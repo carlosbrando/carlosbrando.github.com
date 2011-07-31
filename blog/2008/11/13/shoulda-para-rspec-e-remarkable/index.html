@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Carlos Brando: Shoulda para RSpec Ã© Remarkable!</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/blog/2008/11/13/shoulda-para-rspec-e-remarkable/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  
+  <link href="/atom.xml" rel="alternate" title="Carlos Brando" type="application/atom+xml"/>
+  
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Carlos Brando</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">Shoulda Para RSpec Ã© Remarkable!</h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-11-13 00:00:00 -0200" pubdate  updated >Nov 13<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+<div class="entry-content">Durante um bom tempo andei evangelizando o uso do <a href="http://www.thoughtbot.com/projects/shoulda">Shoulda</a> na <a href="http://surgeworks.com/">Surgeworks</a> e fiz muito uso dele em meus projetos pessoais. O fato é que não obtive muito sucesso em evangelizar meus colegas de trabalho a adotarem o Shoulda, por outro lado eles conseguiram me convencer a aprender e usar <a href="http://rspec.info/">RSpec</a>.
+
+E realmente RSpec é um framework de testes muito interessante. Mas tudo ficou ainda mais interessante quando comecei a brincar com o <strong>Cucumber</strong> (pretendo escrever sobre isto no futuro).
+
+Mas o segredo do sucesso do Shoulda é a maneira em que ele transforma testes comuns como verificar se as associações estão funcionando, se todas as validações necessárias foram adicionadas ou se uma simples informação foi adicionada corretamente a sessão, em algo extremamente trivial.
+
+Passei a gostar cada dia mais do RSpec e decidi adotá-lo como meu framework oficial de testes de agora em diante. Mas não posso mais viver sem as facilidades que o Shoulda me oferecia. Então resolvi coçar a minha própria coceira.
+<h2>Remarkable</h2>
+Inicialmente, a função do <a href="http://github.com/carlosbrando/remarkable/tree/master">Remarkable</a> é portar para RSpec todas as macros do Shoulda, mas obviamente o plano é muito mais ambicioso do que isto. Tenho muita coisa em mente que tornará este projeto especialmente útil para os usuários de RSpec.
+
+Neste momento você talvez se pergunte: &#8220;Mas já não existem plugins que fazem a mesma coisa, como o skinny e o rspec-on-rails-matchers, por exemplo?&#8221;. Sou obrigado a responder: &#8220;Sim&#8221;. Então, por que mais um projeto?
+<h2>Por que mais um projeto?</h2>
+Em primeiro lugar este não é simplesmente &#8220;mais um&#8221; plugin com matchers para RSpec. Vou usar um clichê agora, mas é mais pura verdade: &#8220;Este é um projeto feito do jeito certo!&#8221;.
+
+Vejamos então uma lista com o que torna o <strong>Remarkable</strong> único:
+<ol>
+	<li>Não é um plugin, e sim um gem.</li>
+	<li>Porta todas as macros atuais do Shoulda para RSpec.</li>
+	<li>Possui duas sintaxes de escrita, uma para quem gosta do estilo RSpec e outra para os que estão migrando seus projetos Shoulda para RSpec.</li>
+	<li>Testes.</li>
+	<li>Mais testes.</li>
+	<li>E mais um pouco de testes.</li>
+</ol>
+Sim, diferente de todos os outros projetos com o mesmo objetivo, o <strong>Remarkable</strong> é o único que possui testes, e este é um grande diferencial, acredite! Como se pode confiar em um projeto que não tem testes? Como evoluir um projeto open-source que não possui testes? O que garante que o último commit não quebrou alguma coisa que estava funcionando?
+<h2>Instalação</h2>
+Instalar o <strong>Remarkable</strong> é muito fácil. Ele está armazenado no <a href="http://github.com/carlosbrando/remarkable/tree/master">GitHub</a>, então se você nunca instalou um gem via GitHub execute primeiro:
+<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">gem sources -a <span class="markup markup_underline markup_underline_link markup_underline_link_text">http://gems.github.com</span></span></span></pre>
+Agora instale o gem:
+<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">sudo gem install carlosbrando-remarkable</span></span></pre>
+Por último adicione a seguinte linha no seu arquivo RAILS_ROOT/config/environment.rb:
+<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">config.gem "carlosbrando-remarkable", :lib =&gt; "remarkable", :source =&gt; "<span class="markup markup_underline markup_underline_link markup_underline_link_text">http://gems.github.com</span>"</span></span></pre>
+<h2>Usando</h2>
+Todas as macros do <strong>Remarkable</strong> podem ser acessadas de duas maneira diferentes. Para aqueles que preferem o <strong>estilo Shoulda</strong>, vejamos como ficaria o teste de um modelo:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rspec"><span class="meta meta_rspec meta_rspec_behaviour"><span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_behaviour">describe</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">Post</span> <span class="keyword keyword_control keyword_control_ruby keyword_control_ruby_start-block">do</span></span>
+  fixtures <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>all</span>
+
+  should_belong_to <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>user</span>
+  should_belong_to <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>owner</span>
+  should_belong_to <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>user</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>owner</span>
+
+  should_have_many <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>tags</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>through</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>taggings</span>
+  should_have_many <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>through_tags</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>through</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>taggings</span>
+  should_have_many <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>tags</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>through_tags</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>through</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>taggings</span>
+
+  should_require_unique_attributes <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>title</span>
+  should_require_attributes <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>body</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>message</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_regexp string_regexp_classic string_regexp_classic_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span>wtf<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span></span>
+  should_require_attributes <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>title</span>
+  should_only_allow_numeric_values_for <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>user_id</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+Igualzinho ao Shoulda? É esta a idéia! Esta sintaxe é ideal para aqueles que desejarem migrar seus testes do Shoulda para o RSpec (tendo apenas de alterar de context para describe e de should para it) ou mesmo para os que adoram a jeitão do Shoulda, assim como eu.
+
+Mas se você não gosta desta sintaxe, também pode criar os mesmos testes da seguinte forma:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rspec"><span class="meta meta_rspec meta_rspec_behaviour"><span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_behaviour">describe</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">Post</span> <span class="keyword keyword_control keyword_control_ruby keyword_control_ruby_start-block">do</span></span>
+  fixtures <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>all</span>
+
+<span class="meta meta_rspec meta_rspec_example">  <span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_example">it</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span>should belong_to<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>user</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
+  it <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span>should belong_to<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>owner</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
+  it <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span>should belong_to<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>user</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>owner</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
+
+  it <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span>should have_many<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>tags</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>through</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>taggings</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
+  it <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span>should have_many<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>through_tags</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>through</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>taggings</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
+  it <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span>should have_many<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>tags</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>through_tags</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>through</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>taggings</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
+
+  it <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span>should require_unique_attributes<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>title</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
+  it <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span>should require_attributes<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>body</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>message</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_regexp string_regexp_classic string_regexp_classic_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span>wtf<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
+  it <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span>should require_attributes<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>title</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
+  it <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span>should only_allow_numeric_values_for<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>user_id</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+</span></span></pre>
+Agora muito mais no <strong>estilo RSpec</strong>!
+<h2>Macros</h2>
+Veja uma relação com todas as macros disponíveis na documentação do projeto.
+
+Para o estilo Shoulda, <a href="http://remarkable.nomedojogo.com/classes/Remarkable/Syntax/Shoulda.html">clique aqui</a>.
+Para o estilo RSpec, <a href="http://remarkable.nomedojogo.com/classes/Remarkable/Syntax/RSpec.html">clique aqui</a>.
+<h2>Finalizando</h2>
+Este projeto já atingiu o primeiro objetivo, que era portar todas as macros do Shoulda para o RSpec. Tudo feito da maneira correta, com todos os cuidados e muitos testes. Mas nada melhor do que o uso na prática para encontrarmos pontos que devem ser melhorados.
+
+Enfim, usem o <strong>Remarkable</strong>, e ajudem a torná-lo ainda melhor!
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+
+      
+
+
+
+
+<time datetime="2008-11-13 00:00:00 -0200" pubdate  updated >Nov 13<span>th</span>, 2008</time>
+
+
+
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://carlosbrando.github.com/blog/2008/11/13/shoulda-para-rspec-e-remarkable/" data-via="" data-counturl="http://carlosbrando.github.com/blog/2008/11/13/shoulda-para-rspec-e-remarkable/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+</div>
+
+      
+        <aside role=sidebar><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/07/31/zombie-ninjas-attack-a-survivors-retrospective/">Zombie Ninjas Attack: A Survivor's Retrospective</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast Ã© fÃ¡cil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+
+</aside>
+      
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+</body>
+</html>

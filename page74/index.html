@@ -1,0 +1,426 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Carlos Brando</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/page74/index.html"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  
+  <link href="/atom.xml" rel="alternate" title="Carlos Brando" type="application/atom+xml"/>
+  
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Carlos Brando</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2007/06/25/colocando-links-para-redes-sociais-no-seu-projeto-rails/">Colocando Links Para Redes Sociais No Seu Projeto Rails</a></h1>
+    
+    
+  </header>
+
+
+  <div class="entry-content">Vi esta dica no blog do <strong><a href="http://www.igvita.com/blog/2006/10/20/adding-social-bookmarks-in-rails/">Ilya  Grigorik</a></strong>.
+
+O c&oacute;digo:
+[source:ruby]
+&lt;%  current_uri = u(request.protocol &lt;&lt; request.host_with_port &lt;&lt; request.request_uri)
+title = u(@title)
+
+bookmarklets = {
+:delicious =&gt;   [&#8216;del.icio.us&#8217;, &#8216;delicious.gif&#8217; ,&#8217;http://del.icio.us/post?url=&amp;title=&#8217;],
+:digg =&gt;        [&#8216;digg it&#8217;, &#8216;digg.gif&#8217;, &#8216;http://digg.com/submit?phase=2&amp;url=&amp;title=&#8217;],
+:spurl =&gt;       [&#8216;spurl&#8217;, &#8216;spurl.gif&#8217;, &#8216;http://www.spurl.net/spurl.php?title=&amp;url=&#8217;],
+#  :wists =&gt;       [&#8216;wists&#8217;, &#8216;wists.gif&#8217;, &#8216;http://wists.com/r.php?c=&amp;r=&amp;title=&#8217;],
+:simpy =&gt;       [&#8216;simpy&#8217;, &#8216;simpy.gif&#8217;, &#8216;http://www.simpy.com/simpy/LinkAdd.do?href=&amp;title=&#8217;],
+#  :newsvine =&gt;    [&#8216;newsvine&#8217;, &#8216;newsvine.gif&#8217;, &#8216;http://www.newsvine.com/_tools/seed&amp;save?u=&amp;h=&#8217;],
+:blinklist =&gt;   [&#8216;blinklist&#8217;, &#8216;blinklist.gif&#8217;, &#8216;http://www.blinklist.com/index.php?Action=Blink/addblink.php&amp;Description=&amp;Url=&amp;Title=&#8217;],
+:furl =&gt;        [&#8216;furl&#8217;, &#8216;furl.gif&#8217;, &#8216;http://www.furl.net/storeIt.jsp?u=&amp;t=&#8217;],
+:reddit =&gt;      [&#8216;reddit&#8217;, &#8216;reddit.gif&#8217;, &#8216;http://reddit.com/submit?url=&amp;title=&#8217;],
+#  :fark =&gt;        [&#8216;fark&#8217;,&#8217;fark.gif&#8217;, &#8216;http://cgi.fark.com/cgi/fark/edit.pl?new_url=&amp;new_comment=&amp;linktype=&#8217;],
+:blogmarks =&gt;   [&#8216;blogmarks&#8217;, &#8216;blogmarks.gif&#8217;, &#8216;http://blogmarks.net/my/new.php?mini=1&amp;simple=1&amp;url=&amp;title=&#8217;],
+:yahoo =&gt;       [&#8216;yahoo&#8217;, &#8216;yahoo.gif&#8217;, &#8216;http://myweb2.search.yahoo.com/myresults/bookmarklet?u=&amp;t=&#8217;],
+#  :smarking =&gt;    [&#8216;smarking&#8217;, &#8216;smarking.gif&#8217;, &#8216;http://smarking.com&#8217;],
+#  :segnalo =&gt;     [&#8216;segnalo&#8217;, &#8216;segnalo.gif&#8217;, &#8216;http://segnalo.com/post.html.php?url=&amp;title=&#8217;],
+:magnolia =&gt;    [&#8216;magnolia&#8217;, &#8216;magnolia.gif&#8217;, &#8216;http://ma.gnolia.com/bookmarklet/add?url=&amp;title=&#8217;]
+}
+
+%&gt;
+
+&lt;% bookmarklets.each_value { |bookmarklet|
+bookmarklet[2].gsub!(/\{\{url\}\}/, current_uri)
+bookmarklet[2].gsub!(/(\{\{url_encoded_title\}\})|(\{\{title\}\})/, title) -%&gt;<a href="http://www.nomedojogo.com/wp-admin/%3C%=%20bookmarklet%5B-1%5D%20%%3E" title="&lt;%= bookmarklet[0] %&gt;:&lt;%= title %&gt;">
+<img src="http://www.nomedojogo.com/images/social/%3C%=%20bookmarklet%5B1%5D%20%%3E" alt="&lt;%= bookmarklet[0] %&gt;" /> &lt;%= bookmarklet[0] %&gt;
+</a>
+
+&lt;% } %&gt;
+
+[/source]
+
+Para funcionar do jeito que est&aacute;, basta ter uma vari&aacute;vel <strong>@title</strong> com o t&iacute;tulo da sua p&aacute;gina.
+
+Para pegar os <strong>&iacute;cones </strong>e ver o artigo original, <a href="http://www.igvita.com/blog/2006/10/20/adding-social-bookmarks-in-rails/">clique aqui</a>.
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/2007/06/25/colocando-links-para-redes-sociais-no-seu-projeto-rails/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2007/06/21/actsasmonkey-um-plugin-para-iniciantes/">ActsAsMonkey - Um Plugin Para Iniciantes</a></h1>
+    
+    
+  </header>
+
+
+  <div class="entry-content"><img src="http://farm2.static.flickr.com/1384/577456946_3456986760_m.jpg" align="right" />A melhor forma de aprender algo &eacute; ver como funciona, correto? Seguindo esta linha <a href="http://piano.altipla.no/"><strong>Tore Darell</strong></a> criou um <strong>plugin</strong> para o Rails chamado <a href="http://nimrod.interinter.net/plugins/trunk/acts_as_monkey"><strong>ActsAsMonkey</strong></a>.
+
+Excelente plugin para iniciantes que querem entender como funciona um plugin no <strong>Ruby on Rails</strong>.
+
+<a href="http://piano.altipla.no/pages/sample_rails_plugin">Clique aqui</a> para ver as explica&ccedil;&otilde;es do pr&oacute;prio autor (em ingl&ecirc;s).
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/2007/06/21/actsasmonkey-um-plugin-para-iniciantes/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2007/06/20/timo-wiki-para-ruby-on-rails/">Ãtimo Wiki Para Ruby on Rails</a></h1>
+    
+    
+  </header>
+
+
+  <div class="entry-content">Vi no <a href="http://whynotwiki.com/Rails_plugins_and_libraries">WhyNotWiki.com</a> um &oacute;timo reposit&oacute;rio de dicas para programadores <strong>RoR</strong>.
+
+Tem dicas para iniciantes (como instalar um <strong>plugin</strong>, por exemplo) e para desenvolvedores mais avan&ccedil;ados.
+
+Vale a visita.
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/2007/06/20/timo-wiki-para-ruby-on-rails/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2007/06/20/pardia-com-o-blog-signal-vs-noise-the38thsignal/">ParÃ³dia Com O Blog Signal vs Noise: The38thSignal</a></h1>
+    
+    
+  </header>
+
+
+  <div class="entry-content">Tr&ecirc;s caras criaram um blog para fazer uma brincadeira com o pessoal da 37 Signals.
+
+O site mostra um wireframe desenhado com o sangue dos inimigos.
+
+Para ver, <a href="http://38thsignal.blogspot.com/">clique aqui</a>.
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/2007/06/20/pardia-com-o-blog-signal-vs-noise-the38thsignal/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2007/06/19/cadastro-de-currculos-no-carreirati/">Cadastro De CurrÃ­culos No CarreiraTI</a></h1>
+    
+    
+  </header>
+
+
+  <div class="entry-content"><img src="http://www.nomedojogo.com/wp-content/uploads/2007/06/untitled-1.gif" alt="Untitled-1" width="450" height="341" />
+
+Com um layout novo o <strong><a href="http://www.carreirati.com">CarreiraTI</a></strong> estréia o cadastro de <strong>currículos</strong>. Agora o usuário além de pesquisar vagas, pode cadastrar seu currículo para que as empresas entrem em contato com ele ou enviar os currículos cadastrados diretamente para a vagas.
+
+Não sou <strong>web-designer</strong>, então não sei se ficou legal. Estou aberto a sugestões e ajuda também, caso alguém tenha interesse.
+
+O CarreiraTI é totalmente desenvolvido em <strong>Ruby on Rails</strong>.
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/2007/06/19/cadastro-de-currculos-no-carreirati/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2007/06/18/validando-formulrios-com-prototype-de-uma-forma-realmente-simples/">Validando FormulÃ¡rios Com Prototype De Uma Forma Realmente Simples</a></h1>
+    
+    
+  </header>
+
+
+  <div class="entry-content"><strong><a href="http://tetlaw.id.au/view/home/">Andrew Tetlaw</a></strong> publicou em seu site uma biblioteca em <strong>javascript</strong> para validação de formulários usando <strong>prototype</strong>.
+
+De uma forma realmente simples, esta biblioteca verifica se o campo foi preenchido, se o valor é numérico, se é um e-mail válido, e mais uma série de outras validações.
+
+O uso também é muito simples, basta incluir o <strong>arquivo .js</strong> na sua aplicação e alterar a propriedade <strong>class</strong> do elemento que deseja validar, por exemplo:
+
+[source:html]
+<input id="field1" class="required validate-number" name="field1" />[/source]
+
+Para ver uma demonstração, <a href="http://tetlaw.id.au/upload/dev/validation/index.html">clique aqui</a>.
+
+Ou <a href="http://tetlaw.id.au/view/javascript/really-easy-field-validation">clique aqui</a> para ver a página do projeto e fazer o <a href="http://tetlaw.id.au/upload/dev/validation/validation1.5.4.1.zip">download</a> da biblioteca.
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/2007/06/18/validando-formulrios-com-prototype-de-uma-forma-realmente-simples/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2007/06/17/lazibi-ruby-com-indentao-no-estilo-python/">Lazibi - Ruby Com IndentaÃ§Ã£o No Estilo Python</a></h1>
+    
+    
+  </header>
+
+
+  <div class="entry-content"><strong>Lazibi</strong> &eacute; um pr&eacute;-processador que permite o uso do estilo de indenta&ccedil;&atilde;o do <strong>Python</strong> ao programar em <strong>Ruby</strong>.
+
+Veja este exemplo de c&oacute;digo:
+[source:ruby]
+class CreateOrders &lt; ActiveRecord::Migration
+    def self.up
+        create_table :orders do
+            fkey    :user
+            fkey    :auction
+            integer :bid_type
+            timestamps!
+
+    def self.down
+        drop_table :orders
+[/source]
+Se voc&ecirc; gostou, acesse o <a href="http://lazibi.rubyforge.org/">site do criador</a> e siga as instru&ccedil;&otilde;es para instalar o gem.
+
+Eu particularmente n&atilde;o gosto.
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/2007/06/17/lazibi-ruby-com-indentao-no-estilo-python/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2007/06/15/railsconf-europe-2007-ser-em-berlim/">RailsConf Europe 2007 SerÃ¡ Em Berlim</a></h1>
+    
+    
+  </header>
+
+
+  <div class="entry-content"><p> <center><img src="http://farm1.static.flickr.com/87/243058092_af20776338.jpg?v=0"></center> <p>&nbsp;  <p>Este ano o RailsConf Europe ocorrer&aacute; na cidade de Berlim do dia 17 at&eacute; 19 de setembro. As <a href="http://www.railsconfeurope.com/">inscri&ccedil;&otilde;es</a> j&aacute; est&atilde;o abertas e custam 645 euros (R$ 1.655,00).  <p>Neste evento ter&atilde;o <a href="http://www.railsconfeurope.com/pub/w/61/sessions.html">palestras</a> sobre Intelig&ecirc;ncia Artificial com Rails, JRuby, Flex e Ruby e at&eacute; sobre como ensinar Rails em uma faculdade.  <p>Bom, como eu n&atilde;o posso ir, o jeito &eacute; esperar os slides e tentar imaginar como ser&aacute;&#8230;</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/2007/06/15/railsconf-europe-2007-ser-em-berlim/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2007/06/15/macros-do-jedit-para-programadores-rails/">Macros Do JEdit Para Programadores Rails</a></h1>
+    
+    
+  </header>
+
+
+  <div class="entry-content"><p> <center><img src="http://farm1.static.flickr.com/175/426478715_d9ce253c49.jpg?v=0"></center> <p></p> <p>&nbsp;</p> <p>Dica do leitor <strong>Thiago</strong> (n&atilde;o deixou link para blog ou site pessoal, se tiver me avisa Thiago).</p> <p>J&aacute; falei aqui do <strong>Aptana</strong> e&nbsp;do <strong>E-Text</strong>. Agora vou falar um pouquinho do <strong><a href="http://www.jedit.org/">JEdit</a></strong>.</p> <p>Para quem n&atilde;o dispensa o editor ao desenvolver em <strong>Rails</strong>, <strong>Jim Morris</strong> lan&ccedil;ou no seu blog uma s&eacute;rie de <strong>macros</strong> para facilitar o desenvolvimento. <a href="http://blog.wolfman.com/articles/2007/05/31/more-jedit-macros-for-rails">Clique aqui</a> para ver.</p> <p>Gostei. E vou experimentar.</p> <p>A &uacute;nica coisa que sinto muita falta em todas estas ferramentas &eacute; um <a href="http://en.wikipedia.org/wiki/IntelliSense">intellisense</a>. A &uacute;nica que conhe&ccedil;o que tem algo parecido com isto &eacute; o <strong><a href="www.netbeans.org">NetBeans</a></strong>, mas &eacute; muito lento.</p> <p> <center><img src="http://farm1.static.flickr.com/106/368608555_a000b91d52.jpg?v=0"></center>
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/2007/06/15/macros-do-jedit-para-programadores-rails/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2007/06/14/reconhecendo-arquivos-rb-corretamente-no-e-text-editor/">Reconhecendo Arquivos .rb Corretamente No E-Text Editor</a></h1>
+    
+    
+  </header>
+
+
+  <div class="entry-content"><p> <center><img height="388" src="http://farm1.static.flickr.com/225/489728104_a479febb76.jpg?v=0" width="500"></center> <p></p> <p>&nbsp;</p> <p>Todo programador <strong>Ruby</strong> que n&atilde;o tem um <strong>Mac</strong> sente (nem que seja um pouquinho) de inveja de quem tem um, e pode usar o famoso <strong>textmate</strong> para desenvolver.</p> <p>Como alternativa para o <strong>Windows</strong> temos o&nbsp;<strong><a href="http://www.e-texteditor.com/index.html">E-Text</a></strong>, que funciona de forma muito parecida.</p> <p>Um problema que tive com o E-Text &eacute; que quando se abre um arquivo <strong>.rb</strong> ele autom&aacute;ticamente reconhece o arquivo e habilita os <strong>Bundles</strong> para <strong>Ruby</strong>, e n&atilde;o <strong>Ruby on Rails</strong>. Como corrigir isto?</p> <p>V&aacute; at&eacute; a pasta onde seu E-Text est&aacute; instalado e procure por estes arquivos:</p> <ul> <li>C:\Program Files\e\Bundles\<strong>Ruby.tmbundle\Syntaxes\Ruby.plist</strong>  <li>C:\Program Files\e\Bundles\<strong>Rails.tmbundle\Syntaxes\Ruby on Rails.plist</strong></li></ul> <p>No primeiro arquivo procure por: <strong>&lt;key&gt;fileTypes&lt;/key&gt;</strong></p> <p>Recorte as seguintes linhas:</p> <ul> <ul> <li>&lt;string&gt;<strong>rb</strong>&lt;/string&gt;  <li>&lt;string&gt;<strong>rjs</strong>&lt;/string&gt;</li></ul></ul> <p>E cole no mesmo lugar do segundo arquivo.</p> <p>Agora, quando voc&ecirc; abrir arquivos .rb ou .rjs no E-Text, ele habilitar&aacute; os atalhos corretos.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/2007/06/14/reconhecendo-arquivos-rb-corretamente-no-e-text-editor/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+<nav role="pagination">
+  <div>
+    
+      <a class="prev" href="/page75/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+      <a class="next" href="/page73/">Newer &rarr;</a>
+    
+  </div>
+</nav>
+
+</div>
+
+      
+        <aside role=sidebar><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/07/31/zombie-ninjas-attack-a-survivors-retrospective/">Zombie Ninjas Attack: A Survivor's Retrospective</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast Ã© fÃ¡cil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+
+</aside>
+      
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Carlos Brando: Porque country_select virou um plugin</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/blog/2008/09/24/porque-country_select-virou-um-plugin/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  
+  <link href="/atom.xml" rel="alternate" title="Carlos Brando" type="application/atom+xml"/>
+  
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Carlos Brando</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">Porque Country_select Virou Um Plugin</h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-09-24 00:00:00 -0300" pubdate  updated >Sep 24<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+<div class="entry-content">Ontem eu <a href="http://www.nomedojogo.com/2008/09/23/edge-rails-country_select-removido-do-rails/">mencionei</a> aqui no blog que o helper <strong>country_select</strong> foi removido do Rails e virou um plugin. Eu não tinha entendido muito bem, mas o <a href="http://queroseragil.wordpress.com/">Rafael Mueller</a> me ajudou a esclarecer o assunto.
+
+O problema todo é que Taiwan segundo a norma ISO 3166, se chama na verdade &#8220;Taiwan, Province of China&#8221;. E foi exatamente assim que Michael Koziarski deixou no método.
+
+Então, Jamis Buck questionou se não seria possível deixar apenas &#8220;Taiwan&#8221;, já que o &#8220;Province of China&#8221; parece ser politicamente agressivo. No GitHub iniciou-se então uma série de <a href="http://github.com/rails/rails/commit/3353b85b0eae76bf36ae7c2f7b6adc1863278a8e#comments">comentários</a> que foram entrando cada vez mais em questões politicas e deixando o técnico totalmente de lado.
+
+Mas, Michael Koziarski foi categórico em afirmar que essas questões politicas estão muito além do que poderíamos resolver com uma simples alteração no código. E se aceitasse esta alteração, logo outras seriam solicitadas para países como Kosovo, Ossétia do Sul, Abecásia, Transnístria e uma longa lista.
+
+A melhor solução, ou pelo menos a que geraria menos controvérsias, foi remover o helper do Rails e disponibiliza-lo na forma de um <a href="http://github.com/rails/country_select/tree/master">plugin</a>. Desta forma qualquer um poderia facilmente criar um fork e montar sua própria lista da forma como mais lhe agradar.
+
+Foi uma ótima forma de resolver o conflito.
+
+Apenas uma correção: No último post mencionei que gravariamos no banco de dados apenas a sigla do nome do país. Isto não é verdade, continuaremos gravando o nome inteiro do país, mas com a nova nomenclatura.
+
+<hr /><em>Este artigo pertence a série “Edge Rails”. Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. A intenção desta série é preparar antecipadamente os programadores para as próximas versões do framework.</em>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+
+      
+
+
+
+
+<time datetime="2008-09-24 00:00:00 -0300" pubdate  updated >Sep 24<span>th</span>, 2008</time>
+
+
+
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://carlosbrando.github.com/blog/2008/09/24/porque-country_select-virou-um-plugin/" data-via="" data-counturl="http://carlosbrando.github.com/blog/2008/09/24/porque-country_select-virou-um-plugin/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+</div>
+
+      
+        <aside role=sidebar><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/07/31/zombie-ninjas-attack-a-survivors-retrospective/">Zombie Ninjas Attack: A Survivor's Retrospective</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast Ã© fÃ¡cil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+
+</aside>
+      
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+</body>
+</html>

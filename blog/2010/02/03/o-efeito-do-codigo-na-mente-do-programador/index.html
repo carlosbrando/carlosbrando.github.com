@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Carlos Brando: O Efeito do CÃ³digo na Mente do Programador</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/blog/2010/02/03/o-efeito-do-codigo-na-mente-do-programador/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  
+  <link href="/atom.xml" rel="alternate" title="Carlos Brando" type="application/atom+xml"/>
+  
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Carlos Brando</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">O Efeito Do CÃ³digo Na Mente Do Programador</h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2010-02-03 00:00:00 -0200" pubdate  updated >Feb 3<span>rd</span>, 2010</time>
+
+
+</p>
+    
+  </header>
+
+
+<div class="entry-content">[caption id=&#8221;attachment_3144&#8221; align=&#8221;aligncenter&#8221; width=&#8221;375&#8221; caption=&#8221;Foto de lmw626&#8221;]<a href="http://www.nomedojogo.com/wp-content/uploads/2010/02/194431937_886fc1b378.jpg"><img class="size-full wp-image-3144" title="194431937_886fc1b378" src="http://www.nomedojogo.com/wp-content/uploads/2010/02/194431937_886fc1b378.jpg" alt="" width="375" height="500" /></a>[/caption]
+<p style="text-align: center;"></p>
+É interessante analisar o efeito que uma linguagem de programação tem sobre a mente do programador, principalmente a sua capacidade de influenciar a maneira como enxergamos um problema. A diferença na sintaxe e os recursos disponíveis afetam a forma como pensamos e nos comunicamos, inclusive no mundo real.
+
+O mesmo problema pode ser solucionado de várias formas diferentes, dependendo da linguagem de programação adotada. Certamente a abordagem escolhida para resolver um problema utilizando Ruby não será a mesma se você usar Java.
+
+Outro fator que exerce uma grande influencia sobre a forma como resolvemos os problemas e pensamos é o domínio do aplicativo. Somos tentados a utilizar o mesmo vocabulário do cliente no código. O meu conselho é tirar o máximo de vantagem desse efeito. Pode ser realmente produtivo &#8220;falar&#8221; a mesma língua que o cliente também dentro do código. Por exemplo, se o cliente explicar uma funcionalidade dessa maneira:
+<blockquote>Quando todas as unidade de um produto se esgotarem em uma das lojas, então o sistema deve solicitar mais 10 unidades do mesmo produto para a fábrica.</blockquote>
+Seria muito bom se o código produzido fosse algo parecido com isso:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="keyword keyword_control keyword_control_ruby">if</span> product<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>sold_out?
+  <span class="support support_class support_class_ruby">Factory</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>order <span class="constant constant_numeric constant_numeric_ruby">10</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> product<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>to</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> store
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+É óbvio que não esperamos que o cliente entenda o código e muito menos que ele altere algo por conta própria, mas nós programadores podemos nos beneficiar muito disso.
+
+Não importa se você está escrevendo um código simples como o exemplo acima ou se construiu uma DSL para se aproximar ainda mais da linguagem do cliente. O importante é estreitar a comunicação entre os envolvidos. Assim o seu cérebro estará livre para se concentrar no que realmente interessa: a solução de problemas.
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+
+      
+
+
+
+
+<time datetime="2010-02-03 00:00:00 -0200" pubdate  updated >Feb 3<span>rd</span>, 2010</time>
+
+
+
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://carlosbrando.github.com/blog/2010/02/03/o-efeito-do-codigo-na-mente-do-programador/" data-via="" data-counturl="http://carlosbrando.github.com/blog/2010/02/03/o-efeito-do-codigo-na-mente-do-programador/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+</div>
+
+      
+        <aside role=sidebar><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/07/31/zombie-ninjas-attack-a-survivors-retrospective/">Zombie Ninjas Attack: A Survivor's Retrospective</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast Ã© fÃ¡cil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+
+</aside>
+      
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Carlos Brando: A pseudo-intellisense for Textmate</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/blog/2010/05/17/a-pseudo-intellisense-for-textmate/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  
+  <link href="/atom.xml" rel="alternate" title="Carlos Brando" type="application/atom+xml"/>
+  
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Carlos Brando</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">A Pseudo-intellisense for Textmate</h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2010-05-17 00:00:00 -0300" pubdate  updated >May 17<span>th</span>, 2010</time>
+
+
+</p>
+    
+  </header>
+
+
+<div class="entry-content">Getting lost with all available attributes names on an Active Record object is normal, especially on large projects.
+
+A lot of programmers have developed the bad habit of consulting the migrations to identify which attributes are available on an Active Record model. This certainly is not the smartest way to do this.
+
+I had been using a gem called <a href="http://rubygems.org/gems/annotate">annotate</a> to automatically add comments in my models with the database schema. But that wasn&#8217;t automatic enough.
+
+So I decided to create something more practical and I ended up implementing a pseudo-intelissense for Textmate which can display a list with all available attributes for each Active Record model in my project. See how it works:
+
+<object width="480" height="385"><param name="movie" value="http://www.youtube.com/v/8YvXzRuG-0s&hl=pt_BR&fs=1&rel=0"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/8YvXzRuG-0s&hl=pt_BR&fs=1&rel=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="480" height="385"></embed></object>
+
+The idea is pretty simple. The variable name is important here. Since you can&#8217;t get the project scope through TextMate (if anyone has an idea how to do it please let me know), then the variable name is what indicates which Active Record model should be used.
+
+For example, if you have a model named <code>User</code> you should use variable names as <code>user</code>, <code>@user</code>, <code>@@user</code>, etc.. Variables such as <code>product</code> and <code>@products</code> will show the <code>Product</code> model attributes. The concept is simple. If you use a different variable name, you must indicate which model should be used.
+
+This is still an experimental feature and a work in progress. See some of the latest features that I&#8217;ve been working in recent days:
+
+[nggallery id=1]
+
+You can install running the following commands in the terminal window:
+
+<pre class="textmate-source"><span class="source source_shell">mkdir -p <span class="keyword keyword_operator keyword_operator_tilde keyword_operator_tilde_shell">~</span>/Library/Application<span class="constant constant_character constant_character_escape constant_character_escape_shell">\ </span>Support/TextMate/Bundles
+
+<span class="support support_function support_function_builtin support_function_builtin_shell">cd</span> <span class="keyword keyword_operator keyword_operator_tilde keyword_operator_tilde_shell">~</span>/Library/Application<span class="constant constant_character constant_character_escape constant_character_escape_shell">\ </span>Support/TextMate/Bundles
+
+git clone git://github.com/carlosbrando/ruby-on-rails-tmbundle.git <span class="string string_quoted string_quoted_double string_quoted_double_shell"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_shell">"</span>Ruby on Rails.tmbundle<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_shell">"</span></span>
+
+osascript -e <span class="string string_quoted string_quoted_single string_quoted_single_shell"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_shell">'</span>tell app "TextMate" to reload bundles<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_shell">'</span></span></span></pre>
+
+This bundle is a fork of Dr. Nic&#8217;s <a href="http://github.com/drnic/ruby-on-rails-tmbundle">ruby-on-rails-tmbundle</a>. So if you already have installed this bundle, it&#8217;s advisable to remove it before to avoid conflicts.
+
+The project is on GitHub: <a href="http://github.com/carlosbrando/ruby-on-rails-tmbundle">http://github.com/carlosbrando/ruby-on-rails-tmbundle</a>
+
+Enjoy!
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+
+      
+
+
+
+
+<time datetime="2010-05-17 00:00:00 -0300" pubdate  updated >May 17<span>th</span>, 2010</time>
+
+
+
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://carlosbrando.github.com/blog/2010/05/17/a-pseudo-intellisense-for-textmate/" data-via="" data-counturl="http://carlosbrando.github.com/blog/2010/05/17/a-pseudo-intellisense-for-textmate/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+</div>
+
+      
+        <aside role=sidebar><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/07/31/zombie-ninjas-attack-a-survivors-retrospective/">Zombie Ninjas Attack: A Survivor's Retrospective</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast Ã© fÃ¡cil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+
+</aside>
+      
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+</body>
+</html>

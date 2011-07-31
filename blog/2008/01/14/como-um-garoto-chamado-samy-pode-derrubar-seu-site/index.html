@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Carlos Brando: Como um garoto chamado Samy pode derrubar seu site</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/blog/2008/01/14/como-um-garoto-chamado-samy-pode-derrubar-seu-site/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  
+  <link href="/atom.xml" rel="alternate" title="Carlos Brando" type="application/atom+xml"/>
+  
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Carlos Brando</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">Como Um Garoto Chamado Samy Pode Derrubar Seu Site</h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-01-14 00:00:00 -0200" pubdate  updated >Jan 14<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+<div class="entry-content"><img src="http://www.nomedojogo.com/wp-content/uploads/2008/01/354217642_74da4a6073.jpg" alt="354217642_74da4a6073.jpg" />
+
+J&aacute; criou algo no Rails 2.0? Mesmo que apenas para testar? J&aacute; viu o arquivo application.rb?
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_controller"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">ApplicationController<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActionController::Base</span></span></span>
+  <span class="support support_function support_function_actionpack support_function_actionpack_rails">helper</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>all</span>
+
+  protect_from_forgery
+</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+Hmm&#8230; <strong>protect_from_forgery</strong>? Para que diabos serve isto? Antes de explicar, me deixa contar uma hist&oacute;ria&#8230;
+<h3>Calma &eacute; uma hist&oacute;ria chata, mas &eacute; curta, e depois fica legal</h3>
+J&aacute; ouviu falar de <em>Cross Site Scripting</em>? Este &eacute; o nome de uma falha de seguran&ccedil;a encontrada facilmente em grande parte dos websites e aplica&ccedil;&otilde;es web que permite &agrave; pessoas maldosas (aqui estou me referindo &agrave; adolescentes sem nada para fazer e sem vida social) alterarem o conte&uacute;do de p&aacute;ginas web, inclu&iacute;rem conte&uacute;do hostil, executarem ataques de <a href="http://pt.wikipedia.org/wiki/Phishing">phishing</a>, obterem o controle do navegador atrav&eacute;s de c&oacute;digos JavaScript e na maioria dos casos for&ccedil;arem o usu&aacute;rio a executar algum comando que eles desejem. Este &uacute;ltimo tipo de ataque se chama crossÂ­site request forgeries.
+
+O <em>Cross Site Request Forgeries</em> &eacute; um tipo de ataque que consiste em obrigar usu&aacute;rios leg&iacute;timos a executarem uma s&eacute;rie de comandos sem nem mesmo saberem disto. E agora com o aumento do uso de Ajax, a coisa tem ficado ainda pior. J&aacute; ouviu falar do Samy Worm?
+<h3>Samy &eacute; o meu her&oacute;i</h3>
+Talvez voc&ecirc; n&atilde;o o conhe&ccedil;a, mas o MySpace.com conhece muito bem, na verdade conhece mais do que gostaria. Gra&ccedil;as a uma falha de seguran&ccedil;a em um c&oacute;digo JavaScript, o tal do &#8220;Samy&#8221;, um garoto solit&aacute;rio e sem amigos (e por isso, um cara muito mal), descobriu uma forma nova de fazer amizades na internet. Ele conseguiu atr&aacute;ves de t&eacute;cnicas de <em>Cross Site Scripting</em> injetar um bloco de c&oacute;digo (JavaScript) na sua p&aacute;gina pessoal. Este c&oacute;digo fez nada mais, nada menos que adicionar automaticamente como &#8220;amigo&#8221; cada pessoa que entrasse na sua p&aacute;gina. O mais interessante &eacute; que depois disso o c&oacute;digo tamb&eacute;m era passado para a p&aacute;gina do novo &#8220;amigo&#8221; e ainda inclu&iacute;a a frase &#8220;O Samy &eacute; meu her&oacute;i&#8221; no perfil da pessoa. Em quest&atilde;o de poucas horas ele ser tornou o her&oacute;i de mais de um milh&atilde;o de pessoas e o grande amig&atilde;o do MySpace. E provavelmente deve ter levado uma bela surra dos seus pais quando a policia chegou na sua casa.
+
+Gra&ccedil;as ao Samy, o MySpace caiu, os funcion&aacute;rios levaram uma boa ralada do chefe e sofreram durante alguns dias para se recuperarem dos danos.
+<h3>O que isso tem a ver com Rails?</h3>
+Tudo! O caso do MySpace foi algo bem simples, que se resolveu apagando o &#8220;Samy&#8221; do banco de dados. Mas com certeza voc&ecirc; n&atilde;o gostaria de ter o Samy cadastrado em seu site, correto? O problema &eacute; que existem muitos Samys por a&iacute;&#8230;
+<h3>E a droga do m&eacute;todo protect_from_forgery, para que serve???</h3>
+Calma! O m&eacute;todo <strong>protect_from_forgery</strong> serve para te proteger do Samy!
+
+Na verdade, este m&eacute;todo serve para nos assegurar de que todos os formul&aacute;rios que sua aplica&ccedil;&atilde;o est&aacute; recebendo est&atilde;o vindo dela mesma, e n&atilde;o de um link perdido de algum outro site. Ele consegue isto incluindo um token (se voc&ecirc; n&atilde;o sabe o que &eacute; um token, <a href="http://pt.wikipedia.org/wiki/Token">clique aqui</a>) baseado na sess&atilde;o em todos os formul&aacute;rios e requisi&ccedil;&otilde;es Ajax geradas pelo Rails, e depois verifica a autenticidade deste token no controller.
+
+H&aacute;, eu j&aacute; ia me esquecendo&#8230; requisi&ccedil;&otilde;es via GET n&atilde;o s&atilde;o protegidas. Mas isto n&atilde;o &eacute; um problema, afinal elas s&oacute; devem ser usadas para nos trazer dados, e n&oacute;s nunca &agrave;s usamos para alterar ou gravar algo em nosso banco de dados, n&atilde;o &eacute; verdade? N&Atilde;O &Eacute; VERDADE?
+
+Se quiser aprender mais sobre CSRF(Cross-Site Request Forgery, u&eacute;) use os links abaixo:
+<ul>
+	<li><a href="isc.sans.org/diary.html?storyid=1750">isc.sans.org/diary.html?storyid=1750</a></li>
+	<li><a href="isc.sans.org/diary.html?storyid=1750">en.wikipedia.org/wiki/Cross-site_request_forgery</a></li>
+</ul>
+Mas lembre-se que isto N&Atilde;O &eacute; uma solu&ccedil;&atilde;o definitiva para nosso problema, ou como costumamos dizer, n&atilde;o &eacute; uma bala de prata. Continuem espertos, e por favor deixem este m&eacute;todo l&aacute;.
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+
+      
+
+
+
+
+<time datetime="2008-01-14 00:00:00 -0200" pubdate  updated >Jan 14<span>th</span>, 2008</time>
+
+
+
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://carlosbrando.github.com/blog/2008/01/14/como-um-garoto-chamado-samy-pode-derrubar-seu-site/" data-via="" data-counturl="http://carlosbrando.github.com/blog/2008/01/14/como-um-garoto-chamado-samy-pode-derrubar-seu-site/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+</div>
+
+      
+        <aside role=sidebar><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/07/31/zombie-ninjas-attack-a-survivors-retrospective/">Zombie Ninjas Attack: A Survivor's Retrospective</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast Ã© fÃ¡cil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+
+</aside>
+      
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+</body>
+</html>

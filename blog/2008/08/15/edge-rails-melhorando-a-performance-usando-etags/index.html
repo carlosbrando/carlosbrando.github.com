@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Carlos Brando: Edge Rails: Melhorando a performance usando ETags</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/blog/2008/08/15/edge-rails-melhorando-a-performance-usando-etags/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  
+  <link href="/atom.xml" rel="alternate" title="Carlos Brando" type="application/atom+xml"/>
+  
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Carlos Brando</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">Edge Rails: Melhorando a Performance Usando ETags</h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-08-15 00:00:00 -0300" pubdate  updated >Aug 15<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+<div class="entry-content">O Carlos Júnior já escreveu sobre isto no blog da <a href="http://tas.milk-it.net/carlos/novo-no-rails-edge-suporte-simples-a-conditional-get-etags/">milk-it</a>. Provavelmente teremos suporte a <strong>ETags</strong> no Rails 2.2. Eu disse provavelmente porque isto ainda não foi incluído no branch oficial do Rails, mas como é algo importante e está sendo feito pelo core team, é quase certo de que será.
+
+Antes de começar a falar sobre isto, deixa eu tentar explicar o que são <strong>ETags</strong> (Entity Tags). <strong>Etags</strong> seriam de uma forma grosseira identificadores associados a cada recurso para determinar se o arquivo que está no servidor é o mesmo que está no cache do browser. No caso, o recurso seria uma página em HTML, mas também poderia ser um XML ou JSON.
+
+Cabe ao servidor a responsabilidade de verificar se o recurso solicitado é igual dos dois lados. Caso o servidor confirme que o recurso armazenado no cache do browser do usuário é exatamente o mesmo que seria enviado de volta para ele, ao invés de devolver todo o conteúdo do recurso novamente ele apenas retorna um <a href="http://www.nomedojogo.com/2008/07/14/http-status-code-no-rails/">status</a> <strong>304</strong> (<strong>Not Modified</strong>) e o browser usará o que está em seu cache.
+
+Servidores Web como o <strong>Apache</strong> e o <strong>IIS</strong> já sabem fazer isto para página estáticas. Mas quando o conteúdo é dinâmico, como na maioria das páginas de um projeto Ruby on Rails, a responsabilidade é todo nossa.
+
+O objeto <strong>response</strong> ganhou dois novos métodos, o <strong>last_modified=</strong> e o <strong>etag=</strong> (note o sinal de igualdade &#8220;=&#8221;). Quando você atribuir valores a estes métodos eles serão repassados aos cabeçalhos <strong>HTTP_IF_MODIFIED_SINCE</strong> e <strong>HTTP_IF_NONE_MATCH</strong> respectivamente. Quando uma nova requisição (<strong>request</strong>) deste recurso for feita ela retornará com estes cabeçalhos permitindo que você possa comparar com o novo valor informado no <strong>response</strong> e decidir se quer enviar todo o conteúdo do recurso novamente ou apenas um status <strong>304</strong>.
+
+Vamos ao código (roubando o exemplo dado por <a href="http://ryandaigle.com/articles/2008/8/14/what-s-new-in-edge-rails-simpler-conditional-get-support-etags">Ryan Daigle</a> no seu blog):
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_controller"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">ArticlesController<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ApplicationController</span></span></span>
+  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">show</span></span>
+    <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>article</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Article</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>params<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>id</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">    <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> informado o identificador
+</span>    response<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>last_modified <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>article</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>published_at<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>utc
+    response<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>etag <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>article</span>
+
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">    <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> verificando se houve mudanças
+</span>    <span class="keyword keyword_control keyword_control_ruby">if</span> request<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>fresh?<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>response<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+      head <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>not_modified</span>
+    <span class="keyword keyword_control keyword_control_ruby">else</span>
+      <span class="support support_function support_function_actionpack support_function_actionpack_rails">respond_to</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">wants</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">        <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> retornando conteúdo normalmente
+</span>      <span class="keyword keyword_control keyword_control_ruby">end</span>
+    <span class="keyword keyword_control keyword_control_ruby">end</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+Note que estou atribuindo valores para <strong>response.last_modified</strong> e <strong>response.etag</strong>, e logo em seguinda usando o método <strong>request.fresh?(response)</strong> para determinar se houve alguma mudança ou não. Caso os dois cabeçalhos continuem iguais eu apenas retorno um status <strong>304</strong> e o browser do usuário usará o conteúdo que está armazenado no seu cache.
+
+Quanto ao método <strong>etag</strong>, também podemos passar um <strong>array</strong> se for o caso:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">response<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>etag <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>article</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> current_user<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span></span></pre>
+
+A forma como foi implementado isto no Rails está causando um certo desconforto em muita gente e várias outras formas foram sugeridas pela comunidade, então possivelmente isto pode mudar antes do lançamento da versão 2.2.
+
+Veja algumas sugestões dadas: <a href="http://pastie.org/252869">in_modified_scope</a> e <a href="http://pastie.org/253302">with_etag_cache</a>.
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+
+      
+
+
+
+
+<time datetime="2008-08-15 00:00:00 -0300" pubdate  updated >Aug 15<span>th</span>, 2008</time>
+
+
+
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://carlosbrando.github.com/blog/2008/08/15/edge-rails-melhorando-a-performance-usando-etags/" data-via="" data-counturl="http://carlosbrando.github.com/blog/2008/08/15/edge-rails-melhorando-a-performance-usando-etags/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+</div>
+
+      
+        <aside role=sidebar><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/07/31/zombie-ninjas-attack-a-survivors-retrospective/">Zombie Ninjas Attack: A Survivor's Retrospective</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast Ã© fÃ¡cil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+
+</aside>
+      
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Carlos Brando: Todo mundo pode ver minha senha nos arquivos de log do Rails...</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/blog/2007/08/16/todo-mundo-pode-ver-minha-senha-nos-arquivos-de-log-do-rails/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  
+  <link href="/atom.xml" rel="alternate" title="Carlos Brando" type="application/atom+xml"/>
+  
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Carlos Brando</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">Todo Mundo Pode Ver Minha Senha Nos Arquivos De Log Do Rails&#8230;</h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2007-08-16 00:00:00 -0300" pubdate  updated >Aug 16<span>th</span>, 2007</time>
+
+
+</p>
+    
+  </header>
+
+
+<div class="entry-content"><p></p>
+<p><img src="http://farm2.static.flickr.com/1039/1101698626_d15d566a94.jpg?v=0"> </p>
+<p>Um recurso muito &uacute;til no <strong>Rails</strong> s&atilde;o os arquivos de log. Por meio deles n&oacute;s podemos acompanhar exatamente o que est&aacute; acontecendo com nosso software, vendo inclusive os comandos <strong>SQL</strong> enviados para o banco de dados.</p>
+<p>Mas este recurso tem um s&eacute;rio problema de seguran&ccedil;a. Uma simples p&aacute;gina de login ou cadastro de usu&aacute;rios, pode fazer com que o <strong>Rails</strong> grave a senha do usu&aacute;rio nos arquivos de log. Quando enviamos dados via post (usado nestes casos) o <strong>Rails</strong> grava todos os parametros enviados no arquivo de log, inclusive sua senha. Fa&ccedil;a o teste e comprove.</p>
+<p>Para evitar este tipo de problema, voc&ecirc; pode utilizar um filtro no seu arquivo de controller:</p>
+<p>[source:ruby]
+class WelcomeController < ApplicationController
+    filter_parameter_logging "password"
+end
+[/source]</p>
+<p>Onde <strong>&#8220;password&#8221;</strong> &eacute; o nome do campo que voc&ecirc; est&aacute; usando para armazenar sua senha.</p>
+<p>Agora fa&ccedil;a o teste novamente. Ao inv&eacute;s de o <strong>Rails</strong> registrar a senha do usu&aacute;rio no log, ele trocar&aacute; por <strong>[FILTERED]</strong>.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+
+      
+
+
+
+
+<time datetime="2007-08-16 00:00:00 -0300" pubdate  updated >Aug 16<span>th</span>, 2007</time>
+
+
+
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://carlosbrando.github.com/blog/2007/08/16/todo-mundo-pode-ver-minha-senha-nos-arquivos-de-log-do-rails/" data-via="" data-counturl="http://carlosbrando.github.com/blog/2007/08/16/todo-mundo-pode-ver-minha-senha-nos-arquivos-de-log-do-rails/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+</div>
+
+      
+        <aside role=sidebar><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/07/31/zombie-ninjas-attack-a-survivors-retrospective/">Zombie Ninjas Attack: A Survivor's Retrospective</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast Ã© fÃ¡cil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+
+</aside>
+      
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+</body>
+</html>

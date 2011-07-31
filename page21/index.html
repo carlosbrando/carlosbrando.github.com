@@ -1,0 +1,445 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Carlos Brando</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/page21/index.html"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  
+  <link href="/atom.xml" rel="alternate" title="Carlos Brando" type="application/atom+xml"/>
+  
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Carlos Brando</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/10/26/edge-rails-edge-rails-inflectorparameterize-simplifica-a-criacao-de-urls-elegantes/">Rails 2.2: Inflector#parameterize Simplifica a CriaÃ§Ã£o De URLs Elegantes</a></h1>
+    
+    
+  </header>
+
+
+  <div class="entry-content">Um novo inflector foi incluído no Rails, e particularmente acho este é muito útil. O <strong>parameterize</strong> transforma um texto qualquer em um formato ideal para o uso em URLs. Por exemplo:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">User</span></span>
+  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">to_param</span></span>
+    <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span><span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>id<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span>-<span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>name<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>parameterize<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+
+<span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>user</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; #&lt;User id: 1, name: "Carlos E. Brando"&gt;
+</span>
+<span class="support support_function support_function_viewhelpers support_function_viewhelpers_rails">link_to</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>user</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>name<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> user_path
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; &lt;a href="/users/1-carlos-e-brando"&gt;Carlos E. Brando&lt;/a&gt;</span></span></pre>
+Um fato interessante é que logo de inicio a implementação feita não aceitava o uso de caracteres acentuados, o que significava um problema para muita gente ao redor do mundo, inclusive nós brasileiros. Um dia depois da primeira implementação, <a href="http://www.koziarski.net/">Michael Koziarski</a> salvou nossas vidas incluindo este suporte. Mesmo assim o código ainda não estava perfeito, então decidiu-se adaptar o código do ótimo plugin <a href="http://github.com/henrik/slugalizer/tree/master">slugalizer</a> criado por <a href="http://henrik.nyh.se/">Henrik Nyh</a>. Agora sim, ficou perfeito!
+
+Para aqueles que ainda não estão fazendo uso do Rails 2.2, o plugin <a href="http://github.com/henrik/slugalizer/tree/master">slugalizer</a> resolve o problema.
+
+<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades do Rails 2.2 no e-book “<a href="../2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">Ruby on Rails - O que há de novo?</a>“.</em>
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/2008/10/26/edge-rails-edge-rails-inflectorparameterize-simplifica-a-criacao-de-urls-elegantes/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/10/24/rails-22-release-candidate-1-released/">Rails 2.2 Release Candidate 1 Released</a></h1>
+    
+    
+  </header>
+
+
+  <div class="entry-content">David Heinemeier Hansson anunciou no <a href="http://weblog.rubyonrails.org/2008/10/24/rails-2-2-rc1-i18n-thread-safety-docs-etag-last-modified">blog oficial</a> do Ruby on Rails o lançamento do primeiro Release Candidate do Rails 2.2.
+
+Para saber de todas as novidades você pode acessar a série <a href="http://www.nomedojogo.com/category/edge-rails/">Edge Rails</a>, publicada neste blog.
+
+Para instalar a versão 2.2 RC1 execute no terminal:
+<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">gem install rails -s <span class="markup markup_underline markup_underline_link markup_underline_link_text">http://gems.rubyonrails.org</span> -v 2.2.0</span></span></pre>
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/2008/10/24/rails-22-release-candidate-1-released/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">Novo Livro E Screencast: Ruby on Rails 2.2 - O Que HÃ¡ De Novo?</a></h1>
+    
+    
+  </header>
+
+
+  <div class="entry-content"><a href="http://envycasts.com/"><img class="alignnone size-full wp-image-1702" title="cover-book-blog" src="http://www.nomedojogo.com/wp-content/uploads/2008/10/cover-book-blog.jpg" alt="" /></a>
+
+Já faz alguns dias que estou batalhando para publicar mais um livro sobre o <strong>Ruby on Rails 2.2</strong>, assim como fiz no começo deste ano com a versão 2.1. Vocês não imaginam o trabalho que dá analisar cada commit realizado no Rails, testar as novas implementações e documentar isto.
+
+Tentei de todas as maneiras conseguir um patrocinador, alguma empresa interessada em promover o livro, que pudesse me financiar para escreve-lo, já que este é um trabalho que consome muitos dias. O máximo que consegui foram algumas empresas oferecendo uma miséria em troca de propaganda.
+
+Foi quando <strong>Gregg Pollack</strong> me procurou e sugeriu juntarmos este livro e o seu novo screencast do Rails 2.2 e vendermos em um pacote promocional. Não preciso dizer que aceitei!
+
+<img class="aligncenter size-full wp-image-1697" title="railsenvy" src="http://www.nomedojogo.com/wp-content/uploads/2008/10/railsenvy.jpg" alt="" />
+
+Neste momento já está disponível para compra o meu livro &#8221;<a href="http://envycasts.com/products/ruby-on-rails-22-pdf">Ruby on Rails 2.2 - O que há de novo?</a>&#8221; em português e inglês (traduzido por Carl Youngblood) por <strong>9 dólares</strong> no site do <a href="http://envycasts.com/">Envycasts</a>. Você também pode comprar o <a href="http://envycasts.com/products/ruby-on-rails-22-package-deal">pacote promocional</a> que vem com as duas versões do livro e mais um screencast gravado pelos engraçadissimos Gregg Pollack e Jason Seifer, por apenas <strong>16 dólares</strong>.
+
+O livro (<strong>120 páginas</strong>) cobre todas as principais novidades do Rails 2.2 e está recheado de exemplos para que você possa testá-las. Se você costuma acompanhar a série Edge Rails deste blog, com certeza vai gostar do conteúdo do livro, que contém muito mais do que já foi publicado por aqui.
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/10/23/ruby-on-rails-212/">Ruby on Rails 2.1.2</a></h1>
+    
+    
+  </header>
+
+
+  <div class="entry-content">Acabou de ser liberada a versão <strong>2.1.2</strong> do Ruby on Rails com algumas correções de segurança. Não sei exatamente quais foram todas as correções, já que DHH ainda não se pronunciou sobre isto.
+
+Só posso dizer com certeza que a correção do bug no método count do ActiveRecord, conforme expliquei <a href="http://www.nomedojogo.com/2008/09/28/edge-rails-correcao-de-bug-no-metodo-count-do-activerecord/">aqui</a>, está inclusa neste release.
+
+Para atualizar sua versão, execute no terminal:
+<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">sudo gem update rails</span></span></pre>
+Lembrando que no Windows não precisa do <strong>sudo</strong>.
+
+Assim que tiver mais informações atualizarei este post.
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/2008/10/23/ruby-on-rails-212/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/10/23/rails-podcast-brasil-episodio-35-especial-rails-summit-2/">Rails Podcast Brasil - EpisÃ³dio 35 (Especial Rails Summit #2)</a></h1>
+    
+    
+  </header>
+
+
+  <div class="entry-content"><img class="alignnone size-full wp-image-1628" title="2964388308_a7622aab9d" src="http://www.nomedojogo.com/wp-content/uploads/2008/10/2964388308_a7622aab9d.jpg" alt="" />
+
+Se você ainda não ouviu a primeira parte deste podcast, <a href="http://www.nomedojogo.com/2008/10/22/rails-podcast-brasil-episodio-34-especial-rails-summit/">clique aqui</a>.
+
+Conforme prometido a segunda parte do especial <strong>Rails Summit</strong> no <strong>Rails Podcast Brasil</strong>. Este episódio já começa com a leitura da palestra de <strong>Chris Wanstrath</strong>, que fechou o primeiro dia do evento e comentários sobre a desconferência que rolou no mesmo dia.
+
+Na sequencia comentamos sobre o segundo dia de palestras e o que rolou depois do fim do evento!
+
+Não sei porque mas o site oficial do podcast está fora do ar, por isto coloquei o episódio no meu servidor, então se você costuma usar o iTunes para ouvir o <strong>Rails Podcast Brasil</strong> e não quiser esperar até que o site volte, terá de fazer o download por aqui mesmo usando os links abaixo.
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/2008/10/23/rails-podcast-brasil-episodio-35-especial-rails-summit-2/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/10/23/evitando-ataques-response-splitting/">Evitando Ataques Response Splitting</a></h1>
+    
+    
+  </header>
+
+
+  <div class="entry-content">Além da correção do <a href="http://www.nomedojogo.com/2008/09/28/edge-rails-correcao-de-bug-no-metodo-count-do-activerecord/">bug no método count do ActiveRecord</a>, conforme mencionei no <a href="http://www.nomedojogo.com/2008/10/23/ruby-on-rails-212/">post anterior</a>. Outra correção de segurança vem com com a nova versão <strong>2.1.2</strong> do Rails.
+
+Até agora no Rails as URLs passadas para o método <strong>redirect_to</strong> não passavam por um processo de santization. Isto era perigoso, pois abria brechas para que pessoas mal intencionadas pudessem realizar ataques do tipo <a href="http://en.wikipedia.org/wiki/HTTP_response_splitting">response splitting</a> e <a href="http://en.wikipedia.org/wiki/HTTP_header_injection">header injection</a> em sua aplicação.
+
+Um exemplo desta vulnerabilidade é quando seu aplicativo recebe uma URL via query string e redireciona seu usuário através do método <strong>redirect_to</strong> para esta URL. Através desta brecha de segurança pessoas mal intencionadas podem gravar cookies na máquina e forjar falsos responses para seus usuários se o seu projeto usar estes parâmetros para construir cabeçalhos HTTP.
+
+Para evitar este tipo de problema o Rails foi atualizado para limpar (sanitize) todas as URLs passadas para o método <strong>redirect_to</strong>. Mas isto não significa que não precisamos nos preocupar mais com este problema, é sempre bom ficar atento.
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/2008/10/23/evitando-ataques-response-splitting/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/10/23/edge-rails-opcao-confirm-no-metodo-image_submit_tag/">Edge Rails: OpÃ§Ã£o :confirm No MÃ©todo Image_submit_tag</a></h1>
+    
+    
+  </header>
+
+
+  <div class="entry-content">A opção <strong>:confirm</strong>, muito utilizada em helpers como o <strong>link_to</strong>, agora também está disponível para o método <strong>image_submit_tag</strong>.
+
+Esta opção faz com que uma caixa de confirmação, com uma pergunta personalizada, seja exibida ao se clicar na imagem. Se o usuário aceitar, o formulário é enviado normalmente, caso contrário nada acontece.
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_function support_function_viewhelpers support_function_viewhelpers_rails">image_submit_tag</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>delete.gif<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>confirm</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Are you sure?<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; &lt;input type="image" src="/images/delete.gif" onclick="return confirm('Are you sure?');"/&gt;</span></span></pre>
+<hr /><em>Este artigo pertence a série “Edge Rails”. Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. A intenção desta série é preparar antecipadamente os programadores para as próximas versões do framework.</em>
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/2008/10/23/edge-rails-opcao-confirm-no-metodo-image_submit_tag/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/10/22/rails-podcast-brasil-episodio-34-especial-rails-summit/">Rails Podcast Brasil - EpisÃ³dio 34 (Especial Rails Summit)</a></h1>
+    
+    
+  </header>
+
+
+  <div class="entry-content"><img class="alignnone size-full wp-image-1608" title="2956958147_27ec0ed206" src="http://www.nomedojogo.com/wp-content/uploads/2008/10/2956958147_27ec0ed206.jpg" alt="" />
+
+Temos muitas coisas para falar sobre o <strong>Rails Summit 2008</strong>, por este motivo dividimos o podcast em duas partes. Nesta primeira parte comentamos rapidamente as noticias mais importantes do mundo Rails e iniciamos um bate-papo sobre os bastidores do evento e sobre as palestras e palestrantes.
+<h2>Neste Episódio</h2>
+<ul>
+	<li><a href="http://www.devlab.com.br/rails">Aprendendo Ruby on Rails</a></li>
+	<li><a href="http://www.cearaonrails.org/">CearáOnRails</a></li>
+	<li><a href="http://weblog.rubyonrails.org/2008/10/19/rails-2-0-5-redirect_to-and-offset-limit-sanitizing">Rails 2.0.5: Security fixes</a></li>
+	<li><a href="http://weblog.rubyonrails.org/2008/10/19/response-splitting-risk">Response Splitting Risk</a></li>
+	<li><a href="http://www.caelum.com.br/falando-em-agile/">Falando em Agile</a></li>
+	<li><a href="http://github.com/blog/185-github-turns-one">GitHub Turns One!</a></li>
+	<li><a href="http://railsrumble.com/">Rails Rumble 2008</a></li>
+	<li><a href="http://www.rubyinside.com/ruby-popularity-marketshare-up-1255.html">Ruby’s Popularity On The Up; An Ideal Haven For The Recession?</a></li>
+</ul>
+Não perca amanhã a segunda parte deste podcast, onde comentamos sobre a palestra de <strong>Chris Wanstrath</strong> que fechou o primeiro dia e sobre a desconferência que aconteceu em seguida. Também falamos sobre as palestras do segundo dia do evento e do que programadores bêbados são capazes!
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/2008/10/22/rails-podcast-brasil-episodio-34-especial-rails-summit/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/10/21/como-ter-bom-gosto/">Como Ter Bom Gosto?</a></h1>
+    
+    
+  </header>
+
+
+  <div class="entry-content">Ter bom gosto é uma das características mais importantes em designers, programadores, administradores e similares. Ser capaz de separar o que é bom daquilo que é ruim. Qual dos milhares de possíveis pequenos detalhes são fundamentais para fazer o que quer que você esteja fazendo simplesmente dar certo?
+
+O problema com o conceito do bom gosto é que ele não é efêmero. Em uma visão simplista do mundo definimos que algumas pessoas simplesmente tem e outros não. Se você teve a sorte de ter nascido com isso você será eternamente impressionante, caso contrário você será sempre um cara condenado a fazer cagadas. Isto é algo que eu não concordo.
+
+Acho que bom gosto é principalmente sobre como desenvolver um olho critico para os pormenores que importam e é algo que absolutamente pode ser aprendido. A melhor maneira de aprender sobre quais detalhes realmente importam é examinar os detalhes dos grandes e dos não tão grandes trabalhos, contrastando e comparando-os.
+
+É necessário determinação e dedicação para desenvolver um olho critico, para desenvolver o seu bom gosto, mas é algo absolutamente possível. Alguns podem ser predispostos, mas qualquer um que se esforce pode chegar lá. Então, o que você está esperando?
+
+<hr /><em>Este artigo é uma tradução/adaptação do texto escrito por <strong>David Heinemeier Hansson</strong> para o blog  <a href="http://blogcabin.37signals.com/svn/">Signal vs. Noise</a>. Para ler o texto original <a href="http://www.37signals.com/svn/posts/1325-acquire-taste">clique aqui</a>.</em>
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/2008/10/21/como-ter-bom-gosto/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/10/20/rails-summit-chad-fowler/">Rails Summit: Chad Fowler</a></h1>
+    
+    
+  </header>
+
+
+  <div class="entry-content"><img class="alignright size-full wp-image-1568" title="chad" src="http://www.nomedojogo.com/wp-content/uploads/2008/10/chad.jpg" alt="" />Não resta dúvidas de que o evento foi um sucesso!
+
+Aqueles que ansiavam por palestras mais técnicas talvez tenham ficado decepcionados, mas de forma alguma isto tirou o mérito do evento. Afinal não é todo dia que um evento de tecnologia termina com champagne e cerveja grátis. Foi divertido ser abordado por programadores bêbados fazendo comentários sobre as palestras e assuntos aleatórios.
+
+Para mim este evento foi ainda mais importante, pois foi a primeira vez em que toda a equipe de desenvolvedores da <a href="http://surgeworks.com/">Surgeworks</a> se encontrou pessoalmente.
+
+Cheguei atrasado ao primeiro dia do evento, mas a tempo de pegar a sessão de perguntas e respostas com <strong>David Heinemeier Hansson</strong>. Confesso que foi um pouco decepcionante, embora eu já soubesse que sua participação seria assim, no fundo eu esperava um pouco mais de &#8220;consideração&#8221; da parte de DHH, que pareceu estar fazendo aquilo apenas dizer que participou do evento.
+
+Logo em seguida tivemos a palestra que para mim iniciou e ditou os termos do evento, com Chad Fowler.
+<h2>Chad Fowler</h2>
+Basicamente Chad fez um resumo do seu livro <strong>&#8220;My Job Went to India&#8221;</strong>, ressaltando pontos como marketing pessoal. O tema da palestra foi <strong>&#8220;Being remarkable&#8221;</strong>, algo como &#8220;Sendo notável&#8221;.
+
+Para quem já leu o livro, nada do que foi dito é novidade, mas foi uma palestra muito interessante.
+
+Chad também falou do seu passado com a música e como de certa forma isto tem a ver com seu trabalho como programador.
+
+No evento como um todo, o que não faltou foram piadinhas com o Java. Um dos pontos altos da palestra de Chad foi quando ele mostrou o vídeo abaixo se referindo a plataforma:
+
+<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="425" height="344" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowFullScreen" value="true" /><param name="src" value="http://www.youtube.com/v/zQQcGc5c1Tk&amp;hl=en&amp;fs=1" /><embed type="application/x-shockwave-flash" width="425" height="344" src="http://www.youtube.com/v/zQQcGc5c1Tk&amp;hl=en&amp;fs=1" allowfullscreen="true"></embed></object>
+
+Depois Chad ainda mostrou alguns gráficos falsos que nomeavam os programadores de acordo com a  linguagem que eles escolheram. Se não estou enganado, programadores Ruby eram experts enquanto desenvolvedores Java e .Net seriam os &#8220;iniciantes avançados&#8221;.
+
+Embora o tema não seja novo, foi uma palestra interessante e motivadora.
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/2008/10/20/rails-summit-chad-fowler/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+<nav role="pagination">
+  <div>
+    
+      <a class="prev" href="/page22/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+      <a class="next" href="/page20/">Newer &rarr;</a>
+    
+  </div>
+</nav>
+
+</div>
+
+      
+        <aside role=sidebar><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/07/31/zombie-ninjas-attack-a-survivors-retrospective/">Zombie Ninjas Attack: A Survivor's Retrospective</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast Ã© fÃ¡cil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+
+</aside>
+      
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+</body>
+</html>

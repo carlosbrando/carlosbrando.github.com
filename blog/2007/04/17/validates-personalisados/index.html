@@ -1,0 +1,259 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Carlos Brando: Mensagens personalizadas com validates</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/blog/2007/04/17/validates-personalisados/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  
+  <link href="/atom.xml" rel="alternate" title="Carlos Brando" type="application/atom+xml"/>
+  
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Carlos Brando</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">Mensagens Personalizadas Com Validates</h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2007-04-17 00:00:00 -0300" pubdate  updated >Apr 17<span>th</span>, 2007</time>
+
+
+</p>
+    
+  </header>
+
+
+<div class="entry-content"><center><img src="http://www.nomedojogo.com/wp-content/uploads/2007/04/windowslivewritervalidatespersonalisados-971dcustom-springs131.jpg" height="150" width="160" /></center>Um problema que temos com os validates &eacute; que ele insiste em colocar o nome do campo na frente da mensagem, mesmo quando personalizamos ela usando o :message.
+[source:ruby]validates_presence_of :title,
+:message =&gt; &#8220;O campo &#8216;T&iacute;tulo&#8217; deve ser preenchido&#8221;[/source]
+Na nossa view ficaria assim:
+<ul>
+	<li>Title O campo &#8216;T&iacute;tulo&#8217; deve ser preenchido</li>
+</ul>
+Como resolver isto?
+
+Crie um arquivo .rb qualquer dentro da pasta lib com o seguinte conte&uacute;do:
+[source:ruby]module ActiveRecord
+	class Errors
+		def add(attribute, msg = @@default_error_messages[:invalid])
+			if replace_message?(msg)
+				msg = replace_message(attribute, msg)
+				attribute = :base
+			end
+
+			@errors[attribute.to_s] = [] if @errors[attribute.to_s].nil?
+			@errors[attribute.to_s] &lt;&lt; msg
+		end
+
+		# true se a mensagem for alter&aacute;vel
+
+		def replace_message?(msg)
+			(msg =~ /{?}/) || (msg.starts_with?&#8221;!&#8221;)
+		end
+
+		# muda a mensagem
+
+		def replace_message(attr, msg)
+
+			# se mensagem veio com {?}, agrega o nome do campo no meio do texto
+
+			if msg =~ /{?}/
+				msg.gsub(/{?}/, attr.to_s.humanize)
+			elsif msg.starts_with?(&#8220;!&#8221;)              # se tiver ! no come&ccedil;o, remove
+				msg.from(1)
+			else
+				msg
+			end
+		end
+
+		def add_on_blank(attributes, msg = @@default_error_messages[:blank])
+			for attr in [attributes].flatten
+				value = @base.respond_to?(attr.to_s) ? @base.send(attr.to_s) : @base[attr.to_s]
+
+				# se mensagem veio com {?}, agrega o nome do campo no meio do texto
+
+				if replace_message?(msg)
+					add(:base, replace_message(attr, msg)) if value.blank?
+				else
+					add(attr, msg) if value.blank? # fluxo normal
+				end
+			end
+		end
+	end
+end[/source]
+N&atilde;o vou entrar em detalhes sobre o que o c&oacute;digo faz (cabe a voc&ecirc; analisar), mas basicamente eu verifico se o texto passado no :message possui:
+<ol>
+	<li>{?} em algum lugar do texto.</li>
+	<li>Ou come&ccedil;a com ! (exclama&ccedil;&atilde;o)</li>
+</ol>
+No primeiro caso, simplesmente subistituimos a string &#8220;{?}&#8221; pelo nome da coluna. O que nos permite criar algo assim: &#8220;O campo &#8216;{?}&#8217; deve ser preenchido&#8221;.
+
+No segundo caso, o c&oacute;digo verifica se a mensagem come&ccedil;a com o s&iacute;mbolo de exclama&ccedil;&atilde;o (!). Se sim, deixa a mensagem exatamente como est&aacute;, ignorando completamente o nome da coluna.
+
+Sendo assim, o c&oacute;digo dado como exemplo acima poderia ficar assim:
+[source:ruby]validates_presence_of :title,
+:message =&gt; &#8221;<strong>!</strong>O campo &#8216;T&iacute;tulo&#8217; deve ser preenchido&#8221;[/source]
+E o resultado na sua p&aacute;gina seria:
+<ul>
+	<li>O campo &#8216;T&iacute;tulo&#8217; deve ser preenchido</li>
+</ul>
+Este &eacute; apenas um exemplo de como podemos alterar o Rails de forma simples para nossas necessidades.
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+
+      
+
+
+
+
+<time datetime="2007-04-17 00:00:00 -0300" pubdate  updated >Apr 17<span>th</span>, 2007</time>
+
+
+
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://carlosbrando.github.com/blog/2007/04/17/validates-personalisados/" data-via="" data-counturl="http://carlosbrando.github.com/blog/2007/04/17/validates-personalisados/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+</div>
+
+      
+        <aside role=sidebar><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/07/31/zombie-ninjas-attack-a-survivors-retrospective/">Zombie Ninjas Attack: A Survivor's Retrospective</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast Ã© fÃ¡cil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+
+</aside>
+      
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Carlos Brando: Ruby on Rails: Coloque as coisas no seu devido lugar.</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/blog/2007/08/19/ruby-on-rails-coloque-as-coisas-no-seu-devido-lugar/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  
+  <link href="/atom.xml" rel="alternate" title="Carlos Brando" type="application/atom+xml"/>
+  
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Carlos Brando</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">Ruby on Rails: Coloque as Coisas No Seu Devido Lugar.</h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2007-08-19 00:00:00 -0300" pubdate  updated >Aug 19<span>th</span>, 2007</time>
+
+
+</p>
+    
+  </header>
+
+
+<div class="entry-content"><p><img src="http://www.nomedojogo.com/wp-content/uploads/2007/08/459207903-d5ce64f14a.jpg" style="border: 0px none " alt="459207903_d5ce64f14a" border="0" height="333" width="500" /> </p>
+<p>Regra: Coloque sempre links para stylesheets e javascript dentro da tag HEAD do HTML.</p>
+<p>N&atilde;o &eacute; que isto seja obrigat&oacute;rio, mas eu gosto de deixar as coisas bonitas. O problema com Rails neste caso &eacute; que quando uso o m&eacute;todo <strong>stylesheet_link_tag</strong> na p&aacute;gina que estou desenvolvendo, quando ela for renderizada, o link do css&nbsp;ficar&aacute; bem no meio da p&aacute;gina por causa do <strong>yield</strong> da p&aacute;gina de layout.</p>
+<p>Mas como tudo no Rails, existe uma solu&ccedil;&atilde;o muito simples para isto. Podemos usar o m&eacute;todo <strong>content_for</strong>.</p>
+<p>Para fazer o teste, crie um view de layout com o seguinte c&oacute;digo:</p>
+<p>[source:html]
+<html>
+	<head>
+		<%= yield :css %>
+	</head>
+	<body>
+		<%= yield %>
+	</body>
+</html>
+[/source]</p>
+<p>Veja que a p&aacute;gina tem dois yield, sendo que o primeiro recebe um par&acirc;metro <strong>:css</strong>.</p>
+<p>Agora crie outra&nbsp;view da seguinte forma:</p>
+<p>[source:html]
+<% content_for :css do %>
+	<%= stylesheet_link_tag 'css_da_minha_pagina' %>
+<% end %>
+<h2>Minha P&aacute;gina</h2>
+[/source]</p>
+<p>Rode e veja como fica sua p&aacute;gina. Pronto, tudo no seu devido lugar.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+
+      
+
+
+
+
+<time datetime="2007-08-19 00:00:00 -0300" pubdate  updated >Aug 19<span>th</span>, 2007</time>
+
+
+
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://carlosbrando.github.com/blog/2007/08/19/ruby-on-rails-coloque-as-coisas-no-seu-devido-lugar/" data-via="" data-counturl="http://carlosbrando.github.com/blog/2007/08/19/ruby-on-rails-coloque-as-coisas-no-seu-devido-lugar/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+</div>
+
+      
+        <aside role=sidebar><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/07/31/zombie-ninjas-attack-a-survivors-retrospective/">Zombie Ninjas Attack: A Survivor's Retrospective</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast Ã© fÃ¡cil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+
+</aside>
+      
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+</body>
+</html>

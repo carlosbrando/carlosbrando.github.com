@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Carlos Brando: The Autotest Notification Gem</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/blog/2008/05/14/the-autotest-notification-gem/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  
+  <link href="/atom.xml" rel="alternate" title="Carlos Brando" type="application/atom+xml"/>
+  
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Carlos Brando</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">The Autotest Notification Gem</h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-05-14 00:00:00 -0300" pubdate  updated >May 14<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+<div class="entry-content">This gem set the autotest (ZenTest) to send messages to software as Growl, LibNotify, and Snarl, displaying a window with the results.
+
+<a href="http://github.com/carlosbrando/autotest-notification/">http://github.com/carlosbrando/autotest-notification/</a>
+<h2>Requirements</h2>
+Independent of operating system you are using, you must install the ZenTest.
+<pre><code>gem install ZenTest</code></pre>
+<h3>If you&#8217;re using a Mac</h3>
+<p style="padding-left:1em;">You need to have Growl and growlnotify installed on your machine.</p>
+<p style="padding-left:1em;">Download the <a href="http://growl.info/index.php">Growl</a> and install it like any other application on your Mac</p>
+<p style="padding-left:1em;">Then you must install the growlnotify.</p>
+<p style="padding-left:1em;">In your shell, cd to the directory on the Growl disk image containing growlnotify, and type <code>./install.sh</code>. That script will install growlnotify to /usr/local/bin and the manpage to /usr/local/man.</p>
+
+<h3>If you&#8217;re using Windows (with cygwin)</h3>
+<p style="padding-left:1em;">You need to have Snarl and sncmd installed on your machine.</p>
+<p style="padding-left:1em;">Download <a href="http://www.fullphat.net/">Snarl</a> and install it like any other application on your machine.</p>
+
+<p style="padding-left:1em;">Then download <a href="http://www.k23productions.com/download.php?view.105">sncmd</a> open the zip file and place
+the executable from the zip in any directory in windows <span class="caps">PATH</span> (for example c:\windows).
+<h3>If you&#8217;re using Windows (without cygwin)</h3>
+<p style="padding-left:1em;">You need to have Snarl, diffutils and ruby-snarl installed on your machine.</p>
+<p style="padding-left:1em;">Download <a href="http://www.fullphat.net/">Snarl</a> and install it like any other application on your machine.</p>
+<p style="padding-left:1em;">Download <a href="http://gnuwin32.sourceforge.net/packages/diffutils.htm">DiffUtils for Windows</a> and follow the installation instructions on the site.</p>
+<p style="padding-left:1em;">Run in the command prompt: <code>gem install ruby-snarl</code></p>
+<p style="padding-left:1em;">After all that. You must update the environment variable <span class="caps">PATH</span> with the path to the bin of diffutils.</p>
+<p style="padding-left:1em;">It&#8217;s the price that was paid for using Windows (try cygwin).</p>
+
+<h3>If you&#8217;re using Linux</h3>
+<p style="padding-left:1em;">You need to have libnotify binaries installed.</p>
+<p style="padding-left:1em;">For ubuntu this means: <code>sudo apt-get install libnotify-bin</code></p>
+<p style="padding-left:1em;">Other distributions may package it with other names, do a search for libnotify using your distribution package manager.</p>
+<p style="padding-left:1em;">If you use <span class="caps">KDE</span> and do not have libnotify-bin installed, it will try to use kdialog wich is part of <span class="caps">KDE</span>. It also works if you have zenity installed.</p>
+
+<h2>Install</h2>
+<pre><code>sudo gem install carlosbrando-autotest-notification --source=http://gems.github.com</code></pre>
+Run it to let the notifier in automatic mode:
+<pre><code>an-install</code></pre>
+In Windows without cygwin, it&#8217;s necessary to install in the directory of the project:
+<pre><code>an-install -p C:\projects\my_project</code></pre>
+To turn off the notifier:
+<pre><code>an-uninstall</code></pre>
+<h2>Contributors</h2>
+<ul>
+	<li><a href="http://www.workingwithrails.com/recommendation/new/person/8137-carlos-brando">carlosbrando</a></li>
+	<li><a href="http://alexandredasilva.wordpress.com">simpsomboy</a></li>
+	<li><a href="http://www.workingwithrails.com/recommendation/new/person/9213-rodrigo-urubatan-ferreira-jardim">urubatan</a></li>
+	<li><a href="http://www.workingwithrails.com/recommendation/new/person/8473-carlos-henrique-j-nior">chjunior</a></li>
+	<li><a href="http://www.workingwithrails.com/recommendation/new/person/6680-davis-zanetti-cabral">daviscabral</a></li>
+	<li><a href="http://www.workingwithrails.com/recommendation/new/person/7526-marcos-c-ssio-tapaj-s-martins-do-couto">tapajos</a></li>
+</ul>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+
+      
+
+
+
+
+<time datetime="2008-05-14 00:00:00 -0300" pubdate  updated >May 14<span>th</span>, 2008</time>
+
+
+
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://carlosbrando.github.com/blog/2008/05/14/the-autotest-notification-gem/" data-via="" data-counturl="http://carlosbrando.github.com/blog/2008/05/14/the-autotest-notification-gem/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+</div>
+
+      
+        <aside role=sidebar><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/07/31/zombie-ninjas-attack-a-survivors-retrospective/">Zombie Ninjas Attack: A Survivor's Retrospective</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast Ã© fÃ¡cil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+
+</aside>
+      
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+</body>
+</html>

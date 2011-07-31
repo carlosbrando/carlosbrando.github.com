@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Carlos Brando: Ortogonalidade</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/blog/2009/12/01/ortogonalidade/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  
+  <link href="/atom.xml" rel="alternate" title="Carlos Brando" type="application/atom+xml"/>
+  
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Carlos Brando</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">Ortogonalidade</h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-12-01 00:00:00 -0200" pubdate  updated >Dec 1<span>st</span>, 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+<div class="entry-content">Infelizmente a maioria dos programadores que conheço nunca ouviram falar sobre ortogonalidade no desenvolvimento de software, embora este seja um principio fundamental para se escrever código de qualidade.
+
+Em desenvolvimento de software, o termo &#8216;ortogonalidade&#8217; passou a significar uma espécie de independência ou dissociação. A ideia é que componentes que conceitualmente não estão relacionados devem ser construídos de forma a não possuírem nenhuma dependência entre si. Adicionar um novo atributo a um objeto do ActiveRecord (na maioria das vezes) não deveria exigir uma alteração na interface com o usuário, por exemplo.
+
+[caption id=&#8221;attachment_2957&#8221; align=&#8221;aligncenter&#8221; width=&#8221;468&#8221; caption=&#8221;Foto de Voxphoto&#8221;]<img class="size-full wp-image-2957" title="2208835201_1a4e5230e7" src="http://www.nomedojogo.com/wp-content/uploads/2009/11/2208835201_1a4e5230e71.jpg" alt="Foto de Voxphoto" width="468" height="321" />[/caption]
+
+Em linguagens orientadas a objetos é muito fácil acrescentar dependências ao código. Em Ruby basta um simples &#8217;<code>require</code>&#8217; e seu projeto passa a depender de uma ou várias bibliotecas. Talvez devido a essa simplicidade este tende a se tornar um problema viral, já que nos estimula a estarmos sempre adicionando mais e mais dependências em nossos sistemas.
+
+Queremos projetar componentes auto-suficientes e com um único propósito bem definido. Sistemas não ortogonais são difíceis de alterar. Em projetos onde seus componentes dependem uns dos outros não existem correções pontuais. Uma correção pode levar a um ou mais problemas em outra parte. E isto pode se tornar um ciclo sem fim.
+
+Por outro lado, em sistemas onde os componentes são isolados uns dos outros, desde que você não mude a sua interface pública, você sabe que pode alterar um deles sem se preocupar com os outros.
+
+Os ganhos em produtividade ao colocar em prática este principio são imensos. Uma abordagem ortogonal promove a reutilização. Como seus componentes serão bem específicos e com responsabilidades bem definidas é fácil reaproveitá-los em outros sistemas. Outro fator importante é que por possuírem apenas o código necessário para cumprir uma única tarefa, obviamente estas bibliotecas serão menores e mais simples de serem projetadas, implementadas, testadas e dificilmente precisaremos revisita-las para adicionar novas funcionalidades ou fazer correções.
+
+O fato de serem componentes menores e com menos código também simplifica a criação de testes. E mesmo que um bug passe despercebido ele não será tão critico, pois o tempo de resolução será menor e a chance de o problema se espalhar por todo o sistema são mínimas, o que diminui os riscos.
+
+Vamos considerar como exemplo o desenvolvimento de um e-commerce. O requisito original previa apenas uma interface web simples, mas as exigências foram alteradas para também contemplar uma interface web para telefones celulares e para compras através de uma central telefônica. Em um sistema projetado ortogonalmente, você precisaria alterar apenas os módulos associados com a interface do usuário para lidar com isso. Se o seu sistema foi bem estruturado, você deveria ser capaz de suportar todas essas interfaces com o mesmo código criado inicialmente para realizar as vendas. O paradigma MVC utilizado no Ruby on Rails funciona bem nestas situações.
+
+Testes unitários são uma ótima forma de verificar a  ortogonalidade de um componente. Se para realizar o teste é necessário carregar ou acessar uma grande quantidade de outras bibliotecas, então você encontrou um módulo que não está bem dissociado do resto do sistema. Outra forma menos interessante de realizar esta avaliação é ao corrigir bugs. Quando você faz uma alteração, outros problemas surgem misteriosamente? Esta é uma evidência de que seu código não é ortogonal.
+
+Ortogonalidade está intimamente relacionado com o princípio DRY (veja mais <a href="http://www.nomedojogo.com/2009/03/06/rails-way-5-dont-repeat-yourself/">aqui</a> e <a href="http://www.nomedojogo.com/2009/03/12/um-pouco-mais-sobre-%E2%80%9Cdon%E2%80%99t-repeat-yourself%E2%80%9D/">aqui</a>). Enquanto DRY visa minimizar a duplicação dentro de um sistema, com a ortogonalidade você reduz a interdependência entre os componentes do sistema. Utilizar estes dois princípios combinados tornará nossos projetos muito mais flexíveis e fáceis de manter.
+
+<hr /><em>Este artigo é descaradamente &#8216;baseado&#8217; no capítulo de mesmo nome do livro <a href="http://www.amazon.com/Pragmatic-Programmer-Journeyman-Master/dp/020161622X">The Pragmatic Programmer</a>.</em>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+
+      
+
+
+
+
+<time datetime="2009-12-01 00:00:00 -0200" pubdate  updated >Dec 1<span>st</span>, 2009</time>
+
+
+
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://carlosbrando.github.com/blog/2009/12/01/ortogonalidade/" data-via="" data-counturl="http://carlosbrando.github.com/blog/2009/12/01/ortogonalidade/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+</div>
+
+      
+        <aside role=sidebar><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/07/31/zombie-ninjas-attack-a-survivors-retrospective/">Zombie Ninjas Attack: A Survivor's Retrospective</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast Ã© fÃ¡cil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+
+</aside>
+      
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,593 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Carlos Brando</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/page18/index.html"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  
+  <link href="/atom.xml" rel="alternate" title="Carlos Brando" type="application/atom+xml"/>
+  
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Carlos Brando</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/11/20/rails-22-suporte-a-banco-de-dados-ibm-db-no-gerador-do-rails/">Rails 2.2: Suporte Ã  Banco De Dados IBM DB No Gerador Do Rails</a></h1>
+    
+    
+  </header>
+
+
+  <div class="entry-content">Foi adicionado ao generator do Rails a opção <strong>IBM DB</strong> para o banco de dados. Para usá-la basta executar no terminal o seguinte comando ao criar o projeto Rails:
+<pre>rails app_name -d ibm_db</pre>
+Isto criará seu projeto com o seguinte arquivo <strong>database.yml</strong>:
+<pre class="textmate-source"><span class="source source_yaml"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> IBM Dataservers
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> Home Page
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> http://rubyforge.org/projects/rubyibm/
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> To install the ibm_db gem:
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> On Linux:
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> Source the db2profile file and set the necessary environment variables:
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> . /home/db2inst1/sqllib/db2profile
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> export IBM_DB_DIR=/opt/ibm/db2/V9.1
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> export IBM_DB_LIB=/opt/ibm/db2/V9.1/lib32
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> Then issue the command: gem install ibm_db
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> On Windows:
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> Issue the command: gem install ibm_db
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> If prompted, select the mswin32 option
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> For more details on the installation refer to http://rubyforge.org/docman/view.php/2361/7682/IBM_DB_GEM.pdf
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> For more details on the connection parameters below refer to:
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> http://rubyibm.rubyforge.org/docs/adapter/0.9.0/rdoc/classes/ActiveRecord/ConnectionAdapters/IBM_DBAdapter.html
+</span>
+<span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">development</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
+</span>  <span class="string string_unquoted string_unquoted_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">adapter<span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span></span> <span class="string string_unquoted string_unquoted_yaml">ibm_db</span></span>
+  <span class="string string_unquoted string_unquoted_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">username<span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span></span> <span class="string string_unquoted string_unquoted_yaml">db2inst1</span></span>
+  <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">password</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
+</span>  <span class="string string_unquoted string_unquoted_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">database<span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span></span> <span class="string string_unquoted string_unquoted_yaml">app_name_dev</span></span>
+  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>schema: db2inst1
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>host: localhost
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>port: 50000
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>account: my_account
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>app_user: my_app_user
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>application: my_application
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>workstation: my_workstation
+</span>
+<span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">test</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
+</span>  <span class="string string_unquoted string_unquoted_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">adapter<span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span></span> <span class="string string_unquoted string_unquoted_yaml">ibm_db</span></span>
+  <span class="string string_unquoted string_unquoted_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">username<span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span></span> <span class="string string_unquoted string_unquoted_yaml">db2inst1</span></span>
+  <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">password</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
+</span>  <span class="string string_unquoted string_unquoted_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">database<span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span></span> <span class="string string_unquoted string_unquoted_yaml">app_name_tst</span></span>
+  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>schema: db2inst1
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>host: localhost
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>port: 50000
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>account: my_account
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>app_user: my_app_user
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>application: my_application
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>workstation: my_workstation
+</span>
+<span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">production</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
+</span>  <span class="string string_unquoted string_unquoted_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">adapter<span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span></span> <span class="string string_unquoted string_unquoted_yaml">ibm_db</span></span>
+  <span class="string string_unquoted string_unquoted_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">username<span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span></span> <span class="string string_unquoted string_unquoted_yaml">db2inst1</span></span>
+  <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">password</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
+</span>  <span class="string string_unquoted string_unquoted_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">database<span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span></span> <span class="string string_unquoted string_unquoted_yaml">app_name_prd</span></span>
+  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>schema: db2inst1
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>host: localhost
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>port: 50000
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>account: my_account
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>app_user: my_app_user
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>application: my_application
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>workstation: my_workstation</span></span></pre>
+<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades do Rails 2.2 no e-book “<a href="../2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">Ruby on Rails - O que há de novo?</a>“.</em>
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/2008/11/20/rails-22-suporte-a-banco-de-dados-ibm-db-no-gerador-do-rails/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/11/20/rails-22-alterada-a-mensagem-do-metodo-assert_difference/">Rails 2.2: Alterada a Mensagem Do MÃ©todo Assert_difference</a></h1>
+    
+    
+  </header>
+
+
+  <div class="entry-content">Quando usávamos o método <strong>assert_difference</strong> com múltiplas expressões e um erro ocorria era difícil de saber qual das expressões não teve seu valor alterado, já que a mensagem de erro não informava isto.
+
+No Rails 2.2 a mensagem devolvida pelo método informará exatamente qual expressão não passou no teste. Por exemplo:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">assert_difference <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Post.count<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>current_user.posts.count<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
+</span>  <span class="support support_class support_class_ruby">Post</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>create<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>params<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+</span></pre>
+O código acima retornará a seguinte mensagem, caso a segunda expressão não tenha passado:
+<pre>&lt;current_user.posts.count&gt; was expression that failed. &lt;1&gt; expected but was &lt;0&gt;.</pre>
+<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades do Rails 2.2 no e-book “<a href="../2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">Ruby on Rails - O que há de novo?</a>“.</em>
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/2008/11/20/rails-22-alterada-a-mensagem-do-metodo-assert_difference/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/11/20/edge-rails-atencao-o-applicationrb-foi-renomeado/">Edge Rails: AtenÃ§Ã£o O application.rb Foi Renomeado</a></h1>
+    
+    
+  </header>
+
+
+  <div class="entry-content">Já faz um tempo que existe uma dicussão sobre o nome do arquivo <code>application.rb</code>. O motivo é que como ele corresponde à classe <code>ApplicationController</code>, deveria chamar-se <code>application_controller.rb</code>.
+
+Bom, depois de muita discussão isto foi alterado. Particularmente eu gostei, mas muitos não gostaram do fato de isto sair já para o Rails 2.2 sem um aviso prévio. Veja a discussão sobre isto <a href="http://github.com/rails/rails/commit/fcce1f17eaf9993b0210fe8e2a8117b61a1f0f69#comments">aqui</a>.
+
+O fato é que se você estiver usando o Edge Rails ou pretende migrar seu projeto para o Rails 2.2, deve alterar o nome deste arquivo manualmente.
+<h2>Atualização</h2>
+Eu me enganei sobre esta noticia conforme alertado pelo <span class="comment-author">Renato nos comentários. Tendo de acompanhar dois branchs separados (Edge Rails e Rails 2.2) acabei me confundindo. Na verdade este arquivo só será renomeado na futura versão 2.3/3.0.</span>
+
+Para o Rails 2.2.2, que deve ser a versão final do 2.2, ele continua exatamente da forma como é hoje.
+
+<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.3/3.0 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades acompanhando a série Edge Rails.</em>
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/2008/11/20/edge-rails-atencao-o-applicationrb-foi-renomeado/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/11/19/rails-22-opcoes-no-metodo-field_set_tag/">Rails 2.2: OpÃ§Ãµes No MÃ©todo Field_set_tag</a></h1>
+    
+    
+  </header>
+
+
+  <div class="entry-content">Foi adicionado ao método <strong>field_set_tag</strong> um parâmetro opcional para facilitar a formatação do HTML. Este parâmetro aceita todas as opções que o método <strong>tag</strong> já aceita. Exemplo:
+<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> field_set_tag <span class="constant constant_language constant_language_ruby">nil</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>class</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>format<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+  <span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>Some text<span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+<span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> <span class="keyword keyword_control keyword_control_ruby">end</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+</span></pre>
+O código acima retornará o seguinte:
+<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">fieldset</span> <span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_html">class</span>=<span class="string string_quoted string_quoted_double string_quoted_double_html"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_html">"</span>format<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_html">"</span></span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+  <span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>Some text<span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+<span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">fieldset</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+</span></pre>
+<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades do Rails 2.2 no e-book “<a href="../2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">Ruby on Rails - O que há de novo?</a>“.</em>
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/2008/11/19/rails-22-opcoes-no-metodo-field_set_tag/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/11/19/new-rails-22-i18n-defaults/">New Rails 2.2 I18n Defaults</a></h1>
+    
+    
+  </header>
+
+
+  <div class="entry-content">Normalmente no Rails funciona assim: Programadores do mundo todo desenvolvem novas funcionalidades e corrigem bugs, criam patchs e o core team aceita ou não estes patches. Mas quando DHH resolve colocar a mão no código ele muda tudo. O bom é que na maioria das vezes é para melhor!
+
+No último <a href="http://www.nomedojogo.com/2008/11/18/rails-podcast-brasil-episodio-38-especial-rails-22/">Rails Podcast Brasil</a> eu disse que deveríamos ficar atentos a algumas mudanças dele na parte de internacionalização. Ele mudou mais do que isto internamente, mas uma alteração importante foi a criação de um diretório <strong>config/locales</strong> para colocarmos nossos arquivos de internacionalização.
+
+Também foi adicionado ao arquivo <strong>environment.rb</strong> o seguinte comentário:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> The internationalization framework can be changed
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> to have another default locale (standard is :en) or more load paths.
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> All files from config/locales/*.rb,yml are added automatically.
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> config.i18n.load_path &lt;&lt; Dir[File.join(RAILS_ROOT, 'my', 'locales', '*.{rb,yml}')]
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> config.i18n.default_locale = :de</span></span></pre>
+O que já era fácil, ficou mais fácil! Na teoria é só colocar o seu arquivo br.yml ou br.rb nesta pasta e alterar a última linha comentada e pronto!
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/2008/11/19/new-rails-22-i18n-defaults/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/11/18/shoulda-for-rspec-is-remarkable/">Shoulda for RSpec Is Remarkable!</a></h1>
+    
+    
+  </header>
+
+
+  <div class="entry-content">For a long time I was evangelizing <a href="http://www.thoughtbot.com/projects/shoulda/">Shoulda</a> at <a href="http://surgeworks.com/">Surgeworks</a> and used it in my personal projects. The fact is, I didn&#8217;t have much success in convincing my co-workers to adopt Shoulda. On the other hand, they managed to convince me to learn and use <a href="http://rspec.info/">RSpec</a>.
+
+RSpec is a very interesting Testing Framework. But I start to like it more after I started to use the <a href="http://github.com/aslakhellesoy/cucumber/wikis">Cucumber</a>.
+
+The great thing about Shoulda is that it’s simplifies tests for trivial things.
+
+I got to like RSpec more and more, so I decided to adopt it as my official testing framework from now on. But I can no longer live without the resources that Shoulda offers me. So I decided to scratch my itch.
+<h2>Remarkable</h2>
+Initially, the main objective of <a href="http://github.com/carlosbrando/remarkable/tree/master">Remarkable</a> is to port all Shoulda macros to RSpec, but of course the plan is more ambitious than that. I have other ideas that will hopefully be especially useful for Rspec users.
+
+At this point you may ask: &#8220;But aren’t there already plug-ins that do the same thing, such as skinny and rspec-on-rails-matchers. Why build something else?”
+
+First, this isn’t simply &#8220;another&#8221; plugin with RSpec matchers. It also does a lot of things differently that I feel are better than other approaches.
+
+Here are some of the things that make Remarkable special:
+<ol>
+	<li>It is not a plug-in; it&#8217;s a gem.</li>
+	<li>All currently Shoulda macros are ported to RSpec.</li>
+	<li>It has two different test syntaxes: one for those who like the RSpec style and another for those who are migrating their projects from Shoulda to RSpec.</li>
+	<li>Tests.</li>
+	<li>More tests.</li>
+	<li>And a few more tests.</li>
+</ol>
+Unlike other similar projects, Remarkable is the only one that tests itself, and this is a big difference, believe me! How can we trust in a project that has no tests? How can you develop an open-source project with no tests? How do you ensure that the last commit didn’t break anything?
+<h2>Install</h2>
+Install Remarkable is very easy. It is stored in <a href="http://github.com/carlosbrando/remarkable/tree/master">GitHub</a>, so if you have never installed a gem via GitHub run the following:
+<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">gem sources -a <span class="markup markup_underline markup_underline_link markup_underline_link_text">http://gems.github.com</span></span></span></pre>
+Then install the gem:
+<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">sudo gem install carlosbrando-remarkable</span></span></pre>
+In RAILS_ROOT/config/environment.rb:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>gem <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>carlosbrando-remarkable<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>  <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>lib</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>remarkable<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>source</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>http://gems.github.com<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span></span></pre>
+<h2>Using</h2>
+All Remarkable macros can be accessed in two different ways. For those who prefer the Shoulda style, let&#8217;s look at some model tests:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rspec"><span class="meta meta_rspec meta_rspec_behaviour"><span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_behaviour">describe</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">Post</span> <span class="keyword keyword_control keyword_control_ruby keyword_control_ruby_start-block">do</span></span>  fixtures <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>all</span>
+
+  should_belong_to <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>user</span>  should_belong_to <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>owner</span>  should_belong_to <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>user</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>owner</span>
+
+  should_have_many <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>tags</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>through</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>taggings</span>  should_have_many <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>through_tags</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>through</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>taggings</span>  should_have_many <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>tags</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>through_tags</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>through</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>taggings</span>
+
+  should_require_unique_attributes <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>title</span>  should_require_attributes <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>body</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>message</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_regexp string_regexp_classic string_regexp_classic_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span>wtf<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span></span>  should_require_attributes <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>title</span>  should_only_allow_numeric_values_for <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>user_id</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+Like Shoulda, right? That’s the idea! This syntax is for those who wish to migrate their Shoulda tests to RSpec. You basically just have to change context to describe and wrap your should statements with it {}.
+
+But if you don&#8217;t like this syntax, you can also create the same tests as follows:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rspec"><span class="meta meta_rspec meta_rspec_behaviour"><span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_behaviour">describe</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">Post</span> <span class="keyword keyword_control keyword_control_ruby keyword_control_ruby_start-block">do</span></span>  fixtures <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>all</span>
+
+<span class="meta meta_rspec meta_rspec_example">  <span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_example">it</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span>should belong_to<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>user</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>  it <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span>should belong_to<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>owner</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>  it <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span>should belong_to<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>user</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>owner</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
+
+  it <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span>should have_many<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>tags</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>through</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>taggings</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>  it <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span>should have_many<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>through_tags</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>through</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>taggings</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>  it <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span>should have_many<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>tags</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>through_tags</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>through</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>taggings</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
+
+  it <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span>should require_unique_attributes<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>title</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>  it <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span>should require_attributes<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>body</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>message</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_regexp string_regexp_classic string_regexp_classic_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span>wtf<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>  it <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span>should require_attributes<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>title</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>  it <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span>should only_allow_numeric_values_for<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>user_id</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></span></pre>
+Now with an RSpec style!
+<h2>Macros</h2>
+Here are all the available macros:
+
+For Shoulda style, <a href="http://github.com/carlosbrando/remarkable/wikis/shoulda-macros">click here</a>.
+For RSpec style, <a href="http://github.com/carlosbrando/remarkable/wikis/rspec-macros">click here</a>.
+<h2>Finalizing</h2>
+This project has already reached the first goal, which was to port all Shoulda macros to RSpec. This has been done with great care and attention to detail, and I have tried to write lots of tests. But there is no substitute for using it in real life and finding areas that could use improvement.
+
+Please use <a href="http://github.com/carlosbrando/remarkable/tree/master">Remarkable</a> and help me to make it even better!
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/2008/11/18/shoulda-for-rspec-is-remarkable/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/11/18/rails-podcast-brasil-episodio-38-especial-rails-22/">Rails Podcast Brasil - EpisÃ³dio 38: Especial Rails 2.2</a></h1>
+    
+    
+  </header>
+
+
+  <div class="entry-content">Um episódio inteiro comentando as principais alterações no Rails 2.2, explicando alguns conceitos e tirando algumas dúvidas.
+
+Entenda se você poderá se beneficiar do novo sistema de Thread-Safe do Rails, o que são eTags, quais métodos saíram e quais entraram e muito mais.
+
+Obviamente não deu para cobrir todas as alterações, principalmente porque não dá para explicar muito sobre código em um podcast. Mas se você deseja entender melhor cada uma das novidades desta versão há três formas: Leia a tradução do Akita do <a href="http://www.akitaonrails.com/2008/10/24/tradu-o-ruby-on-rails-2-2-release-notes">release notes</a>, acompanhe a séria <a href="http://www.nomedojogo.com/category/rails-22/">Edge Rails</a> deste blog, ou compre o PDF (em <a href="http://envycasts.com/products/ruby-on-rails-22-pdf">português e inglês</a>)  + screencast do Rails 2.2 no site do <a href="http://envycasts.com/products/ruby-on-rails-22-package-deal">Envycasts</a>.
+
+<img class="alignnone" title="Podcast" src="http://www.nomedojogo.com/wp-content/uploads/2008/01/untitled-1.png" alt="" width="280" height="130" />
+
+<strong>Download</strong>: <a href="http://download.podcast.rubyonrails.pro.br/RailsPodcastBrasil_038.mp3">Episódio #38</a>
+iTunes: <a href="http://podcast.rubyonrails.pro.br/rss">http://podcast.rubyonrails.pro.br/rss</a>
+Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podcast.rubyonrails.pro.br/</a>
+
+<strong>Nota:</strong> Este episódio foi gravado na semana passada, antes do anúncio do Rails 2.2 RC2.
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/2008/11/18/rails-podcast-brasil-episodio-38-especial-rails-22/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/11/17/the-rspec-book-behaviour-driven-development-with-ruby/">The RSpec Book: Behaviour Driven Development With Ruby</a></h1>
+    
+    
+  </header>
+
+
+  <div class="entry-content">Um novo livro está sendo preparado pela <strong>Pragmatic Programmers</strong>: <a href="http://www.pragprog.com/titles/achbd/the-rspec-book">The RSpec Book: Behaviour Driven Development with Ruby</a>.
+
+O livro será escrito pelo próprio <strong>David Chelimsky</strong> (principal desenvolvedor e mantenedor do Rspec) e outros participantes de peso. A idéia é ser um livro introdutório sobre RSpec, Cucumber e outras ferramentas necessários para se fazer BDD com Ruby, e promete ser recheado de tutoriais e exemplos práticos.
+
+O último capítulo do livro abordará testes no Rails usando todas as ferramentas e conceitos explorados nos primeiros capítulos.
+
+Infelizmente a previsão para venda é somente para o mês de abril de 2009.
+<h3>Tópicos</h3>
+<ul>
+	<li>Foreward</li>
+	<li>Introduction</li>
+	<li>Tutorial: <span class="caps">BDD</span> with RSpec and Cucumber
+<ul>
+	<li>Mastermind</li>
+</ul>
+</li>
+	<li>Behaviour Driven Development
+<ul>
+	<li>Writing Software That Matters</li>
+	<li>It’s Not About Testing</li>
+	<li>Coupling</li>
+	<li>Mock Objects</li>
+</ul>
+</li>
+	<li>RSpec
+<ul>
+	<li>Code Examples</li>
+	<li>Expectations</li>
+	<li>Mocking in RSpec</li>
+	<li>RSpec and Test::Unit</li>
+	<li>Tools and Integration</li>
+	<li>Extending RSpec</li>
+</ul>
+</li>
+	<li>Cucumber
+<ul>
+	<li>Cucumber</li>
+</ul>
+</li>
+	<li>Behaviour Driven Rails
+<ul>
+	<li><span class="caps">BDD</span> in Rails</li>
+	<li>Cucumber with Rails</li>
+	<li>Webrat</li>
+	<li>Rails Views</li>
+	<li>Rails Helpers</li>
+	<li>Rails Controllers</li>
+	<li>Rails Models</li>
+</ul>
+</li>
+</ul>
+Durante um tempo adotei o Shoulda com Test::Unit como meu principal framework de testes, mas depois que comecei a brincar com o <strong>Cucumber</strong> estou migrando para o RSpec. Mais detalhes <a href="http://www.nomedojogo.com/2008/11/13/shoulda-para-rspec-e-remarkable/">aqui</a>.
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/2008/11/17/the-rspec-book-behaviour-driven-development-with-ruby/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/11/17/mito-1-rails-e-dificil-de-implantar/">Mito #1: Rails Ã© DifÃ­cil De Implantar</a></h1>
+    
+    
+  </header>
+
+
+  <div class="entry-content">David Heinemeier Hansson iniciou uma série de artigos em seu <a href="http://www.loudthinking.com/posts/29-the-rails-myths">blog pessoal</a> <span style="color: #000000;"><span style="font-family: &quot;Lucida Grande&quot;,&quot;Lucida Sans Unicode&quot;,Tahoma,Verdana,sans-serif;">desmistificando</span></span> algumas crenças sobre o Ruby on Rails. Este texto não é uma tradução literal e sim uma explanação do <a href="http://www.loudthinking.com/posts/30-myth-1-rails-is-hard-to-deploy#mod_rails">primeiro artigo</a> de David.
+
+Quando David lançou o <a href="http://www.basecamphq.com/">Basecamp</a> sob <a href="http://www.modruby.net/en/">mod_ruby,</a> há alguns anos atrás, ele não estava preocupado com o fato de que precisaria executar várias instâncias de um projeto Rails, tanto é que na época isto era um pouco complicado de se fazer, sem uma bela de uma gambiarra.
+
+Naquela época só era possível executar o Rails sob CGI. Depois veio o FCGI, que ainda hoje é uma plataforma viável. Os softwares da 37signals foram executados sob esta plataforma durante alguns anos, mas esta parecia ser uma plataforma moribunda.
+<h2>Mongrel</h2>
+Foi nesta época em que apareceu o <a href="http://mongrel.rubyforge.org/">Mongrel</a>, e junto com ele a sensação de que não precisávamos de mais nenhum outro protocolo para fazer com que os servidores de aplicação e os servidores web conversassem.  Nós simplesmente podíamos usar HTTP! Hoje Mongrel, <a href="http://code.macournoyer.com/thin/">Thin</a>, <a href="http://ebb.rubyforge.org/">Ebb</a> e outros servidores web baseados em Ruby predominam nos ambientes de produção. E existem boas razões para isto, afinal eles são estáveis, versáteis e rápidos.
+<h2>Muitas opções</h2>
+Até aqui tudo parece muito bem, mas um problema apareceu: Entre tantas opções, qual é a melhor para colocar meu projeto em produção? Devo ir de Apache, nginx, ou quem sabe de lighttpd? Devo confiar nos proxies dos servidores web ou usar algo como o HAProxy ou Pound? Quantos processos do Mongrel devo usar? Seria bom usar alguma ferramenta para monitorar os processos? God ou Monit?
+
+Todas estas são boas opções, mas isto gera um paradoxo das Boas Opções. Entre elas qual é a melhor? Este grande numero de Boas Opções é exatamente o que cria este primeiro mito sobre o Ruby on Rails. <strong>Sem saber exatamente qual ferramenta usar, conclui-se que é difícil implantar um projeto Rails.</strong>
+
+Como resolver este tipo de problema?
+<h2>Phusion Passenger™</h2>
+<a href="http://www.modrails.com/">Passenger (mod_rails)</a>, é uma solução única que torna o deploy de aplicativos Rails tão fácil quanto um mod_php. Após um deploy ridiculamente simples, você tem um Apache se comportando como um web server, load balancer, application server e monitorador de processos. Você simplesmente joga seu aplicativo, altera o arquivo tmp/restart.txt e pronto, você está no ar!
+
+Isto ainda não quer dizer que todos os grandes projetos Rails estão usando Passenger. Atualmente até mesmo os projetos da 37signals ainda não estão usando-o, pelo menos por enquanto.
+
+O fato importante é que se houver alguma razão para isso, você pode montar todo o seu ambiente de produção manualmente com algumas das soluções mencionadas acima. Mas caso queira algo realmente simples e rápido, pode optar pelo Passenger, e confiar que esta é uma excelente opção.
+
+<strong>Resumindo, Rails é difícil de implantar? Não! Phusion Passenger tornou o processo de implantação de projetos Rails ridiculamente simples.</strong>
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/2008/11/17/mito-1-rails-e-dificil-de-implantar/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/11/17/darkcast-edicao-especial-railssummit/">DarkCast - EdiÃ§Ã£o Especial RailsSummit</a></h1>
+    
+    
+  </header>
+
+
+  <div class="entry-content">Coloque um bando de nerds em uma Van, apague a luz e prenda-os no trânsito de São Paulo por algumas horas. Qual seria o resultado?
+
+<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="500" height="409" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="src" value="http://vimeo.com/moogaloop.swf?clip_id=2094245&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=00ADEF&amp;fullscreen=1" /><embed type="application/x-shockwave-flash" width="500" height="409" src="http://vimeo.com/moogaloop.swf?clip_id=2094245&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=00ADEF&amp;fullscreen=1" allowscriptaccess="always" allowfullscreen="true"></embed></object>
+
+O vídeo mais maneiro sobre o Rails Summit Latin America, sem dúvida!
+
+Parabéns pelo trabalho, vocês deviam se juntar e fazer isto mais vezes, mas não precisa ser sempre no escurinho&#8230;
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/2008/11/17/darkcast-edicao-especial-railssummit/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+<nav role="pagination">
+  <div>
+    
+      <a class="prev" href="/page19/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+      <a class="next" href="/page17/">Newer &rarr;</a>
+    
+  </div>
+</nav>
+
+</div>
+
+      
+        <aside role=sidebar><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/07/31/zombie-ninjas-attack-a-survivors-retrospective/">Zombie Ninjas Attack: A Survivor's Retrospective</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast Ã© fÃ¡cil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+
+</aside>
+      
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+</body>
+</html>

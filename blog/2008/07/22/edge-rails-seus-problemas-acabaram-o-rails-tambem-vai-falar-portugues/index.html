@@ -1,0 +1,222 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Carlos Brando: Edge Rails: Seus problemas acabaram, o Rails tambÃ©m vai falar portuguÃªs!</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/blog/2008/07/22/edge-rails-seus-problemas-acabaram-o-rails-tambem-vai-falar-portugues/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  
+  <link href="/atom.xml" rel="alternate" title="Carlos Brando" type="application/atom+xml"/>
+  
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Carlos Brando</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">Edge Rails: Seus Problemas Acabaram, O Rails TambÃ©m Vai Falar PortuguÃªs!</h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-07-22 00:00:00 -0300" pubdate  updated >Jul 22<span>nd</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+<div class="entry-content"><a href="http://www.nomedojogo.com/wp-content/uploads/2008/07/1417766186_85663b2a70.jpg"><img class="alignnone size-medium wp-image-908" title="1417766186_85663b2a70" src="http://www.nomedojogo.com/wp-content/uploads/2008/07/1417766186_85663b2a70.jpg" alt="" /></a>
+<h6>Foto de <a title="Link to chrys' photostream" href="http://flickr.com/photos/chrys/"><strong>chrys</strong></a></h6>
+Algumas pessoas estão comentando que o <strong>Ruby on Rails 2.2</strong> deve ser lançado até setembro, a tempo do <a href="http://en.oreilly.com/railseurope2008/public/content/home">RailsConf Europe</a>, e acredito que esta é uma das novidades que mais nos interessa.
+
+Tudo começou em setembro de 2007 quando um grupo de desenvolvedores começaram a construção de um plugin para o Rails chamado <a href="http://groups.google.com/group/rails-i18n">rails-I18n</a>, que visava eliminar a necessidade de monkey patching no Rails para internacionalizar uma aplicação.
+<h3>Peraí, antes de começar, o que é I18n?</h3>
+Há claro, não posso começar um artigo sobre <strong>I18n</strong> sem explicar o que isto significa. Primeiro, para entender o porque deste nome, precisamos ter um conhecimento profundo de cálculos matemáticos. Conte comigo, quantas letras temos entre o <strong>I</strong> e o <strong>n</strong> na palavra <strong>Internationalization</strong>? 18. Muito bom, <strong>I18n</strong>.
+
+O mesmo vale para <strong>Localization</strong> e <strong>L10n</strong>.
+
+Já viu quando um site tem aquelas bandeirinhas no topo, permitindo que você escolha em que língua quer navegar? Quando você clica em uma delas, todos os textos do site mudam para a língua correspondente daquele país.
+
+Isto é Internationalization, ou I18n.
+
+Claro que estou sendo muito simplista, na maioria das vezes não é só os textos que mudam de um país para outro. Não podemos nos esquecer do formato da data, fuso-horário, padrões de peso e medida. E talvez o mais importante a moeda.
+<h3>I18n e L10n, qual a diferença?</h3>
+Internacionalização é preparar seu software para que pessoas de outros países e línguas possam usá-lo.
+
+Localização (L10n) é adaptar o seu produto as necessidades de um país. É como pegar um site americano que só aceita pagamento via PayPal e adaptá-lo para aceitar boleto bancário, por exemplo.
+<h3>O que tem de novo no Rails?</h3>
+No Rails 2.2 este plugin de internacionalização será integrado ao seu código fonte.
+
+Isto não significa que o Rails sofrerá grandes alterações. Na verdade quase nada muda no Rails, ele continuará sendo o mesmo framework de sempre, com todas as suas mensagens de validações em inglês e tudo mais.
+
+A diferença é que se quiséssemos estas mensagem em português, ou em outro idioma, hoje, teríamos de criar um monkey patch para isto. Não posso deixar de citar como exemplo o famoso <a href="http://www.improveit.com.br/software_livre/brazilian_rails">Brazilian Rails</a>, que faz exatamente isto para traduzir as mensagens do <strong>ActiveRecord</strong>.
+
+A novidade é que a partir do Rails 2.2 teremos uma forma padronizada e mais simples de fazer isto, usando uma interface comum.
+<h3>Como isto vai funcionar?</h3>
+Básicamente este gem é dividido em duas partes:
+<ul>
+	<li>A primeira acrescenta à API do Rails uma coleção de novos métodos, estes métodos basicamente servirão para acessar a segunda parte do gem.</li>
+	<li>A segunda parte é um <strong>backend</strong> simples que implementa toda a lógica para fazer o Rails funcionar exatamente como funciona hoje, usando a localização <strong>en-US</strong>.</li>
+</ul>
+Okey, até aí, não mudou nada. A grande sacada é que esta segunda parte poderá ser substituída por uma que dê suporte à internacionalização que você deseja. Melhor ainda, uma série de plugins que serão lançados irão fazer exatamente isto.
+
+E é claro que teremos um em português. Talvez uma adaptação do Brazilian Rails? Tomara que desta vez com um nome um pouco mais bonito&#8230;
+
+No próximo artigo vou dar mais detalhes desta implementação, usando código.
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+
+      
+
+
+
+
+<time datetime="2008-07-22 00:00:00 -0300" pubdate  updated >Jul 22<span>nd</span>, 2008</time>
+
+
+
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://carlosbrando.github.com/blog/2008/07/22/edge-rails-seus-problemas-acabaram-o-rails-tambem-vai-falar-portugues/" data-via="" data-counturl="http://carlosbrando.github.com/blog/2008/07/22/edge-rails-seus-problemas-acabaram-o-rails-tambem-vai-falar-portugues/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+</div>
+
+      
+        <aside role=sidebar><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/07/31/zombie-ninjas-attack-a-survivors-retrospective/">Zombie Ninjas Attack: A Survivor's Retrospective</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast Ã© fÃ¡cil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+
+</aside>
+      
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+</body>
+</html>

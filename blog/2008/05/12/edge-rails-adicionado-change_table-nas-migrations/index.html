@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Carlos Brando: Edge Rails: change_table</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/blog/2008/05/12/edge-rails-adicionado-change_table-nas-migrations/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  
+  <link href="/atom.xml" rel="alternate" title="Carlos Brando" type="application/atom+xml"/>
+  
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Carlos Brando</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">Edge Rails: Change_table</h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-05-12 00:00:00 -0300" pubdate  updated >May 12<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+<div class="entry-content">Criar migrations ficou muito mais <strong>sexy</strong> depois do lançamento do Rails 2.0, mas alterar uma tabela usando migrations continuou sendo da forma antiga, nada sexy.
+
+No Rails 2.1 (que já está para sair) alterar uma tabela também será sexy, com o novo método <strong>change_table</strong>. Veja um exemplo:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">change_table <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>videos</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">t</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>timestamps <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> adiciona as colunas created_at e updated_at
+</span>  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="support support_function support_function_activerecord support_function_activerecord_rails">belongs_to</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>goat</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> adiciona a coluna goat_id (integer)
+</span>  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>string <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>name</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>email</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>limit</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">20</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> adiciona duas colunas: name e email
+</span>  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>remove <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>name</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>email</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> remove as colunhas name e email
+</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+Funciona como o <em>create_table</em>, mas ao invés de criar uma nova tabela, apenas altera uma tabela existente, adicionando ou removendo colunas e índices. Veja uma lista das opções existentes:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">change_table <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>table</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">t</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>column <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> cria uma coluna simples. Ex: t.column(:name, :string)
+</span>  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>index <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Adiciona um novo índice à tabela
+</span>  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>timestamps
+  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>change <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> muda a definição da coluna. Ex: t.change(:name, :string, :limit =&gt; 80)
+</span>  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>change_default <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> muda o valor padrão da coluna.
+</span>  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>rename <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> muda o nome da coluna
+</span>  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>references
+  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="support support_function support_function_activerecord support_function_activerecord_rails">belongs_to</span>
+  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>string
+  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>text
+  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>integer
+  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>float
+  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>decimal
+  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>datetime
+  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>timestamp
+  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>time
+  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>date
+  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>binary
+  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>boolean
+  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>remove
+  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>remove_references
+  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>remove_belongs_to
+  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>remove_index
+  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>remove_timestamps
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+
+      
+
+
+
+
+<time datetime="2008-05-12 00:00:00 -0300" pubdate  updated >May 12<span>th</span>, 2008</time>
+
+
+
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://carlosbrando.github.com/blog/2008/05/12/edge-rails-adicionado-change_table-nas-migrations/" data-via="" data-counturl="http://carlosbrando.github.com/blog/2008/05/12/edge-rails-adicionado-change_table-nas-migrations/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+</div>
+
+      
+        <aside role=sidebar><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/07/31/zombie-ninjas-attack-a-survivors-retrospective/">Zombie Ninjas Attack: A Survivor's Retrospective</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast Ã© fÃ¡cil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+
+</aside>
+      
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+</body>
+</html>

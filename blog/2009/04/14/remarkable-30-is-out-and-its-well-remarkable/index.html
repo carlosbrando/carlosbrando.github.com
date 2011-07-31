@@ -1,0 +1,315 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Carlos Brando: Remarkable 3.0 is out and it's... well... remarkable!</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/blog/2009/04/14/remarkable-30-is-out-and-its-well-remarkable/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  
+  <link href="/atom.xml" rel="alternate" title="Carlos Brando" type="application/atom+xml"/>
+  
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Carlos Brando</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">Remarkable 3.0 Is Out and It&#8217;s&#8230; Well&#8230; Remarkable!</h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-04-14 00:00:00 -0300" pubdate  updated >Apr 14<span>th</span>, 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+<div class="entry-content">Wow, a major release? Yes, a major release and we have plenty reasons for that. Since me and <a id="f0t3" title="José Valim" href="http://josevalim.blogspot.com/">José Valim</a> were working on it for a couple months, we have quite a list :). So follow up:
+<h2>1. Remarkable Core</h2>
+<a id="oue7" title="Remarkable" href="http://github.com/carlosbrando/remarkable">Remarkable</a> is now a framework for <a id="l2-8" title="rspec" href="http://rspec.info/">rspec</a> matchers. Since Rails matchers are not simple, as Remarkable grew, we saw our matchers full of logic to show messages (description and failure messages) and that some methods could be automatically generated, reducing repetitive work.
+
+Compare the allow_mass_assignment_of matcher in <a id="y8_3" title="Remarkable 2.x" href="http://github.com/carlosbrando/remarkable/blob/a296cae395ae87a8b7ae1f83605a31a4eb3988bf/lib/remarkable/active_record/macros/validations/allow_mass_assignment_of_matcher.rb">Remarkable 2.x</a> and in <a id="dtj7" title="Remarkable 3.0" href="http://github.com/carlosbrando/remarkable/blob/136267fbd66be4892db6f3b561cab650f3f7b935/remarkable_activerecord/lib/remarkable_activerecord/matchers/allow_mass_assignment_of_matcher.rb">Remarkable 3.0</a>. Which one do you prefer? :)
+
+So we built a DSL and called it Remarkable, which with Remarkable ActiveRecord and Remarkable Rails, provides you nice matchers/macros to speed up your tests. To install them, just do:
+<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">sudo gem install remarkable_rails</span></span></pre>
+You can also install just <strong>remarkable</strong> or just <strong>remarkable_activerecord</strong>. But remarkable_rails brings you the whole packet.
+<h2>2. I18n</h2>
+On Rails Summit Latin America, <a id="x6yr" title="Obie Fernandez" href="http://blog.obiefernandez.com/">Obie Fernandez</a> talked about the Hash Rocket way and one of the items were that they actually print out the specs and give it to the client. Both me and José <a id="v:p1" title="works" href="http://surgeworks.com/">work with</a> <a id="reai" title="Rails projects" href="http://www.plataformatec.com.br/">Rails projects</a> and we couldn&#8217;t deliver the same to technical clients, because the output was in english. Well, we scratched our own itch!
+
+This is how an English output would be like:
+<div style="margin-left: 40px;"><span style="font-family: Courier New;">Example disabled: require age to be set</span><br style="font-family: Courier New;" /><br style="font-family: Courier New;" /><span style="font-family: Courier New;">User</span><br style="font-family: Courier New;" /><span style="font-family: Courier New;">- should require name and email to be set</span><br style="font-family: Courier New;" /><span style="font-family: Courier New;">- should ensure length of name is within 3..40 characters</span><br style="font-family: Courier New;" /><span style="font-family: Courier New;">- should require unique values for email</span><br style="font-family: Courier New;" /><span style="font-family: Courier New;">- should ensure numericality of age allowing only integer values and allowing blank values </span></div>
+In Remarkable, we can have the same results in Portuguese:
+<div style="margin-left: 40px; font-family: Courier New;">Exemplo desativado: exigir presença de idade
+
+Usuário
+- deve exigir presença de nome e email
+- deve garantir tamanho de nome seja entre 3..40 caracteres
+- deve garantir valores únicos para email
+- deve aceitar apenas números em idade permitindo somente valores inteiros e permitindo valores nulos</div>
+As you have noticed everything gets translated including the class and attributes names. This happens by setting up <a id="bvhg" title="Remarkable" href="http://github.com/carlosbrando/remarkable">Remarkable</a> and Rails yml files.
+<h2>3. Macros</h2>
+In Remarkable earlier versions, we coded the matcher (validate_presence_of) but most of the time we had to do some tweaks in other to a matcher becomes a macro (should_validate_presence_of). In <a id="fc01" title="Remarkable 3.0" href="http://github.com/carlosbrando/remarkable">Remarkable 3.0</a> it happens transparently.
+
+In other words, if you are using <a id="ju-8" title="Remarkable 3.0" href="http://github.com/carlosbrando/remarkable">Remarkable 3.0</a> to build your matchers you have cleaner matchers, I18n support and transparent macros creation.
+<h2>4. Pending and disabled macros</h2>
+In Remarkable 2.2, we added the ability to mark macros as disabled:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rspec">xshould_validate_uniqueness_of <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>name</span></span></pre>
+And it would print on your specs output:
+<div style="margin-left: 40px;"><span style="font-family: Courier New;">Example disabled: require unique values for name</span></div>
+As some people pointed out, Remarkable was still lacking support for pending macros. Pending examples in Rspec would be:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rspec"><span class="meta meta_rspec meta_rspec_example"><span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_example">it</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>should have one manager<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="keyword keyword_control keyword_control_ruby keyword_control_ruby_start-block">do</span></span>
+  pending<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>create managers resource<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+
+<span class="meta meta_rspec meta_rspec_example"><span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_example">it</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>should validate associated manager<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="keyword keyword_control keyword_control_ruby keyword_control_ruby_start-block">do</span></span>
+  pending<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>create managers resource<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+And now in Remarkable, you have the pending group:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rspec">pending <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>create managers resource<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
+</span>  should_have_one <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>manager</span>
+  should_validate_associated <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>manager</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+In both cases a message &#8220;PENDING: create managers resources&#8221; is appended to matcher description.
+<h2>5. More options to matchers</h2>
+In Remarkable 2.2, we started to <a id="edml" title="support ALL Active Record validations with ALL options" href="../2009/02/10/remarkable-now-supports-all-activerecord-validations/">support ALL Active Record validations with ALL options</a>. And now we extended support for association matchers!
+
+From only :dependent and :through as supported options, now it accepts:
+<div style="margin-left: 40px;">:through, :class_name, :foreign_key, :dependent, :join_table, :uniq, :readonly, :validate, :autosave, :counter_cache, :polymorphic</div>
+Besides matchers became much smarter. Whenever :join_table or :through is given as option, it also checks if the given table exists. Whenever :foreign_key or :counter_cache is given, it also checks if the given column exists.
+<h2><span style="font-family: Verdana;">6. Controllers matchers extended</span></h2>
+To provide I18n, we ported redirect_to and render_template matchers from rspec-rails. We also added some extra options to respond_with and render template, so you can now do:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rspec">render_template <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>edit<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>layout</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>users<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+
+respond_with <span class="constant constant_numeric constant_numeric_ruby">422</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>content_type</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="support support_class support_class_ruby">Mime</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="variable variable_other variable_other_constant variable_other_constant_ruby">XML</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
+                  <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>body</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_regexp string_regexp_classic string_regexp_classic_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span>Unprocessable Entitity<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span></span></span></pre>
+And the route matcher is willing to make your life twice easier. Since it tests params recognitation and routes generation at once, you can cut your routing_specs at least in a half! So the following lines:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rspec">route_for<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>controller</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>companies<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
+          <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>action</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>show<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
+          <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>id</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>1<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>should <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">==</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>/companies/1<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+
+params_from<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>get</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>/companies/1<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>should <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">==</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>controller</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>companies<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
+                                              <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>action</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>show<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
+                                              <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>id</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>1<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span></span></pre>
+Will become:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rspec">route<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>get</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>/companies/1<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>controller</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>companies<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
+                            <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>action</span>     <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>show<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
+                            <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>id</span>         <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>1<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+</span></pre>
+<h2>7. Macro stubs</h2>
+There is a presentation from <a id="zdqa" title="José Valim" href="http://josevalim.blogspot.com/2009/04/my-presentation-about-remarkable-30-at.html">José Valim</a> that explains this feature with more details, but it basically makes your controllers specs from this:
+<br style="font-family: Courier New;" />
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rspec"><span class="meta meta_rspec meta_rspec_behaviour"><span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_behaviour">describe</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">TasksController</span> <span class="keyword keyword_control keyword_control_ruby keyword_control_ruby_start-block">do</span></span>
+  <span class="meta meta_function meta_function_method meta_function_method_with-arguments meta_function_method_with-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">mock_task</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">(</span><span class="variable variable_parameter variable_parameter_function variable_parameter_function_ruby">stubs<span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{}</span></span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">)</span></span>
+    <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>task</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_augmented keyword_operator_assignment_augmented_ruby">||=</span> mock_model<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_constant variable_other_constant_ruby">Task</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> stubs<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+
+<span class="meta meta_rspec meta_rspec_behaviour">  <span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_behaviour">describe</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>responding to #POST create<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="keyword keyword_control keyword_control_ruby keyword_control_ruby_start-block">do</span></span>
+<span class="meta meta_rspec meta_rspec_example">    <span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_example">it</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>exposes a newly created task as @task<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="keyword keyword_control keyword_control_ruby keyword_control_ruby_start-block">do</span></span>
+      <span class="support support_class support_class_ruby">Task</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>should_receive<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>new</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>with<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>these<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>params<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>
+      and_return<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>mock_task<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>save</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">true</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">))</span>‏
+      post <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>create</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>task</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>these</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>params<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
+      assigns<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>task</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>should equal<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>mock_task<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>‏
+    <span class="keyword keyword_control keyword_control_ruby">end</span>
+
+<span class="meta meta_rspec meta_rspec_example">    <span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_example">it</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>redirects to the created task<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="keyword keyword_control keyword_control_ruby keyword_control_ruby_start-block">do</span></span>
+      <span class="support support_class support_class_ruby">Task</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>stub!<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>new</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>and_return<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>mock_task<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>save</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">true</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">))</span>‏
+      post <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>create</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>task</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{}</span>
+      response<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>should redirect_to<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>task_url<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>mock_task<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">))</span>‏
+    <span class="keyword keyword_control keyword_control_ruby">end</span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+Become this:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rspec"><span class="meta meta_rspec meta_rspec_behaviour"><span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_behaviour">describe</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">TasksController</span> <span class="keyword keyword_control keyword_control_ruby keyword_control_ruby_start-block">do</span></span>
+  mock_models <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>task</span>
+
+<span class="meta meta_rspec meta_rspec_behaviour">  <span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_behaviour">describe</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>post</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>create</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>task</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>these</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>params<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span> <span class="keyword keyword_control keyword_control_ruby keyword_control_ruby_start-block">do</span></span>
+    expects <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>new</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>  <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>on</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">Task</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>with</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>these</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>params<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>returns</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> mock_task
+    expects <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>save</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>on</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> mock_task<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>returns</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">true</span>
+
+    should_assign_to <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>task</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>with</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> mock_task
+    should_redirect_to <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span>task_url<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>mock_task<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+It aims to improve readability and be more DRY, since you declare your expectations/stubs just once. You can see the whole controller specs in rspec and remarkable way compared <a id="ojk7" title="here" href="http://gist.github.com/gists/94700">here</a>.
+
+It works by eval&#8217;ing the expectation/stubs chain and performing the action before each macro is executed. On should_assign_to it evals using expectations (:should_receive), on should_redirect_to it uses stubs (:stub!).
+
+We also want to thank <a id="o-q3" title="David Chelimsky" href="http://blog.davidchelimsky.net/">David Chelimsky</a> that gave the nice hint to allow <strong>:post =&gt; :create</strong> inside the <strong>describe</strong> method and suggested to use <a id="oi7p" title="mocha" href="http://mocha.rubyforge.org/">mocha</a> syntax. :)
+<h2>8. Documentation, documentation and documentation</h2>
+Yes, three times, because each project is very well documented. Browse them:
+
+Remarkable:
+<a href="http://remarkable.rubyforge.org/core/">http://remarkable.rubyforge.org/core/</a>
+
+Remarkable ActiveRecord:
+<a href="http://remarkable.rubyforge.org/activerecord/">http://remarkable.rubyforge.org/activerecord/</a>
+<a href="http://remarkable.rubyforge.org/activerecord/classes/Remarkable/ActiveRecord/Matchers.html">http://remarkable.rubyforge.org/activerecord/classes/Remarkable/ActiveRecord/Matchers.html</a> (just matchers)
+
+Remarkable Rails:
+<a href="http://remarkable.rubyforge.org/rails/">http://remarkable.rubyforge.org/rails/</a>
+<a href="http://remarkable.rubyforge.org/rails/classes/Remarkable/ActionController/Matchers.html">http://remarkable.rubyforge.org/rails/classes/Remarkable/ActionController/Matchers.html</a> (just matchers)
+<h2>9. Volunteers?</h2>
+Last but definitely not least: we need you!
+<p style="text-align: center;"><img class="aligncenter" src="http://travelpod.files.wordpress.com/2009/02/446px-uncle_sam_pointing_finger.jpg" alt="http://travelpod.files.wordpress.com/2009/02/446px-uncle_sam_pointing_finger.jpg" width="198" height="267" /></p>
+
+We created a solid basis for matchers/macros creation. And we want to take it further by hosting even more matchers. So anyone who wants to work on Remarkable Datamapper, Remarkable Sequel, Remarkable Sinatra, please step in! We are waiting for you. :)
+
+And all the others can equally help us by <a id="p4fn" title="joining the group" href="http://groups.google.com/group/remarkable-core">joining the group</a> and posting bugs, matchers, enhancements in <a id="f4k0" title="bug tracking system" href="http://carlosbrando.lighthouseapp.com/projects/19775-remarkable/">bug tracking system</a>.
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+
+      
+
+
+
+
+<time datetime="2009-04-14 00:00:00 -0300" pubdate  updated >Apr 14<span>th</span>, 2009</time>
+
+
+
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://carlosbrando.github.com/blog/2009/04/14/remarkable-30-is-out-and-its-well-remarkable/" data-via="" data-counturl="http://carlosbrando.github.com/blog/2009/04/14/remarkable-30-is-out-and-its-well-remarkable/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+</div>
+
+      
+        <aside role=sidebar><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/07/31/zombie-ninjas-attack-a-survivors-retrospective/">Zombie Ninjas Attack: A Survivor's Retrospective</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast Ã© fÃ¡cil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+
+</aside>
+      
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+</body>
+</html>
