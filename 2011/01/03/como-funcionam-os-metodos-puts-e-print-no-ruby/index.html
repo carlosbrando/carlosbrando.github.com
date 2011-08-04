@@ -116,37 +116,41 @@
 
 <div class="entry-content"><p>Se você já experimentou Ruby com certeza já conheceu os famosos métodos <code>puts</code>, <code>print</code> e outros semelhantes a esses. Talvez você tenha notado que esses métodos, diferente de como aprendemos, podem ser executados sem que seja necessário informar um objeto.</p>
 
-<p>Se você vem de outra linguagem de programação talvez tenha logo especulado que eles sejam palavras reservadas do Ruby. Mas isso não é verdade. Ambos são métodos comuns, como qualquer outro. Veja por si mesmo:
-&#8220;` ruby</p>
+<p>Se você vem de outra linguagem de programação talvez tenha logo especulado que eles sejam palavras reservadas do Ruby. Mas isso não é verdade. Ambos são métodos comuns, como qualquer outro. Veja por si mesmo:</p>
 
-<pre><code>Object.send :puts, "um texto qualquer"
-# =&gt; um texto qualquer
-</code></pre>
+<div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="no">Object</span><span class="o">.</span><span class="n">send</span> <span class="ss">:puts</span><span class="p">,</span> <span class="s2">&quot;um texto qualquer&quot;</span>
+</div><div class='line'><span class="c1"># =&gt; um texto qualquer</span>
+</div></code></pre></td></tr></table></div>
 
-<p><code>
-Como você pode ver no exemplo acima, esses métodos foram inteligentemente incluidos na classe `Object`, e como no Ruby tudo é um objeto...
-</code> ruby</p>
+<p>Como você pode ver no exemplo acima, esses métodos foram inteligentemente incluidos na classe <code>Object</code>, e como no Ruby tudo é um objeto&#8230;</p>
 
-<pre><code>puts send(:class) # =&gt; Object
-</code></pre>
-
-<p>&#8220;`</p>
+<div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="nb">puts</span> <span class="nb">send</span><span class="p">(</span><span class="ss">:class</span><span class="p">)</span> <span class="c1"># =&gt; Object</span>
+</div></code></pre></td></tr></table></div>
 
 <h2>O módulo Kernel</h2>
 
-<p>Embora esses métodos sejam disponibilizados por meio de <code>Object</code>, eles estão implementados em um módulo chamado <code>Kernel</code>, que é então incluido na classe.
-O interessante é que você pode tirar proveito desse mecanismo. Se você adicionar um método ao módulo <code>Kernel</code> ele funcionará exatamente como os métodos citados acima. Veja:
-&#8220;` ruby</p>
+<p>Embora esses métodos sejam disponibilizados por meio de <code>Object</code>, eles estão implementados em um módulo chamado <code>Kernel</code>, que é então incluido na classe.</p>
 
-<pre><code>module Kernel
-    def print_line
-        puts '-' * 20
-    end
-end
-print_line # =&gt; --------------------
-</code></pre>
+<p>O interessante é que você pode tirar proveito desse mecanismo. Se você adicionar um método ao módulo <code>Kernel</code> ele funcionará exatamente como os métodos citados acima. Veja:</p>
 
-<p>&#8220;`</p>
+<div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="k">module</span> <span class="nn">Kernel</span>
+</div><div class='line'>    <span class="k">def</span> <span class="nf">print_line</span>
+</div><div class='line'>        <span class="nb">puts</span> <span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">20</span>
+</div><div class='line'>    <span class="k">end</span>
+</div><div class='line'><span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">print_line</span> <span class="c1"># =&gt; --------------------</span>
+</div></code></pre></td></tr></table></div>
 </div>
 
 

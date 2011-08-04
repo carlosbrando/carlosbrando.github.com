@@ -4,7 +4,7 @@
   <title></title>
   <link href="http://carlosbrando.github.com/atom.xml" rel="self"/>
   <link href="http://carlosbrando.github.com/"/>
-  <updated>2011-08-04T01:13:24-03:00</updated>
+  <updated>2011-08-04T01:24:28-03:00</updated>
   <id>http://carlosbrando.github.com/</id>
   <author>
     <name>Carlos Brando</name>
@@ -258,16 +258,19 @@ Você pode adicionar o podcast ao seu iTunes &lt;a href=&quot;http://itunes.app
     <id>http://carlosbrando.github.com/2011/01/03/como-funcionam-os-metodos-puts-e-print-no-ruby</id>
     <content type="html">&lt;p&gt;Se você já experimentou Ruby com certeza já conheceu os famosos métodos &lt;code&gt;puts&lt;/code&gt;, &lt;code&gt;print&lt;/code&gt; e outros semelhantes a esses. Talvez você tenha notado que esses métodos, diferente de como aprendemos, podem ser executados sem que seja necessário informar um objeto.&lt;/p&gt;
 
-&lt;p&gt;Se você vem de outra linguagem de programação talvez tenha logo especulado que eles sejam palavras reservadas do Ruby. Mas isso não é verdade. Ambos são métodos comuns, como qualquer outro. Veja por si mesmo:
-``` ruby&lt;/p&gt;
+&lt;p&gt;Se você vem de outra linguagem de programação talvez tenha logo especulado que eles sejam palavras reservadas do Ruby. Mas isso não é verdade. Ambos são métodos comuns, como qualquer outro. Veja por si mesmo:&lt;/p&gt;
+
+&lt;p&gt;``` ruby&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;Object.send :puts, &quot;um texto qualquer&quot;
 # =&amp;gt; um texto qualquer
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;code&gt;
-Como você pode ver no exemplo acima, esses métodos foram inteligentemente incluidos na classe `Object`, e como no Ruby tudo é um objeto...
-&lt;/code&gt; ruby&lt;/p&gt;
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;Como você pode ver no exemplo acima, esses métodos foram inteligentemente incluidos na classe &lt;code&gt;Object&lt;/code&gt;, e como no Ruby tudo é um objeto...&lt;/p&gt;
+
+&lt;p&gt;``` ruby&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;puts send(:class) # =&amp;gt; Object
 &lt;/code&gt;&lt;/pre&gt;
@@ -276,15 +279,18 @@ Como você pode ver no exemplo acima, esses métodos foram inteligentemente incl
 
 &lt;h2&gt;O módulo Kernel&lt;/h2&gt;
 
-&lt;p&gt;Embora esses métodos sejam disponibilizados por meio de &lt;code&gt;Object&lt;/code&gt;, eles estão implementados em um módulo chamado &lt;code&gt;Kernel&lt;/code&gt;, que é então incluido na classe.
-O interessante é que você pode tirar proveito desse mecanismo. Se você adicionar um método ao módulo &lt;code&gt;Kernel&lt;/code&gt; ele funcionará exatamente como os métodos citados acima. Veja:
-``` ruby&lt;/p&gt;
+&lt;p&gt;Embora esses métodos sejam disponibilizados por meio de &lt;code&gt;Object&lt;/code&gt;, eles estão implementados em um módulo chamado &lt;code&gt;Kernel&lt;/code&gt;, que é então incluido na classe.&lt;/p&gt;
+
+&lt;p&gt;O interessante é que você pode tirar proveito desse mecanismo. Se você adicionar um método ao módulo &lt;code&gt;Kernel&lt;/code&gt; ele funcionará exatamente como os métodos citados acima. Veja:&lt;/p&gt;
+
+&lt;p&gt;``` ruby&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;module Kernel
     def print_line
         puts '-' * 20
     end
 end
+
 print_line # =&amp;gt; --------------------
 &lt;/code&gt;&lt;/pre&gt;
 
