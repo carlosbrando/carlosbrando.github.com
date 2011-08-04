@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Nome do Jogo: Edge Rails: Evitando feeds duplicados</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/2008/09/11/edge-rails-evitando-feeds-duplicados/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <link href="http://feeds2.feedburner.com/NomeDoJogo" rel="alternate" title="Nome do Jogo" type="application/atom+xml"/>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1249636-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Nome do Jogo</a></h1>
+  
+    <h2>por Carlos Brando</h2>
+  
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="http://feeds2.feedburner.com/NomeDoJogo" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">Edge Rails: Evitando Feeds Duplicados</h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-09-11 00:00:00 -0300" pubdate  updated >Sep 11<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+<div class="entry-content">Algumas vezes você assina o feed de um blog e de repente se depara com uma série de posts que já foram lidos aparecendo como se fossem novos no seu <strong>Google Reader</strong>. Já aconteceu com você?
+
+Isto pode acontecer por vários motivos, mas não seria legal deixar isto acontecer com os assinantes do seu feed, correto?
+
+Para ajudar-nos a evitar este tipo de constrangimento, cada entrada e o próprio feed criado pelo builder <a href="http://www.nomedojogo.com/2008/01/17/edge-rails-atom-feed-turbinado/">atom_feed</a> receberam uma nova opção chamada <strong>:id</strong>.
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">atom_feed<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>id</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>tag:nomedojogo.com,2008:test/<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">feed</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+  feed<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>My great blog!<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+  feed<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>updated<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">((</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>posts</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>first<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>created_at<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">))</span>
+
+  <span class="keyword keyword_control keyword_control_ruby">for</span> post <span class="keyword keyword_control keyword_control_ruby">in</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>posts</span>
+    feed<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>entry<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>post<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>id</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>tag:nomedojogo.com,2008:<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">+</span> post<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>id<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>to_s<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">entry</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+      entry<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>post<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+      entry<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>content<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>post<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>body<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>type</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>html<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+
+      entry<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>author <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">author</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+        author<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>name<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Carlos Brando<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+      <span class="keyword keyword_control keyword_control_ruby">end</span>
+    <span class="keyword keyword_control keyword_control_ruby">end</span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+Fazendo desta forma, mesmo que você tenha de reescrever algum trecho do código que gera os feeds, ou fazer alguma grande alteração no conteúdo do seu site, o <strong>id</strong> criado para aquela entrada será sempre o mesmo fazendo com que o leitor de feeds não duplique as entradas antigas.
+
+Seus leitores agradecem.
+
+Aproveitando a ocasião, você pode assinar o feed do Nome do Jogo, <a href="http://www.nomedojogo.com/feed/rss/">clicando aqui</a>.
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+
+      
+
+
+
+
+<time datetime="2008-09-11 00:00:00 -0300" pubdate  updated >Sep 11<span>th</span>, 2008</time>
+
+
+
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://carlosbrando.github.com/2008/09/11/edge-rails-evitando-feeds-duplicados/" data-via="carlosbrando" data-counturl="http://carlosbrando.github.com/2008/09/11/edge-rails-evitando-feeds-duplicados/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread"><div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'carlosbrando';
+  var disqus_identifier = 'http://carlosbrando.github.com/2008/09/11/edge-rails-evitando-feeds-duplicados/';
+  var disqus_url = 'http://carlosbrando.github.com/2008/09/11/edge-rails-evitando-feeds-duplicados/';
+  //var disqus_developer = 1;
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro anos de Nome do Jogo</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("carlosbrando", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/carlosbrando" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @carlosbrando</a>
+  
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

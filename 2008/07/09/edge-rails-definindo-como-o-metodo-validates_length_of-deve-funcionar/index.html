@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Nome do Jogo: Edge Rails: Definindo como o método validates_length_of deve funcionar</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/2008/07/09/edge-rails-definindo-como-o-metodo-validates_length_of-deve-funcionar/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <link href="http://feeds2.feedburner.com/NomeDoJogo" rel="alternate" title="Nome do Jogo" type="application/atom+xml"/>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1249636-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Nome do Jogo</a></h1>
+  
+    <h2>por Carlos Brando</h2>
+  
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="http://feeds2.feedburner.com/NomeDoJogo" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">Edge Rails: Definindo Como O Método Validates_length_of Deve Funcionar</h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-07-09 00:00:00 -0300" pubdate  updated >Jul 9<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+<div class="entry-content">O método <a href="http://rails-doc.org/docs/ActiveModel/Validations/ClassMethods/validates_length_of">validates_length_of</a> faz parte dos muitos métodos de validação contidos no <strong>ActiveRecord</strong>. Este método em particular serve para garantir que o valor gravado em uma determinada coluna no banco de dados terá um tamanho máximo, mínimo, exato, ou até mesmo se está em um intervalo de valores.
+
+Mas o termo &#8220;tamanho&#8221; é relativo. Hoje quando dizemos &#8220;tamanho&#8221; estamos nos referindo a quantidade de caracteres no texto.
+
+Mas imagine um caso onde eu tenha um campo em um formulário onde a limitação não seja definida pela quantidade de caracteres e sim pela quantidade de palavras, algo como &#8220;escreva um texto com no mínimo 100 palavras&#8221;. Imagine uma página onde o usuário tenha de redigir uma redação, por exemplo.
+
+Hoje, para validar isto não teríamos outra escolha senão criarmos um novo método que faça esta validação. Mas na próxima versão do Rails poderemos personalizar o método <strong>validates_length_of</strong> para funcionar da forma como desejamos usando a opção <strong>:tokenizer</strong>.
+
+Veja um exemplo que resolveria o problema citado acima:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_function support_function_activerecord support_function_activerecord_rails">validates_length_of</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>essay</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
+                    <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>minimum</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">100</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
+                    <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>too_short</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Sua redação deve ter no mínimo %d palavras.<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
+                    <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>tokenizer</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> lambda <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">str</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> str<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>scan<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_regexp string_regexp_classic string_regexp_classic_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span><span class="constant constant_character constant_character_escape constant_character_escape_ruby">\w</span>+<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span></span></pre>
+
+Este é apenas um exemplo do que podemos fazer com esta nova opção. Além disso podemos usa-lá para contar apenas a quantidade de dígitos, menções de uma única palavra, etc..
+
+E então, como você fará uso dessa opção?
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+
+      
+
+
+
+
+<time datetime="2008-07-09 00:00:00 -0300" pubdate  updated >Jul 9<span>th</span>, 2008</time>
+
+
+
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://carlosbrando.github.com/2008/07/09/edge-rails-definindo-como-o-metodo-validates_length_of-deve-funcionar/" data-via="carlosbrando" data-counturl="http://carlosbrando.github.com/2008/07/09/edge-rails-definindo-como-o-metodo-validates_length_of-deve-funcionar/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread"><div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'carlosbrando';
+  var disqus_identifier = 'http://carlosbrando.github.com/2008/07/09/edge-rails-definindo-como-o-metodo-validates_length_of-deve-funcionar/';
+  var disqus_url = 'http://carlosbrando.github.com/2008/07/09/edge-rails-definindo-como-o-metodo-validates_length_of-deve-funcionar/';
+  //var disqus_developer = 1;
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro anos de Nome do Jogo</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("carlosbrando", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/carlosbrando" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @carlosbrando</a>
+  
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

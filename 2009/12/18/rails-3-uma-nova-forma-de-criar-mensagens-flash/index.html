@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Nome do Jogo: Rails 3: Uma nova forma de criar mensagens flash</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/2009/12/18/rails-3-uma-nova-forma-de-criar-mensagens-flash/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <link href="http://feeds2.feedburner.com/NomeDoJogo" rel="alternate" title="Nome do Jogo" type="application/atom+xml"/>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1249636-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Nome do Jogo</a></h1>
+  
+    <h2>por Carlos Brando</h2>
+  
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="http://feeds2.feedburner.com/NomeDoJogo" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">Rails 3: Uma Nova Forma De Criar Mensagens Flash</h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-12-18 00:00:00 -0200" pubdate  updated >Dec 18<span>th</span>, 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+<div class="entry-content">Como a maioria deve saber, um dos grandes diferenciais do Rails vem de uma característica que também é marcante em seu criador. Ruby on Rails é um software de opinião. Atualmente DHH não é mais tão ativo no desenvolvimento do Ruby on Rails quanto no passado. Porém de tempos em tempos ele aparece com algumas inclusões polêmicas no framework.
+
+Seu último patch é referente a inclusão das opções <code>:alert</code>, <code>:notice</code> e <code>:flash</code> no método <code>redirect_to</code>. Assim, se antes fazíamos desta maneira:
+<pre class="textmate-source"><span class="source source_ruby">flash<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>notice</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Post was created<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+redirect_to<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>post</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+</span></pre>
+Agora podemos fazer assim:
+<pre class="textmate-source"><span class="source source_ruby">redirect_to<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>post</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>notice</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Post was created<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
+Esse sem dúvida é um recurso interessante e nos ajudará a diminuir a quantidade de linhas de código que escrevemos. Porém alguns desenvolvedores não gostaram desta implementação argumentando que não costumam utilizar <code>flash[:alert]</code> como sinalizador de problemas, mas sim <code>flash[:error]</code>.
+
+A resposta de DHH? &#8220;Nós estamos utilizando <code>alert</code> para tudo na 37signals. Isto realmente não importa. Só que exista um sinalizador para continuar e outro para parar&#8221;.
+
+Aceitando ou não esta explicação é importante lembrar do fato de que desde o principio foram estas &#8220;convenções&#8221; que tornaram o Rails o que ele é hoje. Sendo assim, a melhor coisa a fazer é passar a adotar o padrão definido.
+
+Outros exemplos extraídos da documentação:
+<pre class="textmate-source"><span class="source source_ruby">redirect_to post_url<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>post</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>alert</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Watch it, mister!<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+
+redirect_to post_url<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>post</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>status</span><span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>found</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
+  <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>notice</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Pay attention to the road<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+
+redirect_to post_url<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>post</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>status</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">301</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
+  <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>flash</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>updated_post_id</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>post</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>id <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
+
+redirect_to <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>action</span><span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>atom<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>alert</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Something serious happened<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span></span></pre>
+<h3>[Atualização 18/12/2009 18:20]</h3>
+Uma informação importante é que existe uma boa chance deste novo recurso entrar em algum futuro release do Rails ainda na versão 2.3.x.
+
+Além disso, também esqueci de mencionar que foram criados métodos mais convenientes para facilitar o acesso ao <code>flash[:notice]</code> e <code>flash[:alert]</code>. Podemos acessar estes recursos simplesmente assim:
+
+<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_begin punctuation_definition_tag_begin_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span> <span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_html">class</span>=<span class="string string_quoted string_quoted_double string_quoted_double_html"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_html">"</span>notice<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_html">"</span></span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_end punctuation_definition_tag_end_html">&gt;</span></span><span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> notice <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span><span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_begin punctuation_definition_tag_begin_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_end punctuation_definition_tag_end_html">&gt;</span></span>
+
+<span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_begin punctuation_definition_tag_begin_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span> <span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_html">class</span>=<span class="string string_quoted string_quoted_double string_quoted_double_html"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_html">"</span>alert<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_html">"</span></span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_end punctuation_definition_tag_end_html">&gt;</span></span><span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> alert <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span><span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_begin punctuation_definition_tag_begin_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_end punctuation_definition_tag_end_html">&gt;</span></span></span></pre>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+
+      
+
+
+
+
+<time datetime="2009-12-18 00:00:00 -0200" pubdate  updated >Dec 18<span>th</span>, 2009</time>
+
+
+
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://carlosbrando.github.com/2009/12/18/rails-3-uma-nova-forma-de-criar-mensagens-flash/" data-via="carlosbrando" data-counturl="http://carlosbrando.github.com/2009/12/18/rails-3-uma-nova-forma-de-criar-mensagens-flash/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread"><div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'carlosbrando';
+  var disqus_identifier = 'http://carlosbrando.github.com/2009/12/18/rails-3-uma-nova-forma-de-criar-mensagens-flash/';
+  var disqus_url = 'http://carlosbrando.github.com/2009/12/18/rails-3-uma-nova-forma-de-criar-mensagens-flash/';
+  //var disqus_developer = 1;
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro anos de Nome do Jogo</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("carlosbrando", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/carlosbrando" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @carlosbrando</a>
+  
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

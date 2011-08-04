@@ -1,0 +1,660 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Nome do Jogo</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/page29/index.html"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <link href="http://feeds2.feedburner.com/NomeDoJogo" rel="alternate" title="Nome do Jogo" type="application/atom+xml"/>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1249636-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Nome do Jogo</a></h1>
+  
+    <h2>por Carlos Brando</h2>
+  
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="http://feeds2.feedburner.com/NomeDoJogo" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/08/15/edge-rails-melhorando-a-performance-usando-etags/">Edge Rails: Melhorando a Performance Usando ETags</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-08-15 00:00:00 -0300" pubdate  updated >Aug 15<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">O Carlos Júnior já escreveu sobre isto no blog da <a href="http://tas.milk-it.net/carlos/novo-no-rails-edge-suporte-simples-a-conditional-get-etags/">milk-it</a>. Provavelmente teremos suporte a <strong>ETags</strong> no Rails 2.2. Eu disse provavelmente porque isto ainda não foi incluído no branch oficial do Rails, mas como é algo importante e está sendo feito pelo core team, é quase certo de que será.
+
+Antes de começar a falar sobre isto, deixa eu tentar explicar o que são <strong>ETags</strong> (Entity Tags). <strong>Etags</strong> seriam de uma forma grosseira identificadores associados a cada recurso para determinar se o arquivo que está no servidor é o mesmo que está no cache do browser. No caso, o recurso seria uma página em HTML, mas também poderia ser um XML ou JSON.
+
+Cabe ao servidor a responsabilidade de verificar se o recurso solicitado é igual dos dois lados. Caso o servidor confirme que o recurso armazenado no cache do browser do usuário é exatamente o mesmo que seria enviado de volta para ele, ao invés de devolver todo o conteúdo do recurso novamente ele apenas retorna um <a href="http://www.nomedojogo.com/2008/07/14/http-status-code-no-rails/">status</a> <strong>304</strong> (<strong>Not Modified</strong>) e o browser usará o que está em seu cache.
+
+Servidores Web como o <strong>Apache</strong> e o <strong>IIS</strong> já sabem fazer isto para página estáticas. Mas quando o conteúdo é dinâmico, como na maioria das páginas de um projeto Ruby on Rails, a responsabilidade é todo nossa.
+
+O objeto <strong>response</strong> ganhou dois novos métodos, o <strong>last_modified=</strong> e o <strong>etag=</strong> (note o sinal de igualdade &#8220;=&#8221;). Quando você atribuir valores a estes métodos eles serão repassados aos cabeçalhos <strong>HTTP_IF_MODIFIED_SINCE</strong> e <strong>HTTP_IF_NONE_MATCH</strong> respectivamente. Quando uma nova requisição (<strong>request</strong>) deste recurso for feita ela retornará com estes cabeçalhos permitindo que você possa comparar com o novo valor informado no <strong>response</strong> e decidir se quer enviar todo o conteúdo do recurso novamente ou apenas um status <strong>304</strong>.
+
+Vamos ao código (roubando o exemplo dado por <a href="http://ryandaigle.com/articles/2008/8/14/what-s-new-in-edge-rails-simpler-conditional-get-support-etags">Ryan Daigle</a> no seu blog):
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_controller"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">ArticlesController<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ApplicationController</span></span></span>
+  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">show</span></span>
+    <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>article</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Article</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>params<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>id</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">    <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> informado o identificador
+</span>    response<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>last_modified <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>article</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>published_at<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>utc
+    response<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>etag <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>article</span>
+
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">    <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> verificando se houve mudanças
+</span>    <span class="keyword keyword_control keyword_control_ruby">if</span> request<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>fresh?<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>response<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+      head <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>not_modified</span>
+    <span class="keyword keyword_control keyword_control_ruby">else</span>
+      <span class="support support_function support_function_actionpack support_function_actionpack_rails">respond_to</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">wants</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">        <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> retornando conteúdo normalmente
+</span>      <span class="keyword keyword_control keyword_control_ruby">end</span>
+    <span class="keyword keyword_control keyword_control_ruby">end</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+Note que estou atribuindo valores para <strong>response.last_modified</strong> e <strong>response.etag</strong>, e logo em seguinda usando o método <strong>request.fresh?(response)</strong> para determinar se houve alguma mudança ou não. Caso os dois cabeçalhos continuem iguais eu apenas retorno um status <strong>304</strong> e o browser do usuário usará o conteúdo que está armazenado no seu cache.
+
+Quanto ao método <strong>etag</strong>, também podemos passar um <strong>array</strong> se for o caso:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">response<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>etag <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>article</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> current_user<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span></span></pre>
+
+A forma como foi implementado isto no Rails está causando um certo desconforto em muita gente e várias outras formas foram sugeridas pela comunidade, então possivelmente isto pode mudar antes do lançamento da versão 2.2.
+
+Veja algumas sugestões dadas: <a href="http://pastie.org/252869">in_modified_scope</a> e <a href="http://pastie.org/253302">with_etag_cache</a>.
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/08/15/edge-rails-melhorando-a-performance-usando-etags/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/08/14/rails-podcast-brasil-episodio-27/">Rails Podcast Brasil - Episódio 27</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-08-14 00:00:00 -0300" pubdate  updated >Aug 14<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><img class="alignnone size-full wp-image-1090" title="379338632_e091628727" src="http://www.nomedojogo.com/wp-content/uploads/2008/08/379338632_e091628727.jpg" alt="" width="500" height="375" />
+
+Está virando moda gravar o podcast de madrugada. Esta ficando difícil conciliar os horários para a gravação!
+
+Neste episódio contamos as últimas novidades do <strong>Rails Summit Latin America</strong>, e desvendamos o que é esse tal de <strong>Adhearsion</strong> que promete ser o próximo killer app do Ruby. Também falamos sobre uma tal blogueira na comunidade, <strong>Getting Real 2</strong>, map and reduce, como ser sua própria <strong>Start-Up</strong>, Erlang e para fechar da dança do quadrado&#8230; digo Ruby ao quadrado.
+
+<strong>Download</strong>: <a href="http://download.podcast.rubyonrails.pro.br/RailsPodcastBrasil_027.mp3">clique aqui</a>
+<strong>iTunes</strong>: <a href="http://podcast.rubyonrails.pro.br/rss">http://podcast.rubyonrails.pro.br/rss</a>
+Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podcast.rubyonrails.pro.br/</a>
+<h3>Neste episódio:</h3>
+<ul>
+	<li><a href="http://www.akitaonrails.com/2008/8/6/rails-summit-na-linux-magazine">Rails Summit Latin America</a></li>
+	<li><a href="http://www.opensteam.net/Default.aspx?AspxAutoDetectCookieSupport=1">openSteam</a></li>
+	<li><a href="http://radar.oreilly.com/2008/08/adhearsion-next-killer-app-for.html">Adhearsion Â next killer app for Ruby?</a></li>
+	<li><a href="http://www.sproutcore.com/2008/08/07/a-page-a-day/">Sproutcore Â A Page a DayÂ</a></li>
+	<li><a href="http://twitter.com/perezd/statuses/886953143">Editando código online via GitHub 14 Aug</a></li>
+	<li><a href="http://www.railsenvy.com/2008/8/12/the-ruby-hoedown-in-10-minutes">The Ruby Hoedown in 10 minutes</a></li>
+	<li><a href="http://getexceptional.com/beta">Exceptional</a></li>
+	<li><a href="http://blog.phusion.nl/2008/08/09/phusion-passenger-203-released/">Phusion</a></li>
+	<li><a href="http://railsgirl.wordpress.com/2008/07/29/criando-uma-tela-de-login/">Criando uma Tela de Login</a></li>
+	<li><a href="http://www.37signals.com/svn/posts/1183-getting-real-2-update-first-draft-done-publisher-search-continues">Getting Real 2 update: First draft done, publisher search continues</a></li>
+	<li><a href="http://www.rubyinside.com/ruby-1-9-what-to-expect-presentation-1008.html">Ruby 1.9: What To Expect</a></li>
+	<li><a href="http://blog.nicksieger.com/articles/2006/09/06/rubys-exception-hierarchy">RubyÂs Exception Hierarchy</a></li>
+	<li><a href="http://www.igvita.com/2008/08/11/asynchronous-db-dbslayer-http/">Asynchronous DB: DBSlayer &amp; HTTP</a></li>
+	<li><a href="http://code.google.com/p/iphone-universal/">iphone-universal</a></li>
+	<li><a href="http://railspikes.com/2008/8/11/understanding-map-and-reduce">Understanding map and reduce</a></li>
+	<li><a href="http://www.theregister.co.uk/2008/08/11/hadoop_dziuba/">Hadoop: When grownups do open source</a></li>
+	<li><a href="http://www.mouseoverstudio.com/blog/?p=114">Plugin in<em>place</em>edit agora com suporte a i18n</a></li>
+	<li><a href="http://blog.mmediasys.com/2008/08/10/rubygems-with-power-comes-responsibility/">RubyGems: With power comes responsibility</a></li>
+	<li><a href="http://www.tableless.com.br/jquery-e-bom-para-designers">jQuery é bom para designers</a></li>
+	<li><a href="http://wrongnotes.blogspot.com/2008/08/rails-on-intellij.html">Rails on IntelliJ</a></li>
+	<li><a href="http://www.wagnerandrade.com/blog/2008/08/ruby-snapshot-4-conectando-no-orkut-google/">Ruby Snapshot #4: Conectando no orkut / Google</a></li>
+	<li><a href="http://blog.jimmy.schementi.com/2008/08/walk-through-silverlight-flickr-client.html">Walkthrough: Silverlight Flickr Client in IronRuby</a></li>
+	<li><a href="http://blog.jayfields.com/2008/08/be-your-start-up.html">Be Your Start-Up</a></li>
+	<li><a href="http://medevyoujane.com/blog/2008/8/6/installing-erlang-and-a-few-libraries-on-mac-os-x.html">Mais Erlang</a></li>
+	<li><a href="http://info.abril.com.br/aberto/infonews/082008/12082008-10.shl">Ruby ao quadrado</a></li>
+</ul>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/08/14/rails-podcast-brasil-episodio-27/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/08/13/edge-rails-novo-helper-para-testes-assert_sql/">Edge Rails: Novo Helper Para Testes (Assert_sql)</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-08-13 00:00:00 -0300" pubdate  updated >Aug 13<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Alguns de vocês já devem conhecer o método <strong>assert_queries</strong> que ajuda a validar nos testes a quantidade de queries executadas. Por exemplo:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">assert_queries<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="support support_class support_class_ruby">Firm</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>partial_updates? <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">?</span> <span class="constant constant_numeric constant_numeric_ruby">0</span> <span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">:</span> <span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span>firm<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>save! <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span></span></pre>
+
+No teste acima estou afirmando que se houver <a href="http://www.nomedojogo.com/2008/04/14/edge-rails-partial-updates/">partial_updates</a> uma query deve ser executada no banco de dados, caso contrário nenhuma deve ser executada.
+
+Agora ganhamos mais um helper para ajudar a testar o tipo de query executada, o método <strong>assert_sql</strong>. Um exemplo:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">test_empty_with_counter_sql</span></span>
+  company <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Firm</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>first</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+  assert_sql <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">/</span><span class="variable variable_other variable_other_constant variable_other_constant_ruby">COUNT</span><span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">/</span>i <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
+</span>    assert_equal <span class="constant constant_language constant_language_ruby">false</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> company<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>clients<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>empty?
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+</span></pre>
+
+No exemplo acima estou afirmando que no bloco informado ao método pelo menos uma query deve conter a palavra <strong>COUNT</strong>. Obviamente você pode ser mais especifico na expressão regular que estiver usando. Vamos pegar um outro exemplo:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">assert_sql<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_regexp string_regexp_classic string_regexp_classic_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span><span class="constant constant_character constant_character_escape constant_character_escape_ruby">\(\"</span>companies<span class="constant constant_character constant_character_escape constant_character_escape_ruby">\"</span>.<span class="constant constant_character constant_character_escape constant_character_escape_ruby">\"</span>id<span class="constant constant_character constant_character_escape constant_character_escape_ruby">\"</span> IN <span class="constant constant_character constant_character_escape constant_character_escape_ruby">\(</span>1<span class="constant constant_character constant_character_escape constant_character_escape_ruby">\)\)</span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
+</span>  <span class="support support_class support_class_ruby">Account</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>include</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>firm</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+Use com parcimônia!
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/08/13/edge-rails-novo-helper-para-testes-assert_sql/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/08/12/edge-rails-opcao-index-funcionando-no-fields_for/">Edge Rails: Opção :index Funcionando No Fields_for</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-08-12 00:00:00 -0300" pubdate  updated >Aug 12<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Muitas vezes a opção <strong>:index</strong> do método <strong>select</strong> pode ser útil, como por exemplo quando se precisa criar diversos <strong>dropdowns</strong> dinamicamente em uma página.
+
+Até hoje o método <strong>fields_for</strong> não repassava esta opção para métodos como <strong>select</strong>, <strong>collection_select</strong>, <strong>country_select</strong> e <strong>time_zone_select</strong>, o que limitava o seu uso em determinados casos.
+
+Isto já foi corrigido para a próxima versão do Rails. Por exemplo, apenas para efeito de teste veja o código abaixo e o seu retorno:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_function support_function_viewhelpers support_function_viewhelpers_rails">fields_for</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>post</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>post</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>index</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">108</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">f</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+  concat f<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>select<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>category</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_other string_quoted_other_literal string_quoted_other_literal_lower string_quoted_other_literal_lower_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">%w(</span> abe &lt;mus&gt; hest<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">)</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">select</span> <span class="meta meta_attribute-with-value meta_attribute-with-value_id meta_attribute-with-value_id_html"><span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_id entity_other_attribute-name_id_html">id</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_html">=</span>\<span class="string string_quoted string_quoted_double string_quoted_double_html"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_html">"</span><span class="meta meta_toc-list meta_toc-list_id meta_toc-list_id_html">post_108_category\</span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_html">"</span></span></span> <span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_html">name</span>=\<span class="string string_quoted string_quoted_double string_quoted_double_html"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_html">"</span>post[108][category]\<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_html">"</span></span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+  <span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">option</span> <span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_html">value</span>=\<span class="string string_quoted string_quoted_double string_quoted_double_html"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_html">"</span>abe\<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_html">"</span></span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>abe<span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">option</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+  <span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">option</span> <span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_html">value</span>=\<span class="string string_quoted string_quoted_double string_quoted_double_html"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_html">"</span><span class="constant constant_character constant_character_entity constant_character_entity_html"><span class="punctuation punctuation_definition punctuation_definition_entity punctuation_definition_entity_html">&amp;</span>lt<span class="punctuation punctuation_definition punctuation_definition_entity punctuation_definition_entity_html">;</span></span>mus<span class="constant constant_character constant_character_entity constant_character_entity_html"><span class="punctuation punctuation_definition punctuation_definition_entity punctuation_definition_entity_html">&amp;</span>gt<span class="punctuation punctuation_definition punctuation_definition_entity punctuation_definition_entity_html">;</span></span>\<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_html">"</span></span> <span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_html">selected</span>=\<span class="string string_quoted string_quoted_double string_quoted_double_html"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_html">"</span>selected\<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_html">"</span></span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span><span class="constant constant_character constant_character_entity constant_character_entity_html"><span class="punctuation punctuation_definition punctuation_definition_entity punctuation_definition_entity_html">&amp;</span>lt<span class="punctuation punctuation_definition punctuation_definition_entity punctuation_definition_entity_html">;</span></span>mus<span class="constant constant_character constant_character_entity constant_character_entity_html"><span class="punctuation punctuation_definition punctuation_definition_entity punctuation_definition_entity_html">&amp;</span>gt<span class="punctuation punctuation_definition punctuation_definition_entity punctuation_definition_entity_html">;</span></span><span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">option</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+  <span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">option</span> <span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_html">value</span>=\<span class="string string_quoted string_quoted_double string_quoted_double_html"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_html">"</span>hest\<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_html">"</span></span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>hest<span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">option</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+<span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">select</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span></span></pre>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/08/12/edge-rails-opcao-index-funcionando-no-fields_for/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/08/12/alguem-entende-alguma-coisa-do-que-o-batman-diz/">Alguém Entende Alguma Coisa Do Que O Batman Diz?</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-08-12 00:00:00 -0300" pubdate  updated >Aug 12<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/kyMMQJ9tzWY&hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><embed src="http://www.youtube.com/v/kyMMQJ9tzWY&hl=en&fs=1" type="application/x-shockwave-flash" allowfullscreen="true" width="425" height="344"></embed></object>
+
+via <a href="http://www.interney.net/blogs/melhoresdomundo/2008/08/12/acuma/">Melhores do Mundo</a>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/08/12/alguem-entende-alguma-coisa-do-que-o-batman-diz/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/08/11/edge-rails-recebendo-alertas-para-melhoria-de-desempenho/">Edge Rails: Recebendo Alertas Para Melhoria De Desempenho</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-08-11 00:00:00 -0300" pubdate  updated >Aug 11<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">O Rails recebeu mais um parâmetro de configuração que faz com que ele emita um alerta caso esteja renderizando um template fora do diretório especificado para views. Isto é muito bom já que arquivos fora dos diretórios especificados para views não são armazenados em cache o que resulta em mais operações no disco.
+
+Para começar a receber os avisos basta incluir a seguinte linha no arquivo <strong>environment.rb</strong> do projeto:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>action_view<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>warn_cache_misses <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_language constant_language_ruby">true</span></span></pre>
+
+Fazendo isto a seguinte mensagem aparecerá caso algum arquivo fora dos diretórios configurados seja renderizado:
+
+<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">[PERFORMANCE] Rendering a template that was
+not found in view path. Templates outside the view path are
+not cached and result in expensive disk operations. Move this
+file into /Users/user/project/app/views or add the folder to your
+view path list</span></span></pre>
+
+Até o momento esta configuração está desligada como padrão.
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/08/11/edge-rails-recebendo-alertas-para-melhoria-de-desempenho/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/08/09/edge-rails-button_to_remote/">Edge Rails: Button_to_remote</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-08-09 00:00:00 -0300" pubdate  updated >Aug 9<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><img class="aligncenter size-full wp-image-1049" title="106960641_1473a4f0a7" src="http://www.nomedojogo.com/wp-content/uploads/2008/08/106960641_1473a4f0a7.jpg" alt="" />
+
+Acho que todo mundo aqui conhece o método <strong>submit_to_remote</strong>, certo? Este método retorna um botão HTML preparado para enviar o formulário via <strong>XMLHttpRequest</strong>.
+
+Para a próxima versão do Rails este método foi renomeado para <code><strong>button_to_remote</strong></code>, para manter uma certa consistência com o nome do seu método irmão o <strong>link_to_remote</strong>.
+
+Aqueles que irão migrar seus projetos não precisam se preocupar já que o nome antigo (<strong>submit_to_remote</strong>) será um alias para novo.
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/08/09/edge-rails-button_to_remote/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/08/08/pesquisa-quantos-anos-voce-tem/">Pesquisa: Quantos Anos Você Tem?</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-08-08 00:00:00 -0300" pubdate  updated >Aug 8<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><img class="alignnone size-full wp-image-1063" title="417034018_7107e8e5d8" src="http://www.nomedojogo.com/wp-content/uploads/2008/08/417034018_7107e8e5d8.jpg" alt="" />
+
+Estou preparando uma <strong>surpresa</strong> para vocês, mas para isto preciso fazer uma pesquisa e gostaria muito de contar com a ajuda da maioria. Preciso ter uma idéia da idade média dos Railers brasileiros.
+
+Sei que pode parecer uma pergunta meio chata e tal, mas para ajudar, algumas das pessoas que responderem vão poder <strong>participar de uma iniciativa bem legal</strong> que estou preparando. Então quem não quiser ser identificado, pode colocar um nome qualquer no comentário, mas coloque o email correto, para que eu possa entrar em contato depois.
+
+Por que não usar uma enquete? Porque preciso entrar em contato por email com alguns de vocês depois, dependendo da resposta.
+
+Vamos ver se dá certo isto&#8230; respondam nos comentários, por favor!
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/08/08/pesquisa-quantos-anos-voce-tem/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/08/08/edge-rails-desabilitando-o-cabecalho-accept-em-requisicoes-http/">Edge Rails: Desabilitando O Cabeçalho Accept Em Requisições HTTP</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-08-08 00:00:00 -0300" pubdate  updated >Aug 8<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Quando usamos o método <strong>respond_to</strong> para fazer algo assim:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">index</span></span>
+  <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>people</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Person</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>all</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+
+  <span class="support support_function support_function_actionpack support_function_actionpack_rails">respond_to</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">format</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+    format<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>html
+    format<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>xml <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="support support_function support_function_actionpack support_function_actionpack_rails">render</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>xml</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>people</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>to_xml <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+</span></pre>
+O Rails tem duas formas de identificar qual é o formato que deve ser usado, a primeira e mais comum é através do formato informado na URL (/index.<strong>xml</strong>, por exemplo) e a segunda forma para o caso de o formato não ter sido especificado é examinando o cabeçalho <strong>Accept</strong> da requisição HTTP.
+
+Para quem não sabe o cabeçalho <strong>Accept</strong> é aquele que informa o tipo do documento desejado em strings mais ou menos assim:
+
+<code>Accept: text/plain, text/html
+Accept: text/x-dvi; q=.8; mxb=100000; mxt=5.0, text/x-c</code>
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> recuperando esta informação via código
+</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>request</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>env<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>HTTP_ACCEPT<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>text/javascript<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span></span></pre>
+<a href="http://www.developershome.com/wap/detection/detection.asp?page=httpHeaders">Aqui</a> você pode ver uma lista dos tipos mais comuns.
+
+Acontece que este cabeçalho é porcamente implementado na maioria dos browsers. E quando ele é usado em sites públicos algumas vezes estranhos erros acontecem quando robôs indexadores fazem seus <strong>requests</strong>.
+
+Assim, tomou-se a decisão de desativar este cabeçalho por padrão, depois voltou-se atrás e resolveu-se que era melhor deixar apenas a opção de desligar se desejado. Para isto basta incluir a seguinte linha no arquivo <strong>environment.rb</strong>:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>action_controller<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>use_accept_header <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_language constant_language_ruby">false</span></span></pre>
+Quando desligado, caso o formato não seja informado na URL o Rails assumirá que deve usar o <strong>format.html</strong>.
+
+Existe um caso especial quando fazemos requisições usando ajax se o cabeçalho <strong>X-Requested-With</strong> estiver presente. Neste caso o formato <strong>format.js</strong> ainda será usado mesmo que o formato não tenha sido especificado (/people/1, por exemplo).
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/08/08/edge-rails-desabilitando-o-cabecalho-accept-em-requisicoes-http/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/08/06/the-big-bang-theory/">The Big Bang Theory</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-08-06 00:00:00 -0300" pubdate  updated >Aug 6<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><img class="alignnone size-full wp-image-1034" title="2271998567_72f1f35306" src="http://www.nomedojogo.com/wp-content/uploads/2008/08/2271998567_72f1f35306.jpg" alt="" />
+
+Tentei assistir este seriado tempos atrás, mas nunca consegui porque minha esposa simplesmente não achava a menor graça *cof* não entendia as piadas *cof* e por isto sempre acabávamos assistindo outra coisa.
+
+Fica claro então que este é um seriado 100% nerd e que eu teria de assistir sozinho, como um bom nerd que sou.
+
+Aproveitei que minha esposa está viajando esta semana e estou sozinho em casa e preparei uma maratona para saciar minha sede de conteúdo nerd, coisa que infelizmente só consigo fazer nestas ocasiões.
+
+A série é um sitcom que conta a história de uma turma de nerds super espertos, que tentam se dar bem socialmente. Mas a grande graça da série vem do alto número de referencias a cultura pop e piadas que somente um nerd de carteirinha conseguiria entender.
+
+Terminei minha maratona exatamente agora. No total foram 17 episódios regados a refrigerante, pizza e muita risada. Recomendado.
+
+<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="425" height="344" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowFullScreen" value="true" /><param name="src" value="http://www.youtube.com/v/9eTUz61LNjo&amp;hl=en&amp;fs=1" /><embed type="application/x-shockwave-flash" width="425" height="344" src="http://www.youtube.com/v/9eTUz61LNjo&amp;hl=en&amp;fs=1" allowfullscreen="true"></embed></object>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/08/06/the-big-bang-theory/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+<nav role="pagination">
+  <div>
+    
+      <a class="prev" href="/page30/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+      <a class="next" href="/page28/">Newer &rarr;</a>
+    
+  </div>
+</nav>
+
+<script type="text/javascript">
+    var disqus_shortname = 'carlosbrando';
+    (function () {
+      var s = document.createElement('script'); s.async = true;
+      s.type = 'text/javascript';
+      s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+      (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+
+</div>
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro anos de Nome do Jogo</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("carlosbrando", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/carlosbrando" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @carlosbrando</a>
+  
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Nome do Jogo: Paginando com estilo</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/2007/05/10/paginando-com-estilo/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <link href="http://feeds2.feedburner.com/NomeDoJogo" rel="alternate" title="Nome do Jogo" type="application/atom+xml"/>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1249636-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Nome do Jogo</a></h1>
+  
+    <h2>por Carlos Brando</h2>
+  
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="http://feeds2.feedburner.com/NomeDoJogo" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">Paginando Com Estilo</h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2007-05-10 00:00:00 -0300" pubdate  updated >May 10<span>th</span>, 2007</time>
+
+
+</p>
+    
+  </header>
+
+
+<div class="entry-content">Acho legal a implementa&ccedil;&atilde;o do Rails para pagina&ccedil;&atilde;o. O problema &eacute; que n&atilde;o d&aacute; para formatar direito o paginador usando CSS ou outros meios.
+
+Mas&#8230; &eacute; muito f&aacute;cil criar um paginador personalizado.
+
+<center><img src="http://www.nomedojogo.com/wp-content/uploads/2007/05/windowslivewriterpaginandocomestilo-cee5pagination3.jpg" height="44" width="356" /></center>No meu caso, criei um m&eacute;todo chamado <strong>pagination_links_with_css</strong> em um dos helpers da minha aplica&ccedil;&atilde;o.Meu c&oacute;digo ficou assim:
+[source:ruby]
+  def pagination_links_with_css(paginator, options={}, html_options={})
+    name = options[:name] || ActionView::Helpers::PaginationHelper::DEFAULT_OPTIONS[:name]
+    params = (options[:params] || ActionView::Helpers::PaginationHelper::DEFAULT_OPTIONS[:params]).clone
+
+    options[:link_to_current_page] = true
+    atual_page = options[:atual_page] || 1
+
+    pagination_links_each(paginator, options) do |n|
+      params[name] = n
+
+      if n.to_s.to_i == atual_page.to_i
+        &#8221;<span class='current'>#{n.to_s}</span>&#8221;
+      else
+        link_to(&#8220;#{n.to_s}&#8221;, params, html_options)
+      end
+    end
+  end
+[/source]
+
+O que fa&ccedil;o &eacute; bem simples. Como preciso pegar a p&aacute;gina corrente, deixo a op&ccedil;&atilde;o link_to_current_page como verdadeira. Tamb&eacute;m recupero o n&uacute;mero da p&aacute;gina atual (:atual_page) que informo na chamada do m&eacute;todo na view (neste ponto chamo aten&ccedil;&atilde;o, porque n&atilde;o consegui recuperar este valor de outra forma, voc&ecirc; sabe como?).
+
+Ent&atilde;o, percorro todas as p&aacute;ginas e posso formatar o retorno de cada uma da maneira como desejo (&#8220;&lt;span class=&#8217;current&#8217;&gt;#{n.to_s}&lt;/span&gt;&#8221;).
+
+No view, a &uacute;nica coisa que tenho de fazer &eacute; chamar o m&eacute;todo novo:
+
+[source:ruby]
+&lt;%= pagination_links_with_css @job_pages, {:window_size =&gt; 10, :atual_page =&gt; params[:page] } %&gt;
+[/source]
+
+&Eacute; por isto que sou um entusiasta do Rails. Mesmo quando o framework n&atilde;o pode fazer algo, &eacute; muito f&aacute;cil implementar.
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+
+      
+
+
+
+
+<time datetime="2007-05-10 00:00:00 -0300" pubdate  updated >May 10<span>th</span>, 2007</time>
+
+
+
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://carlosbrando.github.com/2007/05/10/paginando-com-estilo/" data-via="carlosbrando" data-counturl="http://carlosbrando.github.com/2007/05/10/paginando-com-estilo/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread"><div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'carlosbrando';
+  var disqus_identifier = 'http://carlosbrando.github.com/2007/05/10/paginando-com-estilo/';
+  var disqus_url = 'http://carlosbrando.github.com/2007/05/10/paginando-com-estilo/';
+  //var disqus_developer = 1;
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro anos de Nome do Jogo</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("carlosbrando", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/carlosbrando" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @carlosbrando</a>
+  
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

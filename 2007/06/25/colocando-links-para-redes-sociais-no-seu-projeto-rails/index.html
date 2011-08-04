@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Nome do Jogo: Colocando links para redes sociais no seu projeto Rails</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/2007/06/25/colocando-links-para-redes-sociais-no-seu-projeto-rails/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <link href="http://feeds2.feedburner.com/NomeDoJogo" rel="alternate" title="Nome do Jogo" type="application/atom+xml"/>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1249636-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Nome do Jogo</a></h1>
+  
+    <h2>por Carlos Brando</h2>
+  
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="http://feeds2.feedburner.com/NomeDoJogo" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">Colocando Links Para Redes Sociais No Seu Projeto Rails</h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2007-06-25 00:00:00 -0300" pubdate  updated >Jun 25<span>th</span>, 2007</time>
+
+
+</p>
+    
+  </header>
+
+
+<div class="entry-content">Vi esta dica no blog do <strong><a href="http://www.igvita.com/blog/2006/10/20/adding-social-bookmarks-in-rails/">Ilya  Grigorik</a></strong>.
+
+O c&oacute;digo:
+[source:ruby]
+&lt;%  current_uri = u(request.protocol &lt;&lt; request.host_with_port &lt;&lt; request.request_uri)
+title = u(@title)
+
+bookmarklets = {
+:delicious =&gt;   [&#8216;del.icio.us&#8217;, &#8216;delicious.gif&#8217; ,&#8217;http://del.icio.us/post?url=&amp;title=&#8217;],
+:digg =&gt;        [&#8216;digg it&#8217;, &#8216;digg.gif&#8217;, &#8216;http://digg.com/submit?phase=2&amp;url=&amp;title=&#8217;],
+:spurl =&gt;       [&#8216;spurl&#8217;, &#8216;spurl.gif&#8217;, &#8216;http://www.spurl.net/spurl.php?title=&amp;url=&#8217;],
+#  :wists =&gt;       [&#8216;wists&#8217;, &#8216;wists.gif&#8217;, &#8216;http://wists.com/r.php?c=&amp;r=&amp;title=&#8217;],
+:simpy =&gt;       [&#8216;simpy&#8217;, &#8216;simpy.gif&#8217;, &#8216;http://www.simpy.com/simpy/LinkAdd.do?href=&amp;title=&#8217;],
+#  :newsvine =&gt;    [&#8216;newsvine&#8217;, &#8216;newsvine.gif&#8217;, &#8216;http://www.newsvine.com/_tools/seed&amp;save?u=&amp;h=&#8217;],
+:blinklist =&gt;   [&#8216;blinklist&#8217;, &#8216;blinklist.gif&#8217;, &#8216;http://www.blinklist.com/index.php?Action=Blink/addblink.php&amp;Description=&amp;Url=&amp;Title=&#8217;],
+:furl =&gt;        [&#8216;furl&#8217;, &#8216;furl.gif&#8217;, &#8216;http://www.furl.net/storeIt.jsp?u=&amp;t=&#8217;],
+:reddit =&gt;      [&#8216;reddit&#8217;, &#8216;reddit.gif&#8217;, &#8216;http://reddit.com/submit?url=&amp;title=&#8217;],
+#  :fark =&gt;        [&#8216;fark&#8217;,&#8217;fark.gif&#8217;, &#8216;http://cgi.fark.com/cgi/fark/edit.pl?new_url=&amp;new_comment=&amp;linktype=&#8217;],
+:blogmarks =&gt;   [&#8216;blogmarks&#8217;, &#8216;blogmarks.gif&#8217;, &#8216;http://blogmarks.net/my/new.php?mini=1&amp;simple=1&amp;url=&amp;title=&#8217;],
+:yahoo =&gt;       [&#8216;yahoo&#8217;, &#8216;yahoo.gif&#8217;, &#8216;http://myweb2.search.yahoo.com/myresults/bookmarklet?u=&amp;t=&#8217;],
+#  :smarking =&gt;    [&#8216;smarking&#8217;, &#8216;smarking.gif&#8217;, &#8216;http://smarking.com&#8217;],
+#  :segnalo =&gt;     [&#8216;segnalo&#8217;, &#8216;segnalo.gif&#8217;, &#8216;http://segnalo.com/post.html.php?url=&amp;title=&#8217;],
+:magnolia =&gt;    [&#8216;magnolia&#8217;, &#8216;magnolia.gif&#8217;, &#8216;http://ma.gnolia.com/bookmarklet/add?url=&amp;title=&#8217;]
+}
+
+%&gt;
+
+&lt;% bookmarklets.each_value { |bookmarklet|
+bookmarklet[2].gsub!(/\{\{url\}\}/, current_uri)
+bookmarklet[2].gsub!(/(\{\{url_encoded_title\}\})|(\{\{title\}\})/, title) -%&gt;<a href="http://www.nomedojogo.com/wp-admin/%3C%=%20bookmarklet%5B-1%5D%20%%3E" title="&lt;%= bookmarklet[0] %&gt;:&lt;%= title %&gt;">
+<img src="http://www.nomedojogo.com/images/social/%3C%=%20bookmarklet%5B1%5D%20%%3E" alt="&lt;%= bookmarklet[0] %&gt;" /> &lt;%= bookmarklet[0] %&gt;
+</a>
+
+&lt;% } %&gt;
+
+[/source]
+
+Para funcionar do jeito que est&aacute;, basta ter uma vari&aacute;vel <strong>@title</strong> com o t&iacute;tulo da sua p&aacute;gina.
+
+Para pegar os <strong>&iacute;cones </strong>e ver o artigo original, <a href="http://www.igvita.com/blog/2006/10/20/adding-social-bookmarks-in-rails/">clique aqui</a>.
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+
+      
+
+
+
+
+<time datetime="2007-06-25 00:00:00 -0300" pubdate  updated >Jun 25<span>th</span>, 2007</time>
+
+
+
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://carlosbrando.github.com/2007/06/25/colocando-links-para-redes-sociais-no-seu-projeto-rails/" data-via="carlosbrando" data-counturl="http://carlosbrando.github.com/2007/06/25/colocando-links-para-redes-sociais-no-seu-projeto-rails/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread"><div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'carlosbrando';
+  var disqus_identifier = 'http://carlosbrando.github.com/2007/06/25/colocando-links-para-redes-sociais-no-seu-projeto-rails/';
+  var disqus_url = 'http://carlosbrando.github.com/2007/06/25/colocando-links-para-redes-sociais-no-seu-projeto-rails/';
+  //var disqus_developer = 1;
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro anos de Nome do Jogo</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("carlosbrando", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/carlosbrando" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @carlosbrando</a>
+  
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

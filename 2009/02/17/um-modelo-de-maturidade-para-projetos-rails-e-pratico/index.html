@@ -1,0 +1,279 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Nome do Jogo: Um modelo de maturidade para projetos Rails é prático?</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/2009/02/17/um-modelo-de-maturidade-para-projetos-rails-e-pratico/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <link href="http://feeds2.feedburner.com/NomeDoJogo" rel="alternate" title="Nome do Jogo" type="application/atom+xml"/>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1249636-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Nome do Jogo</a></h1>
+  
+    <h2>por Carlos Brando</h2>
+  
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="http://feeds2.feedburner.com/NomeDoJogo" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">Um Modelo De Maturidade Para Projetos Rails é Prático?</h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-02-17 00:00:00 -0300" pubdate  updated >Feb 17<span>th</span>, 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+<div class="entry-content">Acredito que este seja o assunto da semana nas rodas de desenvolvedores Rails, e como tal eu não poderia deixar de dar minha opinião sobre o assunto.
+
+Obie Fernandez - um personagem conhecido na comunidade Rails mundial graças ao seu famoso livro “The Rails Way”, sua empresa Hashrocket e também pela sua personalidade forte - vem criando uma certa polemica sobre a <a href="http://groups.google.com/group/rails-business/browse_thread/thread/e24cfda7947fda10">criação de um modelo para definir a maturidade de uma empresa</a> na criação de projetos Rails. A ideia original é criar um sistema parecido com o que seria um <a href="http://pt.wikipedia.org/wiki/CMM">CMM</a>, mas direcionado as melhores práticas de desenvolvimento em projeto Ruby on Rails.
+
+O RMM descreveria os estágios de maturidade através dos quais as empresas de software teriam de passar afim de evoluir seus processos. Na concepção original estes estágios seriam divididos em níveis que iriam de 0 a 3:
+
+RMM0
+<ul>
+	<li> Nenhum processo formal de desenvolvimento</li>
+	<li> Sem cobertura de testes</li>
+	<li> Nenhum padrão de práticas de negócio</li>
+	<li> Análise de falhas estática</li>
+</ul>
+RMM1 e RMM2 deveriam ser alguma coisa intermediária, sendo que o RMM1 seria considerado negativo, enquanto o RMM2 seria considerado positivo.
+
+RMM3:
+<ul>
+	<li> Práticas ágeis de desenvolvimento de software</li>
+	<li> 100% de cobertura com testes</li>
+	<li> 100% de programação em pares</li>
+	<li> Padrão formal de práticas de negócio</li>
+	<li> Sistema de aprendizado contínuo e melhoria do processo</li>
+	<li> Testemunhos positivos de clientes</li>
+	<li> Aplicativos Rails implantados com sucesso</li>
+	<li> Outros itens a serem definidos&#8230;</li>
+</ul>
+Obviamente este itens são apenas ideias, muita coisa ainda estaria faltando se isto estivesse finalizado.
+
+O grande problema levantado por Obie é que muitas empresas que desejam contratar profissionais ou terceirizar o desenvolvimento de softwares em Rails, tem dificuldade em identificar se uma determinada consultoria ou profissional são realmente bons. A criação de um selo como o RMM simplificaria este processo. Teoricamente bastaria o contratante verificar em qual nível do RMM a prospectiva empresa se encontra, e isto definiria a qualidade dos serviços prestados e traria segurança ao contratante.
+
+É exatamente neste ponto que discordo totalmente de Obie. Possuir um “selo” de qualidade não indica realmente que a empresa é de qualidade. Existe muito mais envolvido nisso do que simplesmente adotar boas práticas.
+
+A empresa pode adotar como regra todas as sugestões dadas no RMM e ainda assim contratar profissionais ruins e/ou desmotivados. Pode adotar o sistema de programação em pares de uma forma que não seja produtiva. Enfim, todos os itens são relativos. Acredito que a qualidade de um empresa depende muito mais dos profissionais contratados e do quão motivados eles estão, não desconsiderando nenhuma destas boas práticas.
+
+Sim, RMM tem tudo a ver com <a href="http://www.nomedojogo.com/2007/09/11/ruby-on-rails-no-tem-futuro-corra-atrs-da-sua-certificao-enquanto-tempo/">certificações</a>. Talvez não pareça, mas no fundo o conceito é o mesmo. Uma certificação é como o exame de motorista. Minha esposa conseguiu tirar sua carta de motorista na primeira tentativa à alguns meses atrás, mas até hoje ela não consegue dirigir em uma avenida mais movimentada que temos perto de casa. Isto se dá porque as escolas não ensinam as pessoas a dirigir, mas sim a passar no exame de motorista.
+
+O mesmo se dá com certificações, as pessoas estudam para passar na avaliação, mas isto não significa que estão preparadas para os desafios da vida real. Contratar um profissional somente pela certificação, seria como contratar uma pessoa que acabou de conseguir sua habilitação para ser o motorista de sua família.
+
+[caption id=&#8221;attachment_2265&#8221; align=&#8221;aligncenter&#8221; width=&#8221;500&#8221; caption=&#8221;Escolher um profissional somente porque ele tem uma certificação é como escolher um motorista somente porque ele tem habilitação para dirigir&#8221;]<img class="size-full wp-image-2265" title="345246158_d34e3a4b41" src="http://www.nomedojogo.com/wp-content/uploads/2009/02/345246158_d34e3a4b41.jpg" alt="345246158_d34e3a4b41" width="500" height="309" />[/caption]
+<p style="text-align: center;"></p>
+
+Contratar uma empresa somente porque ela segue uma série de regras definidas por uma outra pessoa ou organização, e por isto conseguiu um “selo de qualidade” representa o mesmo tipo de risco.
+
+Ao contratar uma empresa para desenvolver um software, seja em Rails ou em qualquer outra tecnologia, entre em contato com outros clientes que já foram atendidos pela empresa. Procure saber quais projetos criados pela empresa foram concluídos com sucesso. Tente descobrir mais sobre os profissionais que compõem o seu time de desenvolvimento. Esta é a melhor garantia de que você estará contratando a empresa certa para o sucesso do seu projeto.
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+
+      
+
+
+
+
+<time datetime="2009-02-17 00:00:00 -0300" pubdate  updated >Feb 17<span>th</span>, 2009</time>
+
+
+
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://carlosbrando.github.com/2009/02/17/um-modelo-de-maturidade-para-projetos-rails-e-pratico/" data-via="carlosbrando" data-counturl="http://carlosbrando.github.com/2009/02/17/um-modelo-de-maturidade-para-projetos-rails-e-pratico/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread"><div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'carlosbrando';
+  var disqus_identifier = 'http://carlosbrando.github.com/2009/02/17/um-modelo-de-maturidade-para-projetos-rails-e-pratico/';
+  var disqus_url = 'http://carlosbrando.github.com/2009/02/17/um-modelo-de-maturidade-para-projetos-rails-e-pratico/';
+  //var disqus_developer = 1;
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro anos de Nome do Jogo</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("carlosbrando", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/carlosbrando" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @carlosbrando</a>
+  
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

@@ -1,1 +1,716 @@
-My Octopress Page is coming soon &hellip;
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Nome do Jogo</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/index.html"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <link href="http://feeds2.feedburner.com/NomeDoJogo" rel="alternate" title="Nome do Jogo" type="application/atom+xml"/>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1249636-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Nome do Jogo</a></h1>
+  
+    <h2>por Carlos Brando</h2>
+  
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="http://feeds2.feedburner.com/NomeDoJogo" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda Do C</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2011-06-13 00:00:00 -0300" pubdate  updated >Jun 13<span>th</span>, 2011</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Atualmente estou envolvido em um projeto envolvendo módulos específicos em Ruby, Erlang e C. Ruby e Erlang são mais tranquilos, mas C tem a desagradável característica de deixar alguns códigos &#8220;meio&#8221; complicados de entender.
+
+Porém, um <a href="http://twitter.com/#!/marciogm">colega</a> da Plano Bê me enviou um artigo que me ajudou muito e quero compartilhá-lo com vocês. O <a href="http://ieng9.ucsd.edu/~cs30x/rt_lt.rule.html">artigo original</a> parece ter sido escrito por Rick Ord da Universidade da California, em San Diego. Segue a tradução:
+
+<h2>A Regra Direita-Esquerda do C</h2>
+A regra <code>direta-esquerda</code> é muito útil para decifrar declarações na linguagem C e também pode ser de grande ajuda ao escrever código. A regra é bem simples, toda vez que encontrar os seguintes símbolos no código, leia:
+<pre class="textmate-source"><span class="text text_html text_html_markdown text_html_markdown_multimarkdown"><span class="meta meta_content meta_content_multimarkdown"><span class="meta meta_paragraph meta_paragraph_markdown">*   como "um ponteiro para"      - sempre do lado esquerdo
+[]  como "um array de"           - sempre do lado direito
+()  como "uma função retornando" - sempre do lado direito
+</span></span></span></pre>
+<h2>Passo 1</h2>
+Encontre o identificador. Esse é o seu ponto de partida. Então, diga para si mesmo <em>&#8220;o identificador é&#8221;</em>. É nesse ponto que iniciamos a declaração.
+<h2>Passo 2</h2>
+Comece pelos símbolos a direita do identificador. Digamos que você encontrou um <code>()</code>, então você sabe que essa declaração é uma função. Então você deve dizer <em>&#8220;o identificador é uma função retornando&#8221;</em>. Caso você tenha encontrado um <code>[]</code>, então você deve dizer <em>&#8220;o identificador é um array de&#8221;</em>. Continue avançando pela direita enquanto houver símbolos OU até encontrar um fecha parênteses <code>)</code>. (continue seguindo caso você encontre um abre parênteses, falaremos sobre isso mais abaixo.)
+<h2>Passo 3</h2>
+Quando terminarem os símbolos a direita do identificador, então comece a procurar por símbolos a sua esquerda. Se você encontrar algo diferente dos símbolos mencionados acima (digamos, algo como <code>int</code>), simplesmente repita o seu nome. Caso contrário, traduza o símbolo para o português usando a tabela. Continue seguindo pela esquerda enquanto houver símbolos OU até encontrar um abre parênteses <code>(</code>.
+
+Então, repita os passos 2 e 3 até terminar toda a sua declaração. Veja abaixo alguns exemplos:
+<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> *p[];</span></pre>
+
+1. Encontre o identificador.
+
+<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> *p[];
+     ^
+     
+<span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>p é<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span></span></pre>
+
+2. Siga pela direita enquanto encontrar um símbolo ou abre parênteses.
+
+<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> *p[];
+      ^^
+<span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>p é um array de<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+</span></pre>
+
+3. Quando não puder mais mover para a direita (os símbolo acabaram), então siga para a esquerda e encontre:
+
+<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> *p[];
+    ^
+<span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>p é um array de ponteiros para<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+</span></pre>
+
+4. Continue seguinte pela esquerda e encontre:
+
+<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> *p[];
+^^^
+<span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>p é um array de ponteiros para int<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>. 
+(ou <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>p é um array onde cada elemento é um ponteiro para um inteiro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>)
+</span></pre>
+
+Outro exemplo:
+
+<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> *(*<span class="meta meta_function meta_function_c"><span class="entity entity_name entity_name_function entity_name_function_c">func</span><span class="meta meta_parens meta_parens_c">()</span>)<span class="meta meta_parens meta_parens_c">()</span>;</span></span></pre>
+
+1. Encontre o identificador.
+
+<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> *(*<span class="meta meta_function meta_function_c"><span class="entity entity_name entity_name_function entity_name_function_c">func</span><span class="meta meta_parens meta_parens_c">()</span>)<span class="meta meta_parens meta_parens_c">()</span>;</span>
+       ^^^^
+<span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>func é<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+</span></pre>
+
+2. Vá para a direita.
+
+<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> *(*<span class="meta meta_function meta_function_c"><span class="entity entity_name entity_name_function entity_name_function_c">func</span><span class="meta meta_parens meta_parens_c">()</span>)<span class="meta meta_parens meta_parens_c">()</span>;</span>
+           ^^
+<span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>func é uma função retornando<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+</span></pre>
+
+3. Não dá para ir mais a direita devido ao fecha parênteses, então vá para a esquerda.
+
+<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> *(*<span class="meta meta_function meta_function_c"><span class="entity entity_name entity_name_function entity_name_function_c">func</span><span class="meta meta_parens meta_parens_c">()</span>)<span class="meta meta_parens meta_parens_c">()</span>;</span>
+      ^
+<span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>func é uma função retornando um ponteiro para<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+</span></pre>
+
+4. Não pode mais ir para a esquerda devido ao abre parênteses, então continue indo pela direita.
+
+<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> *(*<span class="meta meta_function meta_function_c"><span class="entity entity_name entity_name_function entity_name_function_c">func</span><span class="meta meta_parens meta_parens_c">()</span>)<span class="meta meta_parens meta_parens_c">()</span>;</span>
+              ^^
+<span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>func é uma função retornando um ponteiro para uma função retornando<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+</span></pre>
+
+5. Não dá mais para ir para a direita porque não há mais simbolos, então vá para a esquerda.
+
+<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> *(*<span class="meta meta_function meta_function_c"><span class="entity entity_name entity_name_function entity_name_function_c">func</span><span class="meta meta_parens meta_parens_c">()</span>)<span class="meta meta_parens meta_parens_c">()</span>;</span>
+    ^
+<span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>func é uma função retornando um ponteiro para uma função retornando um ponteiro para<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+</span></pre>
+
+6. E finalmente, o último símbolo a esquerda.
+
+<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> *(*<span class="meta meta_function meta_function_c"><span class="entity entity_name entity_name_function entity_name_function_c">func</span><span class="meta meta_parens meta_parens_c">()</span>)<span class="meta meta_parens meta_parens_c">()</span>;</span>
+^^^
+<span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>func é uma função retornando um ponteiro para uma função retornando um ponteiro para um inteiro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>.
+</span></pre>
+
+Como você pode ver, essa regra pode ser muito útil. Ela também é ótima para manter a sua sanidade enquanto estiver criando declarações, além de ajudá-lo a identificar onde colocar o próximo símbolo ou parênteses.
+
+Algumas declarações podem parecer ainda mais complicadas quando definem o tamanho de um array ou informam uma lista de argumentos. Por exemplo, se você ver algo como <code>[3]</code>, deve ler <em>&#8220;um array (de tamanho 3) de&#8230;&#8221;</em>. Mas se você ver algo como <code>(char *,int)</code>, então deve ler <em>&#8220;uma função esperando (char *, int) e retornando&#8230;&#8221;</em>. Veja mais um exemplo:
+
+<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> (*(*fun_one)(<span class="storage storage_type storage_type_c">char</span> *,<span class="storage storage_type storage_type_c">double</span>))[<span class="constant constant_numeric constant_numeric_c">9</span>][<span class="constant constant_numeric constant_numeric_c">20</span>];</span></pre>
+
+Eu não vou seguir cada passo para decifrar essa declaração. Mas o resultado será: <em>&#8220;fun_one é um ponteiro para uma função esperando (char *, double) e retornando um ponteiro para um array (tamanho 9) de um array (tamanho 20) de inteiros&#8221;</em>.
+
+Fica mais fácil se você remover o tamanho dos arrays e as listas de argumentos:
+
+<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> (*(*fun_one)())[][];</span></pre>
+
+Uma boa opção é decifrar dessa maneira e só depois adicionar o tamanho dos arrays e a lista de argumentos.
+
+<h2>Algumas considerações finais</h2>
+É totalmente possível criar declarações ilegais usando essa regra, então algum conhecimento do que é aceitável e do que não é em C é necessário. Por exemplo, se você tiver algo assim:
+
+<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> *((*fun_one)())[][];</span></pre>
+
+A declaração acima seria traduzida para <em>&#8220;fun_one é um ponteiro para uma função retornando um array de arrays de ponteiros para inteiros&#8221;</em>.
+
+Uma vez que uma função não pode retornar um array, mas somente um ponteiro para um array, essa declaração é ilegal.
+
+Combinações ilegais incluem:
+
+<pre class="textmate-source"><span class="source source_c">[]() - não pode haver um array de funções
+()() - não pode haver uma função que retorna uma função
+()[] - não pode haver uma função que retorna um array</span></pre>
+
+Em todos os casos acima, você provavelmente precisaria de um conjunto de parênteses para colocar um símbolo <code>*</code> a esquerda entre cada <code>()</code> e <code>[]</code> para tornar uma declaração válida.
+
+Segue abaixo alguns exemplos válidos e inválidos para exercitar o que aprendemos:
+
+<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> i;           <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>i um inteiro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> *p;          <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>p é um ponteiro para um inteiro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> a[];         <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>a é um array de inteiros<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span><span class="meta meta_function meta_function_c"><span class="punctuation punctuation_whitespace punctuation_whitespace_function punctuation_whitespace_function_leading punctuation_whitespace_function_leading_c"> </span><span class="entity entity_name entity_name_function entity_name_function_c">f</span><span class="meta meta_parens meta_parens_c">()</span>;</span>         <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>f é uma função retornando um inteiro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> **pp;        <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>pp é um ponteiro para um ponteiro para um inteiro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> (*pa)[];     <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>pa é um ponteiro para um array de inteiros<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> (*pf)();     <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>pf é um ponteiro para uma função retornando um inteiro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> *ap[];       <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>ap é um array de ponteiros para inteiros<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> aa[][];      <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>aa é um array de arrays de inteiros<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> af[]();      <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>af é um array de funções retornando um inteiro (ILEGAL)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> *<span class="meta meta_function meta_function_c"><span class="entity entity_name entity_name_function entity_name_function_c">fp</span><span class="meta meta_parens meta_parens_c">()</span>;</span>       <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>fp é uma função retornando um ponteiro para um inteiro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span><span class="meta meta_function meta_function_c"><span class="punctuation punctuation_whitespace punctuation_whitespace_function punctuation_whitespace_function_leading punctuation_whitespace_function_leading_c"> </span><span class="entity entity_name entity_name_function entity_name_function_c">fa</span><span class="meta meta_parens meta_parens_c">()</span>[];</span>      <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>fa é uma função retornando um array de inteiros (ILEGAL)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span><span class="meta meta_function meta_function_c"><span class="punctuation punctuation_whitespace punctuation_whitespace_function punctuation_whitespace_function_leading punctuation_whitespace_function_leading_c"> </span><span class="entity entity_name entity_name_function entity_name_function_c">ff</span><span class="meta meta_parens meta_parens_c">()()</span>;</span>      <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>ff é uma função retornando uma função retornando um inteiro (ILEGAL)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> ***ppp;      <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>ppp é um ponteiro para um ponteiro para um ponteiro para um inteiro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> (**ppa)[];   <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>ppa é um ponteiro para um ponteiro para um array de inteiros<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> (**ppf)();   <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>ppf é um ponteiro para um ponteiro para uma função retornando um inteiro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> *(*pap)[];   <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>pap é um ponteiro para um array de ponteiros para inteiros<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> (*paa)[][];  <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>paa é um ponteiro para um array de arrays de inteiros<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> (*paf)[]();  <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>paf é um ponteiro para um array de funções retornando um inteiro (ILEGAL)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> *(*pfp)();   <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>pfp é um ponteiro para uma função retornando um ponteiro para um inteiro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> (*pfa)()[];  <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>pfa é um ponteiro para uma função retornando um array de inteiros (ILEGAL)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> (*pff)()();  <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>pff é um ponteiro para uma função retornando uma função retornando um inteiro (ILEGAL)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> **app[];     <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>app é um array de ponteiros para ponteiros para um inteiro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> (*apa[])[];  <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>apa é um array de ponteiros para um array de inteiros<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> (*apf[])();  <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>apf é um array de ponteiros para funções retornando um inteiro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> *aap[][];    <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>aap é um array de arrays de ponteiros para inteiros<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> aaa[][][];   <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>aaa é um array de arrays de arrays de inteiros<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> aaf[][]();   <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>aaf é um array de arrays de funções retornando um inteiro (ILEGAL)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> *afp[]();    <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>afp é um array de funções retornando um ponteiro para um inteiro (ILEGAL)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> afa[]()[];   <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>afa é um array de funções retornando um array de inteiros (ILEGAL)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> aff[]()();   <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>aff é um array de funções retornando funções retornando um inteiro (ILEGAL)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> **<span class="meta meta_function meta_function_c"><span class="entity entity_name entity_name_function entity_name_function_c">fpp</span><span class="meta meta_parens meta_parens_c">()</span>;</span>     <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>fpp é uma função retornando um ponteiro para um ponteiro para um inteiro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> (*<span class="meta meta_function meta_function_c"><span class="entity entity_name entity_name_function entity_name_function_c">fpa</span><span class="meta meta_parens meta_parens_c">()</span>)[];</span>  <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>fpa é uma função retornando um ponteiro para um array de inteiros<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> (*<span class="meta meta_function meta_function_c"><span class="entity entity_name entity_name_function entity_name_function_c">fpf</span><span class="meta meta_parens meta_parens_c">()</span>)<span class="meta meta_parens meta_parens_c">()</span>;</span>  <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>fpf é uma função retornando um ponteiro para uma função retornando um inteiro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> *<span class="meta meta_function meta_function_c"><span class="entity entity_name entity_name_function entity_name_function_c">fap</span><span class="meta meta_parens meta_parens_c">()</span>[];</span>    <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>fap é uma função retornando um array de ponteiros para inteiros (ILEGAL)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span><span class="meta meta_function meta_function_c"><span class="punctuation punctuation_whitespace punctuation_whitespace_function punctuation_whitespace_function_leading punctuation_whitespace_function_leading_c"> </span><span class="entity entity_name entity_name_function entity_name_function_c">faa</span><span class="meta meta_parens meta_parens_c">()</span>[][];</span>   <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>faa é uma função retornando um array de arrays de inteiros (ILEGAL)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span><span class="meta meta_function meta_function_c"><span class="punctuation punctuation_whitespace punctuation_whitespace_function punctuation_whitespace_function_leading punctuation_whitespace_function_leading_c"> </span><span class="entity entity_name entity_name_function entity_name_function_c">faf</span><span class="meta meta_parens meta_parens_c">()</span>[]<span class="meta meta_parens meta_parens_c">()</span>;</span>   <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>faf é uma função retornando um array de funções retornando inteiros (ILEGAL)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
+<span class="storage storage_type storage_type_c">int</span> *<span class="meta meta_function meta_function_c"><span class="entity entity_name entity_name_function entity_name_function_c">ffp</span><span class="meta meta_parens meta_parens_c">()()</span>;</span>    <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>ffp é uma função retornando uma função retornando um ponteiro para um inteiro (ILEGAL)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span></span></pre>
+</div>
+  <footer>
+    <a rel="full-article" href="/2011/06/13/a-regra-direita-esquerda-do-c/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/06/03/colorific/">Colorific</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2011-06-03 00:00:00 -0300" pubdate  updated >Jun 3<span>rd</span>, 2011</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Já faz algum tempo que desenvolvi uma gem para imprimir o resultado dos meus testes de uma forma mais intuitiva, menos poluída e mais&#8230; <strong><span style="color: #ff0000;">c</span><span style="color: #ff9900;">o</span><span style="color: #ff00ff;">l</span><span style="color: #339966;">o</span><span style="color: #0000ff;">r</span><span style="color: #666699;">i</span><span style="color: #993366;">d</span><span style="color: #333399;">a</span></strong>! Não sei bem porque, mas não divulguei muito essa gem na época. De qualquer forma, ai está:
+
+<iframe width="560" height="349" src="http://www.youtube.com/embed/BQm4nFlJcco" frameborder="0" allowfullscreen></iframe>
+
+Para instalar é fácil, basta adicionar o seguinte código no seu arquivo Gemfile:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_require meta_require_ruby"><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">gem</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>colorific<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>group</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>test</span></span></span></pre>
+Se desejar contribuir com algo, essa biblioteca tem 78 linhas de código apenas. E todo o código encontra-se no GitHub: <a href="https://github.com/carlosbrando/colorific/blob/master/lib/colorific.rb">https://github.com/carlosbrando/colorific/blob/master/lib/colorific.rb</a>
+</div>
+  <footer>
+    <a rel="full-article" href="/2011/06/03/colorific/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem Disse Que Gravar Um Podcast é Fácil?</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2011-03-29 00:00:00 -0300" pubdate  updated >Mar 29<span>th</span>, 2011</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Não deixe de acompanhar semanalmente o <a href="http://grokpodcast.com/">Grok Podcast</a>!
+</div>
+  <footer>
+    <a rel="full-article" href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/03/24/convite-para-o-grok-podcast/">Convite Para O Grok Podcast!</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2011-03-24 00:00:00 -0300" pubdate  updated >Mar 24<span>th</span>, 2011</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Um convite formal para o próximo convidado especial do <a href="http://grokpodcast.com/">Grok Podcast</a>!
+</div>
+  <footer>
+    <a rel="full-article" href="/2011/03/24/convite-para-o-grok-podcast/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro Anos De Nome Do Jogo</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2011-02-08 00:00:00 -0200" pubdate  updated >Feb 8<span>th</span>, 2011</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><img class="aligncenter size-full wp-image-3610" title="247607315_a74fac5aa4" src="http://www.nomedojogo.com/wp-content/uploads/2011/02/247607315_a74fac5aa4.jpg" alt="" width="500" height="332" />
+
+Hoje completam quatro anos desde que comecei a escrever esse blog. No total são 812 artigos e 4.305 comentários. Sempre mantive um ritmo muito bom de publicação, porém com o crescimento do Twitter (<a href="http://twitter.com/#!/carlosbrando">@carlosbrando</a>) como ferramenta de comunicação o tempo entre um artigo e outro diminuiu muito, eu tenho de confessar.
+
+Escrever e manter um blog por tanto tempo não é fácil, principalmente se você tem a intenção de publicar conteúdo de qualidade. Mas as recompensas valem muito a pena, nesses quatro anos esse blog gerou dois livros, muitos vídeos, um podcast semanal sobre <a href="http://podcast.rubyonrails.pro.br/">Ruby on Rails</a> e agora o <a href="http://grokpodcast.com/">Grok Podcast</a>. Sem contar todas as outras oportunidades que apareceram graças a essa iniciativa.
+
+Obrigado pela audiência!
+</div>
+  <footer>
+    <a rel="full-article" href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/01/27/grok-podcast-16-%25e2%2580%2593-o-livro-rework/">Grok Podcast 16 â O Livro Rework</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2011-01-27 00:00:00 -0200" pubdate  updated >Jan 27<span>th</span>, 2011</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><img class="aligncenter" src="http://grokpodcast.com/wp-content/uploads/2011/01/header.jpg" alt="" width="940" height="301" />
+
+Depois de um bom período de férias, estamos de volta com o <a href="http://grokpodcast.com/">Grok Podcast</a>! E para começar o ano com tudo decidimos gravar uma série inteira sobre o controverso livro <a href="http://37signals.com/rework/">Rework</a> de Jason Fried e David Heinemeier Hansson (o criador do framework Ruby on Rails).
+
+Serão ao todo três episódios comentando os pontos-chave de cada um dos capítulos do livro. Se você já leu o livro será como bater um papo sobre a leitura e se você ainda não teve a oportunidade de ler, será como um bom resumo para atiçar a sua curiosidade.
+
+Espero que gostem e continuem acompanhando o <a href="http://grokpodcast.com/">Grok Podcast</a> nessa segunda temporada!
+
+Você pode adicionar o podcast ao seu iTunes <a href="http://itunes.apple.com/us/podcast/grok-podcast/id393122038" target="_blank">clicando aqui</a> ou atráves do nosso <a href="http://grokpodcast.com/feed/" target="_blank">RSS</a>.
+</div>
+  <footer>
+    <a rel="full-article" href="/2011/01/27/grok-podcast-16-%25e2%2580%2593-o-livro-rework/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/01/03/como-funcionam-os-metodos-puts-e-print-no-ruby/">Como Funcionam Os Métodos Puts E Print No Ruby</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2011-01-03 00:00:00 -0200" pubdate  updated >Jan 3<span>rd</span>, 2011</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Se você já experimentou Ruby com certeza já conheceu os famosos métodos <code>puts</code>, <code>print</code> e outros semelhantes a esses. Talvez você tenha notado que esses métodos, diferente de como aprendemos, podem ser executados sem que seja necessário informar um objeto.
+
+Se você vem de outra linguagem de programação talvez tenha logo especulado que eles sejam palavras reservadas do Ruby. Mas isso não é verdade. Ambos são métodos comuns, como qualquer outro. Veja por si mesmo:
+<pre class="textmate-source"><span class="source source_ruby"><span class="support support_class support_class_ruby">Object</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>send <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>puts</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>um texto qualquer<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; um texto qualquer
+</span></span></pre>
+Como você pode ver no exemplo acima, esses métodos foram inteligentemente incluidos na classe <code>Object</code>, e como no Ruby tudo é um objeto&#8230;
+<pre class="textmate-source"><span class="source source_ruby">puts send<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>class</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; Object</span></span></pre>
+<h2>O módulo Kernel</h2>
+Embora esses métodos sejam disponibilizados por meio de <code>Object</code>, eles estão implementados em um módulo chamado <code>Kernel</code>, que é então incluido na classe.
+
+O interessante é que você pode tirar proveito desse mecanismo. Se você adicionar um método ao módulo <code>Kernel</code> ele funcionará exatamente como os métodos citados acima. Veja:
+<pre class="textmate-source"><span class="source source_ruby"><span class="meta meta_module meta_module_ruby"><span class="keyword keyword_control keyword_control_module keyword_control_module_ruby">module</span> <span class="entity entity_name entity_name_type entity_name_type_module entity_name_type_module_ruby">Kernel</span></span>
+  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">print_line</span></span>
+    puts <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>-<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">*</span> <span class="constant constant_numeric constant_numeric_ruby">20</span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+
+print_line <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; --------------------</span></span></pre>
+</div>
+  <footer>
+    <a rel="full-article" href="/2011/01/03/como-funcionam-os-metodos-puts-e-print-no-ruby/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/12/31/retrospectiva-2010/">Retrospectiva 2010</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2010-12-31 00:00:00 -0200" pubdate  updated >Dec 31<span>st</span>, 2010</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Mais um ano bem agitado se passou. Muito trabalho e diversão fizeram de 2010 um excelente ano para mim. Porém, o que mais me marcou esse ano foi o meu retorno ao mundo dos podcasts (algo que pessoalmente gosto muito de fazer) com o <a href="http://grokpodcast.com/">Grok Podcast</a>.
+
+Mas a brincadeira ainda não acabou, tenho muitos projetos na cabeça e espero poder colocá-los em prática no ano que se segue.
+<h2>Os artigos mais lidos do blog em 2010</h2>
+<ul>
+	<li><a href="http://www.nomedojogo.com/2010/01/20/a-filosofia-do-ruby/">A Filosofia do Ruby</a></li>
+	<li><a href="http://www.nomedojogo.com/2010/02/17/programadores-incompetentes-sao-otimos-para-o-mercado/">Programadores incompetentes são ótimos para o mercado</a></li>
+	<li><a href="http://www.nomedojogo.com/2010/02/10/quer-se-tornar-um-programador-de-sucesso-pare-de-escrever-codigo/">Quer se tornar um programador de sucesso? Pare de escrever código</a></li>
+	<li><a href="http://www.nomedojogo.com/2010/02/03/o-efeito-do-codigo-na-mente-do-programador/">O Efeito do Código na Mente do Programador</a></li>
+	<li><a href="http://www.nomedojogo.com/2010/03/28/nao-se-fazem-mais-programadores-como-antigamente/">Não se fazem mais programadores como antigamente</a></li>
+	<li><a href="http://www.nomedojogo.com/2010/04/23/investir-em-ruby-era-muito-arriscado/">Investir em Ruby era muito arriscado</a></li>
+	<li><a href="http://www.nomedojogo.com/2010/04/20/migrando-do-textmate-para-o-textmate/">Migrando do Textmate para o Textmate</a></li>
+	<li><a href="http://www.nomedojogo.com/2010/05/06/um-pseudo-intellisense-para-o-textmate/">Um pseudo-intellisense para o Textmate</a></li>
+	<li><a href="http://www.nomedojogo.com/2010/06/04/programadores-nem-sempre-o-time-que-esta-ganhando-esta-ganhando/">Programadores: Nem sempre o time que está ganhando está ganhando</a></li>
+	<li><a href="http://www.nomedojogo.com/2010/07/01/eu-quebrei-o-codigo/">“Eu quebrei o código”</a></li>
+	<li><a href="http://www.nomedojogo.com/2010/09/15/meu-novo-podcast/">Meu novo podcast</a></li>
+</ul>
+Até o ano que vem!
+</div>
+  <footer>
+    <a rel="full-article" href="/2010/12/31/retrospectiva-2010/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/12/22/singularidade-e-biologia-sintetica/">Singularidade E Biologia Sintética</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2010-12-22 00:00:00 -0200" pubdate  updated >Dec 22<span>nd</span>, 2010</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Acabou de ir ao ar a última parte do <a href="http://grokpodcast.com/">Grok Podcast</a> que gravamos com o Elizer Pimentel e o Luis Gustavo da <a href="http://planobe.com.br/">Plano Bê</a> (a melhor empresa de tecnologia do mundo e do universo de acordo com o Luis&#8230; :P) sobre singularidade e biologia sintetica.
+
+<strong>Por que esse assunto é do interesse de programadores e desenvolvedores de software?</strong> Basicamente a biologia sintetica apresenta um novo hardware para programarmos e como tudo ainda é muito novo e desconhecido essa série promete abrir os seus horizontes quanto a um futuro possível dentro de nossa area de atuação. Além do mais é um assunto super divertido e fácil de absorver.
+
+Eu e o Rafael Rosa estamos muito felizes com os resultados até agora com esse novo empreendimento do podcast e já temos muitos outros temas interessantes preparados para o ano que vem. Aguardem!
+
+Para ouvir a série sobre singularidade e biologia sintetica na integra segue os links das três partes:
+<ul>
+	<li><a href="http://grokpodcast.com/2010/12/08/episodio-13-singularidade-e-biologia-sintetica-parte-1/">Parte 1</a></li>
+	<li><a href="http://grokpodcast.com/2010/12/15/episodio-14-%E2%80%93-singularidade-e-biologia-sintetica-%E2%80%93-parte-2/">Parte 2</a></li>
+	<li><a href="http://grokpodcast.com/2010/12/22/episodio-15-%E2%80%93-singularidade-e-biologia-sintetica-%E2%80%93-parte-3/">Parte 3</a></li>
+</ul>
+Caso você tenha o interesse de anunciar no podcast, entre em contato conosco <a href="http://www.nomedojogo.com/contato/">clicando aqui</a>.
+</div>
+  <footer>
+    <a rel="full-article" href="/2010/12/22/singularidade-e-biologia-sintetica/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/12/10/o-comovente-guia-de-ruby-do-why-em-pdf/">O (Comovente) Guia De Ruby Do Why Em PDF</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2010-12-10 00:00:00 -0200" pubdate  updated >Dec 10<span>th</span>, 2010</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><img class="aligncenter size-full wp-image-3574" title="blix-1" src="http://www.nomedojogo.com/wp-content/uploads/2010/12/blix-1.gif" alt="" width="796" height="251" />
+
+Não importa se você já é um rubista experiente ou está se aprendendo essa linguagem magnifica, &#8221;<strong>O (comovente) guia de Ruby do Why</strong>&#8221; é sem dúvida uma leitura obrigatória. A tradução do livro para português foi finalizada em 2009 e desde então você pode lê-lo na integra através do endereço: <a href="http://why.nomedojogo.com/index.html">why.nomedojogo.com</a>.
+
+Recentemente Mairon D. Brasil, preparou um arquivo em PDF com o conteúdo do livro. Acredito que isso deve facilitar um pouco para aqueles que desejam imprimi-lo. Essa versão está disponível em seu <a href="http://maironbrasil.wordpress.com/2010/12/10/o-comovente-guia-de-ruby-do-why-em-pdf/">blog</a>.
+</div>
+  <footer>
+    <a rel="full-article" href="/2010/12/10/o-comovente-guia-de-ruby-do-why-em-pdf/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+<nav role="pagination">
+  <div>
+    
+      <a class="prev" href="/page2/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+  </div>
+</nav>
+
+<script type="text/javascript">
+    var disqus_shortname = 'carlosbrando';
+    (function () {
+      var s = document.createElement('script'); s.async = true;
+      s.type = 'text/javascript';
+      s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+      (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+
+</div>
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro anos de Nome do Jogo</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("carlosbrando", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/carlosbrando" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @carlosbrando</a>
+  
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

@@ -1,0 +1,284 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Nome do Jogo: ZenTest com Growl, mais uma vez...</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/2008/04/26/zentest-com-growl-mais-uma-vez/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <link href="http://feeds2.feedburner.com/NomeDoJogo" rel="alternate" title="Nome do Jogo" type="application/atom+xml"/>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1249636-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Nome do Jogo</a></h1>
+  
+    <h2>por Carlos Brando</h2>
+  
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="http://feeds2.feedburner.com/NomeDoJogo" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">ZenTest Com Growl, Mais Uma Vez&#8230;</h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-04-26 00:00:00 -0300" pubdate  updated >Apr 26<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+<div class="entry-content">Desde que instalei o <strong>Leopard</strong> venho sofrendo para integrar o <strong>ZenTest</strong> com o <strong>Growl</strong>. Quando achei que tinha encontrado a solução para o problema, logo depois uma atualização no ZenTest ferrou tudo de novo.
+
+Finalmente começamos a usar <strong>RSpec</strong> em um projeto de verdade aqui na <strong>Surgeworks</strong> e eu comecei a me lamentar do porque do maldito do Growl não estar funcionando. Naveguei e segui quase todas as dicas que encontrei pelo caminho para fazer isto funcionar e nada deu certo. Tentei o <a href="http://simplesideias.com.br/test-notifier-gem-para-ruby/">Test Notifier</a> do Nando Vieira, que também não funcionou aqui&#8230;
+
+Então resolvi que eu tinha de parar de ficar pegando <strong>scripts prontos</strong> na internet e coçar minha própria coceira&#8230;
+
+Na verdade foi muito mais fácil do que imaginei, mas como foi algo que estava me dando dor de cabeça, segue abaixo o script que criei para fazer o ZenTest funcionar com o Growl no Leopard. Na verdade este fica sendo apenas mais um dos tantos por aí&#8230; pode ser também que não funcione em sua máquina, mas pode servir de modelo para que você crie o seu.
+
+Para saber o que fazer com este script, leia o <a href="http://www.nomedojogo.com/2008/02/28/autotest-com-growl-no-leopard/">artigo que escrevi em fevereiro</a> explicando como fiz a mesma coisa naquela época, e só troque o script antigo por este.
+
+<pre class="textmate-source"><span class="source source_ruby"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> ~.autotest
+</span><span class="meta meta_require meta_require_ruby"><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">require</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>autotest/growl<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span>
+
+<span class="meta meta_module meta_module_ruby"><span class="keyword keyword_control keyword_control_module keyword_control_module_ruby">module</span> <span class="entity entity_name entity_name_type entity_name_type_module entity_name_type_module_ruby"><span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_module entity_other_inherited-class_module_first entity_other_inherited-class_module_first_ruby">Autotest<span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">::</span></span>Growl</span></span>
+  <span class="variable variable_other variable_other_constant variable_other_constant_ruby">FAIL_IMAGE</span>    <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>/Users/carlosbrando/.autotest_images/fail.png<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+  <span class="variable variable_other variable_other_constant variable_other_constant_ruby">PENDING_IMAGE</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>/Users/carlosbrando/.autotest_images/pending.png<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+  <span class="variable variable_other variable_other_constant variable_other_constant_ruby">SUCCESS_IMAGE</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>/Users/carlosbrando/.autotest_images/pass.png<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+
+  <span class="support support_class support_class_ruby">Autotest</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>add_hook <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>ran_command</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">at</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+    result <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> at<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>results<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>last
+    <span class="keyword keyword_control keyword_control_ruby">if</span> result
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">      <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> examples = result =~ /(\d+) examples/ ? $1.to_i : 0
+</span>      failures <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> result <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">=~</span> <span class="string string_regexp string_regexp_classic string_regexp_classic_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span><span class="string string_regexp string_regexp_group string_regexp_group_ruby"><span class="punctuation punctuation_definition punctuation_definition_group punctuation_definition_group_ruby">(</span><span class="constant constant_character constant_character_escape constant_character_escape_ruby">\d</span>+<span class="punctuation punctuation_definition punctuation_definition_group punctuation_definition_group_ruby">)</span></span> failure<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span></span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">?</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_global variable_other_readwrite_global_pre-defined variable_other_readwrite_global_pre-defined_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">$</span>1</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>to_i <span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">:</span> <span class="constant constant_numeric constant_numeric_ruby">0</span>
+      pendings <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> result <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">=~</span> <span class="string string_regexp string_regexp_classic string_regexp_classic_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span><span class="string string_regexp string_regexp_group string_regexp_group_ruby"><span class="punctuation punctuation_definition punctuation_definition_group punctuation_definition_group_ruby">(</span><span class="constant constant_character constant_character_escape constant_character_escape_ruby">\d</span>+<span class="punctuation punctuation_definition punctuation_definition_group punctuation_definition_group_ruby">)</span></span> pending<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span></span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">?</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_global variable_other_readwrite_global_pre-defined variable_other_readwrite_global_pre-defined_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">$</span>1</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>to_i <span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">:</span> <span class="constant constant_numeric constant_numeric_ruby">0</span>
+
+      <span class="keyword keyword_control keyword_control_ruby">if</span> failures <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">0</span>
+        growl <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Tests Failed<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span><span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>failures<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span> test<span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>s<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="keyword keyword_control keyword_control_ruby">if</span> failures <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">1</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span> failed<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">FAIL_IMAGE</span>
+      <span class="keyword keyword_control keyword_control_ruby">elsif</span> pendings <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">0</span>
+        growl <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Tests Pending<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span><span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>pendings<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span> test<span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span>pendings <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">==</span> <span class="constant constant_numeric constant_numeric_ruby">1</span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">?</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span> is pending<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">:</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>s are pending<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">PENDING_IMAGE</span>
+      <span class="keyword keyword_control keyword_control_ruby">else</span>
+        growl <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Tests Passed<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>All tests passed<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">SUCCESS_IMAGE</span>
+      <span class="keyword keyword_control keyword_control_ruby">end</span>
+
+      code <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>failures <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">0</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">?</span> <span class="constant constant_numeric constant_numeric_ruby">31</span> <span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">:</span> <span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>pendings <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">0</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">?</span> <span class="constant constant_numeric constant_numeric_ruby">33</span> <span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">:</span> <span class="constant constant_numeric constant_numeric_ruby">32</span>
+      puts <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span><span class="constant constant_character constant_character_escape constant_character_escape_ruby">\e</span>[<span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>code<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span>m<span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>=<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">*</span> <span class="constant constant_numeric constant_numeric_ruby">80</span><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span><span class="constant constant_character constant_character_escape constant_character_escape_ruby">\e</span>[0m<span class="constant constant_character constant_character_escape constant_character_escape_ruby">\n\n</span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+    <span class="keyword keyword_control keyword_control_ruby">end</span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+
+<span class="meta meta_class meta_class_ruby">  <span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby"><span class="variable variable_other variable_other_object variable_other_object_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">&lt;&lt;</span> self</span></span></span>
+    <span class="meta meta_function meta_function_method meta_function_method_with-arguments meta_function_method_with-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">growl</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">(</span><span class="variable variable_parameter variable_parameter_function variable_parameter_function_ruby">title<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> msg<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> img <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">SUCCESS_IMAGE</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> pri <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_numeric constant_numeric_ruby">0</span></span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">)</span></span>
+      title <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Autotest Running<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="keyword keyword_control keyword_control_ruby">if</span> title <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">==</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>autotest running<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+      msg <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_augmented keyword_operator_assignment_augmented_ruby">+=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span> at <span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span><span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>now<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>strftime<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>%I:%M %p<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="keyword keyword_control keyword_control_ruby">if</span> msg <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">==</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Started<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+
+      system <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>growlnotify -n autotest --image <span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>img<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span> -p <span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>pri<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span> -m <span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>msg<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>inspect<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span> <span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>title<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+    <span class="keyword keyword_control keyword_control_ruby">end</span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+Não sei porque (e por pura preguiça não procurei saber ainda) mas o WordPress troca o caractere de <strong>aspas</strong> no código, então se na hora de copiá-lo ficar tudo zoado, pegue o <a href="http://pastie.caboo.se/187114">código aqui</a>.
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+
+      
+
+
+
+
+<time datetime="2008-04-26 00:00:00 -0300" pubdate  updated >Apr 26<span>th</span>, 2008</time>
+
+
+
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://carlosbrando.github.com/2008/04/26/zentest-com-growl-mais-uma-vez/" data-via="carlosbrando" data-counturl="http://carlosbrando.github.com/2008/04/26/zentest-com-growl-mais-uma-vez/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread"><div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'carlosbrando';
+  var disqus_identifier = 'http://carlosbrando.github.com/2008/04/26/zentest-com-growl-mais-uma-vez/';
+  var disqus_url = 'http://carlosbrando.github.com/2008/04/26/zentest-com-growl-mais-uma-vez/';
+  //var disqus_developer = 1;
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro anos de Nome do Jogo</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("carlosbrando", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/carlosbrando" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @carlosbrando</a>
+  
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

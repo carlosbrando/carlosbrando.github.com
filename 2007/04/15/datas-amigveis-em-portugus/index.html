@@ -1,0 +1,284 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Nome do Jogo: Datas amigáveis em português</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/2007/04/15/datas-amigveis-em-portugus/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <link href="http://feeds2.feedburner.com/NomeDoJogo" rel="alternate" title="Nome do Jogo" type="application/atom+xml"/>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1249636-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Nome do Jogo</a></h1>
+  
+    <h2>por Carlos Brando</h2>
+  
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="http://feeds2.feedburner.com/NomeDoJogo" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">Datas Amigáveis Em Português</h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2007-04-15 00:00:00 -0300" pubdate  updated >Apr 15<span>th</span>, 2007</time>
+
+
+</p>
+    
+  </header>
+
+
+<div class="entry-content"><img src="http://www.nomedojogo.com/wp-content/uploads/writer/Datasamigveisemportugus_C8CE/calendario6.jpg" style="border-width: 0px" align="right" border="0" height="126" width="102" />
+
+O Rails &eacute; genial, pena que tudo &eacute; em ingl&ecirc;s. Mas eu queria o que? Tudo na minha l&iacute;ngua, de forma perfeita? &Eacute; claro que sim.
+
+Isto &eacute; poss&iacute;vel. Existe um projeto open source para deixar todos os retornos padr&otilde;es do rails em portugu&ecirc;s, e mais alguns b&ocirc;nus&#8230;
+
+Falo sobre isto outro dia. Hoje vou apenas postar um trechinho de c&oacute;digo para ajudar quem tem o trabalho de traduzir tudo no Rails.
+
+Crie um arquivo .rb na pasta lib e cole o c&oacute;digo abaixo:
+[source:ruby]module ActionView
+  module Helpers
+    module DateHelper
+
+      def distance_of_time_in_words(from_time, to_time = 0, include_seconds = false)
+        from_time = from_time.to_time if from_time.respond_to?(:to_time)
+        to_time = to_time.to_time if to_time.respond_to?(:to_time)
+        distance_in_minutes = (((to_time - from_time).abs)/60).round
+        distance_in_seconds = ((to_time - from_time).abs).round
+
+        case distance_in_minutes
+          when 0..1
+            return (distance_in_minutes == 0) ? &#8216;menos de um minuto&#8217; : &#8216;1 minuto&#8217; unless include_seconds
+            case distance_in_seconds
+              when 0..4   then &#8216;menos de 5 segundos&#8217;
+              when 5..9   then &#8216;menos de 10 segundos&#8217;
+              when 10..19 then &#8216;menos de 20 segundos&#8217;
+              when 20..39 then &#8216;meio minuto&#8217;
+              when 40..59 then &#8216;menos de um minuto&#8217;
+              else             &#8216;1 minuto&#8217;
+            end
+
+          when 2..44           then &#8220;#{distance_in_minutes} minutos&#8221;
+          when 45..89          then &#8216;1 hora&#8217;
+          when 90..1439        then &#8220;#{(distance_in_minutes.to_f / 60.0).round} horas&#8221;
+          when 1440..2879      then &#8216;1 dia&#8217;
+          when 2880..43199     then &#8220;#{(distance_in_minutes / 1440).round} dias&#8221;
+          when 43200..86399    then &#8216;1 m&ecirc;s&#8217;
+          when 86400..525959   then &#8220;#{(distance_in_minutes / 43200).round} meses&#8221;
+          when 525960..1051919 then &#8216;1 ano&#8217;
+          else                      &#8220;mais de #{(distance_in_minutes / 525960).round} anos&#8221;
+        end
+      end
+
+    end
+  end
+end[/source]
+Acrecente a seguinte linha no fim do arquivo environment.rb:
+[source:ruby]require &#8220;nome_do_arquivo_criado_acima&#8221;[/source]
+Agora basta colocar a chamada para o m&eacute;todo <strong>distance_of_time_in_words </strong>passando a data desejada. Pronto agora voc&ecirc; j&aacute; tem datas amig&aacute;veis em portugu&ecirc;s, usando o Rails e sem precisar alterar nada no seu c&oacute;digo pronto.
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+
+      
+
+
+
+
+<time datetime="2007-04-15 00:00:00 -0300" pubdate  updated >Apr 15<span>th</span>, 2007</time>
+
+
+
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://carlosbrando.github.com/2007/04/15/datas-amigveis-em-portugus/" data-via="carlosbrando" data-counturl="http://carlosbrando.github.com/2007/04/15/datas-amigveis-em-portugus/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread"><div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'carlosbrando';
+  var disqus_identifier = 'http://carlosbrando.github.com/2007/04/15/datas-amigveis-em-portugus/';
+  var disqus_url = 'http://carlosbrando.github.com/2007/04/15/datas-amigveis-em-portugus/';
+  //var disqus_developer = 1;
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro anos de Nome do Jogo</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("carlosbrando", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/carlosbrando" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @carlosbrando</a>
+  
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

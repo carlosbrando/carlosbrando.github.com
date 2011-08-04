@@ -1,0 +1,710 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Nome do Jogo</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/page45/index.html"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <link href="http://feeds2.feedburner.com/NomeDoJogo" rel="alternate" title="Nome do Jogo" type="application/atom+xml"/>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1249636-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Nome do Jogo</a></h1>
+  
+    <h2>por Carlos Brando</h2>
+  
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="http://feeds2.feedburner.com/NomeDoJogo" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/04/18/edge-rails-hashwithout/">Edge Rails: Hash#without</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-04-18 00:00:00 -0300" pubdate  updated >Apr 18<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Conhece o método slice que o Rails acrescenta ao objeto <code>Hash</code>? O método <code>slice</code> é muito útil em diversas ocasiões. Veja um exemplo:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_function meta_function_method meta_function_method_with-arguments meta_function_method_with-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">search</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">(</span><span class="variable variable_parameter variable_parameter_function variable_parameter_function_ruby">criteria <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{}</span></span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">)</span></span>
+  assert_valid_keys<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>mass</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>velocity</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>time</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+
+search<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>options<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>slice<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>mass</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>velocity</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>time</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">))</span>
+</span></pre>
+
+Meu método <code>search</code> espera um <code>Hash</code> com as chaves <code>:mass</code>, <code>:velocity</code> e <code>:time,</code> se eu passar mais uma chave dentro do <code>Hash</code> o método <code>assert_valid_keys</code> irá retornar um <code>ArgumentError</code>. Para evitar este problema eu estou usando o método <code>slice</code> para que apenas as chaves corretas sejam passadas para o método.
+
+É isto que o método <code>slice</code> faz, ele retorna um <code>Hash</code> apenas com as chaves informadas.
+
+No Rails 2.1 teremos um método inverso ao <code>slice</code>, o método <code>without</code> que retorna um <code>Hash</code> sem as chaves informadas.
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Event</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>event<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>attributes<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>without<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>id</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>user_id</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">))</span></span></pre>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/04/18/edge-rails-hashwithout/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/04/17/edge-rails-railslogger-railsroot-railsenv-e-railscache/">Edge Rails: Rails.logger, Rails.root, Rails.env E Rails.cache</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-04-17 00:00:00 -0300" pubdate  updated >Apr 17<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">No Rails 2.1 ao invés de usarmos as constantes: <code>RAILS_DEFAULT_LOGGER</code>, <code>RAILS_ROOT</code>, <code>RAILS_ENV</code> e <code>RAILS_CACHE</code>. Usaremos os atalhos:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> RAILS_DEFAULT_LOGGER
+</span><span class="support support_class support_class_ruby">Rails</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>logger
+
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> RAILS_ROOT
+</span><span class="support support_class support_class_ruby">Rails</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>root
+
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> RAILS_ENV
+</span><span class="support support_class support_class_ruby">Rails</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>env
+
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> RAILS_CACHE
+</span><span class="support support_class support_class_ruby">Rails</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>cache</span></pre>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/04/17/edge-rails-railslogger-railsroot-railsenv-e-railscache/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/04/16/rails-podcast-brasil-episodio-13/">Rails Podcast Brasil - Episódio 13</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-04-16 00:00:00 -0300" pubdate  updated >Apr 16<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">O assunto da semana foi a migração Rails para Git e GitHub, mas não falamos apenas disto neste podcast, falamos um pouco sobre a nova iniciativa do Google, o Google App Engine, também conversamos sobre o mod_rails, Mack, Merb, JRuby&#8230;
+
+Para baixar o episódio acesse: <a href="http://www.rubyonrails.pro.br/podcasts">http://www.rubyonrails.pro.br/podcasts</a>
+<h3>Neste episódio:</h3>
+<ul>
+	<li><a href="http://www.techcrunch.com/2008/04/08/techcrunch-labs-our-experience-building-and-launching-app-on-google-app-engine/">TechCrunch Labs: Our Experience Building And Launching An App On Google App Engine</a></li>
+	<li><a href="http://www.rubyinside.com/railscasts-releases-100th-free-screencast-holds-a-contest-845.html">Railscasts Releases 100th Free Screencast; Holds a Contest</a></li>
+	<li><a href="http://weblog.rubyonrails.com/2008/4/11/passenger-mod_rails-for-apache-launches">Passenger (mod_rails for Apache) launches</a></li>
+	<li><a href="http://weblog.rubyonrails.com/2008/4/11/rails-premieres-on-github">Rails premieres on GitHub</a></li>
+	<li><a href="http://www.infoq.com/news/2008/04/jruby-1-1-release">JRuby 1.1 released with major performance improvements</a></li>
+	<li><a href="http://www.rubyinside.com/mack-a-fast-best-of-the-rest-web-app-framework-856.html">Mack: A Fast, &#8220;Best of the Rest&#8221; Web App Framework</a></li>
+	<li><a href="http://code.google.com/p/query-reviewer/">query reviewer</a></li>
+	<li><a href="http://www.makemesimple.com/blog/2008/04/07/contribuindo-plugin-reserved_attributes-para-rails/">Contribuindo: plugin reserved_attributes para Rails</a></li>
+	<li><a href="http://code.leadmediapartners.com/tools/rubyamp">RubyAMP</a></li>
+	<li><a href="http://blog.segment7.net/articles/2008/04/10/rubygems-1-1-1">RubyGems 1.1.1</a></li>
+	<li><a href="http://revolutiononrails.blogspot.com/2007/04/actsaswithreadonly-to-support-read-only.html">ActsAsWithReadonly to support read-only DB slave databases</a></li>
+	<li><a href="http://blog.jayfields.com/2008/04/alternatives-for-redefining-methods.html">Alternatives for redefining methods</a></li>
+	<li><a href="http://blog.jayfields.com/2008/04/extend-modules-instead-of-defining.html">Extend modules instead of defining methods on a metaclass</a></li>
+	<li><a href="http://effectif.com/2008/3/29/opening-ruby-gems-in-textmate">Opening Ruby gems in TextMate</a></li>
+	<li><a href="http://ruby.dzone.com/news/merb-jruby-11-rc3">Merb on JRuby 1.1 RC3</a></li>
+	<li><a href="http://mad.ly/2008/04/09/rails-21-time-zone-support-an-overview/">Rails 2.1 Time Zone Support: An Overview</a></li>
+	<li><a href="http://robsanheim.com/2008/04/04/zero-to-a-fully-git-enabled-rails-app-in-the-time-it-takes-to-drink/">Zero to a Fully Git Enabled Rails App in the time it takes to drink an espresso</a></li>
+	<li><a href="http://drnicwilliams.com/2008/04/08/git-for-rubyforge-accounts/">Git for Rubyforge accounts</a></li>
+	<li><a href="http://woss.name/2008/04/09/using-git-submodules-to-track-vendorrails/">Using git submodules to track plugins</a></li>
+	<li><a href="http://www.dtsato.com/blog/default/?permalink=Git-tip-for-Brazilians.html&amp;smm=y">Git tip for Brazilians</a></li>
+	<li><a href="http://woss.name/2008/04/10/read-only-clones-and-commiting-changes-to-submodules/">Read-only clones and commiting changes to submodules</a></li>
+	<li><a href="http://www.rubyinside.com/git-and-ruby-git-tutorials-articles-and-links-for-rubyists-860.html">Git and Ruby: Git tutorials, articles and links for Rubyists</a></li>
+	<li><a href="http://betterruby.wordpress.com/2008/04/11/rubinius-on-github/">Rubinius on GitHub</a></li>
+	<li><a href="http://blog.davidchelimsky.net/articles/2008/04/09/rspec-at-github">RSpec at github</a></li>
+	<li><a href="http://www.robbyonrails.com/articles/2008/04/10/git-svn-is-a-gateway-drug">git-svn is a gateway drug</a></li>
+</ul>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/04/16/rails-podcast-brasil-episodio-13/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/04/15/edge-rails-configgem-em-plugins/">Edge Rails: config.gem Em Plugins</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-04-15 00:00:00 -0300" pubdate  updated >Apr 15<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Hoje de manhõ eu falei do <a href="http://www.nomedojogo.com/2008/04/15/edge-rails-configgem/">config.gem</a>. Agora vai uma dica para os construtores de plugins. Principalmente se o seu plugin depende de algum gem.
+
+Até agora o arquivo <code>init.rb</code> de um plugin se parece com isto:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> init.rb do plugin open_id_authentication
+</span><span class="meta meta_require meta_require_ruby"><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">require</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>yadis<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> </span>
+<span class="meta meta_require meta_require_ruby"><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">require</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>openid<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> </span>
+<span class="support support_class support_class_ruby">ActionController</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">Base</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>send <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>include</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">OpenIdAuthentication</span> </span></pre>
+
+Mas no <strong>Rails 2.1</strong> um arquivo <code>init.rb</code> como este deve ser criado assim:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Novo formato
+</span>config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>gem <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>ruby-openid<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>lib</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>openid<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>version</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>1.1.4<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>gem <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>ruby-yadis<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>  <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>lib</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>yadis<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>  <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>version</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>0.3.4<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+
+config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>after_initialize <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
+</span>  <span class="support support_class support_class_ruby">ActionController</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">Base</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>send <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>include</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">OpenIdAuthentication</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+Assim, quando você rodar a tarefa para instalar todos os gems necessários, estes gems estarão entre eles.
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/04/15/edge-rails-configgem-em-plugins/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/04/14/new-feature-in-custom-resource-name-plugin/">New Feature in Custom Resource Name Plugin</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-04-14 00:00:00 -0300" pubdate  updated >Apr 14<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Added one more feature to plugin. Imagine the following case:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_routes">ActionController::Routing::Routes<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>draw <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">map</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+  map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>aliases <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>resources</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>houses</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>casas<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+  map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>aliases <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>actions</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>new</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>novo<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+
+  map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>houses</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span>
+</span></pre>
+See that all actions <code>:new</code> will be replaced by &#8216;novo&#8217;, but this does not fit properly in resource <code>:casas</code>, which would correct be &#8216;nova&#8217; and not &#8216;novo&#8217; (is just one example).
+
+In this case we can use the option <code>:actions_as</code> in the resources, like this:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>houses</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>actions_as</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>new</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>nova<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span></span></pre>
+Problem solved. In all other cases the action <code>:new</code> will be called &#8216;novo&#8217;, but only in the resource <code>:casas</code> it will be &#8216;nova&#8217;.
+
+In addition we also have the option <code>:as</code> those who do the same thing with the name of the resource.
+
+To understand how to install and use this plugin, <a href="http://www.nomedojogo.com/custom-resource-name-plugin/">click here</a>.
+
+If the plugin is being useful to you, be sure to <a href="http://www.workingwithrails.com/recommendation/new/person/8137-carlos-brando">recommend me in working with rails</a>.
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/04/14/new-feature-in-custom-resource-name-plugin/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/04/14/edge-rails-partial-updates/">Edge Rails: Partial Updates</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-04-14 00:00:00 -0300" pubdate  updated >Apr 14<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Na última sexta-feira eu falei sobre <a href="http://www.nomedojogo.com/2008/04/11/edge-rails-dirty-objects/">Dirty Objects</a>, e disse que aquela novidade seria o gancho para uma outra ainda mais interessante.
+
+Já que agora podemos rastrear quais atributos foram alterados na instancia do objeto, porque não usar isto para evitar atualizações desnecessários no banco de dados?
+
+Hoje quando executamos o método save em um <code>ActiveRecord</code> já existente, será executado no banco de dados um <code>UPDATE</code> em todas as colunas da tabela, mesmo para as que não sofreram alterações.
+
+Com o Dirty Objects isto poderia ser melhorado, e foi exatamente o que aconteceu. Veja o SQL gerado ao tentar salvar um registro que sofreu apenas uma leve alteração no <strong>Rails 2.1</strong>:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">article <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Article</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>first</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; "Title"
+</span>article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>subject  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; "Edge Rails"
+</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Vamos atualizar um atributo...
+</span>article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>New Title<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Veja o SQL criado ao persistir o objeto
+</span>article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>save
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt;  "UPDATE articles SET title = 'New Title' WHERE id = 1"</span></span></pre>
+
+Note que apenas o atributo alterado será atualizado no banco de dados. Se nenhum atributo fosse alterado, o <code>ActiveRecord</code> não executaria nenhum update.
+
+Para habilitar/desabilitar esta nova funcionalidade você deve alterar a propriedade <code>partial_updates</code> dos seus models.
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Para habilitar a funcionalidade...
+</span><span class="support support_class support_class_ruby">MinhaClasse</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>partial_updates <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_language constant_language_ruby">true</span></span></pre>
+
+Se deseja habilitar/desabilitar esta funcionalidade para todos os models do seu sistema acrescente esta linha no arquivo environment.rb ou em algum arquivo no diretório config/initializer:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Habilitando para todos os meus models
+</span><span class="support support_class support_class_ruby">ActiveRecord</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">Base</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>partial_updates <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_language constant_language_ruby">true</span></span></pre>
+
+Atualmente o arquivo <a href="http://dev.rubyonrails.org/browser/trunk/railties/configs/initializers/new_rails_defaults.rb?rev=9239">config/initializers/new_rails_defaults.rb</a> já tem esta linha, mas ele deve ser removido mais para frente.
+
+<strong>Atenção: Não se esqueça de informar o <code>ActiveRecord</code> quando for alterar um atributo sem usar o método <code>attr=</code>, assim:</strong>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Se eu fizer assim, tudo bem...
+</span>person<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>name <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>bobby<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+person<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>name_change    <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; ['bob', 'bobby']
+</span>
+
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Mas se eu não alterar o atributo usando o sinal de '='
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> então preciso avisar que vou fazer uma alteração
+</span>person<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>name_will_change!
+person<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>name <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_augmented keyword_operator_assignment_augmented_ruby">&lt;&lt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>by<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+person<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>name_change    <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; ['bob', 'bobby']</span></span></pre>
+
+Se não fizer isto este tipo de alteração não será rastreado, e sua tabela não será atualizada corretamente.
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/04/14/edge-rails-partial-updates/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/04/14/edge-rails-configgem/">Edge Rails: config.gem</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-04-14 00:00:00 -0300" pubdate  updated >Apr 14<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Também falamos disto no <a href="http://www.nomedojogo.com/2008/04/07/rails-podcast-brasil-episodio-12/">podcast #12</a>. No Rails 2.1 teremos outro problema que dá dor de cabeça nos desenvolvedores resolvido.
+
+Toda vez que você entra em um projeto novo, existe uma sequência inicial que precisa ser seguida, e os dois primeiros passos são: baixar o fonte na sua máquina e instalar todos os gems necessários. Este segundo passo é especialmente chato.
+
+Era chato, porque agora no Rails podemos usar o novo recurso <code>config.gem</code>. No arquivo <code>environment.rb</code> você &#8220;deve&#8221; adicionar quais gems seu projeto depende, assim:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>gem <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>bj<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+
+config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>gem <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>hpricot<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>version</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>0.6<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
+                      <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>source</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>http://code.whytheluckystiff.net<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+
+config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>gem <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>aws-s3<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>lib</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>aws/s3<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span></span></pre>
+Depois sua equipe, ou você mesmo, pode instalar todas as dependências de uma só vez com o comando:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Instala todos os gems listados
+</span>rake gems<span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>install</span></span></pre>
+Também é possível listar quais gems estão sendo usados no projeto executando:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Lista todos os gems dependentes
+</span>rake gems</span></pre>
+E se algum dos gems tiver um arquivo <code>rails/init.rb</code> e você quiser <a href="http://www.nomedojogo.com/2008/04/09/edge-rails-gems-podem-ser-plugins/">levar o gem junto com sua aplicação</a>, rode:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Copia o gem especifícado para vendor/gems/nome_do_gem-x.x.x
+</span>rake gems<span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>unpack</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">GEM</span><span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span>nome_do_gem</span></pre>
+E o gem será copiado para o diretório <code>vendor/gems/gem_name-x.x.x</code>.
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/04/14/edge-rails-configgem/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/04/11/edge-rails-timestamped-migrations/">Edge Rails: Timestamped Migrations</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-04-11 00:00:00 -0300" pubdate  updated >Apr 11<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Quando se está estudando Rails ou desenvolvendo algo sozinho, migrations parece ser a solução para todos os problemas. Mas quando se tem uma equipe trabalhando no mesmo projeto e todo mundo criando migrations ao mesmo tempo, você descobrirá (ou já descobriu) que migrations simplesmente não funcionam, pelo menos no formato atual do Rails.
+
+O problema é que quando se cria uma migration, ela recebe um número. Mas o que acontece se duas pessoas criarem uma migration ao mesmo tempo, ou pior ainda, se várias pessoas começarem a criar migrations e só derem commit depois? Você terá um monte de migrations com o mesmo número com códigos diferentes. <strong>Conflito!</strong>
+
+Hoje existe várias formas de &#8220;tentar&#8221; solucionar isto. Existem alguns plugins com abordagens diferentes para resolver este impasse. Mas independente do plugin ou abordagem que você use, uma coisa fica bem clara, a forma atual simplesmente não funciona.
+
+Se você estiver usando <strong>Git</strong> isto é pior ainda, porque provavelmente sua equipe terá alguns branches de trabalho e podem criar migrations em todos eles, e você terá os mesmo conflitos na hora de fazer o merge.
+
+Tanto que o coreteam alterou a criação de migrations no Rails para usar não mais um número, mas uma string baseada na hora UTC no formato: <strong>YYYYMMDDHHMMSS</strong>.
+
+Isto ajuda a resolver um dos problemas, já que os arquivos serão criados com nomes diferentes, o que evitará conflitos. Mas ainda está longe de ser a solução definitiva.
+
+Ainda, caso você esteja trabalhando sozinho, ou seja louco e prefira o formato atual (usando uma sequência numérica), basta incluir esta linha no arquivo <code>environment.rb</code>:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>active_record<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>timestamped_migrations <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_language constant_language_ruby">false</span></span></pre>
+
+Também foram criadas novas tarefas <code>rake</code> para &#8220;andar&#8221; pelos migrations:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">rake db<span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>migrate<span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>up</span>
+rake db<span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>migrate<span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>down</span></span></pre>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/04/11/edge-rails-timestamped-migrations/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/04/11/edge-rails-problema-com-migrations-resolvido/">Edge Rails: Problema Com Migrations Resolvido</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-04-11 00:00:00 -0300" pubdate  updated >Apr 11<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Agora à pouco eu falei sobre <a href="http://www.nomedojogo.com/2008/04/11/edge-rails-timestamped-migrations/">Timestamped Migrations</a>, e reclamei que isto ainda não resolvia o problema com as migrations. Depois disso eu pensei que talvez a solução fosse armazenar na tabela <code>schema_info</code> todas as migrations executadas e cada vez que rodássemos um <code>rake db:migrate</code> o Rails verificasse quais scripts não foram executados, fizesse um rollback até o primeiro não executado e então rodasse tudo denovo até o fim. Na teoria isto resolveria os problemas das migrations.
+
+Pois é, não fui só eu que pensei nisto&#8230;
+
+Isto já está implementado para o Rails 2.1. A única diferença da minha idéia é que criaram uma outra tabela para isto, chamada <code>schema_migrations</code>.
+
+Não sei, mas acho que isto resolve o problema com as migrations.
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/04/11/edge-rails-problema-com-migrations-resolvido/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/04/11/edge-rails-dirty-objects/">Edge Rails: Dirty Objects</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-04-11 00:00:00 -0300" pubdate  updated >Apr 11<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Mesmo publicando uma atualização do Rails por dia, (às vezes mais do que uma) neste blog, ainda assim estou atrasado, muito atrasado. Por isto algumas vezes sou obrigado a documentar algumas novidades que não são mais novidades para ninguém.
+
+O Ryan Daigle já escreveu sobre <a href="http://ryandaigle.com/articles/2008/3/31/what-s-new-in-edge-rails-dirty-objects">Dirty Objects</a> no seu blog e eu vou basicamente traduzir a explicação dele para cá.
+
+Nós falamos sobre isto no <a href="http://www.nomedojogo.com/2008/04/07/rails-podcast-brasil-episodio-12/">último podcast</a>, mas agora no Rails podemos rastrear alterações feitas no <code>ActiveRecord</code>. Podemos saber se um objeto foi alterado ou não e se foi alterado podemos identificar o que mudou e até mesmo fazer um comparativo do tipo antes e depois. Vamos aos exemplos:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">article <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Article</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>first</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>changed?  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; false
+</span>
+article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; "Title"
+</span>article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>New Title<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title_changed? <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; true
+</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Recupera o valor anterior do atributo
+</span>article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title_was  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; "Title"
+</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Veja o antes de depois da alteração
+</span>article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title_change  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; ["Title", "New Title"]</span></span></pre>
+
+Como você pode ver é bem simples. Você também pode listar todas as alterações no objeto de duas formas. Continuando do código anterior:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Devolve uma lista com os atributos alterados
+</span>article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>changed  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; ['title']
+</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Devolve um Hash com os atributos alterados e um antes e depois
+</span>article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>changes  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; { 'title' =&gt; ["Title", "New Title"] }
+</span></span></pre>
+
+Note que quando o objeto é salvo, o status dele é alterado. Veja:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>changed?  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; true
+</span>article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>save  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; true
+</span>article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>changed?  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; false</span></span></pre>
+
+Caso você vá alterar um objeto sem usar o operador <code>attr=</code>, você precisará informar manualmente que o atributo foi alterado usando o método <code>attr_name_will_change!</code> (no lugar de <code>attr</code>, vai o nome do atributo), veja mais um último exemplo:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">article <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Article</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>first</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title_will_change!
+article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>upcase!
+article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title_change  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; ['Title', 'TITLE']</span></span></pre>
+
+Guarde este artigo nos seus favoritos porque ele é gancho para uma outra modificação importante.
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/04/11/edge-rails-dirty-objects/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+<nav role="pagination">
+  <div>
+    
+      <a class="prev" href="/page46/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+      <a class="next" href="/page44/">Newer &rarr;</a>
+    
+  </div>
+</nav>
+
+<script type="text/javascript">
+    var disqus_shortname = 'carlosbrando';
+    (function () {
+      var s = document.createElement('script'); s.async = true;
+      s.type = 'text/javascript';
+      s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+      (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+
+</div>
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro anos de Nome do Jogo</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("carlosbrando", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/carlosbrando" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @carlosbrando</a>
+  
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Nome do Jogo: Edge Rails - Cache, SQLITE3, Rails 2.0.2 e mais</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/2007/12/17/edge-rails-cache-sqlite3-rails-202-e-mais/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <link href="http://feeds2.feedburner.com/NomeDoJogo" rel="alternate" title="Nome do Jogo" type="application/atom+xml"/>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1249636-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Nome do Jogo</a></h1>
+  
+    <h2>por Carlos Brando</h2>
+  
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="http://feeds2.feedburner.com/NomeDoJogo" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">Edge Rails - Cache, SQLITE3, Rails 2.0.2 E Mais</h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2007-12-17 00:00:00 -0200" pubdate  updated >Dec 17<span>th</span>, 2007</time>
+
+
+</p>
+    
+  </header>
+
+
+<div class="entry-content">Como de costume tivemos mais um fim de semana muito animado no desenvolvimento do Rails. O que aconteceu no sábado você já leu <a href="http://www.nomedojogo.com/2007/12/16/edge-rails-%e2%80%93-ruby-19-seguranca-e-muito-zelo/">aqui</a>, agora vamos a um resumo do domingo.
+<h3>Cache de templates em produção</h3>
+A partir de agora no arquivo <strong>config/environments/production.rb</strong>, <strong>ActionView::Base.cache_template_loading</strong> estará sempre ligado como padrão. Em outras palavras, qualquer alteração em um template no ambiente de produção para ter efeito deve-se reinicializar a aplicação.
+<h3>Chave criptográfica</h3>
+No último post eu mencionei sobre esta chave, mas parece que DHH não gostou do nome usado no rake e mudou, agora para se obte-la use &#8221;<strong>rake secret</strong>&#8221;.
+<h3>Banco de dados padrão</h3>
+O <strong>mysql</strong> deixa de ser o banco de dados padrão e dá lugar ao <strong>sqlite3</strong>. Então se você executar &#8221;<strong>rails myapp</strong>&#8221; o arquivo <strong>config/database.yml</strong> virá com as configurações do sqlite3 e não mais do mysql. Se quiser que o arquivo seja pré-configurado como antes use &#8221;<strong>rails -d mysql myapp</strong>&#8221;.
+<h3>Rails 2.0.2</h3>
+David já começou os preparativos para a versão 2.0.2 do Rails. Ainda não saiu, mas deve ser anunciado em breve.
+<h3>Novo método HTTP - OPTIONS</h3>
+A requisição OPTIONS foi novamente incluída na lista de requisições HTTP. Quando se está construindo um serviço RESTful, um OPTIONS deve retornar quais requisições o recurso responderá. Também é útil quando se está usando o Rails sob um Mongrel através de um proxy como o Perlbal, neste caso é comum requisitar um OPTIONS para ter certeza de que o Rails já está no ar e pronto para receber uma nova requisição.
+<h3>Novos métodos nos testes integrados</h3>
+Foi incluído dois novos métodos nos testes integrados, o <strong>delete_via_redirect</strong> e o <strong>put_via_redirect</strong>. Os dois métodos realizam um DELETE ou PUT seguido de um redirecionamento. Um pouco de cuidado aqui, porque se a requisição solicitada já fizer um redirecionamento, você pode cair em um loop infinito.
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+
+      
+
+
+
+
+<time datetime="2007-12-17 00:00:00 -0200" pubdate  updated >Dec 17<span>th</span>, 2007</time>
+
+
+
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://carlosbrando.github.com/2007/12/17/edge-rails-cache-sqlite3-rails-202-e-mais/" data-via="carlosbrando" data-counturl="http://carlosbrando.github.com/2007/12/17/edge-rails-cache-sqlite3-rails-202-e-mais/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread"><div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'carlosbrando';
+  var disqus_identifier = 'http://carlosbrando.github.com/2007/12/17/edge-rails-cache-sqlite3-rails-202-e-mais/';
+  var disqus_url = 'http://carlosbrando.github.com/2007/12/17/edge-rails-cache-sqlite3-rails-202-e-mais/';
+  //var disqus_developer = 1;
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro anos de Nome do Jogo</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("carlosbrando", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/carlosbrando" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @carlosbrando</a>
+  
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

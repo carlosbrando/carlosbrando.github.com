@@ -1,0 +1,303 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Nome do Jogo: Edge Rails: Use rótulos nas suas páginas</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/2008/01/16/edge-rails-use-rotulos-nas-suas-paginas/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <link href="http://feeds2.feedburner.com/NomeDoJogo" rel="alternate" title="Nome do Jogo" type="application/atom+xml"/>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1249636-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Nome do Jogo</a></h1>
+  
+    <h2>por Carlos Brando</h2>
+  
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="http://feeds2.feedburner.com/NomeDoJogo" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">Edge Rails: Use Rótulos Nas Suas Páginas</h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-01-16 00:00:00 -0200" pubdate  updated >Jan 16<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+<div class="entry-content"><img src="http://www.nomedojogo.com/wp-content/uploads/2008/01/631345826_d7158ef086.jpg" alt="631345826_d7158ef086.jpg" />
+
+Fa&ccedil;a o Teste, crie um projeto Rails 2.0 (voc&ecirc; j&aacute; sabe fazer isto n&eacute;?) e execute o comando abaixo:
+<pre>./script/generate scaffold Post title:string body:text</pre>
+Vamos pegar como exemplo o arquivo <em>edit.html.erb</em>, veja como foi criado o formul&aacute;rio de edi&ccedil;&atilde;o:
+
+<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> form_for<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>post</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">f</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+  <span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+    <span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">b</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>Title<span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">b</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">br</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html"> /&gt;</span></span>
+    <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> f<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>text_field <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>title</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+  <span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+
+  <span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+    <span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">b</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>Body<span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">b</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">br</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html"> /&gt;</span></span>
+    <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> f<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>text_area <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>body</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+  <span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+
+  <span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+    <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> f<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>submit <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Update<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+  <span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+<span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> <span class="keyword keyword_control keyword_control_ruby">end</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span></span></pre>
+
+Ok, agora vamos criar um segundo projeto e usar a vers&atilde;o <em>edge</em> do Rails. Lembra como faz? N&atilde;o? Ent&atilde;o assista ao <a href="http://www.nomedojogo.com/2008/01/02/screencast-3-edge-rails/">terceiro epis&oacute;dio</a> do screencast deste blog.
+
+[PAUSA PARA ASSISTIR AO EPIS&Oacute;DIO]
+
+Pronto? Beleza! Agora execute o mesmo comando acima (o primeiro c&oacute;digo do post). Vamos pegar o mesmo arquivo e verificar como foi gerado o formul&aacute;rio de edi&ccedil;&atilde;o:
+
+<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> form_for<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>post</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">f</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+  <span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+    <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> f<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>label <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>title</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span><span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">br</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html"> /&gt;</span></span>
+    <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> f<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>text_field <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>title</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+  <span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+  <span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+    <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> f<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>label <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>body</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span><span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">br</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html"> /&gt;</span></span>
+    <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> f<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>text_area <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>body</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+  <span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+  <span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+    <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> f<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>submit <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Update<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+  <span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+<span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> <span class="keyword keyword_control keyword_control_ruby">end</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span></span></pre>
+
+Hmm&#8230; diferente! E agora faz muito mais sentido. J&aacute; que temos o m&eacute;todo <strong>label</strong>, porque n&atilde;o usar?
+<h3>Apenas para ficar registrado, o que faz o m&eacute;todo label?</h3>
+Essa &eacute; f&aacute;cil, o m&eacute;todo <strong>label</strong> retorna uma string com o t&iacute;tulo da coluna num formato legal para se colocar na p&aacute;gina, por exemplo, se a coluna se chama &#8220;title&#8221;, ele retorna uma string com o texto &#8220;Title&#8221;, com o &#8220;t&#8221; em mai&uacute;sculo. Essa foi f&aacute;cil, manda outra&#8230;
+
+Espera a&iacute;. N&atilde;o &eacute; isso n&atilde;o. A resposta est&aacute; <font color="#ff0000"><strong>ERRADA</strong><font color="#000000">.</font></font>
+
+Na verdade o m&eacute;todo <strong>label</strong> faz mais ou menos isso, mas ele n&atilde;o retorna uma string apenas com o nome da coluna, veja um exemplo:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> f<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>label <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>title</span>
+<span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span>label <span class="keyword keyword_control keyword_control_ruby">for</span><span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>post_title<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span><span class="variable variable_other variable_other_constant variable_other_constant_ruby">Title</span><span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span><span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">/</span>label<span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span>
+
+<span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> f<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>label <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>title</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>A short title<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+<span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span>label <span class="keyword keyword_control keyword_control_ruby">for</span><span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>post_title<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span><span class="variable variable_other variable_other_constant variable_other_constant_ruby">A</span> short title<span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span><span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">/</span>label<span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span>
+
+<span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> label <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>title</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>A short title<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>class</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>title_label<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+<span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span>label <span class="keyword keyword_control keyword_control_ruby">for</span><span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>post_title<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="keyword keyword_control keyword_control_ruby">class</span><span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>title_label<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span><span class="variable variable_other variable_other_constant variable_other_constant_ruby">A</span> short title<span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span><span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">/</span>label<span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span></span></pre>
+
+Ele retorna o nome do coluna, mas dentro de uma tag <strong>&lt;label&gt;</strong>.
+<h3>Que droga! Isto s&oacute; vai sujar meu HTML</h3>
+Como &eacute;? Sujar seu HTML? Calma a&iacute;, vai me dizer que voc&ecirc; n&atilde;o sabe para que serve a tag <strong>&lt;label&gt;</strong>? A&iacute; a&iacute;, l&aacute; vamos n&oacute;s outra vez&#8230;
+
+Percebeu o par&acirc;metro &#8221;<strong>for</strong>&#8221; dentro da tag? O &#8220;post_title&#8221; &eacute; o nome da caixa de texto que cont&eacute;m o t&iacute;tulo do nosso post. Em outras palavras a tag <strong>&lt;label&gt;</strong> &eacute; na verdade um r&oacute;tulo associado ao objeto post_title. Quando se clica no r&oacute;tulo (ele n&atilde;o &eacute; um link, n&atilde;o confunda as coisas) o controle associado a ele recebe o foco.
+<h3>Legal&#8230; e para que eu vou querer isso?</h3>
+<strong>Robby Russell</strong> escreveu um artigo interessante em seu blog sobre este assunto. <a href="http://www.robbyonrails.com/articles/2007/12/02/that-checkbox-needs-a-label">Clique aqui</a> para ler (est&aacute; em ingl&ecirc;s).
+
+Se voc&ecirc; sabe o m&iacute;nimo necess&aacute;rio de ingl&ecirc;s para trabalhar na &aacute;rea de programa&ccedil;&atilde;o, leia o artigo de Robby, &eacute; bem simples, mesmo que voc&ecirc; saiba bem pouco de ingl&ecirc;s. Mas se voc&ecirc; n&atilde;o sabe nada (deveria se preocupar com isso) use r&oacute;tulos nem que seja apenas para deixar os usu&aacute;rios do seu sistema mais felizes.
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+
+      
+
+
+
+
+<time datetime="2008-01-16 00:00:00 -0200" pubdate  updated >Jan 16<span>th</span>, 2008</time>
+
+
+
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://carlosbrando.github.com/2008/01/16/edge-rails-use-rotulos-nas-suas-paginas/" data-via="carlosbrando" data-counturl="http://carlosbrando.github.com/2008/01/16/edge-rails-use-rotulos-nas-suas-paginas/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread"><div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'carlosbrando';
+  var disqus_identifier = 'http://carlosbrando.github.com/2008/01/16/edge-rails-use-rotulos-nas-suas-paginas/';
+  var disqus_url = 'http://carlosbrando.github.com/2008/01/16/edge-rails-use-rotulos-nas-suas-paginas/';
+  //var disqus_developer = 1;
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro anos de Nome do Jogo</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("carlosbrando", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/carlosbrando" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @carlosbrando</a>
+  
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

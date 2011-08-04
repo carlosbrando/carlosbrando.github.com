@@ -1,0 +1,312 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Nome do Jogo: Rails Way: Variáveis de Instância, Controllers e Views</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/2009/02/06/rails-way-variaveis-de-instancia-controllers-e-views/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <link href="http://feeds2.feedburner.com/NomeDoJogo" rel="alternate" title="Nome do Jogo" type="application/atom+xml"/>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1249636-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Nome do Jogo</a></h1>
+  
+    <h2>por Carlos Brando</h2>
+  
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="http://feeds2.feedburner.com/NomeDoJogo" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">Rails Way: Variáveis De Instância, Controllers E Views</h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-02-06 00:00:00 -0200" pubdate  updated >Feb 6<span>th</span>, 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+<div class="entry-content">Mais uma sexta-feira e mais um artigo da série <a href="http://www.nomedojogo.com/category/rails-way/">Rails Way</a>, onde vou pouco a pouco mostrando a forma como os Rubistas mais experientes costumam programar no Ruby on Rails.
+
+Programadores iniciantes rapidamente ficam fascinados com o Ruby e principalmente com o Rails, e por serem uma linguagem e framework com uma curva de aprendizado muito curta é comum que ao terminarem seu primeiro projeto em Rails, percam um pouco o interesse em entender como determinadas coisas funcionam, assimilando tudo que o Rails faz como pura mágica.
+
+Isto é extremamente prejudicial ao programador iniciante e pode levá-lo a se tornar um programador “experiente” com pouco ou nenhum conhecimento real sobre o funcionamento interno da sua ferramenta de trabalho.
+
+A ideia desta série de artigos é expor algumas boas práticas de desenvolvimento ao mesmo tempo em que tento explicar de uma forma simples como as engrenagens funcionam. Por exemplo, já se perguntou como um controller e uma view compartilham as mesmas variáveis de instância?
+
+Por definição uma variável de instância só existe dentro de uma única instância de um objeto. Mas quando estamos falando de controllers e view, estamos falando de dois objetos diferentes que compartilham as mesmas variáveis.
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> books_controller.rb
+</span><span class="meta meta_rails meta_rails_controller"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">BooksController<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ApplicationController</span></span></span>
+  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">index</span></span>
+    <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>books</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Book</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>all</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span>
+</span></pre>
+
+<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="comment comment_block comment_block_html"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_html">&lt;!--</span> index.html.erb <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_html">--&gt;</span></span>
+<span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> <span class="keyword keyword_control keyword_control_ruby">for</span> book <span class="keyword keyword_control keyword_control_ruby">in</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>books</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+   <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> book<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+<span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> <span class="keyword keyword_control keyword_control_ruby">end</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+</span></pre>
+
+Nos exemplos acima estou definindo uma variável de instância <code>@books</code> dentro do controller, e eu simplesmente assumo que a variável também estará disponível na view.
+
+Note que meu controller é uma extensão da classe <code>ApplicationController</code> que por sua vez é uma extensão da classe <code>ActionController::Base</code> e por isto é uma instância desta classe. Por outro lado a minha view é uma instância da classe <code>ActionView::Base</code>. Ou seja, meu controller é uma instância de um objeto enquanto minha view é uma instância de um outro objeto totalmente diferente.
+
+Então como é possível compartilhar uma variável de instância quando temos duas instância de objetos diferentes? Será mágica? Não, a resposta é mais simples do que você imagina.
+
+O Rails acrescenta à classe <code>Object</code> um método chamado <code>copy_instance_variables_from</code> que faz exatamente o que o nome diz, copia variáveis de instância de uma classe para outro. Você pode até mesmo brincar um pouco com este método no console. Abra o terminal e após digitar o comando <code>irb</code>, copie e cole o código abaixo e veja o resultado:
+
+<pre class="textmate-source"><span class="source source_ruby"><span class="meta meta_require meta_require_ruby"><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">require</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>rubygems<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span>
+<span class="meta meta_require meta_require_ruby"><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">require</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>active_support<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span>
+
+
+<span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">A</span></span>
+  <span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">attr_reader</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>x</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>y</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+
+<span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">B</span></span>
+  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">initialize</span></span>
+    <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>x</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>valor copiado da classe B<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+    <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>y</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_numeric constant_numeric_ruby">11</span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+
+
+a <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">A</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span>
+b <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">B</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span>
+
+puts a<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>x <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; nil
+</span>puts a<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>y <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; nil
+</span>
+a<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>copy_instance_variables_from<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>b<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+
+puts a<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>x <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "valor copiado da classe B"
+</span>puts a<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>y <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; 11</span></span></pre>
+
+Acabamos de copiar todas as variáveis de instância de um objeto para outro. É exatamente assim que acontece com controllers e views.
+
+O que acontece por debaixo dos panos é que quando o método <code>render</code> do controller é executado, primeiro ele copia todas as variáveis de instância que você criou para dentro de apenas uma variável chamada <code>@assigns</code>, que funciona como um <code>Hash</code>. E ao criar uma uma nova view, ele faz uma copia desta variável (<code>@assigns</code> com todas as suas variáveis dentro) para o novo objeto. Simples não?
+<h2>O inferno das variáveis</h2>
+O que tenho visto muitas vezes é que alguns programadores tem abusado desta facilidade que o Rails oferece, criando inúmeras variáveis de instância no controller para recuperar todo tipo de informação na view.
+
+Manter muitas variáveis complica o gerenciamento do código, e em alguns casos acabamos até mesmo fazendo chamadas repetidas à associações de um modelo sem se dar conta disso, causando um problema de performance em nosso projeto.
+
+O ideal é que você compartilhe apenas uma variável de instância entre seu controller e sua view. Desta forma todas as chamadas para associações serão realizadas &#8220;on demand&#8221; evitando o consumo indevido de recursos e tornando a manutenção do código mais simples.
+
+[caption id=&#8221;attachment_2198&#8221; align=&#8221;aligncenter&#8221; width=&#8221;500&#8221; caption=&#8221;Apenas uma variável de instância entre seu controller e sua view&#8221;]<img class="size-full wp-image-2198" title="97493713_c72ee9a7bd" src="http://www.nomedojogo.com/wp-content/uploads/2009/02/97493713_c72ee9a7bd.jpg" alt="97493713_c72ee9a7bd" height="375" width="500">[/caption]
+<p style="text-align: center;"></p>
+
+Isto não quer dizer que você não possa compartilhar outras variáveis quando necessário. Mas é importante que você analise a real necessidade de se fazer isto. Por exemplo, é mais prático criar um helper <code>current_user</code> para recuperar o usuário atual do que sempre armazená-lo em uma variável <code>@current_user</code>.
+
+Se no primeiro exemplo você precisasse recuperar também todos os livros relacionados ao livro atual, talvez parecesse razoável criar uma segunda variável <code>@related_books</code> contendo estes livros. Mas se você colocar em prática a <a href="http://www.nomedojogo.com/2009/01/30/rails-way-1-modelos-gordos-e-controladores-magros/">primeira dica</a> desta série e acrescentar o método <code>related_books</code> ao modelo <code>Book</code>, você poderá usar <code>@book.related_books</code> na sua view. Evitando a criação desnecessária de mais uma variável e deixando seu código mais limpo e organizado.
+
+Usem de bom senso.
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+
+      
+
+
+
+
+<time datetime="2009-02-06 00:00:00 -0200" pubdate  updated >Feb 6<span>th</span>, 2009</time>
+
+
+
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://carlosbrando.github.com/2009/02/06/rails-way-variaveis-de-instancia-controllers-e-views/" data-via="carlosbrando" data-counturl="http://carlosbrando.github.com/2009/02/06/rails-way-variaveis-de-instancia-controllers-e-views/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread"><div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'carlosbrando';
+  var disqus_identifier = 'http://carlosbrando.github.com/2009/02/06/rails-way-variaveis-de-instancia-controllers-e-views/';
+  var disqus_url = 'http://carlosbrando.github.com/2009/02/06/rails-way-variaveis-de-instancia-controllers-e-views/';
+  //var disqus_developer = 1;
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro anos de Nome do Jogo</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("carlosbrando", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/carlosbrando" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @carlosbrando</a>
+  
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

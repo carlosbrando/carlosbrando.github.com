@@ -1,0 +1,669 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Nome do Jogo</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/page3/index.html"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <link href="http://feeds2.feedburner.com/NomeDoJogo" rel="alternate" title="Nome do Jogo" type="application/atom+xml"/>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1249636-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Nome do Jogo</a></h1>
+  
+    <h2>por Carlos Brando</h2>
+  
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="http://feeds2.feedburner.com/NomeDoJogo" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/05/17/a-pseudo-intellisense-for-textmate/">A Pseudo-intellisense for Textmate</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2010-05-17 00:00:00 -0300" pubdate  updated >May 17<span>th</span>, 2010</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Getting lost with all available attributes names on an Active Record object is normal, especially on large projects.
+
+A lot of programmers have developed the bad habit of consulting the migrations to identify which attributes are available on an Active Record model. This certainly is not the smartest way to do this.
+
+I had been using a gem called <a href="http://rubygems.org/gems/annotate">annotate</a> to automatically add comments in my models with the database schema. But that wasn&#8217;t automatic enough.
+
+So I decided to create something more practical and I ended up implementing a pseudo-intelissense for Textmate which can display a list with all available attributes for each Active Record model in my project. See how it works:
+
+<object width="480" height="385"><param name="movie" value="http://www.youtube.com/v/8YvXzRuG-0s&hl=pt_BR&fs=1&rel=0"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/8YvXzRuG-0s&hl=pt_BR&fs=1&rel=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="480" height="385"></embed></object>
+
+The idea is pretty simple. The variable name is important here. Since you can&#8217;t get the project scope through TextMate (if anyone has an idea how to do it please let me know), then the variable name is what indicates which Active Record model should be used.
+
+For example, if you have a model named <code>User</code> you should use variable names as <code>user</code>, <code>@user</code>, <code>@@user</code>, etc.. Variables such as <code>product</code> and <code>@products</code> will show the <code>Product</code> model attributes. The concept is simple. If you use a different variable name, you must indicate which model should be used.
+
+This is still an experimental feature and a work in progress. See some of the latest features that I&#8217;ve been working in recent days:
+
+[nggallery id=1]
+
+You can install running the following commands in the terminal window:
+
+<pre class="textmate-source"><span class="source source_shell">mkdir -p <span class="keyword keyword_operator keyword_operator_tilde keyword_operator_tilde_shell">~</span>/Library/Application<span class="constant constant_character constant_character_escape constant_character_escape_shell">\ </span>Support/TextMate/Bundles
+
+<span class="support support_function support_function_builtin support_function_builtin_shell">cd</span> <span class="keyword keyword_operator keyword_operator_tilde keyword_operator_tilde_shell">~</span>/Library/Application<span class="constant constant_character constant_character_escape constant_character_escape_shell">\ </span>Support/TextMate/Bundles
+
+git clone git://github.com/carlosbrando/ruby-on-rails-tmbundle.git <span class="string string_quoted string_quoted_double string_quoted_double_shell"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_shell">"</span>Ruby on Rails.tmbundle<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_shell">"</span></span>
+
+osascript -e <span class="string string_quoted string_quoted_single string_quoted_single_shell"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_shell">'</span>tell app "TextMate" to reload bundles<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_shell">'</span></span></span></pre>
+
+This bundle is a fork of Dr. Nic&#8217;s <a href="http://github.com/drnic/ruby-on-rails-tmbundle">ruby-on-rails-tmbundle</a>. So if you already have installed this bundle, it&#8217;s advisable to remove it before to avoid conflicts.
+
+The project is on GitHub: <a href="http://github.com/carlosbrando/ruby-on-rails-tmbundle">http://github.com/carlosbrando/ruby-on-rails-tmbundle</a>
+
+Enjoy!
+</div>
+  <footer>
+    <a rel="full-article" href="/2010/05/17/a-pseudo-intellisense-for-textmate/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/05/06/um-pseudo-intellisense-para-o-textmate/">Um Pseudo-intellisense Para O Textmate</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2010-05-06 00:00:00 -0300" pubdate  updated >May 6<span>th</span>, 2010</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Quem nunca se confundiu com o nome dos atributos em modelos do Active Record? Principalmente em projetos maiores é comum se perder com os nomes das colunas que cada tabela do projeto possui.
+
+Alguns programadores acabam criando o péssimo hábito de consultar os arquivos de migrations para identificar quais atributos estão disponiveis através do banco de dados em uma classe do Active Record. Além de não ser nada pragmático, essa com certeza não é a forma mais inteligente de se fazer isso.
+
+Até então eu costumava usar uma gem chamada <a href="http://rubygems.org/gems/annotate">annotate</a> para adicionar de forma automática comentários em meus modelos com os nomes dessas colunas. Isso já simplificava bastante.
+
+Resolvi então avançar um pouco mais e implementar um pseudo-intelissense no Textmate que pudesse exibir em uma lista quais atributos estão disponíveis em cada modelo do Active Record em meu projeto. Veja como ficou:
+
+<center>
+<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="480" height="385" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="src" value="http://www.youtube.com/v/8YvXzRuG-0s&amp;hl=pt_BR&amp;fs=1&amp;rel=0" /><param name="allowfullscreen" value="true" /><embed type="application/x-shockwave-flash" width="480" height="385" src="http://www.youtube.com/v/8YvXzRuG-0s&amp;hl=pt_BR&amp;fs=1&amp;rel=0" allowscriptaccess="always" allowfullscreen="true"></embed></object>
+</center>
+
+A ideia é bem simples. O nome da variável é importante aqui. Como não é possível recuperar o escopo do projeto através do TextMate (se alguém tiver uma ideia de como fazer isso fale comigo), então o nome da variável informa qual é o modelo do Active Record correspondente.
+
+Por exemplo: Se a variável se chamar <code>user</code>, <code>@user</code>, <code>@@user</code> ou qualquer coisa parecida então o bundle procurará pela classe com o mesmo nome, no caso <code>User</code>. O mesmo vale para um modelo chamado <code>Product</code>, onde você deverá usar variáveis com nomes como <code>product</code>, <code>@product</code> e assim por diante.
+
+Esse recurso ainda é experimental. Ainda há muita coisa a ser feita, como melhorar o sistema de cache e resolver algumas incompatibilidades com gemsets do RVM e diferentes versões do Rails.
+
+Para instalar, faça o download do bundle (<a href="http://github.com/downloads/carlosbrando/ruby-on-rails-tmbundle/Ruby%20on%20Rails.tmbundle.1.0.0.zip">clique aqui</a>) e carregue-o clicando duas vezes.
+
+Você também pode instalar diretamente pelo terminal, executando os comandos abaixo:
+<pre class="textmate-source"><span class="source source_shell">mkdir -p <span class="keyword keyword_operator keyword_operator_tilde keyword_operator_tilde_shell">~</span>/Library/Application<span class="constant constant_character constant_character_escape constant_character_escape_shell">\ </span>Support/TextMate/Bundles
+
+<span class="support support_function support_function_builtin support_function_builtin_shell">cd</span> <span class="keyword keyword_operator keyword_operator_tilde keyword_operator_tilde_shell">~</span>/Library/Application<span class="constant constant_character constant_character_escape constant_character_escape_shell">\ </span>Support/TextMate/Bundles
+
+git clone git://github.com/carlosbrando/ruby-on-rails-tmbundle.git <span class="string string_quoted string_quoted_double string_quoted_double_shell"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_shell">"</span>Ruby on Rails.tmbundle<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_shell">"</span></span>
+
+osascript -e <span class="string string_quoted string_quoted_single string_quoted_single_shell"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_shell">'</span>tell app "TextMate" to reload bundles<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_shell">'</span></span></span></pre>
+Esse bundle é um fork do repositório do Dr. Nic, no qual eu também sou commiter. Se você já tem o bundle do drnic instalado, é melhor remove-lo antes de instalar esse novo para evitar conflitos.
+
+O projeto se encontra no Github: <a href="http://github.com/carlosbrando/ruby-on-rails-tmbundle">http://github.com/carlosbrando/ruby-on-rails-tmbundle</a>
+
+Boa diversão!
+</div>
+  <footer>
+    <a rel="full-article" href="/2010/05/06/um-pseudo-intellisense-para-o-textmate/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/04/23/investir-em-ruby-era-muito-arriscado/">Investir Em Ruby Era Muito Arriscado</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2010-04-23 00:00:00 -0300" pubdate  updated >Apr 23<span>rd</span>, 2010</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">[caption id=&#8221;attachment_3292&#8221; align=&#8221;aligncenter&#8221; width=&#8221;500&#8221; caption=&#8221;Foto de Marcin Wichary&#8221;]<a href="http://www.nomedojogo.com/wp-content/uploads/2010/04/2319335415_3c98028b5d.jpg"><img class="size-full wp-image-3292" title="2319335415_3c98028b5d" src="http://www.nomedojogo.com/wp-content/uploads/2010/04/2319335415_3c98028b5d.jpg" alt="" width="500" height="333" /></a>[/caption]
+<p style="text-align: center;"></p>
+A muitos anos atrás programar em Visual Basic era uma escolha de baixo risco. Para um jovem em inicio de carreira, como eu, parecia a escolha óbvia a fazer. Era fácil encontrar trabalho, porém havia tantos programadores Visual Basic no mercado que a média salarial não era nada especial. Um baixo risco e uma baixa recompensa.
+
+Com o tempo o Visual Basic cedeu espaço ao C# e mais uma vez essa era a escolha natural para muitos programadores. Mais uma escolha de baixo risco e por consequência uma recompensa compatível.
+
+Depois de mais de dez anos trabalhando com tecnologia Microsoft, conheci o Ruby. Eu realmente gostava de programar com essa linguagem, porém poucas empresas estavam investindo em Ruby e era muito difícil conseguir um emprego para trabalhar com ele.
+
+Mas alguma coisa dentro de mim dizia que havia algo especial naquela linguagem somada ao framework Rails. Era um sentimento forte de que aquilo poderia se tornar grande.
+
+Eu investi cedo em Ruby, numa época em que o risco era muito alto. Alto risco,  grandes recompensas.
+</div>
+  <footer>
+    <a rel="full-article" href="/2010/04/23/investir-em-ruby-era-muito-arriscado/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/04/20/migrando-do-textmate-para-o-textmate/">Migrando Do Textmate Para O Textmate</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2010-04-20 00:00:00 -0300" pubdate  updated >Apr 20<span>th</span>, 2010</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">[caption id=&#8221;attachment_3281&#8221; align=&#8221;aligncenter&#8221; width=&#8221;500&#8221; caption=&#8221;Foto de D&#39;Arcy Norman&#8221;]<a href="http://www.nomedojogo.com/wp-content/uploads/2010/04/2392880126_1e12e523d2.jpg"><img class="size-full wp-image-3281" title="2392880126_1e12e523d2" src="http://www.nomedojogo.com/wp-content/uploads/2010/04/2392880126_1e12e523d2.jpg" alt="" width="500" height="282" /></a>[/caption]
+<p style="text-align: center;"></p>
+Até pouco tempo atrás o <a href="http://macromates.com/">Textmate</a> era uma unanimidade para programadores Rails. Recentemente porém tenho visto alguns programadores migrando para outros editores de texto, como o <a href="http://www.vim.org/">Vim</a> e o <a href="http://www.gnu.org/software/emacs/">Emacs</a>.
+
+Embora eu já tivesse uma certa experiência com esses últimos, eu nunca havia tentando desenvolver código de verdade com eles. Depois de fazer uma experiência trabalhando com cada um deles por uma semana, vejo que ambos são excelentes editores de textos e obviamente boas alternativas para o desenvolvimento de software em diversas linguagens.
+
+Porém, quais critérios devem ser usados ao comparar essas ferramentas e decidir qual delas é a melhor? Quais são as características mais importantes em um editor de textos que poderiam determinar a minha escolha?
+
+Acredito que o mais importante nesse caso é ser proficiente. Chega a ser irritante ver alguém pressionar dezenas de vezes a seta para a esquerda afim de colocar o cursor no começo de uma linha ou recorrer ao mouse para chegar ao topo do documento no Textmate, sendo que existem atalhos para se fazer isso com apenas uma combinação de teclas.
+
+Escolher um editor de textos para programar não deve ser algo trivial. A curva de aprendizado é bastante íngreme até que você não precise mais pensar em quais combinações de teclas devem ser usadas para realizar uma operação. Tudo deve acontecer por reflexo.
+
+É importante que a ferramenta seja flexível, permitindo que o programador possa configura-la de acordo com as suas preferencias. Como o processo de aprendizado é lento, é importante que você possa continuar usando o editor de textos mesmo ao trocar de uma linguagem para outra. Bons editores são capazes de aprender a trabalhar com qualquer nova linguagem de programação que apareça.
+
+Alguns recursos como syntax highlighting e auto-indentation são indispensáveis para o desenvolvimento de software.
+
+A conclusão é que todos esses editores de textos mencionados no inicio do artigo passam com louvor na avaliação dos requisitos mínimos. Mas isso ainda não responde a pergunta: Qual é o melhor editor de textos para se trabalhar com Rails?
+
+Eu não sou um usuário comum do Textmate. Além de me sentir totalmente à vontade com essa ferramenta eu estou constantemente implementando meus próprios <a href="http://github.com/carlosbrando/ruby-on-rails-tmbundle">Bundles</a> e refinando os recursos que mais uso para o meu estilo de trabalho.
+
+Como particularmente sou mais produtivo no Textmate, então especialmente para mim essa é a melhor ferramenta para programar em qualquer linguagem.
+
+A idéia aqui não é defender o meu editor preferido. De fato, não importa se você escolheu o Textmate, o Emacs ou o Vim. Desde que o seu editor seja uma extensão das suas mãos.
+</div>
+  <footer>
+    <a rel="full-article" href="/2010/04/20/migrando-do-textmate-para-o-textmate/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/04/17/acelerando-um-pouco-as-buscas-no-textmate/">Acelerando Um Pouco as Buscas No Textmate</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2010-04-17 00:00:00 -0300" pubdate  updated >Apr 17<span>th</span>, 2010</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Eu costumo trabalhar muito com o terminal, assim é natural usar o comando <code>mate .</code> para carregar um projeto Rails no meu Textmate.
+
+Em projetos grandes é normal utilizar o sistema de buscas da ferramenta para localizar um arquivo ou encontrar alguma declaração, por exemplo. Embora existam plugin como o excelente <a href="http://github.com/protocool/AckMate">AckMate</a> que melhorem perceptivelmente a performance dessas buscas, elas ainda costumam ser lentas. Um dos vilões nessa história são os arquivos temporários e logs que são inclusos no processo de busca, e normalmente esses arquivos costumam ser bem grandes. Além de deixarem a busca mais lenta, eles também acabam poluindo o resultado já que na maioria das vezes não estamos procurando por algo nos logs.
+
+[caption id=&#8221;attachment_3270&#8221; align=&#8221;aligncenter&#8221; width=&#8221;563&#8221; caption=&#8221;Arquivos de log incluídos nas buscas &#8220;]<a href="http://www.nomedojogo.com/wp-content/uploads/2010/04/Screen-shot-2010-04-17-at-3.27.28-PM.png"><img class="size-full wp-image-3270" title="Screen shot 2010-04-17 at 3.27.28 PM" src="http://www.nomedojogo.com/wp-content/uploads/2010/04/Screen-shot-2010-04-17-at-3.27.28-PM.png" alt="" width="563" height="307" /></a>[/caption]
+
+Inicialmente eu costumava remover os diretórios <code>tmp</code> e <code>log</code> depois de carregar o projeto no Textmate. Porém realizar essa operação todas as vezes não era nada prático.
+
+A solução mais simples e definitiva é alterar as configurações do Textmate para que ele ignore esses diretórios. Para isso abra as preferencias do editor de textos (<code>⌘,</code>) e na opção <strong>Advanced</strong> vá até a aba <strong>Folder References</strong>.
+
+[caption id=&#8221;attachment_3275&#8221; align=&#8221;aligncenter&#8221; width=&#8221;448&#8221; caption=&#8221;Folder References&#8221;]<a href="http://www.nomedojogo.com/wp-content/uploads/2010/04/Screen-shot-2010-04-17-at-11.16.19-PM.png"><img class="size-full wp-image-3275" title="Screen shot 2010-04-17 at 11.16.19 PM" src="http://www.nomedojogo.com/wp-content/uploads/2010/04/Screen-shot-2010-04-17-at-11.16.19-PM.png" alt="" width="448" height="259" /></a>[/caption]
+<p style="text-align: center;"></p>
+Os dois campos acima são expressões regulares que determinam quais arquivos e diretórios devem ser carregados em um projeto. Isso é útil para impedir que o diretório do CVS apareça no Textmate, por exemplo.
+
+Para adicionar os diretórios log e tmp nessa lista negra precisamos alterar o campo <strong>Folder Pattern</strong>. Adicione <code>|tmp|log</code> exatamente antes do <code>|CVS</code>. Pronto, de agora em diante toda vez que um projeto for carregado à partir de um diretório, essas pastas também serão ignoradas.
+
+Além disso você também pode adicionar outros diretórios ou arquivos, como por exemplo a pasta <code>vendor</code> se você não pretende alterar ou visualizar o código de plugins e gems.
+</div>
+  <footer>
+    <a rel="full-article" href="/2010/04/17/acelerando-um-pouco-as-buscas-no-textmate/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/28/nao-se-fazem-mais-programadores-como-antigamente/">Não Se Fazem Mais Programadores Como Antigamente</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2010-03-28 00:00:00 -0300" pubdate  updated >Mar 28<span>th</span>, 2010</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">[caption id=&#8221;attachment_3244&#8221; align=&#8221;aligncenter&#8221; width=&#8221;500&#8221; caption=&#8221;MS-DOS&#8221;]<a href="http://www.nomedojogo.com/wp-content/uploads/2010/03/MS-DOS_125b-e1269789727778.jpg"><img class="size-full wp-image-3244" title="MS-DOS_125b" src="http://www.nomedojogo.com/wp-content/uploads/2010/03/MS-DOS_125b-e1269789727778.jpg" alt="" width="500" height="375" /></a>[/caption]
+<p style="text-align: center;"></p>
+Acredite, nem sempre houve interfaces gráficas. Meu primeiro contato com um computador foi feito através de uma tela preta com letras verdes. Não me lembro exatamente, mas provavelmente era alguma versão do MS-DOS ou do PC-DOS.
+
+Qualquer criança com acesso a um computador nessa época, rapidamente aprendia a manipular arquivos e diretórios através de comandos básicos que o sistema operacional oferecia. Era necessário aprender esses comandos se quisesse se divertir com um novo jogo, por exemplo. Além disso, muitos jogos mais sofisticados exigiam que o usuário entendesse, mesmo que superficialmente, como o sistema operacional manipulava a memória. Termos como memória estendida, superior, convencional e expandida eram comuns na roda de amigos.
+
+Pode parecer nostalgia, mas mesmo depois de mais de uma década, todo esse conhecimento básico continua me sendo prático até os dias de hoje. Afinal, a maior parte do meu trabalho é resolvido através daquela mesma janela do terminal.
+
+É claro que muitos programadores conseguem realizar todo o seu trabalho através de uma um ambiente integrado de desenvolvimento (IDE). Mas será que realmente podemos fazer tudo igualmente bem apontando o ponteiro do mouse e clicando?
+
+Eu sempre acreditei que não. Interfaces gráficas são ótimas e realmente convenientes para muitas situações, mas o seu poder também é a sua limitação. Quando nos tornamos dependentes de uma interface gráfica (GUI) para realizar nosso trabalho, estamos presos à imaginação dos desenvolvedores que a criaram.
+
+No terminal, nossa liberdade é quase infinita. Não vamos encontrar nada muito sofisticado lá, a maioria dos comandos e utilitários realizam apenas uma única tarefa. Mas realizam essa tarefa muito bem. Não existem distinções entre documentos, diretórios, discos rígido, drives de CD e DVD, teclados, impressoras e monitores por lá. Todos são simplesmente arquivos e são manipulados como tais, o que facilita muito as coisas.
+
+Mas a maior vantagem do terminal é que podemos facilmente combinar sequencias desses comandos em scripts, o que nos dá a liberdade de automatizar praticamente qualquer tarefa que podermos imaginar, algo essencialmente importante para um programador pragmático que se preze. 
+
+Tire o máximo de proveito da sua IDE, mas não ignore o terminal. Aprender a usar bem o shell deve ser uma prioridade para qualquer programador iniciante.
+</div>
+  <footer>
+    <a rel="full-article" href="/2010/03/28/nao-se-fazem-mais-programadores-como-antigamente/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/24/dica-recuperando-as-rotas-de-um-aplicativo-rails/">Dica: Recuperando as Rotas De Um Aplicativo Rails</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2010-03-24 00:00:00 -0300" pubdate  updated >Mar 24<span>th</span>, 2010</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Trabalhando em um novo plugin, surgiu a necessidade de recuperar uma lista com todas as rotas nomeadas de um projeto Rails.
+
+Depois de procurar um pouco, encontrei isso:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_routes">ActionController::Routing::Routes<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>named_routes<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>routes</span></span></pre>
+</div>
+  <footer>
+    <a rel="full-article" href="/2010/03/24/dica-recuperando-as-rotas-de-um-aplicativo-rails/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/22/dica-utilizando-partials-em-arquivos-xml-no-rails/">Dica: Utilizando Partials Em Arquivos XML No Rails</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2010-03-22 00:00:00 -0300" pubdate  updated >Mar 22<span>nd</span>, 2010</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Trabalhando em um novo plugin, senti a necessidade de usar partials em uma view renderizada através do Builder (index.xml.builder, por exemplo). Porém não é possível utilizar partials em views desse tipo da mesma forma como fazemos no ERb. Nesses casos a linha abaixo não tem nenhum efeito:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_function support_function_actionpack support_function_actionpack_rails">render</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>partial</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>preferences<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span></span></pre>
+
+Isso não funciona porque a partial receberá um novo objeto xml Builder quando estiver sendo renderizada. Há várias formas de solucionar isso, mas a mais simples é assim:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">xml <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_augmented keyword_operator_assignment_augmented_ruby">&lt;&lt;</span> <span class="support support_function support_function_actionpack support_function_actionpack_rails">render</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>partial</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>preferences<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
+
+O objetivo desse post é deixar isso registrado para um eventual esquecimento meu.
+</div>
+  <footer>
+    <a rel="full-article" href="/2010/03/22/dica-utilizando-partials-em-arquivos-xml-no-rails/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/17/metodos-macarronicos-sao-mais-rapidos-ou-nao/">Métodos Macarrônicos São Mais Rápidos, Ou Não&#8230;</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2010-03-17 00:00:00 -0300" pubdate  updated >Mar 17<span>th</span>, 2010</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">[caption id=&#8221;attachment_3226&#8221; align=&#8221;aligncenter&#8221; width=&#8221;500&#8221; caption=&#8221;Foto de Balakov&#8221;]<a href="http://www.nomedojogo.com/wp-content/uploads/2010/03/1544234007_dd7686d788.jpg"><img class="size-full wp-image-3226" title="1544234007_dd7686d788" src="http://www.nomedojogo.com/wp-content/uploads/2010/03/1544234007_dd7686d788.jpg" alt="" width="500" height="323" /></a>[/caption]
+<p style="text-align: center;"></p>
+Se você está preocupado com a performance do seu programa, saiba que métodos macarrônicos são mais velozes. Ao escrever todo o código dentro de um único método você estará evitando todos os custos envolvidos na chamada de outros métodos, reduzindo o tempo de execução do seu código.
+
+Embora o argumento acima não seja falso, é triste reconhecer que muitos programadores ainda possuem esse tipo de pensamento. Talvez não de uma forma tão radical, mas são poucos os profissionais que entendem que programar é muito mais do que escrever instruções para um computador, mas que o código que escrevemos também será lido por outras pessoas.
+
+O tamanho do método é proporcional a dificuldade de manutenção e entendimento. Quando damos prioridade a escrever métodos pequenos e com nomes descritivos aumentamos a produtividade do time (incluindo o autor do código).
+
+Métodos pequenos, com poucas linhas de código, facilitam a manutenção e a inserção de novas funcionalidades. Use as características da linguagem a seu favor. Não é feio criar um método com um nome longo e descritivo em Ruby. Respeite a pontuação. Acrescente o sinal de interrogação no final quando o método retornar um booleano.
+
+Não estamos apenas escrevendo código, estamos nos comunicando.
+
+<hr/>
+
+P.S.: Sim, eu acabei de ver uma coisa que me deixou irritado.
+</div>
+  <footer>
+    <a rel="full-article" href="/2010/03/17/metodos-macarronicos-sao-mais-rapidos-ou-nao/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/04/como-estimar-prazos-precisos-e-imprecisos/">Como Estimar Prazos Precisos E Imprecisos</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2010-03-04 00:00:00 -0300" pubdate  updated >Mar 4<span>th</span>, 2010</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">[caption id=&#8221;attachment_3216&#8221; align=&#8221;aligncenter&#8221; width=&#8221;500&#8221; caption=&#8221;Ilustração de hartboy&#8221;]<a href="http://www.nomedojogo.com/wp-content/uploads/2010/03/3540926707_1dcf688e02.jpg"><img class="size-full wp-image-3216" title="3540926707_1dcf688e02" src="http://www.nomedojogo.com/wp-content/uploads/2010/03/3540926707_1dcf688e02.jpg" alt="" width="500" height="375" /></a>[/caption]
+
+Definir quanto tempo será necessário para finalizar uma tarefa ou o desenvolvimento de um software não é (ou pelo menos não deveria ser) algo trivial. Estimar prazos faz parte do nosso dia-a-dia como programadores.
+
+O que muita gente não se dá conta é que a precisão com que um programador prevê a entrega de tarefas e projetos é um poderoso indicador do quão bom ele é.
+
+Para informar de forma precisa o tempo necessário para a realização de algo em desenvolvimento de software é necessário que o programador possua uma certa experiência no assunto, tenha um bom domínio do negócio, seja rápido e produtivo.
+
+Embora muitos de nós não apreciem essa difícil tarefa, estimar prazos é parte do nosso trabalho. Fazer isso bem pode ser a diferença entre um programador profissional e um amador.
+
+Em um dia normal, estamos estimando prazos o tempo todo. Ao colocar a comida no micro-ondas você deve informar quantos minutos serão necessários para esquenta-la. Se você tem um horário fixo para acordar, deve analisar quantas horas de sono serão suficientes e então decidir quando deve ir para a cama.
+
+O segredo não está no tempo, mas em quão precisa deve ser a sua estimativa. Se seu chefe pergunta que horas você entregará o relatório amanhã, ele quer ter uma ideia se será antes ou depois do almoço. Se ele lhe pergunta quanto tempo será necessário para resolver um bug critico e colocar o sistema de volta em produção ele precisa de uma precisão maior.
+
+A escala de tempo é muito importante ao se estimar prazos. Por exemplo, você pode dizer &#8220;O projeto será entregue em 25 dias&#8221; ou pode dizer &#8220;O projeto será entregue em cerca de 5 semanas&#8221;. Embora ambas as frases indiquem o mesmo tempo, o efeito sob cada uma delas pode ser diferente. Ao dar a primeira resposta, seu cliente provavelmente anotará na agenda dele o dia exato em que você entregará o projeto. Por outro lado, a segunda resposta fará com que ele lhe procure a qualquer momento daqui a 4 ou 6 semanas.
+
+O livro <a href="http://www.pragprog.com/the-pragmatic-programmer">The Pragmatic Programmer</a> dá uma importante dica que nos ajuda a escolher a escala de tempo apropriada ao estimar prazos. Veja a tabela:
+
+1-15 dias    -&gt; dias
+3-8 semanas  -&gt; semanas
+8-30 semanas -&gt; meses
+30 + semanas -&gt; pense bem antes de dar uma estimativa
+
+Qual a vantagem disso? O fato é que quanto maior o tempo, mais difícil é a previsão, exigindo que você seja cada vez mais impreciso. Por exemplo, se sua estimativa é que serão necessários 125 dias para terminar um trabalho, é muito mais seguro dizer que precisará de &#8220;cerca de 6 meses&#8221; para finaliza-lo.
+
+Todas as estimativas que fazemos são baseadas em nossas experiências passadas. Mas, o que fazer quando é necessário estimar algo que você nunca fez ou que não conhece? A resposta é simples: &#8220;não estime&#8221;. É melhor pedir para que alguém que já tenha feito algo semelhante lhe dê uma ideia do tempo necessário.
+
+Além de considerar o grau de precisão, também é importante entender qual é o problema antes de começar a chutar um tempo. Quase sempre nossas estimativas dependem de outros fatores para darem certo: &#8220;Supondo que não haja trânsito dá para chegar aí em 20 minutos&#8221;.
+
+Se possível é muito útil testar alguns aspectos do projeto antes de dizer quanto tempo será necessário para cumpri-lo. Se o sistema precisa ser carregado dentro do Facebook, seria muito bom poder gastar um tempo criando alguma coisa bem simples para esta plataforma afim de analisar o grau de complexidade, isto sem dúvida aumentará a precisão da estimativa.
+
+É muito importante levar em consideração que a equipe, sua produtividade e o ambiente afetam diretamente sua estimativa.
+
+Analisando todos estes fatores, a conclusão é que há apenas uma única resposta correta a se dar quando lhe é pedido para estimar um prazo: &#8220;Me dê algum tempo para pensar&#8221;. Você sempre terá resultados melhores se retardar a resposta e pensar um pouco mais.
+</div>
+  <footer>
+    <a rel="full-article" href="/2010/03/04/como-estimar-prazos-precisos-e-imprecisos/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+<nav role="pagination">
+  <div>
+    
+      <a class="prev" href="/page4/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+      <a class="next" href="/page2/">Newer &rarr;</a>
+    
+  </div>
+</nav>
+
+<script type="text/javascript">
+    var disqus_shortname = 'carlosbrando';
+    (function () {
+      var s = document.createElement('script'); s.async = true;
+      s.type = 'text/javascript';
+      s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+      (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+
+</div>
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro anos de Nome do Jogo</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("carlosbrando", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/carlosbrando" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @carlosbrando</a>
+  
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

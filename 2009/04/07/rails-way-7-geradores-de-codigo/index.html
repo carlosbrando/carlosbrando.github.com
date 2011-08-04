@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Nome do Jogo: Rails Way #7: Geradores de Código</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/2009/04/07/rails-way-7-geradores-de-codigo/"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+  <link href="http://feeds2.feedburner.com/NomeDoJogo" rel="alternate" title="Nome do Jogo" type="application/atom+xml"/>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1249636-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Nome do Jogo</a></h1>
+  
+    <h2>por Carlos Brando</h2>
+  
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="http://feeds2.feedburner.com/NomeDoJogo" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">Rails Way #7: Geradores De Código</h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-04-07 00:00:00 -0300" pubdate  updated >Apr 7<span>th</span>, 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+<div class="entry-content"><p style="text-align: center;"><img class="size-full wp-image-2396 aligncenter" title="2084287794_ecbee303db" src="http://www.nomedojogo.com/wp-content/uploads/2009/04/2084287794_ecbee303db.jpg" alt="2084287794_ecbee303db" /></p>
+
+O Ruby on Rails possui algumas dezenas de geradores de código que visam automatizar tarefas repetitivas, economizando o tempo de desenvolvimento e evitando que o programador tenha que se repetir. Geradores de código tem tudo a ver com a filosofia “Don’t Repeat Yourself”.
+<h2>Aplicativos que geram código</h2>
+Se expandirmos nossos horizontes para outras linguagens de programação menos dinâmicas, talvez geradores de código possam ser muito úteis na criação de arquivos XML de configuração, justificando de maneira óbvia o seu custo. Ao usar ferramentas como o Microsoft Visual Studio eu simplesmente informava ao editor que desejava criar uma aplicativo MFC (Microsoft Foundation Classes) e ele gerava para mim um esqueleto com mais de 2000 linhas de código, uma economia de tempo incalculável.
+
+Algumas pessoas são totalmente contra este tipo de gerador de código porque na maioria dos casos o programador que o utiliza não entende exatamente o que o código gerado está fazendo. Embora isto seja uma realidade, isso não deve ser uma justificativa para evitar ferramentas como essa, já que na maior parte do tempo o problema está no programador e não na ferramenta. No exemplo que dei acima, embora eu nunca tenha parado para analisar cuidadosamente o que cada uma das 2000 linhas de código gerados pelo Visual Studio faça, eu entendo no contexto o porque delas, e para mim isto sempre foi o suficiente para tocar um projeto à partir deste esqueleto.
+
+No Rails também encontramos alguns geradores deste tipo na forma de scripts (<code>./script/generate scaffold</code>, por exemplo). Os scripts geradores de código do Rails nos ajudam a manter as convenções propostas pelo framework com mais facilidade, e normalmente incluem apenas algumas poucas linhas de código em cada arquivo gerado.
+
+Raramente você achará útil criar um script ou aplicativo gerador de código para um projeto Rails. Mas ao criar um plugin ou mesmo o seu próprio framework em Ruby, talvez seja prático investir na criação deste tipo de gerador. Mas não se engane, construir um gerador de código deste tipo é uma tarefa que consome tempo e um grande esforço. Além do tempo gasto na codificação do gerador, também deve-se levar em consideração o esforço necessário para manter o projeto (atualizações, correções de bugs e inclusão de novas funcionalidades) e para treinar a sua equipe (e re-treinar após modificações).
+
+A escolha do seu editor preferido também depende muito da capacidade que ele possui de gerar código. O TextMate, por exemplo, durante muito tempo foi (no meu caso ainda é) considerado o melhor editor para se trabalhar com código Ruby, e isto se deu graças aos seus famosos Bundles, que não são mais do que scripts geradores de código.
+
+Muitos editores também permitem que você crie seus próprios “bundles”. Na maior parte do tempo é mais fácil e barato criar um script utilizando as ferramentas que seu editor lhe fornece do que criar um aplicativo do zero afim de automatizar a criação de códigos mais simples.
+<h2>Metaprogramação</h2>
+Usamos metaprogramação para criar softwares que tenham a capacidade de escrever código por si mesmo. Um bom exemplo disso é o ActiveRecord do Rails, que cria em tempo de execução todo o código necessário para a manipulação de informações de um banco de dados. Ao adicionar uma nova coluna no banco de dados, não precisamos alterar nenhuma linha no código do modelo, o ActiveRecord usando metaprogramação consegue identificar a nova coluna e automaticamente criará todos os métodos e atributos necessários para permitir o acesso a esta nova coluna.
+
+Linguagens dinâmicas como o Ruby favorecem muito o uso de metaprogramação. Programadores mais avançados fazem muito uso destes recursos para diminuir repetições em seus códigos.
+
+A ferramenta mais comum de metaprogramação é um compilador, já que ele permite que você escreva pequenos programas em uma linguagem de alto nível afim de gerar programas em linguagem de máquina. Uma brincadeira comum que envolve o exercício de metaprogramação é montar um <a href="http://pt.wikipedia.org/wiki/Quine_(inform%C3%A1tica)">quine</a>, que é um programa que deve produzir uma única saída que é o seu próprio código fonte. Veja um exemplo em Javascript:
+<pre class="textmate-source"><span class="source source_js"><span class="support support_function support_function_js">unescape</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span>q<span class="keyword keyword_operator keyword_operator_js">=</span><span class="string string_quoted string_quoted_double string_quoted_double_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">"</span>unescape(q=%22*%22).replace('*',q)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">"</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span><span class="meta meta_delimiter meta_delimiter_method meta_delimiter_method_period meta_delimiter_method_period_js">.</span><span class="support support_function support_function_js">replace</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>*<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_delimiter meta_delimiter_object meta_delimiter_object_comma meta_delimiter_object_comma_js">,</span>q<span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span></span></pre>
+Execute o código acima e você terá como saída um texto com exatamente o mesmo código gerador. Tente fazer o mesmo em Ruby, é um bom exercício!
+<h2>Helpers</h2>
+O diretório helpers não foi adicionado ao Rails à toa, ele está lá para ser utilizado. Helpers são fáceis de criar e podem ajudar a diminuir uma quantidade razoável de repetições em suas views. Quando criados utilizando-se de recursos de metaprogramação podem fazer uma grande diferença.
+
+Linguagens de marcação como o <a href="http://haml.hamptoncatlin.com/">Haml</a>, servem de grande incentivo para estimular a criação de helpers em projetos Rails.
+<h2>Finalizando</h2>
+Geradores de código são ferramentas essenciais no dia-a-dia dos programadores e são extremamente importantes para aumentar nossa produtividade e evitar que tenhamos de escrever códigos desnecessários.
+
+Faça uso dos geradores que você tem a disposição, e também crie seus próprios geradores quando forem realmente necessários. Mas mantenha-se longe de geradores que criem código que você não sabe para que serve ou que não entende.
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+
+      
+
+
+
+
+<time datetime="2009-04-07 00:00:00 -0300" pubdate  updated >Apr 7<span>th</span>, 2009</time>
+
+
+
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://carlosbrando.github.com/2009/04/07/rails-way-7-geradores-de-codigo/" data-via="carlosbrando" data-counturl="http://carlosbrando.github.com/2009/04/07/rails-way-7-geradores-de-codigo/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread"><div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'carlosbrando';
+  var disqus_identifier = 'http://carlosbrando.github.com/2009/04/07/rails-way-7-geradores-de-codigo/';
+  var disqus_url = 'http://carlosbrando.github.com/2009/04/07/rails-way-7-geradores-de-codigo/';
+  //var disqus_developer = 1;
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro anos de Nome do Jogo</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("carlosbrando", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/carlosbrando" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @carlosbrando</a>
+  
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>
