@@ -4,7 +4,7 @@
   <title></title>
   <link href="http://carlosbrando.github.com/atom.xml" rel="self"/>
   <link href="http://carlosbrando.github.com/"/>
-  <updated>2011-08-04T00:20:05-03:00</updated>
+  <updated>2011-08-04T00:58:16-03:00</updated>
   <id>http://carlosbrando.github.com/</id>
   <author>
     <name>Carlos Brando</name>
@@ -235,7 +235,7 @@ Obrigado pela audiência!
   </entry>
   
   <entry>
-    <title>Grok Podcast 16 â O livro Rework</title>
+    <title>Grok Podcast 16 - O livro Rework</title>
     <link href="http://carlosbrando.github.com/2011/01/27/grok-podcast-16-%25e2%2580%2593-o-livro-rework/"/>
     <updated>2011-01-27T00:00:00-02:00</updated>
     <id>http://carlosbrando.github.com/2011/01/27/grok-podcast-16-%e2%80%93-o-livro-rework</id>
@@ -256,25 +256,45 @@ Você pode adicionar o podcast ao seu iTunes &lt;a href=&quot;http://itunes.app
     <link href="http://carlosbrando.github.com/2011/01/03/como-funcionam-os-metodos-puts-e-print-no-ruby/"/>
     <updated>2011-01-03T00:00:00-02:00</updated>
     <id>http://carlosbrando.github.com/2011/01/03/como-funcionam-os-metodos-puts-e-print-no-ruby</id>
-    <content type="html">Se você já experimentou Ruby com certeza já conheceu os famosos métodos &lt;code&gt;puts&lt;/code&gt;, &lt;code&gt;print&lt;/code&gt; e outros semelhantes a esses. Talvez você tenha notado que esses métodos, diferente de como aprendemos, podem ser executados sem que seja necessário informar um objeto.
+    <content type="html">&lt;p&gt;Se você já experimentou Ruby com certeza já conheceu os famosos métodos &lt;code&gt;puts&lt;/code&gt;, &lt;code&gt;print&lt;/code&gt; e outros semelhantes a esses. Talvez você tenha notado que esses métodos, diferente de como aprendemos, podem ser executados sem que seja necessário informar um objeto.&lt;/p&gt;
 
-Se você vem de outra linguagem de programação talvez tenha logo especulado que eles sejam palavras reservadas do Ruby. Mas isso não é verdade. Ambos são métodos comuns, como qualquer outro. Veja por si mesmo:
-&lt;pre class=&quot;textmate-source&quot;&gt;&lt;span class=&quot;source source_ruby&quot;&gt;&lt;span class=&quot;support support_class support_class_ruby&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby&quot;&gt;.&lt;/span&gt;send &lt;span class=&quot;constant constant_other constant_other_symbol constant_other_symbol_ruby&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby&quot;&gt;:&lt;/span&gt;puts&lt;/span&gt;&lt;span class=&quot;punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_ruby&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby&quot;&gt;&quot;&lt;/span&gt;um texto qualquer&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;comment comment_line comment_line_number-sign comment_line_number-sign_ruby&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby&quot;&gt;#&lt;/span&gt; =&amp;gt; um texto qualquer
-&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;
-Como você pode ver no exemplo acima, esses métodos foram inteligentemente incluidos na classe &lt;code&gt;Object&lt;/code&gt;, e como no Ruby tudo é um objeto...
-&lt;pre class=&quot;textmate-source&quot;&gt;&lt;span class=&quot;source source_ruby&quot;&gt;puts send&lt;span class=&quot;punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;constant constant_other constant_other_symbol constant_other_symbol_ruby&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby&quot;&gt;:&lt;/span&gt;class&lt;/span&gt;&lt;span class=&quot;punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;comment comment_line comment_line_number-sign comment_line_number-sign_ruby&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby&quot;&gt;#&lt;/span&gt; =&amp;gt; Object&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;Se você vem de outra linguagem de programação talvez tenha logo especulado que eles sejam palavras reservadas do Ruby. Mas isso não é verdade. Ambos são métodos comuns, como qualquer outro. Veja por si mesmo:&lt;/p&gt;
+
+&lt;p&gt;``` ruby&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Object.send :puts, &quot;um texto qualquer&quot;
+# =&amp;gt; um texto qualquer
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;Como você pode ver no exemplo acima, esses métodos foram inteligentemente incluidos na classe &lt;code&gt;Object&lt;/code&gt;, e como no Ruby tudo é um objeto...&lt;/p&gt;
+
+&lt;p&gt;``` ruby&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;puts send(:class) # =&amp;gt; Object
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
 &lt;h2&gt;O módulo Kernel&lt;/h2&gt;
-Embora esses métodos sejam disponibilizados por meio de &lt;code&gt;Object&lt;/code&gt;, eles estão implementados em um módulo chamado &lt;code&gt;Kernel&lt;/code&gt;, que é então incluido na classe.
 
-O interessante é que você pode tirar proveito desse mecanismo. Se você adicionar um método ao módulo &lt;code&gt;Kernel&lt;/code&gt; ele funcionará exatamente como os métodos citados acima. Veja:
-&lt;pre class=&quot;textmate-source&quot;&gt;&lt;span class=&quot;source source_ruby&quot;&gt;&lt;span class=&quot;meta meta_module meta_module_ruby&quot;&gt;&lt;span class=&quot;keyword keyword_control keyword_control_module keyword_control_module_ruby&quot;&gt;module&lt;/span&gt; &lt;span class=&quot;entity entity_name entity_name_type entity_name_type_module entity_name_type_module_ruby&quot;&gt;Kernel&lt;/span&gt;&lt;/span&gt;
-  &lt;span class=&quot;meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby&quot;&gt;&lt;span class=&quot;keyword keyword_control keyword_control_def keyword_control_def_ruby&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;entity entity_name entity_name_function entity_name_function_ruby&quot;&gt;print_line&lt;/span&gt;&lt;/span&gt;
-    puts &lt;span class=&quot;string string_quoted string_quoted_single string_quoted_single_ruby&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby&quot;&gt;'&lt;/span&gt;-&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby&quot;&gt;'&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;constant constant_numeric constant_numeric_ruby&quot;&gt;20&lt;/span&gt;
-  &lt;span class=&quot;keyword keyword_control keyword_control_ruby&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;keyword keyword_control keyword_control_ruby&quot;&gt;end&lt;/span&gt;
+&lt;p&gt;Embora esses métodos sejam disponibilizados por meio de &lt;code&gt;Object&lt;/code&gt;, eles estão implementados em um módulo chamado &lt;code&gt;Kernel&lt;/code&gt;, que é então incluido na classe.&lt;/p&gt;
 
-print_line &lt;span class=&quot;comment comment_line comment_line_number-sign comment_line_number-sign_ruby&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby&quot;&gt;#&lt;/span&gt; =&amp;gt; --------------------&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;O interessante é que você pode tirar proveito desse mecanismo. Se você adicionar um método ao módulo &lt;code&gt;Kernel&lt;/code&gt; ele funcionará exatamente como os métodos citados acima. Veja:&lt;/p&gt;
+
+&lt;p&gt;``` ruby&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;module Kernel
+    def print_line
+        puts '-' * 20
+    end
+end
+
+print_line # =&amp;gt; --------------------
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
 </content>
   </entry>
   

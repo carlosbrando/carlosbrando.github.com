@@ -428,7 +428,7 @@ Obrigado pela audiência!
     
   <header>
     
-      <h1 class="entry-title"><a href="/2011/01/27/grok-podcast-16-%25e2%2580%2593-o-livro-rework/">Grok Podcast 16 â O Livro Rework</a></h1>
+      <h1 class="entry-title"><a href="/2011/01/27/grok-podcast-16-%25e2%2580%2593-o-livro-rework/">Grok Podcast 16 - O Livro Rework</a></h1>
     
     
       <p class="meta">
@@ -482,25 +482,43 @@ Você pode adicionar o podcast ao seu iTunes <a href="http://itunes.apple.com/u
   </header>
 
 
-  <div class="entry-content">Se você já experimentou Ruby com certeza já conheceu os famosos métodos <code>puts</code>, <code>print</code> e outros semelhantes a esses. Talvez você tenha notado que esses métodos, diferente de como aprendemos, podem ser executados sem que seja necessário informar um objeto.
+  <div class="entry-content"><p>Se você já experimentou Ruby com certeza já conheceu os famosos métodos <code>puts</code>, <code>print</code> e outros semelhantes a esses. Talvez você tenha notado que esses métodos, diferente de como aprendemos, podem ser executados sem que seja necessário informar um objeto.</p>
 
-Se você vem de outra linguagem de programação talvez tenha logo especulado que eles sejam palavras reservadas do Ruby. Mas isso não é verdade. Ambos são métodos comuns, como qualquer outro. Veja por si mesmo:
-<pre class="textmate-source"><span class="source source_ruby"><span class="support support_class support_class_ruby">Object</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>send <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>puts</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>um texto qualquer<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; um texto qualquer
-</span></span></pre>
-Como você pode ver no exemplo acima, esses métodos foram inteligentemente incluidos na classe <code>Object</code>, e como no Ruby tudo é um objeto&#8230;
-<pre class="textmate-source"><span class="source source_ruby">puts send<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>class</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; Object</span></span></pre>
+<p>Se você vem de outra linguagem de programação talvez tenha logo especulado que eles sejam palavras reservadas do Ruby. Mas isso não é verdade. Ambos são métodos comuns, como qualquer outro. Veja por si mesmo:</p>
+
+<div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="no">Object</span><span class="o">.</span><span class="n">send</span> <span class="ss">:puts</span><span class="p">,</span> <span class="s2">&quot;um texto qualquer&quot;</span>
+</div><div class='line'><span class="c1"># =&gt; um texto qualquer</span>
+</div></code></pre></td></tr></table></div>
+
+<p>Como você pode ver no exemplo acima, esses métodos foram inteligentemente incluidos na classe <code>Object</code>, e como no Ruby tudo é um objeto&#8230;</p>
+
+<div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="nb">puts</span> <span class="nb">send</span><span class="p">(</span><span class="ss">:class</span><span class="p">)</span> <span class="c1"># =&gt; Object</span>
+</div></code></pre></td></tr></table></div>
+
 <h2>O módulo Kernel</h2>
-Embora esses métodos sejam disponibilizados por meio de <code>Object</code>, eles estão implementados em um módulo chamado <code>Kernel</code>, que é então incluido na classe.
 
-O interessante é que você pode tirar proveito desse mecanismo. Se você adicionar um método ao módulo <code>Kernel</code> ele funcionará exatamente como os métodos citados acima. Veja:
-<pre class="textmate-source"><span class="source source_ruby"><span class="meta meta_module meta_module_ruby"><span class="keyword keyword_control keyword_control_module keyword_control_module_ruby">module</span> <span class="entity entity_name entity_name_type entity_name_type_module entity_name_type_module_ruby">Kernel</span></span>
-  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">print_line</span></span>
-    puts <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>-<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">*</span> <span class="constant constant_numeric constant_numeric_ruby">20</span>
-  <span class="keyword keyword_control keyword_control_ruby">end</span>
-<span class="keyword keyword_control keyword_control_ruby">end</span>
+<p>Embora esses métodos sejam disponibilizados por meio de <code>Object</code>, eles estão implementados em um módulo chamado <code>Kernel</code>, que é então incluido na classe.</p>
 
-print_line <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; --------------------</span></span></pre>
+<p>O interessante é que você pode tirar proveito desse mecanismo. Se você adicionar um método ao módulo <code>Kernel</code> ele funcionará exatamente como os métodos citados acima. Veja:</p>
+
+<div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="k">module</span> <span class="nn">Kernel</span>
+</div><div class='line'>    <span class="k">def</span> <span class="nf">print_line</span>
+</div><div class='line'>        <span class="nb">puts</span> <span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">20</span>
+</div><div class='line'>    <span class="k">end</span>
+</div><div class='line'><span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">print_line</span> <span class="c1"># =&gt; --------------------</span>
+</div></code></pre></td></tr></table></div>
 </div>
   <footer>
     <a rel="full-article" href="/2011/01/03/como-funcionam-os-metodos-puts-e-print-no-ruby/">Read on &rarr;</a>
