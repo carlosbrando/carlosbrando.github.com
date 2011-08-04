@@ -4,7 +4,7 @@
   <title></title>
   <link href="http://carlosbrando.github.com/atom.xml" rel="self"/>
   <link href="http://carlosbrando.github.com/"/>
-  <updated>2011-08-04T01:24:28-03:00</updated>
+  <updated>2011-08-04T10:55:32-03:00</updated>
   <id>http://carlosbrando.github.com/</id>
   <author>
     <name>Carlos Brando</name>
@@ -17,172 +17,201 @@
     <link href="http://carlosbrando.github.com/2011/06/13/a-regra-direita-esquerda-do-c/"/>
     <updated>2011-06-13T00:00:00-03:00</updated>
     <id>http://carlosbrando.github.com/2011/06/13/a-regra-direita-esquerda-do-c</id>
-    <content type="html">Atualmente estou envolvido em um projeto envolvendo módulos específicos em Ruby, Erlang e C. Ruby e Erlang são mais tranquilos, mas C tem a desagradável característica de deixar alguns códigos &quot;meio&quot; complicados de entender.
+    <content type="html">&lt;p&gt;Atualmente estou envolvido em um projeto envolvendo módulos específicos em Ruby, Erlang e C. Ruby e Erlang são mais tranquilos, mas C tem a desagradável característica de deixar alguns códigos &quot;meio&quot; complicados de entender.&lt;/p&gt;
 
-Porém, um &lt;a href=&quot;http://twitter.com/#!/marciogm&quot;&gt;colega&lt;/a&gt; da Plano Bê me enviou um artigo que me ajudou muito e quero compartilhá-lo com vocês. O &lt;a href=&quot;http://ieng9.ucsd.edu/~cs30x/rt_lt.rule.html&quot;&gt;artigo original&lt;/a&gt; parece ter sido escrito por Rick Ord da Universidade da California, em San Diego. Segue a tradução:
+&lt;p&gt;Porém, um &lt;a href=&quot;http://twitter.com/#!/marciogm&quot;&gt;colega&lt;/a&gt; da Plano Bê me enviou um artigo que me ajudou muito e quero compartilhá-lo com vocês. O &lt;a href=&quot;http://ieng9.ucsd.edu/~cs30x/rt_lt.rule.html&quot;&gt;artigo original&lt;/a&gt; parece ter sido escrito por Rick Ord da Universidade da California, em San Diego. Segue a tradução:&lt;/p&gt;
 
 &lt;h2&gt;A Regra Direita-Esquerda do C&lt;/h2&gt;
-A regra &lt;code&gt;direta-esquerda&lt;/code&gt; é muito útil para decifrar declarações na linguagem C e também pode ser de grande ajuda ao escrever código. A regra é bem simples, toda vez que encontrar os seguintes símbolos no código, leia:
-&lt;pre class=&quot;textmate-source&quot;&gt;&lt;span class=&quot;text text_html text_html_markdown text_html_markdown_multimarkdown&quot;&gt;&lt;span class=&quot;meta meta_content meta_content_multimarkdown&quot;&gt;&lt;span class=&quot;meta meta_paragraph meta_paragraph_markdown&quot;&gt;*   como &quot;um ponteiro para&quot;      - sempre do lado esquerdo
+
+&lt;p&gt;A regra &lt;code&gt;direta-esquerda&lt;/code&gt; é muito útil para decifrar declarações na linguagem C e também pode ser de grande ajuda ao escrever código. A regra é bem simples, toda vez que encontrar os seguintes símbolos no código, leia:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;*   como &quot;um ponteiro para&quot;      - sempre do lado esquerdo
 []  como &quot;um array de&quot;           - sempre do lado direito
 ()  como &quot;uma função retornando&quot; - sempre do lado direito
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;h2&gt;Passo 1&lt;/h2&gt;
-Encontre o identificador. Esse é o seu ponto de partida. Então, diga para si mesmo &lt;em&gt;&quot;o identificador é&quot;&lt;/em&gt;. É nesse ponto que iniciamos a declaração.
+
+&lt;p&gt;Encontre o identificador. Esse é o seu ponto de partida. Então, diga para si mesmo &lt;em&gt;&quot;o identificador é&quot;&lt;/em&gt;. É nesse ponto que iniciamos a declaração.&lt;/p&gt;
+
 &lt;h2&gt;Passo 2&lt;/h2&gt;
-Comece pelos símbolos a direita do identificador. Digamos que você encontrou um &lt;code&gt;()&lt;/code&gt;, então você sabe que essa declaração é uma função. Então você deve dizer &lt;em&gt;&quot;o identificador é uma função retornando&quot;&lt;/em&gt;. Caso você tenha encontrado um &lt;code&gt;[]&lt;/code&gt;, então você deve dizer &lt;em&gt;&quot;o identificador é um array de&quot;&lt;/em&gt;. Continue avançando pela direita enquanto houver símbolos OU até encontrar um fecha parênteses &lt;code&gt;)&lt;/code&gt;. (continue seguindo caso você encontre um abre parênteses, falaremos sobre isso mais abaixo.)
+
+&lt;p&gt;Comece pelos símbolos a direita do identificador. Digamos que você encontrou um &lt;code&gt;()&lt;/code&gt;, então você sabe que essa declaração é uma função. Então você deve dizer &lt;em&gt;&quot;o identificador é uma função retornando&quot;&lt;/em&gt;. Caso você tenha encontrado um &lt;code&gt;[]&lt;/code&gt;, então você deve dizer &lt;em&gt;&quot;o identificador é um array de&quot;&lt;/em&gt;. Continue avançando pela direita enquanto houver símbolos OU até encontrar um fecha parênteses &lt;code&gt;)&lt;/code&gt;. (continue seguindo caso você encontre um abre parênteses, falaremos sobre isso mais abaixo.)&lt;/p&gt;
+
 &lt;h2&gt;Passo 3&lt;/h2&gt;
-Quando terminarem os símbolos a direita do identificador, então comece a procurar por símbolos a sua esquerda. Se você encontrar algo diferente dos símbolos mencionados acima (digamos, algo como &lt;code&gt;int&lt;/code&gt;), simplesmente repita o seu nome. Caso contrário, traduza o símbolo para o português usando a tabela. Continue seguindo pela esquerda enquanto houver símbolos OU até encontrar um abre parênteses &lt;code&gt;(&lt;/code&gt;.
 
-Então, repita os passos 2 e 3 até terminar toda a sua declaração. Veja abaixo alguns exemplos:
-&lt;pre class=&quot;textmate-source&quot;&gt;&lt;span class=&quot;source source_c&quot;&gt;&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; *p[];&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;Quando terminarem os símbolos a direita do identificador, então comece a procurar por símbolos a sua esquerda. Se você encontrar algo diferente dos símbolos mencionados acima (digamos, algo como &lt;code&gt;int&lt;/code&gt;), simplesmente repita o seu nome. Caso contrário, traduza o símbolo para o português usando a tabela. Continue seguindo pela esquerda enquanto houver símbolos OU até encontrar um abre parênteses &lt;code&gt;(&lt;/code&gt;.&lt;/p&gt;
 
-1. Encontre o identificador.
+&lt;p&gt;Então, repita os passos 2 e 3 até terminar toda a sua declaração. Veja abaixo alguns exemplos:&lt;/p&gt;
 
-&lt;pre class=&quot;textmate-source&quot;&gt;&lt;span class=&quot;source source_c&quot;&gt;&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; *p[];
-     ^
-     
-&lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;p é&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;int *p[];
+&lt;/code&gt;&lt;/pre&gt;
 
-2. Siga pela direita enquanto encontrar um símbolo ou abre parênteses.
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Encontre o identificador.&lt;/p&gt;
 
-&lt;pre class=&quot;textmate-source&quot;&gt;&lt;span class=&quot;source source_c&quot;&gt;&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; *p[];
-      ^^
-&lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;p é um array de&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt; int *p[];&lt;/p&gt;
 
-3. Quando não puder mais mover para a direita (os símbolo acabaram), então siga para a esquerda e encontre:
+&lt;pre&gt;&lt;code&gt;  ^
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre class=&quot;textmate-source&quot;&gt;&lt;span class=&quot;source source_c&quot;&gt;&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; *p[];
-    ^
-&lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;p é um array de ponteiros para&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt; &quot;p é&quot;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Siga pela direita enquanto encontrar um símbolo ou abre parênteses.&lt;/p&gt;
 
-4. Continue seguinte pela esquerda e encontre:
+&lt;p&gt; int *p[];&lt;/p&gt;
 
-&lt;pre class=&quot;textmate-source&quot;&gt;&lt;span class=&quot;source source_c&quot;&gt;&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; *p[];
-^^^
-&lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;p é um array de ponteiros para int&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;. 
-(ou &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;p é um array onde cada elemento é um ponteiro para um inteiro&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;)
-&lt;/span&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;   ^^
+&lt;/code&gt;&lt;/pre&gt;
 
-Outro exemplo:
+&lt;p&gt; &quot;p é um array de&quot;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Quando não puder mais mover para a direita (os símbolo acabaram), então siga para a esquerda e encontre:&lt;/p&gt;
 
-&lt;pre class=&quot;textmate-source&quot;&gt;&lt;span class=&quot;source source_c&quot;&gt;&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; *(*&lt;span class=&quot;meta meta_function meta_function_c&quot;&gt;&lt;span class=&quot;entity entity_name entity_name_function entity_name_function_c&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;meta meta_parens meta_parens_c&quot;&gt;()&lt;/span&gt;)&lt;span class=&quot;meta meta_parens meta_parens_c&quot;&gt;()&lt;/span&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt; int *p[];&lt;/p&gt;
 
-1. Encontre o identificador.
+&lt;pre&gt;&lt;code&gt; ^
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre class=&quot;textmate-source&quot;&gt;&lt;span class=&quot;source source_c&quot;&gt;&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; *(*&lt;span class=&quot;meta meta_function meta_function_c&quot;&gt;&lt;span class=&quot;entity entity_name entity_name_function entity_name_function_c&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;meta meta_parens meta_parens_c&quot;&gt;()&lt;/span&gt;)&lt;span class=&quot;meta meta_parens meta_parens_c&quot;&gt;()&lt;/span&gt;;&lt;/span&gt;
-       ^^^^
-&lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;func é&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt; &quot;p é um array de ponteiros para&quot;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Continue seguinte pela esquerda e encontre:&lt;/p&gt;
 
-2. Vá para a direita.
+&lt;p&gt; int *p[];
+ ^&lt;sup&gt;^&lt;/sup&gt;
+ &quot;p é um array de ponteiros para int&quot;.
+ (ou &quot;p é um array onde cada elemento é um ponteiro para um inteiro&quot;)&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;pre class=&quot;textmate-source&quot;&gt;&lt;span class=&quot;source source_c&quot;&gt;&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; *(*&lt;span class=&quot;meta meta_function meta_function_c&quot;&gt;&lt;span class=&quot;entity entity_name entity_name_function entity_name_function_c&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;meta meta_parens meta_parens_c&quot;&gt;()&lt;/span&gt;)&lt;span class=&quot;meta meta_parens meta_parens_c&quot;&gt;()&lt;/span&gt;;&lt;/span&gt;
-           ^^
-&lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;func é uma função retornando&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/pre&gt;
 
-3. Não dá para ir mais a direita devido ao fecha parênteses, então vá para a esquerda.
+&lt;p&gt;Outro exemplo:&lt;/p&gt;
 
-&lt;pre class=&quot;textmate-source&quot;&gt;&lt;span class=&quot;source source_c&quot;&gt;&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; *(*&lt;span class=&quot;meta meta_function meta_function_c&quot;&gt;&lt;span class=&quot;entity entity_name entity_name_function entity_name_function_c&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;meta meta_parens meta_parens_c&quot;&gt;()&lt;/span&gt;)&lt;span class=&quot;meta meta_parens meta_parens_c&quot;&gt;()&lt;/span&gt;;&lt;/span&gt;
-      ^
-&lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;func é uma função retornando um ponteiro para&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;int *(*func())();
+&lt;/code&gt;&lt;/pre&gt;
 
-4. Não pode mais ir para a esquerda devido ao abre parênteses, então continue indo pela direita.
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Encontre o identificador.&lt;/p&gt;
 
-&lt;pre class=&quot;textmate-source&quot;&gt;&lt;span class=&quot;source source_c&quot;&gt;&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; *(*&lt;span class=&quot;meta meta_function meta_function_c&quot;&gt;&lt;span class=&quot;entity entity_name entity_name_function entity_name_function_c&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;meta meta_parens meta_parens_c&quot;&gt;()&lt;/span&gt;)&lt;span class=&quot;meta meta_parens meta_parens_c&quot;&gt;()&lt;/span&gt;;&lt;/span&gt;
-              ^^
-&lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;func é uma função retornando um ponteiro para uma função retornando&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt; int &lt;em&gt;(&lt;/em&gt;func())();&lt;/p&gt;
 
-5. Não dá mais para ir para a direita porque não há mais simbolos, então vá para a esquerda.
+&lt;pre&gt;&lt;code&gt;    ^^^^
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre class=&quot;textmate-source&quot;&gt;&lt;span class=&quot;source source_c&quot;&gt;&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; *(*&lt;span class=&quot;meta meta_function meta_function_c&quot;&gt;&lt;span class=&quot;entity entity_name entity_name_function entity_name_function_c&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;meta meta_parens meta_parens_c&quot;&gt;()&lt;/span&gt;)&lt;span class=&quot;meta meta_parens meta_parens_c&quot;&gt;()&lt;/span&gt;;&lt;/span&gt;
-    ^
-&lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;func é uma função retornando um ponteiro para uma função retornando um ponteiro para&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt; &quot;func é&quot;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Vá para a direita.&lt;/p&gt;
 
-6. E finalmente, o último símbolo a esquerda.
+&lt;p&gt; int &lt;em&gt;(&lt;/em&gt;func())();&lt;/p&gt;
 
-&lt;pre class=&quot;textmate-source&quot;&gt;&lt;span class=&quot;source source_c&quot;&gt;&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; *(*&lt;span class=&quot;meta meta_function meta_function_c&quot;&gt;&lt;span class=&quot;entity entity_name entity_name_function entity_name_function_c&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;meta meta_parens meta_parens_c&quot;&gt;()&lt;/span&gt;)&lt;span class=&quot;meta meta_parens meta_parens_c&quot;&gt;()&lt;/span&gt;;&lt;/span&gt;
-^^^
-&lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;func é uma função retornando um ponteiro para uma função retornando um ponteiro para um inteiro&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;.
-&lt;/span&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;        ^^
+&lt;/code&gt;&lt;/pre&gt;
 
-Como você pode ver, essa regra pode ser muito útil. Ela também é ótima para manter a sua sanidade enquanto estiver criando declarações, além de ajudá-lo a identificar onde colocar o próximo símbolo ou parênteses.
+&lt;p&gt; &quot;func é uma função retornando&quot;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Não dá para ir mais a direita devido ao fecha parênteses, então vá para a esquerda.&lt;/p&gt;
 
-Algumas declarações podem parecer ainda mais complicadas quando definem o tamanho de um array ou informam uma lista de argumentos. Por exemplo, se você ver algo como &lt;code&gt;[3]&lt;/code&gt;, deve ler &lt;em&gt;&quot;um array (de tamanho 3) de...&quot;&lt;/em&gt;. Mas se você ver algo como &lt;code&gt;(char *,int)&lt;/code&gt;, então deve ler &lt;em&gt;&quot;uma função esperando (char *, int) e retornando...&quot;&lt;/em&gt;. Veja mais um exemplo:
+&lt;p&gt; int &lt;em&gt;(&lt;/em&gt;func())();&lt;/p&gt;
 
-&lt;pre class=&quot;textmate-source&quot;&gt;&lt;span class=&quot;source source_c&quot;&gt;&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; (*(*fun_one)(&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;char&lt;/span&gt; *,&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;double&lt;/span&gt;))[&lt;span class=&quot;constant constant_numeric constant_numeric_c&quot;&gt;9&lt;/span&gt;][&lt;span class=&quot;constant constant_numeric constant_numeric_c&quot;&gt;20&lt;/span&gt;];&lt;/span&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;   ^
+&lt;/code&gt;&lt;/pre&gt;
 
-Eu não vou seguir cada passo para decifrar essa declaração. Mas o resultado será: &lt;em&gt;&quot;fun_one é um ponteiro para uma função esperando (char *, double) e retornando um ponteiro para um array (tamanho 9) de um array (tamanho 20) de inteiros&quot;&lt;/em&gt;.
+&lt;p&gt; &quot;func é uma função retornando um ponteiro para&quot;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Não pode mais ir para a esquerda devido ao abre parênteses, então continue indo pela direita.&lt;/p&gt;
 
-Fica mais fácil se você remover o tamanho dos arrays e as listas de argumentos:
+&lt;p&gt; int &lt;em&gt;(&lt;/em&gt;func())();&lt;/p&gt;
 
-&lt;pre class=&quot;textmate-source&quot;&gt;&lt;span class=&quot;source source_c&quot;&gt;&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; (*(*fun_one)())[][];&lt;/span&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;           ^^
+&lt;/code&gt;&lt;/pre&gt;
 
-Uma boa opção é decifrar dessa maneira e só depois adicionar o tamanho dos arrays e a lista de argumentos.
+&lt;p&gt; &quot;func é uma função retornando um ponteiro para uma função retornando&quot;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Não dá mais para ir para a direita porque não há mais simbolos, então vá para a esquerda.&lt;/p&gt;
+
+&lt;p&gt; int &lt;em&gt;(&lt;/em&gt;func())();&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; ^
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt; &quot;func é uma função retornando um ponteiro para uma função retornando um ponteiro para&quot;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;E finalmente, o último símbolo a esquerda.&lt;/p&gt;
+
+&lt;p&gt; int &lt;em&gt;(&lt;/em&gt;func())();
+ ^&lt;sup&gt;^&lt;/sup&gt;
+ &quot;func é uma função retornando um ponteiro para uma função retornando um ponteiro para um inteiro&quot;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;Como você pode ver, essa regra pode ser muito útil. Ela também é ótima para manter a sua sanidade enquanto estiver criando declarações, além de ajudá-lo a identificar onde colocar o próximo símbolo ou parênteses.&lt;/p&gt;
+
+&lt;p&gt;Algumas declarações podem parecer ainda mais complicadas quando definem o tamanho de um array ou informam uma lista de argumentos. Por exemplo, se você ver algo como &lt;code&gt;[3]&lt;/code&gt;, deve ler &lt;em&gt;&quot;um array (de tamanho 3) de...&quot;&lt;/em&gt;. Mas se você ver algo como &lt;code&gt;(char *,int)&lt;/code&gt;, então deve ler &lt;em&gt;&quot;uma função esperando (char &lt;/em&gt;, int) e retornando...&quot;*. Veja mais um exemplo:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;int (*(*fun_one)(char *,double))[9][20];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Eu não vou seguir cada passo para decifrar essa declaração. Mas o resultado será: &lt;em&gt;&quot;fun_one é um ponteiro para uma função esperando (char &lt;/em&gt;, double) e retornando um ponteiro para um array (tamanho 9) de um array (tamanho 20) de inteiros&quot;*.&lt;/p&gt;
+
+&lt;p&gt;Fica mais fácil se você remover o tamanho dos arrays e as listas de argumentos:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;int (*(*fun_one)())[][];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Uma boa opção é decifrar dessa maneira e só depois adicionar o tamanho dos arrays e a lista de argumentos.&lt;/p&gt;
 
 &lt;h2&gt;Algumas considerações finais&lt;/h2&gt;
-É totalmente possível criar declarações ilegais usando essa regra, então algum conhecimento do que é aceitável e do que não é em C é necessário. Por exemplo, se você tiver algo assim:
 
-&lt;pre class=&quot;textmate-source&quot;&gt;&lt;span class=&quot;source source_c&quot;&gt;&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; *((*fun_one)())[][];&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;É totalmente possível criar declarações ilegais usando essa regra, então algum conhecimento do que é aceitável e do que não é em C é necessário. Por exemplo, se você tiver algo assim:&lt;/p&gt;
 
-A declaração acima seria traduzida para &lt;em&gt;&quot;fun_one é um ponteiro para uma função retornando um array de arrays de ponteiros para inteiros&quot;&lt;/em&gt;.
+&lt;pre&gt;&lt;code&gt;int *((*fun_one)())[][];
+&lt;/code&gt;&lt;/pre&gt;
 
-Uma vez que uma função não pode retornar um array, mas somente um ponteiro para um array, essa declaração é ilegal.
+&lt;p&gt;A declaração acima seria traduzida para &lt;em&gt;&quot;fun_one é um ponteiro para uma função retornando um array de arrays de ponteiros para inteiros&quot;&lt;/em&gt;.&lt;/p&gt;
 
-Combinações ilegais incluem:
+&lt;p&gt;Uma vez que uma função não pode retornar um array, mas somente um ponteiro para um array, essa declaração é ilegal.&lt;/p&gt;
 
-&lt;pre class=&quot;textmate-source&quot;&gt;&lt;span class=&quot;source source_c&quot;&gt;[]() - não pode haver um array de funções
+&lt;p&gt;Combinações ilegais incluem:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[]() - não pode haver um array de funções
 ()() - não pode haver uma função que retorna uma função
-()[] - não pode haver uma função que retorna um array&lt;/span&gt;&lt;/pre&gt;
+()[] - não pode haver uma função que retorna um array
+&lt;/code&gt;&lt;/pre&gt;
 
-Em todos os casos acima, você provavelmente precisaria de um conjunto de parênteses para colocar um símbolo &lt;code&gt;*&lt;/code&gt; a esquerda entre cada &lt;code&gt;()&lt;/code&gt; e &lt;code&gt;[]&lt;/code&gt; para tornar uma declaração válida.
+&lt;p&gt;Em todos os casos acima, você provavelmente precisaria de um conjunto de parênteses para colocar um símbolo &lt;code&gt;*&lt;/code&gt; a esquerda entre cada &lt;code&gt;()&lt;/code&gt; e &lt;code&gt;[]&lt;/code&gt; para tornar uma declaração válida.&lt;/p&gt;
 
-Segue abaixo alguns exemplos válidos e inválidos para exercitar o que aprendemos:
+&lt;p&gt;Segue abaixo alguns exemplos válidos e inválidos para exercitar o que aprendemos:&lt;/p&gt;
 
-&lt;pre class=&quot;textmate-source&quot;&gt;&lt;span class=&quot;source source_c&quot;&gt;&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; i;           &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;i um inteiro&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; *p;          &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;p é um ponteiro para um inteiro&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; a[];         &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;a é um array de inteiros&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;meta meta_function meta_function_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_whitespace punctuation_whitespace_function punctuation_whitespace_function_leading punctuation_whitespace_function_leading_c&quot;&gt; &lt;/span&gt;&lt;span class=&quot;entity entity_name entity_name_function entity_name_function_c&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;meta meta_parens meta_parens_c&quot;&gt;()&lt;/span&gt;;&lt;/span&gt;         &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;f é uma função retornando um inteiro&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; **pp;        &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;pp é um ponteiro para um ponteiro para um inteiro&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; (*pa)[];     &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;pa é um ponteiro para um array de inteiros&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; (*pf)();     &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;pf é um ponteiro para uma função retornando um inteiro&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; *ap[];       &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;ap é um array de ponteiros para inteiros&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; aa[][];      &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;aa é um array de arrays de inteiros&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; af[]();      &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;af é um array de funções retornando um inteiro (ILEGAL)&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; *&lt;span class=&quot;meta meta_function meta_function_c&quot;&gt;&lt;span class=&quot;entity entity_name entity_name_function entity_name_function_c&quot;&gt;fp&lt;/span&gt;&lt;span class=&quot;meta meta_parens meta_parens_c&quot;&gt;()&lt;/span&gt;;&lt;/span&gt;       &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;fp é uma função retornando um ponteiro para um inteiro&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;meta meta_function meta_function_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_whitespace punctuation_whitespace_function punctuation_whitespace_function_leading punctuation_whitespace_function_leading_c&quot;&gt; &lt;/span&gt;&lt;span class=&quot;entity entity_name entity_name_function entity_name_function_c&quot;&gt;fa&lt;/span&gt;&lt;span class=&quot;meta meta_parens meta_parens_c&quot;&gt;()&lt;/span&gt;[];&lt;/span&gt;      &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;fa é uma função retornando um array de inteiros (ILEGAL)&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;meta meta_function meta_function_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_whitespace punctuation_whitespace_function punctuation_whitespace_function_leading punctuation_whitespace_function_leading_c&quot;&gt; &lt;/span&gt;&lt;span class=&quot;entity entity_name entity_name_function entity_name_function_c&quot;&gt;ff&lt;/span&gt;&lt;span class=&quot;meta meta_parens meta_parens_c&quot;&gt;()()&lt;/span&gt;;&lt;/span&gt;      &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;ff é uma função retornando uma função retornando um inteiro (ILEGAL)&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; ***ppp;      &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;ppp é um ponteiro para um ponteiro para um ponteiro para um inteiro&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; (**ppa)[];   &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;ppa é um ponteiro para um ponteiro para um array de inteiros&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; (**ppf)();   &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;ppf é um ponteiro para um ponteiro para uma função retornando um inteiro&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; *(*pap)[];   &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;pap é um ponteiro para um array de ponteiros para inteiros&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; (*paa)[][];  &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;paa é um ponteiro para um array de arrays de inteiros&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; (*paf)[]();  &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;paf é um ponteiro para um array de funções retornando um inteiro (ILEGAL)&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; *(*pfp)();   &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;pfp é um ponteiro para uma função retornando um ponteiro para um inteiro&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; (*pfa)()[];  &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;pfa é um ponteiro para uma função retornando um array de inteiros (ILEGAL)&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; (*pff)()();  &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;pff é um ponteiro para uma função retornando uma função retornando um inteiro (ILEGAL)&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; **app[];     &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;app é um array de ponteiros para ponteiros para um inteiro&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; (*apa[])[];  &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;apa é um array de ponteiros para um array de inteiros&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; (*apf[])();  &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;apf é um array de ponteiros para funções retornando um inteiro&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; *aap[][];    &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;aap é um array de arrays de ponteiros para inteiros&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; aaa[][][];   &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;aaa é um array de arrays de arrays de inteiros&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; aaf[][]();   &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;aaf é um array de arrays de funções retornando um inteiro (ILEGAL)&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; *afp[]();    &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;afp é um array de funções retornando um ponteiro para um inteiro (ILEGAL)&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; afa[]()[];   &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;afa é um array de funções retornando um array de inteiros (ILEGAL)&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; aff[]()();   &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;aff é um array de funções retornando funções retornando um inteiro (ILEGAL)&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; **&lt;span class=&quot;meta meta_function meta_function_c&quot;&gt;&lt;span class=&quot;entity entity_name entity_name_function entity_name_function_c&quot;&gt;fpp&lt;/span&gt;&lt;span class=&quot;meta meta_parens meta_parens_c&quot;&gt;()&lt;/span&gt;;&lt;/span&gt;     &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;fpp é uma função retornando um ponteiro para um ponteiro para um inteiro&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; (*&lt;span class=&quot;meta meta_function meta_function_c&quot;&gt;&lt;span class=&quot;entity entity_name entity_name_function entity_name_function_c&quot;&gt;fpa&lt;/span&gt;&lt;span class=&quot;meta meta_parens meta_parens_c&quot;&gt;()&lt;/span&gt;)[];&lt;/span&gt;  &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;fpa é uma função retornando um ponteiro para um array de inteiros&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; (*&lt;span class=&quot;meta meta_function meta_function_c&quot;&gt;&lt;span class=&quot;entity entity_name entity_name_function entity_name_function_c&quot;&gt;fpf&lt;/span&gt;&lt;span class=&quot;meta meta_parens meta_parens_c&quot;&gt;()&lt;/span&gt;)&lt;span class=&quot;meta meta_parens meta_parens_c&quot;&gt;()&lt;/span&gt;;&lt;/span&gt;  &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;fpf é uma função retornando um ponteiro para uma função retornando um inteiro&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; *&lt;span class=&quot;meta meta_function meta_function_c&quot;&gt;&lt;span class=&quot;entity entity_name entity_name_function entity_name_function_c&quot;&gt;fap&lt;/span&gt;&lt;span class=&quot;meta meta_parens meta_parens_c&quot;&gt;()&lt;/span&gt;[];&lt;/span&gt;    &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;fap é uma função retornando um array de ponteiros para inteiros (ILEGAL)&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;meta meta_function meta_function_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_whitespace punctuation_whitespace_function punctuation_whitespace_function_leading punctuation_whitespace_function_leading_c&quot;&gt; &lt;/span&gt;&lt;span class=&quot;entity entity_name entity_name_function entity_name_function_c&quot;&gt;faa&lt;/span&gt;&lt;span class=&quot;meta meta_parens meta_parens_c&quot;&gt;()&lt;/span&gt;[][];&lt;/span&gt;   &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;faa é uma função retornando um array de arrays de inteiros (ILEGAL)&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;meta meta_function meta_function_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_whitespace punctuation_whitespace_function punctuation_whitespace_function_leading punctuation_whitespace_function_leading_c&quot;&gt; &lt;/span&gt;&lt;span class=&quot;entity entity_name entity_name_function entity_name_function_c&quot;&gt;faf&lt;/span&gt;&lt;span class=&quot;meta meta_parens meta_parens_c&quot;&gt;()&lt;/span&gt;[]&lt;span class=&quot;meta meta_parens meta_parens_c&quot;&gt;()&lt;/span&gt;;&lt;/span&gt;   &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;faf é uma função retornando um array de funções retornando inteiros (ILEGAL)&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;storage storage_type storage_type_c&quot;&gt;int&lt;/span&gt; *&lt;span class=&quot;meta meta_function meta_function_c&quot;&gt;&lt;span class=&quot;entity entity_name entity_name_function entity_name_function_c&quot;&gt;ffp&lt;/span&gt;&lt;span class=&quot;meta meta_parens meta_parens_c&quot;&gt;()()&lt;/span&gt;;&lt;/span&gt;    &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_c&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c&quot;&gt;&quot;&lt;/span&gt;ffp é uma função retornando uma função retornando um ponteiro para um inteiro (ILEGAL)&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;int i;           &quot;i um inteiro&quot;
+int *p;          &quot;p é um ponteiro para um inteiro&quot;
+int a[];         &quot;a é um array de inteiros&quot;
+int f();         &quot;f é uma função retornando um inteiro&quot;
+int **pp;        &quot;pp é um ponteiro para um ponteiro para um inteiro&quot;
+int (*pa)[];     &quot;pa é um ponteiro para um array de inteiros&quot;
+int (*pf)();     &quot;pf é um ponteiro para uma função retornando um inteiro&quot;
+int *ap[];       &quot;ap é um array de ponteiros para inteiros&quot;
+int aa[][];      &quot;aa é um array de arrays de inteiros&quot;
+int af[]();      &quot;af é um array de funções retornando um inteiro (ILEGAL)&quot;
+int *fp();       &quot;fp é uma função retornando um ponteiro para um inteiro&quot;
+int fa()[];      &quot;fa é uma função retornando um array de inteiros (ILEGAL)&quot;
+int ff()();      &quot;ff é uma função retornando uma função retornando um inteiro (ILEGAL)&quot;
+int ***ppp;      &quot;ppp é um ponteiro para um ponteiro para um ponteiro para um inteiro&quot;
+int (**ppa)[];   &quot;ppa é um ponteiro para um ponteiro para um array de inteiros&quot;
+int (**ppf)();   &quot;ppf é um ponteiro para um ponteiro para uma função retornando um inteiro&quot;
+int *(*pap)[];   &quot;pap é um ponteiro para um array de ponteiros para inteiros&quot;
+int (*paa)[][];  &quot;paa é um ponteiro para um array de arrays de inteiros&quot;
+int (*paf)[]();  &quot;paf é um ponteiro para um array de funções retornando um inteiro (ILEGAL)&quot;
+int *(*pfp)();   &quot;pfp é um ponteiro para uma função retornando um ponteiro para um inteiro&quot;
+int (*pfa)()[];  &quot;pfa é um ponteiro para uma função retornando um array de inteiros (ILEGAL)&quot;
+int (*pff)()();  &quot;pff é um ponteiro para uma função retornando uma função retornando um inteiro (ILEGAL)&quot;
+int **app[];     &quot;app é um array de ponteiros para ponteiros para um inteiro&quot;
+int (*apa[])[];  &quot;apa é um array de ponteiros para um array de inteiros&quot;
+int (*apf[])();  &quot;apf é um array de ponteiros para funções retornando um inteiro&quot;
+int *aap[][];    &quot;aap é um array de arrays de ponteiros para inteiros&quot;
+int aaa[][][];   &quot;aaa é um array de arrays de arrays de inteiros&quot;
+int aaf[][]();   &quot;aaf é um array de arrays de funções retornando um inteiro (ILEGAL)&quot;
+int *afp[]();    &quot;afp é um array de funções retornando um ponteiro para um inteiro (ILEGAL)&quot;
+int afa[]()[];   &quot;afa é um array de funções retornando um array de inteiros (ILEGAL)&quot;
+int aff[]()();   &quot;aff é um array de funções retornando funções retornando um inteiro (ILEGAL)&quot;
+int **fpp();     &quot;fpp é uma função retornando um ponteiro para um ponteiro para um inteiro&quot;
+int (*fpa())[];  &quot;fpa é uma função retornando um ponteiro para um array de inteiros&quot;
+int (*fpf())();  &quot;fpf é uma função retornando um ponteiro para uma função retornando um inteiro&quot;
+int *fap()[];    &quot;fap é uma função retornando um array de ponteiros para inteiros (ILEGAL)&quot;
+int faa()[][];   &quot;faa é uma função retornando um array de arrays de inteiros (ILEGAL)&quot;
+int faf()[]();   &quot;faf é uma função retornando um array de funções retornando inteiros (ILEGAL)&quot;
+int *ffp()();    &quot;ffp é uma função retornando uma função retornando um ponteiro para um inteiro (ILEGAL)&quot;
+&lt;/code&gt;&lt;/pre&gt;
 </content>
   </entry>
   
@@ -191,13 +220,17 @@ Segue abaixo alguns exemplos válidos e inválidos para exercitar o que aprendem
     <link href="http://carlosbrando.github.com/2011/06/03/colorific/"/>
     <updated>2011-06-03T00:00:00-03:00</updated>
     <id>http://carlosbrando.github.com/2011/06/03/colorific</id>
-    <content type="html">Já faz algum tempo que desenvolvi uma gem para imprimir o resultado dos meus testes de uma forma mais intuitiva, menos poluída e mais... &lt;strong&gt;&lt;span style=&quot;color: #ff0000;&quot;&gt;c&lt;/span&gt;&lt;span style=&quot;color: #ff9900;&quot;&gt;o&lt;/span&gt;&lt;span style=&quot;color: #ff00ff;&quot;&gt;l&lt;/span&gt;&lt;span style=&quot;color: #339966;&quot;&gt;o&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;r&lt;/span&gt;&lt;span style=&quot;color: #666699;&quot;&gt;i&lt;/span&gt;&lt;span style=&quot;color: #993366;&quot;&gt;d&lt;/span&gt;&lt;span style=&quot;color: #333399;&quot;&gt;a&lt;/span&gt;&lt;/strong&gt;! Não sei bem porque, mas não divulguei muito essa gem na época. De qualquer forma, ai está:
+    <content type="html">&lt;p&gt;Já faz algum tempo que desenvolvi uma gem para imprimir o resultado dos meus testes de uma forma mais intuitiva, menos poluída e mais... &lt;strong&gt;&lt;span style=&quot;color: #ff0000;&quot;&gt;c&lt;/span&gt;&lt;span style=&quot;color: #ff9900;&quot;&gt;o&lt;/span&gt;&lt;span style=&quot;color: #ff00ff;&quot;&gt;l&lt;/span&gt;&lt;span style=&quot;color: #339966;&quot;&gt;o&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;r&lt;/span&gt;&lt;span style=&quot;color: #666699;&quot;&gt;i&lt;/span&gt;&lt;span style=&quot;color: #993366;&quot;&gt;d&lt;/span&gt;&lt;span style=&quot;color: #333399;&quot;&gt;a&lt;/span&gt;&lt;/strong&gt;! Não sei bem porque, mas não divulguei muito essa gem na época. De qualquer forma, ai está:&lt;/p&gt;
 
 &lt;iframe width=&quot;560&quot; height=&quot;349&quot; src=&quot;http://www.youtube.com/embed/BQm4nFlJcco&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
 
-Para instalar é fácil, basta adicionar o seguinte código no seu arquivo Gemfile:
-&lt;pre class=&quot;textmate-source&quot;&gt;&lt;span class=&quot;source source_ruby source_ruby_rails&quot;&gt;&lt;span class=&quot;meta meta_require meta_require_ruby&quot;&gt;&lt;span class=&quot;keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;string string_quoted string_quoted_single string_quoted_single_ruby&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby&quot;&gt;'&lt;/span&gt;colorific&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby&quot;&gt;'&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;constant constant_other constant_other_symbol constant_other_symbol_ruby&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby&quot;&gt;:&lt;/span&gt;group&lt;/span&gt; &lt;span class=&quot;punctuation punctuation_separator punctuation_separator_key-value&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;constant constant_other constant_other_symbol constant_other_symbol_ruby&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby&quot;&gt;:&lt;/span&gt;test&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;
-Se desejar contribuir com algo, essa biblioteca tem 78 linhas de código apenas. E todo o código encontra-se no GitHub: &lt;a href=&quot;https://github.com/carlosbrando/colorific/blob/master/lib/colorific.rb&quot;&gt;https://github.com/carlosbrando/colorific/blob/master/lib/colorific.rb&lt;/a&gt;
+
+&lt;p&gt;Para instalar é fácil, basta adicionar o seguinte código no seu arquivo Gemfile:&lt;/p&gt;
+
+&lt;div&gt;&lt;figure role=code&gt;&lt;pre&gt;&lt;code&gt;gem 'colorific', :group =&gt; :test&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Se desejar contribuir com algo, essa biblioteca tem 78 linhas de código apenas. E todo o código encontra-se no GitHub: &lt;a href=&quot;https://github.com/carlosbrando/colorific/blob/master/lib/colorific.rb&quot;&gt;https://github.com/carlosbrando/colorific/blob/master/lib/colorific.rb&lt;/a&gt;&lt;/p&gt;
 </content>
   </entry>
   

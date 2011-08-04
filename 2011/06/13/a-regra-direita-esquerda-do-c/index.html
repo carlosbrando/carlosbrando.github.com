@@ -114,172 +114,201 @@
   </header>
 
 
-<div class="entry-content">Atualmente estou envolvido em um projeto envolvendo módulos específicos em Ruby, Erlang e C. Ruby e Erlang são mais tranquilos, mas C tem a desagradável característica de deixar alguns códigos &#8220;meio&#8221; complicados de entender.
+<div class="entry-content"><p>Atualmente estou envolvido em um projeto envolvendo módulos específicos em Ruby, Erlang e C. Ruby e Erlang são mais tranquilos, mas C tem a desagradável característica de deixar alguns códigos &#8220;meio&#8221; complicados de entender.</p>
 
-Porém, um <a href="http://twitter.com/#!/marciogm">colega</a> da Plano Bê me enviou um artigo que me ajudou muito e quero compartilhá-lo com vocês. O <a href="http://ieng9.ucsd.edu/~cs30x/rt_lt.rule.html">artigo original</a> parece ter sido escrito por Rick Ord da Universidade da California, em San Diego. Segue a tradução:
+<p>Porém, um <a href="http://twitter.com/#!/marciogm">colega</a> da Plano Bê me enviou um artigo que me ajudou muito e quero compartilhá-lo com vocês. O <a href="http://ieng9.ucsd.edu/~cs30x/rt_lt.rule.html">artigo original</a> parece ter sido escrito por Rick Ord da Universidade da California, em San Diego. Segue a tradução:</p>
 
 <h2>A Regra Direita-Esquerda do C</h2>
-A regra <code>direta-esquerda</code> é muito útil para decifrar declarações na linguagem C e também pode ser de grande ajuda ao escrever código. A regra é bem simples, toda vez que encontrar os seguintes símbolos no código, leia:
-<pre class="textmate-source"><span class="text text_html text_html_markdown text_html_markdown_multimarkdown"><span class="meta meta_content meta_content_multimarkdown"><span class="meta meta_paragraph meta_paragraph_markdown">*   como "um ponteiro para"      - sempre do lado esquerdo
+
+<p>A regra <code>direta-esquerda</code> é muito útil para decifrar declarações na linguagem C e também pode ser de grande ajuda ao escrever código. A regra é bem simples, toda vez que encontrar os seguintes símbolos no código, leia:</p>
+
+<pre><code>*   como "um ponteiro para"      - sempre do lado esquerdo
 []  como "um array de"           - sempre do lado direito
 ()  como "uma função retornando" - sempre do lado direito
-</span></span></span></pre>
+</code></pre>
+
 <h2>Passo 1</h2>
-Encontre o identificador. Esse é o seu ponto de partida. Então, diga para si mesmo <em>&#8220;o identificador é&#8221;</em>. É nesse ponto que iniciamos a declaração.
+
+<p>Encontre o identificador. Esse é o seu ponto de partida. Então, diga para si mesmo <em>&#8220;o identificador é&#8221;</em>. É nesse ponto que iniciamos a declaração.</p>
+
 <h2>Passo 2</h2>
-Comece pelos símbolos a direita do identificador. Digamos que você encontrou um <code>()</code>, então você sabe que essa declaração é uma função. Então você deve dizer <em>&#8220;o identificador é uma função retornando&#8221;</em>. Caso você tenha encontrado um <code>[]</code>, então você deve dizer <em>&#8220;o identificador é um array de&#8221;</em>. Continue avançando pela direita enquanto houver símbolos OU até encontrar um fecha parênteses <code>)</code>. (continue seguindo caso você encontre um abre parênteses, falaremos sobre isso mais abaixo.)
+
+<p>Comece pelos símbolos a direita do identificador. Digamos que você encontrou um <code>()</code>, então você sabe que essa declaração é uma função. Então você deve dizer <em>&#8220;o identificador é uma função retornando&#8221;</em>. Caso você tenha encontrado um <code>[]</code>, então você deve dizer <em>&#8220;o identificador é um array de&#8221;</em>. Continue avançando pela direita enquanto houver símbolos OU até encontrar um fecha parênteses <code>)</code>. (continue seguindo caso você encontre um abre parênteses, falaremos sobre isso mais abaixo.)</p>
+
 <h2>Passo 3</h2>
-Quando terminarem os símbolos a direita do identificador, então comece a procurar por símbolos a sua esquerda. Se você encontrar algo diferente dos símbolos mencionados acima (digamos, algo como <code>int</code>), simplesmente repita o seu nome. Caso contrário, traduza o símbolo para o português usando a tabela. Continue seguindo pela esquerda enquanto houver símbolos OU até encontrar um abre parênteses <code>(</code>.
 
-Então, repita os passos 2 e 3 até terminar toda a sua declaração. Veja abaixo alguns exemplos:
-<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> *p[];</span></pre>
+<p>Quando terminarem os símbolos a direita do identificador, então comece a procurar por símbolos a sua esquerda. Se você encontrar algo diferente dos símbolos mencionados acima (digamos, algo como <code>int</code>), simplesmente repita o seu nome. Caso contrário, traduza o símbolo para o português usando a tabela. Continue seguindo pela esquerda enquanto houver símbolos OU até encontrar um abre parênteses <code>(</code>.</p>
 
-1. Encontre o identificador.
+<p>Então, repita os passos 2 e 3 até terminar toda a sua declaração. Veja abaixo alguns exemplos:</p>
 
-<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> *p[];
-     ^
-     
-<span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>p é<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span></span></pre>
+<pre><code>int *p[];
+</code></pre>
 
-2. Siga pela direita enquanto encontrar um símbolo ou abre parênteses.
+<ol>
+<li><p>Encontre o identificador.</p>
 
-<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> *p[];
-      ^^
-<span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>p é um array de<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-</span></pre>
+<p> int *p[];</p>
 
-3. Quando não puder mais mover para a direita (os símbolo acabaram), então siga para a esquerda e encontre:
+<pre><code>  ^
+</code></pre>
 
-<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> *p[];
-    ^
-<span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>p é um array de ponteiros para<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-</span></pre>
+<p> &#8220;p é&#8221;</p></li>
+<li><p>Siga pela direita enquanto encontrar um símbolo ou abre parênteses.</p>
 
-4. Continue seguinte pela esquerda e encontre:
+<p> int *p[];</p>
 
-<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> *p[];
-^^^
-<span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>p é um array de ponteiros para int<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>. 
-(ou <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>p é um array onde cada elemento é um ponteiro para um inteiro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>)
-</span></pre>
+<pre><code>   ^^
+</code></pre>
 
-Outro exemplo:
+<p> &#8220;p é um array de&#8221;</p></li>
+<li><p>Quando não puder mais mover para a direita (os símbolo acabaram), então siga para a esquerda e encontre:</p>
 
-<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> *(*<span class="meta meta_function meta_function_c"><span class="entity entity_name entity_name_function entity_name_function_c">func</span><span class="meta meta_parens meta_parens_c">()</span>)<span class="meta meta_parens meta_parens_c">()</span>;</span></span></pre>
+<p> int *p[];</p>
 
-1. Encontre o identificador.
+<pre><code> ^
+</code></pre>
 
-<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> *(*<span class="meta meta_function meta_function_c"><span class="entity entity_name entity_name_function entity_name_function_c">func</span><span class="meta meta_parens meta_parens_c">()</span>)<span class="meta meta_parens meta_parens_c">()</span>;</span>
-       ^^^^
-<span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>func é<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-</span></pre>
+<p> &#8220;p é um array de ponteiros para&#8221;</p></li>
+<li><p>Continue seguinte pela esquerda e encontre:</p>
 
-2. Vá para a direita.
+<p> int *p[];
+ ^<sup>^</sup>
+ &#8220;p é um array de ponteiros para int&#8221;.
+ (ou &#8220;p é um array onde cada elemento é um ponteiro para um inteiro&#8221;)</p></li>
+</ol>
 
-<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> *(*<span class="meta meta_function meta_function_c"><span class="entity entity_name entity_name_function entity_name_function_c">func</span><span class="meta meta_parens meta_parens_c">()</span>)<span class="meta meta_parens meta_parens_c">()</span>;</span>
-           ^^
-<span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>func é uma função retornando<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-</span></pre>
 
-3. Não dá para ir mais a direita devido ao fecha parênteses, então vá para a esquerda.
+<p>Outro exemplo:</p>
 
-<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> *(*<span class="meta meta_function meta_function_c"><span class="entity entity_name entity_name_function entity_name_function_c">func</span><span class="meta meta_parens meta_parens_c">()</span>)<span class="meta meta_parens meta_parens_c">()</span>;</span>
-      ^
-<span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>func é uma função retornando um ponteiro para<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-</span></pre>
+<pre><code>int *(*func())();
+</code></pre>
 
-4. Não pode mais ir para a esquerda devido ao abre parênteses, então continue indo pela direita.
+<ol>
+<li><p>Encontre o identificador.</p>
 
-<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> *(*<span class="meta meta_function meta_function_c"><span class="entity entity_name entity_name_function entity_name_function_c">func</span><span class="meta meta_parens meta_parens_c">()</span>)<span class="meta meta_parens meta_parens_c">()</span>;</span>
-              ^^
-<span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>func é uma função retornando um ponteiro para uma função retornando<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-</span></pre>
+<p> int <em>(</em>func())();</p>
 
-5. Não dá mais para ir para a direita porque não há mais simbolos, então vá para a esquerda.
+<pre><code>    ^^^^
+</code></pre>
 
-<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> *(*<span class="meta meta_function meta_function_c"><span class="entity entity_name entity_name_function entity_name_function_c">func</span><span class="meta meta_parens meta_parens_c">()</span>)<span class="meta meta_parens meta_parens_c">()</span>;</span>
-    ^
-<span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>func é uma função retornando um ponteiro para uma função retornando um ponteiro para<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-</span></pre>
+<p> &#8220;func é&#8221;</p></li>
+<li><p>Vá para a direita.</p>
 
-6. E finalmente, o último símbolo a esquerda.
+<p> int <em>(</em>func())();</p>
 
-<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> *(*<span class="meta meta_function meta_function_c"><span class="entity entity_name entity_name_function entity_name_function_c">func</span><span class="meta meta_parens meta_parens_c">()</span>)<span class="meta meta_parens meta_parens_c">()</span>;</span>
-^^^
-<span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>func é uma função retornando um ponteiro para uma função retornando um ponteiro para um inteiro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>.
-</span></pre>
+<pre><code>        ^^
+</code></pre>
 
-Como você pode ver, essa regra pode ser muito útil. Ela também é ótima para manter a sua sanidade enquanto estiver criando declarações, além de ajudá-lo a identificar onde colocar o próximo símbolo ou parênteses.
+<p> &#8220;func é uma função retornando&#8221;</p></li>
+<li><p>Não dá para ir mais a direita devido ao fecha parênteses, então vá para a esquerda.</p>
 
-Algumas declarações podem parecer ainda mais complicadas quando definem o tamanho de um array ou informam uma lista de argumentos. Por exemplo, se você ver algo como <code>[3]</code>, deve ler <em>&#8220;um array (de tamanho 3) de&#8230;&#8221;</em>. Mas se você ver algo como <code>(char *,int)</code>, então deve ler <em>&#8220;uma função esperando (char *, int) e retornando&#8230;&#8221;</em>. Veja mais um exemplo:
+<p> int <em>(</em>func())();</p>
 
-<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> (*(*fun_one)(<span class="storage storage_type storage_type_c">char</span> *,<span class="storage storage_type storage_type_c">double</span>))[<span class="constant constant_numeric constant_numeric_c">9</span>][<span class="constant constant_numeric constant_numeric_c">20</span>];</span></pre>
+<pre><code>   ^
+</code></pre>
 
-Eu não vou seguir cada passo para decifrar essa declaração. Mas o resultado será: <em>&#8220;fun_one é um ponteiro para uma função esperando (char *, double) e retornando um ponteiro para um array (tamanho 9) de um array (tamanho 20) de inteiros&#8221;</em>.
+<p> &#8220;func é uma função retornando um ponteiro para&#8221;</p></li>
+<li><p>Não pode mais ir para a esquerda devido ao abre parênteses, então continue indo pela direita.</p>
 
-Fica mais fácil se você remover o tamanho dos arrays e as listas de argumentos:
+<p> int <em>(</em>func())();</p>
 
-<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> (*(*fun_one)())[][];</span></pre>
+<pre><code>           ^^
+</code></pre>
 
-Uma boa opção é decifrar dessa maneira e só depois adicionar o tamanho dos arrays e a lista de argumentos.
+<p> &#8220;func é uma função retornando um ponteiro para uma função retornando&#8221;</p></li>
+<li><p>Não dá mais para ir para a direita porque não há mais simbolos, então vá para a esquerda.</p>
+
+<p> int <em>(</em>func())();</p>
+
+<pre><code> ^
+</code></pre>
+
+<p> &#8220;func é uma função retornando um ponteiro para uma função retornando um ponteiro para&#8221;</p></li>
+<li><p>E finalmente, o último símbolo a esquerda.</p>
+
+<p> int <em>(</em>func())();
+ ^<sup>^</sup>
+ &#8220;func é uma função retornando um ponteiro para uma função retornando um ponteiro para um inteiro&#8221;.</p></li>
+</ol>
+
+
+<p>Como você pode ver, essa regra pode ser muito útil. Ela também é ótima para manter a sua sanidade enquanto estiver criando declarações, além de ajudá-lo a identificar onde colocar o próximo símbolo ou parênteses.</p>
+
+<p>Algumas declarações podem parecer ainda mais complicadas quando definem o tamanho de um array ou informam uma lista de argumentos. Por exemplo, se você ver algo como <code>[3]</code>, deve ler <em>&#8220;um array (de tamanho 3) de&#8230;&#8221;</em>. Mas se você ver algo como <code>(char *,int)</code>, então deve ler <em>&#8220;uma função esperando (char </em>, int) e retornando&#8230;&#8221;*. Veja mais um exemplo:</p>
+
+<pre><code>int (*(*fun_one)(char *,double))[9][20];
+</code></pre>
+
+<p>Eu não vou seguir cada passo para decifrar essa declaração. Mas o resultado será: <em>&#8220;fun_one é um ponteiro para uma função esperando (char </em>, double) e retornando um ponteiro para um array (tamanho 9) de um array (tamanho 20) de inteiros&#8221;*.</p>
+
+<p>Fica mais fácil se você remover o tamanho dos arrays e as listas de argumentos:</p>
+
+<pre><code>int (*(*fun_one)())[][];
+</code></pre>
+
+<p>Uma boa opção é decifrar dessa maneira e só depois adicionar o tamanho dos arrays e a lista de argumentos.</p>
 
 <h2>Algumas considerações finais</h2>
-É totalmente possível criar declarações ilegais usando essa regra, então algum conhecimento do que é aceitável e do que não é em C é necessário. Por exemplo, se você tiver algo assim:
 
-<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> *((*fun_one)())[][];</span></pre>
+<p>É totalmente possível criar declarações ilegais usando essa regra, então algum conhecimento do que é aceitável e do que não é em C é necessário. Por exemplo, se você tiver algo assim:</p>
 
-A declaração acima seria traduzida para <em>&#8220;fun_one é um ponteiro para uma função retornando um array de arrays de ponteiros para inteiros&#8221;</em>.
+<pre><code>int *((*fun_one)())[][];
+</code></pre>
 
-Uma vez que uma função não pode retornar um array, mas somente um ponteiro para um array, essa declaração é ilegal.
+<p>A declaração acima seria traduzida para <em>&#8220;fun_one é um ponteiro para uma função retornando um array de arrays de ponteiros para inteiros&#8221;</em>.</p>
 
-Combinações ilegais incluem:
+<p>Uma vez que uma função não pode retornar um array, mas somente um ponteiro para um array, essa declaração é ilegal.</p>
 
-<pre class="textmate-source"><span class="source source_c">[]() - não pode haver um array de funções
+<p>Combinações ilegais incluem:</p>
+
+<pre><code>[]() - não pode haver um array de funções
 ()() - não pode haver uma função que retorna uma função
-()[] - não pode haver uma função que retorna um array</span></pre>
+()[] - não pode haver uma função que retorna um array
+</code></pre>
 
-Em todos os casos acima, você provavelmente precisaria de um conjunto de parênteses para colocar um símbolo <code>*</code> a esquerda entre cada <code>()</code> e <code>[]</code> para tornar uma declaração válida.
+<p>Em todos os casos acima, você provavelmente precisaria de um conjunto de parênteses para colocar um símbolo <code>*</code> a esquerda entre cada <code>()</code> e <code>[]</code> para tornar uma declaração válida.</p>
 
-Segue abaixo alguns exemplos válidos e inválidos para exercitar o que aprendemos:
+<p>Segue abaixo alguns exemplos válidos e inválidos para exercitar o que aprendemos:</p>
 
-<pre class="textmate-source"><span class="source source_c"><span class="storage storage_type storage_type_c">int</span> i;           <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>i um inteiro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> *p;          <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>p é um ponteiro para um inteiro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> a[];         <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>a é um array de inteiros<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span><span class="meta meta_function meta_function_c"><span class="punctuation punctuation_whitespace punctuation_whitespace_function punctuation_whitespace_function_leading punctuation_whitespace_function_leading_c"> </span><span class="entity entity_name entity_name_function entity_name_function_c">f</span><span class="meta meta_parens meta_parens_c">()</span>;</span>         <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>f é uma função retornando um inteiro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> **pp;        <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>pp é um ponteiro para um ponteiro para um inteiro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> (*pa)[];     <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>pa é um ponteiro para um array de inteiros<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> (*pf)();     <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>pf é um ponteiro para uma função retornando um inteiro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> *ap[];       <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>ap é um array de ponteiros para inteiros<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> aa[][];      <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>aa é um array de arrays de inteiros<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> af[]();      <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>af é um array de funções retornando um inteiro (ILEGAL)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> *<span class="meta meta_function meta_function_c"><span class="entity entity_name entity_name_function entity_name_function_c">fp</span><span class="meta meta_parens meta_parens_c">()</span>;</span>       <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>fp é uma função retornando um ponteiro para um inteiro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span><span class="meta meta_function meta_function_c"><span class="punctuation punctuation_whitespace punctuation_whitespace_function punctuation_whitespace_function_leading punctuation_whitespace_function_leading_c"> </span><span class="entity entity_name entity_name_function entity_name_function_c">fa</span><span class="meta meta_parens meta_parens_c">()</span>[];</span>      <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>fa é uma função retornando um array de inteiros (ILEGAL)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span><span class="meta meta_function meta_function_c"><span class="punctuation punctuation_whitespace punctuation_whitespace_function punctuation_whitespace_function_leading punctuation_whitespace_function_leading_c"> </span><span class="entity entity_name entity_name_function entity_name_function_c">ff</span><span class="meta meta_parens meta_parens_c">()()</span>;</span>      <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>ff é uma função retornando uma função retornando um inteiro (ILEGAL)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> ***ppp;      <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>ppp é um ponteiro para um ponteiro para um ponteiro para um inteiro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> (**ppa)[];   <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>ppa é um ponteiro para um ponteiro para um array de inteiros<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> (**ppf)();   <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>ppf é um ponteiro para um ponteiro para uma função retornando um inteiro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> *(*pap)[];   <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>pap é um ponteiro para um array de ponteiros para inteiros<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> (*paa)[][];  <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>paa é um ponteiro para um array de arrays de inteiros<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> (*paf)[]();  <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>paf é um ponteiro para um array de funções retornando um inteiro (ILEGAL)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> *(*pfp)();   <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>pfp é um ponteiro para uma função retornando um ponteiro para um inteiro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> (*pfa)()[];  <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>pfa é um ponteiro para uma função retornando um array de inteiros (ILEGAL)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> (*pff)()();  <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>pff é um ponteiro para uma função retornando uma função retornando um inteiro (ILEGAL)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> **app[];     <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>app é um array de ponteiros para ponteiros para um inteiro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> (*apa[])[];  <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>apa é um array de ponteiros para um array de inteiros<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> (*apf[])();  <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>apf é um array de ponteiros para funções retornando um inteiro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> *aap[][];    <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>aap é um array de arrays de ponteiros para inteiros<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> aaa[][][];   <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>aaa é um array de arrays de arrays de inteiros<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> aaf[][]();   <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>aaf é um array de arrays de funções retornando um inteiro (ILEGAL)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> *afp[]();    <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>afp é um array de funções retornando um ponteiro para um inteiro (ILEGAL)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> afa[]()[];   <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>afa é um array de funções retornando um array de inteiros (ILEGAL)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> aff[]()();   <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>aff é um array de funções retornando funções retornando um inteiro (ILEGAL)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> **<span class="meta meta_function meta_function_c"><span class="entity entity_name entity_name_function entity_name_function_c">fpp</span><span class="meta meta_parens meta_parens_c">()</span>;</span>     <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>fpp é uma função retornando um ponteiro para um ponteiro para um inteiro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> (*<span class="meta meta_function meta_function_c"><span class="entity entity_name entity_name_function entity_name_function_c">fpa</span><span class="meta meta_parens meta_parens_c">()</span>)[];</span>  <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>fpa é uma função retornando um ponteiro para um array de inteiros<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> (*<span class="meta meta_function meta_function_c"><span class="entity entity_name entity_name_function entity_name_function_c">fpf</span><span class="meta meta_parens meta_parens_c">()</span>)<span class="meta meta_parens meta_parens_c">()</span>;</span>  <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>fpf é uma função retornando um ponteiro para uma função retornando um inteiro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> *<span class="meta meta_function meta_function_c"><span class="entity entity_name entity_name_function entity_name_function_c">fap</span><span class="meta meta_parens meta_parens_c">()</span>[];</span>    <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>fap é uma função retornando um array de ponteiros para inteiros (ILEGAL)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span><span class="meta meta_function meta_function_c"><span class="punctuation punctuation_whitespace punctuation_whitespace_function punctuation_whitespace_function_leading punctuation_whitespace_function_leading_c"> </span><span class="entity entity_name entity_name_function entity_name_function_c">faa</span><span class="meta meta_parens meta_parens_c">()</span>[][];</span>   <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>faa é uma função retornando um array de arrays de inteiros (ILEGAL)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span><span class="meta meta_function meta_function_c"><span class="punctuation punctuation_whitespace punctuation_whitespace_function punctuation_whitespace_function_leading punctuation_whitespace_function_leading_c"> </span><span class="entity entity_name entity_name_function entity_name_function_c">faf</span><span class="meta meta_parens meta_parens_c">()</span>[]<span class="meta meta_parens meta_parens_c">()</span>;</span>   <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>faf é uma função retornando um array de funções retornando inteiros (ILEGAL)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span>
-<span class="storage storage_type storage_type_c">int</span> *<span class="meta meta_function meta_function_c"><span class="entity entity_name entity_name_function entity_name_function_c">ffp</span><span class="meta meta_parens meta_parens_c">()()</span>;</span>    <span class="string string_quoted string_quoted_double string_quoted_double_c"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_c">"</span>ffp é uma função retornando uma função retornando um ponteiro para um inteiro (ILEGAL)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_c">"</span></span></span></pre>
+<pre><code>int i;           "i um inteiro"
+int *p;          "p é um ponteiro para um inteiro"
+int a[];         "a é um array de inteiros"
+int f();         "f é uma função retornando um inteiro"
+int **pp;        "pp é um ponteiro para um ponteiro para um inteiro"
+int (*pa)[];     "pa é um ponteiro para um array de inteiros"
+int (*pf)();     "pf é um ponteiro para uma função retornando um inteiro"
+int *ap[];       "ap é um array de ponteiros para inteiros"
+int aa[][];      "aa é um array de arrays de inteiros"
+int af[]();      "af é um array de funções retornando um inteiro (ILEGAL)"
+int *fp();       "fp é uma função retornando um ponteiro para um inteiro"
+int fa()[];      "fa é uma função retornando um array de inteiros (ILEGAL)"
+int ff()();      "ff é uma função retornando uma função retornando um inteiro (ILEGAL)"
+int ***ppp;      "ppp é um ponteiro para um ponteiro para um ponteiro para um inteiro"
+int (**ppa)[];   "ppa é um ponteiro para um ponteiro para um array de inteiros"
+int (**ppf)();   "ppf é um ponteiro para um ponteiro para uma função retornando um inteiro"
+int *(*pap)[];   "pap é um ponteiro para um array de ponteiros para inteiros"
+int (*paa)[][];  "paa é um ponteiro para um array de arrays de inteiros"
+int (*paf)[]();  "paf é um ponteiro para um array de funções retornando um inteiro (ILEGAL)"
+int *(*pfp)();   "pfp é um ponteiro para uma função retornando um ponteiro para um inteiro"
+int (*pfa)()[];  "pfa é um ponteiro para uma função retornando um array de inteiros (ILEGAL)"
+int (*pff)()();  "pff é um ponteiro para uma função retornando uma função retornando um inteiro (ILEGAL)"
+int **app[];     "app é um array de ponteiros para ponteiros para um inteiro"
+int (*apa[])[];  "apa é um array de ponteiros para um array de inteiros"
+int (*apf[])();  "apf é um array de ponteiros para funções retornando um inteiro"
+int *aap[][];    "aap é um array de arrays de ponteiros para inteiros"
+int aaa[][][];   "aaa é um array de arrays de arrays de inteiros"
+int aaf[][]();   "aaf é um array de arrays de funções retornando um inteiro (ILEGAL)"
+int *afp[]();    "afp é um array de funções retornando um ponteiro para um inteiro (ILEGAL)"
+int afa[]()[];   "afa é um array de funções retornando um array de inteiros (ILEGAL)"
+int aff[]()();   "aff é um array de funções retornando funções retornando um inteiro (ILEGAL)"
+int **fpp();     "fpp é uma função retornando um ponteiro para um ponteiro para um inteiro"
+int (*fpa())[];  "fpa é uma função retornando um ponteiro para um array de inteiros"
+int (*fpf())();  "fpf é uma função retornando um ponteiro para uma função retornando um inteiro"
+int *fap()[];    "fap é uma função retornando um array de ponteiros para inteiros (ILEGAL)"
+int faa()[][];   "faa é uma função retornando um array de arrays de inteiros (ILEGAL)"
+int faf()[]();   "faf é uma função retornando um array de funções retornando inteiros (ILEGAL)"
+int *ffp()();    "ffp é uma função retornando uma função retornando um ponteiro para um inteiro (ILEGAL)"
+</code></pre>
 </div>
 
 
