@@ -1,0 +1,707 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Nome do Jogo</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/blog/page/13/index.html"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds2.feedburner.com/NomeDoJogo" rel="alternate" title="Nome do Jogo" type="application/atom+xml"/>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1249636-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Nome do Jogo</a></h1>
+  
+    <h2>por Carlos Brando</h2>
+  
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="http://feeds2.feedburner.com/NomeDoJogo" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/01/27/edge-rails-escopos-dinamicos/">Edge Rails: Escopos Dinâmicos</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-01-27 00:00:00 -0200" pubdate  updated >Jan 27<span>th</span>, 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Finders dinâmicos não são mais novidades no Ruby on Rails há muito tempo, qualquer um que já tenha trabalhado em um simples projeto Rails, já fez algo assim:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find_by_first_name_and_age<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Pedro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">20</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
+Sabemos que o método acima não existe, mas graças aos finders dinâmicos podemos usá-lo para recuperar todos os usuários que tenham como primeiro nome ‘Pedro’ e 20 anos de idade.
+
+Outro recurso, um pouco mais novo, que também tem se mostrado muito útil são os named scopes. Com este recurso podemos definir um escopo como base para uma pesquisa. Por exemplo:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Article<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
+  <span class="support support_function support_function_activerecord support_function_activerecord_rails">named_scope</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>published</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>conditions</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>published</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">true</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span>
+
+<span class="support support_class support_class_ruby">Article</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>published<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>all <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>limit</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">5</span>
+</span></pre>
+No exemplo acima estou usando o escopo <code>published</code> que ajustará minha pesquisa para que apenas artigos publicados sejam devolvidos, mas acrescentando o método <code>all</code> também posso limitar a quantidade de artigos retornados em cinco. Este tipo de flexibilidade não é possível em finders dinâmicos.
+
+Para resolver esta deficiência foi adicionado um novo recurso ao Rails chamado dynamic scopes (escopos dinâmicos). Imagine esta funcionalidade como uma mistura dos dois conceitos que acabamos de ver.
+
+Agora você poderá criar escopos de forma dinâmica, da mesma forma como já fazíamos através do <code>find_by</code>. Desta forma:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>scoped_by_first_name_and_age <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Pedro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">20</span></span></pre>
+Mas com a vantagem de poder usar toda a flexibilidade de um escopo:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>scoped_by_first_name_and_age<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Pedro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">20</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>all<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>limit</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">5</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
+Da mesma forma como fazíamos em escopos comuns, também podemos preceder um escopo com outro escopo:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>scoped_by_first_name<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Pedro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>scoped_by_age<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">20</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
+Enfim, mais um grande ganho à nossa produtividade.
+
+<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.3/3.0 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades acompanhando a série <a href="../category/edge-rails/">Edge Rails</a>.</em>
+</div>
+  <footer>
+    <a rel="full-article" href="/2009/01/27/edge-rails-escopos-dinamicos/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/01/26/minhas-impressoes-sobre-o-campus-party/">Minhas Impressões Sobre O Campus Party</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-01-26 00:00:00 -0200" pubdate  updated >Jan 26<span>th</span>, 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Sei que muita gente discordará de mim, mas considerei o Campus Party o pior evento que já participei. A organização foi muito ruim, o barulho incomodava muito e nenhuma palestra que assisti me agregou alguma coisa (o barulho com certeza colaborou com isto também).
+
+A conclusão é que Campus Party não é um evento para mim. Tenho certeza que muita gente se divertiu por lá, mas para gostar deste tipo de evento você precisa entrar no clima dele. E isto não aconteceu comigo.
+
+Os vários vídeos de revolta nerd gravados no evento, em minha opinião, só provam que muitos outros participantes também estavam descontentes com a organização. Você pode ver alguns <a href="http://br.youtube.com/watch?hl=pt&amp;v=HZLwox4a3z8&amp;gl=BR">aqui</a>, <a href="http://br.youtube.com/watch?v=Dm3MlphmCu4&amp;feature=related">aqui</a> e <a href="http://br.youtube.com/watch?v=cIswfKr8uLI&amp;feature=related">aqui</a>.
+
+[caption id=&#8221;attachment_2141&#8221; align=&#8221;aligncenter&#8221; width=&#8221;500&#8221; caption=&#8221;Coelhinha após ter sido molestada por participante do evento (foto de skateonrails)&#8221;]<img class="size-full wp-image-2141" title="3222305161_2044795d90" src="http://www.nomedojogo.com/wp-content/uploads/2009/01/3222305161_2044795d90.jpg" alt="3222305161_2044795d90" width="500" height="375" />[/caption]
+
+Aguardo ansiosamente pelo próximo <strong>Rails Summit Latin America</strong>.
+</div>
+  <footer>
+    <a rel="full-article" href="/2009/01/26/minhas-impressoes-sobre-o-campus-party/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/01/23/utilizando-valores-de-entrada-como-sugestoes-a-maneira-facil/">Utilizando Valores De Entrada Como Sugestões, a Maneira Fácil</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-01-23 00:00:00 -0200" pubdate  updated >Jan 23<span>rd</span>, 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><a href="http://mir.aculo.us/">Thomas Fuchs</a>, o criador do <a href="http://script.aculo.us/">script.aculo.us</a> iniciou um novo projeto esta semana chamado <a href="http://github.com/madrobby/prototype_helpers/tree/master">Prototype helpers</a>. O projeto visa disponibilizar uma série de scripts do <a href="http://www.prototypejs.org/">Prototype</a> criados por ele.
+
+Eu particularmente gostei muito do <a href="http://mir.aculo.us/2009/1/7/using-input-values-as-hints-the-easy-way">defaultValueActsAsHint</a>, um script que facilita a inclusão de dicas sobre o preenchimento de um formulário dentro do próprio campo no formato de um texto mais claro. Ao se clicar no campo o texto some, mas caso o usuário não preencha o campo o texto volta a aparecer ao perder o foco.
+
+[caption id=&#8221;attachment_2131&#8221; align=&#8221;aligncenter&#8221; width=&#8221;347&#8221; caption=&#8221;O efeito em ação&#8221;]<img class="size-full wp-image-2131" title="quickentry" src="http://www.nomedojogo.com/wp-content/uploads/2009/01/quickentry.png" alt="O efeito em ação" width="347" height="165" />[/caption]
+<p style="text-align: center;"></p>
+
+Enfim, é melhor mostrar do que falar. <a href="http://www.nomedojogo.com/wp-content/uploads/2009/01/jquery_helpers/defaultValueActsAsHint/test.html">Clique aqui</a> para ver um exemplo funcionando.
+
+Como não sou um usuário de Prototype, fiz questão de portar este script para um plugin do <a href="http://jquery.com/">jQuery</a>, que faço questão de disponibilizar para vocês.
+
+Para usar é muito fácil, lembrando que você deve estar usando o jQuery, basta incluir o script abaixo em sua página:
+<pre class="textmate-source"><span class="source source_js source_js_jquery"><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="storage storage_type storage_type_js">function</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="keyword keyword_operator keyword_operator_js">$</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span><span class="meta meta_brace meta_brace_curly meta_brace_curly_js">{</span>
+  <span class="meta meta_function meta_function_js"><span class="support support_class support_class_js">$.fn</span>.<span class="entity entity_name entity_name_function entity_name_function_js">defaultValueActsAsHint</span> = <span class="storage storage_type storage_type_function storage_type_function_js">function</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_begin punctuation_definition_parameters_begin_js">(</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_end punctuation_definition_parameters_end_js">)</span></span> <span class="meta meta_brace meta_brace_curly meta_brace_curly_js">{</span>
+    <span class="keyword keyword_control keyword_control_js">return</span> <span class="variable variable_language variable_language_js">this</span><span class="support support_function support_function_js support_function_js_jquery">.each</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="storage storage_type storage_type_js">function</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">()</span> <span class="meta meta_brace meta_brace_curly meta_brace_curly_js">{</span>
+      <span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.attr</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>_default<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_delimiter meta_delimiter_object meta_delimiter_object_comma meta_delimiter_object_comma_js">, </span><span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.attr</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>value<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">))</span>
+      <span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.addClass</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>hint<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span><span class="punctuation punctuation_terminator punctuation_terminator_statement punctuation_terminator_statement_js">;</span>
+
+      <span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.bind</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>focus<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_delimiter meta_delimiter_object meta_delimiter_object_comma meta_delimiter_object_comma_js">, </span><span class="storage storage_type storage_type_js">function</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="support support_class support_class_js">event</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span> <span class="meta meta_brace meta_brace_curly meta_brace_curly_js">{</span>
+        <span class="keyword keyword_control keyword_control_js">if</span> <span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.attr</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>_default<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span> <span class="keyword keyword_operator keyword_operator_js">==</span> <span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.attr</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>value<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">))</span>
+          <span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.removeClass</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>hint<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.attr</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>value<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_delimiter meta_delimiter_object meta_delimiter_object_comma meta_delimiter_object_comma_js">, </span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span><span class="punctuation punctuation_terminator punctuation_terminator_statement punctuation_terminator_statement_js">;</span>
+      <span class="meta meta_brace meta_brace_curly meta_brace_curly_js">}</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span><span class="punctuation punctuation_terminator punctuation_terminator_statement punctuation_terminator_statement_js">;</span>
+
+      <span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.blur</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="storage storage_type storage_type_js">function</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">()</span> <span class="meta meta_brace meta_brace_curly meta_brace_curly_js">{</span>
+        <span class="keyword keyword_control keyword_control_js">if</span> <span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="keyword keyword_operator keyword_operator_js">$</span><span class="meta meta_delimiter meta_delimiter_method meta_delimiter_method_period meta_delimiter_method_period_js">.</span>trim<span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.attr</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>value<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">))</span> <span class="keyword keyword_operator keyword_operator_js">==</span> <span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span>
+          <span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.addClass</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>hint<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.attr</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>value<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_delimiter meta_delimiter_object meta_delimiter_object_comma meta_delimiter_object_comma_js">, </span><span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.attr</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>_default<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">))</span><span class="punctuation punctuation_terminator punctuation_terminator_statement punctuation_terminator_statement_js">;</span>
+      <span class="meta meta_brace meta_brace_curly meta_brace_curly_js">}</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span><span class="punctuation punctuation_terminator punctuation_terminator_statement punctuation_terminator_statement_js">;</span>
+
+    <span class="meta meta_brace meta_brace_curly meta_brace_curly_js">}</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span><span class="punctuation punctuation_terminator punctuation_terminator_statement punctuation_terminator_statement_js">;</span>
+  <span class="meta meta_brace meta_brace_curly meta_brace_curly_js">}</span><span class="punctuation punctuation_terminator punctuation_terminator_statement punctuation_terminator_statement_js">;</span>
+<span class="meta meta_brace meta_brace_curly meta_brace_curly_js">}</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)(</span>jQuery<span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span><span class="punctuation punctuation_terminator punctuation_terminator_statement punctuation_terminator_statement_js">;</span>
+</span></pre>
+<h4>Download: <a href="http://www.nomedojogo.com/wp-content/uploads/2009/01/jquery_helpers/defaultValueActsAsHint/jquery.defaultvalueactsashint.js "><span>jquery.defaultvalueactsashint.js</span></a></h4>
+E definir quais campos se beneficiarão deste script, assim:
+<pre class="textmate-source"><span class="text text_html text_html_jquery"><span class="source source_js source_js_jquery source_js_jquery_embedded source_js_jquery_embedded_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_script entity_name_tag_script_html">script</span> type="text/javascript" charset="utf-8"<span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span>
+  <span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="punctuation punctuation_definition punctuation_definition_selector punctuation_definition_selector_begin punctuation_definition_selector_begin_js">'</span><span class="meta meta_selector meta_selector_css"><span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_id entity_other_attribute-name_id_css"><span class="punctuation punctuation_definition punctuation_definition_attribute-name punctuation_definition_attribute-name_css">#</span>foo</span></span><span class="punctuation punctuation_definition punctuation_definition_selector punctuation_definition_selector_end punctuation_definition_selector_end_js">'</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="meta meta_delimiter meta_delimiter_method meta_delimiter_method_period meta_delimiter_method_period_js">.</span>defaultValueActsAsHint<span class="meta meta_brace meta_brace_round meta_brace_round_js">()</span><span class="punctuation punctuation_terminator punctuation_terminator_statement punctuation_terminator_statement_js">;</span>
+<span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_script entity_name_tag_script_html">script</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span></span></pre>
+Como sempre, tudo está em um projeto no <a href="http://github.com/carlosbrando/jquery_helpers/tree/master">GitHub</a>. Bom divertimento!
+</div>
+  <footer>
+    <a rel="full-article" href="/2009/01/23/utilizando-valores-de-entrada-como-sugestoes-a-maneira-facil/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/01/22/edge-rails-delegate-allow_nil/">Edge Rails: Delegate :allow_nil</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-01-22 00:00:00 -0200" pubdate  updated >Jan 22<span>nd</span>, 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">O método <code>delegate</code> é util para expor métodos de terceiros em uma classe como se fossem dela. Para aqueles que não conhecem este método, vamos pegar um exemplo:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Greeter<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
+  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">hello</span></span>
+    <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>hello<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span>
+
+<span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Foo<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
+  <span class="support support_function support_function_activerecord support_function_activerecord_rails">belongs_to</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>greeter</span>
+  <span class="support support_function support_function_activesupport support_function_activesupport_rails">delegate</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>hello</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>to</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>greeter</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span>
+
+<span class="support support_class support_class_ruby">Foo</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>hello   <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "hello"
+</span></span></pre>
+Como você pode ver no exemplo acima estou executando o método <code>hello</code> como se ele pertencesse a classe <code>Foo</code>, embora ele realmente pertença a classe <code>Greeter</code>.
+
+Mas o que aconteceria se a associação não existisse e o objeto <code>greeter</code> fosse nulo? Teríamos um erro do tipo <code>NoMethodError</code> ao executar o método <code>hello</code> já que por debaixo dos panos estaríamos executando <code>nil.hello</code>.
+
+Para contornar este tipo de problema foi adicionado ao método <code>delegate</code> a opção <code>:allow_nil</code> que impede o retorno de uma exceção nesses casos.
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Foo</span></span>
+  <span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">attr_accessor</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>bar</span>
+  <span class="meta meta_function meta_function_method meta_function_method_with-arguments meta_function_method_with-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">initialize</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">(</span><span class="variable variable_parameter variable_parameter_function variable_parameter_function_ruby">bar <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_language constant_language_ruby">nil</span></span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">)</span></span>
+    <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>bar</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> bar
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+  <span class="support support_function support_function_activesupport support_function_activesupport_rails">delegate</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>zoo</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>to</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>bar</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>allow_nil</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">true</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+
+<span class="support support_class support_class_ruby">Foo</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>zoo <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> returns nil</span></span></pre>
+No exemplo acima mesmo que o objeto <code>bar</code> seja nulo, o método <code>zoo</code> não disparará uma exceção, ele retornará <code>nil</code>.
+
+<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.3/3.0 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades acompanhando a série <a href="../category/edge-rails/">Edge Rails</a>.</em>
+</div>
+  <footer>
+    <a rel="full-article" href="/2009/01/22/edge-rails-delegate-allow_nil/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/01/21/edge-rails-date-helpers/">Edge Rails: Date Helpers</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-01-21 00:00:00 -0200" pubdate  updated >Jan 21<span>st</span>, 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Uma nova opção foi adicionada aos date helpers do Rails. Métodos como o <code>date_select</code>, <code>time_select</code>, <code>datetime_select</code>, <code>select_minute</code> e outros receberam a opção <code>:prompt</code>.
+
+Com esta opção é possível definir um valor padrão como o primeiro elemento da lista. Veja um exemplo:
+<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> date_select<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>post<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>written_on<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>prompt</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">true</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span></span></pre>
+O código acima devolverá os campos com as seguintes mensagens:
+
+[caption id=&#8221;attachment_2116&#8221; align=&#8221;aligncenter&#8221; width=&#8221;233&#8221; caption=&#8221;Exemplo com os valores padrão&#8221;]<img class="size-full wp-image-2116" title="Exemplo 1" src="http://www.nomedojogo.com/wp-content/uploads/2009/01/exemplo1.png" alt="exemplo1" width="233" height="53" />[/caption]
+
+Também é possível personalizar a mensagem de cada campo:
+<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> date_select<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>post<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>written_on<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
+      <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>prompt</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block">
+</span>        <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>day</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Select day<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
+        <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>month</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Select month<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
+        <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>year</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Select year<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+      <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span></span></pre>
+Com o código acima teremos algo assim:
+
+[caption id=&#8221;attachment_2117&#8221; align=&#8221;aligncenter&#8221; width=&#8221;319&#8221; caption=&#8221;Exemplo com valores personalizados&#8221;]<img class="size-full wp-image-2117" title="Exemplo 2" src="http://www.nomedojogo.com/wp-content/uploads/2009/01/exemplo2.png" alt="exemplo2" width="319" height="54" />[/caption]
+
+Esta é uma opção muito bem-vinda, já que para conseguir o mesmo efeito antes era necessário um truquezinho.
+
+<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.3/3.0 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades acompanhando a série <a href="../category/edge-rails/">Edge Rails</a>.</em>
+</div>
+  <footer>
+    <a rel="full-article" href="/2009/01/21/edge-rails-date-helpers/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/01/20/edge-rails-observe_field/">Edge Rails: Observe_field</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-01-20 00:00:00 -0200" pubdate  updated >Jan 20<span>th</span>, 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">O método <code>observe_field</code> tem a finalidade de observar um determinado campo de um formulário e executar uma chamada Ajax quando houver alguma alteração em seu valor.
+
+Até hoje, este método possuía também a opção <code>:on</code> que permitia identificar qual evento deveria ser observado. No exemplo abaixo ele deveria disparar uma chamada Ajax assim que o campo <code>book_title</code> perdesse o foco (blur):
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">observe_field <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>book_title<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
+  <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>url</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>http://example.com/books/edit/1<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
+  <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>on</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>blur<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+</span></pre>
+Mas a funcionalidade que define a opção <code>:on</code> foi <a href="http://github.com/rails/rails/commit/382741f289beb0c4630fc2848a145f8049379bb4">removida</a> do <a href="http://www.prototypejs.org/">Prototype</a> (o framework utilizado pelo Rails para manipulação de JavaScript) há mais ou menos dois anos atrás. Ou seja, já faz dois anos que esta opção não funciona e foi ignorada, por isto ela foi removida definitivamente do Rails.
+
+<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.3/3.0 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades acompanhando a série <a href="../category/edge-rails/">Edge Rails</a>.</em>
+</div>
+  <footer>
+    <a rel="full-article" href="/2009/01/20/edge-rails-observe_field/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/01/19/livro-gratis-ruby-on-rails-22-o-que-ha-de-novo/">Livro Grátis: Ruby on Rails 2.2 - O Que Há De Novo?</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-01-19 00:00:00 -0200" pubdate  updated >Jan 19<span>th</span>, 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Atendendo a pedidos: O segundo livro extraído deste blog:
+
+[caption id=&#8221;attachment_2104&#8221; align=&#8221;aligncenter&#8221; width=&#8221;400&#8221; caption=&#8221;Clique aqui para fazer o download&#8221;]<a href="http://www.nomedojogo.com/wp-content/uploads/2009/01/ruby-on-rails-2-2_whats-new_br.pdf"><img class="size-full wp-image-2104" title="livro_capa" src="http://www.nomedojogo.com/wp-content/uploads/2009/01/livro_capa.png" alt="livro_capa" width="400" height="311" /></a>[/caption]
+<p style="text-align: center;"></p>
+
+Como sabe já virou tradição por aqui lançar um livro para cada nova versão do Rails, e confesso que cada vez tem ficado mais difícil fazer isto, tanto que para conseguir lançar este segundo livro na data certa tive de fazer alguns <a href="http://www.nomedojogo.com/2009/01/16/pergunta-devo-disponibilizar-a-versao-em-portugues-do-livro-rails-22-para-download-de-graca/#comments">sacrifícios</a>.
+
+Espero que você tire o máximo de proveito deste material, assim como todos os que compraram o livro já tiraram. É um livro feito com muito carinho que tem a intenção de mostrar todas as novidades da última versão do Ruby on Rails. O livro está recheado de exemplos, até mesmo para as funcionalidades mais simples.
+
+Algumas pessoas sugeriram que eu colocasse um link de doação no site para que pudessem contribuir para a criação de futuros livros. Isto não é necessário no momento, mas eu agradeceria muito se você fizesse uma das quatro coisas abaixo:
+<ul>
+	<li>Divulgar o link deste post em seu blog para que outras pessoas possam saber mais sobre este livro e sobre o Nome do Jogo.</li>
+	<li> Comunicar seus amigos no Twitter sobre o lançamento deste livro. Meu Twitter: <a href="http://twitter.com/carlosbrando">@carlosbrando</a></li>
+	<li> Me recomendar no site <a href="http://www.workingwithrails.com/recommendation/new/person/8137-carlos-brando">Working with Rails</a>.</li>
+	<li> Deixar um comentário.</li>
+</ul>
+Se desejar você também pode fazer o download do primeiro livro: <a href="http://www.nomedojogo.com/wp-content/uploads/2009/01/rails2_1.pdf">clique aqui</a>.
+<h2>Italiano</h2>
+Além da versão em inglês (paga) também já existe uma versão em <a href="http://carlopecchia.eu/blog/2009/01/16/rubyonrails-22-free-book-italian-edition/">italiano</a> (grátis), feita pelo meu amigo <a class="url" rel="external nofollow" href="http://carlopecchia.eu/">Carlo Pecchia</a>.
+<h2>Capa</h2>
+O responsável pela linda capa do livro é o <a href="http://renatocarvalho.com/">Renato Carvalho</a>, designer da <a href="http://surgeworks.com/">Surgeworks</a>.
+</div>
+  <footer>
+    <a rel="full-article" href="/2009/01/19/livro-gratis-ruby-on-rails-22-o-que-ha-de-novo/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/01/16/pergunta-devo-disponibilizar-a-versao-em-portugues-do-livro-rails-22-para-download-de-graca/">Pergunta: Devo Disponibilizar a Versão Em Português Do Livro Rails 2.2 Para Download De Graça?</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-01-16 00:00:00 -0200" pubdate  updated >Jan 16<span>th</span>, 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Em outubro do ano passado lancei o meu <a href="http://www.nomedojogo.com/2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">segundo livro</a>: “Ruby on Rails 2.2 - O que há de novo?” e conforme expliquei na ocasião, para conseguir lançar o livro na data do lançamento do Rails 2.2 tive de perder alguns dias de trabalho. Então Gregg Pollack me fez uma proposta de vender o livro em um pacote promocional junto com o screencast que estavam produzindo.
+
+Nunca fez parte dos meus planos vender o livro, até porque todo o seu conteúdo já estava disponível gratuitamente neste blog. Mas como eu precisava recuperar o dinheiro investido aceitei a proposta.
+
+As vendas foram razoavelmente boas, mas demorou um pouco para que eu conseguisse recuperar o dinheiro que perdi na época da escrita do livro, já que o preço do livro é ridiculamente baixo (9 dólares) e uma parte do dinheiro foi para o Carl pela tradução do livro, outra para o Renato pela concepção da capa e outra para pagamento de impostos e taxas.
+
+Analisando como um todo, não ganhei nada escrevendo o livro, mas também não perdi nada.
+
+Quero agradecer a todos os brasileiros que investiram seu dinheiro comprando este livro mesmo sem haver necessidade, porque conforme eu disse tudo já estava disponível aqui no blog de graça. Os que fizeram isto com certeza o fizeram não somente pelo conteúdo, mas principalmente para colaborar com o trabalho que foi realizado.
+
+Como eu já consegui recuperar o dinheiro necessário, quero fazer uma pergunta a todos os que compraram o livro. <strong>O que vocês achariam se a versão em português do livro fosse disponibilizada para download gratuitamente aqui no blog?</strong>
+
+A opinião de todos é importante, mas principalmente daqueles que compraram o livro. Já se passaram quase três meses desde o lançamento do Rails 2.2, então aqueles que compraram já tiraram todo o proveito necessário do livro. Pensem que estarão ajudando a comunidade brasileira com mais um material grátis.
+
+Comentem, por favor.
+</div>
+  <footer>
+    <a rel="full-article" href="/2009/01/16/pergunta-devo-disponibilizar-a-versao-em-portugues-do-livro-rails-22-para-download-de-graca/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/01/15/explicando-o-rails-metal-parte-2/">Explicando O Rails Metal - Parte 2</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-01-15 00:00:00 -0200" pubdate  updated >Jan 15<span>th</span>, 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">No <a href="http://www.nomedojogo.com/2009/01/12/o-que-e-o-rails-metal/">primeiro artigo</a> desta série eu comentei sobre um dos novos recursos incluídos no Rails, chamado de <strong>Rails Metal</strong>. Agora vamos falar da funcionalidade que leva o nome “Metal”.
+
+Imagine que você precise criar um serviço simples (como uma API pública, por exemplo) que faça uma ou duas consultas no banco de dados e devolva um string para o usuário e que precisa ser muito, muito rápido. É nestas horas que utilizaremos o Rails “Metal”, para realizar tarefas simples que precisam ser realmente rápidas.
+
+Para criar um serviço Rails Metal devemos usar o seguinte comando:
+
+<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">$ ./script/generate metal poller</span></span></pre>
+
+Com isto teremos um novo diretório chamado <code>app/metal</code>. Nele você encontrará o arquivo <code>poller.rb</code> que deve se parecer com o isto:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Allow the metal piece to run in isolation
+</span><span class="meta meta_require meta_require_ruby"><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">require</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="support support_class support_class_ruby">File</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>dirname<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_language variable_language_ruby">__FILE__</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">+</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>/../../config/environment<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_ruby">unless</span> <span class="keyword keyword_control keyword_control_pseudo-method keyword_control_pseudo-method_ruby">defined?</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_constant variable_other_constant_ruby">Rails</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span>
+
+<span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Poller</span></span>
+  <span class="meta meta_function meta_function_method meta_function_method_with-arguments meta_function_method_with-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">self.call</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">(</span><span class="variable variable_parameter variable_parameter_function variable_parameter_function_ruby">env</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">)</span></span>
+    <span class="keyword keyword_control keyword_control_ruby">if</span> env<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>PATH_INFO<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">=~</span> <span class="string string_regexp string_regexp_classic string_regexp_classic_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span>^<span class="constant constant_character constant_character_escape constant_character_escape_ruby">\/</span>poller<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span></span>
+      <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_numeric constant_numeric_ruby">200</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Content-Type<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>text/html<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Hello, World!<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]]</span>
+    <span class="keyword keyword_control keyword_control_ruby">else</span>
+      <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_numeric constant_numeric_ruby">404</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Content-Type<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>text/html<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Not Found<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]]</span>
+    <span class="keyword keyword_control keyword_control_ruby">end</span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+</span></pre>
+
+Neste modelo tudo o que ele faz é capturar as requisições feitas para <code>/poller</code> e retornar <code>‘Hello World’</code>. Quando a requisição não for para <code>/poller</code> ele retornará um status 404, que indica ao sistema de rotas do Rails que ele deve assumir à partir daí, cuidando da requisição.
+
+Para ficar mais claro, o código acima se fosse criado em um controller comum do Rails seria algo mais ou menos assim:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_controller"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">OldPollerController<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ApplicationController</span></span></span>
+  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">poller</span></span>
+    <span class="support support_function support_function_actionpack support_function_actionpack_rails">render</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>text</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Hello World!<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+<a href="http://soylentfoo.jnewland.com/articles/2008/12/16/rails-metal-a-micro-framework-with-the-power-of-rails-m">Jesse Newland</a> fez um teste simples de performance e chegou ao seguinte resultado: Executando estes dois códigos, no modelo tradicional usando um controller comum teríamos 408.45 req/s e 2.448 ms, enquanto na versão Metal temos 1154.66 req/s e 0.866 ms. Ou seja, para um ridículo Hello World o Rails Metal se mostra 2.8x mais rápido que um Controller comum. Muito bom.
+
+Ao subir seu projeto Rails você já terá no ar o seu serviço Rails Metal. Mas se desejar também pode subir o serviço isoladamente através da ferramenta rackup:
+
+<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">rackup -s mongrel app/metal/poller.rb</span></span></pre>
+
+<h2>Usando outras ferramentas</h2>
+Além do modelo proposto também podemos fazer uso de outras ferramentas afim de simplificar a criação destes serviços. Veja um exemplo retirado da especificação do Rails de um código usando o <a href="http://sinatra.rubyforge.org/">Sinatra</a> para criar um serviço Rails Metal:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> app/metal/api.rb
+</span><span class="meta meta_require meta_require_ruby"><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">require</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>sinatra<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span>
+<span class="support support_class support_class_ruby">Sinatra</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">Application</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>default_options<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>merge!<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>run</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">false</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>env</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>production</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="variable variable_other variable_other_constant variable_other_constant_ruby">Api</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Sinatra</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>application <span class="keyword keyword_control keyword_control_ruby">unless</span> <span class="keyword keyword_control keyword_control_pseudo-method keyword_control_pseudo-method_ruby">defined?</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">Api</span>
+
+get <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>/interesting/new/ideas<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
+</span>  <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Hello Sinatra!<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+<h2>Finalizando</h2>
+Como podem ver teremos o melhor de dois mundo na próxima versão do Rails. Mas é importante ressaltar que mesmo sendo possível criar um projeto inteiro usando apenas o Rails Metal, isto não é uma boa coisa a se fazer. O Rails Metal é uma ferramenta com uma finalidade especifica e somente deve ser usada para casos onde a performance é crucial para o sucesso do seu software.
+</div>
+  <footer>
+    <a rel="full-article" href="/2009/01/15/explicando-o-rails-metal-parte-2/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/01/14/curso-gratis-de-ruby/">Curso Grátis De Ruby</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-01-14 00:00:00 -0200" pubdate  updated >Jan 14<span>th</span>, 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p style="text-align: center;"></p>
+
+À partir do dia <strong>24 de janeiro</strong>, Satish Talim do <a onclick="javascript:urchinTracker ('/outbound/article/www.rubylearning.org');" href="http://www.rubylearning.org/" target="_blank">Ruby Learning</a> iniciará mais um dos seus famosos cursos de <a href="http://rubylearning.com/satishtalim/tutorial.html">Ruby</a>. O curso é online e o material é liberado diariamente.
+
+[caption id=&#8221;attachment_2081&#8221; align=&#8221;aligncenter&#8221; width=&#8221;479&#8221; caption=&#8221;Mais de 5600 formados no curso de Ruby&#8221;]<img class="size-full wp-image-2081" title="logo" src="http://www.nomedojogo.com/wp-content/uploads/2009/01/logo.gif" alt="logo" width="479" height="80" />[/caption]
+<p style="text-align: center;"></p>
+
+Segundo <a href="http://www.fernandoquadro.com.br/html/">Fernando Quadro</a> me informou por e-mail, nesta turma já estão inscritos 450 pessoas sendo que 300 são brasileiros, mais de 60% da turma. Embora o curso seja totalmente em inglês já deu para ver que isto não é um problema tão grande assim.
+
+Além do curso gratuito de Ruby o site também promove outros cursos pagos de Merb, Shoes, FXRuby e JRuby pelo valor simbólico de 10 dólares.
+
+Já é possível se <a href="http://rubylearning.org/class/login/index.php">matricular</a> no curso e o material já está disponível para os que desejarem se adiantar.
+</div>
+  <footer>
+    <a rel="full-article" href="/2009/01/14/curso-gratis-de-ruby/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+<nav role="pagination">
+  <div>
+    
+      <a class="prev" href="/blog/page/14/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/12/">Newer &rarr;</a>
+    
+  </div>
+</nav>
+
+<script type="text/javascript">
+    var disqus_shortname = 'carlosbrando';
+    (function () {
+      var s = document.createElement('script'); s.async = true;
+      s.type = 'text/javascript';
+      s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+      (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+
+</div>
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro anos de Nome do Jogo</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("carlosbrando", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/carlosbrando" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @carlosbrando</a>
+  
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

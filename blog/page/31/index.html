@@ -1,0 +1,652 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Nome do Jogo</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/blog/page/31/index.html"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds2.feedburner.com/NomeDoJogo" rel="alternate" title="Nome do Jogo" type="application/atom+xml"/>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1249636-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Nome do Jogo</a></h1>
+  
+    <h2>por Carlos Brando</h2>
+  
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="http://feeds2.feedburner.com/NomeDoJogo" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/07/29/edge-rails-fazendo-uso-da-opcao-accessible-em-formularios/">Edge Rails: Fazendo Uso Da Opção Accessible Em Formulários</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-07-29 00:00:00 -0300" pubdate  updated >Jul 29<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">No <a href="http://www.nomedojogo.com/2008/07/28/edge-rails-usando-a-opcao-accessible-para-fazer-atribuicoes-em-massa-no-activerecord/">último artigo</a> desta série comentei sobre a nova forma de atribuir valores à associações usando a opção <code><strong>:accessible</strong></code>.
+
+Agora vou mostrar uma das grandes vantagens dessa novidade. Fazendo uso deste novo recurso podemos melhorar a forma como usamos o método <code><strong>fields_for</strong></code>. Vamos pegar um exemplo, baseado nos códigos do artigo anterior:
+<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> form_for <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>post</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">f</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+  <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> f<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>text_field <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>body</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+  <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> fields_for <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>author</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">a_f</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+    <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> a_f<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>text_field <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>name</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+  <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> <span class="keyword keyword_control keyword_control_ruby">end</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+  <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> submit_tag <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+<span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> <span class="keyword keyword_control keyword_control_ruby">end</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span></span></pre>
+Estou usando o método <code><strong>fields_for</strong></code> para acrescentar o nome do autor na página de criação de posts. Agora vem a melhor parte, veja como ficaria a criação do post e do autor usando este novo recurso:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_controller"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">PostController<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ApplicationController</span></span></span>
+
+  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">new</span></span>
+    <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>post</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Post</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>create<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>params<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>post</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+    <span class="support support_function support_function_actionpack support_function_actionpack_rails">respond_to</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">wants</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+      <span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">...</span>
+    <span class="keyword keyword_control keyword_control_ruby">end</span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span>
+</span></pre>
+Veja que estou usando apenas o método <code><strong>create</strong></code> do objeto <code><strong>Post</strong></code>. Como foi definido a opção <code><strong>:accessible</strong></code> do relacionamento deste objeto com o objeto <code><strong>Author</strong></code> como verdadeiro (<code><strong>true</strong></code>), a criação do autor é automática e transparente.
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/07/29/edge-rails-fazendo-uso-da-opcao-accessible-em-formularios/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/07/28/edge-rails-usando-a-opcao-accessible-para-fazer-atribuicoes-em-massa-no-activerecord/">Edge Rails: Usando a Opção :accessible Para Fazer Atribuições Em Massa No ActiveRecord</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-07-28 00:00:00 -0300" pubdate  updated >Jul 28<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Todos os métodos de associações do <strong>ActiveRecord</strong> (<strong>belongs_to</strong>, <strong>has_one</strong>, <strong>has_many</strong> e <strong>has_and_belongs_to_many</strong>) receberam um nova opção que permite a atribuição de valores para suas associações usando hashes aninhados.
+
+Vamos pegar como exemplo um modelo chamado <strong>Post</strong>:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Post<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
+  <span class="support support_function support_function_activerecord support_function_activerecord_rails">belongs_to</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>author</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>accessible</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">true</span>
+  <span class="support support_function support_function_activerecord support_function_activerecord_rails">has_many</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>comments</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>accessible</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">true</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span>
+</span></pre>
+
+Note que logo após associar este modelo com <strong>author</strong> e <strong>comments</strong> estou definindo a nova opção <strong>:accessible</strong> como <strong>true</strong> (verdadeiro). Com esta opção &#8220;ligada&#8221; eu posso fazer algo assim:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">post <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Post</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>create<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block">
+</span>  <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>title</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Accessible Attributes<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
+  <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>author</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>name</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>David Dollar<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
+  <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>comments</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span>
+    <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>body</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>First Post!<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
+    <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>body</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Nested Hashes are great!<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
+  <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span>
+<span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
+
+Veja que estou criando todas as associações usando apenas um único <strong>hash</strong> com sub-níveis para cada associação. Isto não é possível de forma automática na versão atual do Rails.
+
+Eu também poderia fazer algo assim, para adicionar um novo comentário:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">post<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>comments <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_augmented keyword_operator_assignment_augmented_ruby">&lt;&lt;</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>body</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Another Comment<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span></span></pre>
+
+Esta nova funcionalidade pode parecer um pouco estranha ou insignificante, mas a grande vantagem por trás dela será vista no próximo artigo desta série.
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/07/28/edge-rails-usando-a-opcao-accessible-para-fazer-atribuicoes-em-massa-no-activerecord/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/07/25/edge-rails-suporte-a-expressoes-regulares-no-time_zone_select/">Edge Rails: Suporte a Expressões Regulares No Time_zone_select</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-07-25 00:00:00 -0300" pubdate  updated >Jul 25<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Na classe <a href="http://rails-doc.org/rails/TimeZone">TimeZone</a> do <strong>ActiveSupport</strong> existe o método <a href="http://rails-doc.org/rails/v2.1.0/TimeZone/us_zones/class">us_zones</a> que convenientemente retorna uma lista dinâmica com todos os fusos-horários americanos.
+
+O problema é que não moramos nos Estados Unidos e muito provavelmente vamos desenvolver software para pessoas em nosso país, mas não existe um método tão conveniente assim que liste os fusos-horários brasileiros ou de outros países.
+
+Ouve uma <a href="http://rails.lighthouseapp.com/projects/8994/tickets/195-convenience-methods-for-time-zones-outside-the-u-s">longa discussão</a> sobre criar ou não criar métodos como <strong>african_zones</strong>, <strong>american_zones</strong>, etc.. No fim prevaleceu o seguinte:
+
+Foi implantado no objeto <strong>TimeZone</strong> o suporte para <strong>=~</strong> afim de ajudar a montar uma lista de fusos-horários a partir de uma expressão regular. Além disso o método <a href="http://rails-doc.org/rails/v2.1.0/ActionView/Helpers/FormOptionsHelper/time_zone_select">time_zone_select</a> foi alterado para trabalhar em conjunto com esta novidade do <strong>TimeZone</strong>.
+
+Agora podemos fazer isto:
+<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> time_zone_select<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>user<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>time_zone<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_regexp string_regexp_classic string_regexp_classic_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span>Brasilia<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span></span></pre>
+Para softwares brasileiros não faz tanta diferença&#8230;
+
+Para aprender mais sobre <strong>TimeZones</strong> aconselho assistir ao <a href="http://railscasts.com/episodes/106">episódio 160</a> do RailsCasts e dar uma olhada no nosso <a href="http://www.nomedojogo.com/2008/06/06/o-primeiro-livro-sobre-rails-21-e-brasileiro/">livro do Rails 2.1</a>.
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/07/25/edge-rails-suporte-a-expressoes-regulares-no-time_zone_select/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/07/24/como-funcionara-o-novo-suporte-a-internacionalizacao-no-rails-22/">Como Funcionará O Novo Suporte a Internacionalização No Rails 2.2</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-07-24 00:00:00 -0300" pubdate  updated >Jul 24<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Conforme expliquei no <a href="http://www.nomedojogo.com/2008/07/22/edge-rails-seus-problemas-acabaram-o-rails-tambem-vai-falar-portugues/">artigo anterior</a>, teremos suporte a <strong>I18n</strong> no Ruby on Rails a partir da próxima versão. E eu prometi escrever um artigo mostrando como funcionaria esta nova implementação, o problema é que demorei e já teve gente se adiantando&#8230;
+
+Então só vou mostrar o caminho das pedras.
+<h3>Antes de começar</h3>
+Preciso deixar claro uma coisa. Quando estamos falando de internacionalização, ao usar as palavras &#8220;localização&#8221; e &#8220;localizar&#8221;, não quero que vocês as entendam como sinônimos de encontrar, achar, etc&#8230;
+
+Quando nos referimos a &#8220;localização&#8221; ou &#8220;localizar&#8221; estamos falando de <strong>L10n</strong>. Eu já falei sobre isto no último artigo.
+<h3>Como funcionará</h3>
+O alicerce desta implementação é um módulo chamado <strong>I18n</strong> que vem através de um gem incorporado ao <strong>ActiveSupport</strong>. Este módulo acrescenta as seguintes funcionalidades ao Rails:
+<p style="padding-left: 30px;">O método <strong>translate</strong>, que será usado para retornar traduções.</p>
+<p style="padding-left: 30px;">O método <strong>localize</strong>, que usaremos para &#8220;traduzir&#8221; objetos Date, DateTime e Time para a localização atual.</p>
+<p style="padding-left: 30px;">Além destes métodos este módulo traz todo o código necessário para armazenar e carregar os <strong>backends</strong> de &#8220;localização&#8221;. E já vem com um manipulador de exceções padrão que captura exceções levantadas no backend.</p>
+
+Tanto o backend como o manipulador de exceções podem (devem) ser substituídos. Além disso para facilitar, os métodos <strong>#translate</strong> e <strong>#localize</strong> também poderão ser executados usando os métodos <strong>#t</strong> e <strong>#l</strong> respectivamente.
+
+Nem tudo está pronto ainda, na verdade muito coisa ainda precisa ser feita e definida por isto é um pouco cedo para dizer com precisão como tudo vai se encaixar no Rails.
+<h3>Exemplos práticos</h3>
+Eu encontrei <a href="http://www.mouseoverstudio.com/blog/?p=105">este artigo</a> escrito pelo <strong>Diego Carrion</strong> que explica um pouco sobre como colocar o <strong>translate</strong> para funcionar, e para quem quer ver isto na prática <strong>Trevor Turk</strong> (do El Dorado) criou no GitHub um <a href="http://github.com/trevorturk/rails-2.2-i18n-example/tree/master">projeto Rails</a> do zero com este código que o Diego menciona no seu blog.
+
+Assim que as coisas estiverem mais concretas, eu volto a falar mais sobre isto.
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/07/24/como-funcionara-o-novo-suporte-a-internacionalizacao-no-rails-22/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/07/23/edge-rails-correcao-de-bug-no-scriptabout-e-alteracoes-nos-metodos-render_file-e-auto_link/">Edge Rails: Bug No Script/about, E Alterações No Render_file E Auto_link</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-07-23 00:00:00 -0300" pubdate  updated >Jul 23<span>rd</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>Railties</h3>
+<ul>
+	<li>Corrigido bug ao usar <strong>script/about</strong> em produção.</li>
+</ul>
+<h3>ActionPack</h3>
+<ul>
+	<li>No Rails 2.2 o método <a href="http://rails-doc.org/rails/ActionView/Base/render_file">ActionView::Base#render_file</a> passa a ser <strong>privado</strong>.</li>
+	<li>O método <a href="http://rails-doc.org/rails/v2.1.0/ActionView/Helpers/TextHelper/auto_link">auto_link</a> agora também suporta o caracter <strong>&#8216;</strong> (aspas simples) no meio da url.</li>
+</ul>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/07/23/edge-rails-correcao-de-bug-no-scriptabout-e-alteracoes-nos-metodos-render_file-e-auto_link/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/07/22/edge-rails-tratando-a-opcao-limit-como-bytes/">Edge Rails: Tratando a Opção :limit Como Bytes (Atualizado)</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-07-22 00:00:00 -0300" pubdate  updated >Jul 22<span>nd</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">À partir da próxima versão do Rails quando usarmos a opção <strong>:limit</strong> para colunas com números inteiros, em nossas migrations, estaremos nos referindo ao número de bytes, no MySQL e no PostgreSQL (no sqlite sempre foi assim).
+
+O tipo da coluna no banco de dados dependerá da quantidade de bytes espeficida. Veja o trecho de código que identifica o tipo da coluna para o MySQL:
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="keyword keyword_control keyword_control_ruby">when</span> <span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_separator punctuation_separator_statement punctuation_separator_statement_ruby">;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>tinyint<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+<span class="keyword keyword_control keyword_control_ruby">when</span> <span class="constant constant_numeric constant_numeric_ruby">2</span><span class="punctuation punctuation_separator punctuation_separator_statement punctuation_separator_statement_ruby">;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>smallint<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+<span class="keyword keyword_control keyword_control_ruby">when</span> <span class="constant constant_numeric constant_numeric_ruby">3</span><span class="punctuation punctuation_separator punctuation_separator_statement punctuation_separator_statement_ruby">;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>mediumint<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+<span class="keyword keyword_control keyword_control_ruby">when</span> <span class="constant constant_language constant_language_ruby">nil</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">4</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">11</span><span class="punctuation punctuation_separator punctuation_separator_statement punctuation_separator_statement_ruby">;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>int(11)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> compatibility with MySQL default
+</span><span class="keyword keyword_control keyword_control_ruby">when</span> <span class="constant constant_numeric constant_numeric_ruby">5</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">..</span><span class="constant constant_numeric constant_numeric_ruby">8</span><span class="punctuation punctuation_separator punctuation_separator_statement punctuation_separator_statement_ruby">;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>bigint<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+<span class="keyword keyword_control keyword_control_ruby">else</span> <span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">raise</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_constant variable_other_constant_ruby">ActiveRecordError</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>No integer type has byte size <span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>limit<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
+
+E para o PostgreSQL:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="keyword keyword_control keyword_control_ruby">when</span> <span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">..</span><span class="constant constant_numeric constant_numeric_ruby">2</span><span class="punctuation punctuation_separator punctuation_separator_statement punctuation_separator_statement_ruby">;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>smallint<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+<span class="keyword keyword_control keyword_control_ruby">when</span> <span class="constant constant_numeric constant_numeric_ruby">3</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">..</span><span class="constant constant_numeric constant_numeric_ruby">4</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_language constant_language_ruby">nil</span><span class="punctuation punctuation_separator punctuation_separator_statement punctuation_separator_statement_ruby">;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>integer<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+<span class="keyword keyword_control keyword_control_ruby">when</span> <span class="constant constant_numeric constant_numeric_ruby">5</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">..</span><span class="constant constant_numeric constant_numeric_ruby">8</span><span class="punctuation punctuation_separator punctuation_separator_statement punctuation_separator_statement_ruby">;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>bigint<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span></pre>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/07/22/edge-rails-tratando-a-opcao-limit-como-bytes/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/07/22/edge-rails-seus-problemas-acabaram-o-rails-tambem-vai-falar-portugues/">Edge Rails: Seus Problemas Acabaram, O Rails Também Vai Falar Português!</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-07-22 00:00:00 -0300" pubdate  updated >Jul 22<span>nd</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><a href="http://www.nomedojogo.com/wp-content/uploads/2008/07/1417766186_85663b2a70.jpg"><img class="alignnone size-medium wp-image-908" title="1417766186_85663b2a70" src="http://www.nomedojogo.com/wp-content/uploads/2008/07/1417766186_85663b2a70.jpg" alt="" /></a>
+<h6>Foto de <a title="Link to chrys' photostream" href="http://flickr.com/photos/chrys/"><strong>chrys</strong></a></h6>
+Algumas pessoas estão comentando que o <strong>Ruby on Rails 2.2</strong> deve ser lançado até setembro, a tempo do <a href="http://en.oreilly.com/railseurope2008/public/content/home">RailsConf Europe</a>, e acredito que esta é uma das novidades que mais nos interessa.
+
+Tudo começou em setembro de 2007 quando um grupo de desenvolvedores começaram a construção de um plugin para o Rails chamado <a href="http://groups.google.com/group/rails-i18n">rails-I18n</a>, que visava eliminar a necessidade de monkey patching no Rails para internacionalizar uma aplicação.
+<h3>Peraí, antes de começar, o que é I18n?</h3>
+Há claro, não posso começar um artigo sobre <strong>I18n</strong> sem explicar o que isto significa. Primeiro, para entender o porque deste nome, precisamos ter um conhecimento profundo de cálculos matemáticos. Conte comigo, quantas letras temos entre o <strong>I</strong> e o <strong>n</strong> na palavra <strong>Internationalization</strong>? 18. Muito bom, <strong>I18n</strong>.
+
+O mesmo vale para <strong>Localization</strong> e <strong>L10n</strong>.
+
+Já viu quando um site tem aquelas bandeirinhas no topo, permitindo que você escolha em que língua quer navegar? Quando você clica em uma delas, todos os textos do site mudam para a língua correspondente daquele país.
+
+Isto é Internationalization, ou I18n.
+
+Claro que estou sendo muito simplista, na maioria das vezes não é só os textos que mudam de um país para outro. Não podemos nos esquecer do formato da data, fuso-horário, padrões de peso e medida. E talvez o mais importante a moeda.
+<h3>I18n e L10n, qual a diferença?</h3>
+Internacionalização é preparar seu software para que pessoas de outros países e línguas possam usá-lo.
+
+Localização (L10n) é adaptar o seu produto as necessidades de um país. É como pegar um site americano que só aceita pagamento via PayPal e adaptá-lo para aceitar boleto bancário, por exemplo.
+<h3>O que tem de novo no Rails?</h3>
+No Rails 2.2 este plugin de internacionalização será integrado ao seu código fonte.
+
+Isto não significa que o Rails sofrerá grandes alterações. Na verdade quase nada muda no Rails, ele continuará sendo o mesmo framework de sempre, com todas as suas mensagens de validações em inglês e tudo mais.
+
+A diferença é que se quiséssemos estas mensagem em português, ou em outro idioma, hoje, teríamos de criar um monkey patch para isto. Não posso deixar de citar como exemplo o famoso <a href="http://www.improveit.com.br/software_livre/brazilian_rails">Brazilian Rails</a>, que faz exatamente isto para traduzir as mensagens do <strong>ActiveRecord</strong>.
+
+A novidade é que a partir do Rails 2.2 teremos uma forma padronizada e mais simples de fazer isto, usando uma interface comum.
+<h3>Como isto vai funcionar?</h3>
+Básicamente este gem é dividido em duas partes:
+<ul>
+	<li>A primeira acrescenta à API do Rails uma coleção de novos métodos, estes métodos basicamente servirão para acessar a segunda parte do gem.</li>
+	<li>A segunda parte é um <strong>backend</strong> simples que implementa toda a lógica para fazer o Rails funcionar exatamente como funciona hoje, usando a localização <strong>en-US</strong>.</li>
+</ul>
+Okey, até aí, não mudou nada. A grande sacada é que esta segunda parte poderá ser substituída por uma que dê suporte à internacionalização que você deseja. Melhor ainda, uma série de plugins que serão lançados irão fazer exatamente isto.
+
+E é claro que teremos um em português. Talvez uma adaptação do Brazilian Rails? Tomara que desta vez com um nome um pouco mais bonito&#8230;
+
+No próximo artigo vou dar mais detalhes desta implementação, usando código.
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/07/22/edge-rails-seus-problemas-acabaram-o-rails-tambem-vai-falar-portugues/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/07/21/free-book-ruby-on-rails-21-whats-new-7-translations/">Free Book: Ruby on Rails 2.1 - What&#8217;s New (7 Translations)</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-07-21 00:00:00 -0300" pubdate  updated >Jul 21<span>st</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><img class="alignnone size-full wp-image-902" title="149172094_f4a814bf30" src="http://www.nomedojogo.com/wp-content/uploads/2008/07/149172094_f4a814bf30.jpg" alt="" />
+
+Mais uma tradução terminada do livro &#8221;<a href="http://www.nomedojogo.com/2008/06/06/o-primeiro-livro-sobre-rails-21-e-brasileiro/">Ruby on Rails 2.1 - O que há de novo?</a>&#8221;, desta vez para chinês tradicional.
+
+A tradução foi feita por meus dois novos amigos chineses, Zero e CFC. A tradução se encontra no site <a href="http://www.scribd.com/doc/4019122/Rails-21-">Scribd</a>.
+
+Com esta tradução este livro já se encontra disponível em <a href="http://www.nomedojogo.com/2008/06/06/o-primeiro-livro-sobre-rails-21-e-brasileiro/">português</a>, <a href="http://www.nomedojogo.com/2008/06/15/ruby-on-rails-21-whats-new-second-edition/">inglês</a>, <a href="http://www.nomedojogo.com/2008/06/21/ruby-on-rails-21-2/">japonês</a>, chinês <a href="http://www.nomedojogo.com/2008/06/25/ruby-on-rails-21-whats-new-chinese-version/">simplificado</a> e <a href="http://www.scribd.com/doc/4019122/Rails-21-">tradicional</a>, <a href="http://www.nomedojogo.com/2008/06/26/ruby-on-rails-21-o-que-ha-de-novo-em-italiano/">italiano</a> e <a href="http://rails21-book.springnote.com/">coreano</a>. E a versão em <a href="http://www.nomedojogo.com/2008/06/13/em-breve/">espanhol</a> deve sair em breve.
+<h4>English</h4>
+Another translation of the book &#8221;<a href="http://www.nomedojogo.com/2008/06/09/new-free-book-ruby-on-rails-21-whats-new/">Ruby on Rails 2.1 - What&#8217;s New</a>&#8221; was finished. Now in Traditional Chinese.
+
+The translation was done by my new Chinese friends, Zero and CFC. To get the translation, <a href="http://www.scribd.com/doc/4019122/Rails-21-">click here</a>.
+
+This book is already available in <a href="http://www.nomedojogo.com/2008/06/06/o-primeiro-livro-sobre-rails-21-e-brasileiro/">Portuguese</a>, <a href="http://www.nomedojogo.com/2008/06/15/ruby-on-rails-21-whats-new-second-edition/">English</a>, <a href="http://www.nomedojogo.com/2008/06/21/ruby-on-rails-21-2/">Japanese</a>, <a href="http://www.nomedojogo.com/2008/06/25/ruby-on-rails-21-whats-new-chinese-version/">Simplified</a> and <a href="http://www.scribd.com/doc/4019122/Rails-21-">Traditional</a> Chinese, <a href="http://www.nomedojogo.com/2008/06/26/ruby-on-rails-21-o-que-ha-de-novo-em-italiano/">Italian</a> and <a href="http://rails21-book.springnote.com/">Korean</a>. And the <a href="http://www.nomedojogo.com/2008/06/13/em-breve/">Spanish</a> version should leave soon.
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/07/21/free-book-ruby-on-rails-21-whats-new-7-translations/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/07/21/edge-rails-correcoes-de-bugs/">Edge Rails: Algumas Correções De Bugs</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-07-21 00:00:00 -0300" pubdate  updated >Jul 21<span>st</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Algumas correções de bugs que sairão na próxima versão do Ruby on Rails:
+<h3>ActiveRecord</h3>
+<ul>
+	<li><strong>Correção de uma colisão entre named_scope e :joins.</strong>
+Quando se usava with_scope junto com :joins todos os atributos da tabelas secundárias eram adicionados ao modelo da tabela principal.</li>
+</ul>
+<ul>
+	<li><strong>Partial updates não atualizavam o lock_version se nada foi alterado.</strong>
+Quando usávamos optimistic locking com partial updates, tinhamos queries extras quando na verdade elas não eram necessárias.</li>
+</ul>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/07/21/edge-rails-correcoes-de-bugs/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/07/19/minha-palestra-no-rejectconf07-agora-com-slides/">Minha Palestra No RejectConf&#8217;07 - Agora Com Slides!</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-07-19 00:00:00 -0300" pubdate  updated >Jul 19<span>th</span>, 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content">Em novembro do ano passado (2007) tivemos o <a href="http://www.nomedojogo.com/2007/10/17/confirmado-evento-de-rails-em-sao-paulo/">RejectConf&#8217;07</a> em São Paulo, onde eu tive o privilégio de fechar o evento com uma palestra motivacional. Depois deste evento, tivemos muitos outros em vários estados do Brasil e online.
+
+Nem faz tanto tempo assim, mas muita coisa aconteceu desde então. A comunidade brasileira de Ruby on Rails cresceu muito e muita gente conseguiu abandonar seus antigos empregos e começar a trabalhar exclusivamente com Ruby, alguns para empresas nacionais como no caso do <a href="http://brasigo.com.br/">Brasigo</a> (que esta semana seu produto), outros para empresas de fora do Brasil.
+
+Agora mais uma vez a comunidade de desenvolvedores Ruby e Rails volta seus olhos para São Paulo com o anúncio do <a href="http://akitaonrails.com/2008/7/13/rails-summit-latin-america-2008">Rails Summit Latin America</a>, um evento que promete alavancar o crescimento da nossa linguagem e framework preferidos por aqui.
+
+Infelizmente desta vez não vou palestrar, mas teremos pessoas mundialmente conhecidas como Dr. Nic, Obie Fernandez e até mesmo o criador do Rails, David Hansson em palestras com direito a tradução simultânea e tudo mais.
+
+Para quem participou do primeiro RejectConf em uma sala de aula na USP, vai ser muito legal reencontrar toda aquela galera novamente num evento desta proporção.
+
+Eu encontrei um serviço bem legal na internet que permite juntar vídeo com slides e resolvi dar um tapa no vídeo da palestra que fiz no RejectConf. Para os saudosos, ou para quem não pôde participar, o vídeo está aí embaixo:
+
+<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="520" height="276" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="bgcolor" value="#FFFFFF" /><param name="quality" value="high" /><param name="allowscriptaccess" value="always" /><param name="allowfullscreen" value="true" /><param name="src" value="http://www.omnisio.com/bin/Embed.swf?embedID=bpIJK0uSmr3AgwadbiFy2w" /><embed type="application/x-shockwave-flash" width="520" height="276" src="http://www.omnisio.com/bin/Embed.swf?embedID=bpIJK0uSmr3AgwadbiFy2w" allowfullscreen="true" allowscriptaccess="always" quality="high" bgcolor="#FFFFFF"></embed></object>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/07/19/minha-palestra-no-rejectconf07-agora-com-slides/">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+<nav role="pagination">
+  <div>
+    
+      <a class="prev" href="/blog/page/32/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/30/">Newer &rarr;</a>
+    
+  </div>
+</nav>
+
+<script type="text/javascript">
+    var disqus_shortname = 'carlosbrando';
+    (function () {
+      var s = document.createElement('script'); s.async = true;
+      s.type = 'text/javascript';
+      s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+      (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+
+</div>
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro anos de Nome do Jogo</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("carlosbrando", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/carlosbrando" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @carlosbrando</a>
+  
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>
