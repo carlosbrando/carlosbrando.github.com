@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Torne Seus Métodos De Pesquisa Menos Poderosos</h1>
+      <h1 class="entry-title">Torne seus métodos de pesquisa menos poderosos</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2007-07-30 00:00:00 -0300" pubdate  updated >Jul 30<span>th</span>, 2007</time>
+<time datetime="2007-07-30 00:00:00 -0300" pubdate  updated >30 de Julho de 2007</time>
 
 
 </p>
@@ -113,24 +113,41 @@
   </header>
 
 
-<div class="entry-content"><center><img src="http://farm1.static.flickr.com/13/18480748_a42e246901.jpg?v=0" alt="" /></center><br/><p>Em um <a href="http://www.nomedojogo.com/2007/07/13/204/">post mais antigo</a> citei um exemplo de uso do m&eacute;todo <strong>with_scope</strong>. Hoje enfrentei um caso onde eu queria fazer exatamente o contr&aacute;rio, impedir que algu&eacute;m usasse um with_scope no meu m&eacute;todo.</p>
+<div class="entry-content"><center><img src="http://farm1.static.flickr.com/13/18480748_a42e246901.jpg?v=0" alt="" /></center>
+
+
+<br/><p>Em um <a href="http://www.nomedojogo.com/2007/07/13/204/">post mais antigo</a> citei um exemplo de uso do m&eacute;todo <strong>with_scope</strong>. Hoje enfrentei um caso onde eu queria fazer exatamente o contr&aacute;rio, impedir que algu&eacute;m usasse um with_scope no meu m&eacute;todo.</p>
+
+
+
 
 <p>Pesquisando nas bibliotecas do Rails descobri que existe um m&eacute;todo chamado <strong>with_exclusive_scope</strong>.</p>
 
+
+
+
 <p>B&aacute;sicamente ele faz o mesmo que o with_scope, mas ignora todas as outras chamadas de with_scope que estiver acima dele. Como sempre, um peda&ccedil;o de c&oacute;digo vale mais do que mil palavras:</p>
 
-[source:ruby]
+
+<p>[source:ruby]
 Mail.with_scope(:find=>{:conditions=>&#8221;user_id = &#8230;&#8221;}) do
   count = Mail.count     # => SELECT COUNT(*) FROM mails WHERE user_id = &#8230;
-  Mail.with_exclusive_scope({}) do
-    count = Mail.count   # => SELECT COUNT(*) FROM mails
-  end
+  Mail.with_exclusive_scope({}) do</p>
+
+<pre><code>count = Mail.count   # =&gt; SELECT COUNT(*) FROM mails
+</code></pre>
+
+<p>  end
 end
-[/source]
+[/source]</p>
 
 <p>Mais uma vez fica bem claro porque <strong>Ruby on Rails</strong> nos torna programadores t&atilde;o felizes.</p>
 
+
+
+
 <p>PS: Quero deixar aqui apenas uma nota de agradecimento ao <a href="http://www.akitaonrails.com/">Akita</a>, por algumas dicas que me concedeu na sexta-feira. Espero estar com novidades para contar em breve&#8230;</p>
+
 </div>
 
 
@@ -139,14 +156,14 @@ end
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2007-07-30 00:00:00 -0300" pubdate  updated >Jul 30<span>th</span>, 2007</time>
+<time datetime="2007-07-30 00:00:00 -0300" pubdate  updated >30 de Julho de 2007</time>
 
 
 

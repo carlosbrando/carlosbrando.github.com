@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Edge Rails: Solução De Bug No Método Rename_column</h1>
+      <h1 class="entry-title">Edge Rails: Solução de bug no método rename_column</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-07-04 00:00:00 -0300" pubdate  updated >Jul 4<span>th</span>, 2008</time>
+<time datetime="2008-07-04 00:00:00 -0300" pubdate  updated > 4 de Julho de 2008</time>
 
 
 </p>
@@ -113,16 +113,22 @@
   </header>
 
 
-<div class="entry-content">Esta alteração trata-se na verdade de uma correção de um <strong>bug</strong> no método <a href="http://rails-doc.org/docs/ActiveRecord/ConnectionAdapters/SchemaStatements/rename_column">rename_column</a>. Para entender qual era o problema precisamos de um cenário como exemplo. Primeiro criamos um <strong>migration</strong>:
+<div class="entry-content"><p>Esta alteração trata-se na verdade de uma correção de um <strong>bug</strong> no método <a href="http://rails-doc.org/docs/ActiveRecord/ConnectionAdapters/SchemaStatements/rename_column">rename_column</a>. Para entender qual era o problema precisamos de um cenário como exemplo. Primeiro criamos um <strong>migration</strong>:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">create_table <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>users<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>force</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">true</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">t</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
   t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>column <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>name</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>string</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>default</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
 <span class="keyword keyword_control keyword_control_ruby">end</span>
 </span></pre>
-Ok, agora criamos um segundo <strong>migration</strong> onde vamos renomear a coluna <strong>name</strong> da tabela:
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">rename_column <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>users</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>name</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>first_name</span></span></pre>
-Se você fizer o teste em sua máquina, notará que ao usar o método <strong>rename_column</strong> a &#8220;nova&#8221; coluna <strong>first_name</strong> não terá mais o valor <strong>default</strong> definido no primeiro <strong>migration</strong>.
 
-Eu não tinha percebido este bug ainda, mas fiz o teste aqui e realmente aconteceu. Mas já está resolvido para a próxima versão do Rails.
+
+<p>Ok, agora criamos um segundo <strong>migration</strong> onde vamos renomear a coluna <strong>name</strong> da tabela:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">rename_column <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>users</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>name</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>first_name</span></span></pre>
+
+
+<p>Se você fizer o teste em sua máquina, notará que ao usar o método <strong>rename_column</strong> a &#8220;nova&#8221; coluna <strong>first_name</strong> não terá mais o valor <strong>default</strong> definido no primeiro <strong>migration</strong>.</p>
+
+<p>Eu não tinha percebido este bug ainda, mas fiz o teste aqui e realmente aconteceu. Mas já está resolvido para a próxima versão do Rails.</p>
 </div>
 
 
@@ -131,14 +137,14 @@ Eu não tinha percebido este bug ainda, mas fiz o teste aqui e realmente acontec
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-07-04 00:00:00 -0300" pubdate  updated >Jul 4<span>th</span>, 2008</time>
+<time datetime="2008-07-04 00:00:00 -0300" pubdate  updated > 4 de Julho de 2008</time>
 
 
 

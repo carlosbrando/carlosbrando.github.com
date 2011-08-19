@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Edge Rails: Bug No PostgreSQL E Novos Métodos Para O DateTime</h1>
+      <h1 class="entry-title">Edge Rails: Bug no PostgreSQL e novos métodos para o DateTime</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-01-25 00:00:00 -0200" pubdate  updated >Jan 25<span>th</span>, 2008</time>
+<time datetime="2008-01-25 00:00:00 -0200" pubdate  updated >25 de Janeiro de 2008</time>
 
 
 </p>
@@ -113,11 +113,15 @@
   </header>
 
 
-<div class="entry-content"><img src="http://www.nomedojogo.com/wp-content/uploads/2008/01/1939398332_4e856ea627.jpg" alt="1939398332_4e856ea627.jpg" />
-<h3>Bug ao adicionar colunas em banco de dados PostgreSQL</h3>
-Havia um bug ao se usar o banco de dados PostgreSQL. O bug ocorria quando se criava uma migration para adicionar uma coluna em uma tabela já existente, veja um exemplo:
+<div class="entry-content"><p><img src="http://www.nomedojogo.com/wp-content/uploads/2008/01/1939398332_4e856ea627.jpg" alt="1939398332_4e856ea627.jpg" /></p>
 
-Arquivo: db/migrate/002_add_cost.rb
+<h3>Bug ao adicionar colunas em banco de dados PostgreSQL</h3>
+
+
+<p>Havia um bug ao se usar o banco de dados PostgreSQL. O bug ocorria quando se criava uma migration para adicionar uma coluna em uma tabela já existente, veja um exemplo:</p>
+
+<p>Arquivo: db/migrate/002_add_cost.rb</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">AddCost<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Migration</span></span></span>
   <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">self.up</span></span>
     add_column <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>items</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>cost</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>decimal</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>precision</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">6</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>scale</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">2</span>
@@ -128,7 +132,8 @@ Arquivo: db/migrate/002_add_cost.rb
   <span class="keyword keyword_control keyword_control_ruby">end</span>
 <span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
 
-Note que estou criando uma coluna com <strong>:precision =&gt; 6</strong> e <strong>:scale =&gt; 2</strong>. Agora é hora de rodar o &#8221;<strong>rake db:migrate</strong>&#8221; e vamos ver como ficou nossa tabela no banco:
+
+<p>Note que estou criando uma coluna com <strong>:precision =&gt; 6</strong> e <strong>:scale =&gt; 2</strong>. Agora é hora de rodar o &#8221;<strong>rake db:migrate</strong>&#8221; e vamos ver como ficou nossa tabela no banco:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">   <span class="variable variable_other variable_other_constant variable_other_constant_ruby">Column</span>     <span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">|</span>          <span class="variable variable_other variable_other_constant variable_other_constant_ruby">Type</span>          <span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">|</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">Modifiers</span>
 <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">--------------+------------------------+-------------</span>
@@ -138,11 +143,15 @@ Note que estou criando uma coluna com <strong>:precision =&gt; 6</strong> e <str
  cost         <span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">|</span> numeric                <span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">|</span>
 </span></pre>
 
-Ops&#8230;Veja a coluna &#8221;<strong>cost</strong>&#8221; que acabamos de criar&#8230; ela é um <strong>numeric</strong> <strong>comum</strong>, mas deveria ser uma coluna como a &#8221;<strong>price</strong>&#8221;, logo acima dela, mais precisamente um <strong>numeric(6,2)</strong>.
 
-Bom, este erro já foi corrigido!
+<p>Ops&#8230;Veja a coluna &#8221;<strong>cost</strong>&#8221; que acabamos de criar&#8230; ela é um <strong>numeric</strong> <strong>comum</strong>, mas deveria ser uma coluna como a &#8221;<strong>price</strong>&#8221;, logo acima dela, mais precisamente um <strong>numeric(6,2)</strong>.</p>
+
+<p>Bom, este erro já foi corrigido!</p>
+
 <h3>Novos métodos #utc, #utc? e #utc_offset para a classe DateTime</h3>
-Outra alteração interessante para a nova versão. Para manter a compatibilidade (<strong>duck-typing</strong>) com a classe <strong>Time</strong>, três métodos novos foram adicionados à classe <strong>DateTime</strong>. Os métodos são <strong>#utc</strong>, <strong>#utc?</strong> e <strong>#utc_offset</strong>. Vamos ver um exemplo de uso de cada um:
+
+
+<p>Outra alteração interessante para a nova versão. Para manter a compatibilidade (<strong>duck-typing</strong>) com a classe <strong>Time</strong>, três métodos novos foram adicionados à classe <strong>DateTime</strong>. Os métodos são <strong>#utc</strong>, <strong>#utc?</strong> e <strong>#utc_offset</strong>. Vamos ver um exemplo de uso de cada um:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> date <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">DateTime</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>civil<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">2005</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">2</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">21</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">10</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">11</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">12</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">Rational</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">-</span><span class="constant constant_numeric constant_numeric_ruby">6</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">24</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">))</span>
 <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">Mon</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">21</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">Feb</span> <span class="constant constant_numeric constant_numeric_ruby">2005</span> <span class="constant constant_numeric constant_numeric_ruby">10</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">:</span><span class="constant constant_numeric constant_numeric_ruby">11</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">:</span><span class="constant constant_numeric constant_numeric_ruby">12</span> <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">-</span><span class="constant constant_numeric constant_numeric_ruby">0600</span>
@@ -156,6 +165,7 @@ Outra alteração interessante para a nova versão. Para manter a compatibilidad
 
 <span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> <span class="support support_class support_class_ruby">DateTime</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>civil<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">2005</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">2</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">21</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">10</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">11</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">12</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">Rational</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">-</span><span class="constant constant_numeric constant_numeric_ruby">6</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">24</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">))</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>utc_offset
 <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">-</span><span class="constant constant_numeric constant_numeric_ruby">21600</span></span></pre>
+
 </div>
 
 
@@ -164,14 +174,14 @@ Outra alteração interessante para a nova versão. Para manter a compatibilidad
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-01-25 00:00:00 -0200" pubdate  updated >Jan 25<span>th</span>, 2008</time>
+<time datetime="2008-01-25 00:00:00 -0200" pubdate  updated >25 de Janeiro de 2008</time>
 
 
 

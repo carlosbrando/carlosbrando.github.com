@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Edge Rails: Armazenando O Nome Completo Da Classe Ao Usar STI</h1>
+      <h1 class="entry-title">Edge Rails: Armazenando o nome completo da classe ao usar STI</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-05-23 00:00:00 -0300" pubdate  updated >May 23<span>rd</span>, 2008</time>
+<time datetime="2008-05-23 00:00:00 -0300" pubdate  updated >23 de Maio de 2008</time>
 
 
 </p>
@@ -113,11 +113,11 @@
   </header>
 
 
-<div class="entry-content">Patch de brasileiro e não é de qualquer brasileiro, é do meu colega de trabalho na <a href="http://www.surgeworks.com/">Surgeworks</a>, <a href="http://blog.divoxx.com/">Rodrigo Kochenburger</a>.
+<div class="entry-content"><p>Patch de brasileiro e não é de qualquer brasileiro, é do meu colega de trabalho na <a href="http://www.surgeworks.com/">Surgeworks</a>, <a href="http://blog.divoxx.com/">Rodrigo Kochenburger</a>.</p>
 
-Neste patch o Rodrigo resolveu um problema que tínhamos ao usar <strong>models com namespace</strong> e <strong>STI</strong>. Nas suas próprias palavras:
+<p>Neste patch o Rodrigo resolveu um problema que tínhamos ao usar <strong>models com namespace</strong> e <strong>STI</strong>. Nas suas próprias palavras:</p>
 
-Quando usamos models com namespace e STI, o <em>ActiveRecord</em> armazena apenas o nome da classe, sem o namespace (<em>demodulized</em>). Isto vai funcionar se todas as classes no STI estiverem no mesmo namespace, mas irá falhar em outros casos. Exemplo:
+<p>Quando usamos models com namespace e STI, o <em>ActiveRecord</em> armazena apenas o nome da classe, sem o namespace (<em>demodulized</em>). Isto vai funcionar se todas as classes no STI estiverem no mesmo namespace, mas irá falhar em outros casos. Exemplo:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">CollectionItem<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span><span class="punctuation punctuation_separator punctuation_separator_statement punctuation_separator_statement_ruby">;</span> <span class="keyword keyword_control keyword_control_ruby">end</span>
 <span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">ComicCollection::Item<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> CollectionItem</span></span></span><span class="punctuation punctuation_separator punctuation_separator_statement punctuation_separator_statement_ruby">;</span> <span class="keyword keyword_control keyword_control_ruby">end</span>
@@ -128,13 +128,15 @@ item<span class="punctuation punctuation_separator punctuation_separator_method 
 item2 <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">CollectionItem</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>item<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>id<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> retorna um erro, porque não encontrou a classe Item
 </span></span></span></pre>
 
-Este patch do Rodrigo adiciona uma nova opção de configuração que faz com que o <em>ActiveRecord</em> armazene o nome completo da classe.
 
-Para ligar ou desligar esta funcionalidade você deve incluir ou alterar a seguinte linha no seu arquivo <em>environment.rb</em>:
+<p>Este patch do Rodrigo adiciona uma nova opção de configuração que faz com que o <em>ActiveRecord</em> armazene o nome completo da classe.</p>
+
+<p>Para ligar ou desligar esta funcionalidade você deve incluir ou alterar a seguinte linha no seu arquivo <em>environment.rb</em>:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="support support_class support_class_ruby">ActiveRecord</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">Base</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>store_full_sti_class <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_language constant_language_ruby">true</span></span></span></pre>
 
-Por padrão esta funcionalidade estará ligada.
+
+<p>Por padrão esta funcionalidade estará ligada.</p>
 </div>
 
 
@@ -143,14 +145,14 @@ Por padrão esta funcionalidade estará ligada.
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-05-23 00:00:00 -0300" pubdate  updated >May 23<span>rd</span>, 2008</time>
+<time datetime="2008-05-23 00:00:00 -0300" pubdate  updated >23 de Maio de 2008</time>
 
 
 

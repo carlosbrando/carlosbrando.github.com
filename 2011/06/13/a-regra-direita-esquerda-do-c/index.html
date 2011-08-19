@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">A Regra Direita-Esquerda Do C</h1>
+      <h1 class="entry-title">A Regra Direita-Esquerda do C</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2011-06-13 00:00:00 -0300" pubdate  updated >Jun 13<span>th</span>, 2011</time>
+<time datetime="2011-06-13 00:00:00 -0300" pubdate  updated >13 de Junho de 2011</time>
 
 
 </p>
@@ -119,7 +119,7 @@
 
 <h2>A Regra Direita-Esquerda do C</h2>
 
-<p>A regra <code>direta-esquerda</code> é muito útil para decifrar declarações na linguagem C e também pode ser de grande ajuda ao escrever código. A regra é bem simples, toda vez que encontrar os seguintes símbolos no código, leia:</p>
+<p>A regra <strong>direta-esquerda</strong> é muito útil para decifrar declarações na linguagem C e também pode ser de grande ajuda ao escrever código. A regra é bem simples, toda vez que encontrar os seguintes símbolos no código, leia:</p>
 
 <pre><code>*   como "um ponteiro para"      - sempre do lado esquerdo
 []  como "um array de"           - sempre do lado direito
@@ -140,115 +140,163 @@
 
 <p>Então, repita os passos 2 e 3 até terminar toda a sua declaração. Veja abaixo alguns exemplos:</p>
 
-<pre><code>int *p[];
-</code></pre>
-
-<ol>
-<li><p>Encontre o identificador.</p>
-
-<p> int *p[];</p>
-
-<pre><code>  ^
-</code></pre>
-
-<p> &#8220;p é&#8221;</p></li>
-<li><p>Siga pela direita enquanto encontrar um símbolo ou abre parênteses.</p></li>
-</ol>
-
-
 <figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'><span class="nb">int</span> <span class="o">*</span><span class="n">p</span><span class="o">[]</span><span class="p">;</span>
-</div><div class='line'>      <span class="o">^^</span>
-</div><div class='line'><span class="s">&quot;p ĂŠ um array de&quot;</span>
+</pre></td><td class='code' width='100%'><pre><code class='c'><div class='line'><span class="kt">int</span> <span class="o">*</span><span class="n">p</span><span class="p">[];</span>
 </div></code></pre></td></tr></table></div></figure>
 
 <ol>
-<li><p>Quando não puder mais mover para a direita (os símbolo acabaram), então siga para a esquerda e encontre:</p>
-
-<p> int *p[];</p>
-
-<pre><code> ^
-</code></pre>
-
-<p> &#8220;p é um array de ponteiros para&#8221;</p></li>
-<li><p>Continue seguinte pela esquerda e encontre:</p>
-
-<p> int *p[];
- ^<sup>^</sup>
- &#8220;p é um array de ponteiros para int&#8221;.
- (ou &#8220;p é um array onde cada elemento é um ponteiro para um inteiro&#8221;)</p></li>
+<li>Encontre o identificador.</li>
 </ol>
+
+
+<div><figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'>int *p[];
+</div><div class='line'>     ^
+</div><div class='line'>"p é"</div></code></pre></td></tr></table></div></figure></div>
+
+
+<ol>
+<li>Siga pela direita enquanto encontrar um símbolo ou abre parênteses.</li>
+</ol>
+
+
+<div><figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'>int *p[];
+</div><div class='line'>      ^^
+</div><div class='line'>"p é um array de"</div></code></pre></td></tr></table></div></figure></div>
+
+
+<ol>
+<li>Quando não puder mais mover para a direita (os símbolo acabaram), então siga para a esquerda e encontre:</li>
+</ol>
+
+
+<div><figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'>int *p[];
+</div><div class='line'>    ^
+</div><div class='line'>"p é um array de ponteiros para"</div></code></pre></td></tr></table></div></figure></div>
+
+
+<ol>
+<li>Continue seguinte pela esquerda e encontre:</li>
+</ol>
+
+
+<div><figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'>int *p[];
+</div><div class='line'>^^^
+</div><div class='line'>"p é um array de ponteiros para int". 
+</div><div class='line'>(ou "p é um array onde cada elemento é um ponteiro para um inteiro")</div></code></pre></td></tr></table></div></figure></div>
 
 
 <p>Outro exemplo:</p>
 
-<pre><code>int *(*func())();
-</code></pre>
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+</pre></td><td class='code' width='100%'><pre><code class='c'><div class='line'><span class="kt">int</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">func</span><span class="p">())();</span>
+</div></code></pre></td></tr></table></div></figure>
 
 <ol>
-<li><p>Encontre o identificador.</p>
-
-<p> int <em>(</em>func())();</p>
-
-<pre><code>    ^^^^
-</code></pre>
-
-<p> &#8220;func é&#8221;</p></li>
-<li><p>Vá para a direita.</p>
-
-<p> int <em>(</em>func())();</p>
-
-<pre><code>        ^^
-</code></pre>
-
-<p> &#8220;func é uma função retornando&#8221;</p></li>
-<li><p>Não dá para ir mais a direita devido ao fecha parênteses, então vá para a esquerda.</p>
-
-<p> int <em>(</em>func())();</p>
-
-<pre><code>   ^
-</code></pre>
-
-<p> &#8220;func é uma função retornando um ponteiro para&#8221;</p></li>
-<li><p>Não pode mais ir para a esquerda devido ao abre parênteses, então continue indo pela direita.</p>
-
-<p> int <em>(</em>func())();</p>
-
-<pre><code>           ^^
-</code></pre>
-
-<p> &#8220;func é uma função retornando um ponteiro para uma função retornando&#8221;</p></li>
-<li><p>Não dá mais para ir para a direita porque não há mais simbolos, então vá para a esquerda.</p>
-
-<p> int <em>(</em>func())();</p>
-
-<pre><code> ^
-</code></pre>
-
-<p> &#8220;func é uma função retornando um ponteiro para uma função retornando um ponteiro para&#8221;</p></li>
-<li><p>E finalmente, o último símbolo a esquerda.</p>
-
-<p> int <em>(</em>func())();
- ^<sup>^</sup>
- &#8220;func é uma função retornando um ponteiro para uma função retornando um ponteiro para um inteiro&#8221;.</p></li>
+<li>Encontre o identificador.</li>
 </ol>
+
+
+<div><figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'>int *(*func())();
+</div><div class='line'>       ^^^^
+</div><div class='line'>"func é"</div></code></pre></td></tr></table></div></figure></div>
+
+
+<ol>
+<li>Vá para a direita.</li>
+</ol>
+
+
+<div><figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'>int *(*func())();
+</div><div class='line'>           ^^
+</div><div class='line'>"func é uma função retornando"</div></code></pre></td></tr></table></div></figure></div>
+
+
+<ol>
+<li>Não dá para ir mais a direita devido ao fecha parênteses, então vá para a esquerda.</li>
+</ol>
+
+
+<div><figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'>int *(*func())();
+</div><div class='line'>      ^
+</div><div class='line'>"func é uma função retornando um ponteiro para"</div></code></pre></td></tr></table></div></figure></div>
+
+
+<ol>
+<li>Não pode mais ir para a esquerda devido ao abre parênteses, então continue indo pela direita.</li>
+</ol>
+
+
+<div><figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'>int *(*func())();
+</div><div class='line'>              ^^
+</div><div class='line'>"func é uma função retornando um ponteiro para uma função retornando"</div></code></pre></td></tr></table></div></figure></div>
+
+
+<ol>
+<li>Não dá mais para ir para a direita porque não há mais simbolos, então vá para a esquerda.</li>
+</ol>
+
+
+<div><figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'>int *(*func())();
+</div><div class='line'>    ^
+</div><div class='line'>"func é uma função retornando um ponteiro para uma função retornando um ponteiro para"</div></code></pre></td></tr></table></div></figure></div>
+
+
+<ol>
+<li>E finalmente, o último símbolo a esquerda.</li>
+</ol>
+
+
+<div><figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'>int *(*func())();
+</div><div class='line'>^^^
+</div><div class='line'>"func é uma função retornando um ponteiro para uma função retornando um ponteiro para um inteiro".</div></code></pre></td></tr></table></div></figure></div>
 
 
 <p>Como você pode ver, essa regra pode ser muito útil. Ela também é ótima para manter a sua sanidade enquanto estiver criando declarações, além de ajudá-lo a identificar onde colocar o próximo símbolo ou parênteses.</p>
 
 <p>Algumas declarações podem parecer ainda mais complicadas quando definem o tamanho de um array ou informam uma lista de argumentos. Por exemplo, se você ver algo como <code>[3]</code>, deve ler <em>&#8220;um array (de tamanho 3) de&#8230;&#8221;</em>. Mas se você ver algo como <code>(char *,int)</code>, então deve ler <em>&#8220;uma função esperando (char </em>, int) e retornando&#8230;&#8221;*. Veja mais um exemplo:</p>
 
-<pre><code>int (*(*fun_one)(char *,double))[9][20];
-</code></pre>
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+</pre></td><td class='code' width='100%'><pre><code class='c'><div class='line'><span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">fun_one</span><span class="p">)(</span><span class="kt">char</span> <span class="o">*</span><span class="p">,</span><span class="kt">double</span><span class="p">))[</span><span class="mi">9</span><span class="p">][</span><span class="mi">20</span><span class="p">];</span>
+</div></code></pre></td></tr></table></div></figure>
 
 <p>Eu não vou seguir cada passo para decifrar essa declaração. Mas o resultado será: <em>&#8220;fun_one é um ponteiro para uma função esperando (char </em>, double) e retornando um ponteiro para um array (tamanho 9) de um array (tamanho 20) de inteiros&#8221;*.</p>
 
 <p>Fica mais fácil se você remover o tamanho dos arrays e as listas de argumentos:</p>
 
-<pre><code>int (*(*fun_one)())[][];
-</code></pre>
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+</pre></td><td class='code' width='100%'><pre><code class='c'><div class='line'><span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">fun_one</span><span class="p">)())[][];</span>
+</div></code></pre></td></tr></table></div></figure>
 
 <p>Uma boa opção é decifrar dessa maneira e só depois adicionar o tamanho dos arrays e a lista de argumentos.</p>
 
@@ -256,8 +304,9 @@
 
 <p>É totalmente possível criar declarações ilegais usando essa regra, então algum conhecimento do que é aceitável e do que não é em C é necessário. Por exemplo, se você tiver algo assim:</p>
 
-<pre><code>int *((*fun_one)())[][];
-</code></pre>
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+</pre></td><td class='code' width='100%'><pre><code class='c'><div class='line'><span class="kt">int</span> <span class="o">*</span><span class="p">((</span><span class="o">*</span><span class="n">fun_one</span><span class="p">)())[][];</span>
+</div></code></pre></td></tr></table></div></figure>
 
 <p>A declaração acima seria traduzida para <em>&#8220;fun_one é um ponteiro para uma função retornando um array de arrays de ponteiros para inteiros&#8221;</em>.</p>
 
@@ -321,14 +370,14 @@ int *ffp()();    "ffp é uma função retornando uma função retornando um pont
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2011-06-13 00:00:00 -0300" pubdate  updated >Jun 13<span>th</span>, 2011</time>
+<time datetime="2011-06-13 00:00:00 -0300" pubdate  updated >13 de Junho de 2011</time>
 
 
 

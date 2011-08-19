@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Instalando a Linguagem Go No Mac</h1>
+      <h1 class="entry-title">Instalando a linguagem Go no Mac</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2009-11-13 00:00:00 -0200" pubdate  updated >Nov 13<span>th</span>, 2009</time>
+<time datetime="2009-11-13 00:00:00 -0200" pubdate  updated >13 de Novembro de 2009</time>
 
 
 </p>
@@ -113,28 +113,37 @@
   </header>
 
 
-<div class="entry-content"><img src="http://www.nomedojogo.com/wp-content/uploads/2009/11/logo-153x55.png" alt="logo-153x55" title="logo-153x55" class="alignright size-full wp-image-2880" />O Google acabou de anunciar o lançamento de uma nova linguagem de programação chamada <a href="http://golang.org/">Go</a>. A linguagem foi desenvolvida por um time formado por cinco engenheiros do Google, incluindo <a href="http://pt.wikipedia.org/wiki/Ken_Thompson">Ken Thompson</a> e <a href="http://pt.wikipedia.org/wiki/Rob_Pike">Rob Pike</a>, que são famosos por terem trabalhado no UNIX.
+<div class="entry-content"><p><img src="http://www.nomedojogo.com/wp-content/uploads/2009/11/logo-153x55.png" alt="logo-153x55" title="logo-153x55" class="alignright size-full wp-image-2880" />O Google acabou de anunciar o lançamento de uma nova linguagem de programação chamada <a href="http://golang.org/">Go</a>. A linguagem foi desenvolvida por um time formado por cinco engenheiros do Google, incluindo <a href="http://pt.wikipedia.org/wiki/Ken_Thompson">Ken Thompson</a> e <a href="http://pt.wikipedia.org/wiki/Rob_Pike">Rob Pike</a>, que são famosos por terem trabalhado no UNIX.</p>
 
-De acordo com o Google, além de oferecer suporte integrado a processos concorrentes, Go tem a pretensão de combinar a velocidade de desenvolvimento de uma linguagem dinâmica com a performance de uma linguagem compilada.
+<p>De acordo com o Google, além de oferecer suporte integrado a processos concorrentes, Go tem a pretensão de combinar a velocidade de desenvolvimento de uma linguagem dinâmica com a performance de uma linguagem compilada.</p>
 
-Eu ainda não testei a linguagem o suficiente para poder expressar qualquer opinião. De qualquer forma, a melhor coisa a fazer é testar por si próprio e tirar suas próprias conclusões. Abaixo você vai encontrar um breve tutorial com os passos que percorri para instalar tudo o que é necessário para começar a brincadeira no meu Mac Os. Espero que ele seja útil para você também.
+<p>Eu ainda não testei a linguagem o suficiente para poder expressar qualquer opinião. De qualquer forma, a melhor coisa a fazer é testar por si próprio e tirar suas próprias conclusões. Abaixo você vai encontrar um breve tutorial com os passos que percorri para instalar tudo o que é necessário para começar a brincadeira no meu Mac Os. Espero que ele seja útil para você também.</p>
+
 <h2>Instalando o Mercurial</h2>
-<a href="http://mercurial.selenic.com/">Mercurial</a> é uma ferramenta de controle de versão distribuído, assim como o nosso querido <strong>Git</strong>. É necessário instalá-lo para poder baixar o código fonte do Go.
 
-Eu utilizei o instalador disponível para Mac na página de <a href="http://mercurial.selenic.com/downloads/">downloads</a> no próprio site da ferramenta.
 
-Após a instalação, você pode verificar se tudo deu certo digitando o comando abaixo no terminal:
+<p><a href="http://mercurial.selenic.com/">Mercurial</a> é uma ferramenta de controle de versão distribuído, assim como o nosso querido <strong>Git</strong>. É necessário instalá-lo para poder baixar o código fonte do Go.</p>
+
+<p>Eu utilizei o instalador disponível para Mac na página de <a href="http://mercurial.selenic.com/downloads/">downloads</a> no próprio site da ferramenta.</p>
+
+<p>Após a instalação, você pode verificar se tudo deu certo digitando o comando abaixo no terminal:</p>
 
 <pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">$ hg version</span></span></pre>
 
-No meu caso, uma mensagem de erro foi disparada e a solução foi configurar algumas variáveis de ambiente. Se isto também acontecer com você, abra o arquivo <code>˜/.profile</code> e acrescente as seguintes linhas no final:
+
+<p>No meu caso, uma mensagem de erro foi disparada e a solução foi configurar algumas variáveis de ambiente. Se isto também acontecer com você, abra o arquivo <code>˜/.profile</code> e acrescente as seguintes linhas no final:</p>
 
 <pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text"># Mercurial
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8</span></span></pre>
 
+
+
+
 <h2>Configurando o ambiente para a instalação do Go</h2>
-Aproveite que você já está com o arquivo <code>.profile</code> aberto e também acrescente as seguintes linhas no fim do arquivo. Estas linhas servem para configurar o seu ambiente para a instalação do Go.
+
+
+<p>Aproveite que você já está com o arquivo <code>.profile</code> aberto e também acrescente as seguintes linhas no fim do arquivo. Estas linhas servem para configurar o seu ambiente para a instalação do Go.</p>
 
 <pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text"># Go
 export GOROOT=$HOME/Sources/go
@@ -143,59 +152,82 @@ export GOARCH=amd64
 export GOBIN=$HOME/Development/Go/Binaries
 export PATH=$GOBIN:$PATH</span></span></pre>
 
-<code>$GOROOT</code> deve conter o diretório onde o código fonte da linguagem será baixado.
 
-As variáveis <code>$GOOS</code> e <code>$GOARCH</code> servem para configurar o seu ambiente. As combinações validas são: linux/amd64, linux/arm, linux/386, darwin/amd64, darwin/386 e nacl/386. O código acima está preparado para a instalação no Mac OS 10.6.
+<p><code>$GOROOT</code> deve conter o diretório onde o código fonte da linguagem será baixado.</p>
 
-E por último, a variável <code>$GOBIN</code> deve conter o diretório onde você deseja que os binários do Go sejam instalados. Se você optar por instalar os binários no diretório <code>/usr/local/bin</code>, aconselho ler esta <a href="http://groups.google.com/group/golang-nuts/browse_thread/thread/6db568d839310301/84f272f19da67545?lnk=raot">discussão</a>. Esta variável é opcional e o valor padrão para ela é o diretório <code>$HOME/bin</code>.
+<p>As variáveis <code>$GOOS</code> e <code>$GOARCH</code> servem para configurar o seu ambiente. As combinações validas são: linux/amd64, linux/arm, linux/386, darwin/amd64, darwin/386 e nacl/386. O código acima está preparado para a instalação no Mac OS 10.6.</p>
 
-Para garantir que tudo está funcionando execute:
+<p>E por último, a variável <code>$GOBIN</code> deve conter o diretório onde você deseja que os binários do Go sejam instalados. Se você optar por instalar os binários no diretório <code>/usr/local/bin</code>, aconselho ler esta <a href="http://groups.google.com/group/golang-nuts/browse_thread/thread/6db568d839310301/84f272f19da67545?lnk=raot">discussão</a>. Esta variável é opcional e o valor padrão para ela é o diretório <code>$HOME/bin</code>.</p>
+
+<p>Para garantir que tudo está funcionando execute:</p>
 
 <pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">$ env | grep '^GO'</span></span></pre>
 
-O resultado deve ser uma lista semelhante a esta:
+
+<p>O resultado deve ser uma lista semelhante a esta:</p>
 
 <pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">GOBIN=/Users/carlosbrando/Development/Go/Binaries
 GOARCH=amd64
 GOROOT=/Users/carlosbrando/Projects/go
 GOOS=darwin</span></span></pre>
 
+
+
+
 <h2>Instalando</h2>
-Após instalar o Mercurial, utilize o comando abaixo para recuperar o código fonte do projeto:
+
+
+<p>Após instalar o Mercurial, utilize o comando abaixo para recuperar o código fonte do projeto:</p>
 
 <pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">$ hg clone -r release <span class="markup markup_underline markup_underline_link markup_underline_link_text">https://go.googlecode.com/hg/</span> $GOROOT</span></span></pre>
 
-Antes de continuar, certifique-se de criar o diretório que você configurou para receber os binários e execute os comandos abaixo:
+
+<p>Antes de continuar, certifique-se de criar o diretório que você configurou para receber os binários e execute os comandos abaixo:</p>
 
 <pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">$ cd $GOROOT/src
 $ ./all.bash</span></span></pre>
 
+
+
+
 <h2>Criando o primeiro programa</h2>
 
-Se tudo correu bem, você já tem o seu ambiente pronto para começar a programar em Go. E nada melhor do que um &#8220;Hello, world&#8221; para começar. Crie um arquivo com o nome helloworld.go e adicione o seguinte código nele:
 
-<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">package main
-</span>
-<span class="meta meta_paragraph meta_paragraph_text">import fmt "fmt"
-</span>
-<span class="meta meta_paragraph meta_paragraph_text">func main() {
-</span>  <span class="meta meta_paragraph meta_paragraph_text">fmt.Printf("Hello, world\n");
-}</span></span></pre>
+<p>Se tudo correu bem, você já tem o seu ambiente pronto para começar a programar em Go. E nada melhor do que um &#8220;Hello, world&#8221; para começar. Crie um arquivo com o nome helloworld.go e adicione o seguinte código nele:</p>
 
-Primeiro compile o arquivo com o comando:
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+</pre></td><td class='code' width='100%'><pre><code class='go'><div class='line'><span class="k">package</span> <span class="n">main</span>
+</div><div class='line'>
+</div><div class='line'><span class="k">import</span> <span class="n">fmt</span> <span class="s">&quot;fmt&quot;</span>
+</div><div class='line'>
+</div><div class='line'><span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+</div><div class='line'>  <span class="n">fmt</span><span class="p">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">&quot;Hello, world\n&quot;</span><span class="p">);</span>
+</div><div class='line'><span class="p">}</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Primeiro compile o arquivo com o comando:</p>
 
 <pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">$ 6g helloworld.go</span></span></pre>
 
-Para &#8220;linkar&#8221; o arquivo utilize:
+
+<p>Para &#8220;linkar&#8221; o arquivo utilize:</p>
 
 <pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">$ 6l helloworld.6</span></span></pre>
 
-E para executar:
+
+<p>E para executar:</p>
 
 <pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">$ ./6.out
 Hello, world</span></span></pre>
 
-Agora é só continuar no <a href="http://golang.org/doc/go_tutorial.html">tutorial</a> criado pelo próprio time de desenvolvimento. E não deixe de compartilhar suas experiências com a linguagem deixando um comentário.
+
+<p>Agora é só continuar no <a href="http://golang.org/doc/go_tutorial.html">tutorial</a> criado pelo próprio time de desenvolvimento. E não deixe de compartilhar suas experiências com a linguagem deixando um comentário.</p>
 </div>
 
 
@@ -204,14 +236,14 @@ Agora é só continuar no <a href="http://golang.org/doc/go_tutorial.html">tutor
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2009-11-13 00:00:00 -0200" pubdate  updated >Nov 13<span>th</span>, 2009</time>
+<time datetime="2009-11-13 00:00:00 -0200" pubdate  updated >13 de Novembro de 2009</time>
 
 
 

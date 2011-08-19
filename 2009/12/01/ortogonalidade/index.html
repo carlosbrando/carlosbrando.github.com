@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2009-12-01 00:00:00 -0200" pubdate  updated >Dec 1<span>st</span>, 2009</time>
+<time datetime="2009-12-01 00:00:00 -0200" pubdate  updated > 1 de Dezembro de 2009</time>
 
 
 </p>
@@ -113,29 +113,30 @@
   </header>
 
 
-<div class="entry-content">Infelizmente a maioria dos programadores que conheço nunca ouviram falar sobre ortogonalidade no desenvolvimento de software, embora este seja um principio fundamental para se escrever código de qualidade.
+<div class="entry-content"><p>Infelizmente a maioria dos programadores que conheço nunca ouviram falar sobre ortogonalidade no desenvolvimento de software, embora este seja um principio fundamental para se escrever código de qualidade.</p>
 
-Em desenvolvimento de software, o termo &#8216;ortogonalidade&#8217; passou a significar uma espécie de independência ou dissociação. A ideia é que componentes que conceitualmente não estão relacionados devem ser construídos de forma a não possuírem nenhuma dependência entre si. Adicionar um novo atributo a um objeto do ActiveRecord (na maioria das vezes) não deveria exigir uma alteração na interface com o usuário, por exemplo.
+<p>Em desenvolvimento de software, o termo &#8216;ortogonalidade&#8217; passou a significar uma espécie de independência ou dissociação. A ideia é que componentes que conceitualmente não estão relacionados devem ser construídos de forma a não possuírem nenhuma dependência entre si. Adicionar um novo atributo a um objeto do ActiveRecord (na maioria das vezes) não deveria exigir uma alteração na interface com o usuário, por exemplo.</p>
 
-[caption id=&#8221;attachment_2957&#8221; align=&#8221;aligncenter&#8221; width=&#8221;468&#8221; caption=&#8221;Foto de Voxphoto&#8221;]<img class="size-full wp-image-2957" title="2208835201_1a4e5230e7" src="http://www.nomedojogo.com/wp-content/uploads/2009/11/2208835201_1a4e5230e71.jpg" alt="Foto de Voxphoto" width="468" height="321" />[/caption]
+<p><img class='' src='http://www.nomedojogo.com/wp-content/uploads/2009/11/2208835201_1a4e5230e71.jpg' width='' height='' alt='' title=''></p>
 
-Em linguagens orientadas a objetos é muito fácil acrescentar dependências ao código. Em Ruby basta um simples &#8217;<code>require</code>&#8217; e seu projeto passa a depender de uma ou várias bibliotecas. Talvez devido a essa simplicidade este tende a se tornar um problema viral, já que nos estimula a estarmos sempre adicionando mais e mais dependências em nossos sistemas.
+<p>Em linguagens orientadas a objetos é muito fácil acrescentar dependências ao código. Em Ruby basta um simples &#8217;<code>require</code>&#8217; e seu projeto passa a depender de uma ou várias bibliotecas. Talvez devido a essa simplicidade este tende a se tornar um problema viral, já que nos estimula a estarmos sempre adicionando mais e mais dependências em nossos sistemas.</p>
 
-Queremos projetar componentes auto-suficientes e com um único propósito bem definido. Sistemas não ortogonais são difíceis de alterar. Em projetos onde seus componentes dependem uns dos outros não existem correções pontuais. Uma correção pode levar a um ou mais problemas em outra parte. E isto pode se tornar um ciclo sem fim.
+<p>Queremos projetar componentes auto-suficientes e com um único propósito bem definido. Sistemas não ortogonais são difíceis de alterar. Em projetos onde seus componentes dependem uns dos outros não existem correções pontuais. Uma correção pode levar a um ou mais problemas em outra parte. E isto pode se tornar um ciclo sem fim.</p>
 
-Por outro lado, em sistemas onde os componentes são isolados uns dos outros, desde que você não mude a sua interface pública, você sabe que pode alterar um deles sem se preocupar com os outros.
+<p>Por outro lado, em sistemas onde os componentes são isolados uns dos outros, desde que você não mude a sua interface pública, você sabe que pode alterar um deles sem se preocupar com os outros.</p>
 
-Os ganhos em produtividade ao colocar em prática este principio são imensos. Uma abordagem ortogonal promove a reutilização. Como seus componentes serão bem específicos e com responsabilidades bem definidas é fácil reaproveitá-los em outros sistemas. Outro fator importante é que por possuírem apenas o código necessário para cumprir uma única tarefa, obviamente estas bibliotecas serão menores e mais simples de serem projetadas, implementadas, testadas e dificilmente precisaremos revisita-las para adicionar novas funcionalidades ou fazer correções.
+<p>Os ganhos em produtividade ao colocar em prática este principio são imensos. Uma abordagem ortogonal promove a reutilização. Como seus componentes serão bem específicos e com responsabilidades bem definidas é fácil reaproveitá-los em outros sistemas. Outro fator importante é que por possuírem apenas o código necessário para cumprir uma única tarefa, obviamente estas bibliotecas serão menores e mais simples de serem projetadas, implementadas, testadas e dificilmente precisaremos revisita-las para adicionar novas funcionalidades ou fazer correções.</p>
 
-O fato de serem componentes menores e com menos código também simplifica a criação de testes. E mesmo que um bug passe despercebido ele não será tão critico, pois o tempo de resolução será menor e a chance de o problema se espalhar por todo o sistema são mínimas, o que diminui os riscos.
+<p>O fato de serem componentes menores e com menos código também simplifica a criação de testes. E mesmo que um bug passe despercebido ele não será tão critico, pois o tempo de resolução será menor e a chance de o problema se espalhar por todo o sistema são mínimas, o que diminui os riscos.</p>
 
-Vamos considerar como exemplo o desenvolvimento de um e-commerce. O requisito original previa apenas uma interface web simples, mas as exigências foram alteradas para também contemplar uma interface web para telefones celulares e para compras através de uma central telefônica. Em um sistema projetado ortogonalmente, você precisaria alterar apenas os módulos associados com a interface do usuário para lidar com isso. Se o seu sistema foi bem estruturado, você deveria ser capaz de suportar todas essas interfaces com o mesmo código criado inicialmente para realizar as vendas. O paradigma MVC utilizado no Ruby on Rails funciona bem nestas situações.
+<p>Vamos considerar como exemplo o desenvolvimento de um e-commerce. O requisito original previa apenas uma interface web simples, mas as exigências foram alteradas para também contemplar uma interface web para telefones celulares e para compras através de uma central telefônica. Em um sistema projetado ortogonalmente, você precisaria alterar apenas os módulos associados com a interface do usuário para lidar com isso. Se o seu sistema foi bem estruturado, você deveria ser capaz de suportar todas essas interfaces com o mesmo código criado inicialmente para realizar as vendas. O paradigma MVC utilizado no Ruby on Rails funciona bem nestas situações.</p>
 
-Testes unitários são uma ótima forma de verificar a  ortogonalidade de um componente. Se para realizar o teste é necessário carregar ou acessar uma grande quantidade de outras bibliotecas, então você encontrou um módulo que não está bem dissociado do resto do sistema. Outra forma menos interessante de realizar esta avaliação é ao corrigir bugs. Quando você faz uma alteração, outros problemas surgem misteriosamente? Esta é uma evidência de que seu código não é ortogonal.
+<p>Testes unitários são uma ótima forma de verificar a  ortogonalidade de um componente. Se para realizar o teste é necessário carregar ou acessar uma grande quantidade de outras bibliotecas, então você encontrou um módulo que não está bem dissociado do resto do sistema. Outra forma menos interessante de realizar esta avaliação é ao corrigir bugs. Quando você faz uma alteração, outros problemas surgem misteriosamente? Esta é uma evidência de que seu código não é ortogonal.</p>
 
-Ortogonalidade está intimamente relacionado com o princípio DRY (veja mais <a href="http://www.nomedojogo.com/2009/03/06/rails-way-5-dont-repeat-yourself/">aqui</a> e <a href="http://www.nomedojogo.com/2009/03/12/um-pouco-mais-sobre-%E2%80%9Cdon%E2%80%99t-repeat-yourself%E2%80%9D/">aqui</a>). Enquanto DRY visa minimizar a duplicação dentro de um sistema, com a ortogonalidade você reduz a interdependência entre os componentes do sistema. Utilizar estes dois princípios combinados tornará nossos projetos muito mais flexíveis e fáceis de manter.
+<p>Ortogonalidade está intimamente relacionado com o princípio DRY (veja mais <a href="http://www.nomedojogo.com/2009/03/06/rails-way-5-dont-repeat-yourself/">aqui</a> e <a href="http://www.nomedojogo.com/2009/03/12/um-pouco-mais-sobre-%E2%80%9Cdon%E2%80%99t-repeat-yourself%E2%80%9D/">aqui</a>). Enquanto DRY visa minimizar a duplicação dentro de um sistema, com a ortogonalidade você reduz a interdependência entre os componentes do sistema. Utilizar estes dois princípios combinados tornará nossos projetos muito mais flexíveis e fáceis de manter.</p>
 
 <hr /><em>Este artigo é descaradamente &#8216;baseado&#8217; no capítulo de mesmo nome do livro <a href="http://www.amazon.com/Pragmatic-Programmer-Journeyman-Master/dp/020161622X">The Pragmatic Programmer</a>.</em>
+
 </div>
 
 
@@ -144,14 +145,14 @@ Ortogonalidade está intimamente relacionado com o princípio DRY (veja mais <a 
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2009-12-01 00:00:00 -0200" pubdate  updated >Dec 1<span>st</span>, 2009</time>
+<time datetime="2009-12-01 00:00:00 -0200" pubdate  updated > 1 de Dezembro de 2009</time>
 
 
 

@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Edge Rails: Agregações (Composed_of) Agora Podem Ser Usadas Nas Pesquisas</h1>
+      <h1 class="entry-title">Edge Rails: Agregações (composed_of) agora podem ser usadas nas pesquisas</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-02-04 00:00:00 -0200" pubdate  updated >Feb 4<span>th</span>, 2008</time>
+<time datetime="2008-02-04 00:00:00 -0200" pubdate  updated > 4 de Fevereiro de 2008</time>
 
 
 </p>
@@ -113,16 +113,21 @@
   </header>
 
 
-<div class="entry-content"><img src="http://www.nomedojogo.com/wp-content/uploads/2008/02/324395092_4e98f00930.jpg" alt="324395092_4e98f00930.jpg" />
+<div class="entry-content"><p><img src="http://www.nomedojogo.com/wp-content/uploads/2008/02/324395092_4e98f00930.jpg" alt="324395092_4e98f00930.jpg" /></p>
 
-O método <strong>composed_of</strong> você já conhece. Veja este caso como exemplo:
+<p>O método <strong>composed_of</strong> você já conhece. Veja este caso como exemplo:</p>
+
 <pre class="textmate-source"><span class="source source_sql">class Account <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_sql">&lt;</span> ActiveRecord::Base
   composed_of :balance, :class_name <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_sql">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>Money"</span>, :mapping <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_sql">=&gt;</span> %w(balance amount)
 end</span></pre>
-A partir de agora, você pode passar um objeto <strong>Money</strong> como parâmetro no método <strong>find</strong> da classe <strong>Account</strong>, assim:
+
+
+<p>A partir de agora, você pode passar um objeto <strong>Money</strong> como parâmetro no método <strong>find</strong> da classe <strong>Account</strong>, assim:</p>
+
 <pre class="textmate-source"><span class="source source_sql">amount <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_sql">=</span> <span class="constant constant_numeric constant_numeric_sql">500</span>
 currency <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_sql">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>USD"</span>
 <span class="constant constant_other constant_other_database-name constant_other_database-name_sql">Account</span>.<span class="constant constant_other constant_other_table-name constant_other_table-name_sql">find</span>(:all, :conditions <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_sql">=&gt;</span> { :balance <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_sql">=&gt;</span> <span class="storage storage_type storage_type_sql">Money</span>.new(amount, currency) })</span></pre>
+
 </div>
 
 
@@ -131,14 +136,14 @@ currency <span class="keyword keyword_operator keyword_operator_comparison keywo
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-02-04 00:00:00 -0200" pubdate  updated >Feb 4<span>th</span>, 2008</time>
+<time datetime="2008-02-04 00:00:00 -0200" pubdate  updated > 4 de Fevereiro de 2008</time>
 
 
 

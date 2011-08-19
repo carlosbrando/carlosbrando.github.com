@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Ruby 1.9 #1: Argumentos Em Blocos</h1>
+      <h1 class="entry-title">Ruby 1.9 #1: Argumentos em blocos</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2009-03-04 00:00:00 -0300" pubdate  updated >Mar 4<span>th</span>, 2009</time>
+<time datetime="2009-03-04 00:00:00 -0300" pubdate  updated > 4 de Março de 2009</time>
 
 
 </p>
@@ -113,9 +113,10 @@
   </header>
 
 
-<div class="entry-content">O Ruby 1.9 está ai e já passou da hora de começarmos a ver quais são algumas das novidades mais importantes desta nova versão da nossa linguagem de programação preferida.
+<div class="entry-content"><p>O Ruby 1.9 está ai e já passou da hora de começarmos a ver quais são algumas das novidades mais importantes desta nova versão da nossa linguagem de programação preferida.</p>
 
-À partir da versão 1.9 argumentos criados dentro de blocos terão seu escopo limitado ao mesmo. Para entender melhor, vejamos um exemplo de código executado na versão 1.8.6 e logo em seguida na versão 1.9:
+<p>À partir da versão 1.9 argumentos criados dentro de blocos terão seu escopo limitado ao mesmo. Para entender melhor, vejamos um exemplo de código executado na versão 1.8.6 e logo em seguida na versão 1.9:</p>
+
 <pre class="textmate-source"><span class="source source_ruby">i <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Olá<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
 <span class="constant constant_numeric constant_numeric_ruby">3</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>times <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">i</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> puts i <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
 puts i
@@ -123,9 +124,12 @@ puts i
 </span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> 1
 </span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> 2
 </span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> 2</span></span></pre>
-Note que no código acima ao alterar a variável <code>i</code> dentro do bloco (o método <code>times</code> atribui  um novo valor a cada execução) acabamos também alterando a variável com o mesmo nome que foi declarada fora do bloco. Embora isto não seja um bug, mas sim uma característica do Ruby nesta versão, raramente (talvez nunca) vamos desejar este comportamento.
 
-Agora o mesmo código sendo executado na versão 1.9:
+
+<p>Note que no código acima ao alterar a variável <code>i</code> dentro do bloco (o método <code>times</code> atribui  um novo valor a cada execução) acabamos também alterando a variável com o mesmo nome que foi declarada fora do bloco. Embora isto não seja um bug, mas sim uma característica do Ruby nesta versão, raramente (talvez nunca) vamos desejar este comportamento.</p>
+
+<p>Agora o mesmo código sendo executado na versão 1.9:</p>
+
 <pre class="textmate-source"><span class="source source_ruby">i <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Olá<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
 <span class="constant constant_numeric constant_numeric_ruby">3</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>times <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">i</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> puts i <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
 puts i
@@ -133,7 +137,9 @@ puts i
 </span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> 1
 </span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> 2
 </span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> "Olá"</span></span></pre>
-Desta vez a execução do bloco não alterou a variável externa <code>i</code>. Toda variável criada dentro de um bloco no Ruby 1.9 só existirá dentro do escopo do bloco, por isto cuidado com seus códigos malucos ao migrar para esta nova versão!
+
+
+<p>Desta vez a execução do bloco não alterou a variável externa <code>i</code>. Toda variável criada dentro de um bloco no Ruby 1.9 só existirá dentro do escopo do bloco, por isto cuidado com seus códigos malucos ao migrar para esta nova versão!</p>
 </div>
 
 
@@ -142,14 +148,14 @@ Desta vez a execução do bloco não alterou a variável externa <code>i</code>.
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2009-03-04 00:00:00 -0300" pubdate  updated >Mar 4<span>th</span>, 2009</time>
+<time datetime="2009-03-04 00:00:00 -0300" pubdate  updated > 4 de Março de 2009</time>
 
 
 

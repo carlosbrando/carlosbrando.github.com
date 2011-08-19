@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Criando Um Template Padrão De Um Projeto Rails, Ou Adeus Bort, Blank, Suspenders E Outros</h1>
+      <h1 class="entry-title">Criando um template padrão de um projeto Rails, ou adeus Bort, Blank, Suspenders e outros</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-12-04 00:00:00 -0200" pubdate  updated >Dec 4<span>th</span>, 2008</time>
+<time datetime="2008-12-04 00:00:00 -0200" pubdate  updated > 4 de Dezembro de 2008</time>
 
 
 </p>
@@ -113,15 +113,16 @@
   </header>
 
 
-<div class="entry-content">De um tempo para cá parece que virou moda a criação de projetos Rails semi-prontos. Em uma rápida pesquisa no GitHub encontrei o <a href="http://jimneath.org/2008/09/09/bort-base-rails-application/">Bort</a>, <a href="http://jamesgolick.com/2008/10/10/blank-a-starter-app-for-r_c-and-shoulda-users">Blank</a>, <a href="http://giantrobots.thoughtbot.com/2008/10/21/suspenders">Suspenders</a>, <a href="http://github.com/pat-maddox/starter-app/tree/master">starter-app</a>, <a href="http://appstarter.latticepurple.com/">appstarter</a> e mais alguns menos conhecidos.
+<div class="entry-content"><p>De um tempo para cá parece que virou moda a criação de projetos Rails semi-prontos. Em uma rápida pesquisa no GitHub encontrei o <a href="http://jimneath.org/2008/09/09/bort-base-rails-application/">Bort</a>, <a href="http://jamesgolick.com/2008/10/10/blank-a-starter-app-for-r_c-and-shoulda-users">Blank</a>, <a href="http://giantrobots.thoughtbot.com/2008/10/21/suspenders">Suspenders</a>, <a href="http://github.com/pat-maddox/starter-app/tree/master">starter-app</a>, <a href="http://appstarter.latticepurple.com/">appstarter</a> e mais alguns menos conhecidos.</p>
 
-E isto é muito bom, já que na maioria das vezes usamos sempre a mesma estrutura para criar nossos projetos, os mesmos gems e plugins e o mesmo sistema de autenticação. Eu mesmo já experimentei alguns dos projetos que mencionei acima, mas eles são projetos semi-prontos criados para suprir as necessidades das equipes que os criaram e não as minhas necessidades.
+<p>E isto é muito bom, já que na maioria das vezes usamos sempre a mesma estrutura para criar nossos projetos, os mesmos gems e plugins e o mesmo sistema de autenticação. Eu mesmo já experimentei alguns dos projetos que mencionei acima, mas eles são projetos semi-prontos criados para suprir as necessidades das equipes que os criaram e não as minhas necessidades.</p>
 
-Existe um projeto mais interessante do que todos estes, chamado <a href="http://github.com/jeremymcanally/rg/tree/master">rg</a>. Jeremy McAnally teve a idéia de criar um script na qual você pudesse montar a sua própria estrutura de projeto, apenas relatando quais gems e plugins você deseja usar, quais arquivos criar e com que conteúdo, etc..
+<p>Existe um projeto mais interessante do que todos estes, chamado <a href="http://github.com/jeremymcanally/rg/tree/master">rg</a>. Jeremy McAnally teve a idéia de criar um script na qual você pudesse montar a sua própria estrutura de projeto, apenas relatando quais gems e plugins você deseja usar, quais arquivos criar e com que conteúdo, etc..</p>
 
-Percebendo a necessidade dos desenvolvedores por tais projetos semi-prontos, o core team do Rails decidiu incluir o rg no Rails. Assim ganhamos a opção de carregar um template ao criar um novo projeto Rails de forma nativa.
+<p>Percebendo a necessidade dos desenvolvedores por tais projetos semi-prontos, o core team do Rails decidiu incluir o rg no Rails. Assim ganhamos a opção de carregar um template ao criar um novo projeto Rails de forma nativa.</p>
 
-Nunca foi tão fácil criar um template padrão para um projeto Rails. Veja um exemplo de um template:
+<p>Nunca foi tão fácil criar um template padrão para um projeto Rails. Veja um exemplo de um template:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Install plugins from git or svn
 </span>plugin <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>will-paginate<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>git</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>git://github.com/mislav/will_paginate.git<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
 plugin <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>old-restful-auth<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>svn</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>http://svn.techno-weenie.net/projects/plugins/restful_authentication/<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
@@ -155,17 +156,23 @@ rakefile<span class="punctuation punctuation_section punctuation_section_functio
 <span class="keyword keyword_control keyword_control_ruby">end</span>
 
 route <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>map.root :controller =&gt; :welcome<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span></span></pre>
-No código acima estou definindo quais plugins devem ser instalados, quais gems devem ser adicionadas no arquivo environment.rb, também estou criando um arquivo chamado crypto.rb na pasta lib e um initializer com o mesmo nome, uma tarefa rake e adicicionando uma rota no arquivo conifg/routes.rb.
 
-Este script pode estar armazenado na sua máquina, ou mesmo em algum site como o <a href="http://gist.github.com/">Gist</a> do <a href="https://github.com/">GitHub,</a> por exemplo. E para criar um projeto baseado neste template basta fazer assim:
+
+<p>No código acima estou definindo quais plugins devem ser instalados, quais gems devem ser adicionadas no arquivo environment.rb, também estou criando um arquivo chamado crypto.rb na pasta lib e um initializer com o mesmo nome, uma tarefa rake e adicicionando uma rota no arquivo conifg/routes.rb.</p>
+
+<p>Este script pode estar armazenado na sua máquina, ou mesmo em algum site como o <a href="http://gist.github.com/">Gist</a> do <a href="https://github.com/">GitHub,</a> por exemplo. E para criar um projeto baseado neste template basta fazer assim:</p>
+
 <pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text"># Usando um arquivo local:
 $ rails &lt;application name&gt; -m /path/to/my/template.rb
 </span>
 <span class="meta meta_paragraph meta_paragraph_text"># Ou através de um URL:
 $ rails &lt;application name&gt; --template=<span class="markup markup_underline markup_underline_link markup_underline_link_text">http://gist.github.com/31208.txt</span></span></span></pre>
-Adeus Bort, Blank, Suspenders, starter-app, appstarter e tantos outros!
+
+
+<p>Adeus Bort, Blank, Suspenders, starter-app, appstarter e tantos outros!</p>
 
 <hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.3/3.0 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades acompanhando a série <a href="http://www.nomedojogo.com/category/edge-rails/">Edge Rails</a>.</em>
+
 </div>
 
 
@@ -174,14 +181,14 @@ Adeus Bort, Blank, Suspenders, starter-app, appstarter e tantos outros!
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-12-04 00:00:00 -0200" pubdate  updated >Dec 4<span>th</span>, 2008</time>
+<time datetime="2008-12-04 00:00:00 -0200" pubdate  updated > 4 de Dezembro de 2008</time>
 
 
 

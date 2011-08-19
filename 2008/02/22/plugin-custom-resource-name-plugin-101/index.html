@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-02-22 00:00:00 -0300" pubdate  updated >Feb 22<span>nd</span>, 2008</time>
+<time datetime="2008-02-22 00:00:00 -0300" pubdate  updated >22 de Fevereiro de 2008</time>
 
 
 </p>
@@ -113,29 +113,38 @@
   </header>
 
 
-<div class="entry-content">Eu sei que mal acabei de lançar o plugin, mas havia algo que continuava me incomodando&#8230; embora minha URL ficasse na minha língua nativa, as actions <code>new</code> e <code>edit</code> continuavam em inglês, isto não estava certo&#8230;
+<div class="entry-content"><p>Eu sei que mal acabei de lançar o plugin, mas havia algo que continuava me incomodando&#8230; embora minha URL ficasse na minha língua nativa, as actions <code>new</code> e <code>edit</code> continuavam em inglês, isto não estava certo&#8230;</p>
 
-Também recebi alguns e-mails sobre este assunto. Então resolvi alterar o plugin mais uma vez para resolver este problema. A questão é que não posso simplesmente alterar a rota para usar <code>novo</code> e <code>editar</code>, afinal de contas não somos só nós brasileiros que temos este problema. Então resolvi contornar a situação de uma forma um pouco diferente.
+<p>Também recebi alguns e-mails sobre este assunto. Então resolvi alterar o plugin mais uma vez para resolver este problema. A questão é que não posso simplesmente alterar a rota para usar <code>novo</code> e <code>editar</code>, afinal de contas não somos só nós brasileiros que temos este problema. Então resolvi contornar a situação de uma forma um pouco diferente.</p>
 
-Já que vamos ter de configurar no arquivo <em>routes.rb</em> o novo nome da rota, vamos aproveitar também para configurar um apelido para os métodos <code>new</code> e <code>edit</code>, assim:
+<p>Já que vamos ter de configurar no arquivo <em>routes.rb</em> o novo nome da rota, vamos aproveitar também para configurar um apelido para os métodos <code>new</code> e <code>edit</code>, assim:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>photos</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>as</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> "fotos"<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>new_as</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>novo<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>edit_as</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>editar<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span></pre>
-Você deve ter notado que agora além da opção <code>:as</code>, você tem <code>:new_as</code> e <code>:edit_as</code>.
 
-Neste caso quando você usar rotas como <code>new_photo</code>, por exemplo, você terá uma URL assim:
+
+<p>Você deve ter notado que agora além da opção <code>:as</code>, você tem <code>:new_as</code> e <code>:edit_as</code>.</p>
+
+<p>Neste caso quando você usar rotas como <code>new_photo</code>, por exemplo, você terá uma URL assim:</p>
+
 <pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text"><span class="markup markup_underline markup_underline_link markup_underline_link_text">http://www.meusite.com.br/fotos/novo</span></span></span></pre>
-Eu sei que isto pode parecer não muito DRY, mas não quero ser egoísta e fazer este plugin apenas para brasileiros, então&#8230;
 
-O melhor desta estratégia é que os seus controllers continuam exatamente do jeito que estão hoje. Nada muda.
 
-Se alguém tiver alguma sugestão ou idéia melhor, estou aceitando todas.
+<p>Eu sei que isto pode parecer não muito DRY, mas não quero ser egoísta e fazer este plugin apenas para brasileiros, então&#8230;</p>
 
-Para usar esta nova funcionalidade você vai precisar atualizar o plugin no seu projeto.
+<p>O melhor desta estratégia é que os seus controllers continuam exatamente do jeito que estão hoje. Nada muda.</p>
 
-Se você já instalou o plugin, só precisa atualizar:
+<p>Se alguém tiver alguma sugestão ou idéia melhor, estou aceitando todas.</p>
+
+<p>Para usar esta nova funcionalidade você vai precisar atualizar o plugin no seu projeto.</p>
+
+<p>Se você já instalou o plugin, só precisa atualizar:</p>
+
 <pre class="textmate-source"><span class="source source_shell">./script/plugin update custom_resource_name</span></pre>
-Se ainda não instalou, veja mais detalhes <a href="http://www.nomedojogo.com/559/">clicando aqui</a>.
 
-Ah, e se você gostou do plugin, não esqueça de me recomendar no <a href="http://www.workingwithrails.com/recommendation/new/person/8137-carlos-brando">Working with Rails</a>.
+
+<p>Se ainda não instalou, veja mais detalhes <a href="http://www.nomedojogo.com/559/">clicando aqui</a>.</p>
+
+<p>Ah, e se você gostou do plugin, não esqueça de me recomendar no <a href="http://www.workingwithrails.com/recommendation/new/person/8137-carlos-brando">Working with Rails</a>.</p>
 </div>
 
 
@@ -144,14 +153,14 @@ Ah, e se você gostou do plugin, não esqueça de me recomendar no <a href="http
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-02-22 00:00:00 -0300" pubdate  updated >Feb 22<span>nd</span>, 2008</time>
+<time datetime="2008-02-22 00:00:00 -0300" pubdate  updated >22 de Fevereiro de 2008</time>
 
 
 

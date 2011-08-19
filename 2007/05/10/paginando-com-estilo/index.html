@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Paginando Com Estilo</h1>
+      <h1 class="entry-title">Paginando com estilo</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2007-05-10 00:00:00 -0300" pubdate  updated >May 10<span>th</span>, 2007</time>
+<time datetime="2007-05-10 00:00:00 -0300" pubdate  updated >10 de Maio de 2007</time>
 
 
 </p>
@@ -113,42 +113,48 @@
   </header>
 
 
-<div class="entry-content">Acho legal a implementa&ccedil;&atilde;o do Rails para pagina&ccedil;&atilde;o. O problema &eacute; que n&atilde;o d&aacute; para formatar direito o paginador usando CSS ou outros meios.
+<div class="entry-content"><p>Acho legal a implementa&ccedil;&atilde;o do Rails para pagina&ccedil;&atilde;o. O problema &eacute; que n&atilde;o d&aacute; para formatar direito o paginador usando CSS ou outros meios.</p>
 
-Mas&#8230; &eacute; muito f&aacute;cil criar um paginador personalizado.
+<p>Mas&#8230; &eacute; muito f&aacute;cil criar um paginador personalizado.</p>
 
-<center><img src="http://www.nomedojogo.com/wp-content/uploads/2007/05/windowslivewriterpaginandocomestilo-cee5pagination3.jpg" height="44" width="356" /></center>No meu caso, criei um m&eacute;todo chamado <strong>pagination_links_with_css</strong> em um dos helpers da minha aplica&ccedil;&atilde;o.Meu c&oacute;digo ficou assim:
+<center><img src="http://www.nomedojogo.com/wp-content/uploads/2007/05/windowslivewriterpaginandocomestilo-cee5pagination3.jpg" height="44" width="356" /></center>
+
+
+<p>No meu caso, criei um m&eacute;todo chamado <strong>pagination_links_with_css</strong> em um dos helpers da minha aplica&ccedil;&atilde;o.Meu c&oacute;digo ficou assim:
 [source:ruby]
-  def pagination_links_with_css(paginator, options={}, html_options={})
-    name = options[:name] || ActionView::Helpers::PaginationHelper::DEFAULT_OPTIONS[:name]
-    params = (options[:params] || ActionView::Helpers::PaginationHelper::DEFAULT_OPTIONS[:params]).clone
+  def pagination_links_with_css(paginator, options={}, html_options={})</p>
 
-    options[:link_to_current_page] = true
-    atual_page = options[:atual_page] || 1
+<pre><code>name = options[:name] || ActionView::Helpers::PaginationHelper::DEFAULT_OPTIONS[:name]
+params = (options[:params] || ActionView::Helpers::PaginationHelper::DEFAULT_OPTIONS[:params]).clone
 
-    pagination_links_each(paginator, options) do |n|
-      params[name] = n
+options[:link_to_current_page] = true
+atual_page = options[:atual_page] || 1
 
-      if n.to_s.to_i == atual_page.to_i
-        &#8221;<span class='current'>#{n.to_s}</span>&#8221;
-      else
-        link_to(&#8220;#{n.to_s}&#8221;, params, html_options)
-      end
-    end
+pagination_links_each(paginator, options) do |n|
+  params[name] = n
+
+  if n.to_s.to_i == atual_page.to_i
+    "&lt;span class='current'&gt;#{n.to_s}&lt;/span&gt;"
+  else
+    link_to("#{n.to_s}", params, html_options)
   end
-[/source]
+end
+</code></pre>
 
-O que fa&ccedil;o &eacute; bem simples. Como preciso pegar a p&aacute;gina corrente, deixo a op&ccedil;&atilde;o link_to_current_page como verdadeira. Tamb&eacute;m recupero o n&uacute;mero da p&aacute;gina atual (:atual_page) que informo na chamada do m&eacute;todo na view (neste ponto chamo aten&ccedil;&atilde;o, porque n&atilde;o consegui recuperar este valor de outra forma, voc&ecirc; sabe como?).
+<p>  end
+[/source]</p>
 
-Ent&atilde;o, percorro todas as p&aacute;ginas e posso formatar o retorno de cada uma da maneira como desejo (&#8220;&lt;span class=&#8217;current&#8217;&gt;#{n.to_s}&lt;/span&gt;&#8221;).
+<p>O que fa&ccedil;o &eacute; bem simples. Como preciso pegar a p&aacute;gina corrente, deixo a op&ccedil;&atilde;o link_to_current_page como verdadeira. Tamb&eacute;m recupero o n&uacute;mero da p&aacute;gina atual (:atual_page) que informo na chamada do m&eacute;todo na view (neste ponto chamo aten&ccedil;&atilde;o, porque n&atilde;o consegui recuperar este valor de outra forma, voc&ecirc; sabe como?).</p>
 
-No view, a &uacute;nica coisa que tenho de fazer &eacute; chamar o m&eacute;todo novo:
+<p>Ent&atilde;o, percorro todas as p&aacute;ginas e posso formatar o retorno de cada uma da maneira como desejo (&#8220;&lt;span class=&#8217;current&#8217;&gt;#{n.to_s}&lt;/span&gt;&#8221;).</p>
 
-[source:ruby]
+<p>No view, a &uacute;nica coisa que tenho de fazer &eacute; chamar o m&eacute;todo novo:</p>
+
+<p>[source:ruby]
 &lt;%= pagination_links_with_css @job_pages, {:window_size =&gt; 10, :atual_page =&gt; params[:page] } %&gt;
-[/source]
+[/source]</p>
 
-&Eacute; por isto que sou um entusiasta do Rails. Mesmo quando o framework n&atilde;o pode fazer algo, &eacute; muito f&aacute;cil implementar.
+<p>&Eacute; por isto que sou um entusiasta do Rails. Mesmo quando o framework n&atilde;o pode fazer algo, &eacute; muito f&aacute;cil implementar.</p>
 </div>
 
 
@@ -157,14 +163,14 @@ No view, a &uacute;nica coisa que tenho de fazer &eacute; chamar o m&eacute;todo
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2007-05-10 00:00:00 -0300" pubdate  updated >May 10<span>th</span>, 2007</time>
+<time datetime="2007-05-10 00:00:00 -0300" pubdate  updated >10 de Maio de 2007</time>
 
 
 

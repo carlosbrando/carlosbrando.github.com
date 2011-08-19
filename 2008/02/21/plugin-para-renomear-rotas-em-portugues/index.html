@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Plugin Para Renomear Rotas Em Português</h1>
+      <h1 class="entry-title">Plugin para renomear rotas em português</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-02-21 00:00:00 -0300" pubdate  updated >Feb 21<span>st</span>, 2008</time>
+<time datetime="2008-02-21 00:00:00 -0300" pubdate  updated >21 de Fevereiro de 2008</time>
 
 
 </p>
@@ -113,26 +113,38 @@
   </header>
 
 
-<div class="entry-content">Já faz um tempo que estou ensaiando um plugin, mas como quase tudo no Rails, um plugin só vale a pena quando é extraído de uma necessidade real. Foi isto que aconteceu ontem. Há alguns dias atrás eu mencionei aqui na série edge rails sobre uma <a href="http://www.nomedojogo.com/2008/02/18/edge-rails-customizando-url-no-mapresources/">alteração no sistema de rotas</a> do Rails permitindo que incluíssemos uma opção <strong>:as</strong> no <strong>map.resources</strong> para dar um apelido ao modelo. Isto nos permitiria fazer algo assim:
+<div class="entry-content"><p>Já faz um tempo que estou ensaiando um plugin, mas como quase tudo no Rails, um plugin só vale a pena quando é extraído de uma necessidade real. Foi isto que aconteceu ontem. Há alguns dias atrás eu mencionei aqui na série edge rails sobre uma <a href="http://www.nomedojogo.com/2008/02/18/edge-rails-customizando-url-no-mapresources/">alteração no sistema de rotas</a> do Rails permitindo que incluíssemos uma opção <strong>:as</strong> no <strong>map.resources</strong> para dar um apelido ao modelo. Isto nos permitiria fazer algo assim:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>products</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>as</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>produtos<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">product</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
   product<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>product_reviews</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>as</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>comentarios<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
 <span class="keyword keyword_control keyword_control_ruby">end</span>
 </span></pre>
-E depois acessar usando a URL:
+
+
+<p>E depois acessar usando a URL:</p>
+
 <pre class="textmate-source"><span class="source source_shell">http://www.meusite.com/produtos/123/comentarios</span></pre>
-Em nosso bom e velho português. O que é uma necessidade no caso de sistemas 100% brasileiros e com público alvo nacional. Seria meio estranho um sistema inteiro em português com URLs em inglês, além de dificultar para alguns usuários, e atrapalhar um pouco o SEO.
 
-Eu estou envolvido em um projeto pessoal nas horas vagas (que aliás está demorando muitoÂ. porque minhas horas vagas são poucas) onde eu precisava exatamente disto. Eu sei que na próxima versão do Rails teremos isto, mas eu não posso esperar, por isto acabei criando um plugin, que faz a mesma coisa, mas que pode ser usado nas versões atuais do Rails. Eu testei nas versãos 2.0.2 e 1.2.6 e tudo funciona tranquilamente.
 
-Uma das vantagens de se usar este plugin é que ele contém exatamente o mesmo código do edge rails, então se no futuro você migrar para a versão 2.x.x do Rails, você poderá remover o plugin e suas rotas continuarão funcionando normalmente.
+<p>Em nosso bom e velho português. O que é uma necessidade no caso de sistemas 100% brasileiros e com público alvo nacional. Seria meio estranho um sistema inteiro em português com URLs em inglês, além de dificultar para alguns usuários, e atrapalhar um pouco o SEO.</p>
 
-Se você tem um software nas versões mais antigas do Rails, como a 1.2.6, por exemplo, você também pode usar o plugin, sem precisar migrar para o Rails 2.0.
+<p>Eu estou envolvido em um projeto pessoal nas horas vagas (que aliás está demorando muitoÂ. porque minhas horas vagas são poucas) onde eu precisava exatamente disto. Eu sei que na próxima versão do Rails teremos isto, mas eu não posso esperar, por isto acabei criando um plugin, que faz a mesma coisa, mas que pode ser usado nas versões atuais do Rails. Eu testei nas versãos 2.0.2 e 1.2.6 e tudo funciona tranquilamente.</p>
 
-O plugin contém uma boa suíte de testes. Ao todo são 49 testes com 3068 assertions, que cobrem todo tipo de teste envolvendo rotas. Se você estiver usando uma versão diferente da 2.0.2 e 1.2.6 eu peço que rode os teste executando o comando abaixo para se certificar de que tudo irá funcionar na sua versão também:
+<p>Uma das vantagens de se usar este plugin é que ele contém exatamente o mesmo código do edge rails, então se no futuro você migrar para a versão 2.x.x do Rails, você poderá remover o plugin e suas rotas continuarão funcionando normalmente.</p>
+
+<p>Se você tem um software nas versões mais antigas do Rails, como a 1.2.6, por exemplo, você também pode usar o plugin, sem precisar migrar para o Rails 2.0.</p>
+
+<p>O plugin contém uma boa suíte de testes. Ao todo são 49 testes com 3068 assertions, que cobrem todo tipo de teste envolvendo rotas. Se você estiver usando uma versão diferente da 2.0.2 e 1.2.6 eu peço que rode os teste executando o comando abaixo para se certificar de que tudo irá funcionar na sua versão também:</p>
+
 <pre class="textmate-source"><span class="source source_shell">rake test:plugins</span></pre>
-E finalmente, para instalar o plugin basta executar o seguinte comando de dentro da sua aplicação Rails:
+
+
+<p>E finalmente, para instalar o plugin basta executar o seguinte comando de dentro da sua aplicação Rails:</p>
+
 <pre class="textmate-source"><span class="source source_shell">./script/plugin install http://plugins.nomedojogo.com/custom_resource_name</span></pre>
-O comando acima é tudo em uma linha só do terminal. Qualquer dúvida ou problema podem entrar em contato comigo pelo formulário de contato ou deixar o seu comentário neste post.
+
+
+<p>O comando acima é tudo em uma linha só do terminal. Qualquer dúvida ou problema podem entrar em contato comigo pelo formulário de contato ou deixar o seu comentário neste post.</p>
 </div>
 
 
@@ -141,14 +153,14 @@ O comando acima é tudo em uma linha só do terminal. Qualquer dúvida ou proble
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-02-21 00:00:00 -0300" pubdate  updated >Feb 21<span>st</span>, 2008</time>
+<time datetime="2008-02-21 00:00:00 -0300" pubdate  updated >21 de Fevereiro de 2008</time>
 
 
 

@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2009-04-23 00:00:00 -0300" pubdate  updated >Apr 23<span>rd</span>, 2009</time>
+<time datetime="2009-04-23 00:00:00 -0300" pubdate  updated >23 de Abril de 2009</time>
 
 
 </p>
@@ -113,7 +113,7 @@
   </header>
 
 
-<div class="entry-content">A próxima versão do Rails contará com um novo método chamado <code>touch</code> em todos os objetos do ActiveRecord, o método basicamente serve para atualizar os campos <code>updated_at</code> e <code>updated_on</code> do registro atual com a data e hora corrente. Veja abaixo a implementação do método:
+<div class="entry-content"><p>A próxima versão do Rails contará com um novo método chamado <code>touch</code> em todos os objetos do ActiveRecord, o método basicamente serve para atualizar os campos <code>updated_at</code> e <code>updated_on</code> do registro atual com a data e hora corrente. Veja abaixo a implementação do método:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_function meta_function_method meta_function_method_with-arguments meta_function_method_with-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">touch</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">(</span><span class="variable variable_parameter variable_parameter_function variable_parameter_function_ruby">attribute <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_language constant_language_ruby">nil</span></span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">)</span></span>
   current_time <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> current_time_from_proper_timezone
@@ -129,20 +129,23 @@
 <span class="keyword keyword_control keyword_control_ruby">end</span>
 </span></pre>
 
-Como você pode ver na implementação acima ele aceita um parâmetro <code>attribute</code>. Utilizaremos este parâmetro para informar um campo diferente dos mencionados acima quando for necessário.
+
+<p>Como você pode ver na implementação acima ele aceita um parâmetro <code>attribute</code>. Utilizaremos este parâmetro para informar um campo diferente dos mencionados acima quando for necessário.</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">product<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>touch <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> atualiza o campo updated_at
 </span>product<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>touch<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>designed_at</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> atualiza o campo designed_at</span></span></pre>
 
-Esta atualização vale tanto para o Rails 3 como para uma futura provável versão do Rails 2.3.
 
-Graças a este novo método também ganhamos um novo atributo para associações <code>belongs_to</code>, fazendo com que ao criar, atualizar ou apagar um registro filho o método <code>touch</code> do registro pai seja executado. Por exemplo, veja o código abaixo:
+<p>Esta atualização vale tanto para o Rails 3 como para uma futura provável versão do Rails 2.3.</p>
+
+<p>Graças a este novo método também ganhamos um novo atributo para associações <code>belongs_to</code>, fazendo com que ao criar, atualizar ou apagar um registro filho o método <code>touch</code> do registro pai seja executado. Por exemplo, veja o código abaixo:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Pet<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
   <span class="support support_function support_function_activerecord support_function_activerecord_rails">belongs_to</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>owner</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>touch</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">true</span>
 </span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
 
-A partir do exemplo, quando cadastrarmos ou atualizarmos um animalzinho de estimação (<code>pet</code>), os campos <code>updated_at/on</code> do dono (<code>owner</code>) correspondente serão automaticamente atualizado com a data atual.
+
+<p>A partir do exemplo, quando cadastrarmos ou atualizarmos um animalzinho de estimação (<code>pet</code>), os campos <code>updated_at/on</code> do dono (<code>owner</code>) correspondente serão automaticamente atualizado com a data atual.</p>
 </div>
 
 
@@ -151,14 +154,14 @@ A partir do exemplo, quando cadastrarmos ou atualizarmos um animalzinho de estim
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2009-04-23 00:00:00 -0300" pubdate  updated >Apr 23<span>rd</span>, 2009</time>
+<time datetime="2009-04-23 00:00:00 -0300" pubdate  updated >23 de Abril de 2009</time>
 
 
 

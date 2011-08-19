@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Dica Rápida: Pra Que Complicar?</h1>
+      <h1 class="entry-title">Dica rápida: Pra que complicar?</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2007-10-23 00:00:00 -0200" pubdate  updated >Oct 23<span>rd</span>, 2007</time>
+<time datetime="2007-10-23 00:00:00 -0200" pubdate  updated >23 de Outubro de 2007</time>
 
 
 </p>
@@ -115,24 +115,40 @@
 
 <div class="entry-content"><p><center><img src="http://www.nomedojogo.com/wp-content/uploads/2007/10/214723509_3758c2c179.jpg" alt="214723509_3758c2c179.jpg" /></center></p>
 
+
+
+
 <p>Eu tenho um Array com nomes de pessoas e quero exibi-lo em minha view em uma senten&ccedil;a, mais ou menos assim: &quot;Carlos, Thiago e Tatiane&quot;.</p>
+
+
+
 
 <p>Pensando r&aacute;pido a solu&ccedil;&atilde;o mais pr&aacute;tica seria verificar quantos itens eu tenho no array e depois fazer um loop por todos os itens, escrevendo o nome na p&aacute;gina e separando por v&iacute;rgulas, com exce&ccedil;&atilde;o do &uacute;ltimo item que receberia a letra &quot;e&quot; no lugar da v&iacute;rgula. Muito simples, mas eu nem quis escrever o c&oacute;digo aqui por pura pregui&ccedil;a. Mas se voc&ecirc; j&aacute; programa em qualquer linguagem a um tempinho, com certeza j&aacute; fez algo parecido, ent&atilde;o sabe do que estou falando.</p>
 
+
+
+
 <p>Por&eacute;m quando o assunto &eacute; Rails, exatamente pelo fato de um c&oacute;digo assim ser rotineiro, basta procurar que com certeza encontraremos algo pronto.</p>
 
-Veja por exemplo o que o m&eacute;todo to_sentence faz:
+
+<p>Veja por exemplo o que o m&eacute;todo to_sentence faz:</p>
+
 <pre>
 &gt;&gt; a = %w(Carlos Thiago Tatiane)
 =&gt; ["Carlos", "Thiago", "Tatiane"]
 
 &gt;&gt; a.to_sentence(:skip_last_comma =&gt; true)
 =&gt; "Carlos, Thiago and Tatiane"</pre>
-&Oacute;timo, &eacute; quase o que queremos, mas a palavra &quot;and&quot; n&atilde;o vai ficar legal no meu sistema que &eacute; em portugu&ecirc;s&#8230; Mas podemos alterar:
+
+
+<p>&Oacute;timo, &eacute; quase o que queremos, mas a palavra &quot;and&quot; n&atilde;o vai ficar legal no meu sistema que &eacute; em portugu&ecirc;s&#8230; Mas podemos alterar:</p>
+
 <pre>
 &gt;&gt; a.to_sentence(:skip_last_comma =&gt; true, :connector =&gt; 'e')
 =&gt; "Carlos, Thiago e Tatiane"</pre>
-Gostou? J&aacute; conhecia este m&eacute;todo?
+
+
+<p>Gostou? J&aacute; conhecia este m&eacute;todo?</p>
 </div>
 
 
@@ -141,14 +157,14 @@ Gostou? J&aacute; conhecia este m&eacute;todo?
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2007-10-23 00:00:00 -0200" pubdate  updated >Oct 23<span>rd</span>, 2007</time>
+<time datetime="2007-10-23 00:00:00 -0200" pubdate  updated >23 de Outubro de 2007</time>
 
 
 

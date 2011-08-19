@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Usou O Method_missing, Então Não Deixe Pontas Soltas</h1>
+      <h1 class="entry-title">Usou o method_missing, então não deixe pontas soltas</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-04-24 00:00:00 -0300" pubdate  updated >Apr 24<span>th</span>, 2008</time>
+<time datetime="2008-04-24 00:00:00 -0300" pubdate  updated >24 de Abril de 2008</time>
 
 
 </p>
@@ -113,9 +113,10 @@
   </header>
 
 
-<div class="entry-content">Devido a natureza dinâmica do Ruby, o método <code>respond_to?</code> é crucial. Quantas vezes não precisamos checar se um método existe no objeto que estamos manipulando, ou mesmo verificar se o objeto é mesmo aquele que estamos esperando (<code>is_a?</code>)?
+<div class="entry-content"><p>Devido a natureza dinâmica do Ruby, o método <code>respond_to?</code> é crucial. Quantas vezes não precisamos checar se um método existe no objeto que estamos manipulando, ou mesmo verificar se o objeto é mesmo aquele que estamos esperando (<code>is_a?</code>)?</p>
 
-Porém tem algo muito importante que muita gente se esquece. Veja por exemplo esta minha classe que faz uso do método <code>method_missing</code>:
+<p>Porém tem algo muito importante que muita gente se esquece. Veja por exemplo esta minha classe que faz uso do método <code>method_missing</code>:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Cachorro</span></span>
   <span class="meta meta_function meta_function_method meta_function_method_with-arguments meta_function_method_with-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">method_missing</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">(</span><span class="variable variable_parameter variable_parameter_function variable_parameter_function_ruby">method<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">*</span>args<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">&amp;</span>block</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">)</span></span>
     <span class="keyword keyword_control keyword_control_ruby">if</span> method<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>to_s <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">=~</span> <span class="string string_regexp string_regexp_classic string_regexp_classic_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span>^latir<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span></span>
@@ -131,13 +132,19 @@ rex<span class="punctuation punctuation_separator punctuation_separator_method p
 </span>rex<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>latir! <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; auau!
 </span>rex<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>latir_e_correr <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; auau!
 </span></span></pre>
-Acho que você já deve conhecer o <code>method_missing</code>, não? Veja que no exemplo acima eu estou criando uma instância da classe <code>Cachorro</code> e chamando os métodos <code>latir</code>, <code>latir!</code> e <code>latir_e_correr</code> que não existem. Por isto o método <code>method_missing</code> é disparado, onde eu uso uma expressão regular simples para retornar &#8220;auau!&#8221; caso o nome do método comece com a expressão latir.
 
-Mas veja o que acontece quando tento usar o método <code>respond_to?</code>:
+
+<p>Acho que você já deve conhecer o <code>method_missing</code>, não? Veja que no exemplo acima eu estou criando uma instância da classe <code>Cachorro</code> e chamando os métodos <code>latir</code>, <code>latir!</code> e <code>latir_e_correr</code> que não existem. Por isto o método <code>method_missing</code> é disparado, onde eu uso uma expressão regular simples para retornar &#8220;auau!&#8221; caso o nome do método comece com a expressão latir.</p>
+
+<p>Mas veja o que acontece quando tento usar o método <code>respond_to?</code>:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">rex<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="support support_function support_function_actionpack support_function_actionpack_rails">respond_to</span>? <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>latir</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; false
 </span>rex<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>latir <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; auau!
 </span></span></pre>
-Ele retorna false, e isto faz todo o sentido já que o método realmente não existe. Então fica na minha responsabilidade alterar o método <code>respond_to?</code> para que ele funcione direito usando esta minha regra especial. Vou alterar minha classe para isto:
+
+
+<p>Ele retorna false, e isto faz todo o sentido já que o método realmente não existe. Então fica na minha responsabilidade alterar o método <code>respond_to?</code> para que ele funcione direito usando esta minha regra especial. Vou alterar minha classe para isto:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Cachorro</span></span>
   <span class="variable variable_other variable_other_constant variable_other_constant_ruby">METODO_LATIR</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_regexp string_regexp_classic string_regexp_classic_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span>^latir<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span></span>
 
@@ -158,11 +165,16 @@ Ele retorna false, e isto faz todo o sentido já que o método realmente não ex
 rex <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Cachorro</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span>
 rex<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="support support_function support_function_actionpack support_function_actionpack_rails">respond_to</span>?<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>latir</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; true
 </span>rex<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>latir <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; auau!</span></span></pre>
-Agora sim! Este é um erro comum que tenho visto em alguns códigos, inclusive no próprio Rails, tente executar um <code>respond_to?</code> para verificar a existência de métodos como <code>find_by_name</code>, por exemplo.
 
-Ruby é uma linguagem impressionante e flexível ao máximo, mas se não tomarmos cuidado podemos deixar pontas soltas como esta.
+
+<p>Agora sim! Este é um erro comum que tenho visto em alguns códigos, inclusive no próprio Rails, tente executar um <code>respond_to?</code> para verificar a existência de métodos como <code>find_by_name</code>, por exemplo.</p>
+
+<p>Ruby é uma linguagem impressionante e flexível ao máximo, mas se não tomarmos cuidado podemos deixar pontas soltas como esta.</p>
+
 <h3>[Atualização]</h3>
-Acabei de ver que no Rails 2.1 corrigiram este problema, poderemos usar o <code>respond_to?</code> para verificar a existência de métodos como o <code>find_by_alguma_coisa</code>.
+
+
+<p>Acabei de ver que no Rails 2.1 corrigiram este problema, poderemos usar o <code>respond_to?</code> para verificar a existência de métodos como o <code>find_by_alguma_coisa</code>.</p>
 </div>
 
 
@@ -171,14 +183,14 @@ Acabei de ver que no Rails 2.1 corrigiram este problema, poderemos usar o <code>
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-04-24 00:00:00 -0300" pubdate  updated >Apr 24<span>th</span>, 2008</time>
+<time datetime="2008-04-24 00:00:00 -0300" pubdate  updated >24 de Abril de 2008</time>
 
 
 

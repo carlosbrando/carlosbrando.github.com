@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Edge Rails: Alteração No Método Error_message_on</h1>
+      <h1 class="entry-title">Edge Rails: Alteração no método error_message_on</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-08-25 00:00:00 -0300" pubdate  updated >Aug 25<span>th</span>, 2008</time>
+<time datetime="2008-08-25 00:00:00 -0300" pubdate  updated >25 de Agosto de 2008</time>
 
 
 </p>
@@ -113,25 +113,31 @@
   </header>
 
 
-<div class="entry-content">O método <strong>error_message_on</strong> é extremamente útil. Com ele podemos exibir mensagens de erro retornadas por determinados métodos em um objeto de uma forma bem simples.
+<div class="entry-content"><p>O método <strong>error_message_on</strong> é extremamente útil. Com ele podemos exibir mensagens de erro retornadas por determinados métodos em um objeto de uma forma bem simples.</p>
+
 <pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> error_message_on <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>post<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>title<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
 
 <span class="comment comment_block comment_block_html"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_html">&lt;!--</span> ou <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_html">--&gt;</span></span>
 
 <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> error_message_on <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>post</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>title<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
 </span></pre>
-Isto fará com que uma mensagem de erro seja exibida na sua página dentro de uma tag <strong>DIV</strong>, caso um erro esteja associado ao campo <strong>title</strong> do modelo <strong>post</strong>.
 
-Mas o mais interessante do método <strong>error_message_on</strong> é que podemos personaliza-lo para que exibida mensagens mais amigáveis. E é aqui que entra a alteração para o Rails 2.2.
 
-Na versão atual os parâmetros de personalização são passadas diretamente para o método, mas no Rails 2.2 serão passadas via um <strong>Hash</strong> de opções:
+<p>Isto fará com que uma mensagem de erro seja exibida na sua página dentro de uma tag <strong>DIV</strong>, caso um erro esteja associado ao campo <strong>title</strong> do modelo <strong>post</strong>.</p>
+
+<p>Mas o mais interessante do método <strong>error_message_on</strong> é que podemos personaliza-lo para que exibida mensagens mais amigáveis. E é aqui que entra a alteração para o Rails 2.2.</p>
+
+<p>Na versão atual os parâmetros de personalização são passadas diretamente para o método, mas no Rails 2.2 serão passadas via um <strong>Hash</strong> de opções:</p>
+
 <pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> error_message_on <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>post<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>title<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
       <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>prepend_text</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Title simply <span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
       <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>append_text</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span> (or it won't work).<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
       <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>css_class</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>inputError<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span></span></pre>
-Fique tranqüilo quanto a uma possível migração de seus projetos atuais, pois o código está preparado para funcionar também da forma antiga (pelo menos por um tempo), mas emitindo um aviso de alerta para que o código seja atualizado.
 
-Este tipo de alteração está se mostrando uma tendência no código do Rails, pois deixa o código mais legível. Então esperem por mais alterações deste tipo.
+
+<p>Fique tranqüilo quanto a uma possível migração de seus projetos atuais, pois o código está preparado para funcionar também da forma antiga (pelo menos por um tempo), mas emitindo um aviso de alerta para que o código seja atualizado.</p>
+
+<p>Este tipo de alteração está se mostrando uma tendência no código do Rails, pois deixa o código mais legível. Então esperem por mais alterações deste tipo.</p>
 </div>
 
 
@@ -140,14 +146,14 @@ Este tipo de alteração está se mostrando uma tendência no código do Rails, 
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-08-25 00:00:00 -0300" pubdate  updated >Aug 25<span>th</span>, 2008</time>
+<time datetime="2008-08-25 00:00:00 -0300" pubdate  updated >25 de Agosto de 2008</time>
 
 
 

@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Edge Rails: Opção :index Funcionando No Fields_for</h1>
+      <h1 class="entry-title">Edge Rails: Opção :index funcionando no fields_for</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-08-12 00:00:00 -0300" pubdate  updated >Aug 12<span>th</span>, 2008</time>
+<time datetime="2008-08-12 00:00:00 -0300" pubdate  updated >12 de Agosto de 2008</time>
 
 
 </p>
@@ -113,21 +113,25 @@
   </header>
 
 
-<div class="entry-content">Muitas vezes a opção <strong>:index</strong> do método <strong>select</strong> pode ser útil, como por exemplo quando se precisa criar diversos <strong>dropdowns</strong> dinamicamente em uma página.
+<div class="entry-content"><p>Muitas vezes a opção <strong>:index</strong> do método <strong>select</strong> pode ser útil, como por exemplo quando se precisa criar diversos <strong>dropdowns</strong> dinamicamente em uma página.</p>
 
-Até hoje o método <strong>fields_for</strong> não repassava esta opção para métodos como <strong>select</strong>, <strong>collection_select</strong>, <strong>country_select</strong> e <strong>time_zone_select</strong>, o que limitava o seu uso em determinados casos.
+<p>Até hoje o método <strong>fields_for</strong> não repassava esta opção para métodos como <strong>select</strong>, <strong>collection_select</strong>, <strong>country_select</strong> e <strong>time_zone_select</strong>, o que limitava o seu uso em determinados casos.</p>
 
-Isto já foi corrigido para a próxima versão do Rails. Por exemplo, apenas para efeito de teste veja o código abaixo e o seu retorno:
+<p>Isto já foi corrigido para a próxima versão do Rails. Por exemplo, apenas para efeito de teste veja o código abaixo e o seu retorno:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_function support_function_viewhelpers support_function_viewhelpers_rails">fields_for</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>post</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>post</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>index</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">108</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">f</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
   concat f<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>select<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>category</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_other string_quoted_other_literal string_quoted_other_literal_lower string_quoted_other_literal_lower_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">%w(</span> abe &lt;mus&gt; hest<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">)</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
 <span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+
 
 <pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">select</span> <span class="meta meta_attribute-with-value meta_attribute-with-value_id meta_attribute-with-value_id_html"><span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_id entity_other_attribute-name_id_html">id</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_html">=</span>\<span class="string string_quoted string_quoted_double string_quoted_double_html"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_html">"</span><span class="meta meta_toc-list meta_toc-list_id meta_toc-list_id_html">post_108_category\</span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_html">"</span></span></span> <span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_html">name</span>=\<span class="string string_quoted string_quoted_double string_quoted_double_html"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_html">"</span>post[108][category]\<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_html">"</span></span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
   <span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">option</span> <span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_html">value</span>=\<span class="string string_quoted string_quoted_double string_quoted_double_html"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_html">"</span>abe\<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_html">"</span></span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>abe<span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">option</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
   <span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">option</span> <span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_html">value</span>=\<span class="string string_quoted string_quoted_double string_quoted_double_html"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_html">"</span><span class="constant constant_character constant_character_entity constant_character_entity_html"><span class="punctuation punctuation_definition punctuation_definition_entity punctuation_definition_entity_html">&amp;</span>lt<span class="punctuation punctuation_definition punctuation_definition_entity punctuation_definition_entity_html">;</span></span>mus<span class="constant constant_character constant_character_entity constant_character_entity_html"><span class="punctuation punctuation_definition punctuation_definition_entity punctuation_definition_entity_html">&amp;</span>gt<span class="punctuation punctuation_definition punctuation_definition_entity punctuation_definition_entity_html">;</span></span>\<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_html">"</span></span> <span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_html">selected</span>=\<span class="string string_quoted string_quoted_double string_quoted_double_html"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_html">"</span>selected\<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_html">"</span></span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span><span class="constant constant_character constant_character_entity constant_character_entity_html"><span class="punctuation punctuation_definition punctuation_definition_entity punctuation_definition_entity_html">&amp;</span>lt<span class="punctuation punctuation_definition punctuation_definition_entity punctuation_definition_entity_html">;</span></span>mus<span class="constant constant_character constant_character_entity constant_character_entity_html"><span class="punctuation punctuation_definition punctuation_definition_entity punctuation_definition_entity_html">&amp;</span>gt<span class="punctuation punctuation_definition punctuation_definition_entity punctuation_definition_entity_html">;</span></span><span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">option</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
   <span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">option</span> <span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_html">value</span>=\<span class="string string_quoted string_quoted_double string_quoted_double_html"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_html">"</span>hest\<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_html">"</span></span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>hest<span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">option</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
 <span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">select</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span></span></pre>
+
 </div>
 
 
@@ -136,14 +140,14 @@ Isto já foi corrigido para a próxima versão do Rails. Por exemplo, apenas par
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-08-12 00:00:00 -0300" pubdate  updated >Aug 12<span>th</span>, 2008</time>
+<time datetime="2008-08-12 00:00:00 -0300" pubdate  updated >12 de Agosto de 2008</time>
 
 
 

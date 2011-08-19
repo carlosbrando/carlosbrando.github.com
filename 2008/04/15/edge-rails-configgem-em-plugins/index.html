@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Edge Rails: config.gem Em Plugins</h1>
+      <h1 class="entry-title">Edge Rails: config.gem em plugins</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-04-15 00:00:00 -0300" pubdate  updated >Apr 15<span>th</span>, 2008</time>
+<time datetime="2008-04-15 00:00:00 -0300" pubdate  updated >15 de Abril de 2008</time>
 
 
 </p>
@@ -113,16 +113,17 @@
   </header>
 
 
-<div class="entry-content">Hoje de manhõ eu falei do <a href="http://www.nomedojogo.com/2008/04/15/edge-rails-configgem/">config.gem</a>. Agora vai uma dica para os construtores de plugins. Principalmente se o seu plugin depende de algum gem.
+<div class="entry-content"><p>Hoje de manhõ eu falei do <a href="http://www.nomedojogo.com/2008/04/15/edge-rails-configgem/">config.gem</a>. Agora vai uma dica para os construtores de plugins. Principalmente se o seu plugin depende de algum gem.</p>
 
-Até agora o arquivo <code>init.rb</code> de um plugin se parece com isto:
+<p>Até agora o arquivo <code>init.rb</code> de um plugin se parece com isto:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> init.rb do plugin open_id_authentication
 </span><span class="meta meta_require meta_require_ruby"><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">require</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>yadis<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> </span>
 <span class="meta meta_require meta_require_ruby"><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">require</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>openid<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> </span>
 <span class="support support_class support_class_ruby">ActionController</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">Base</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>send <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>include</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">OpenIdAuthentication</span> </span></pre>
 
-Mas no <strong>Rails 2.1</strong> um arquivo <code>init.rb</code> como este deve ser criado assim:
+
+<p>Mas no <strong>Rails 2.1</strong> um arquivo <code>init.rb</code> como este deve ser criado assim:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Novo formato
 </span>config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>gem <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>ruby-openid<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>lib</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>openid<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>version</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>1.1.4<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
@@ -132,7 +133,8 @@ config<span class="punctuation punctuation_separator punctuation_separator_metho
 </span>  <span class="support support_class support_class_ruby">ActionController</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">Base</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>send <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>include</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">OpenIdAuthentication</span>
 <span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
 
-Assim, quando você rodar a tarefa para instalar todos os gems necessários, estes gems estarão entre eles.
+
+<p>Assim, quando você rodar a tarefa para instalar todos os gems necessários, estes gems estarão entre eles.</p>
 </div>
 
 
@@ -141,14 +143,14 @@ Assim, quando você rodar a tarefa para instalar todos os gems necessários, est
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-04-15 00:00:00 -0300" pubdate  updated >Apr 15<span>th</span>, 2008</time>
+<time datetime="2008-04-15 00:00:00 -0300" pubdate  updated >15 de Abril de 2008</time>
 
 
 

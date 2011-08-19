@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Como Funcionará O Novo Suporte a Internacionalização No Rails 2.2</h1>
+      <h1 class="entry-title">Como funcionará o novo suporte a internacionalização no Rails 2.2</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-07-24 00:00:00 -0300" pubdate  updated >Jul 24<span>th</span>, 2008</time>
+<time datetime="2008-07-24 00:00:00 -0300" pubdate  updated >24 de Julho de 2008</time>
 
 
 </p>
@@ -113,26 +113,41 @@
   </header>
 
 
-<div class="entry-content">Conforme expliquei no <a href="http://www.nomedojogo.com/2008/07/22/edge-rails-seus-problemas-acabaram-o-rails-tambem-vai-falar-portugues/">artigo anterior</a>, teremos suporte a <strong>I18n</strong> no Ruby on Rails a partir da próxima versão. E eu prometi escrever um artigo mostrando como funcionaria esta nova implementação, o problema é que demorei e já teve gente se adiantando&#8230;
+<div class="entry-content"><p>Conforme expliquei no <a href="http://www.nomedojogo.com/2008/07/22/edge-rails-seus-problemas-acabaram-o-rails-tambem-vai-falar-portugues/">artigo anterior</a>, teremos suporte a <strong>I18n</strong> no Ruby on Rails a partir da próxima versão. E eu prometi escrever um artigo mostrando como funcionaria esta nova implementação, o problema é que demorei e já teve gente se adiantando&#8230;</p>
 
-Então só vou mostrar o caminho das pedras.
+<p>Então só vou mostrar o caminho das pedras.</p>
+
 <h3>Antes de começar</h3>
-Preciso deixar claro uma coisa. Quando estamos falando de internacionalização, ao usar as palavras &#8220;localização&#8221; e &#8220;localizar&#8221;, não quero que vocês as entendam como sinônimos de encontrar, achar, etc&#8230;
 
-Quando nos referimos a &#8220;localização&#8221; ou &#8220;localizar&#8221; estamos falando de <strong>L10n</strong>. Eu já falei sobre isto no último artigo.
+
+<p>Preciso deixar claro uma coisa. Quando estamos falando de internacionalização, ao usar as palavras &#8220;localização&#8221; e &#8220;localizar&#8221;, não quero que vocês as entendam como sinônimos de encontrar, achar, etc&#8230;</p>
+
+<p>Quando nos referimos a &#8220;localização&#8221; ou &#8220;localizar&#8221; estamos falando de <strong>L10n</strong>. Eu já falei sobre isto no último artigo.</p>
+
 <h3>Como funcionará</h3>
-O alicerce desta implementação é um módulo chamado <strong>I18n</strong> que vem através de um gem incorporado ao <strong>ActiveSupport</strong>. Este módulo acrescenta as seguintes funcionalidades ao Rails:
+
+
+<p>O alicerce desta implementação é um módulo chamado <strong>I18n</strong> que vem através de um gem incorporado ao <strong>ActiveSupport</strong>. Este módulo acrescenta as seguintes funcionalidades ao Rails:</p>
+
 <p style="padding-left: 30px;">O método <strong>translate</strong>, que será usado para retornar traduções.</p>
+
+
 <p style="padding-left: 30px;">O método <strong>localize</strong>, que usaremos para &#8220;traduzir&#8221; objetos Date, DateTime e Time para a localização atual.</p>
+
+
 <p style="padding-left: 30px;">Além destes métodos este módulo traz todo o código necessário para armazenar e carregar os <strong>backends</strong> de &#8220;localização&#8221;. E já vem com um manipulador de exceções padrão que captura exceções levantadas no backend.</p>
 
-Tanto o backend como o manipulador de exceções podem (devem) ser substituídos. Além disso para facilitar, os métodos <strong>#translate</strong> e <strong>#localize</strong> também poderão ser executados usando os métodos <strong>#t</strong> e <strong>#l</strong> respectivamente.
 
-Nem tudo está pronto ainda, na verdade muito coisa ainda precisa ser feita e definida por isto é um pouco cedo para dizer com precisão como tudo vai se encaixar no Rails.
+<p>Tanto o backend como o manipulador de exceções podem (devem) ser substituídos. Além disso para facilitar, os métodos <strong>#translate</strong> e <strong>#localize</strong> também poderão ser executados usando os métodos <strong>#t</strong> e <strong>#l</strong> respectivamente.</p>
+
+<p>Nem tudo está pronto ainda, na verdade muito coisa ainda precisa ser feita e definida por isto é um pouco cedo para dizer com precisão como tudo vai se encaixar no Rails.</p>
+
 <h3>Exemplos práticos</h3>
-Eu encontrei <a href="http://www.mouseoverstudio.com/blog/?p=105">este artigo</a> escrito pelo <strong>Diego Carrion</strong> que explica um pouco sobre como colocar o <strong>translate</strong> para funcionar, e para quem quer ver isto na prática <strong>Trevor Turk</strong> (do El Dorado) criou no GitHub um <a href="http://github.com/trevorturk/rails-2.2-i18n-example/tree/master">projeto Rails</a> do zero com este código que o Diego menciona no seu blog.
 
-Assim que as coisas estiverem mais concretas, eu volto a falar mais sobre isto.
+
+<p>Eu encontrei <a href="http://www.mouseoverstudio.com/blog/?p=105">este artigo</a> escrito pelo <strong>Diego Carrion</strong> que explica um pouco sobre como colocar o <strong>translate</strong> para funcionar, e para quem quer ver isto na prática <strong>Trevor Turk</strong> (do El Dorado) criou no GitHub um <a href="http://github.com/trevorturk/rails-2.2-i18n-example/tree/master">projeto Rails</a> do zero com este código que o Diego menciona no seu blog.</p>
+
+<p>Assim que as coisas estiverem mais concretas, eu volto a falar mais sobre isto.</p>
 </div>
 
 
@@ -141,14 +156,14 @@ Assim que as coisas estiverem mais concretas, eu volto a falar mais sobre isto.
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-07-24 00:00:00 -0300" pubdate  updated >Jul 24<span>th</span>, 2008</time>
+<time datetime="2008-07-24 00:00:00 -0300" pubdate  updated >24 de Julho de 2008</time>
 
 
 

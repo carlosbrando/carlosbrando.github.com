@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-04-03 00:00:00 -0300" pubdate  updated >Apr 3<span>rd</span>, 2008</time>
+<time datetime="2008-04-03 00:00:00 -0300" pubdate  updated > 3 de Abril de 2008</time>
 
 
 </p>
@@ -113,9 +113,9 @@
   </header>
 
 
-<div class="entry-content"><img src="http://www.nomedojogo.com/wp-content/uploads/2008/04/128188093_9dc3b73007.jpg" alt="" title="128188093_9dc3b73007" class="aligncenter size-full wp-image-653" />
+<div class="entry-content"><p><img src="http://www.nomedojogo.com/wp-content/uploads/2008/04/128188093_9dc3b73007.jpg" alt="" title="128188093_9dc3b73007" class="aligncenter size-full wp-image-653" /></p>
 
-Acrescentei mais uma funcionalidade ao plugin. Imagine o seguite caso:
+<p>Acrescentei mais uma funcionalidade ao plugin. Imagine o seguite caso:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_routes">ActionController::Routing::Routes<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>draw <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">map</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
   map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>aliases <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>resources</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>houses</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>casas<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
@@ -124,17 +124,19 @@ Acrescentei mais uma funcionalidade ao plugin. Imagine o seguite caso:
   map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>houses</span>
 </span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
 
-Veja que todas as actions <code>:new</code> serão substituídas por <code>ÂnovoÂ</code>, mas isto não se encaixa corretamente no resource <code>:casas</code>, onde o correto seria <code>ÂnovaÂ</code> e não <code>ÂnovoÂ </code>(é apenas um exemplo&#8230;).
 
-Neste caso podemos usar a opção <code>:actions_as</code> no próprio resource, assim:
+<p>Veja que todas as actions <code>:new</code> serão substituídas por <code>ÂnovoÂ</code>, mas isto não se encaixa corretamente no resource <code>:casas</code>, onde o correto seria <code>ÂnovaÂ</code> e não <code>ÂnovoÂ </code>(é apenas um exemplo&#8230;).</p>
+
+<p>Neste caso podemos usar a opção <code>:actions_as</code> no próprio resource, assim:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>houses</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>actions_as</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>new</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>nova<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span></span></pre>
 
-Problema resolvido. Para todos os outros casos a action <code>:new</code> será apelidada de <code>ÂnovoÂ</code>, mas somente no resource <code>:casa</code> ela será <code>ÂnovaÂ</code>.
 
-Além disto também temos a opção <code>:as</code>, quem faz a mesma coisa com o nome do resource.
+<p>Problema resolvido. Para todos os outros casos a action <code>:new</code> será apelidada de <code>ÂnovoÂ</code>, mas somente no resource <code>:casa</code> ela será <code>ÂnovaÂ</code>.</p>
 
-Se o plugin estiver sendo útil para você, não se esqueça de me recomendar no <a href="http://www.workingwithrails.com/recommendation/new/person/8137-carlos-brando">working with rails</a>.
+<p>Além disto também temos a opção <code>:as</code>, quem faz a mesma coisa com o nome do resource.</p>
+
+<p>Se o plugin estiver sendo útil para você, não se esqueça de me recomendar no <a href="http://www.workingwithrails.com/recommendation/new/person/8137-carlos-brando">working with rails</a>.</p>
 </div>
 
 
@@ -143,14 +145,14 @@ Se o plugin estiver sendo útil para você, não se esqueça de me recomendar no
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-04-03 00:00:00 -0300" pubdate  updated >Apr 3<span>rd</span>, 2008</time>
+<time datetime="2008-04-03 00:00:00 -0300" pubdate  updated > 3 de Abril de 2008</time>
 
 
 

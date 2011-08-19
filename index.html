@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -100,7 +100,7 @@
     
   <header>
     
-      <h1 class="entry-title"><a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda Do C</a></h1>
+      <h1 class="entry-title"><a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a></h1>
     
     
       <p class="meta">
@@ -108,7 +108,7 @@
 
 
 
-<time datetime="2011-06-13 00:00:00 -0300" pubdate  updated >Jun 13<span>th</span>, 2011</time>
+<time datetime="2011-06-13 00:00:00 -0300" pubdate  updated >13 de Junho de 2011</time>
 
 
 </p>
@@ -122,7 +122,7 @@
 
 <h2>A Regra Direita-Esquerda do C</h2>
 
-<p>A regra <code>direta-esquerda</code> é muito útil para decifrar declarações na linguagem C e também pode ser de grande ajuda ao escrever código. A regra é bem simples, toda vez que encontrar os seguintes símbolos no código, leia:</p>
+<p>A regra <strong>direta-esquerda</strong> é muito útil para decifrar declarações na linguagem C e também pode ser de grande ajuda ao escrever código. A regra é bem simples, toda vez que encontrar os seguintes símbolos no código, leia:</p>
 
 <pre><code>*   como "um ponteiro para"      - sempre do lado esquerdo
 []  como "um array de"           - sempre do lado direito
@@ -143,115 +143,163 @@
 
 <p>Então, repita os passos 2 e 3 até terminar toda a sua declaração. Veja abaixo alguns exemplos:</p>
 
-<pre><code>int *p[];
-</code></pre>
-
-<ol>
-<li><p>Encontre o identificador.</p>
-
-<p> int *p[];</p>
-
-<pre><code>  ^
-</code></pre>
-
-<p> &#8220;p é&#8221;</p></li>
-<li><p>Siga pela direita enquanto encontrar um símbolo ou abre parênteses.</p></li>
-</ol>
-
-
 <figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'><span class="nb">int</span> <span class="o">*</span><span class="n">p</span><span class="o">[]</span><span class="p">;</span>
-</div><div class='line'>      <span class="o">^^</span>
-</div><div class='line'><span class="s">&quot;p ĂŠ um array de&quot;</span>
+</pre></td><td class='code' width='100%'><pre><code class='c'><div class='line'><span class="kt">int</span> <span class="o">*</span><span class="n">p</span><span class="p">[];</span>
 </div></code></pre></td></tr></table></div></figure>
 
 <ol>
-<li><p>Quando não puder mais mover para a direita (os símbolo acabaram), então siga para a esquerda e encontre:</p>
-
-<p> int *p[];</p>
-
-<pre><code> ^
-</code></pre>
-
-<p> &#8220;p é um array de ponteiros para&#8221;</p></li>
-<li><p>Continue seguinte pela esquerda e encontre:</p>
-
-<p> int *p[];
- ^<sup>^</sup>
- &#8220;p é um array de ponteiros para int&#8221;.
- (ou &#8220;p é um array onde cada elemento é um ponteiro para um inteiro&#8221;)</p></li>
+<li>Encontre o identificador.</li>
 </ol>
+
+
+<div><figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'>int *p[];
+</div><div class='line'>     ^
+</div><div class='line'>"p é"</div></code></pre></td></tr></table></div></figure></div>
+
+
+<ol>
+<li>Siga pela direita enquanto encontrar um símbolo ou abre parênteses.</li>
+</ol>
+
+
+<div><figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'>int *p[];
+</div><div class='line'>      ^^
+</div><div class='line'>"p é um array de"</div></code></pre></td></tr></table></div></figure></div>
+
+
+<ol>
+<li>Quando não puder mais mover para a direita (os símbolo acabaram), então siga para a esquerda e encontre:</li>
+</ol>
+
+
+<div><figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'>int *p[];
+</div><div class='line'>    ^
+</div><div class='line'>"p é um array de ponteiros para"</div></code></pre></td></tr></table></div></figure></div>
+
+
+<ol>
+<li>Continue seguinte pela esquerda e encontre:</li>
+</ol>
+
+
+<div><figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'>int *p[];
+</div><div class='line'>^^^
+</div><div class='line'>"p é um array de ponteiros para int". 
+</div><div class='line'>(ou "p é um array onde cada elemento é um ponteiro para um inteiro")</div></code></pre></td></tr></table></div></figure></div>
 
 
 <p>Outro exemplo:</p>
 
-<pre><code>int *(*func())();
-</code></pre>
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+</pre></td><td class='code' width='100%'><pre><code class='c'><div class='line'><span class="kt">int</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">func</span><span class="p">())();</span>
+</div></code></pre></td></tr></table></div></figure>
 
 <ol>
-<li><p>Encontre o identificador.</p>
-
-<p> int <em>(</em>func())();</p>
-
-<pre><code>    ^^^^
-</code></pre>
-
-<p> &#8220;func é&#8221;</p></li>
-<li><p>Vá para a direita.</p>
-
-<p> int <em>(</em>func())();</p>
-
-<pre><code>        ^^
-</code></pre>
-
-<p> &#8220;func é uma função retornando&#8221;</p></li>
-<li><p>Não dá para ir mais a direita devido ao fecha parênteses, então vá para a esquerda.</p>
-
-<p> int <em>(</em>func())();</p>
-
-<pre><code>   ^
-</code></pre>
-
-<p> &#8220;func é uma função retornando um ponteiro para&#8221;</p></li>
-<li><p>Não pode mais ir para a esquerda devido ao abre parênteses, então continue indo pela direita.</p>
-
-<p> int <em>(</em>func())();</p>
-
-<pre><code>           ^^
-</code></pre>
-
-<p> &#8220;func é uma função retornando um ponteiro para uma função retornando&#8221;</p></li>
-<li><p>Não dá mais para ir para a direita porque não há mais simbolos, então vá para a esquerda.</p>
-
-<p> int <em>(</em>func())();</p>
-
-<pre><code> ^
-</code></pre>
-
-<p> &#8220;func é uma função retornando um ponteiro para uma função retornando um ponteiro para&#8221;</p></li>
-<li><p>E finalmente, o último símbolo a esquerda.</p>
-
-<p> int <em>(</em>func())();
- ^<sup>^</sup>
- &#8220;func é uma função retornando um ponteiro para uma função retornando um ponteiro para um inteiro&#8221;.</p></li>
+<li>Encontre o identificador.</li>
 </ol>
+
+
+<div><figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'>int *(*func())();
+</div><div class='line'>       ^^^^
+</div><div class='line'>"func é"</div></code></pre></td></tr></table></div></figure></div>
+
+
+<ol>
+<li>Vá para a direita.</li>
+</ol>
+
+
+<div><figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'>int *(*func())();
+</div><div class='line'>           ^^
+</div><div class='line'>"func é uma função retornando"</div></code></pre></td></tr></table></div></figure></div>
+
+
+<ol>
+<li>Não dá para ir mais a direita devido ao fecha parênteses, então vá para a esquerda.</li>
+</ol>
+
+
+<div><figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'>int *(*func())();
+</div><div class='line'>      ^
+</div><div class='line'>"func é uma função retornando um ponteiro para"</div></code></pre></td></tr></table></div></figure></div>
+
+
+<ol>
+<li>Não pode mais ir para a esquerda devido ao abre parênteses, então continue indo pela direita.</li>
+</ol>
+
+
+<div><figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'>int *(*func())();
+</div><div class='line'>              ^^
+</div><div class='line'>"func é uma função retornando um ponteiro para uma função retornando"</div></code></pre></td></tr></table></div></figure></div>
+
+
+<ol>
+<li>Não dá mais para ir para a direita porque não há mais simbolos, então vá para a esquerda.</li>
+</ol>
+
+
+<div><figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'>int *(*func())();
+</div><div class='line'>    ^
+</div><div class='line'>"func é uma função retornando um ponteiro para uma função retornando um ponteiro para"</div></code></pre></td></tr></table></div></figure></div>
+
+
+<ol>
+<li>E finalmente, o último símbolo a esquerda.</li>
+</ol>
+
+
+<div><figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'>int *(*func())();
+</div><div class='line'>^^^
+</div><div class='line'>"func é uma função retornando um ponteiro para uma função retornando um ponteiro para um inteiro".</div></code></pre></td></tr></table></div></figure></div>
 
 
 <p>Como você pode ver, essa regra pode ser muito útil. Ela também é ótima para manter a sua sanidade enquanto estiver criando declarações, além de ajudá-lo a identificar onde colocar o próximo símbolo ou parênteses.</p>
 
 <p>Algumas declarações podem parecer ainda mais complicadas quando definem o tamanho de um array ou informam uma lista de argumentos. Por exemplo, se você ver algo como <code>[3]</code>, deve ler <em>&#8220;um array (de tamanho 3) de&#8230;&#8221;</em>. Mas se você ver algo como <code>(char *,int)</code>, então deve ler <em>&#8220;uma função esperando (char </em>, int) e retornando&#8230;&#8221;*. Veja mais um exemplo:</p>
 
-<pre><code>int (*(*fun_one)(char *,double))[9][20];
-</code></pre>
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+</pre></td><td class='code' width='100%'><pre><code class='c'><div class='line'><span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">fun_one</span><span class="p">)(</span><span class="kt">char</span> <span class="o">*</span><span class="p">,</span><span class="kt">double</span><span class="p">))[</span><span class="mi">9</span><span class="p">][</span><span class="mi">20</span><span class="p">];</span>
+</div></code></pre></td></tr></table></div></figure>
 
 <p>Eu não vou seguir cada passo para decifrar essa declaração. Mas o resultado será: <em>&#8220;fun_one é um ponteiro para uma função esperando (char </em>, double) e retornando um ponteiro para um array (tamanho 9) de um array (tamanho 20) de inteiros&#8221;*.</p>
 
 <p>Fica mais fácil se você remover o tamanho dos arrays e as listas de argumentos:</p>
 
-<pre><code>int (*(*fun_one)())[][];
-</code></pre>
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+</pre></td><td class='code' width='100%'><pre><code class='c'><div class='line'><span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">fun_one</span><span class="p">)())[][];</span>
+</div></code></pre></td></tr></table></div></figure>
 
 <p>Uma boa opção é decifrar dessa maneira e só depois adicionar o tamanho dos arrays e a lista de argumentos.</p>
 
@@ -259,8 +307,9 @@
 
 <p>É totalmente possível criar declarações ilegais usando essa regra, então algum conhecimento do que é aceitável e do que não é em C é necessário. Por exemplo, se você tiver algo assim:</p>
 
-<pre><code>int *((*fun_one)())[][];
-</code></pre>
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+</pre></td><td class='code' width='100%'><pre><code class='c'><div class='line'><span class="kt">int</span> <span class="o">*</span><span class="p">((</span><span class="o">*</span><span class="n">fun_one</span><span class="p">)())[][];</span>
+</div></code></pre></td></tr></table></div></figure>
 
 <p>A declaração acima seria traduzida para <em>&#8220;fun_one é um ponteiro para uma função retornando um array de arrays de ponteiros para inteiros&#8221;</em>.</p>
 
@@ -318,7 +367,7 @@ int *ffp()();    "ffp é uma função retornando uma função retornando um pont
 </code></pre>
 </div>
   <footer>
-    <a rel="full-article" href="/2011/06/13/a-regra-direita-esquerda-do-c/">Read on &rarr;</a>
+    <a rel="full-article" href="/2011/06/13/a-regra-direita-esquerda-do-c/">Ler mais &rarr;</a>
   </footer>
 
 
@@ -337,7 +386,7 @@ int *ffp()();    "ffp é uma função retornando uma função retornando um pont
 
 
 
-<time datetime="2011-06-03 00:00:00 -0300" pubdate  updated >Jun 3<span>rd</span>, 2011</time>
+<time datetime="2011-06-03 00:00:00 -0300" pubdate  updated > 3 de Junho de 2011</time>
 
 
 </p>
@@ -359,7 +408,7 @@ int *ffp()();    "ffp é uma função retornando uma função retornando um pont
 <p>Se desejar contribuir com algo, essa biblioteca tem 78 linhas de código apenas. E todo o código encontra-se no GitHub: <a href="https://github.com/carlosbrando/colorific/blob/master/lib/colorific.rb">https://github.com/carlosbrando/colorific/blob/master/lib/colorific.rb</a></p>
 </div>
   <footer>
-    <a rel="full-article" href="/2011/06/03/colorific/">Read on &rarr;</a>
+    <a rel="full-article" href="/2011/06/03/colorific/">Ler mais &rarr;</a>
   </footer>
 
 
@@ -370,7 +419,7 @@ int *ffp()();    "ffp é uma função retornando uma função retornando um pont
     
   <header>
     
-      <h1 class="entry-title"><a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem Disse Que Gravar Um Podcast é Fácil?</a></h1>
+      <h1 class="entry-title"><a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a></h1>
     
     
       <p class="meta">
@@ -378,7 +427,7 @@ int *ffp()();    "ffp é uma função retornando uma função retornando um pont
 
 
 
-<time datetime="2011-03-29 00:00:00 -0300" pubdate  updated >Mar 29<span>th</span>, 2011</time>
+<time datetime="2011-03-29 00:00:00 -0300" pubdate  updated >29 de Março de 2011</time>
 
 
 </p>
@@ -386,10 +435,12 @@ int *ffp()();    "ffp é uma função retornando uma função retornando um pont
   </header>
 
 
-  <div class="entry-content">Não deixe de acompanhar semanalmente o <a href="http://grokpodcast.com/">Grok Podcast</a>!
+  <div class="entry-content"><p>Não deixe de acompanhar semanalmente o <a href="http://grokpodcast.com/">Grok Podcast</a>!</p>
+
+<p><audio controls='controls'><source src='http://www.nomedojogo.com/podpress_trac/web/3627/0/Rafael-Rosa-Bruno-Douglas-Campos-on-2011-02-24-at-21.51.output.mp3 ' type='audio/mp3'/></audio></p>
 </div>
   <footer>
-    <a rel="full-article" href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Read on &rarr;</a>
+    <a rel="full-article" href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Ler mais &rarr;</a>
   </footer>
 
 
@@ -400,7 +451,7 @@ int *ffp()();    "ffp é uma função retornando uma função retornando um pont
     
   <header>
     
-      <h1 class="entry-title"><a href="/2011/03/24/convite-para-o-grok-podcast/">Convite Para O Grok Podcast!</a></h1>
+      <h1 class="entry-title"><a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a></h1>
     
     
       <p class="meta">
@@ -408,7 +459,7 @@ int *ffp()();    "ffp é uma função retornando uma função retornando um pont
 
 
 
-<time datetime="2011-03-24 00:00:00 -0300" pubdate  updated >Mar 24<span>th</span>, 2011</time>
+<time datetime="2011-03-24 00:00:00 -0300" pubdate  updated >24 de Março de 2011</time>
 
 
 </p>
@@ -416,10 +467,12 @@ int *ffp()();    "ffp é uma função retornando uma função retornando um pont
   </header>
 
 
-  <div class="entry-content">Um convite formal para o próximo convidado especial do <a href="http://grokpodcast.com/">Grok Podcast</a>!
+  <div class="entry-content"><p>Um convite formal para o próximo convidado especial do <a href="http://grokpodcast.com/">Grok Podcast</a>!</p>
+
+<p><audio controls='controls'><source src='http://www.nomedojogo.com/wp-content/uploads/2011/03/Rafael-Rosa-Bruno-Douglas-Campos-on-2011-02-24-at-22.33.output.mp3 ' type='audio/mp3'/></audio></p>
 </div>
   <footer>
-    <a rel="full-article" href="/2011/03/24/convite-para-o-grok-podcast/">Read on &rarr;</a>
+    <a rel="full-article" href="/2011/03/24/convite-para-o-grok-podcast/">Ler mais &rarr;</a>
   </footer>
 
 
@@ -430,7 +483,7 @@ int *ffp()();    "ffp é uma função retornando uma função retornando um pont
     
   <header>
     
-      <h1 class="entry-title"><a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro Anos De Nome Do Jogo</a></h1>
+      <h1 class="entry-title"><a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro anos de Nome do Jogo</a></h1>
     
     
       <p class="meta">
@@ -438,7 +491,7 @@ int *ffp()();    "ffp é uma função retornando uma função retornando um pont
 
 
 
-<time datetime="2011-02-08 00:00:00 -0200" pubdate  updated >Feb 8<span>th</span>, 2011</time>
+<time datetime="2011-02-08 00:00:00 -0200" pubdate  updated > 8 de Fevereiro de 2011</time>
 
 
 </p>
@@ -446,16 +499,16 @@ int *ffp()();    "ffp é uma função retornando uma função retornando um pont
   </header>
 
 
-  <div class="entry-content"><img class="aligncenter size-full wp-image-3610" title="247607315_a74fac5aa4" src="http://www.nomedojogo.com/wp-content/uploads/2011/02/247607315_a74fac5aa4.jpg" alt="" width="500" height="332" />
+  <div class="entry-content"><p><img class='' src='http://www.nomedojogo.com/wp-content/uploads/2011/02/247607315_a74fac5aa4.jpg' width='500' height='332' alt='' title=''></p>
 
-Hoje completam quatro anos desde que comecei a escrever esse blog. No total são 812 artigos e 4.305 comentários. Sempre mantive um ritmo muito bom de publicação, porém com o crescimento do Twitter (<a href="http://twitter.com/#!/carlosbrando">@carlosbrando</a>) como ferramenta de comunicação o tempo entre um artigo e outro diminuiu muito, eu tenho de confessar.
+<p>Hoje completam quatro anos desde que comecei a escrever esse blog. No total são 812 artigos e 4.305 comentários. Sempre mantive um ritmo muito bom de publicação, porém com o crescimento do Twitter (<a href="http://twitter.com/#!/carlosbrando">@carlosbrando</a>) como ferramenta de comunicação o tempo entre um artigo e outro diminuiu muito, eu tenho de confessar.</p>
 
-Escrever e manter um blog por tanto tempo não é fácil, principalmente se você tem a intenção de publicar conteúdo de qualidade. Mas as recompensas valem muito a pena, nesses quatro anos esse blog gerou dois livros, muitos vídeos, um podcast semanal sobre <a href="http://podcast.rubyonrails.pro.br/">Ruby on Rails</a> e agora o <a href="http://grokpodcast.com/">Grok Podcast</a>. Sem contar todas as outras oportunidades que apareceram graças a essa iniciativa.
+<p>Escrever e manter um blog por tanto tempo não é fácil, principalmente se você tem a intenção de publicar conteúdo de qualidade. Mas as recompensas valem muito a pena, nesses quatro anos esse blog gerou dois livros, muitos vídeos, um podcast semanal sobre <a href="http://podcast.rubyonrails.pro.br/">Ruby on Rails</a> e agora o <a href="http://grokpodcast.com/">Grok Podcast</a>. Sem contar todas as outras oportunidades que apareceram graças a essa iniciativa.</p>
 
-Obrigado pela audiência!
+<p>Obrigado pela audiência!</p>
 </div>
   <footer>
-    <a rel="full-article" href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Read on &rarr;</a>
+    <a rel="full-article" href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Ler mais &rarr;</a>
   </footer>
 
 
@@ -466,7 +519,7 @@ Obrigado pela audiência!
     
   <header>
     
-      <h1 class="entry-title"><a href="/2011/01/27/grok-podcast-16-%25e2%2580%2593-o-livro-rework/">Grok Podcast 16 - O Livro Rework</a></h1>
+      <h1 class="entry-title"><a href="/2011/01/27/grok-podcast-16-%25e2%2580%2593-o-livro-rework/">Grok Podcast 16 - O livro Rework</a></h1>
     
     
       <p class="meta">
@@ -474,7 +527,7 @@ Obrigado pela audiência!
 
 
 
-<time datetime="2011-01-27 00:00:00 -0200" pubdate  updated >Jan 27<span>th</span>, 2011</time>
+<time datetime="2011-01-27 00:00:00 -0200" pubdate  updated >27 de Janeiro de 2011</time>
 
 
 </p>
@@ -482,18 +535,18 @@ Obrigado pela audiência!
   </header>
 
 
-  <div class="entry-content"><img class="aligncenter" src="http://grokpodcast.com/wp-content/uploads/2011/01/header.jpg" alt="" width="940" height="301" />
+  <div class="entry-content"><p><img class="aligncenter" src="http://grokpodcast.com/wp-content/uploads/2011/01/header.jpg" alt="" width="940" height="301" /></p>
 
-Depois de um bom período de férias, estamos de volta com o <a href="http://grokpodcast.com/">Grok Podcast</a>! E para começar o ano com tudo decidimos gravar uma série inteira sobre o controverso livro <a href="http://37signals.com/rework/">Rework</a> de Jason Fried e David Heinemeier Hansson (o criador do framework Ruby on Rails).
+<p>Depois de um bom período de férias, estamos de volta com o <a href="http://grokpodcast.com/">Grok Podcast</a>! E para começar o ano com tudo decidimos gravar uma série inteira sobre o controverso livro <a href="http://37signals.com/rework/">Rework</a> de Jason Fried e David Heinemeier Hansson (o criador do framework Ruby on Rails).</p>
 
-Serão ao todo três episódios comentando os pontos-chave de cada um dos capítulos do livro. Se você já leu o livro será como bater um papo sobre a leitura e se você ainda não teve a oportunidade de ler, será como um bom resumo para atiçar a sua curiosidade.
+<p>Serão ao todo três episódios comentando os pontos-chave de cada um dos capítulos do livro. Se você já leu o livro será como bater um papo sobre a leitura e se você ainda não teve a oportunidade de ler, será como um bom resumo para atiçar a sua curiosidade.</p>
 
-Espero que gostem e continuem acompanhando o <a href="http://grokpodcast.com/">Grok Podcast</a> nessa segunda temporada!
+<p>Espero que gostem e continuem acompanhando o <a href="http://grokpodcast.com/">Grok Podcast</a> nessa segunda temporada!</p>
 
-Você pode adicionar o podcast ao seu iTunes <a href="http://itunes.apple.com/us/podcast/grok-podcast/id393122038" target="_blank">clicando aqui</a> ou atráves do nosso <a href="http://grokpodcast.com/feed/" target="_blank">RSS</a>.
+<p>Você pode adicionar o podcast ao seu iTunes <a href="http://itunes.apple.com/us/podcast/grok-podcast/id393122038" target="_blank">clicando aqui</a> ou atráves do nosso <a href="http://grokpodcast.com/feed/" target="_blank">RSS</a>.</p>
 </div>
   <footer>
-    <a rel="full-article" href="/2011/01/27/grok-podcast-16-%25e2%2580%2593-o-livro-rework/">Read on &rarr;</a>
+    <a rel="full-article" href="/2011/01/27/grok-podcast-16-%25e2%2580%2593-o-livro-rework/">Ler mais &rarr;</a>
   </footer>
 
 
@@ -504,7 +557,7 @@ Você pode adicionar o podcast ao seu iTunes <a href="http://itunes.apple.com/u
     
   <header>
     
-      <h1 class="entry-title"><a href="/2011/01/03/como-funcionam-os-metodos-puts-e-print-no-ruby/">Como Funcionam Os Métodos Puts E Print No Ruby</a></h1>
+      <h1 class="entry-title"><a href="/2011/01/03/como-funcionam-os-metodos-puts-e-print-no-ruby/">Como funcionam os métodos puts e print no Ruby</a></h1>
     
     
       <p class="meta">
@@ -512,7 +565,7 @@ Você pode adicionar o podcast ao seu iTunes <a href="http://itunes.apple.com/u
 
 
 
-<time datetime="2011-01-03 00:00:00 -0200" pubdate  updated >Jan 3<span>rd</span>, 2011</time>
+<time datetime="2011-01-03 00:00:00 -0200" pubdate  updated > 3 de Janeiro de 2011</time>
 
 
 </p>
@@ -559,7 +612,7 @@ Você pode adicionar o podcast ao seu iTunes <a href="http://itunes.apple.com/u
 </div></code></pre></td></tr></table></div></figure>
 </div>
   <footer>
-    <a rel="full-article" href="/2011/01/03/como-funcionam-os-metodos-puts-e-print-no-ruby/">Read on &rarr;</a>
+    <a rel="full-article" href="/2011/01/03/como-funcionam-os-metodos-puts-e-print-no-ruby/">Ler mais &rarr;</a>
   </footer>
 
 
@@ -578,7 +631,7 @@ Você pode adicionar o podcast ao seu iTunes <a href="http://itunes.apple.com/u
 
 
 
-<time datetime="2010-12-31 00:00:00 -0200" pubdate  updated >Dec 31<span>st</span>, 2010</time>
+<time datetime="2010-12-31 00:00:00 -0200" pubdate  updated >31 de Dezembro de 2010</time>
 
 
 </p>
@@ -586,27 +639,31 @@ Você pode adicionar o podcast ao seu iTunes <a href="http://itunes.apple.com/u
   </header>
 
 
-  <div class="entry-content">Mais um ano bem agitado se passou. Muito trabalho e diversão fizeram de 2010 um excelente ano para mim. Porém, o que mais me marcou esse ano foi o meu retorno ao mundo dos podcasts (algo que pessoalmente gosto muito de fazer) com o <a href="http://grokpodcast.com/">Grok Podcast</a>.
+  <div class="entry-content"><p>Mais um ano bem agitado se passou. Muito trabalho e diversão fizeram de 2010 um excelente ano para mim. Porém, o que mais me marcou esse ano foi o meu retorno ao mundo dos podcasts (algo que pessoalmente gosto muito de fazer) com o <a href="http://grokpodcast.com/">Grok Podcast</a>.</p>
 
-Mas a brincadeira ainda não acabou, tenho muitos projetos na cabeça e espero poder colocá-los em prática no ano que se segue.
+<p>Mas a brincadeira ainda não acabou, tenho muitos projetos na cabeça e espero poder colocá-los em prática no ano que se segue.</p>
+
 <h2>Os artigos mais lidos do blog em 2010</h2>
+
 <ul>
-	<li><a href="http://www.nomedojogo.com/2010/01/20/a-filosofia-do-ruby/">A Filosofia do Ruby</a></li>
-	<li><a href="http://www.nomedojogo.com/2010/02/17/programadores-incompetentes-sao-otimos-para-o-mercado/">Programadores incompetentes são ótimos para o mercado</a></li>
-	<li><a href="http://www.nomedojogo.com/2010/02/10/quer-se-tornar-um-programador-de-sucesso-pare-de-escrever-codigo/">Quer se tornar um programador de sucesso? Pare de escrever código</a></li>
-	<li><a href="http://www.nomedojogo.com/2010/02/03/o-efeito-do-codigo-na-mente-do-programador/">O Efeito do Código na Mente do Programador</a></li>
-	<li><a href="http://www.nomedojogo.com/2010/03/28/nao-se-fazem-mais-programadores-como-antigamente/">Não se fazem mais programadores como antigamente</a></li>
-	<li><a href="http://www.nomedojogo.com/2010/04/23/investir-em-ruby-era-muito-arriscado/">Investir em Ruby era muito arriscado</a></li>
-	<li><a href="http://www.nomedojogo.com/2010/04/20/migrando-do-textmate-para-o-textmate/">Migrando do Textmate para o Textmate</a></li>
-	<li><a href="http://www.nomedojogo.com/2010/05/06/um-pseudo-intellisense-para-o-textmate/">Um pseudo-intellisense para o Textmate</a></li>
-	<li><a href="http://www.nomedojogo.com/2010/06/04/programadores-nem-sempre-o-time-que-esta-ganhando-esta-ganhando/">Programadores: Nem sempre o time que está ganhando está ganhando</a></li>
-	<li><a href="http://www.nomedojogo.com/2010/07/01/eu-quebrei-o-codigo/">“Eu quebrei o código”</a></li>
-	<li><a href="http://www.nomedojogo.com/2010/09/15/meu-novo-podcast/">Meu novo podcast</a></li>
+<li><a href="http://www.nomedojogo.com/2010/01/20/a-filosofia-do-ruby/">A Filosofia do Ruby</a></li>
+<li><a href="http://www.nomedojogo.com/2010/02/17/programadores-incompetentes-sao-otimos-para-o-mercado/">Programadores incompetentes são ótimos para o mercado</a></li>
+<li><a href="http://www.nomedojogo.com/2010/02/10/quer-se-tornar-um-programador-de-sucesso-pare-de-escrever-codigo/">Quer se tornar um programador de sucesso? Pare de escrever código</a></li>
+<li><a href="http://www.nomedojogo.com/2010/02/03/o-efeito-do-codigo-na-mente-do-programador/">O Efeito do Código na Mente do Programador</a></li>
+<li><a href="http://www.nomedojogo.com/2010/03/28/nao-se-fazem-mais-programadores-como-antigamente/">Não se fazem mais programadores como antigamente</a></li>
+<li><a href="http://www.nomedojogo.com/2010/04/23/investir-em-ruby-era-muito-arriscado/">Investir em Ruby era muito arriscado</a></li>
+<li><a href="http://www.nomedojogo.com/2010/04/20/migrando-do-textmate-para-o-textmate/">Migrando do Textmate para o Textmate</a></li>
+<li><a href="http://www.nomedojogo.com/2010/05/06/um-pseudo-intellisense-para-o-textmate/">Um pseudo-intellisense para o Textmate</a></li>
+<li><a href="http://www.nomedojogo.com/2010/06/04/programadores-nem-sempre-o-time-que-esta-ganhando-esta-ganhando/">Programadores: Nem sempre o time que está ganhando está ganhando</a></li>
+<li><a href="http://www.nomedojogo.com/2010/07/01/eu-quebrei-o-codigo/">“Eu quebrei o código”</a></li>
+<li><a href="http://www.nomedojogo.com/2010/09/15/meu-novo-podcast/">Meu novo podcast</a></li>
 </ul>
-Até o ano que vem!
+
+
+<p>Até o ano que vem!</p>
 </div>
   <footer>
-    <a rel="full-article" href="/2010/12/31/retrospectiva-2010/">Read on &rarr;</a>
+    <a rel="full-article" href="/2010/12/31/retrospectiva-2010/">Ler mais &rarr;</a>
   </footer>
 
 
@@ -617,7 +674,7 @@ Até o ano que vem!
     
   <header>
     
-      <h1 class="entry-title"><a href="/2010/12/22/singularidade-e-biologia-sintetica/">Singularidade E Biologia Sintética</a></h1>
+      <h1 class="entry-title"><a href="/2010/12/22/singularidade-e-biologia-sintetica/">Singularidade e Biologia Sintética</a></h1>
     
     
       <p class="meta">
@@ -625,7 +682,7 @@ Até o ano que vem!
 
 
 
-<time datetime="2010-12-22 00:00:00 -0200" pubdate  updated >Dec 22<span>nd</span>, 2010</time>
+<time datetime="2010-12-22 00:00:00 -0200" pubdate  updated >22 de Dezembro de 2010</time>
 
 
 </p>
@@ -633,22 +690,25 @@ Até o ano que vem!
   </header>
 
 
-  <div class="entry-content">Acabou de ir ao ar a última parte do <a href="http://grokpodcast.com/">Grok Podcast</a> que gravamos com o Elizer Pimentel e o Luis Gustavo da <a href="http://planobe.com.br/">Plano Bê</a> (a melhor empresa de tecnologia do mundo e do universo de acordo com o Luis&#8230; :P) sobre singularidade e biologia sintetica.
+  <div class="entry-content"><p>Acabou de ir ao ar a última parte do <a href="http://grokpodcast.com/">Grok Podcast</a> que gravamos com o Elizer Pimentel e o Luis Gustavo da <a href="http://planobe.com.br/">Plano Bê</a> (a melhor empresa de tecnologia do mundo e do universo de acordo com o Luis&#8230; :P) sobre singularidade e biologia sintetica.</p>
 
-<strong>Por que esse assunto é do interesse de programadores e desenvolvedores de software?</strong> Basicamente a biologia sintetica apresenta um novo hardware para programarmos e como tudo ainda é muito novo e desconhecido essa série promete abrir os seus horizontes quanto a um futuro possível dentro de nossa area de atuação. Além do mais é um assunto super divertido e fácil de absorver.
+<p><strong>Por que esse assunto é do interesse de programadores e desenvolvedores de software?</strong> Basicamente a biologia sintetica apresenta um novo hardware para programarmos e como tudo ainda é muito novo e desconhecido essa série promete abrir os seus horizontes quanto a um futuro possível dentro de nossa area de atuação. Além do mais é um assunto super divertido e fácil de absorver.</p>
 
-Eu e o Rafael Rosa estamos muito felizes com os resultados até agora com esse novo empreendimento do podcast e já temos muitos outros temas interessantes preparados para o ano que vem. Aguardem!
+<p>Eu e o Rafael Rosa estamos muito felizes com os resultados até agora com esse novo empreendimento do podcast e já temos muitos outros temas interessantes preparados para o ano que vem. Aguardem!</p>
 
-Para ouvir a série sobre singularidade e biologia sintetica na integra segue os links das três partes:
+<p>Para ouvir a série sobre singularidade e biologia sintetica na integra segue os links das três partes:</p>
+
 <ul>
-	<li><a href="http://grokpodcast.com/2010/12/08/episodio-13-singularidade-e-biologia-sintetica-parte-1/">Parte 1</a></li>
-	<li><a href="http://grokpodcast.com/2010/12/15/episodio-14-%E2%80%93-singularidade-e-biologia-sintetica-%E2%80%93-parte-2/">Parte 2</a></li>
-	<li><a href="http://grokpodcast.com/2010/12/22/episodio-15-%E2%80%93-singularidade-e-biologia-sintetica-%E2%80%93-parte-3/">Parte 3</a></li>
+<li><a href="http://grokpodcast.com/2010/12/08/episodio-13-singularidade-e-biologia-sintetica-parte-1/">Parte 1</a></li>
+<li><a href="http://grokpodcast.com/2010/12/15/episodio-14-%E2%80%93-singularidade-e-biologia-sintetica-%E2%80%93-parte-2/">Parte 2</a></li>
+<li><a href="http://grokpodcast.com/2010/12/22/episodio-15-%E2%80%93-singularidade-e-biologia-sintetica-%E2%80%93-parte-3/">Parte 3</a></li>
 </ul>
-Caso você tenha o interesse de anunciar no podcast, entre em contato conosco <a href="http://www.nomedojogo.com/contato/">clicando aqui</a>.
+
+
+<p>Caso você tenha o interesse de anunciar no podcast, entre em contato conosco <a href="http://www.nomedojogo.com/contato/">clicando aqui</a>.</p>
 </div>
   <footer>
-    <a rel="full-article" href="/2010/12/22/singularidade-e-biologia-sintetica/">Read on &rarr;</a>
+    <a rel="full-article" href="/2010/12/22/singularidade-e-biologia-sintetica/">Ler mais &rarr;</a>
   </footer>
 
 
@@ -659,7 +719,7 @@ Caso você tenha o interesse de anunciar no podcast, entre em contato conosco 
     
   <header>
     
-      <h1 class="entry-title"><a href="/2010/12/10/o-comovente-guia-de-ruby-do-why-em-pdf/">O (Comovente) Guia De Ruby Do Why Em PDF</a></h1>
+      <h1 class="entry-title"><a href="/2010/12/10/o-comovente-guia-de-ruby-do-why-em-pdf/">O (comovente) guia de Ruby do Why em PDF</a></h1>
     
     
       <p class="meta">
@@ -667,7 +727,7 @@ Caso você tenha o interesse de anunciar no podcast, entre em contato conosco 
 
 
 
-<time datetime="2010-12-10 00:00:00 -0200" pubdate  updated >Dec 10<span>th</span>, 2010</time>
+<time datetime="2010-12-10 00:00:00 -0200" pubdate  updated >10 de Dezembro de 2010</time>
 
 
 </p>
@@ -675,14 +735,14 @@ Caso você tenha o interesse de anunciar no podcast, entre em contato conosco 
   </header>
 
 
-  <div class="entry-content"><img class="aligncenter size-full wp-image-3574" title="blix-1" src="http://www.nomedojogo.com/wp-content/uploads/2010/12/blix-1.gif" alt="" width="796" height="251" />
+  <div class="entry-content"><p><img class='' src='http://www.nomedojogo.com/wp-content/uploads/2010/12/blix-1.gif' width='796' height='251' alt='' title=''></p>
 
-Não importa se você já é um rubista experiente ou está se aprendendo essa linguagem magnifica, &#8221;<strong>O (comovente) guia de Ruby do Why</strong>&#8221; é sem dúvida uma leitura obrigatória. A tradução do livro para português foi finalizada em 2009 e desde então você pode lê-lo na integra através do endereço: <a href="http://why.nomedojogo.com/index.html">why.nomedojogo.com</a>.
+<p>Não importa se você já é um rubista experiente ou está se aprendendo essa linguagem magnifica, &#8221;<strong>O (comovente) guia de Ruby do Why</strong>&#8221; é sem dúvida uma leitura obrigatória. A tradução do livro para português foi finalizada em 2009 e desde então você pode lê-lo na integra através do endereço: <a href="http://why.nomedojogo.com/index.html">why.nomedojogo.com</a>.</p>
 
-Recentemente Mairon D. Brasil, preparou um arquivo em PDF com o conteúdo do livro. Acredito que isso deve facilitar um pouco para aqueles que desejam imprimi-lo. Essa versão está disponível em seu <a href="http://maironbrasil.wordpress.com/2010/12/10/o-comovente-guia-de-ruby-do-why-em-pdf/">blog</a>.
+<p>Recentemente Mairon D. Brasil, preparou um arquivo em PDF com o conteúdo do livro. Acredito que isso deve facilitar um pouco para aqueles que desejam imprimi-lo. Essa versão está disponível em seu blog.</p>
 </div>
   <footer>
-    <a rel="full-article" href="/2010/12/10/o-comovente-guia-de-ruby-do-why-em-pdf/">Read on &rarr;</a>
+    <a rel="full-article" href="/2010/12/10/o-comovente-guia-de-ruby-do-why-em-pdf/">Ler mais &rarr;</a>
   </footer>
 
 
@@ -691,9 +751,9 @@ Recentemente Mairon D. Brasil, preparou um arquivo em PDF com o conteúdo do liv
 <nav role="pagination">
   <div>
     
-      <a class="prev" href="/blog/page/2/">&larr; Older</a>
+      <a class="prev" href="/page/2/">&larr; Antigos</a>
     
-    <a href="/blog/archives">Blog Archives</a>
+    <a href="/blog/archives">Arquivo</a>
     
   </div>
 </nav>

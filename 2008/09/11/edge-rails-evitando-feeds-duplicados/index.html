@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Edge Rails: Evitando Feeds Duplicados</h1>
+      <h1 class="entry-title">Edge Rails: Evitando feeds duplicados</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-09-11 00:00:00 -0300" pubdate  updated >Sep 11<span>th</span>, 2008</time>
+<time datetime="2008-09-11 00:00:00 -0300" pubdate  updated >11 de Setembro de 2008</time>
 
 
 </p>
@@ -113,11 +113,12 @@
   </header>
 
 
-<div class="entry-content">Algumas vezes você assina o feed de um blog e de repente se depara com uma série de posts que já foram lidos aparecendo como se fossem novos no seu <strong>Google Reader</strong>. Já aconteceu com você?
+<div class="entry-content"><p>Algumas vezes você assina o feed de um blog e de repente se depara com uma série de posts que já foram lidos aparecendo como se fossem novos no seu <strong>Google Reader</strong>. Já aconteceu com você?</p>
 
-Isto pode acontecer por vários motivos, mas não seria legal deixar isto acontecer com os assinantes do seu feed, correto?
+<p>Isto pode acontecer por vários motivos, mas não seria legal deixar isto acontecer com os assinantes do seu feed, correto?</p>
 
-Para ajudar-nos a evitar este tipo de constrangimento, cada entrada e o próprio feed criado pelo builder <a href="http://www.nomedojogo.com/2008/01/17/edge-rails-atom-feed-turbinado/">atom_feed</a> receberam uma nova opção chamada <strong>:id</strong>.
+<p>Para ajudar-nos a evitar este tipo de constrangimento, cada entrada e o próprio feed criado pelo builder <a href="http://www.nomedojogo.com/2008/01/17/edge-rails-atom-feed-turbinado/">atom_feed</a> receberam uma nova opção chamada <strong>:id</strong>.</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">atom_feed<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>id</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>tag:nomedojogo.com,2008:test/<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">feed</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
   feed<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>My great blog!<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
   feed<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>updated<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">((</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>posts</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>first<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>created_at<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">))</span>
@@ -133,11 +134,13 @@ Para ajudar-nos a evitar este tipo de constrangimento, cada entrada e o próprio
     <span class="keyword keyword_control keyword_control_ruby">end</span>
   <span class="keyword keyword_control keyword_control_ruby">end</span>
 <span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-Fazendo desta forma, mesmo que você tenha de reescrever algum trecho do código que gera os feeds, ou fazer alguma grande alteração no conteúdo do seu site, o <strong>id</strong> criado para aquela entrada será sempre o mesmo fazendo com que o leitor de feeds não duplique as entradas antigas.
 
-Seus leitores agradecem.
 
-Aproveitando a ocasião, você pode assinar o feed do Nome do Jogo, <a href="http://www.nomedojogo.com/feed/rss/">clicando aqui</a>.
+<p>Fazendo desta forma, mesmo que você tenha de reescrever algum trecho do código que gera os feeds, ou fazer alguma grande alteração no conteúdo do seu site, o <strong>id</strong> criado para aquela entrada será sempre o mesmo fazendo com que o leitor de feeds não duplique as entradas antigas.</p>
+
+<p>Seus leitores agradecem.</p>
+
+<p>Aproveitando a ocasião, você pode assinar o feed do Nome do Jogo, <a href="http://www.nomedojogo.com/feed/rss/">clicando aqui</a>.</p>
 </div>
 
 
@@ -146,14 +149,14 @@ Aproveitando a ocasião, você pode assinar o feed do Nome do Jogo, <a href="htt
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-09-11 00:00:00 -0300" pubdate  updated >Sep 11<span>th</span>, 2008</time>
+<time datetime="2008-09-11 00:00:00 -0300" pubdate  updated >11 de Setembro de 2008</time>
 
 
 

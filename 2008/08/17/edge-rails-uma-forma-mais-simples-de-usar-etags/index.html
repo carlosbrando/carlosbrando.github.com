@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Edge Rails: Uma Forma Mais Simples De Usar ETags</h1>
+      <h1 class="entry-title">Edge Rails: Uma forma mais simples de usar ETags</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-08-17 00:00:00 -0300" pubdate  updated >Aug 17<span>th</span>, 2008</time>
+<time datetime="2008-08-17 00:00:00 -0300" pubdate  updated >17 de Agosto de 2008</time>
 
 
 </p>
@@ -113,11 +113,12 @@
   </header>
 
 
-<div class="entry-content">Se você ainda não sabe o que são ETags, leia o <a href="http://www.nomedojogo.com/2008/08/15/edge-rails-melhorando-a-performance-usando-etags/">último post desta série</a>.
+<div class="entry-content"><p>Se você ainda não sabe o que são ETags, leia o <a href="http://www.nomedojogo.com/2008/08/15/edge-rails-melhorando-a-performance-usando-etags/">último post desta série</a>.</p>
 
-Este recurso já foi efetivamente incluido no branch oficial do Rails, mas junto com ele também ganhamos mais dois novos métodos que devem facilitar a forma como vamos implementar isto em nosso código. Os métodos <strong>etag!</strong> e <strong>last_modified!</strong>.
+<p>Este recurso já foi efetivamente incluido no branch oficial do Rails, mas junto com ele também ganhamos mais dois novos métodos que devem facilitar a forma como vamos implementar isto em nosso código. Os métodos <strong>etag!</strong> e <strong>last_modified!</strong>.</p>
 
-Veja a implementação destes métodos direto do código fonte do Rails:
+<p>Veja a implementação destes métodos direto do código fonte do Rails:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Sets the Last-Modified response header. Returns 304 Not Modified if the
 </span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> If-Modified-Since request header is &lt;= last modified.
 </span><span class="meta meta_function meta_function_method meta_function_method_with-arguments meta_function_method_with-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">last_modified!</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">(</span><span class="variable variable_parameter variable_parameter_function variable_parameter_function_ruby">utc_time</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">)</span></span>
@@ -130,7 +131,10 @@ Veja a implementação destes métodos direto do código fonte do Rails:
   head<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>not_modified</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_ruby">if</span> response<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>etag!<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>etag<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
 <span class="keyword keyword_control keyword_control_ruby">end</span>
 </span></pre>
-Isto facilita muito as coisas. Veja como ficaria o exemplo dado no último post usando estes novos métodos:
+
+
+<p>Isto facilita muito as coisas. Veja como ficaria o exemplo dado no último post usando estes novos métodos:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_controller"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">ArticlesController<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ApplicationController</span></span></span>
   <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">show</span></span>
     <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>article</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Article</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>params<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>id</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
@@ -139,7 +143,9 @@ Isto facilita muito as coisas. Veja como ficaria o exemplo dado no último post 
     last_modified! <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>article</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>published_at<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>utc
   <span class="keyword keyword_control keyword_control_ruby">end</span>
 </span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-Bem mais simples!
+
+
+<p>Bem mais simples!</p>
 </div>
 
 
@@ -148,14 +154,14 @@ Bem mais simples!
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-08-17 00:00:00 -0300" pubdate  updated >Aug 17<span>th</span>, 2008</time>
+<time datetime="2008-08-17 00:00:00 -0300" pubdate  updated >17 de Agosto de 2008</time>
 
 
 

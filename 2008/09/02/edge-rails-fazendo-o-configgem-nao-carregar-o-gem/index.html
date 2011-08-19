@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Edge Rails: Fazendo O config.gem Não Carregar O Gem</h1>
+      <h1 class="entry-title">Edge Rails: Fazendo o config.gem não carregar o gem</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-09-02 00:00:00 -0300" pubdate  updated >Sep 2<span>nd</span>, 2008</time>
+<time datetime="2008-09-02 00:00:00 -0300" pubdate  updated > 2 de Setembro de 2008</time>
 
 
 </p>
@@ -113,23 +113,25 @@
   </header>
 
 
-<div class="entry-content">Uma das novidades introduzidas no Rails 2.1 foi o <strong><a href="http://www.nomedojogo.com/2008/04/14/edge-rails-configgem/">config.gem</a></strong>, que nos permitia configurar de quais gems nosso projeto era dependente.
+<div class="entry-content"><p>Uma das novidades introduzidas no Rails 2.1 foi o <strong><a href="http://www.nomedojogo.com/2008/04/14/edge-rails-configgem/">config.gem</a></strong>, que nos permitia configurar de quais gems nosso projeto era dependente.</p>
 
-Com isto ganhamos diversas tarefas que facilitaram nosso trabalho, como o <strong>rake gems:install</strong> que instala todas as dependências automaticamente.
+<p>Com isto ganhamos diversas tarefas que facilitaram nosso trabalho, como o <strong>rake gems:install</strong> que instala todas as dependências automaticamente.</p>
 
-Mas tínhamos de tomar alguns cuidados ao configurar as dependências, porque em alguns casos o nome da gem não é necessariamente o nome da biblioteca que o método <strong>require</strong> precisa carregar. Por exemplo, a gem <strong>aws-s3</strong> deve ser carregada com o nome <strong>&#8220;aws/s3&#8221;</strong>, trocando o traço por uma barra invertida. Prevendo este tipo de coisa, foi incluído no <strong>config.gem</strong> a opção <strong>:lib</strong>. Veja como ficaria o caso acima:
+<p>Mas tínhamos de tomar alguns cuidados ao configurar as dependências, porque em alguns casos o nome da gem não é necessariamente o nome da biblioteca que o método <strong>require</strong> precisa carregar. Por exemplo, a gem <strong>aws-s3</strong> deve ser carregada com o nome <strong>&#8220;aws/s3&#8221;</strong>, trocando o traço por uma barra invertida. Prevendo este tipo de coisa, foi incluído no <strong>config.gem</strong> a opção <strong>:lib</strong>. Veja como ficaria o caso acima:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>gem <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>aws-s3<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>lib</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>aws/s3<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
 </span></pre>
 
-Depois de um tempo surgiu um outro problema, meu projeto depende desta gem, mas eu não quero que ela seja carregada neste momento. Como fazer?
 
-Neste momento nada, mas na próxima versão do Rails poderemos configurar a opção <strong>:lib</strong> como <strong>false</strong> e isto fará com que o Rails não carregue a gem.
+<p>Depois de um tempo surgiu um outro problema, meu projeto depende desta gem, mas eu não quero que ela seja carregada neste momento. Como fazer?</p>
+
+<p>Neste momento nada, mas na próxima versão do Rails poderemos configurar a opção <strong>:lib</strong> como <strong>false</strong> e isto fará com que o Rails não carregue a gem.</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>gem <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>aws-s3<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>lib</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">false</span>
 </span></pre>
 
-Mesmo sem carregá-la ela ainda será instalada caso você execute a tarefa <strong>rake gems:install</strong> e estará incluída em qualquer outra tarefa relacionada a gems.
+
+<p>Mesmo sem carregá-la ela ainda será instalada caso você execute a tarefa <strong>rake gems:install</strong> e estará incluída em qualquer outra tarefa relacionada a gems.</p>
 </div>
 
 
@@ -138,14 +140,14 @@ Mesmo sem carregá-la ela ainda será instalada caso você execute a tarefa <str
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-09-02 00:00:00 -0300" pubdate  updated >Sep 2<span>nd</span>, 2008</time>
+<time datetime="2008-09-02 00:00:00 -0300" pubdate  updated > 2 de Setembro de 2008</time>
 
 
 

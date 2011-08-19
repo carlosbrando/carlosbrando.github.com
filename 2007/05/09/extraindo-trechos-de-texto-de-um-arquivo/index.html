@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Extraindo Trechos De Texto De Um Arquivo</h1>
+      <h1 class="entry-title">Extraindo trechos de texto de um arquivo</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2007-05-09 00:00:00 -0300" pubdate  updated >May 9<span>th</span>, 2007</time>
+<time datetime="2007-05-09 00:00:00 -0300" pubdate  updated > 9 de Maio de 2007</time>
 
 
 </p>
@@ -113,9 +113,9 @@
   </header>
 
 
-<div class="entry-content">O problema era o seguinte: Tenho um arquivo de texto com um monte de  informa&ccedil;&otilde;es in&uacute;teis e precisava ler este arquivo e retirar o texto que me  interessa, gravando em outro arquivo.
+<div class="entry-content"><p>O problema era o seguinte: Tenho um arquivo de texto com um monte de  informa&ccedil;&otilde;es in&uacute;teis e precisava ler este arquivo e retirar o texto que me  interessa, gravando em outro arquivo.</p>
 
-Para ler um arquivo de texto &eacute; f&aacute;cil:
+<p>Para ler um arquivo de texto &eacute; f&aacute;cil:
 [source:ruby]
 f = File.open(&#8220;arquivo.txt&#8221;)
 begin
@@ -123,31 +123,37 @@ begin
   todas_linhas = linhas.join
 end
 f.close
-[/source]
+[/source]</p>
 
-Pronto agora tenhos o arquivo inteiro na string <strong>todas_linhas</strong>. O pr&oacute;ximo passo &eacute; localizar o texto que preciso extrair.
+<p>Pronto agora tenhos o arquivo inteiro na string <strong>todas_linhas</strong>. O pr&oacute;ximo passo &eacute; localizar o texto que preciso extrair.</p>
 
-Dentro do bloco begin..end:
+<p>Dentro do bloco begin..end:
 [source:ruby]
   retorno = &#8220;&#8221;
-  todas_linhas.scan /regular_expression/ do |texto|
-    retorno = &#8220;#{retorno}#{texto}\n&#8221;
-  end
+  todas_linhas.scan /regular_expression/ do |texto|</p>
+
+<pre><code>retorno = "#{retorno}#{texto}\n"
+</code></pre>
+
+<p>  end
 [/source]
-Pronto! A vari&aacute;vel retorno j&aacute; cont&eacute;m somente o texto que me interessa.
+Pronto! A vari&aacute;vel retorno j&aacute; cont&eacute;m somente o texto que me interessa.</p>
 
-O m&eacute;todo <strong>scan</strong> varre toda a string procurando por valores que combinem com a regular expression passada. Eu simplesmente pego este valor e separo.
+<p>O m&eacute;todo <strong>scan</strong> varre toda a string procurando por valores que combinem com a regular expression passada. Eu simplesmente pego este valor e separo.</p>
 
-No fim para gravar um novo arquivo&#8230;
+<p>No fim para gravar um novo arquivo&#8230;
 [source:ruby]
   x = File.new(&#8220;retorno.txt&#8221;, File::CREAT|File::TRUNC|File::RDWR, 0644)
-  begin
-    x.puts retorno
-  end
-  x.close
-[/source]
+  begin</p>
 
-Conhece um jeito mais f&aacute;cil? Comenta a&iacute;!
+<pre><code>x.puts retorno
+</code></pre>
+
+<p>  end
+  x.close
+[/source]</p>
+
+<p>Conhece um jeito mais f&aacute;cil? Comenta a&iacute;!</p>
 </div>
 
 
@@ -156,14 +162,14 @@ Conhece um jeito mais f&aacute;cil? Comenta a&iacute;!
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2007-05-09 00:00:00 -0300" pubdate  updated >May 9<span>th</span>, 2007</time>
+<time datetime="2007-05-09 00:00:00 -0300" pubdate  updated > 9 de Maio de 2007</time>
 
 
 

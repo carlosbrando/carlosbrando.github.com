@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Todos Os Métodos Devem Ser Públicos? Definitivamente Não!</h1>
+      <h1 class="entry-title">Todos os métodos devem ser públicos? Definitivamente não!</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2009-07-01 00:00:00 -0300" pubdate  updated >Jul 1<span>st</span>, 2009</time>
+<time datetime="2009-07-01 00:00:00 -0300" pubdate  updated > 1 de Julho de 2009</time>
 
 
 </p>
@@ -113,29 +113,29 @@
   </header>
 
 
-<div class="entry-content">Recentemente fiz a seguinte pergunta no <a href="http://twitter.com/carlosbrando">Twitter</a>:
+<div class="entry-content"><p>Recentemente fiz a seguinte pergunta no <a href="http://twitter.com/carlosbrando">Twitter</a>:</p>
 
-[caption id=&#8221;attachment_2605&#8221; align=&#8221;aligncenter&#8221; width=&#8221;493&#8221; caption=&#8221;@carlosbrando&#8221;]<img class="size-full wp-image-2605" title="Picture 1" src="http://www.nomedojogo.com/wp-content/uploads/2009/07/Picture-1.png" alt="Picture 1" width="493" height="200" />[/caption]
+<p><img class='' src='http://www.nomedojogo.com/wp-content/uploads/2009/07/Picture-1.png' width='' height='' alt='' title=''></p>
 
-As respostas que recebi apenas confirmaram o que eu já imaginava.
+<p>As respostas que recebi apenas confirmaram o que eu já imaginava.</p>
 
-[caption id=&#8221;attachment_2604&#8221; align=&#8221;aligncenter&#8221; width=&#8221;549&#8221; caption=&#8221;@tapajos&#8221;]<img class="size-full wp-image-2604" title="Picture 2" src="http://www.nomedojogo.com/wp-content/uploads/2009/07/Picture-2.png" alt="Picture 2" width="549" height="268" />[/caption]
+<p><img class='' src='http://www.nomedojogo.com/wp-content/uploads/2009/07/Picture-2.png' width='' height='' alt='' title=''></p>
 
-[caption id=&#8221;attachment_2602&#8221; align=&#8221;aligncenter&#8221; width=&#8221;489&#8221; caption=&#8221;@flaviogranero&#8221;]<img class="size-full wp-image-2602" title="Picture 4" src="http://www.nomedojogo.com/wp-content/uploads/2009/07/Picture-4.png" alt="Picture 4" width="489" height="264" />[/caption]
+<p><img class='' src='http://www.nomedojogo.com/wp-content/uploads/2009/07/Picture-4.png' width='' height='' alt='' title=''></p>
 
-O motivo da pesquisa é que recentemente eu estava lendo um artigo onde o autor argumentava que o ideal seria criarmos classes somente com métodos públicos, evitando ao máximo métodos privados ou protegidos. E entre outros argumentos, um dos motivos para se fazer isto era simplificar a criação de testes.
+<p>O motivo da pesquisa é que recentemente eu estava lendo um artigo onde o autor argumentava que o ideal seria criarmos classes somente com métodos públicos, evitando ao máximo métodos privados ou protegidos. E entre outros argumentos, um dos motivos para se fazer isto era simplificar a criação de testes.</p>
 
-Uma coisa que me preocupa no Ruby é que é muito comum encontrar programadores que não estão nem um pouco preocupados se os seus métodos são públicos, protegidos ou privados. Pior ainda, quando tomam decisões apoiando-se em argumentos como o acima.
+<p>Uma coisa que me preocupa no Ruby é que é muito comum encontrar programadores que não estão nem um pouco preocupados se os seus métodos são públicos, protegidos ou privados. Pior ainda, quando tomam decisões apoiando-se em argumentos como o acima.</p>
 
-Um clássico exemplo são os métodos de callback de validações do Active Record, que em praticamente 99% dos casos deveriam ser privados ou protegidos, mas é normal encontrá-los entre os métodos públicos de um modelo na maioria dos projetos Rails. Acredito que isto aconteça porque programadores iniciantes entusiasmados com as facilidades do Active Record apenas saem incluindo seus códigos sem pensar muito no que estão fazendo.
+<p>Um clássico exemplo são os métodos de callback de validações do Active Record, que em praticamente 99% dos casos deveriam ser privados ou protegidos, mas é normal encontrá-los entre os métodos públicos de um modelo na maioria dos projetos Rails. Acredito que isto aconteça porque programadores iniciantes entusiasmados com as facilidades do Active Record apenas saem incluindo seus códigos sem pensar muito no que estão fazendo.</p>
 
-Eu também não tenho o hábito de testar métodos privados, pelas mesmas razões mencionadas pelos amigos do Twitter. Mas no Ruby, se você realmente desejar, é trivial realizar uma chamada em um método privado de um objeto. Uma das técnicas mais usadas por “testadores de métodos privados” é se valer das características dinâmicas da linguagem para transformar todos os métodos privados de uma classe em métodos públicos durante os testes. Diferente de outras linguagens, como C# por exemplo, onde você tem uma barreira formal para impedi-lo de acessar métodos privados, no Ruby é ridiculamente simples ultrapassar esta barreira.
+<p>Eu também não tenho o hábito de testar métodos privados, pelas mesmas razões mencionadas pelos amigos do Twitter. Mas no Ruby, se você realmente desejar, é trivial realizar uma chamada em um método privado de um objeto. Uma das técnicas mais usadas por “testadores de métodos privados” é se valer das características dinâmicas da linguagem para transformar todos os métodos privados de uma classe em métodos públicos durante os testes. Diferente de outras linguagens, como C# por exemplo, onde você tem uma barreira formal para impedi-lo de acessar métodos privados, no Ruby é ridiculamente simples ultrapassar esta barreira.</p>
 
-Pensando desta maneira, definir um método como privado no Ruby pode não significar muita coisa, já que outro programador pode alterar esta característica com facilidade. Mas ainda assim, definir um método como privado é como dizer aos outros programadores que aquele método faz parte do funcionamento interno daquela classe e que o programador original quer se manter no direito de realizar qualquer tipo de alteração necessária sem se preocupar se alguém está usando ou não aquele método. Isto tem tudo a ver com encapsulamento, e pode fazer toda a diferença quando surgir a necessidade de alterar algum comportamento do objeto.
+<p>Pensando desta maneira, definir um método como privado no Ruby pode não significar muita coisa, já que outro programador pode alterar esta característica com facilidade. Mas ainda assim, definir um método como privado é como dizer aos outros programadores que aquele método faz parte do funcionamento interno daquela classe e que o programador original quer se manter no direito de realizar qualquer tipo de alteração necessária sem se preocupar se alguém está usando ou não aquele método. Isto tem tudo a ver com encapsulamento, e pode fazer toda a diferença quando surgir a necessidade de alterar algum comportamento do objeto.</p>
 
-Toda vez que você constrói um novo objeto, você está construindo uma nova API. Cabe a você então decidir o que deve ser exposto e o que faz parte dos mecanismos internos deste objeto. Desta forma, quando surgir a necessidade de alterar alguma coisa, você não precisará se preocupar tanto com quantas classes serão afetadas pela mudança. Ao marcar um método como privado, você está se resguardando e garantindo que não causará danos ao restante do sistema, já que você está dentro da fronteira do encapsulamento, podendo assim refatorar seu código sem dor na consciência.
+<p>Toda vez que você constrói um novo objeto, você está construindo uma nova API. Cabe a você então decidir o que deve ser exposto e o que faz parte dos mecanismos internos deste objeto. Desta forma, quando surgir a necessidade de alterar alguma coisa, você não precisará se preocupar tanto com quantas classes serão afetadas pela mudança. Ao marcar um método como privado, você está se resguardando e garantindo que não causará danos ao restante do sistema, já que você está dentro da fronteira do encapsulamento, podendo assim refatorar seu código sem dor na consciência.</p>
 
-Por favor, não saia simplesmente injetando código em suas classes. Pense!
+<p>Por favor, não saia simplesmente injetando código em suas classes. Pense!</p>
 </div>
 
 
@@ -144,14 +144,14 @@ Por favor, não saia simplesmente injetando código em suas classes. Pense!
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2009-07-01 00:00:00 -0300" pubdate  updated >Jul 1<span>st</span>, 2009</time>
+<time datetime="2009-07-01 00:00:00 -0300" pubdate  updated > 1 de Julho de 2009</time>
 
 
 

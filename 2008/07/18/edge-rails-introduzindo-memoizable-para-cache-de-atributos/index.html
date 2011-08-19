@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Edge Rails: Introduzindo Memoizable Para Cache De Atributos</h1>
+      <h1 class="entry-title">Edge Rails: Introduzindo Memoizable para cache de atributos</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-07-18 00:00:00 -0300" pubdate  updated >Jul 18<span>th</span>, 2008</time>
+<time datetime="2008-07-18 00:00:00 -0300" pubdate  updated >18 de Julho de 2008</time>
 
 
 </p>
@@ -113,7 +113,7 @@
   </header>
 
 
-<div class="entry-content">Performance é coisa séria, e um dos métodos mais usados para aumentar a velocidade de execução em códigos é o uso de cache. Quem nunca fez algo assim?
+<div class="entry-content"><p>Performance é coisa séria, e um dos métodos mais usados para aumentar a velocidade de execução em códigos é o uso de cache. Quem nunca fez algo assim?</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Person<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
   <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">age</span></span>
@@ -122,7 +122,8 @@
 </span><span class="keyword keyword_control keyword_control_ruby">end</span>
 </span></pre>
 
-Na próxima versão do Rails teremos uma forma mais elegante de fazer isto usando o método <strong>memoize</strong> (é memoize mesmo e não memorize). Vamos alterar o exemplo acima para funcionar com esta nova funcionalidade:
+
+<p>Na próxima versão do Rails teremos uma forma mais elegante de fazer isto usando o método <strong>memoize</strong> (é memoize mesmo e não memorize). Vamos alterar o exemplo acima para funcionar com esta nova funcionalidade:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Person<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
   <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">age</span></span>
@@ -131,11 +132,12 @@ Na próxima versão do Rails teremos uma forma mais elegante de fazer isto usand
   memoize <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>age</span>
 </span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
 
-O método <strong>age</strong> será executado apenas uma vez e o seu retorno será armazenado e retornado em futuras chamadas ao método.
 
-Só existe uma diferença entre os dois códigos acima. No primeiro, como o método é executado todas as vezes, se o valor armazenado na variável <strong>@age</strong> for <strong>nil</strong> ou <strong>false</strong> o cálculo (muito complexo) será executado novamente até termos a idade da pessoa.
+<p>O método <strong>age</strong> será executado apenas uma vez e o seu retorno será armazenado e retornado em futuras chamadas ao método.</p>
 
-No segundo exemplo, o método <strong>age</strong> só será executado uma vez e o valor retornado será sempre devolvido nas próximas chamadas, mesmo que seja <strong>nil</strong> ou <strong>false</strong>.
+<p>Só existe uma diferença entre os dois códigos acima. No primeiro, como o método é executado todas as vezes, se o valor armazenado na variável <strong>@age</strong> for <strong>nil</strong> ou <strong>false</strong> o cálculo (muito complexo) será executado novamente até termos a idade da pessoa.</p>
+
+<p>No segundo exemplo, o método <strong>age</strong> só será executado uma vez e o valor retornado será sempre devolvido nas próximas chamadas, mesmo que seja <strong>nil</strong> ou <strong>false</strong>.</p>
 </div>
 
 
@@ -144,14 +146,14 @@ No segundo exemplo, o método <strong>age</strong> só será executado uma vez e
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-07-18 00:00:00 -0300" pubdate  updated >Jul 18<span>th</span>, 2008</time>
+<time datetime="2008-07-18 00:00:00 -0300" pubdate  updated >18 de Julho de 2008</time>
 
 
 

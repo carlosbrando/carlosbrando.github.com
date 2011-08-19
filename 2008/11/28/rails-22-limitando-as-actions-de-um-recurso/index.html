@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Rails 2.2: Limitando as Actions De Um Recurso</h1>
+      <h1 class="entry-title">Rails 2.2: Limitando as actions de um recurso</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-11-28 00:00:00 -0200" pubdate  updated >Nov 28<span>th</span>, 2008</time>
+<time datetime="2008-11-28 00:00:00 -0200" pubdate  updated >28 de Novembro de 2008</time>
 
 
 </p>
@@ -113,24 +113,34 @@
   </header>
 
 
-<div class="entry-content">A criação de rotas nomeadas é algo muito simples, mas muito poderoso dentro do Rails. Por isto é justo que ele receba uma atenção especial em cada novo release.
+<div class="entry-content"><p>A criação de rotas nomeadas é algo muito simples, mas muito poderoso dentro do Rails. Por isto é justo que ele receba uma atenção especial em cada novo release.</p>
 
-No Rails 2.2 o sistema de <a href="http://www.nomedojogo.com/2008/09/15/edge-rails-polymorphic-routes/">rotas polimórficas foi aprimorado</a> e o <a href="http://www.nomedojogo.com/2008/09/12/edge-rails-simplificando-o-acesso-aos-resources/">acesso aos resources foi simplificado</a>. E para fechar com chave de ouro, uma nova opção na criação de rotas promete diminuir um pouco os gastos com memória causados pela geração desnecessária de código.
+<p>No Rails 2.2 o sistema de <a href="http://www.nomedojogo.com/2008/09/15/edge-rails-polymorphic-routes/">rotas polimórficas foi aprimorado</a> e o <a href="http://www.nomedojogo.com/2008/09/12/edge-rails-simplificando-o-acesso-aos-resources/">acesso aos resources foi simplificado</a>. E para fechar com chave de ouro, uma nova opção na criação de rotas promete diminuir um pouco os gastos com memória causados pela geração desnecessária de código.</p>
 
-Duas novas opções foram adicionadas ao <code>map.resources</code>: <code>:only</code> e <code>:except</code>.
+<p>Duas novas opções foram adicionadas ao <code>map.resources</code>: <code>:only</code> e <code>:except</code>.</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>posts</span></span></pre>
-No código acima estou criando sete actions (<code>index</code>, <code>create</code>, <code>new</code>, <code>edit</code>, <code>show</code>, <code>update</code> e <code>destroy</code>) para o recurso <code>Post</code>. Mas digamos que eu só precise de duas (<code>index</code> e <code>show</code>), neste caso estou criando cinco actions desnecessariamente.
 
-Usando estas novas opções eu poderia fazer isto:
+
+<p>No código acima estou criando sete actions (<code>index</code>, <code>create</code>, <code>new</code>, <code>edit</code>, <code>show</code>, <code>update</code> e <code>destroy</code>) para o recurso <code>Post</code>. Mas digamos que eu só precise de duas (<code>index</code> e <code>show</code>), neste caso estou criando cinco actions desnecessariamente.</p>
+
+<p>Usando estas novas opções eu poderia fazer isto:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>posts</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>only</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>index</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>show</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span></span></pre>
-Assim, somente as actions necessárias serão criadas. Veja um outro exemplo de uso:
+
+
+<p>Assim, somente as actions necessárias serão criadas. Veja um outro exemplo de uso:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>posts</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>only</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>index</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>show</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">post</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
   post<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>comments</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>except</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>update</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>destroy</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span>
 <span class="keyword keyword_control keyword_control_ruby">end</span>
 </span></pre>
-No código acima acrescentei o recurso <code>Comment</code>, mas removendo as actions <code>update</code> e <code>destroy</code> que não serão usadas, já que não será possível atualizar nem apagar os comentários de um <code>post</code>.
 
-Veja um resumo de algumas ações e o retorno de cada uma:
+
+<p>No código acima acrescentei o recurso <code>Comment</code>, mas removendo as actions <code>update</code> e <code>destroy</code> que não serão usadas, já que não será possível atualizar nem apagar os comentários de um <code>post</code>.</p>
+
+<p>Veja um resumo de algumas ações e o retorno de cada uma:</p>
+
 <pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">GET /posts (action PostsController#index)
 POST /posts (falha)
 GET /posts/1 (action PostsController#show)
@@ -138,9 +148,12 @@ DELETE /posts/1 (falha)
 POST /posts/1/comments (action CommentsController#create)
 PUT /posts/1/comments/1 (falha)
 </span></span></pre>
-Um recurso interessante, mas que deve ser usado com critério.
+
+
+<p>Um recurso interessante, mas que deve ser usado com critério.</p>
 
 <hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades do Rails 2.2 no e-book “<a href="../2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">Ruby on Rails - O que há de novo?</a>“.</em>
+
 </div>
 
 
@@ -149,14 +162,14 @@ Um recurso interessante, mas que deve ser usado com critério.
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-11-28 00:00:00 -0200" pubdate  updated >Nov 28<span>th</span>, 2008</time>
+<time datetime="2008-11-28 00:00:00 -0200" pubdate  updated >28 de Novembro de 2008</time>
 
 
 

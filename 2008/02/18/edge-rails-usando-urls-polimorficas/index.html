@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Edge Rails: Usando URLs Polimórficas</h1>
+      <h1 class="entry-title">Edge Rails: Usando URLs polimórficas</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-02-18 00:00:00 -0300" pubdate  updated >Feb 18<span>th</span>, 2008</time>
+<time datetime="2008-02-18 00:00:00 -0300" pubdate  updated >18 de Fevereiro de 2008</time>
 
 
 </p>
@@ -113,11 +113,11 @@
   </header>
 
 
-<div class="entry-content">Os helpers para URLs polimórficas são métodos usados para resolver de uma forma mais inteligente uma rota nomeada quando você tem uma instancia de um modelo do <font color="#333333"><strong>ActiveRecord</strong>.</font>
+<div class="entry-content"><p>Os helpers para URLs polimórficas são métodos usados para resolver de uma forma mais inteligente uma rota nomeada quando você tem uma instancia de um modelo do <font color="#333333"><strong>ActiveRecord</strong>.</font></p>
 
-Estes métodos são úteis quando você quer gerar uma URL correta para um recurso RESTful sem precisar saber exatamente qual é o tipo do registro em questão.
+<p>Estes métodos são úteis quando você quer gerar uma URL correta para um recurso RESTful sem precisar saber exatamente qual é o tipo do registro em questão.</p>
 
-O funcionamento é bem simples, veja alguns exemplos (nos comentários estão as chamadas equivalentes, como fazemos hoje):
+<p>O funcionamento é bem simples, veja alguns exemplos (nos comentários estão as chamadas equivalentes, como fazemos hoje):</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">record <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Article</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>first</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
 polymorphic_url<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>record<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>-&gt;  article_url(record)
@@ -130,13 +130,15 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
 polymorphic_url<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>record<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>-&gt;  comments_url()
 </span></span></pre>
 
-Veja que o método reconhece o registro usado e monta a rota corretamente. Nested resources e namespaces também são suportados:
+
+<p>Veja que o método reconhece o registro usado e monta a rota corretamente. Nested resources e namespaces também são suportados:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">polymorphic_url<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>admin</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>article</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>comment</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
 <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>-&gt; vai devolver:
 </span>admin_article_comment_url<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>article</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>comment</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
 
-Você também pode usar prefixos como <font color="#333333"><strong>new</strong>,</font> <font color="#333333"><strong>edit</strong></font> e <font color="#333333"><strong>formatted</strong>,</font> veja alguns exemplos:
+
+<p>Você também pode usar prefixos como <font color="#333333"><strong>new</strong>,</font> <font color="#333333"><strong>edit</strong></font> e <font color="#333333"><strong>formatted</strong>,</font> veja alguns exemplos:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">edit_polymorphic_path<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>post</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
 <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; /posts/1/edit
@@ -144,7 +146,8 @@ Você também pode usar prefixos como <font color="#333333"><strong>new</strong>
 formatted_polymorphic_path<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>post</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>pdf</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
 <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; /posts/1.pdf</span></span></pre>
 
-O próprio Rails faz uso destes helpers em alguns momentos, como no método <font color="#333333"><strong>form_for</strong></font>, por exemplo. Talvez venham a ser úteis para você também, principalmente na construção de plugins.
+
+<p>O próprio Rails faz uso destes helpers em alguns momentos, como no método <font color="#333333"><strong>form_for</strong></font>, por exemplo. Talvez venham a ser úteis para você também, principalmente na construção de plugins.</p>
 </div>
 
 
@@ -153,14 +156,14 @@ O próprio Rails faz uso destes helpers em alguns momentos, como no método <fon
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-02-18 00:00:00 -0300" pubdate  updated >Feb 18<span>th</span>, 2008</time>
+<time datetime="2008-02-18 00:00:00 -0300" pubdate  updated >18 de Fevereiro de 2008</time>
 
 
 

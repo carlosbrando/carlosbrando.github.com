@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Acelere O Rails Com C</h1>
+      <h1 class="entry-title">Acelere o Rails com C</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2007-07-12 00:00:00 -0300" pubdate  updated >Jul 12<span>th</span>, 2007</time>
+<time datetime="2007-07-12 00:00:00 -0300" pubdate  updated >12 de Julho de 2007</time>
 
 
 </p>
@@ -113,33 +113,43 @@
   </header>
 
 
-<div class="entry-content"><center><img src="http://farm1.static.flickr.com/145/360459302_f7504ec9d6.jpg?v=0" height="375" width="500" /></center><br/>Ao contr&aacute;rio do que alguns podem dizer, <strong>Ruby on Rails</strong> n&atilde;o &eacute; lento. Mas podem surgir situa&ccedil;&otilde;es onde voc&ecirc; precise de mais velocidade. Nestes casos, existe a op&ccedil;&atilde;o de incluir c&oacute;digo em <strong>C</strong> no seu projeto Ruby on Rails.<br/><br/>Uma maneira de se conseguir isto &eacute; usar o <a href="http://www.zenspider.com/ZSS/Products/RubyInline/"><strong>RubyInline</strong></a>. O RubyInline funciona como um gem do ruby, que pode ser instalado normalmente.
+<div class="entry-content"><center><img src="http://farm1.static.flickr.com/145/360459302_f7504ec9d6.jpg?v=0" height="375" width="500" /></center>
 
-[source:ruby]sudo gem install RubyInline[/source]
 
-Depois de instalado voc&ecirc; pode fazer algo assim:
+<br/>Ao contr&aacute;rio do que alguns podem dizer, <strong>Ruby on Rails</strong> n&atilde;o &eacute; lento. Mas podem surgir situa&ccedil;&otilde;es onde voc&ecirc; precise de mais velocidade. Nestes casos, existe a op&ccedil;&atilde;o de incluir c&oacute;digo em <strong>C</strong> no seu projeto Ruby on Rails.<br/><br/>Uma maneira de se conseguir isto &eacute; usar o <a href="http://www.zenspider.com/ZSS/Products/RubyInline/"><strong>RubyInline</strong></a>. O RubyInline funciona como um gem do ruby, que pode ser instalado normalmente.
 
-[source:ruby]
-class MyTest
 
-  def factorial(n)
-    f = 1
-    n.downto(2) { |x| f *= x }
-    f
-  end
+<p>[source:ruby]sudo gem install RubyInline[/source]</p>
 
-  inline do |builder|
-    builder.c &#8221;
-    long factorial_c(int max) {
-      int i=max, result=1;
-      while (i >= 2) { result *= i&#8211;; }
-      return result;
-    }&#8221;
-  end
+<p>Depois de instalado voc&ecirc; pode fazer algo assim:</p>
+
+<p>[source:ruby]
+class MyTest</p>
+
+<p>  def factorial(n)</p>
+
+<pre><code>f = 1
+n.downto(2) { |x| f *= x }
+f
+</code></pre>
+
+<p>  end</p>
+
+<p>  inline do |builder|</p>
+
+<pre><code>builder.c "
+long factorial_c(int max) {
+  int i=max, result=1;
+  while (i &gt;= 2) { result *= i--; }
+  return result;
+}"
+</code></pre>
+
+<p>  end
 end
-[/source]
+[/source]</p>
 
-De acordo com o autor deste gem (<a href="http://www.zenspider.com/RWD/">Ryan Davis</a>) o ganho de performance &eacute; consider&aacute;vel. Se voc&ecirc; precisa desenvolver algo que deve ser executado mais r&aacute;pido do que Ruby lhe permite, esta &eacute; uma alternativa interessante.
+<p>De acordo com o autor deste gem (<a href="http://www.zenspider.com/RWD/">Ryan Davis</a>) o ganho de performance &eacute; consider&aacute;vel. Se voc&ecirc; precisa desenvolver algo que deve ser executado mais r&aacute;pido do que Ruby lhe permite, esta &eacute; uma alternativa interessante.</p>
 </div>
 
 
@@ -148,14 +158,14 @@ De acordo com o autor deste gem (<a href="http://www.zenspider.com/RWD/">Ryan Da
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2007-07-12 00:00:00 -0300" pubdate  updated >Jul 12<span>th</span>, 2007</time>
+<time datetime="2007-07-12 00:00:00 -0300" pubdate  updated >12 de Julho de 2007</time>
 
 
 

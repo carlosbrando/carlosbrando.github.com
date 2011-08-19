@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Todo Mundo Pode Ver Minha Senha Nos Arquivos De Log Do Rails&#8230;</h1>
+      <h1 class="entry-title">Todo mundo pode ver minha senha nos arquivos de log do Rails&#8230;</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2007-08-16 00:00:00 -0300" pubdate  updated >Aug 16<span>th</span>, 2007</time>
+<time datetime="2007-08-16 00:00:00 -0300" pubdate  updated >16 de Agosto de 2007</time>
 
 
 </p>
@@ -114,10 +114,20 @@
 
 
 <div class="entry-content"><p></p>
+
+
 <p><img src="http://farm2.static.flickr.com/1039/1101698626_d15d566a94.jpg?v=0"> </p>
+
+
 <p>Um recurso muito &uacute;til no <strong>Rails</strong> s&atilde;o os arquivos de log. Por meio deles n&oacute;s podemos acompanhar exatamente o que est&aacute; acontecendo com nosso software, vendo inclusive os comandos <strong>SQL</strong> enviados para o banco de dados.</p>
+
+
 <p>Mas este recurso tem um s&eacute;rio problema de seguran&ccedil;a. Uma simples p&aacute;gina de login ou cadastro de usu&aacute;rios, pode fazer com que o <strong>Rails</strong> grave a senha do usu&aacute;rio nos arquivos de log. Quando enviamos dados via post (usado nestes casos) o <strong>Rails</strong> grava todos os parametros enviados no arquivo de log, inclusive sua senha. Fa&ccedil;a o teste e comprove.</p>
+
+
 <p>Para evitar este tipo de problema, voc&ecirc; pode utilizar um filtro no seu arquivo de controller:</p>
+
+
 <p>[source:ruby]
 class WelcomeController < ApplicationController
     filter_parameter_logging "password"
@@ -125,6 +135,7 @@ end
 [/source]</p>
 <p>Onde <strong>&#8220;password&#8221;</strong> &eacute; o nome do campo que voc&ecirc; est&aacute; usando para armazenar sua senha.</p>
 <p>Agora fa&ccedil;a o teste novamente. Ao inv&eacute;s de o <strong>Rails</strong> registrar a senha do usu&aacute;rio no log, ele trocar&aacute; por <strong>[FILTERED]</strong>.</p>
+
 </div>
 
 
@@ -133,14 +144,14 @@ end
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2007-08-16 00:00:00 -0300" pubdate  updated >Aug 16<span>th</span>, 2007</time>
+<time datetime="2007-08-16 00:00:00 -0300" pubdate  updated >16 de Agosto de 2007</time>
 
 
 

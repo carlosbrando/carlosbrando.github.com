@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Dica: Testando Rotas No Console</h1>
+      <h1 class="entry-title">Dica: Testando rotas no console</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-09-21 00:00:00 -0300" pubdate  updated >Sep 21<span>st</span>, 2008</time>
+<time datetime="2008-09-21 00:00:00 -0300" pubdate  updated >21 de Setembro de 2008</time>
 
 
 </p>
@@ -113,9 +113,10 @@
   </header>
 
 
-<div class="entry-content">Andei brincando muito com rotas nomeadas ultimamente. O problema é que eu precisa de uma forma bem rápida de testar se as rotas que eu estava criando estavam realmente funcionando, enquanto eu editava o arquivo <strong>route.rb</strong>. E a melhor forma que encontrei foi testar as rotas no console do Rails.
+<div class="entry-content"><p>Andei brincando muito com rotas nomeadas ultimamente. O problema é que eu precisa de uma forma bem rápida de testar se as rotas que eu estava criando estavam realmente funcionando, enquanto eu editava o arquivo <strong>route.rb</strong>. E a melhor forma que encontrei foi testar as rotas no console do Rails.</p>
 
-Para isto bastou executar dois trechos de código antes de começar com a brincadeira:
+<p>Para isto bastou executar dois trechos de código antes de começar com a brincadeira:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">$ <span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">/</span>script<span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">/</span>console
 <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Loading development environment (Rails 2.1.1)
 </span>
@@ -125,20 +126,31 @@ Para isto bastou executar dois trechos de código antes de começar com a brinca
 <span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> default_url_options<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>host</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>example.com<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
 <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "example.com"
 </span></span></pre>
-Agora é só testar as rotas:
+
+
+<p>Agora é só testar as rotas:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> user_url<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
 <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "http://example.com/users/1"
 </span>
 <span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> user_photos_url<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
 <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "http://example.com/users/1/photos"
 </span></span></pre>
-Outro problema é que quando o arquivo <strong>route.rb</strong> é alterado, isto não reflete no console. Para ter acesso as últimas modificações, toda vez que houver uma atualização você terá de executar:
+
+
+<p>Outro problema é que quando o arquivo <strong>route.rb</strong> é alterado, isto não reflete no console. Para ter acesso as últimas modificações, toda vez que houver uma atualização você terá de executar:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> reload!
 <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Reloading...
 </span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; true</span></span></pre>
-Boa diversão!
+
+
+<p>Boa diversão!</p>
+
 <h2>Atualização</h2>
-O <a href="http://simplesideias.com.br/">Nando Vieira</a> e o <a href="http://www.araecriacoes.com.br/">Daniel Lopes</a> deram uma dica que eu não conhecia, que aliás torna muito mais fácil fazer a mesma coisa. Veja os comentários abaixo.
+
+
+<p>O <a href="http://simplesideias.com.br/">Nando Vieira</a> e o <a href="http://www.araecriacoes.com.br/">Daniel Lopes</a> deram uma dica que eu não conhecia, que aliás torna muito mais fácil fazer a mesma coisa. Veja os comentários abaixo.</p>
 </div>
 
 
@@ -147,14 +159,14 @@ O <a href="http://simplesideias.com.br/">Nando Vieira</a> e o <a href="http://ww
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-09-21 00:00:00 -0300" pubdate  updated >Sep 21<span>st</span>, 2008</time>
+<time datetime="2008-09-21 00:00:00 -0300" pubdate  updated >21 de Setembro de 2008</time>
 
 
 

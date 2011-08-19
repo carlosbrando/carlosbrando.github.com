@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Rails 3: Uma Nova DSL Para a Configuração De Rotas</h1>
+      <h1 class="entry-title">Rails 3: Uma nova DSL para a configuração de rotas</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2009-12-14 00:00:00 -0200" pubdate  updated >Dec 14<span>th</span>, 2009</time>
+<time datetime="2009-12-14 00:00:00 -0200" pubdate  updated >14 de Dezembro de 2009</time>
 
 
 </p>
@@ -113,86 +113,165 @@
   </header>
 
 
-<div class="entry-content">Muitas novidades estão sendo preparadas para a próxima versão do Rails. Uma que já estamos observando a alguns dias é a nova DSL para a configuração de rotas.
+<div class="entry-content"><p>Muitas novidades estão sendo preparadas para a próxima versão do Rails. Uma que já estamos observando a alguns dias é a nova DSL para a configuração de rotas.</p>
 
-O Rails 3 ainda está em desenvolvimento, isto significa que o código da DSL pode sofrer alterações até o lançamento oficial. De qualquer forma você pode ir matando a curiosidade analisando o novo arquivo <code>config/routes.rb</code> que está sendo gerado pelo <code>Rails 3.0.pre</code> neste momento. Eu tomei a liberdade de traduzir os comentários para facilitar o entendimento.
+<p>O Rails 3 ainda está em desenvolvimento, isto significa que o código da DSL pode sofrer alterações até o lançamento oficial. De qualquer forma você pode ir matando a curiosidade analisando o novo arquivo <code>config/routes.rb</code> que está sendo gerado pelo <code>Rails 3.0.pre</code> neste momento. Eu tomei a liberdade de traduzir os comentários para facilitar o entendimento.</p>
 
-<pre class="textmate-source"><h5>routes.rb</h5><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_routes">ActionController::Routing::Routes<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>draw <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">map</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> A prioridade é baseada na ordem da criação:
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> criado primeiro -&gt; maior prioridade.
-</span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Exemplo de uma rota comum:
-</span>  match <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>products/:id<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>to</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>catalog#view<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Tenha em mente que você pode atribuir outros valores
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> além de :controller e :action
-</span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Exemplo de uma rota nomeada:
-</span>  match <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>products/:id/purchase<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
-    <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>to</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>catalog#purchase<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>as</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>purchase</span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Esta rota pode ser invocada utilizando
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> purchase_url(:id =&gt; product.id)
-</span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Exemplo utilizando resources (mapeia verbos HTTP
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> para ações do controller automaticamente)
-</span>  resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>products</span>
+<div><figure role=code><figcaption><span>routes.rb </span></figcaption>
+ <div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+<span class='line'>20</span>
+<span class='line'>21</span>
+<span class='line'>22</span>
+<span class='line'>23</span>
+<span class='line'>24</span>
+<span class='line'>25</span>
+<span class='line'>26</span>
+<span class='line'>27</span>
+<span class='line'>28</span>
+<span class='line'>29</span>
+<span class='line'>30</span>
+<span class='line'>31</span>
+<span class='line'>32</span>
+<span class='line'>33</span>
+<span class='line'>34</span>
+<span class='line'>35</span>
+<span class='line'>36</span>
+<span class='line'>37</span>
+<span class='line'>38</span>
+<span class='line'>39</span>
+<span class='line'>40</span>
+<span class='line'>41</span>
+<span class='line'>42</span>
+<span class='line'>43</span>
+<span class='line'>44</span>
+<span class='line'>45</span>
+<span class='line'>46</span>
+<span class='line'>47</span>
+<span class='line'>48</span>
+<span class='line'>49</span>
+<span class='line'>50</span>
+<span class='line'>51</span>
+<span class='line'>52</span>
+<span class='line'>53</span>
+<span class='line'>54</span>
+<span class='line'>55</span>
+<span class='line'>56</span>
+<span class='line'>57</span>
+<span class='line'>58</span>
+<span class='line'>59</span>
+<span class='line'>60</span>
+<span class='line'>61</span>
+<span class='line'>62</span>
+<span class='line'>63</span>
+<span class='line'>64</span>
+<span class='line'>65</span>
+<span class='line'>66</span>
+<span class='line'>67</span>
+<span class='line'>68</span>
+<span class='line'>69</span>
+<span class='line'>70</span>
+</pre></td><td class='code' width='100%'><pre><code class='rb'><div class='line'><span class="no">ActionController</span><span class="o">::</span><span class="no">Routing</span><span class="o">::</span><span class="no">Routes</span><span class="o">.</span><span class="n">draw</span> <span class="k">do</span> <span class="o">|</span><span class="n">map</span><span class="o">|</span>
+</div><div class='line'>  <span class="c1"># A prioridade é baseada na ordem da criação:</span>
+</div><div class='line'>  <span class="c1"># criado primeiro -&gt; maior prioridade.</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="c1"># Exemplo de uma rota comum:</span>
+</div><div class='line'>  <span class="n">match</span> <span class="s1">&#39;products/:id&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;catalog#view&#39;</span>
+</div><div class='line'>  <span class="c1"># Tenha em mente que você pode atribuir outros valores</span>
+</div><div class='line'>  <span class="c1"># além de :controller e :action</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="c1"># Exemplo de uma rota nomeada:</span>
+</div><div class='line'>  <span class="n">match</span> <span class="s1">&#39;products/:id/purchase&#39;</span><span class="p">,</span>
+</div><div class='line'>    <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;catalog#purchase&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:purchase</span>
+</div><div class='line'>  <span class="c1"># Esta rota pode ser invocada utilizando</span>
+</div><div class='line'>  <span class="c1"># purchase_url(:id =&gt; product.id)</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="c1"># Exemplo utilizando resources (mapeia verbos HTTP</span>
+</div><div class='line'>  <span class="c1"># para ações do controller automaticamente)</span>
+</div><div class='line'>  <span class="n">resources</span> <span class="ss">:products</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="c1"># Exemplo utilizando resources com opções:</span>
+</div><div class='line'>  <span class="n">resources</span> <span class="ss">:products</span> <span class="k">do</span>
+</div><div class='line'>    <span class="n">member</span> <span class="k">do</span>
+</div><div class='line'>      <span class="n">get</span> <span class="ss">:short</span>
+</div><div class='line'>      <span class="n">post</span> <span class="ss">:toggle</span>
+</div><div class='line'>    <span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="n">collection</span> <span class="k">do</span>
+</div><div class='line'>      <span class="n">get</span> <span class="ss">:sold</span>
+</div><div class='line'>    <span class="k">end</span>
+</div><div class='line'>  <span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="c1"># Exemplo utilizando resource com sub-resources:</span>
+</div><div class='line'>  <span class="n">resources</span> <span class="ss">:products</span> <span class="k">do</span>
+</div><div class='line'>    <span class="n">resources</span> <span class="ss">:comments</span><span class="p">,</span> <span class="ss">:sales</span>
+</div><div class='line'>    <span class="n">resource</span> <span class="ss">:seller</span>
+</div><div class='line'>  <span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="c1"># Exemplo mais complexo de uso de resources com </span>
+</div><div class='line'>  <span class="c1"># sub-resources:</span>
+</div><div class='line'>  <span class="n">resources</span> <span class="ss">:products</span> <span class="k">do</span>
+</div><div class='line'>    <span class="n">resources</span> <span class="ss">:comments</span>
+</div><div class='line'>    <span class="n">resources</span> <span class="ss">:sales</span> <span class="k">do</span>
+</div><div class='line'>      <span class="n">get</span> <span class="ss">:recent</span><span class="p">,</span> <span class="ss">:on</span> <span class="o">=&gt;</span> <span class="ss">:collection</span>
+</div><div class='line'>    <span class="k">end</span>
+</div><div class='line'>  <span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="c1"># Exeplo utilizando resource com um namespace:</span>
+</div><div class='line'>  <span class="n">namespace</span> <span class="ss">:admin</span> <span class="k">do</span>
+</div><div class='line'>    <span class="c1"># Direciona /admin/products/* para </span>
+</div><div class='line'>    <span class="c1"># Admin::ProductsController</span>
+</div><div class='line'>    <span class="c1"># (app/controllers/admin/products_controller.rb)</span>
+</div><div class='line'>    <span class="n">resources</span> <span class="ss">:products</span>
+</div><div class='line'>  <span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="c1"># Você pode definir a home do seu site utilizando </span>
+</div><div class='line'>  <span class="c1"># &quot;root&quot;. </span>
+</div><div class='line'>  <span class="c1"># Lembre-se de apagar o arquivo public/index.html.</span>
+</div><div class='line'>  <span class="n">root</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s2">&quot;welcome&quot;</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="c1"># Você pode listar todas as rotas disponíveis com </span>
+</div><div class='line'>  <span class="c1"># &quot;rake routes&quot;</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="c1"># Deixe a rota padrão com a prioridade mais baixa </span>
+</div><div class='line'>  <span class="c1"># possível.</span>
+</div><div class='line'>  <span class="c1"># Nota: A rota padrão torna todas as actions em </span>
+</div><div class='line'>  <span class="c1"># qualquer controller acessíveis via solicitações GET. </span>
+</div><div class='line'>  <span class="c1"># Você deve considerar a remoção ou comentar esta </span>
+</div><div class='line'>  <span class="c1"># linha se estiver usando rotas nomeadas e recursos.</span>
+</div><div class='line'>  <span class="n">match</span> <span class="s1">&#39;:controller(/:action(/:id(.:format)))&#39;</span>
+</div><div class='line'><span class="k">end</span>
+</div></code></pre></td></tr></table></div></figure></div>
 
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Exemplo utilizando resources com opções:
-</span>  resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>products</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
-</span>    member <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
-</span>      get <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>short</span>
-      post <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>toggle</span>
-    <span class="keyword keyword_control keyword_control_ruby">end</span>
 
-    collection <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
-</span>      get <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>sold</span>
-    <span class="keyword keyword_control keyword_control_ruby">end</span>
-  <span class="keyword keyword_control keyword_control_ruby">end</span>
+<h4>[ATUALIZAÇÃO 21/12/2009 3:00]</h4>
 
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Exemplo utilizando resource com sub-resources:
-</span>  resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>products</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
-</span>    resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>comments</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>sales</span>
-    resource <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>seller</span>
-  <span class="keyword keyword_control keyword_control_ruby">end</span>
+<p>A DSL sofreu uma leve alteração que simplifica ainda mais a especificação de rotas.</p>
 
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Exemplo mais complexo de uso de resources com 
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> sub-resources:
-</span>  resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>products</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
-</span>    resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>comments</span>
-    resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>sales</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
-</span>      get <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>recent</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>on</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>collection</span>
-    <span class="keyword keyword_control keyword_control_ruby">end</span>
-  <span class="keyword keyword_control keyword_control_ruby">end</span>
-
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Exeplo utilizando resource com um namespace:
-</span>  namespace <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>admin</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">    <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Direciona /admin/products/* para 
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">    <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Admin::ProductsController
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">    <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> (app/controllers/admin/products_controller.rb)
-</span>    resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>products</span>
-  <span class="keyword keyword_control keyword_control_ruby">end</span>
-
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Você pode definir a home do seu site utilizando 
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> "root". 
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Lembre-se de apagar o arquivo public/index.html.
-</span>  root <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>to</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>welcome<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
-
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Você pode listar todas as rotas disponíveis com 
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> "rake routes"
-</span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Deixe a rota padrão com a prioridade mais baixa 
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> possível.
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Nota: A rota padrão torna todas as actions em 
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> qualquer controller acessíveis via solicitações GET. 
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Você deve considerar a remoção ou comentar esta 
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> linha se estiver usando rotas nomeadas e recursos.
-</span>  match <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>:controller(/:action(/:id(.:format)))<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
-</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-
-<h3>[ATUALIZAÇÃO 21/12/2009 3:00]</h3>
-A DSL sofreu uma leve alteração que simplifica ainda mais a especificação de rotas.
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> As duas linhas a seguir fazem a mesma coisa
-</span>match <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>products/:id<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>to</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>catalog#view<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
-match <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>products/:id<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>catalog#view<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span></pre>
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="c1"># As duas linhas a seguir fazem a mesma coisa</span>
+</div><div class='line'><span class="n">match</span> <span class="s1">&#39;products/:id&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;catalog#view&#39;</span>
+</div><div class='line'><span class="n">match</span> <span class="s1">&#39;products/:id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;catalog#view&#39;</span>
+</div></code></pre></td></tr></table></div></figure>
 </div>
 
 
@@ -201,14 +280,14 @@ match <span class="string string_quoted string_quoted_single string_quoted_singl
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2009-12-14 00:00:00 -0200" pubdate  updated >Dec 14<span>th</span>, 2009</time>
+<time datetime="2009-12-14 00:00:00 -0200" pubdate  updated >14 de Dezembro de 2009</time>
 
 
 

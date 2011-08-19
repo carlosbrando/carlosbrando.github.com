@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Edge Rails: Novo Helper Para Testes (Assert_sql)</h1>
+      <h1 class="entry-title">Edge Rails: Novo helper para testes (assert_sql)</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-08-13 00:00:00 -0300" pubdate  updated >Aug 13<span>th</span>, 2008</time>
+<time datetime="2008-08-13 00:00:00 -0300" pubdate  updated >13 de Agosto de 2008</time>
 
 
 </p>
@@ -113,13 +113,14 @@
   </header>
 
 
-<div class="entry-content">Alguns de vocês já devem conhecer o método <strong>assert_queries</strong> que ajuda a validar nos testes a quantidade de queries executadas. Por exemplo:
+<div class="entry-content"><p>Alguns de vocês já devem conhecer o método <strong>assert_queries</strong> que ajuda a validar nos testes a quantidade de queries executadas. Por exemplo:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">assert_queries<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="support support_class support_class_ruby">Firm</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>partial_updates? <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">?</span> <span class="constant constant_numeric constant_numeric_ruby">0</span> <span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">:</span> <span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span>firm<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>save! <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span></span></pre>
 
-No teste acima estou afirmando que se houver <a href="http://www.nomedojogo.com/2008/04/14/edge-rails-partial-updates/">partial_updates</a> uma query deve ser executada no banco de dados, caso contrário nenhuma deve ser executada.
 
-Agora ganhamos mais um helper para ajudar a testar o tipo de query executada, o método <strong>assert_sql</strong>. Um exemplo:
+<p>No teste acima estou afirmando que se houver <a href="http://www.nomedojogo.com/2008/04/14/edge-rails-partial-updates/">partial_updates</a> uma query deve ser executada no banco de dados, caso contrário nenhuma deve ser executada.</p>
+
+<p>Agora ganhamos mais um helper para ajudar a testar o tipo de query executada, o método <strong>assert_sql</strong>. Um exemplo:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">test_empty_with_counter_sql</span></span>
   company <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Firm</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>first</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
@@ -129,13 +130,15 @@ Agora ganhamos mais um helper para ajudar a testar o tipo de query executada, o 
 <span class="keyword keyword_control keyword_control_ruby">end</span>
 </span></pre>
 
-No exemplo acima estou afirmando que no bloco informado ao método pelo menos uma query deve conter a palavra <strong>COUNT</strong>. Obviamente você pode ser mais especifico na expressão regular que estiver usando. Vamos pegar um outro exemplo:
+
+<p>No exemplo acima estou afirmando que no bloco informado ao método pelo menos uma query deve conter a palavra <strong>COUNT</strong>. Obviamente você pode ser mais especifico na expressão regular que estiver usando. Vamos pegar um outro exemplo:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">assert_sql<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_regexp string_regexp_classic string_regexp_classic_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span><span class="constant constant_character constant_character_escape constant_character_escape_ruby">\(\"</span>companies<span class="constant constant_character constant_character_escape constant_character_escape_ruby">\"</span>.<span class="constant constant_character constant_character_escape constant_character_escape_ruby">\"</span>id<span class="constant constant_character constant_character_escape constant_character_escape_ruby">\"</span> IN <span class="constant constant_character constant_character_escape constant_character_escape_ruby">\(</span>1<span class="constant constant_character constant_character_escape constant_character_escape_ruby">\)\)</span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
 </span>  <span class="support support_class support_class_ruby">Account</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>include</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>firm</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
 <span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
 
-Use com parcimônia!
+
+<p>Use com parcimônia!</p>
 </div>
 
 
@@ -144,14 +147,14 @@ Use com parcimônia!
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-08-13 00:00:00 -0300" pubdate  updated >Aug 13<span>th</span>, 2008</time>
+<time datetime="2008-08-13 00:00:00 -0300" pubdate  updated >13 de Agosto de 2008</time>
 
 
 

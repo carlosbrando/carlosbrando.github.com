@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Edge Rails: Mais Alterações No TimeZone</h1>
+      <h1 class="entry-title">Edge Rails: Mais alterações no TimeZone</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-02-13 00:00:00 -0200" pubdate  updated >Feb 13<span>th</span>, 2008</time>
+<time datetime="2008-02-13 00:00:00 -0200" pubdate  updated >13 de Fevereiro de 2008</time>
 
 
 </p>
@@ -113,11 +113,11 @@
   </header>
 
 
-<div class="entry-content">Pelo visto o formato atual de se trabalhar com TimeZones estava incomodando bastante gente, porque muita coisa está sendo alterada ou melhorada neste ponto no Rails.
+<div class="entry-content"><p>Pelo visto o formato atual de se trabalhar com TimeZones estava incomodando bastante gente, porque muita coisa está sendo alterada ou melhorada neste ponto no Rails.</p>
 
-O método <strong>formatted_offset</strong> foi incluído nas classes <strong>Time</strong> e <strong>DateTime</strong> para retornar no formato +HH:MM o desvio da hora UTC. Por exemplo, em nosso fuso-horário (hora de Brasília) o desvio retornado pelo método seria uma string com o valor &#8220;-03:00&#8221;.
+<p>O método <strong>formatted_offset</strong> foi incluído nas classes <strong>Time</strong> e <strong>DateTime</strong> para retornar no formato +HH:MM o desvio da hora UTC. Por exemplo, em nosso fuso-horário (hora de Brasília) o desvio retornado pelo método seria uma string com o valor &#8220;-03:00&#8221;.</p>
 
-Vamos aos exemplos:
+<p>Vamos aos exemplos:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Recuperando o desvio a partir de um DateTime
 </span>datetime <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">DateTime</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>civil<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">2000</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">0</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">0</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">0</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">Rational</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">-</span><span class="constant constant_numeric constant_numeric_ruby">6</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">24</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">))</span>
@@ -128,9 +128,13 @@ datetime<span class="punctuation punctuation_separator punctuation_separator_met
 </span><span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>local<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">2000</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>formatted_offset         <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "-06:00"
 </span><span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>local<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">2000</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>formatted_offset<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_language constant_language_ruby">false</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "-0600"</span></span></pre>
 
-Note que este método retorna uma string, que pode ser formatada ou não dependendo do valor passado como parâmetro.
+
+<p>Note que este método retorna uma string, que pode ser formatada ou não dependendo do valor passado como parâmetro.</p>
+
 <h3>Prototype</h3>
-Uma informação rápida: Foi corrigido um erro no <strong>Effect.ScrollTo</strong> que fazia o Firefox fazer o o scroll para a posição errada em algumas situações.
+
+
+<p>Uma informação rápida: Foi corrigido um erro no <strong>Effect.ScrollTo</strong> que fazia o Firefox fazer o o scroll para a posição errada em algumas situações.</p>
 </div>
 
 
@@ -139,14 +143,14 @@ Uma informação rápida: Foi corrigido um erro no <strong>Effect.ScrollTo</stro
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-02-13 00:00:00 -0200" pubdate  updated >Feb 13<span>th</span>, 2008</time>
+<time datetime="2008-02-13 00:00:00 -0200" pubdate  updated >13 de Fevereiro de 2008</time>
 
 
 

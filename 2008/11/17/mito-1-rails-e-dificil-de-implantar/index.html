@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Mito #1: Rails é Difícil De Implantar</h1>
+      <h1 class="entry-title">Mito #1: Rails é difícil de implantar</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-11-17 00:00:00 -0200" pubdate  updated >Nov 17<span>th</span>, 2008</time>
+<time datetime="2008-11-17 00:00:00 -0200" pubdate  updated >17 de Novembro de 2008</time>
 
 
 </p>
@@ -113,27 +113,36 @@
   </header>
 
 
-<div class="entry-content">David Heinemeier Hansson iniciou uma série de artigos em seu <a href="http://www.loudthinking.com/posts/29-the-rails-myths">blog pessoal</a> <span style="color: #000000;"><span style="font-family: &quot;Lucida Grande&quot;,&quot;Lucida Sans Unicode&quot;,Tahoma,Verdana,sans-serif;">desmistificando</span></span> algumas crenças sobre o Ruby on Rails. Este texto não é uma tradução literal e sim uma explanação do <a href="http://www.loudthinking.com/posts/30-myth-1-rails-is-hard-to-deploy#mod_rails">primeiro artigo</a> de David.
+<div class="entry-content"><p>David Heinemeier Hansson iniciou uma série de artigos em seu <a href="http://www.loudthinking.com/posts/29-the-rails-myths">blog pessoal</a> <span style="color: #000000;"><span style="font-family: &quot;Lucida Grande&quot;,&quot;Lucida Sans Unicode&quot;,Tahoma,Verdana,sans-serif;">desmistificando</span></span> algumas crenças sobre o Ruby on Rails. Este texto não é uma tradução literal e sim uma explanação do <a href="http://www.loudthinking.com/posts/30-myth-1-rails-is-hard-to-deploy#mod_rails">primeiro artigo</a> de David.</p>
 
-Quando David lançou o <a href="http://www.basecamphq.com/">Basecamp</a> sob <a href="http://www.modruby.net/en/">mod_ruby,</a> há alguns anos atrás, ele não estava preocupado com o fato de que precisaria executar várias instâncias de um projeto Rails, tanto é que na época isto era um pouco complicado de se fazer, sem uma bela de uma gambiarra.
+<p>Quando David lançou o <a href="http://www.basecamphq.com/">Basecamp</a> sob <a href="http://www.modruby.net/en/">mod_ruby,</a> há alguns anos atrás, ele não estava preocupado com o fato de que precisaria executar várias instâncias de um projeto Rails, tanto é que na época isto era um pouco complicado de se fazer, sem uma bela de uma gambiarra.</p>
 
-Naquela época só era possível executar o Rails sob CGI. Depois veio o FCGI, que ainda hoje é uma plataforma viável. Os softwares da 37signals foram executados sob esta plataforma durante alguns anos, mas esta parecia ser uma plataforma moribunda.
+<p>Naquela época só era possível executar o Rails sob CGI. Depois veio o FCGI, que ainda hoje é uma plataforma viável. Os softwares da 37signals foram executados sob esta plataforma durante alguns anos, mas esta parecia ser uma plataforma moribunda.</p>
+
 <h2>Mongrel</h2>
-Foi nesta época em que apareceu o <a href="http://mongrel.rubyforge.org/">Mongrel</a>, e junto com ele a sensação de que não precisávamos de mais nenhum outro protocolo para fazer com que os servidores de aplicação e os servidores web conversassem.  Nós simplesmente podíamos usar HTTP! Hoje Mongrel, <a href="http://code.macournoyer.com/thin/">Thin</a>, <a href="http://ebb.rubyforge.org/">Ebb</a> e outros servidores web baseados em Ruby predominam nos ambientes de produção. E existem boas razões para isto, afinal eles são estáveis, versáteis e rápidos.
+
+
+<p>Foi nesta época em que apareceu o <a href="http://mongrel.rubyforge.org/">Mongrel</a>, e junto com ele a sensação de que não precisávamos de mais nenhum outro protocolo para fazer com que os servidores de aplicação e os servidores web conversassem.  Nós simplesmente podíamos usar HTTP! Hoje Mongrel, <a href="http://code.macournoyer.com/thin/">Thin</a>, <a href="http://ebb.rubyforge.org/">Ebb</a> e outros servidores web baseados em Ruby predominam nos ambientes de produção. E existem boas razões para isto, afinal eles são estáveis, versáteis e rápidos.</p>
+
 <h2>Muitas opções</h2>
-Até aqui tudo parece muito bem, mas um problema apareceu: Entre tantas opções, qual é a melhor para colocar meu projeto em produção? Devo ir de Apache, nginx, ou quem sabe de lighttpd? Devo confiar nos proxies dos servidores web ou usar algo como o HAProxy ou Pound? Quantos processos do Mongrel devo usar? Seria bom usar alguma ferramenta para monitorar os processos? God ou Monit?
 
-Todas estas são boas opções, mas isto gera um paradoxo das Boas Opções. Entre elas qual é a melhor? Este grande numero de Boas Opções é exatamente o que cria este primeiro mito sobre o Ruby on Rails. <strong>Sem saber exatamente qual ferramenta usar, conclui-se que é difícil implantar um projeto Rails.</strong>
 
-Como resolver este tipo de problema?
+<p>Até aqui tudo parece muito bem, mas um problema apareceu: Entre tantas opções, qual é a melhor para colocar meu projeto em produção? Devo ir de Apache, nginx, ou quem sabe de lighttpd? Devo confiar nos proxies dos servidores web ou usar algo como o HAProxy ou Pound? Quantos processos do Mongrel devo usar? Seria bom usar alguma ferramenta para monitorar os processos? God ou Monit?</p>
+
+<p>Todas estas são boas opções, mas isto gera um paradoxo das Boas Opções. Entre elas qual é a melhor? Este grande numero de Boas Opções é exatamente o que cria este primeiro mito sobre o Ruby on Rails. <strong>Sem saber exatamente qual ferramenta usar, conclui-se que é difícil implantar um projeto Rails.</strong></p>
+
+<p>Como resolver este tipo de problema?</p>
+
 <h2>Phusion Passenger™</h2>
-<a href="http://www.modrails.com/">Passenger (mod_rails)</a>, é uma solução única que torna o deploy de aplicativos Rails tão fácil quanto um mod_php. Após um deploy ridiculamente simples, você tem um Apache se comportando como um web server, load balancer, application server e monitorador de processos. Você simplesmente joga seu aplicativo, altera o arquivo tmp/restart.txt e pronto, você está no ar!
 
-Isto ainda não quer dizer que todos os grandes projetos Rails estão usando Passenger. Atualmente até mesmo os projetos da 37signals ainda não estão usando-o, pelo menos por enquanto.
 
-O fato importante é que se houver alguma razão para isso, você pode montar todo o seu ambiente de produção manualmente com algumas das soluções mencionadas acima. Mas caso queira algo realmente simples e rápido, pode optar pelo Passenger, e confiar que esta é uma excelente opção.
+<p><a href="http://www.modrails.com/">Passenger (mod_rails)</a>, é uma solução única que torna o deploy de aplicativos Rails tão fácil quanto um mod_php. Após um deploy ridiculamente simples, você tem um Apache se comportando como um web server, load balancer, application server e monitorador de processos. Você simplesmente joga seu aplicativo, altera o arquivo tmp/restart.txt e pronto, você está no ar!</p>
 
-<strong>Resumindo, Rails é difícil de implantar? Não! Phusion Passenger tornou o processo de implantação de projetos Rails ridiculamente simples.</strong>
+<p>Isto ainda não quer dizer que todos os grandes projetos Rails estão usando Passenger. Atualmente até mesmo os projetos da 37signals ainda não estão usando-o, pelo menos por enquanto.</p>
+
+<p>O fato importante é que se houver alguma razão para isso, você pode montar todo o seu ambiente de produção manualmente com algumas das soluções mencionadas acima. Mas caso queira algo realmente simples e rápido, pode optar pelo Passenger, e confiar que esta é uma excelente opção.</p>
+
+<p><strong>Resumindo, Rails é difícil de implantar? Não! Phusion Passenger tornou o processo de implantação de projetos Rails ridiculamente simples.</strong></p>
 </div>
 
 
@@ -142,14 +151,14 @@ O fato importante é que se houver alguma razão para isso, você pode montar to
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-11-17 00:00:00 -0200" pubdate  updated >Nov 17<span>th</span>, 2008</time>
+<time datetime="2008-11-17 00:00:00 -0200" pubdate  updated >17 de Novembro de 2008</time>
 
 
 

@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Rails 3: Uma Nova Forma De Criar Mensagens Flash</h1>
+      <h1 class="entry-title">Rails 3: Uma nova forma de criar mensagens flash</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2009-12-18 00:00:00 -0200" pubdate  updated >Dec 18<span>th</span>, 2009</time>
+<time datetime="2009-12-18 00:00:00 -0200" pubdate  updated >18 de Dezembro de 2009</time>
 
 
 </p>
@@ -113,38 +113,64 @@
   </header>
 
 
-<div class="entry-content">Como a maioria deve saber, um dos grandes diferenciais do Rails vem de uma característica que também é marcante em seu criador. Ruby on Rails é um software de opinião. Atualmente DHH não é mais tão ativo no desenvolvimento do Ruby on Rails quanto no passado. Porém de tempos em tempos ele aparece com algumas inclusões polêmicas no framework.
+<div class="entry-content"><p>Como a maioria deve saber, um dos grandes diferenciais do Rails vem de uma característica que também é marcante em seu criador. Ruby on Rails é um software de opinião. Atualmente DHH não é mais tão ativo no desenvolvimento do Ruby on Rails quanto no passado. Porém de tempos em tempos ele aparece com algumas inclusões polêmicas no framework.</p>
 
-Seu último patch é referente a inclusão das opções <code>:alert</code>, <code>:notice</code> e <code>:flash</code> no método <code>redirect_to</code>. Assim, se antes fazíamos desta maneira:
-<pre class="textmate-source"><span class="source source_ruby">flash<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>notice</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Post was created<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
-redirect_to<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>post</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-</span></pre>
-Agora podemos fazer assim:
-<pre class="textmate-source"><span class="source source_ruby">redirect_to<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>post</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>notice</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Post was created<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
-Esse sem dúvida é um recurso interessante e nos ajudará a diminuir a quantidade de linhas de código que escrevemos. Porém alguns desenvolvedores não gostaram desta implementação argumentando que não costumam utilizar <code>flash[:alert]</code> como sinalizador de problemas, mas sim <code>flash[:error]</code>.
+<p>Seu último patch é referente a inclusão das opções <code>:alert</code>, <code>:notice</code> e <code>:flash</code> no método <code>redirect_to</code>. Assim, se antes fazíamos desta maneira:</p>
 
-A resposta de DHH? &#8220;Nós estamos utilizando <code>alert</code> para tudo na 37signals. Isto realmente não importa. Só que exista um sinalizador para continuar e outro para parar&#8221;.
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="n">flash</span><span class="o">[</span><span class="ss">:notice</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;Post was created&#39;</span>
+</div><div class='line'><span class="n">redirect_to</span><span class="p">(</span><span class="vi">@post</span><span class="p">)</span>
+</div></code></pre></td></tr></table></div></figure>
 
-Aceitando ou não esta explicação é importante lembrar do fato de que desde o principio foram estas &#8220;convenções&#8221; que tornaram o Rails o que ele é hoje. Sendo assim, a melhor coisa a fazer é passar a adotar o padrão definido.
+<p>Agora podemos fazer assim:</p>
 
-Outros exemplos extraídos da documentação:
-<pre class="textmate-source"><span class="source source_ruby">redirect_to post_url<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>post</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>alert</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Watch it, mister!<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="n">redirect_to</span><span class="p">(</span><span class="vi">@post</span><span class="p">,</span> <span class="ss">:notice</span> <span class="o">=&gt;</span> <span class="s1">&#39;Post was created&#39;</span><span class="p">)</span>
+</div></code></pre></td></tr></table></div></figure>
 
-redirect_to post_url<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>post</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>status</span><span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>found</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
-  <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>notice</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Pay attention to the road<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+<p>Esse sem dúvida é um recurso interessante e nos ajudará a diminuir a quantidade de linhas de código que escrevemos. Porém alguns desenvolvedores não gostaram desta implementação argumentando que não costumam utilizar <code>flash[:alert]</code> como sinalizador de problemas, mas sim <code>flash[:error]</code>.</p>
 
-redirect_to post_url<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>post</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>status</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">301</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
-  <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>flash</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>updated_post_id</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>post</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>id <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
+<p>A resposta de DHH? &#8220;Nós estamos utilizando <code>alert</code> para tudo na 37signals. Isto realmente não importa. Só que exista um sinalizador para continuar e outro para parar&#8221;.</p>
 
-redirect_to <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>action</span><span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>atom<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>alert</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Something serious happened<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span></span></pre>
+<p>Aceitando ou não esta explicação é importante lembrar do fato de que desde o principio foram estas &#8220;convenções&#8221; que tornaram o Rails o que ele é hoje. Sendo assim, a melhor coisa a fazer é passar a adotar o padrão definido.</p>
+
+<p>Outros exemplos extraídos da documentação:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="n">redirect_to</span> <span class="n">post_url</span><span class="p">(</span><span class="vi">@post</span><span class="p">),</span> <span class="ss">:alert</span> <span class="o">=&gt;</span> <span class="s2">&quot;Watch it, mister!&quot;</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">redirect_to</span> <span class="n">post_url</span><span class="p">(</span><span class="vi">@post</span><span class="p">),</span> <span class="ss">:status</span><span class="o">=&gt;</span> <span class="ss">:found</span><span class="p">,</span>
+</div><div class='line'>  <span class="ss">:notice</span> <span class="o">=&gt;</span> <span class="s2">&quot;Pay attention to the road&quot;</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">redirect_to</span> <span class="n">post_url</span><span class="p">(</span><span class="vi">@post</span><span class="p">),</span> <span class="ss">:status</span> <span class="o">=&gt;</span> <span class="mi">301</span><span class="p">,</span>
+</div><div class='line'>  <span class="ss">:flash</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:updated_post_id</span> <span class="o">=&gt;</span> <span class="vi">@post</span><span class="o">.</span><span class="n">id</span> <span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">redirect_to</span> <span class="p">{</span> <span class="ss">:action</span><span class="o">=&gt;</span><span class="s1">&#39;atom&#39;</span> <span class="p">},</span> <span class="ss">:alert</span> <span class="o">=&gt;</span> <span class="s2">&quot;Something serious happened&quot;</span>
+</div></code></pre></td></tr></table></div></figure>
+
 <h3>[Atualização 18/12/2009 18:20]</h3>
-Uma informação importante é que existe uma boa chance deste novo recurso entrar em algum futuro release do Rails ainda na versão 2.3.x.
 
-Além disso, também esqueci de mencionar que foram criados métodos mais convenientes para facilitar o acesso ao <code>flash[:notice]</code> e <code>flash[:alert]</code>. Podemos acessar estes recursos simplesmente assim:
 
-<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_begin punctuation_definition_tag_begin_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span> <span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_html">class</span>=<span class="string string_quoted string_quoted_double string_quoted_double_html"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_html">"</span>notice<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_html">"</span></span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_end punctuation_definition_tag_end_html">&gt;</span></span><span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> notice <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span><span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_begin punctuation_definition_tag_begin_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_end punctuation_definition_tag_end_html">&gt;</span></span>
+<p>Uma informação importante é que existe uma boa chance deste novo recurso entrar em algum futuro release do Rails ainda na versão 2.3.x.</p>
 
-<span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_begin punctuation_definition_tag_begin_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span> <span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_html">class</span>=<span class="string string_quoted string_quoted_double string_quoted_double_html"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_html">"</span>alert<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_html">"</span></span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_end punctuation_definition_tag_end_html">&gt;</span></span><span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> alert <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span><span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_begin punctuation_definition_tag_begin_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_end punctuation_definition_tag_end_html">&gt;</span></span></span></pre>
+<p>Além disso, também esqueci de mencionar que foram criados métodos mais convenientes para facilitar o acesso ao <code>flash[:notice]</code> e <code>flash[:alert]</code>. Podemos acessar estes recursos simplesmente assim:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+</pre></td><td class='code' width='100%'><pre><code class='html'><div class='line'><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;notice&quot;</span><span class="nt">&gt;</span><span class="err">&lt;</span>%= notice %&gt;<span class="nt">&lt;/p&gt;</span>
+</div><div class='line'>
+</div><div class='line'><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;alert&quot;</span><span class="nt">&gt;</span><span class="err">&lt;</span>%= alert %&gt;<span class="nt">&lt;/p&gt;</span>
+</div></code></pre></td></tr></table></div></figure>
 </div>
 
 
@@ -153,14 +179,14 @@ Além disso, também esqueci de mencionar que foram criados métodos mais conven
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2009-12-18 00:00:00 -0200" pubdate  updated >Dec 18<span>th</span>, 2009</time>
+<time datetime="2009-12-18 00:00:00 -0200" pubdate  updated >18 de Dezembro de 2009</time>
 
 
 

@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Dica De Ruby: Quem Disparou Este Método?</h1>
+      <h1 class="entry-title">Dica de Ruby: Quem disparou este método?</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2009-09-21 00:00:00 -0300" pubdate  updated >Sep 21<span>st</span>, 2009</time>
+<time datetime="2009-09-21 00:00:00 -0300" pubdate  updated >21 de Setembro de 2009</time>
 
 
 </p>
@@ -113,27 +113,37 @@
   </header>
 
 
-<div class="entry-content">Recentemente eu precisei desenvolver um módulo de log para o framework no qual estou trabalhando e não sabia como recuperar quem havia disparado o método atual no momento do registro do log.
+<div class="entry-content"><p>Recentemente eu precisei desenvolver um módulo de log para o framework no qual estou trabalhando e não sabia como recuperar quem havia disparado o método atual no momento do registro do log.</p>
 
-Depois de pesquisar um pouco encontrei a resposta, um método muito simples no <code>Kernel</code> do Ruby chamado <code>caller</code> que devolve um <code>array</code> com o call stack. O primeiro item do array é quem disparou o método atual. E cada elemento consecutivamente é aquele que disparou o método anterior na fila, e assim se segue até o final da pilha.
+<p>Depois de pesquisar um pouco encontrei a resposta, um método muito simples no <code>Kernel</code> do Ruby chamado <code>caller</code> que devolve um <code>array</code> com o call stack. O primeiro item do array é quem disparou o método atual. E cada elemento consecutivamente é aquele que disparou o método anterior na fila, e assim se segue até o final da pilha.</p>
 
-Este método pode ser muito útil quando se deseja descobrir a causa de uma exceção em um aplicativo. Veja um exemplo:
+<p>Este método pode ser muito útil quando se deseja descobrir a causa de uma exceção em um aplicativo. Veja um exemplo:</p>
 
-<pre class="textmate-source"><span class='linenum'>    1</span> <span class="source source_ruby"><span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">metodo_a</span></span>
-<span class='linenum'>    2</span>   puts caller
-<span class='linenum'>    3</span> <span class="keyword keyword_control keyword_control_ruby">end</span>
-<span class='linenum'>    4</span> 
-<span class='linenum'>    5</span> <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">metodo_b</span></span>
-<span class='linenum'>    6</span>   metodo_a
-<span class='linenum'>    7</span> <span class="keyword keyword_control keyword_control_ruby">end</span>
-<span class='linenum'>    8</span> 
-<span class='linenum'>    9</span> metodo_b
-<span class='linenum'>   10</span> 
-<span class='linenum'>   11</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; ["untitled:6:in `metodo_b'", "untitled:9"]</span></span></pre>
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="k">def</span> <span class="nf">metodo_a</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="nb">caller</span>
+</div><div class='line'><span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'><span class="k">def</span> <span class="nf">metodo_b</span>
+</div><div class='line'>    <span class="n">metodo_a</span>
+</div><div class='line'><span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">metodo_b</span>
+</div><div class='line'><span class="c1"># =&gt; [&quot;untitled:6:in `metodo_b&#39;&quot;, &quot;untitled:9&quot;]</span>
+</div></code></pre></td></tr></table></div></figure>
 
-Conforme você pôde ver no exemplo acima, o primeiro item no <code>array</code> informa que o <code>metodo_a</code> foi disparado pelo <code>metodo_b</code> na linha <code>6</code> e que o <code>metodo_b</code> foi disparado na linha <code>9</code>.
+<p>Conforme você pôde ver no exemplo acima, o primeiro item no <code>array</code> informa que o <code>metodo_a</code> foi disparado pelo <code>metodo_b</code> na linha <code>6</code> e que o <code>metodo_b</code> foi disparado na linha <code>9</code>.</p>
 
-O <code>string</code> de retorno sempre seguirá o formato [arquivo]:[linha] ou [arquivo]:[linha]: in [método]. 
+<p>O <code>string</code> de retorno sempre seguirá o formato [arquivo]:[linha] ou [arquivo]:[linha]: in [método].</p>
 </div>
 
 
@@ -142,14 +152,14 @@ O <code>string</code> de retorno sempre seguirá o formato [arquivo]:[linha] ou 
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2009-09-21 00:00:00 -0300" pubdate  updated >Sep 21<span>st</span>, 2009</time>
+<time datetime="2009-09-21 00:00:00 -0300" pubdate  updated >21 de Setembro de 2009</time>
 
 
 

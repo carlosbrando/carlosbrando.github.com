@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Edge Rails: Fazendo Uso Da Opção Accessible Em Formulários</h1>
+      <h1 class="entry-title">Edge Rails: Fazendo uso da opção accessible em formulários</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-07-29 00:00:00 -0300" pubdate  updated >Jul 29<span>th</span>, 2008</time>
+<time datetime="2008-07-29 00:00:00 -0300" pubdate  updated >29 de Julho de 2008</time>
 
 
 </p>
@@ -113,9 +113,10 @@
   </header>
 
 
-<div class="entry-content">No <a href="http://www.nomedojogo.com/2008/07/28/edge-rails-usando-a-opcao-accessible-para-fazer-atribuicoes-em-massa-no-activerecord/">último artigo</a> desta série comentei sobre a nova forma de atribuir valores à associações usando a opção <code><strong>:accessible</strong></code>.
+<div class="entry-content"><p>No <a href="http://www.nomedojogo.com/2008/07/28/edge-rails-usando-a-opcao-accessible-para-fazer-atribuicoes-em-massa-no-activerecord/">último artigo</a> desta série comentei sobre a nova forma de atribuir valores à associações usando a opção <code><strong>:accessible</strong></code>.</p>
 
-Agora vou mostrar uma das grandes vantagens dessa novidade. Fazendo uso deste novo recurso podemos melhorar a forma como usamos o método <code><strong>fields_for</strong></code>. Vamos pegar um exemplo, baseado nos códigos do artigo anterior:
+<p>Agora vou mostrar uma das grandes vantagens dessa novidade. Fazendo uso deste novo recurso podemos melhorar a forma como usamos o método <code><strong>fields_for</strong></code>. Vamos pegar um exemplo, baseado nos códigos do artigo anterior:</p>
+
 <pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> form_for <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>post</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">f</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
   <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> f<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>text_field <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>body</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
   <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> fields_for <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>author</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">a_f</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
@@ -123,7 +124,10 @@ Agora vou mostrar uma das grandes vantagens dessa novidade. Fazendo uso deste no
   <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> <span class="keyword keyword_control keyword_control_ruby">end</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
   <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> submit_tag <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
 <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> <span class="keyword keyword_control keyword_control_ruby">end</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span></span></pre>
-Estou usando o método <code><strong>fields_for</strong></code> para acrescentar o nome do autor na página de criação de posts. Agora vem a melhor parte, veja como ficaria a criação do post e do autor usando este novo recurso:
+
+
+<p>Estou usando o método <code><strong>fields_for</strong></code> para acrescentar o nome do autor na página de criação de posts. Agora vem a melhor parte, veja como ficaria a criação do post e do autor usando este novo recurso:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_controller"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">PostController<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ApplicationController</span></span></span>
 
   <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">new</span></span>
@@ -134,7 +138,9 @@ Estou usando o método <code><strong>fields_for</strong></code> para acrescentar
   <span class="keyword keyword_control keyword_control_ruby">end</span>
 </span><span class="keyword keyword_control keyword_control_ruby">end</span>
 </span></pre>
-Veja que estou usando apenas o método <code><strong>create</strong></code> do objeto <code><strong>Post</strong></code>. Como foi definido a opção <code><strong>:accessible</strong></code> do relacionamento deste objeto com o objeto <code><strong>Author</strong></code> como verdadeiro (<code><strong>true</strong></code>), a criação do autor é automática e transparente.
+
+
+<p>Veja que estou usando apenas o método <code><strong>create</strong></code> do objeto <code><strong>Post</strong></code>. Como foi definido a opção <code><strong>:accessible</strong></code> do relacionamento deste objeto com o objeto <code><strong>Author</strong></code> como verdadeiro (<code><strong>true</strong></code>), a criação do autor é automática e transparente.</p>
 </div>
 
 
@@ -143,14 +149,14 @@ Veja que estou usando apenas o método <code><strong>create</strong></code> do o
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-07-29 00:00:00 -0300" pubdate  updated >Jul 29<span>th</span>, 2008</time>
+<time datetime="2008-07-29 00:00:00 -0300" pubdate  updated >29 de Julho de 2008</time>
 
 
 

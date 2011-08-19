@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Edge Rails - Ruby 1.9, Segurança E Muito Zelo</h1>
+      <h1 class="entry-title">Edge Rails - Ruby 1.9, segurança e muito zelo</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2007-12-16 00:00:00 -0200" pubdate  updated >Dec 16<span>th</span>, 2007</time>
+<time datetime="2007-12-16 00:00:00 -0200" pubdate  updated >16 de Dezembro de 2007</time>
 
 
 </p>
@@ -113,13 +113,20 @@
   </header>
 
 
-<div class="entry-content">O core team do Rails tem trabalhando bastante ultimamente, está ficando até meio difícil de acompanhar o que está sendo feito. Desta vez vou fazer um resumão das principais alterações no código até agora, lembrando que tudo que isto ainda não está disponível para o público em geral. Mas quem quiser testar basta baixar a versão edge do Rails com o seguinte comando de dentro da sua aplicação:
-<pre>rake rails:freeze:edge</pre>
-Agora vamos ao que interessa.
-<h3>Testes funcionais</h3>
-Foram feitos ajustes nos testes funcionais gerados pelo <a href="http://dev.rubyonrails.org/ticket/10435">scaffold</a> para usar dados criados pelas fixtures e não usar nada hard-coded.
+<div class="entry-content"><p>O core team do Rails tem trabalhando bastante ultimamente, está ficando até meio difícil de acompanhar o que está sendo feito. Desta vez vou fazer um resumão das principais alterações no código até agora, lembrando que tudo que isto ainda não está disponível para o público em geral. Mas quem quiser testar basta baixar a versão edge do Rails com o seguinte comando de dentro da sua aplicação:</p>
 
-O que antes era assim:
+<pre>rake rails:freeze:edge</pre>
+
+
+<p>Agora vamos ao que interessa.</p>
+
+<h3>Testes funcionais</h3>
+
+
+<p>Foram feitos ajustes nos testes funcionais gerados pelo <a href="http://dev.rubyonrails.org/ticket/10435">scaffold</a> para usar dados criados pelas fixtures e não usar nada hard-coded.</p>
+
+<p>O que antes era assim:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">test_should_show_</span></span><span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span><span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_augmented keyword_operator_assignment_augmented_ruby">%=</span> file_name <span class="string string_quoted string_quoted_other string_quoted_other_literal string_quoted_other_literal_other string_quoted_other_literal_other_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">%&gt;</span>
   get :show, :id =<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">&gt;</span></span> <span class="constant constant_numeric constant_numeric_ruby">1</span>
   assert_response <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>success</span>
@@ -139,7 +146,10 @@ O que antes era assim:
   assert_difference('&lt;%= class_name %<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">&gt;</span></span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>count<span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>, -1) do
   delete :destroy, :id =&gt; 1
 end</span></span></pre>
-Ficou assim:
+
+
+<p>Ficou assim:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">test_should_show_</span></span><span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span><span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_augmented keyword_operator_assignment_augmented_ruby">%=</span> file_name <span class="string string_quoted string_quoted_other string_quoted_other_literal string_quoted_other_literal_other string_quoted_other_literal_other_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">%&gt;</span>
   get :show, :id =<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">&gt;</span></span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span><span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_augmented keyword_operator_assignment_augmented_ruby">%=</span> table_name <span class="string string_quoted string_quoted_other string_quoted_other_literal string_quoted_other_literal_other string_quoted_other_literal_other_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">%&gt;</span>(:one).id
   assert_response :success
@@ -159,14 +169,28 @@ def test_should_update_&lt;%= file_name %<span class="punctuation punctuation_de
   assert_difference('&lt;%= class_name %<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">&gt;</span></span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>count<span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>, -1) do
   delete :destroy, :id =&gt; &lt;%= table_name %&gt;(:one).id
 end</span></span></pre>
+
+
 <h3>Databases.rake</h3>
-Foi feita uma alteração no arquivo <a href="http://dev.rubyonrails.org/browser/trunk/railties/lib/tasks/databases.rake?rev=8388">databases.rake</a> que antes só considerava um banco de dados local como estando em <strong>localhost</strong> para considerar também o IP <strong>127.0.0.1</strong>.
+
+
+<p>Foi feita uma alteração no arquivo <a href="http://dev.rubyonrails.org/browser/trunk/railties/lib/tasks/databases.rake?rev=8388">databases.rake</a> que antes só considerava um banco de dados local como estando em <strong>localhost</strong> para considerar também o IP <strong>127.0.0.1</strong>.</p>
+
 <h3>Novas exceções</h3>
-Foram criadas <a href="http://dev.rubyonrails.org/ticket/10326">exceções especificas</a> para os erros 400, 401 e 403, como BadRequest, UnauthorizedAccess e ForbiddenAccess respectivamente. Onde o erro 400 (BadRequest) corresponde a uma url mal formatada ou algum parâmetro com formatação incorreta. Os outros dois erros são exatamente o que o nome já diz.
+
+
+<p>Foram criadas <a href="http://dev.rubyonrails.org/ticket/10326">exceções especificas</a> para os erros 400, 401 e 403, como BadRequest, UnauthorizedAccess e ForbiddenAccess respectivamente. Onde o erro 400 (BadRequest) corresponde a uma url mal formatada ou algum parâmetro com formatação incorreta. Os outros dois erros são exatamente o que o nome já diz.</p>
+
 <h3>Excesso de zelo?</h3>
-É interessante notar o excesso de zelo de David com o código, onde ele se preocupa até mesmo com uma <a href="http://dev.rubyonrails.org/changeset/8389?new_path=%2F">linha em branco</a> a mais ou a menos. Ele também criou um novo branch chamado <a href="http://dev.rubyonrails.org/browser/branches/2-1-caching?rev=8391">2-1 caching</a>. David trabalhou bastante realizando merge para este novo branch e também se dedicou em corrigir problemas e realizar melhorias em tudo que diz respeito a cache.
+
+
+<p>É interessante notar o excesso de zelo de David com o código, onde ele se preocupa até mesmo com uma <a href="http://dev.rubyonrails.org/changeset/8389?new_path=%2F">linha em branco</a> a mais ou a menos. Ele também criou um novo branch chamado <a href="http://dev.rubyonrails.org/browser/branches/2-1-caching?rev=8391">2-1 caching</a>. David trabalhou bastante realizando merge para este novo branch e também se dedicou em corrigir problemas e realizar melhorias em tudo que diz respeito a cache.</p>
+
 <h3>Ruby 1.9</h3>
-As melhorias no código prevendo o Ruby 1.9 também continuam. Algo interessante aqui foi esta simples alteração nestes dois métodos do arquivo <a href="http://dev.rubyonrails.org/browser/trunk/activesupport/lib/active_support/core_ext/integer/even_odd.rb?rev=8397">even_odd.rb</a> que ficaram assim:
+
+
+<p>As melhorias no código prevendo o Ruby 1.9 também continuam. Algo interessante aqui foi esta simples alteração nestes dois métodos do arquivo <a href="http://dev.rubyonrails.org/browser/trunk/activesupport/lib/active_support/core_ext/integer/even_odd.rb?rev=8397">even_odd.rb</a> que ficaram assim:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">even?</span></span>
   multiple_of? <span class="constant constant_numeric constant_numeric_ruby">2</span>
 <span class="keyword keyword_control keyword_control_ruby">end</span> <span class="keyword keyword_control keyword_control_ruby">if</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">RUBY_VERSION</span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>1.9<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
@@ -174,7 +198,10 @@ As melhorias no código prevendo o Ruby 1.9 também continuam. Algo interessante
 <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">odd?</span></span>
   <span class="keyword keyword_operator keyword_operator_logical keyword_operator_logical_ruby">!</span>even?
 <span class="keyword keyword_control keyword_control_ruby">end</span> <span class="keyword keyword_control keyword_control_ruby">if</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">RUBY_VERSION</span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>1.9<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span></pre>
-Note que os métodos só serão definidos se a versão do ruby utilizada for anterior à 1.9, porque no Ruby 1.9 os métodos <strong>even?</strong> e <strong>odd?</strong> estão incorporados diretamente na classe <strong>Integer</strong>, tornando-os desnecessários no Rails. O mesmo ocorre no arquivo <a href="http://dev.rubyonrails.org/browser/trunk/activesupport/lib/active_support/core_ext/string.rb?rev=8397">string.rb</a> e <a href="http://dev.rubyonrails.org/browser/trunk/activesupport/lib/active_support/core_ext/string/starts_ends_with.rb?rev=8397">starts_ends_with.rb</a> onde o seguinte código foi acrescentado, já que os métodos <strong>start_with?</strong> e <strong>end_with?</strong> também foram implementados diretamente na classe <strong>String</strong> para a nova versão:
+
+
+<p>Note que os métodos só serão definidos se a versão do ruby utilizada for anterior à 1.9, porque no Ruby 1.9 os métodos <strong>even?</strong> e <strong>odd?</strong> estão incorporados diretamente na classe <strong>Integer</strong>, tornando-os desnecessários no Rails. O mesmo ocorre no arquivo <a href="http://dev.rubyonrails.org/browser/trunk/activesupport/lib/active_support/core_ext/string.rb?rev=8397">string.rb</a> e <a href="http://dev.rubyonrails.org/browser/trunk/activesupport/lib/active_support/core_ext/string/starts_ends_with.rb?rev=8397">starts_ends_with.rb</a> onde o seguinte código foi acrescentado, já que os métodos <strong>start_with?</strong> e <strong>end_with?</strong> também foram implementados diretamente na classe <strong>String</strong> para a nova versão:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> arquivo string.rb
 </span><span class="keyword keyword_control keyword_control_ruby">if</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">RUBY_VERSION</span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>1.9<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
   <span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">include</span> <span class="support support_class support_class_ruby">ActiveSupport</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">CoreExtensions</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">String</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="variable variable_other variable_other_constant variable_other_constant_ruby">StartsEndsWith</span>
@@ -190,13 +217,21 @@ Note que os métodos só serão definidos se a versão do ruby utilizada for ant
     <span class="keyword keyword_control keyword_control_pseudo-method keyword_control_pseudo-method_ruby">alias_method</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>end_with?</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>ends_with?</span>
   <span class="keyword keyword_control keyword_control_ruby">end</span>
 <span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-Também foram feitos outros ajuste concernente as mudanças nas classe DateTime e ao suporte do UTF8.
-<h3>Segurança</h3>
-Uma outro novidade interessante foi a criação de uma chave secreta (criptografada) para usar com cookies de sessão. Isto basicamente aumenta a segurança. Para usar basta executar:
-<pre>rake generate:secret</pre>
-E incluir a chave no arquivo <strong>config/environment.rb</strong>.
 
-Muitas outras alterações foram realizadas, na grande maioria para melhorar a compatibilidade do Rails com o Ruby 1.9. O foco agora é este.
+
+<p>Também foram feitos outros ajuste concernente as mudanças nas classe DateTime e ao suporte do UTF8.</p>
+
+<h3>Segurança</h3>
+
+
+<p>Uma outro novidade interessante foi a criação de uma chave secreta (criptografada) para usar com cookies de sessão. Isto basicamente aumenta a segurança. Para usar basta executar:</p>
+
+<pre>rake generate:secret</pre>
+
+
+<p>E incluir a chave no arquivo <strong>config/environment.rb</strong>.</p>
+
+<p>Muitas outras alterações foram realizadas, na grande maioria para melhorar a compatibilidade do Rails com o Ruby 1.9. O foco agora é este.</p>
 </div>
 
 
@@ -205,14 +240,14 @@ Muitas outras alterações foram realizadas, na grande maioria para melhorar a c
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2007-12-16 00:00:00 -0200" pubdate  updated >Dec 16<span>th</span>, 2007</time>
+<time datetime="2007-12-16 00:00:00 -0200" pubdate  updated >16 de Dezembro de 2007</time>
 
 
 

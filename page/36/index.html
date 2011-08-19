@@ -1,0 +1,771 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Nome do Jogo</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/page/36/index.html"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds2.feedburner.com/NomeDoJogo" rel="alternate" title="Nome do Jogo" type="application/atom+xml"/>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1249636-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Nome do Jogo</a></h1>
+  
+    <h2>por Carlos Brando</h2>
+  
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="http://feeds2.feedburner.com/NomeDoJogo" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/06/13/edge-rails-novo-metodo-objectpresent/">Edge Rails: Novo método Object#present?</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-06-13 00:00:00 -0300" pubdate  updated >13 de Junho de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Um novo método foi acrescentado à classe <strong>Object</strong>. O método <strong>present?</strong> é o equivalente a <strong>!Object#blank?</strong>.</p>
+
+<p>Em outras palavras um objeto está presente se ele não for vazio. Mas o que é um objeto vazio?</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">EmptyTrue</span></span>
+  <span class="meta meta_function meta_function_method meta_function_method_with-arguments meta_function_method_with-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">empty?</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">()</span></span> <span class="constant constant_language constant_language_ruby">true</span><span class="punctuation punctuation_separator punctuation_separator_statement punctuation_separator_statement_ruby">;</span> <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+
+a <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">EmptyTrue</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span>
+b <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_language constant_language_ruby">nil</span>
+c <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_language constant_language_ruby">false</span>
+d <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+e <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>   <span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+g <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>  <span class="constant constant_character constant_character_escape constant_character_escape_ruby">\n\t</span>  <span class="constant constant_character constant_character_escape constant_character_escape_ruby">\r</span> <span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+g <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[]</span>
+h <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{}</span>
+
+a<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>present? <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; false
+</span>b<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>present? <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; false
+</span>c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>present? <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; false
+</span>d<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>present? <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; false
+</span>e<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>present? <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; false
+</span>f<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>present? <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; false
+</span>g<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>present? <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; false
+</span>h<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>present? <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; false</span></span></pre>
+
+
+<p>Todos estes objetos são vazios ou não estão presentes.</p>
+
+<p>Mas, muito cuidado, algumas pessoas tem confundido as coisas. Veja alguns exemplos de objetos que <strong>NÃO</strong> estão vazios, ou seja, estão presentes:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">EmptyFalse</span></span>
+  <span class="meta meta_function meta_function_method meta_function_method_with-arguments meta_function_method_with-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">empty?</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">()</span></span> <span class="constant constant_language constant_language_ruby">false</span><span class="punctuation punctuation_separator punctuation_separator_statement punctuation_separator_statement_ruby">;</span> <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+
+a <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">EmptyFalse</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span>
+b <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Object</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span>
+c <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_language constant_language_ruby">true</span>
+d <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_numeric constant_numeric_ruby">0</span>
+e <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_numeric constant_numeric_ruby">1</span>
+f <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>a<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+g <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_language constant_language_ruby">nil</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span>
+h <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_language constant_language_ruby">nil</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">0</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
+
+a<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>present? <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; true
+</span>b<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>present? <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; true
+</span>c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>present? <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; true
+</span>d<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>present? <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; true
+</span>e<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>present? <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; true
+</span>f<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>present? <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; true
+</span>g<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>present? <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; true
+</span>h<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>present? <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; true</span></span></pre>
+
+
+<p>Qualquer objeto que contenha um valor, está presente, isto vale até mesmo para um <strong>Array</strong> preenchido com um <strong>nil</strong>, porque o <strong>Array</strong> não está vazio.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/06/13/edge-rails-novo-metodo-objectpresent/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/06/12/enquanto-isto-na-wwdc/">Enquanto isto na WWDC&#8230;</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-06-12 00:00:00 -0300" pubdate  updated >12 de Junho de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="alignnone size-full wp-image-784" title="wwdc_rails21" src="http://www.nomedojogo.com/wp-content/uploads/2008/06/wwdc_rails21.jpg" alt="" /></p>
+
+<p>Obrigado <a href="http://gc.blog.br/">Guilherme Chapiewski</a> e <a href="http://blog.improveit.com.br/">Vinicius Teles</a>! Nossos correspondentes na <strong>WWDC 2008</strong>. :)</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/06/12/enquanto-isto-na-wwdc/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/06/12/edge-rails-esta-chegando-o-fim-dos-plugins/">Edge Rails: Está chegando o fim dos plugins?</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-06-12 00:00:00 -0300" pubdate  updated >12 de Junho de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>No Rails 2.1, <strong>gems passaram a poder ser <a href="http://www.nomedojogo.com/2008/04/09/edge-rails-gems-podem-ser-plugins/">usadas como plugins</a></strong> em nossos projetos. Para isto bastava criar uma pasta chamada <em>rails</em> dentro do projeto do gem e incluir um arquivo <em>init.rb</em>.</p>
+
+<p>Isto acrescentou um leque de <a href="http://www.nomedojogo.com/2008/04/14/edge-rails-configgem/">novidades</a> como <strong>config.gem</strong> e <strong>rake:gems</strong>. Mas isto nos faz pensar, já que agora eu posso carregar gems dentro da minha aplicação Rails, seria apenas uma questão de tempo até que plugins deixassem de existir.</p>
+
+<p>E parece que isto realmente pode acontecer. No edge rails, por exemplo, foi incluída uma alteração que permite inicializar <strong>plugins</strong> tanto pelo arquivo <em>init.rb</em> na raiz do plugin, como em um arquivo em um diretório <em>rails/init.rb</em> (da mesma forma como fazemos com os gems), sendo esta segunda opção a prioritária.</p>
+
+<p>Assim, eu poderia por exemplo criar um <strong>gem</strong> (que funcionaria como um plugin) e instalar de duas maneiras:</p>
+
+<pre class="textmate-source"><span class="source source_shell">./script/plugin install git://github.com/user/plugin.git
+
+sudo gem install user-plugin --source=http://gems.github.com</span></pre>
+
+
+<p>Isto sem precisar manter dois arquivos <em>init.rb</em> (um na raiz e outro no diretório rails).</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/06/12/edge-rails-esta-chegando-o-fim-dos-plugins/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/06/11/como-lidar-com-discordancias/">Como lidar com discordâncias?</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-06-11 00:00:00 -0300" pubdate  updated >11 de Junho de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>Tradução do artigo:</strong> <a href="http://www.37signals.com/svn/posts/1046-ask-37signals-how-do-you-handle-disagreements">How do you handle disagreements?</a></p>
+
+<p>Como vocês lidam com discordâncias? O que acontece quando David e Jamis discordam sobre a melhor forma de implementar algo? O que acontece quando Ryan e Jason discordam sobre a melhor maneira de interagir com um novo recurso? Como é que se evita demoradas discussões sobre (aparentemente) minúsculos pormenores?</p>
+
+<h4>Resposta</h4>
+
+
+<p>Felizmente, não levamos adiante todas as discussões por divergências que aparecem. Discordâncias podem ser boas de vez em quando, mas quando acontece muitas vezes têm um impacto negativo na moral da equipe. Nós tentamos tratar a moral do time como o mais importante dos recursos de que dispomos.</p>
+
+<p>Mas quando estamos sem saída (geralmente depois de 10-15 minutos de discussão) eventualmente alguém acaba propondo uma solução. A solução geralmente envolve o mais forte defensor tendo total responsabilidade pela decisão.</p>
+
+<p>Por exemplo, se Jamis defende mais ferrenhamente alguma coisa do que David, Jamis irá &#8220;ganhar&#8221;, mas ele também vai ser o responsável por qualquer erro ou suporte devido à questões relacionadas com esta decisão. Isto obriga o vencedor a pensar seriamente se ele realmente acredita em sua posição, pelo menos o suficiente para lidar com as eventuais exigências que cairão sobre ele depois do lançamento. Caso ele ache que sim, geralmente aceita o acordo. Caso contrário, o &#8220;perdedor&#8221; segue com sua idéia sem empecilhos.</p>
+
+<p>Isto é apenas um exemplo. Nem sempre funciona desta maneira, mas já tivemos sucesso agindo assim no passado.</p>
+
+<p>Um aspecto a ter em mente é o seguinte: Certifique-se de qual é o ponto de desacordo. É realmente fácil que argumentos e desacordos incendeiem a discussão rapidamente. Este tipo de desacordo muitas vezes leva duas pessoas à falarem diretamente uma para a outra, esquecendo dos outros. Param de argumentar uns com os outros e passam a argumentar somente entre eles. Nesse ponto a discussão acaba e alguém precisa pegar as rédeas de volta.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/06/11/como-lidar-com-discordancias/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/06/10/rails-podcast-brasil-episodio-20/">Rails Podcast Brasil - Episódio 20</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-06-10 00:00:00 -0300" pubdate  updated >10 de Junho de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Depois do RailsConf, agora um podcast que tenta cobrir o que aconteceu nas duas últimas semanas no mundo do Ruby on Rails.</p>
+
+<p>Este podcast conta com a participação especial de uma figurinha carimbada da comunidade brasileira, que não vou falar quem é&#8230; ouça&#8230;</p>
+
+<p>Entre outros assuntos, nesta edição você vai ouvir sobre o lançamento do Rails 2.1 e do nosso livro, Phusion Passenger, JQuery, Discount, uma geral das palestras realizadas no RailsConf 2008 e claro iPhone.</p>
+
+<p>Para ouvir o podcast, acesse: <a href="http://podcast.rubyonrails.pro.br/podcast/podcast-20-20">http://podcast.rubyonrails.pro.br</a></p>
+
+<p>Os links de todas as fontes utilizadas neste podcast estão no novo site do podcast!</p>
+
+<p>Link para iTunes e semelhantes: <span><a class="a" href="http://podcast.rubyonrails.pro.br/rss">http://podcast.rubyonrails.pro.br/rss</a></span></p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/06/10/rails-podcast-brasil-episodio-20/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/06/09/new-free-book-ruby-on-rails-21-whats-new/">New Free Book: &#8220;Ruby on Rails 2.1 - What&#8217;s new&#8221;</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-06-09 00:00:00 -0300" pubdate  updated > 9 de Junho de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://www.nomedojogo.com/livro/carlosbrando-rubyonrails21_en.pdf">Click here to download</a></p>
+
+<p>Less than one week after the release of Rails 2.1, was launched in Brazil the first book describing all the new features of this release.</p>
+
+<p>After the launch of the book in Portuguese, the Brazilian community united to translate the book into English.</p>
+
+<p>Done! A gift from all Brazilian Railers to the international community.</p>
+
+<h3><span style="color: #000000;">To download <a href="http://www.nomedojogo.com/livro/carlosbrando-rubyonrails21_en.pdf">click here</a>.</span></h3>
+
+
+<h4>Credits</h4>
+
+
+<p>The book was originally written by <a href="http://www.nomedojogo.com">Carlos Brando</a> and revised by <a href="www.improveit.com.br/en/company/tapajos">Marcos Tapajos</a>.</p>
+
+<p>If you liked the book, you can recommend them:
+<a href="http://www.workingwithrails.com/recommendation/new/person/8137-carlos-brando">Recommend Carlos Brando</a>
+<a href="http://www.workingwithrails.com/recommendation/new/person/7526-marcos-c-ssio-tapaj-s-martins-do-couto">Recommend Marcos Tapajos</a></p>
+
+<h4>Thank these guys for the English version:</h4>
+
+
+<p><a href="http://www.act-as-newbie.com">Rafael Barbosa</a></p>
+
+<ul>
+    <li><a href="http://workingwithrails.com/recommendation/new/person/12119-rafael-barbosa-de-oliveira-costa">Recommend</a></li>
+    <li> Introduction and chapter 1</li>
+</ul>
+
+
+<p><a href="http://www.caikesouza.com/blog/">Caike Souza</a></p>
+
+<ul>
+    <li> <a href="http://twitter.com/caike"></a><a href="http://www.workingwithrails.com/person/15670-carlos-henrique-souza">Recommend</a></li>
+    <li>Twitter: <a href="http://twitter.com/caike">@caike</a></li>
+    <li> Chapter 2</li>
+</ul>
+
+
+<p><a href="http://www.pedropimentel.com">Pedro Pimentel</a></p>
+
+<ul>
+    <li><a href="http://www.workingwithrails.com/recommendation/new/person/9323-pedro-pimentel">Recommend</a></li>
+    <li> Chapters 3-8 and 10-13</li>
+</ul>
+
+
+<p><a href="http://abrcoelho.net">Abraão Coelho</a></p>
+
+<ul>
+    <li><a href="http://workingwithrails.com/person/13057-abra-o-coelho-carvalho">Recommend</a></li>
+    <li> Chapter 9</li>
+</ul>
+
+
+<p><a href="http://blog.shadowmaru.org">Ricardo S Yasuda</a></p>
+
+<ul>
+    <li><a href="http://www.workingwithrails.com/recommendation/new/person/7899-ricardo-shiota-yasuda">Recommend</a></li>
+    <li> Chapter 14</li>
+</ul>
+
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/06/09/new-free-book-ruby-on-rails-21-whats-new/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/06/07/agora-e-a-sua-vez/">Agora é a sua vez!</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-06-07 00:00:00 -0300" pubdate  updated > 7 de Junho de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Confesso que antes de lançar o e-book de Rails 2.1 eu estava um pouco preocupado quanto a reação da comunidade brasileira, afinal todo o texto do livro está também neste blog. Por que alguém ia se interessar em um livro assim? Nesta hora agradeço ao Marcos Tapajós pela iniciativa em me ajudar a montar o livro.</p>
+
+<p>Agora imaginem a minha alegria ao ver tanta gente baixando o livro, comentando no blog, enviando emails e mandando mensagens via Twitter? Até agora de acordo com os logs do meu servidor já foram realizados mais de <strong>700 downloads</strong> do livro à partir deste site.</p>
+
+<p>Isto tudo já é muito legal e me estimula a continuar contribuindo com a comunidade brasileira ainda mais. Agora melhor do que isto é ver o reconhecimento internacional pelo trabalho que estamos realizando.</p>
+
+<p>Antes de qualquer coisa eu sou um programador como vocês e tenho todo interesse em ver o Ruby e o Rails se tornarem fortes neste país. Tenho mais interesse ainda em ver empresas de outros países interessadas em nós brasileiros, como já está acontecendo. Como costumo dizer, isto é bom para os negócios&#8230; :)</p>
+
+<p>Mas ainda não atingimos nosso potencial máximo. Para isto precisamos mostrar do que somos capazes. Este post é mais do que um post de agradecimento ou informativo, é uma convocação para levantarmos nossos traseiros gordos da cadeira e fazermos alguma coisa. Ou melhor ainda, já que passamos horas e horas sentados na frente de um computador, ao invés de gastarmos nosso tempo vendo vídeos no YouTube ou mandando scraps pelo Orkut, que tal participar em algo grande como a tradução do livro &#8220;Why&#8217;s (Poignant) Guide to Ruby&#8221; para português, ou da tradução do livro &#8220;Ruby on Rails 2.1 - O que há de novo?&#8221; para inglês?</p>
+
+<p>Os dois projetos estão tendo uma ótima visibilidade lá fora e quando estiverem completos, chamarão à atenção. E os envolvidos nesses projetos terão seus nomes divulgados. São esses nomes que as empresas estão interessadas em contratar. Pessoas tão apaixonadas pelo que fazem, que mesmo em suas horas vagas programam, escrevem ou ajudam em traduções como forma de diversão.</p>
+
+<p>Tem muita coisa acontecendo lá fora e aqui no Brasil. Quem vai ficar de fora?</p>
+
+<h4>Tradução do livro Ruby on Rails 2.1 - O que há de novo:</h4>
+
+
+<p><strong>Responsável:</strong> Marcos Tapajós</p>
+
+<p><strong>Repositório:</strong> <a href="http://github.com/carlosbrando/rails21-book/tree/master">http://github.com/carlosbrando/rails21-book/tree/master</a>
+<strong> Grupo: </strong><a href="http://groups.google.com/group/rails21">http://groups.google.com/group/rails21</a>
+<strong> Relação de capítulos já traduzidos:</strong> <a href="https://spreadsheets.google.com/ccc?key=pq5hAbcwH_ZlY60ptewslaw&amp;hl=en">Clique aqui
+</a></p>
+
+<p><strong>Convocação feita pelo site GitHub:</strong> <a href="http://github.com/blog/81-rails-2-1-book-translation">http://github.com/blog/81-rails-2-1-book-translation</a></p>
+
+<h4>Tradução do livro Why&#8217;s (Poignant) Guide to Ruby:</h4>
+
+
+<p><strong>Responsável:</strong> Carlos Brando</p>
+
+<p><strong>Repositório:</strong> <a href="http://github.com/carlosbrando/poignant-br/tree/master">http://github.com/carlosbrando/poignant-br/tree/master</a>
+<strong> Grupo:</strong> <a href="http://groups.google.com/group/whys-poignant-guide-to-ruby---portugues">http://groups.google.com/group/whys-poignant-guide-to-ruby&#8212;portugues</a>
+<strong>Relação de capítulos já traduzidos:</strong> <a href="https://spreadsheets.google.com/ccc?key=pU_MriAPjg2AHUgj-pIVeRQ&amp;hl=en">Clique aqui
+</a></p>
+
+<p><strong>Sinta o nível de qualidade da tradução:</strong> <a href="http://github.com/brunopedroso/poignant-br/commit/b12b451598ac5e881381d4ac2062ec51605a5f0a">Clique aqui
+</a></p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/06/07/agora-e-a-sua-vez/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/06/06/o-primeiro-livro-sobre-rails-21-e-brasileiro/">O primeiro livro sobre Rails 2.1 é brasileiro!</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-06-06 00:00:00 -0300" pubdate  updated > 6 de Junho de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Esta semana foi correria para mim e para o <a href="http://www.improveit.com.br/empresa/tapajos">Marcos Tapajós</a>. Aceitamos o desafio de compilar todas as dicas dadas neste blog em um livro. Mas não queríamos apenas um pdfzinho meia-boca. Queríamos um livro de verdade, no melhor estilo <strong>PeepCode</strong>, que pudéssemos imprimir e mandar encadernar.</p>
+
+<p>O trabalho começou com a compilação de todos os artigos. Um trabalho braçal que nos consumiu algumas horas. Depois começou a parte mais difícil, revisar todo o texto, corrigir erros, melhorar algumas explicações&#8230; Só para vocês terem uma idéia do esforço, quando começamos a idéia era liberar o livro logo na segunda-feira, mas acabamos tendo de trabalhar praticamente todas as madrugadas desta semana para conseguir terminá-lo. Ou seja, ficamos uma semana sem dormir para liberar este livro para a comunidade o mais rápido possível.</p>
+
+<p>Alguns amigos já tiveram a oportunidade de ver o livro antes do lançamento e dar sugestões sobre o conteúdo, capa, fontes, etc.. E acredito que todos gostaram do resultado final.</p>
+
+<p>Eu quero agradecer ao <a href="http://www.improveit.com.br/empresa/tapajos">Marcos Tapajós</a> que ajudou a tornar isto possível, ficando acordado até tarde para revisar textos, ajustar códigos e até me ajudar a corrigir alguns bugs.</p>
+
+<p>Este livro também tem uma singularidade que apenas os que colaboraram conosco em traduções conhecem. Ele não foi escrito em um editor de textos como o Word, por exemplo, mas ele foi <strong>programado</strong>. Isto mesmo, para facilitar a criação do livro eu e o Tapajós criamos um projeto que deve virar um gem no futuro para facilitar a criação de livros de programação.</p>
+
+<p>Bom, chega de papo-furado, e vamos ao que interessa. Com vocês o <strong>primeiro livro de Ruby on Rails 2.1</strong> do mundo:</p>
+
+<p><a href="http://www.nomedojogo.com/livro/carlosbrando-rubyonrails21.pdf"><img class="alignnone size-full wp-image-773" title="ruby_on_rails_2_1" src="http://www.nomedojogo.com/wp-content/uploads/2008/06/ruby_on_rails_2_1.jpg" alt="" /></a></p>
+
+<p>E o melhor de tudo, é de <strong>graça</strong>! Para fazer o download é só <a href="http://www.nomedojogo.com/wp-content/uploads/2009/01/rails2_1.pdf">clicar aqui</a>.</p>
+
+<p>Gostou do livro? Quer continuar tendo conteúdo desta qualidade, sempre? É só clicar nos links abaixo e recomendar eu e o Tapajós no <strong>Working With Rails</strong> e ajudar a aumentar a visibilidade dos brasileiros lá fora.</p>
+
+<ul>
+    <li><a href="http://www.workingwithrails.com/recommendation/new/person/8137-carlos-brando">Recomendar Carlos Brando</a></li>
+    <li><a href="http://www.workingwithrails.com/recommendation/new/person/7526-marcos-c-ssio-tapaj-s-martins-do-couto">Recomendar Marcos Tapajó</a></li>
+</ul>
+
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/06/06/o-primeiro-livro-sobre-rails-21-e-brasileiro/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/06/06/edge-rails-stringquestioneer-renomeado-para-stringinquirer/">Edge Rails: StringQuestioneer renomeado para StringInquirer</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-06-06 00:00:00 -0300" pubdate  updated > 6 de Junho de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Hoje de manhã eu <a href="http://www.nomedojogo.com/2008/06/06/edge-rails-stringquestioneer/">falei desta nova classe</a> no Rails, e comentei que estavam querendo mudar o seu nome. Pois bem, isto aconteceu mesmo!</p>
+
+<p>Agora a classe se chama <strong>StringInquirer</strong>. Além disso ela também foi incluída no namespace <strong>ActiveSupport</strong>.</p>
+
+<p>Vejam o mesmo exemplo usado no artigo anterior, mas adaptado para funcionar com estas alterações:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Cliente</span></span>
+  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">status</span></span>
+    <span class="support support_class support_class_ruby">ActiveSupport</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">StringInquirer</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>ativo<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+
+c <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Cliente</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span>
+c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>status
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "ativo"
+</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Agora vem a grande diferença:
+</span>c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>status<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>ativo?
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; true
+</span>
+c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>status<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>inativo?
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; false</span></span></pre>
+
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/06/06/edge-rails-stringquestioneer-renomeado-para-stringinquirer/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/06/06/edge-rails-stringquestioneer/">Edge Rails: StringQuestioneer</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-06-06 00:00:00 -0300" pubdate  updated > 6 de Junho de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>David acabou de incluir uma novidade interessante no Rails, a classe <strong>StringQuestioneer</strong> (alguns estão tentando mudar este nome para StringInquirer, mas por enquanto é <strong>StringQuestioneer</strong> mesmo).</p>
+
+<p>Para entender como funciona, vou ter de explicar usando alguns exemplos. Vamos criar uma classe chamada Cliente que contém um método que retorna o status do cliente:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Cliente</span></span>
+  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">status</span></span>
+    <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>ativo<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+
+
+c <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Cliente</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span>
+c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>status
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "ativo"
+</span>
+c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>status <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">==</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>ativo<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; true
+</span>
+c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>status <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">==</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>inativo<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; false
+</span></span></pre>
+
+
+<p>Ok, até aqui tudo normal. Agora vou modificar a implementação do método status usando a classe <strong>StringQuestioneer</strong>, sempre lembrando que o retorno do método status pode vir de uma coluna do banco de dados (claro), isto é apenas um exemplo.</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Cliente</span></span>
+  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">status</span></span>
+    <span class="support support_class support_class_ruby">StringQuestioneer</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>ativo<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+
+
+c <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Cliente</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span>
+c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>status
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "ativo"
+</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Agora vem a grande diferença:
+</span>c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>status<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>ativo?
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; true
+</span>
+c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>status<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>inativo?
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; false</span></span></pre>
+
+
+<p>Para verificar se o status do cliente é o esperado, ao invés de comparar <strong>Strings</strong>, eu uso um método com o valor do status e o sinal de interrogação. Gostou?</p>
+
+<p>Claro que isto já começou a ser usado no próprio Rails. Por exemplo, caso você precise verificar se o Rails foi carregado em ambiente de produção, você pode substituir o velho <strong>Rails.env == &#8220;production&#8221;</strong>, por:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Rails</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>env<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>production?</span></pre>
+
+
+<p>Para variar criei mais um plugin só para ir colocando as novidades que gostei e não quero esperar
+para usar. Para quem quiser acompanhar, tá no <strong>GitHub</strong> (para variar):
+<a href="http://github.com/carlosbrando/back-to-the-future">http://github.com/carlosbrando/back-to-the-future</a></p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/06/06/edge-rails-stringquestioneer/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+<nav role="pagination">
+  <div>
+    
+      <a class="prev" href="/page/37/">&larr; Antigos</a>
+    
+    <a href="/blog/archives">Arquivo</a>
+    
+    <a class="next" href="/page/35/">Novos &rarr;</a>
+    
+  </div>
+</nav>
+
+<script type="text/javascript">
+    var disqus_shortname = 'carlosbrando';
+    (function () {
+      var s = document.createElement('script'); s.async = true;
+      s.type = 'text/javascript';
+      s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+      (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+
+</div>
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro anos de Nome do Jogo</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("carlosbrando", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/carlosbrando" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @carlosbrando</a>
+  
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

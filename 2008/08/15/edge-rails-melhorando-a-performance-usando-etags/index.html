@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Edge Rails: Melhorando a Performance Usando ETags</h1>
+      <h1 class="entry-title">Edge Rails: Melhorando a performance usando ETags</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-08-15 00:00:00 -0300" pubdate  updated >Aug 15<span>th</span>, 2008</time>
+<time datetime="2008-08-15 00:00:00 -0300" pubdate  updated >15 de Agosto de 2008</time>
 
 
 </p>
@@ -113,17 +113,17 @@
   </header>
 
 
-<div class="entry-content">O Carlos Júnior já escreveu sobre isto no blog da <a href="http://tas.milk-it.net/carlos/novo-no-rails-edge-suporte-simples-a-conditional-get-etags/">milk-it</a>. Provavelmente teremos suporte a <strong>ETags</strong> no Rails 2.2. Eu disse provavelmente porque isto ainda não foi incluído no branch oficial do Rails, mas como é algo importante e está sendo feito pelo core team, é quase certo de que será.
+<div class="entry-content"><p>O Carlos Júnior já escreveu sobre isto no blog da <a href="http://tas.milk-it.net/carlos/novo-no-rails-edge-suporte-simples-a-conditional-get-etags/">milk-it</a>. Provavelmente teremos suporte a <strong>ETags</strong> no Rails 2.2. Eu disse provavelmente porque isto ainda não foi incluído no branch oficial do Rails, mas como é algo importante e está sendo feito pelo core team, é quase certo de que será.</p>
 
-Antes de começar a falar sobre isto, deixa eu tentar explicar o que são <strong>ETags</strong> (Entity Tags). <strong>Etags</strong> seriam de uma forma grosseira identificadores associados a cada recurso para determinar se o arquivo que está no servidor é o mesmo que está no cache do browser. No caso, o recurso seria uma página em HTML, mas também poderia ser um XML ou JSON.
+<p>Antes de começar a falar sobre isto, deixa eu tentar explicar o que são <strong>ETags</strong> (Entity Tags). <strong>Etags</strong> seriam de uma forma grosseira identificadores associados a cada recurso para determinar se o arquivo que está no servidor é o mesmo que está no cache do browser. No caso, o recurso seria uma página em HTML, mas também poderia ser um XML ou JSON.</p>
 
-Cabe ao servidor a responsabilidade de verificar se o recurso solicitado é igual dos dois lados. Caso o servidor confirme que o recurso armazenado no cache do browser do usuário é exatamente o mesmo que seria enviado de volta para ele, ao invés de devolver todo o conteúdo do recurso novamente ele apenas retorna um <a href="http://www.nomedojogo.com/2008/07/14/http-status-code-no-rails/">status</a> <strong>304</strong> (<strong>Not Modified</strong>) e o browser usará o que está em seu cache.
+<p>Cabe ao servidor a responsabilidade de verificar se o recurso solicitado é igual dos dois lados. Caso o servidor confirme que o recurso armazenado no cache do browser do usuário é exatamente o mesmo que seria enviado de volta para ele, ao invés de devolver todo o conteúdo do recurso novamente ele apenas retorna um <a href="http://www.nomedojogo.com/2008/07/14/http-status-code-no-rails/">status</a> <strong>304</strong> (<strong>Not Modified</strong>) e o browser usará o que está em seu cache.</p>
 
-Servidores Web como o <strong>Apache</strong> e o <strong>IIS</strong> já sabem fazer isto para página estáticas. Mas quando o conteúdo é dinâmico, como na maioria das páginas de um projeto Ruby on Rails, a responsabilidade é todo nossa.
+<p>Servidores Web como o <strong>Apache</strong> e o <strong>IIS</strong> já sabem fazer isto para página estáticas. Mas quando o conteúdo é dinâmico, como na maioria das páginas de um projeto Ruby on Rails, a responsabilidade é todo nossa.</p>
 
-O objeto <strong>response</strong> ganhou dois novos métodos, o <strong>last_modified=</strong> e o <strong>etag=</strong> (note o sinal de igualdade &#8220;=&#8221;). Quando você atribuir valores a estes métodos eles serão repassados aos cabeçalhos <strong>HTTP_IF_MODIFIED_SINCE</strong> e <strong>HTTP_IF_NONE_MATCH</strong> respectivamente. Quando uma nova requisição (<strong>request</strong>) deste recurso for feita ela retornará com estes cabeçalhos permitindo que você possa comparar com o novo valor informado no <strong>response</strong> e decidir se quer enviar todo o conteúdo do recurso novamente ou apenas um status <strong>304</strong>.
+<p>O objeto <strong>response</strong> ganhou dois novos métodos, o <strong>last_modified=</strong> e o <strong>etag=</strong> (note o sinal de igualdade &#8220;=&#8221;). Quando você atribuir valores a estes métodos eles serão repassados aos cabeçalhos <strong>HTTP_IF_MODIFIED_SINCE</strong> e <strong>HTTP_IF_NONE_MATCH</strong> respectivamente. Quando uma nova requisição (<strong>request</strong>) deste recurso for feita ela retornará com estes cabeçalhos permitindo que você possa comparar com o novo valor informado no <strong>response</strong> e decidir se quer enviar todo o conteúdo do recurso novamente ou apenas um status <strong>304</strong>.</p>
 
-Vamos ao código (roubando o exemplo dado por <a href="http://ryandaigle.com/articles/2008/8/14/what-s-new-in-edge-rails-simpler-conditional-get-support-etags">Ryan Daigle</a> no seu blog):
+<p>Vamos ao código (roubando o exemplo dado por <a href="http://ryandaigle.com/articles/2008/8/14/what-s-new-in-edge-rails-simpler-conditional-get-support-etags">Ryan Daigle</a> no seu blog):</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_controller"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">ArticlesController<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ApplicationController</span></span></span>
   <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">show</span></span>
@@ -143,15 +143,17 @@ Vamos ao código (roubando o exemplo dado por <a href="http://ryandaigle.com/art
     <span class="keyword keyword_control keyword_control_ruby">end</span>
 </span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
 
-Note que estou atribuindo valores para <strong>response.last_modified</strong> e <strong>response.etag</strong>, e logo em seguinda usando o método <strong>request.fresh?(response)</strong> para determinar se houve alguma mudança ou não. Caso os dois cabeçalhos continuem iguais eu apenas retorno um status <strong>304</strong> e o browser do usuário usará o conteúdo que está armazenado no seu cache.
 
-Quanto ao método <strong>etag</strong>, também podemos passar um <strong>array</strong> se for o caso:
+<p>Note que estou atribuindo valores para <strong>response.last_modified</strong> e <strong>response.etag</strong>, e logo em seguinda usando o método <strong>request.fresh?(response)</strong> para determinar se houve alguma mudança ou não. Caso os dois cabeçalhos continuem iguais eu apenas retorno um status <strong>304</strong> e o browser do usuário usará o conteúdo que está armazenado no seu cache.</p>
+
+<p>Quanto ao método <strong>etag</strong>, também podemos passar um <strong>array</strong> se for o caso:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">response<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>etag <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>article</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> current_user<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span></span></pre>
 
-A forma como foi implementado isto no Rails está causando um certo desconforto em muita gente e várias outras formas foram sugeridas pela comunidade, então possivelmente isto pode mudar antes do lançamento da versão 2.2.
 
-Veja algumas sugestões dadas: <a href="http://pastie.org/252869">in_modified_scope</a> e <a href="http://pastie.org/253302">with_etag_cache</a>.
+<p>A forma como foi implementado isto no Rails está causando um certo desconforto em muita gente e várias outras formas foram sugeridas pela comunidade, então possivelmente isto pode mudar antes do lançamento da versão 2.2.</p>
+
+<p>Veja algumas sugestões dadas: <a href="http://pastie.org/252869">in_modified_scope</a> e <a href="http://pastie.org/253302">with_etag_cache</a>.</p>
 </div>
 
 
@@ -160,14 +162,14 @@ Veja algumas sugestões dadas: <a href="http://pastie.org/252869">in_modified_sc
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-08-15 00:00:00 -0300" pubdate  updated >Aug 15<span>th</span>, 2008</time>
+<time datetime="2008-08-15 00:00:00 -0300" pubdate  updated >15 de Agosto de 2008</time>
 
 
 

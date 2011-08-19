@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2009-02-12 00:00:00 -0200" pubdate  updated >Feb 12<span>th</span>, 2009</time>
+<time datetime="2009-02-12 00:00:00 -0200" pubdate  updated >12 de Fevereiro de 2009</time>
 
 
 </p>
@@ -113,22 +113,32 @@
   </header>
 
 
-<div class="entry-content">O lançamento do Ruby on Rails 2.3 está muito próximo e eu ainda não comentei sobre algumas novidades por aqui. A idéia desta <a href="http://www.nomedojogo.com/category/rails-23/">série</a> não é apenas mostrar as novas funcionalidades, mas explicar e dar exemplos de como elas funcionam na prática, mas alguns dos novos recursos são muito simples e não exigem muitos detalhes. Vejamos alguns relacionados ao Active Record.
+<div class="entry-content"><p>O lançamento do Ruby on Rails 2.3 está muito próximo e eu ainda não comentei sobre algumas novidades por aqui. A idéia desta <a href="http://www.nomedojogo.com/category/rails-23/">série</a> não é apenas mostrar as novas funcionalidades, mas explicar e dar exemplos de como elas funcionam na prática, mas alguns dos novos recursos são muito simples e não exigem muitos detalhes. Vejamos alguns relacionados ao Active Record.</p>
 
-Os <em>callbacks</em> do Active Record receberam uma nova implementação que permite o uso combinado das opções <code>:if</code> e <code>:unless</code> no mesmo <em>callback</em>. Você também pode usar um <em>array</em> para definir múltiplas condições:
+<p>Os <em>callbacks</em> do Active Record receberam uma nova implementação que permite o uso combinado das opções <code>:if</code> e <code>:unless</code> no mesmo <em>callback</em>. Você também pode usar um <em>array</em> para definir múltiplas condições:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_function support_function_activerecord support_function_activerecord_rails">before_save</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>update_credit_rating</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
             <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>if</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>active</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
             <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>unless</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>admin</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>cash_only</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span>
 </span></pre>
-O método <code>find</code> também ganhou uma nova opção <code>:having</code> para filtrar registros agrupados:
+
+
+<p>O método <code>find</code> também ganhou uma nova opção <code>:having</code> para filtrar registros agrupados:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Developer</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>all</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
                <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>group</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>salary<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
                <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>having</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>sum(salary) &gt;  10000<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
                <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>select</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>salary<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
 </span></pre>
-Outra funcionalidade importante que temos de volta é o uso de um <em>hash</em> <code>:conditions</code> em relacionamentos <code>has_many</code>. Isto já funcionava no Rails 2.1, parou de funcionar no Rails 2.2 e está de volta no Rails 2.3.
+
+
+<p>Outra funcionalidade importante que temos de volta é o uso de um <em>hash</em> <code>:conditions</code> em relacionamentos <code>has_many</code>. Isto já funcionava no Rails 2.1, parou de funcionar no Rails 2.2 e está de volta no Rails 2.3.</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_function support_function_activerecord support_function_activerecord_rails">has_many</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>orders</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>conditions</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>status</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>confirmed<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span></span></pre>
+
+
 <hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.3 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades acompanhando a série <a href="../category/rails-23/">Rails 2.3</a>.</em>
+
 </div>
 
 
@@ -137,14 +147,14 @@ Outra funcionalidade importante que temos de volta é o uso de um <em>hash</em> 
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2009-02-12 00:00:00 -0200" pubdate  updated >Feb 12<span>th</span>, 2009</time>
+<time datetime="2009-02-12 00:00:00 -0200" pubdate  updated >12 de Fevereiro de 2009</time>
 
 
 

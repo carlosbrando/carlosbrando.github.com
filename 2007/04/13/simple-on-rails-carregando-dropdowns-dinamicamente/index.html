@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Simple on Rails - Carregando Dropdowns Dinamicamente</h1>
+      <h1 class="entry-title">Simple on Rails - Carregando dropdowns dinamicamente</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2007-04-13 00:00:00 -0300" pubdate  updated >Apr 13<span>th</span>, 2007</time>
+<time datetime="2007-04-13 00:00:00 -0300" pubdate  updated >13 de Abril de 2007</time>
 
 
 </p>
@@ -113,40 +113,52 @@
   </header>
 
 
-<div class="entry-content"><img src="http://www.nomedojogo.com/wp-content/uploads/writer/Carregandodropdownsdinamicamentecomduasl_9CBA/michelin_tweel_curb7.jpg" style="border-width: 0px" align="right" border="0" height="160" width="240" /> Recentemente tive de encontrar uma solu&ccedil;&atilde;o para um problema simples: eu tinha uma lista de estados e cidades em dropdowns. A inten&ccedil;&atilde;o &eacute; que a lista de cidades fosse carregada de acordo com o estado selecionado. Simples.
+<div class="entry-content"><p><img src="http://www.nomedojogo.com/wp-content/uploads/writer/Carregandodropdownsdinamicamentecomduasl_9CBA/michelin_tweel_curb7.jpg" style="border-width: 0px" align="right" border="0" height="160" width="240" /> Recentemente tive de encontrar uma solu&ccedil;&atilde;o para um problema simples: eu tinha uma lista de estados e cidades em dropdowns. A inten&ccedil;&atilde;o &eacute; que a lista de cidades fosse carregada de acordo com o estado selecionado. Simples.</p>
 
-Como estou come&ccedil;ando com o Rails, procurei na internet por alguma dica para fazer isto. Encontrei diversos sites descrevendo o passo-a-passo para a solu&ccedil;&atilde;o. Entre alguns deles os blogs do <a href="http://eustaquiorangel.com/blog/show/367" target="_blank">Eust&aacute;quio</a> e do <a href="http://blog.boaideia.inf.br/articles/2007/01/20/rjs-at%C3%A9-que-um-dia" target="_blank">Andr&eacute; Ribeiro</a>.
+<p>Como estou come&ccedil;ando com o Rails, procurei na internet por alguma dica para fazer isto. Encontrei diversos sites descrevendo o passo-a-passo para a solu&ccedil;&atilde;o. Entre alguns deles os blogs do <a href="http://eustaquiorangel.com/blog/show/367" target="_blank">Eust&aacute;quio</a> e do <a href="http://blog.boaideia.inf.br/articles/2007/01/20/rjs-at%C3%A9-que-um-dia" target="_blank">Andr&eacute; Ribeiro</a>.</p>
 
-Achei a solu&ccedil;&atilde;o apresentada por eles muito confusa e com muito c&oacute;digo.
+<p>Achei a solu&ccedil;&atilde;o apresentada por eles muito confusa e com muito c&oacute;digo.</p>
 
-Mas uma coisa que me chamou aten&ccedil;&atilde;o foi o seguinte coment&aacute;rio:
+<p>Mas uma coisa que me chamou aten&ccedil;&atilde;o foi o seguinte coment&aacute;rio:</p>
+
 <blockquote>Vamos utilizar alguma t&eacute;cnica mais atual, que tal um pouco de AJAX&#8230; &eacute; relativamente f&aacute;cil implementar isso com Rails, normalmente carregar&iacute;amos um fragmento de HTML que implementa o campo atrav&eacute;s de uma requisi&ccedil;&atilde;o AJAX enganchada no m&eacute;todo onchange do drop-down.
 
 Mas esta t&eacute;cnica &eacute; t&atilde;o&#8230; antiga.</blockquote>
-Antiga? N&atilde;o entendi. Para mim antiga &eacute; a roda, e eu n&atilde;o pretendo invent&aacute;-la de novo.
 
-Sempre existe mais de uma solu&ccedil;&atilde;o para o mesmo problema, e a melhor &eacute; sempre a mais simples.
 
-Depois de ler isto, resolvi tentar fazer do meu jeito:
+<p>Antiga? N&atilde;o entendi. Para mim antiga &eacute; a roda, e eu n&atilde;o pretendo invent&aacute;-la de novo.</p>
 
-Inclui um observe_field na minha view:
+<p>Sempre existe mais de uma solu&ccedil;&atilde;o para o mesmo problema, e a melhor &eacute; sempre a mais simples.</p>
+
+<p>Depois de ler isto, resolvi tentar fazer do meu jeito:</p>
+
+<p>Inclui um observe_field na minha view:
 [source:ruby]&lt;span id=&#8221;select_cidades&#8221;&gt;&lt;/span&gt;
-&lt;%= observe_field :job_state,
-	:url =&gt; { :action =&gt; &#8216;carrega_cidades&#8217; },
-	:update =&gt; &#8216;form_cidade&#8217;,
-	:with =&gt; &#8216;form_estado&#8217;,
-	:complete =&gt; &#8220;visual_effect(:highlight, &#8216;td_cidades&#8217;)&#8221; %&gt;[/source]
-E no meu controller:
-[source:ruby]def carrega_cidades
-@cities = City.find(:all,
-		:conditions =&gt; &#8220;state_id = #{params[:job_state]}&#8221;,
-		:order =&gt; &#8216;nome&#8217;)
-render :inline =&gt;
-	&#8220;&lt;%= collection_select(&#8216;job&#8217;, &#8216;city_id&#8217; , @cities, &#8216;id&#8217;, &#8216;nome&#8217;) %&gt;&#8221;
-end[/source]
-Funciona!
+&lt;%= observe_field :job_state,</p>
 
-N&atilde;o se esque&ccedil;a porque voc&ecirc; decidiu aprender rails.
+<pre><code>:url =&amp;gt; { :action =&amp;gt; 'carrega_cidades' },
+:update =&amp;gt; 'form_cidade',
+:with =&amp;gt; 'form_estado',
+:complete =&amp;gt; "visual_effect(:highlight, 'td_cidades')" %&amp;gt;[/source]
+</code></pre>
+
+<p>E no meu controller:
+[source:ruby]def carrega_cidades
+@cities = City.find(:all,</p>
+
+<pre><code>    :conditions =&amp;gt; "state_id = #{params[:job_state]}",
+    :order =&amp;gt; 'nome')
+</code></pre>
+
+<p>render :inline =&gt;</p>
+
+<pre><code>"&amp;lt;%= collection_select('job', 'city_id' , @cities, 'id', 'nome') %&amp;gt;"
+</code></pre>
+
+<p>end[/source]
+Funciona!</p>
+
+<p>N&atilde;o se esque&ccedil;a porque voc&ecirc; decidiu aprender rails.</p>
 </div>
 
 
@@ -155,14 +167,14 @@ N&atilde;o se esque&ccedil;a porque voc&ecirc; decidiu aprender rails.
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2007-04-13 00:00:00 -0300" pubdate  updated >Apr 13<span>th</span>, 2007</time>
+<time datetime="2007-04-13 00:00:00 -0300" pubdate  updated >13 de Abril de 2007</time>
 
 
 

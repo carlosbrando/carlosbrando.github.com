@@ -4,7 +4,7 @@
   <title>Nome do Jogo</title>
   <link href="http://carlosbrando.github.com/atom.xml" rel="self"/>
   <link href="http://carlosbrando.github.com/"/>
-  <updated>2011-08-16T13:16:19-03:00</updated>
+  <updated>2011-08-18T23:56:58-03:00</updated>
   <id>http://carlosbrando.github.com/</id>
   <author>
     <name>Carlos Brando</name>
@@ -23,7 +23,7 @@
 
 &lt;h2&gt;A Regra Direita-Esquerda do C&lt;/h2&gt;
 
-&lt;p&gt;A regra &lt;code&gt;direta-esquerda&lt;/code&gt; é muito útil para decifrar declarações na linguagem C e também pode ser de grande ajuda ao escrever código. A regra é bem simples, toda vez que encontrar os seguintes símbolos no código, leia:&lt;/p&gt;
+&lt;p&gt;A regra &lt;strong&gt;direta-esquerda&lt;/strong&gt; é muito útil para decifrar declarações na linguagem C e também pode ser de grande ajuda ao escrever código. A regra é bem simples, toda vez que encontrar os seguintes símbolos no código, leia:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;*   como &quot;um ponteiro para&quot;      - sempre do lado esquerdo
 []  como &quot;um array de&quot;           - sempre do lado direito
@@ -44,116 +44,175 @@
 
 &lt;p&gt;Então, repita os passos 2 e 3 até terminar toda a sua declaração. Veja abaixo alguns exemplos:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;int *p[];
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Encontre o identificador.&lt;/p&gt;
-
-&lt;p&gt; int *p[];&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;  ^
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt; &quot;p é&quot;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Siga pela direita enquanto encontrar um símbolo ou abre parênteses.&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-
-&lt;p&gt;```&lt;/p&gt;
+&lt;p&gt;``` c&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;int *p[];
-      ^^
-&quot;p é um array de&quot;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;```&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Quando não puder mais mover para a direita (os símbolo acabaram), então siga para a esquerda e encontre:&lt;/p&gt;
-
-&lt;p&gt; int *p[];&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt; ^
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt; &quot;p é um array de ponteiros para&quot;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Continue seguinte pela esquerda e encontre:&lt;/p&gt;
-
-&lt;p&gt; int *p[];
- ^&lt;sup&gt;^&lt;/sup&gt;
- &quot;p é um array de ponteiros para int&quot;.
- (ou &quot;p é um array onde cada elemento é um ponteiro para um inteiro&quot;)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;Encontre o identificador.&lt;/li&gt;
 &lt;/ol&gt;
+
+
+&lt;div&gt;&lt;figure role=code&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class='line'&gt;1&lt;/span&gt;
+&lt;span class='line'&gt;2&lt;/span&gt;
+&lt;span class='line'&gt;3&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class='code' width='100%'&gt;&lt;pre&gt;&lt;code class=''&gt;&lt;div class='line'&gt;int *p[];
+&lt;/div&gt;&lt;div class='line'&gt;     ^
+&lt;/div&gt;&lt;div class='line'&gt;&quot;p é&quot;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;Siga pela direita enquanto encontrar um símbolo ou abre parênteses.&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;div&gt;&lt;figure role=code&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class='line'&gt;1&lt;/span&gt;
+&lt;span class='line'&gt;2&lt;/span&gt;
+&lt;span class='line'&gt;3&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class='code' width='100%'&gt;&lt;pre&gt;&lt;code class=''&gt;&lt;div class='line'&gt;int *p[];
+&lt;/div&gt;&lt;div class='line'&gt;      ^^
+&lt;/div&gt;&lt;div class='line'&gt;&quot;p é um array de&quot;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;Quando não puder mais mover para a direita (os símbolo acabaram), então siga para a esquerda e encontre:&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;div&gt;&lt;figure role=code&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class='line'&gt;1&lt;/span&gt;
+&lt;span class='line'&gt;2&lt;/span&gt;
+&lt;span class='line'&gt;3&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class='code' width='100%'&gt;&lt;pre&gt;&lt;code class=''&gt;&lt;div class='line'&gt;int *p[];
+&lt;/div&gt;&lt;div class='line'&gt;    ^
+&lt;/div&gt;&lt;div class='line'&gt;&quot;p é um array de ponteiros para&quot;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;Continue seguinte pela esquerda e encontre:&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;div&gt;&lt;figure role=code&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class='line'&gt;1&lt;/span&gt;
+&lt;span class='line'&gt;2&lt;/span&gt;
+&lt;span class='line'&gt;3&lt;/span&gt;
+&lt;span class='line'&gt;4&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class='code' width='100%'&gt;&lt;pre&gt;&lt;code class=''&gt;&lt;div class='line'&gt;int *p[];
+&lt;/div&gt;&lt;div class='line'&gt;^^^
+&lt;/div&gt;&lt;div class='line'&gt;&quot;p é um array de ponteiros para int&quot;. 
+&lt;/div&gt;&lt;div class='line'&gt;(ou &quot;p é um array onde cada elemento é um ponteiro para um inteiro&quot;)&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Outro exemplo:&lt;/p&gt;
 
+&lt;p&gt;``` c&lt;/p&gt;
+
 &lt;pre&gt;&lt;code&gt;int *(*func())();
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;p&gt;```&lt;/p&gt;
+
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Encontre o identificador.&lt;/p&gt;
-
-&lt;p&gt; int &lt;em&gt;(&lt;/em&gt;func())();&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;    ^^^^
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt; &quot;func é&quot;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Vá para a direita.&lt;/p&gt;
-
-&lt;p&gt; int &lt;em&gt;(&lt;/em&gt;func())();&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;        ^^
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt; &quot;func é uma função retornando&quot;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Não dá para ir mais a direita devido ao fecha parênteses, então vá para a esquerda.&lt;/p&gt;
-
-&lt;p&gt; int &lt;em&gt;(&lt;/em&gt;func())();&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;   ^
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt; &quot;func é uma função retornando um ponteiro para&quot;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Não pode mais ir para a esquerda devido ao abre parênteses, então continue indo pela direita.&lt;/p&gt;
-
-&lt;p&gt; int &lt;em&gt;(&lt;/em&gt;func())();&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;           ^^
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt; &quot;func é uma função retornando um ponteiro para uma função retornando&quot;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Não dá mais para ir para a direita porque não há mais simbolos, então vá para a esquerda.&lt;/p&gt;
-
-&lt;p&gt; int &lt;em&gt;(&lt;/em&gt;func())();&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt; ^
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt; &quot;func é uma função retornando um ponteiro para uma função retornando um ponteiro para&quot;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;E finalmente, o último símbolo a esquerda.&lt;/p&gt;
-
-&lt;p&gt; int &lt;em&gt;(&lt;/em&gt;func())();
- ^&lt;sup&gt;^&lt;/sup&gt;
- &quot;func é uma função retornando um ponteiro para uma função retornando um ponteiro para um inteiro&quot;.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;Encontre o identificador.&lt;/li&gt;
 &lt;/ol&gt;
+
+
+&lt;div&gt;&lt;figure role=code&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class='line'&gt;1&lt;/span&gt;
+&lt;span class='line'&gt;2&lt;/span&gt;
+&lt;span class='line'&gt;3&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class='code' width='100%'&gt;&lt;pre&gt;&lt;code class=''&gt;&lt;div class='line'&gt;int *(*func())();
+&lt;/div&gt;&lt;div class='line'&gt;       ^^^^
+&lt;/div&gt;&lt;div class='line'&gt;&quot;func é&quot;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;Vá para a direita.&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;div&gt;&lt;figure role=code&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class='line'&gt;1&lt;/span&gt;
+&lt;span class='line'&gt;2&lt;/span&gt;
+&lt;span class='line'&gt;3&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class='code' width='100%'&gt;&lt;pre&gt;&lt;code class=''&gt;&lt;div class='line'&gt;int *(*func())();
+&lt;/div&gt;&lt;div class='line'&gt;           ^^
+&lt;/div&gt;&lt;div class='line'&gt;&quot;func é uma função retornando&quot;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;Não dá para ir mais a direita devido ao fecha parênteses, então vá para a esquerda.&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;div&gt;&lt;figure role=code&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class='line'&gt;1&lt;/span&gt;
+&lt;span class='line'&gt;2&lt;/span&gt;
+&lt;span class='line'&gt;3&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class='code' width='100%'&gt;&lt;pre&gt;&lt;code class=''&gt;&lt;div class='line'&gt;int *(*func())();
+&lt;/div&gt;&lt;div class='line'&gt;      ^
+&lt;/div&gt;&lt;div class='line'&gt;&quot;func é uma função retornando um ponteiro para&quot;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;Não pode mais ir para a esquerda devido ao abre parênteses, então continue indo pela direita.&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;div&gt;&lt;figure role=code&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class='line'&gt;1&lt;/span&gt;
+&lt;span class='line'&gt;2&lt;/span&gt;
+&lt;span class='line'&gt;3&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class='code' width='100%'&gt;&lt;pre&gt;&lt;code class=''&gt;&lt;div class='line'&gt;int *(*func())();
+&lt;/div&gt;&lt;div class='line'&gt;              ^^
+&lt;/div&gt;&lt;div class='line'&gt;&quot;func é uma função retornando um ponteiro para uma função retornando&quot;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;Não dá mais para ir para a direita porque não há mais simbolos, então vá para a esquerda.&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;div&gt;&lt;figure role=code&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class='line'&gt;1&lt;/span&gt;
+&lt;span class='line'&gt;2&lt;/span&gt;
+&lt;span class='line'&gt;3&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class='code' width='100%'&gt;&lt;pre&gt;&lt;code class=''&gt;&lt;div class='line'&gt;int *(*func())();
+&lt;/div&gt;&lt;div class='line'&gt;    ^
+&lt;/div&gt;&lt;div class='line'&gt;&quot;func é uma função retornando um ponteiro para uma função retornando um ponteiro para&quot;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;E finalmente, o último símbolo a esquerda.&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;div&gt;&lt;figure role=code&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class='line'&gt;1&lt;/span&gt;
+&lt;span class='line'&gt;2&lt;/span&gt;
+&lt;span class='line'&gt;3&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class='code' width='100%'&gt;&lt;pre&gt;&lt;code class=''&gt;&lt;div class='line'&gt;int *(*func())();
+&lt;/div&gt;&lt;div class='line'&gt;^^^
+&lt;/div&gt;&lt;div class='line'&gt;&quot;func é uma função retornando um ponteiro para uma função retornando um ponteiro para um inteiro&quot;.&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Como você pode ver, essa regra pode ser muito útil. Ela também é ótima para manter a sua sanidade enquanto estiver criando declarações, além de ajudá-lo a identificar onde colocar o próximo símbolo ou parênteses.&lt;/p&gt;
 
 &lt;p&gt;Algumas declarações podem parecer ainda mais complicadas quando definem o tamanho de um array ou informam uma lista de argumentos. Por exemplo, se você ver algo como &lt;code&gt;[3]&lt;/code&gt;, deve ler &lt;em&gt;&quot;um array (de tamanho 3) de...&quot;&lt;/em&gt;. Mas se você ver algo como &lt;code&gt;(char *,int)&lt;/code&gt;, então deve ler &lt;em&gt;&quot;uma função esperando (char &lt;/em&gt;, int) e retornando...&quot;*. Veja mais um exemplo:&lt;/p&gt;
 
+&lt;p&gt;``` c&lt;/p&gt;
+
 &lt;pre&gt;&lt;code&gt;int (*(*fun_one)(char *,double))[9][20];
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
 
 &lt;p&gt;Eu não vou seguir cada passo para decifrar essa declaração. Mas o resultado será: &lt;em&gt;&quot;fun_one é um ponteiro para uma função esperando (char &lt;/em&gt;, double) e retornando um ponteiro para um array (tamanho 9) de um array (tamanho 20) de inteiros&quot;*.&lt;/p&gt;
 
 &lt;p&gt;Fica mais fácil se você remover o tamanho dos arrays e as listas de argumentos:&lt;/p&gt;
 
+&lt;p&gt;``` c&lt;/p&gt;
+
 &lt;pre&gt;&lt;code&gt;int (*(*fun_one)())[][];
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
 
 &lt;p&gt;Uma boa opção é decifrar dessa maneira e só depois adicionar o tamanho dos arrays e a lista de argumentos.&lt;/p&gt;
 
@@ -161,8 +220,12 @@
 
 &lt;p&gt;É totalmente possível criar declarações ilegais usando essa regra, então algum conhecimento do que é aceitável e do que não é em C é necessário. Por exemplo, se você tiver algo assim:&lt;/p&gt;
 
+&lt;p&gt;``` c&lt;/p&gt;
+
 &lt;pre&gt;&lt;code&gt;int *((*fun_one)())[][];
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
 
 &lt;p&gt;A declaração acima seria traduzida para &lt;em&gt;&quot;fun_one é um ponteiro para uma função retornando um array de arrays de ponteiros para inteiros&quot;&lt;/em&gt;.&lt;/p&gt;
 
@@ -246,7 +309,9 @@ int *ffp()();    &quot;ffp é uma função retornando uma função retornando um
     <link href="http://carlosbrando.github.com/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/"/>
     <updated>2011-03-29T00:00:00-03:00</updated>
     <id>http://carlosbrando.github.com/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil</id>
-    <content type="html">Não deixe de acompanhar semanalmente o &lt;a href=&quot;http://grokpodcast.com/&quot;&gt;Grok Podcast&lt;/a&gt;!
+    <content type="html">&lt;p&gt;Não deixe de acompanhar semanalmente o &lt;a href=&quot;http://grokpodcast.com/&quot;&gt;Grok Podcast&lt;/a&gt;!&lt;/p&gt;
+
+&lt;p&gt;&lt;audio controls='controls'&gt;&lt;source src='http://www.nomedojogo.com/podpress_trac/web/3627/0/Rafael-Rosa-Bruno-Douglas-Campos-on-2011-02-24-at-21.51.output.mp3 ' type='audio/mp3'/&gt;&lt;/audio&gt;&lt;/p&gt;
 </content>
   </entry>
   
@@ -255,7 +320,9 @@ int *ffp()();    &quot;ffp é uma função retornando uma função retornando um
     <link href="http://carlosbrando.github.com/2011/03/24/convite-para-o-grok-podcast/"/>
     <updated>2011-03-24T00:00:00-03:00</updated>
     <id>http://carlosbrando.github.com/2011/03/24/convite-para-o-grok-podcast</id>
-    <content type="html">Um convite formal para o próximo convidado especial do &lt;a href=&quot;http://grokpodcast.com/&quot;&gt;Grok Podcast&lt;/a&gt;!
+    <content type="html">&lt;p&gt;Um convite formal para o próximo convidado especial do &lt;a href=&quot;http://grokpodcast.com/&quot;&gt;Grok Podcast&lt;/a&gt;!&lt;/p&gt;
+
+&lt;p&gt;&lt;audio controls='controls'&gt;&lt;source src='http://www.nomedojogo.com/wp-content/uploads/2011/03/Rafael-Rosa-Bruno-Douglas-Campos-on-2011-02-24-at-22.33.output.mp3 ' type='audio/mp3'/&gt;&lt;/audio&gt;&lt;/p&gt;
 </content>
   </entry>
   
@@ -264,13 +331,13 @@ int *ffp()();    &quot;ffp é uma função retornando uma função retornando um
     <link href="http://carlosbrando.github.com/2011/02/08/quatro-anos-de-nome-do-jogo/"/>
     <updated>2011-02-08T00:00:00-02:00</updated>
     <id>http://carlosbrando.github.com/2011/02/08/quatro-anos-de-nome-do-jogo</id>
-    <content type="html">&lt;img class=&quot;aligncenter size-full wp-image-3610&quot; title=&quot;247607315_a74fac5aa4&quot; src=&quot;http://www.nomedojogo.com/wp-content/uploads/2011/02/247607315_a74fac5aa4.jpg&quot; alt=&quot;&quot; width=&quot;500&quot; height=&quot;332&quot; /&gt;
+    <content type="html">&lt;p&gt;&lt;img class='' src='http://www.nomedojogo.com/wp-content/uploads/2011/02/247607315_a74fac5aa4.jpg' width='500' height='332' alt='' title=''&gt;&lt;/p&gt;
 
-Hoje completam quatro anos desde que comecei a escrever esse blog. No total são 812 artigos e 4.305 comentários. Sempre mantive um ritmo muito bom de publicação, porém com o crescimento do Twitter (&lt;a href=&quot;http://twitter.com/#!/carlosbrando&quot;&gt;@carlosbrando&lt;/a&gt;) como ferramenta de comunicação o tempo entre um artigo e outro diminuiu muito, eu tenho de confessar.
+&lt;p&gt;Hoje completam quatro anos desde que comecei a escrever esse blog. No total são 812 artigos e 4.305 comentários. Sempre mantive um ritmo muito bom de publicação, porém com o crescimento do Twitter (&lt;a href=&quot;http://twitter.com/#!/carlosbrando&quot;&gt;@carlosbrando&lt;/a&gt;) como ferramenta de comunicação o tempo entre um artigo e outro diminuiu muito, eu tenho de confessar.&lt;/p&gt;
 
-Escrever e manter um blog por tanto tempo não é fácil, principalmente se você tem a intenção de publicar conteúdo de qualidade. Mas as recompensas valem muito a pena, nesses quatro anos esse blog gerou dois livros, muitos vídeos, um podcast semanal sobre &lt;a href=&quot;http://podcast.rubyonrails.pro.br/&quot;&gt;Ruby on Rails&lt;/a&gt; e agora o &lt;a href=&quot;http://grokpodcast.com/&quot;&gt;Grok Podcast&lt;/a&gt;. Sem contar todas as outras oportunidades que apareceram graças a essa iniciativa.
+&lt;p&gt;Escrever e manter um blog por tanto tempo não é fácil, principalmente se você tem a intenção de publicar conteúdo de qualidade. Mas as recompensas valem muito a pena, nesses quatro anos esse blog gerou dois livros, muitos vídeos, um podcast semanal sobre &lt;a href=&quot;http://podcast.rubyonrails.pro.br/&quot;&gt;Ruby on Rails&lt;/a&gt; e agora o &lt;a href=&quot;http://grokpodcast.com/&quot;&gt;Grok Podcast&lt;/a&gt;. Sem contar todas as outras oportunidades que apareceram graças a essa iniciativa.&lt;/p&gt;
 
-Obrigado pela audiência!
+&lt;p&gt;Obrigado pela audiência!&lt;/p&gt;
 </content>
   </entry>
   
@@ -279,15 +346,15 @@ Obrigado pela audiência!
     <link href="http://carlosbrando.github.com/2011/01/27/grok-podcast-16-%25e2%2580%2593-o-livro-rework/"/>
     <updated>2011-01-27T00:00:00-02:00</updated>
     <id>http://carlosbrando.github.com/2011/01/27/grok-podcast-16-%e2%80%93-o-livro-rework</id>
-    <content type="html">&lt;img class=&quot;aligncenter&quot; src=&quot;http://grokpodcast.com/wp-content/uploads/2011/01/header.jpg&quot; alt=&quot;&quot; width=&quot;940&quot; height=&quot;301&quot; /&gt;
+    <content type="html">&lt;p&gt;&lt;img class=&quot;aligncenter&quot; src=&quot;http://grokpodcast.com/wp-content/uploads/2011/01/header.jpg&quot; alt=&quot;&quot; width=&quot;940&quot; height=&quot;301&quot; /&gt;&lt;/p&gt;
 
-Depois de um bom período de férias, estamos de volta com o &lt;a href=&quot;http://grokpodcast.com/&quot;&gt;Grok Podcast&lt;/a&gt;! E para começar o ano com tudo decidimos gravar uma série inteira sobre o controverso livro &lt;a href=&quot;http://37signals.com/rework/&quot;&gt;Rework&lt;/a&gt; de Jason Fried e David Heinemeier Hansson (o criador do framework Ruby on Rails).
+&lt;p&gt;Depois de um bom período de férias, estamos de volta com o &lt;a href=&quot;http://grokpodcast.com/&quot;&gt;Grok Podcast&lt;/a&gt;! E para começar o ano com tudo decidimos gravar uma série inteira sobre o controverso livro &lt;a href=&quot;http://37signals.com/rework/&quot;&gt;Rework&lt;/a&gt; de Jason Fried e David Heinemeier Hansson (o criador do framework Ruby on Rails).&lt;/p&gt;
 
-Serão ao todo três episódios comentando os pontos-chave de cada um dos capítulos do livro. Se você já leu o livro será como bater um papo sobre a leitura e se você ainda não teve a oportunidade de ler, será como um bom resumo para atiçar a sua curiosidade.
+&lt;p&gt;Serão ao todo três episódios comentando os pontos-chave de cada um dos capítulos do livro. Se você já leu o livro será como bater um papo sobre a leitura e se você ainda não teve a oportunidade de ler, será como um bom resumo para atiçar a sua curiosidade.&lt;/p&gt;
 
-Espero que gostem e continuem acompanhando o &lt;a href=&quot;http://grokpodcast.com/&quot;&gt;Grok Podcast&lt;/a&gt; nessa segunda temporada!
+&lt;p&gt;Espero que gostem e continuem acompanhando o &lt;a href=&quot;http://grokpodcast.com/&quot;&gt;Grok Podcast&lt;/a&gt; nessa segunda temporada!&lt;/p&gt;
 
-Você pode adicionar o podcast ao seu iTunes &lt;a href=&quot;http://itunes.apple.com/us/podcast/grok-podcast/id393122038&quot; target=&quot;_blank&quot;&gt;clicando aqui&lt;/a&gt; ou atráves do nosso &lt;a href=&quot;http://grokpodcast.com/feed/&quot; target=&quot;_blank&quot;&gt;RSS&lt;/a&gt;.
+&lt;p&gt;Você pode adicionar o podcast ao seu iTunes &lt;a href=&quot;http://itunes.apple.com/us/podcast/grok-podcast/id393122038&quot; target=&quot;_blank&quot;&gt;clicando aqui&lt;/a&gt; ou atráves do nosso &lt;a href=&quot;http://grokpodcast.com/feed/&quot; target=&quot;_blank&quot;&gt;RSS&lt;/a&gt;.&lt;/p&gt;
 </content>
   </entry>
   
@@ -343,24 +410,28 @@ print_line # =&amp;gt; --------------------
     <link href="http://carlosbrando.github.com/2010/12/31/retrospectiva-2010/"/>
     <updated>2010-12-31T00:00:00-02:00</updated>
     <id>http://carlosbrando.github.com/2010/12/31/retrospectiva-2010</id>
-    <content type="html">Mais um ano bem agitado se passou. Muito trabalho e diversão fizeram de 2010 um excelente ano para mim. Porém, o que mais me marcou esse ano foi o meu retorno ao mundo dos podcasts (algo que pessoalmente gosto muito de fazer) com o &lt;a href=&quot;http://grokpodcast.com/&quot;&gt;Grok Podcast&lt;/a&gt;.
+    <content type="html">&lt;p&gt;Mais um ano bem agitado se passou. Muito trabalho e diversão fizeram de 2010 um excelente ano para mim. Porém, o que mais me marcou esse ano foi o meu retorno ao mundo dos podcasts (algo que pessoalmente gosto muito de fazer) com o &lt;a href=&quot;http://grokpodcast.com/&quot;&gt;Grok Podcast&lt;/a&gt;.&lt;/p&gt;
 
-Mas a brincadeira ainda não acabou, tenho muitos projetos na cabeça e espero poder colocá-los em prática no ano que se segue.
+&lt;p&gt;Mas a brincadeira ainda não acabou, tenho muitos projetos na cabeça e espero poder colocá-los em prática no ano que se segue.&lt;/p&gt;
+
 &lt;h2&gt;Os artigos mais lidos do blog em 2010&lt;/h2&gt;
+
 &lt;ul&gt;
-	&lt;li&gt;&lt;a href=&quot;http://www.nomedojogo.com/2010/01/20/a-filosofia-do-ruby/&quot;&gt;A Filosofia do Ruby&lt;/a&gt;&lt;/li&gt;
-	&lt;li&gt;&lt;a href=&quot;http://www.nomedojogo.com/2010/02/17/programadores-incompetentes-sao-otimos-para-o-mercado/&quot;&gt;Programadores incompetentes são ótimos para o mercado&lt;/a&gt;&lt;/li&gt;
-	&lt;li&gt;&lt;a href=&quot;http://www.nomedojogo.com/2010/02/10/quer-se-tornar-um-programador-de-sucesso-pare-de-escrever-codigo/&quot;&gt;Quer se tornar um programador de sucesso? Pare de escrever código&lt;/a&gt;&lt;/li&gt;
-	&lt;li&gt;&lt;a href=&quot;http://www.nomedojogo.com/2010/02/03/o-efeito-do-codigo-na-mente-do-programador/&quot;&gt;O Efeito do Código na Mente do Programador&lt;/a&gt;&lt;/li&gt;
-	&lt;li&gt;&lt;a href=&quot;http://www.nomedojogo.com/2010/03/28/nao-se-fazem-mais-programadores-como-antigamente/&quot;&gt;Não se fazem mais programadores como antigamente&lt;/a&gt;&lt;/li&gt;
-	&lt;li&gt;&lt;a href=&quot;http://www.nomedojogo.com/2010/04/23/investir-em-ruby-era-muito-arriscado/&quot;&gt;Investir em Ruby era muito arriscado&lt;/a&gt;&lt;/li&gt;
-	&lt;li&gt;&lt;a href=&quot;http://www.nomedojogo.com/2010/04/20/migrando-do-textmate-para-o-textmate/&quot;&gt;Migrando do Textmate para o Textmate&lt;/a&gt;&lt;/li&gt;
-	&lt;li&gt;&lt;a href=&quot;http://www.nomedojogo.com/2010/05/06/um-pseudo-intellisense-para-o-textmate/&quot;&gt;Um pseudo-intellisense para o Textmate&lt;/a&gt;&lt;/li&gt;
-	&lt;li&gt;&lt;a href=&quot;http://www.nomedojogo.com/2010/06/04/programadores-nem-sempre-o-time-que-esta-ganhando-esta-ganhando/&quot;&gt;Programadores: Nem sempre o time que está ganhando está ganhando&lt;/a&gt;&lt;/li&gt;
-	&lt;li&gt;&lt;a href=&quot;http://www.nomedojogo.com/2010/07/01/eu-quebrei-o-codigo/&quot;&gt;“Eu quebrei o código”&lt;/a&gt;&lt;/li&gt;
-	&lt;li&gt;&lt;a href=&quot;http://www.nomedojogo.com/2010/09/15/meu-novo-podcast/&quot;&gt;Meu novo podcast&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.nomedojogo.com/2010/01/20/a-filosofia-do-ruby/&quot;&gt;A Filosofia do Ruby&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.nomedojogo.com/2010/02/17/programadores-incompetentes-sao-otimos-para-o-mercado/&quot;&gt;Programadores incompetentes são ótimos para o mercado&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.nomedojogo.com/2010/02/10/quer-se-tornar-um-programador-de-sucesso-pare-de-escrever-codigo/&quot;&gt;Quer se tornar um programador de sucesso? Pare de escrever código&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.nomedojogo.com/2010/02/03/o-efeito-do-codigo-na-mente-do-programador/&quot;&gt;O Efeito do Código na Mente do Programador&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.nomedojogo.com/2010/03/28/nao-se-fazem-mais-programadores-como-antigamente/&quot;&gt;Não se fazem mais programadores como antigamente&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.nomedojogo.com/2010/04/23/investir-em-ruby-era-muito-arriscado/&quot;&gt;Investir em Ruby era muito arriscado&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.nomedojogo.com/2010/04/20/migrando-do-textmate-para-o-textmate/&quot;&gt;Migrando do Textmate para o Textmate&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.nomedojogo.com/2010/05/06/um-pseudo-intellisense-para-o-textmate/&quot;&gt;Um pseudo-intellisense para o Textmate&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.nomedojogo.com/2010/06/04/programadores-nem-sempre-o-time-que-esta-ganhando-esta-ganhando/&quot;&gt;Programadores: Nem sempre o time que está ganhando está ganhando&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.nomedojogo.com/2010/07/01/eu-quebrei-o-codigo/&quot;&gt;“Eu quebrei o código”&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.nomedojogo.com/2010/09/15/meu-novo-podcast/&quot;&gt;Meu novo podcast&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-Até o ano que vem!
+
+
+&lt;p&gt;Até o ano que vem!&lt;/p&gt;
 </content>
   </entry>
   
@@ -369,19 +440,22 @@ Até o ano que vem!
     <link href="http://carlosbrando.github.com/2010/12/22/singularidade-e-biologia-sintetica/"/>
     <updated>2010-12-22T00:00:00-02:00</updated>
     <id>http://carlosbrando.github.com/2010/12/22/singularidade-e-biologia-sintetica</id>
-    <content type="html">Acabou de ir ao ar a última parte do &lt;a href=&quot;http://grokpodcast.com/&quot;&gt;Grok Podcast&lt;/a&gt; que gravamos com o Elizer Pimentel e o Luis Gustavo da &lt;a href=&quot;http://planobe.com.br/&quot;&gt;Plano Bê&lt;/a&gt; (a melhor empresa de tecnologia do mundo e do universo de acordo com o Luis... :P) sobre singularidade e biologia sintetica.
+    <content type="html">&lt;p&gt;Acabou de ir ao ar a última parte do &lt;a href=&quot;http://grokpodcast.com/&quot;&gt;Grok Podcast&lt;/a&gt; que gravamos com o Elizer Pimentel e o Luis Gustavo da &lt;a href=&quot;http://planobe.com.br/&quot;&gt;Plano Bê&lt;/a&gt; (a melhor empresa de tecnologia do mundo e do universo de acordo com o Luis... :P) sobre singularidade e biologia sintetica.&lt;/p&gt;
 
-&lt;strong&gt;Por que esse assunto é do interesse de programadores e desenvolvedores de software?&lt;/strong&gt; Basicamente a biologia sintetica apresenta um novo hardware para programarmos e como tudo ainda é muito novo e desconhecido essa série promete abrir os seus horizontes quanto a um futuro possível dentro de nossa area de atuação. Além do mais é um assunto super divertido e fácil de absorver.
+&lt;p&gt;&lt;strong&gt;Por que esse assunto é do interesse de programadores e desenvolvedores de software?&lt;/strong&gt; Basicamente a biologia sintetica apresenta um novo hardware para programarmos e como tudo ainda é muito novo e desconhecido essa série promete abrir os seus horizontes quanto a um futuro possível dentro de nossa area de atuação. Além do mais é um assunto super divertido e fácil de absorver.&lt;/p&gt;
 
-Eu e o Rafael Rosa estamos muito felizes com os resultados até agora com esse novo empreendimento do podcast e já temos muitos outros temas interessantes preparados para o ano que vem. Aguardem!
+&lt;p&gt;Eu e o Rafael Rosa estamos muito felizes com os resultados até agora com esse novo empreendimento do podcast e já temos muitos outros temas interessantes preparados para o ano que vem. Aguardem!&lt;/p&gt;
 
-Para ouvir a série sobre singularidade e biologia sintetica na integra segue os links das três partes:
+&lt;p&gt;Para ouvir a série sobre singularidade e biologia sintetica na integra segue os links das três partes:&lt;/p&gt;
+
 &lt;ul&gt;
-	&lt;li&gt;&lt;a href=&quot;http://grokpodcast.com/2010/12/08/episodio-13-singularidade-e-biologia-sintetica-parte-1/&quot;&gt;Parte 1&lt;/a&gt;&lt;/li&gt;
-	&lt;li&gt;&lt;a href=&quot;http://grokpodcast.com/2010/12/15/episodio-14-%E2%80%93-singularidade-e-biologia-sintetica-%E2%80%93-parte-2/&quot;&gt;Parte 2&lt;/a&gt;&lt;/li&gt;
-	&lt;li&gt;&lt;a href=&quot;http://grokpodcast.com/2010/12/22/episodio-15-%E2%80%93-singularidade-e-biologia-sintetica-%E2%80%93-parte-3/&quot;&gt;Parte 3&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://grokpodcast.com/2010/12/08/episodio-13-singularidade-e-biologia-sintetica-parte-1/&quot;&gt;Parte 1&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://grokpodcast.com/2010/12/15/episodio-14-%E2%80%93-singularidade-e-biologia-sintetica-%E2%80%93-parte-2/&quot;&gt;Parte 2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://grokpodcast.com/2010/12/22/episodio-15-%E2%80%93-singularidade-e-biologia-sintetica-%E2%80%93-parte-3/&quot;&gt;Parte 3&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-Caso você tenha o interesse de anunciar no podcast, entre em contato conosco &lt;a href=&quot;http://www.nomedojogo.com/contato/&quot;&gt;clicando aqui&lt;/a&gt;.
+
+
+&lt;p&gt;Caso você tenha o interesse de anunciar no podcast, entre em contato conosco &lt;a href=&quot;http://www.nomedojogo.com/contato/&quot;&gt;clicando aqui&lt;/a&gt;.&lt;/p&gt;
 </content>
   </entry>
   
@@ -390,11 +464,11 @@ Caso você tenha o interesse de anunciar no podcast, entre em contato conosco 
     <link href="http://carlosbrando.github.com/2010/12/10/o-comovente-guia-de-ruby-do-why-em-pdf/"/>
     <updated>2010-12-10T00:00:00-02:00</updated>
     <id>http://carlosbrando.github.com/2010/12/10/o-comovente-guia-de-ruby-do-why-em-pdf</id>
-    <content type="html">&lt;img class=&quot;aligncenter size-full wp-image-3574&quot; title=&quot;blix-1&quot; src=&quot;http://www.nomedojogo.com/wp-content/uploads/2010/12/blix-1.gif&quot; alt=&quot;&quot; width=&quot;796&quot; height=&quot;251&quot; /&gt;
+    <content type="html">&lt;p&gt;&lt;img class='' src='http://www.nomedojogo.com/wp-content/uploads/2010/12/blix-1.gif' width='796' height='251' alt='' title=''&gt;&lt;/p&gt;
 
-Não importa se você já é um rubista experiente ou está se aprendendo essa linguagem magnifica, &quot;&lt;strong&gt;O (comovente) guia de Ruby do Why&lt;/strong&gt;&quot; é sem dúvida uma leitura obrigatória. A tradução do livro para português foi finalizada em 2009 e desde então você pode lê-lo na integra através do endereço: &lt;a href=&quot;http://why.nomedojogo.com/index.html&quot;&gt;why.nomedojogo.com&lt;/a&gt;.
+&lt;p&gt;Não importa se você já é um rubista experiente ou está se aprendendo essa linguagem magnifica, &quot;&lt;strong&gt;O (comovente) guia de Ruby do Why&lt;/strong&gt;&quot; é sem dúvida uma leitura obrigatória. A tradução do livro para português foi finalizada em 2009 e desde então você pode lê-lo na integra através do endereço: &lt;a href=&quot;http://why.nomedojogo.com/index.html&quot;&gt;why.nomedojogo.com&lt;/a&gt;.&lt;/p&gt;
 
-Recentemente Mairon D. Brasil, preparou um arquivo em PDF com o conteúdo do livro. Acredito que isso deve facilitar um pouco para aqueles que desejam imprimi-lo. Essa versão está disponível em seu &lt;a href=&quot;http://maironbrasil.wordpress.com/2010/12/10/o-comovente-guia-de-ruby-do-why-em-pdf/&quot;&gt;blog&lt;/a&gt;.
+&lt;p&gt;Recentemente Mairon D. Brasil, preparou um arquivo em PDF com o conteúdo do livro. Acredito que isso deve facilitar um pouco para aqueles que desejam imprimi-lo. Essa versão está disponível em seu blog.&lt;/p&gt;
 </content>
   </entry>
   
@@ -403,17 +477,25 @@ Recentemente Mairon D. Brasil, preparou um arquivo em PDF com o conteúdo do liv
     <link href="http://carlosbrando.github.com/2010/11/01/rubyconf-brasil-2010/"/>
     <updated>2010-11-01T00:00:00-02:00</updated>
     <id>http://carlosbrando.github.com/2010/11/01/rubyconf-brasil-2010</id>
-    <content type="html">Aconteceu na semana passada o &lt;strong&gt;RubyConf Brasil 2010&lt;/strong&gt; e o evento foi sem dúvida um sucesso em todos os sentidos. Principalmente, em minha opinião, pelo alto nível técnico da maioria das palestras.
+    <content type="html">&lt;p&gt;Aconteceu na semana passada o &lt;strong&gt;RubyConf Brasil 2010&lt;/strong&gt; e o evento foi sem dúvida um sucesso em todos os sentidos. Principalmente, em minha opinião, pelo alto nível técnico da maioria das palestras.&lt;/p&gt;
 
-Eu também tive o prazer de palestrar sobre minha experiencia desenvolvendo aplicativos sociais. Também foi uma palestra totalmente técnica, com muito código e uma demonstração de como criar um aplicativo simples do começo ao fim para a plataforma &lt;strong&gt;OpenSocial&lt;/strong&gt; utilizando &lt;strong&gt;Rails 3&lt;/strong&gt;. Cumprindo a minha promessa, abaixo você pode rever os slides da apresentação e o vídeo do desenvolvimento do aplicativo. Infelizmente o vídeo não tem som, então ele será mais útil para aqueles que assistiram a palestra.
+&lt;p&gt;Eu também tive o prazer de palestrar sobre minha experiencia desenvolvendo aplicativos sociais. Também foi uma palestra totalmente técnica, com muito código e uma demonstração de como criar um aplicativo simples do começo ao fim para a plataforma &lt;strong&gt;OpenSocial&lt;/strong&gt; utilizando &lt;strong&gt;Rails 3&lt;/strong&gt;. Cumprindo a minha promessa, abaixo você pode rever os slides da apresentação e o vídeo do desenvolvimento do aplicativo. Infelizmente o vídeo não tem som, então ele será mais útil para aqueles que assistiram a palestra.&lt;/p&gt;
 
-Todas as palestras foram gravadas, assim eu acredito que em breve a &lt;strong&gt;Locaweb&lt;/strong&gt; deve disponibilizá-los online.
+&lt;p&gt;Todas as palestras foram gravadas, assim eu acredito que em breve a &lt;strong&gt;Locaweb&lt;/strong&gt; deve disponibilizá-los online.&lt;/p&gt;
+
 &lt;h2&gt;Slides&lt;/h2&gt;
+
+
 &lt;div id=&quot;__ss_5629495&quot; style=&quot;width: 425px;&quot;&gt;&lt;strong&gt;&lt;a title=&quot;Desenvolvendo Aplicativos Sociais com Rails 3&quot; href=&quot;http://www.slideshare.net/eduardobrando/desenvolvendo-aplicativos-sociais-com-rails-3&quot;&gt;Desenvolvendo Aplicativos Sociais com Rails 3&lt;/a&gt;&lt;/strong&gt;&lt;object id=&quot;__sse5629495&quot; classid=&quot;clsid:d27cdb6e-ae6d-11cf-96b8-444553540000&quot; width=&quot;425&quot; height=&quot;355&quot; codebase=&quot;http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0&quot;&gt;&lt;param name=&quot;allowFullScreen&quot; value=&quot;true&quot; /&gt;&lt;param name=&quot;allowScriptAccess&quot; value=&quot;always&quot; /&gt;&lt;param name=&quot;src&quot; value=&quot;http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=rubyconf-101031214321-phpapp01&amp;amp;stripped_title=desenvolvendo-aplicativos-sociais-com-rails-3&amp;amp;userName=eduardobrando&quot; /&gt;&lt;param name=&quot;name&quot; value=&quot;__sse5629495&quot; /&gt;&lt;param name=&quot;allowfullscreen&quot; value=&quot;true&quot; /&gt;&lt;embed id=&quot;__sse5629495&quot; type=&quot;application/x-shockwave-flash&quot; width=&quot;425&quot; height=&quot;355&quot; src=&quot;http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=rubyconf-101031214321-phpapp01&amp;amp;stripped_title=desenvolvendo-aplicativos-sociais-com-rails-3&amp;amp;userName=eduardobrando&quot; name=&quot;__sse5629495&quot; allowscriptaccess=&quot;always&quot; allowfullscreen=&quot;true&quot;&gt;&lt;/embed&gt;&lt;/object&gt;
 &lt;div style=&quot;padding: 5px 0 12px;&quot;&gt;View more &lt;a href=&quot;http://www.slideshare.net/&quot;&gt;presentations&lt;/a&gt; from &lt;a href=&quot;http://www.slideshare.net/eduardobrando&quot;&gt;Carlos Brando&lt;/a&gt;.&lt;/div&gt;
 &lt;/div&gt;
+
+
 &lt;h2&gt;Vídeo&lt;/h2&gt;
+
+
 &lt;object classid=&quot;clsid:d27cdb6e-ae6d-11cf-96b8-444553540000&quot; width=&quot;480&quot; height=&quot;385&quot; codebase=&quot;http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0&quot;&gt;&lt;param name=&quot;allowFullScreen&quot; value=&quot;true&quot; /&gt;&lt;param name=&quot;allowscriptaccess&quot; value=&quot;always&quot; /&gt;&lt;param name=&quot;src&quot; value=&quot;http://www.youtube.com/v/C4eHP49-KtI?fs=1&amp;amp;hl=en_US&quot; /&gt;&lt;param name=&quot;allowfullscreen&quot; value=&quot;true&quot; /&gt;&lt;embed type=&quot;application/x-shockwave-flash&quot; width=&quot;480&quot; height=&quot;385&quot; src=&quot;http://www.youtube.com/v/C4eHP49-KtI?fs=1&amp;amp;hl=en_US&quot; allowscriptaccess=&quot;always&quot; allowfullscreen=&quot;true&quot;&gt;&lt;/embed&gt;&lt;/object&gt;
+
 </content>
   </entry>
   
@@ -423,6 +505,7 @@ Todas as palestras foram gravadas, assim eu acredito que em breve a &lt;strong
     <updated>2010-10-13T00:00:00-03:00</updated>
     <id>http://carlosbrando.github.com/2010/10/13/ajude-a-melhorar-o-grok-podcast</id>
     <content type="html">&lt;iframe src=&quot;https://spreadsheets.google.com/embeddedform?formkey=dFZXNnNnNXRQWmJPVl8tU2VSX29ybHc6MQ&quot; width=&quot;760&quot; height=&quot;695&quot; frameborder=&quot;0&quot; marginheight=&quot;0&quot; marginwidth=&quot;0&quot;&gt;Loading...&lt;/iframe&gt;
+
 </content>
   </entry>
   
@@ -431,23 +514,23 @@ Todas as palestras foram gravadas, assim eu acredito que em breve a &lt;strong
     <link href="http://carlosbrando.github.com/2010/09/29/os-bastidores-do-rails-3/"/>
     <updated>2010-09-29T00:00:00-03:00</updated>
     <id>http://carlosbrando.github.com/2010/09/29/os-bastidores-do-rails-3</id>
-    <content type="html">[caption id=&quot;attachment_3541&quot; align=&quot;aligncenter&quot; width=&quot;500&quot; caption=&quot;A proposta do GrokPodcast é explicar e não somente noticiar&quot;]&lt;a href=&quot;http://www.nomedojogo.com/wp-content/uploads/2010/09/why.jpg&quot;&gt;&lt;img class=&quot;size-full wp-image-3541&quot; title=&quot;why&quot; src=&quot;http://www.nomedojogo.com/wp-content/uploads/2010/09/why.jpg&quot; alt=&quot;&quot; width=&quot;500&quot; height=&quot;375&quot; /&gt;&lt;/a&gt;[/caption]
+    <content type="html">&lt;p&gt;&lt;img class='' src='http://www.nomedojogo.com/wp-content/uploads/2010/09/why.jpg' width='' height='' alt='A proposta do GrokPodcast é explicar e não somente noticiar' title='A proposta do GrokPodcast é explicar e não somente noticiar'&gt;&lt;/p&gt;
 
-Faz exatamente um mês que o Rails 3 foi liberado na sua versão final. É o trabalho de mais de 1600 programadores em um período de quase dois anos.
+&lt;p&gt;Faz exatamente um mês que o Rails 3 foi liberado na sua versão final. É o trabalho de mais de 1600 programadores em um período de quase dois anos.&lt;/p&gt;
 
-Nessa versão tivemos uma grande alteração no sistema de queries do Active Record, a forma como costumavámos declarar rotas foi alterada, o Bundler foi adicionado ao projeto, um novo Action Mailer e muito código reescrito. Enquanto muitos recursos antigos foram melhorados, também dezenas de novas funcionalidades foram adicionadas. Certamente você já deve ter lido sobre essas novidades em outros sites e blogs.
+&lt;p&gt;Nessa versão tivemos uma grande alteração no sistema de queries do Active Record, a forma como costumavámos declarar rotas foi alterada, o Bundler foi adicionado ao projeto, um novo Action Mailer e muito código reescrito. Enquanto muitos recursos antigos foram melhorados, também dezenas de novas funcionalidades foram adicionadas. Certamente você já deve ter lido sobre essas novidades em outros sites e blogs.&lt;/p&gt;
 
-Mas o que é levado em consideração pelo core team ao decidir se deve acrescentar ou não um novo recurso ao framework? O que é discutido nas reuniões desse time de elite?
+&lt;p&gt;Mas o que é levado em consideração pelo core team ao decidir se deve acrescentar ou não um novo recurso ao framework? O que é discutido nas reuniões desse time de elite?&lt;/p&gt;
 
-O Grok Podcast inicia hoje uma nova série sobre os bastidores do Rails 3, com a participação especial de &lt;a href=&quot;http://twitter.com/#!/josevalim&quot;&gt;José Valim&lt;/a&gt;, membro do core team do Ruby on Rails.
+&lt;p&gt;O Grok Podcast inicia hoje uma nova série sobre os bastidores do Rails 3, com a participação especial de &lt;a href=&quot;http://twitter.com/#!/josevalim&quot;&gt;José Valim&lt;/a&gt;, membro do core team do Ruby on Rails.&lt;/p&gt;
 
-Você encontrará o primeiro episódio da série no &lt;a href=&quot;http://grokpodcast.com/&quot;&gt;site do programa&lt;/a&gt;. Também estão disponíveis os dois primeiros episódios onde contamos a história da empresa Paypal.
+&lt;p&gt;Você encontrará o primeiro episódio da série no &lt;a href=&quot;http://grokpodcast.com/&quot;&gt;site do programa&lt;/a&gt;. Também estão disponíveis os dois primeiros episódios onde contamos a história da empresa Paypal.&lt;/p&gt;
 
-Se você usa o iTunes é fácil adicionar o podcast na sua lista de programas, basta &lt;a href=&quot;http://itunes.apple.com/us/podcast/grok-podcast/id393122038&quot;&gt;clicar aqui&lt;/a&gt;. Você também pode usa o &lt;a href=&quot;http://grokpodcast.com/feed/&quot;&gt;RSS&lt;/a&gt; do site ou seguir o Grok Podcast no &lt;a href=&quot;http://twitter.com/#!/grokpodcast&quot;&gt;Twitter&lt;/a&gt;.
+&lt;p&gt;Se você usa o iTunes é fácil adicionar o podcast na sua lista de programas, basta &lt;a href=&quot;http://itunes.apple.com/us/podcast/grok-podcast/id393122038&quot;&gt;clicar aqui&lt;/a&gt;. Você também pode usa o &lt;a href=&quot;http://grokpodcast.com/feed/&quot;&gt;RSS&lt;/a&gt; do site ou seguir o Grok Podcast no &lt;a href=&quot;http://twitter.com/#!/grokpodcast&quot;&gt;Twitter&lt;/a&gt;.&lt;/p&gt;
 
-Essa série sobre os bastidores do Rails 3 está sendo patrocinada pelos nossos amigos da &lt;a href=&quot;http://www.egenialsas.com.br/&quot;&gt;e-Genial&lt;/a&gt; e da &lt;a href=&quot;http://plataformatec.com.br/&quot;&gt;Plataforma Tecnologia&lt;/a&gt;.
+&lt;p&gt;Essa série sobre os bastidores do Rails 3 está sendo patrocinada pelos nossos amigos da &lt;a href=&quot;http://www.egenialsas.com.br/&quot;&gt;e-Genial&lt;/a&gt; e da &lt;a href=&quot;http://plataformatec.com.br/&quot;&gt;Plataforma Tecnologia&lt;/a&gt;.&lt;/p&gt;
 
-Gostou do podcast? Então ajude a divulgá-lo. Fale dele para os seus amigos, comente no twitter, coloque um link no seu blog...
+&lt;p&gt;Gostou do podcast? Então ajude a divulgá-lo. Fale dele para os seus amigos, comente no twitter, coloque um link no seu blog...&lt;/p&gt;
 </content>
   </entry>
   
@@ -456,29 +539,35 @@ Gostou do podcast? Então ajude a divulgá-lo. Fale dele para os seus amigos, co
     <link href="http://carlosbrando.github.com/2010/09/15/meu-novo-podcast/"/>
     <updated>2010-09-15T00:00:00-03:00</updated>
     <id>http://carlosbrando.github.com/2010/09/15/meu-novo-podcast</id>
-    <content type="html">Durante o ano de 2008 eu gravei um programa semanal com as últimas noticias sobre &lt;a href=&quot;http://podcast.rubyonrails.pro.br/&quot;&gt;Ruby on Rails&lt;/a&gt; junto com o &lt;a href=&quot;http://www.akitaonrails.com/&quot;&gt;Fábio Akita&lt;/a&gt;. Infelizmente o programa não sobreviveu àquele ano.
+    <content type="html">&lt;p&gt;Durante o ano de 2008 eu gravei um programa semanal com as últimas noticias sobre &lt;a href=&quot;http://podcast.rubyonrails.pro.br/&quot;&gt;Ruby on Rails&lt;/a&gt; junto com o &lt;a href=&quot;http://www.akitaonrails.com/&quot;&gt;Fábio Akita&lt;/a&gt;. Infelizmente o programa não sobreviveu àquele ano.&lt;/p&gt;
 
-Durante muito tempo eu planejei voltar a gravar o &lt;a href=&quot;http://podcast.rubyonrails.pro.br/&quot;&gt;Rails Podcast Brasil&lt;/a&gt;, mas nenhuma das tentativas deu muito certo. Hoje felizmente não faz mais sentido um programa como aquele, já que noticias sobre Ruby e Rails podem ser facilmente encontradas em sites como o &lt;a href=&quot;http://www.rubyinside.com.br/&quot;&gt;Ruby Inside Brasil&lt;/a&gt; e outros.
+&lt;p&gt;Durante muito tempo eu planejei voltar a gravar o &lt;a href=&quot;http://podcast.rubyonrails.pro.br/&quot;&gt;Rails Podcast Brasil&lt;/a&gt;, mas nenhuma das tentativas deu muito certo. Hoje felizmente não faz mais sentido um programa como aquele, já que noticias sobre Ruby e Rails podem ser facilmente encontradas em sites como o &lt;a href=&quot;http://www.rubyinside.com.br/&quot;&gt;Ruby Inside Brasil&lt;/a&gt; e outros.&lt;/p&gt;
 
-Mesmo assim eu ainda desejava voltar a gravar. Assim me juntei ao &lt;a href=&quot;http://rafaelrosafu.com/&quot;&gt;Rafael Rosa Fu&lt;/a&gt; em um novo projeto: o &lt;a href=&quot;http://grokpodcast.com/&quot;&gt;Grok Podcast&lt;/a&gt;!
+&lt;p&gt;Mesmo assim eu ainda desejava voltar a gravar. Assim me juntei ao &lt;a href=&quot;http://rafaelrosafu.com/&quot;&gt;Rafael Rosa Fu&lt;/a&gt; em um novo projeto: o &lt;a href=&quot;http://grokpodcast.com/&quot;&gt;Grok Podcast&lt;/a&gt;!&lt;/p&gt;
 
-[caption id=&quot;attachment_3491&quot; align=&quot;aligncenter&quot; width=&quot;499&quot; caption=&quot;Grok é compreender algo tão bem que você se torna parte daquilo&quot;]&lt;a href=&quot;http://grokpodcast.com/&quot;&gt;&lt;img class=&quot;size-full wp-image-3491  &quot; title=&quot;Screen shot 2010-09-15 at 1.47.56 PM&quot; src=&quot;http://www.nomedojogo.com/wp-content/uploads/2010/09/Screen-shot-2010-09-15-at-1.47.56-PM-e1284569444802.png&quot; alt=&quot;&quot; width=&quot;499&quot; height=&quot;333&quot; /&gt;&lt;/a&gt;[/caption]
+&lt;p&gt;&lt;a href=&quot;http://grokpodcast.com/&quot;&gt;&lt;img class='' src='http://www.nomedojogo.com/wp-content/uploads/2010/09/Screen-shot-2010-09-15-at-1.47.56-PM-e1284569444802.png' width='' height='' alt='' title=''&gt;&lt;/a&gt;&lt;/p&gt;
 
-A intenção desse novo podcast é apresentar um único assunto por vez e aprofundar o máximo possível dentro desse tópico. Os episódios sempre girarão em torno de programação, empreendedorismo e tecnologia.
+&lt;p&gt;A intenção desse novo podcast é apresentar um único assunto por vez e aprofundar o máximo possível dentro desse tópico. Os episódios sempre girarão em torno de programação, empreendedorismo e tecnologia.&lt;/p&gt;
 
-O primeiro episódio conta a história da empresa PayPal. Nos baseamos no livro &lt;a href=&quot;http://www.foundersatwork.com/&quot;&gt;Founders at Work&lt;/a&gt; de Jessica Livingston, para contar sobre os primórdios da empresa. Acredito que esse tipo de conhecimento é prático para qualquer programador e principalmente para aqueles que pretendem iniciar o seu próprio negócio.
+&lt;p&gt;O primeiro episódio conta a história da empresa PayPal. Nos baseamos no livro &lt;a href=&quot;http://www.foundersatwork.com/&quot;&gt;Founders at Work&lt;/a&gt; de Jessica Livingston, para contar sobre os primórdios da empresa. Acredito que esse tipo de conhecimento é prático para qualquer programador e principalmente para aqueles que pretendem iniciar o seu próprio negócio.&lt;/p&gt;
 
-Espero que gostem e ajudem a divulgar esse novo projeto!
+&lt;p&gt;Espero que gostem e ajudem a divulgar esse novo projeto!&lt;/p&gt;
 
-Grok Podcast: &lt;a href=&quot;http://grokpodcast.com/&quot;&gt;http://grokpodcast.com/&lt;/a&gt;
+&lt;p&gt;Grok Podcast: &lt;a href=&quot;http://grokpodcast.com/&quot;&gt;http://grokpodcast.com/&lt;/a&gt;&lt;/p&gt;
+
 &lt;h2&gt;Agradecimentos&lt;/h2&gt;
-Eu gostaria de agradecer ao &lt;a href=&quot;http://twitter.com/x4ids&quot;&gt;Vinícius Machado&lt;/a&gt; da &lt;a href=&quot;http://www.x4ids.com.br/&quot;&gt;X4-Internet Development Solutions&lt;/a&gt; e a galera da &lt;a href=&quot;http://anathumana.com.br/&quot;&gt;Anathumana&lt;/a&gt; pela trilha sonora que eles prepararam especialmente para este podcast.
 
-Também tenho de agradecer ao &lt;a href=&quot;http://rafael.tauil.com.br/&quot;&gt;Rafael B. Tauil&lt;/a&gt; pelo logo maneiro que ele desenvolveu para o projeto.
+
+&lt;p&gt;Eu gostaria de agradecer ao &lt;a href=&quot;http://twitter.com/x4ids&quot;&gt;Vinícius Machado&lt;/a&gt; da &lt;a href=&quot;http://www.x4ids.com.br/&quot;&gt;X4-Internet Development Solutions&lt;/a&gt; e a galera da &lt;a href=&quot;http://anathumana.com.br/&quot;&gt;Anathumana&lt;/a&gt; pela trilha sonora que eles prepararam especialmente para este podcast.&lt;/p&gt;
+
+&lt;p&gt;Também tenho de agradecer ao &lt;a href=&quot;http://rafael.tauil.com.br/&quot;&gt;Rafael B. Tauil&lt;/a&gt; pelo logo maneiro que ele desenvolveu para o projeto.&lt;/p&gt;
+
 &lt;h2&gt;Patrocinio&lt;/h2&gt;
-Este primeiro episódio é patrocinado por &lt;a href=&quot;http://webbynode.com/&quot;&gt;Webbynode&lt;/a&gt;. E foi com a ajuda deles que conseguimos esse site maneiro para o programa.
 
-Se você deseja patrocinar ou ajudar o podcast de qualquer forma entre contato conosco através do formulário de contato desse &lt;a href=&quot;http://www.nomedojogo.com/contato/&quot;&gt;blog&lt;/a&gt; ou do próprio &lt;a href=&quot;http://grokpodcast.com/contato/&quot;&gt;site oficial do podcast&lt;/a&gt;.
+
+&lt;p&gt;Este primeiro episódio é patrocinado por &lt;a href=&quot;http://webbynode.com/&quot;&gt;Webbynode&lt;/a&gt;. E foi com a ajuda deles que conseguimos esse site maneiro para o programa.&lt;/p&gt;
+
+&lt;p&gt;Se você deseja patrocinar ou ajudar o podcast de qualquer forma entre contato conosco através do formulário de contato desse &lt;a href=&quot;http://www.nomedojogo.com/contato/&quot;&gt;blog&lt;/a&gt; ou do próprio &lt;a href=&quot;http://grokpodcast.com/contato/&quot;&gt;site oficial do podcast&lt;/a&gt;.&lt;/p&gt;
 </content>
   </entry>
   
@@ -488,9 +577,11 @@ Se você deseja patrocinar ou ajudar o podcast de qualquer forma entre contato c
     <updated>2010-09-07T00:00:00-03:00</updated>
     <id>http://carlosbrando.github.com/2010/09/07/adicionando-a-documentacao-do-rails-3-ao-dicionario-do-mac-os-x</id>
     <content type="html">&lt;p style=&quot;text-align: center;&quot;&gt;&lt;img class=&quot;aligncenter size-full wp-image-3464&quot; src=&quot;http://www.nomedojogo.com/wp-content/uploads/2010/09/Screen-shot-2010-09-07-at-1.44.43-AM.png&quot; alt=&quot;Uma pesquisa no Dictionary.app&quot; width=&quot;675&quot; height=&quot;434&quot; /&gt;&lt;/p&gt;
-&lt;a href=&quot;http://www.priithaamer.com/blog/rails-3-dictionary-update&quot;&gt;Priit Haamer&lt;/a&gt; liberou recentemente a documentação atualizada do Rails 3 para o aplicativo Dictionary.app do Mac OS X.
 
-Para instalar é fácil, basta &lt;a href=&quot;http://f.priithaamer.com/dictionary/Ruby%20on%20Rails%203.0.dictionary.zip&quot;&gt;baixar o dicionário&lt;/a&gt;, decompactá-lo e copiar o arquivo para o diretório &lt;code&gt;~/Library/Dictionaries&lt;/code&gt;.
+
+&lt;p&gt;&lt;a href=&quot;http://www.priithaamer.com/blog/rails-3-dictionary-update&quot;&gt;Priit Haamer&lt;/a&gt; liberou recentemente a documentação atualizada do Rails 3 para o aplicativo Dictionary.app do Mac OS X.&lt;/p&gt;
+
+&lt;p&gt;Para instalar é fácil, basta &lt;a href=&quot;http://f.priithaamer.com/dictionary/Ruby%20on%20Rails%203.0.dictionary.zip&quot;&gt;baixar o dicionário&lt;/a&gt;, decompactá-lo e copiar o arquivo para o diretório &lt;code&gt;~/Library/Dictionaries&lt;/code&gt;.&lt;/p&gt;
 </content>
   </entry>
   
@@ -499,7 +590,7 @@ Para instalar é fácil, basta &lt;a href=&quot;http://f.priithaamer.com/diction
     <link href="http://carlosbrando.github.com/2010/08/22/uploading-files/"/>
     <updated>2010-08-22T00:00:00-03:00</updated>
     <id>http://carlosbrando.github.com/2010/08/22/uploading-files</id>
-    <content type="html">A common task is uploading some sort of file, whether it's a picture of a person or a CSV file containing data to process. The most important thing to remember with file uploads is that the form's encoding &lt;strong&gt;MUST&lt;/strong&gt; be set to &quot;multipart/form-data&quot;. If you're using &lt;code&gt;form_for&lt;/code&gt; just using &lt;code&gt;file_field&lt;/code&gt; inside of it does the trick, but if you're using &lt;code&gt;form_tag&lt;/code&gt; &lt;code&gt;:multi_part =&amp;gt; true&lt;/code&gt; must passed as an HTML option, in the second options hash. If you forget to do this the file will not be uploaded.
+    <content type="html">&lt;p&gt;A common task is uploading some sort of file, whether it's a picture of a person or a CSV file containing data to process. The most important thing to remember with file uploads is that the form's encoding &lt;strong&gt;MUST&lt;/strong&gt; be set to &quot;multipart/form-data&quot;. If you're using &lt;code&gt;form_for&lt;/code&gt; just using &lt;code&gt;file_field&lt;/code&gt; inside of it does the trick, but if you're using &lt;code&gt;form_tag&lt;/code&gt; &lt;code&gt;:multi_part =&amp;gt; true&lt;/code&gt; must passed as an HTML option, in the second options hash. If you forget to do this the file will not be uploaded.&lt;/p&gt;
 </content>
   </entry>
   
@@ -508,43 +599,51 @@ Para instalar é fácil, basta &lt;a href=&quot;http://f.priithaamer.com/diction
     <link href="http://carlosbrando.github.com/2010/08/16/ruby-c-assembly-oxente/"/>
     <updated>2010-08-16T00:00:00-03:00</updated>
     <id>http://carlosbrando.github.com/2010/08/16/ruby-c-assembly-oxente</id>
-    <content type="html">Nos dias 6 e 7 de agosto desse ano estive presente na segunda edição do &lt;a href=&quot;http://oxenterails.com/&quot;&gt;Oxente Rails&lt;/a&gt; em Natal no Rio Grande do Norte. E para variar o evento superou as expectativas. Programadores de qualquer linguagem e pessoas interessadas em empreendedorismo não podem perder esse evento, simples assim.
+    <content type="html">&lt;p&gt;Nos dias 6 e 7 de agosto desse ano estive presente na segunda edição do &lt;a href=&quot;http://oxenterails.com/&quot;&gt;Oxente Rails&lt;/a&gt; em Natal no Rio Grande do Norte. E para variar o evento superou as expectativas. Programadores de qualquer linguagem e pessoas interessadas em empreendedorismo não podem perder esse evento, simples assim.&lt;/p&gt;
 
-Abaixo estão os slides da minha apresentação e um trecho de código que será facilmente entendido por aqueles que assistiram a minha palestra.
+&lt;p&gt;Abaixo estão os slides da minha apresentação e um trecho de código que será facilmente entendido por aqueles que assistiram a minha palestra.&lt;/p&gt;
 
-&lt;p style=&quot;text-align: center;&quot;&gt;&lt;object id=&quot;__sse4928964&quot; classid=&quot;clsid:d27cdb6e-ae6d-11cf-96b8-444553540000&quot; width=&quot;425&quot; height=&quot;355&quot; codebase=&quot;http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0&quot;&gt;&lt;param name=&quot;allowFullScreen&quot; value=&quot;true&quot; /&gt;&lt;param name=&quot;allowScriptAccess&quot; value=&quot;always&quot; /&gt;&lt;param name=&quot;src&quot; value=&quot;http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=palestra-100809101346-phpapp02&amp;amp;stripped_title=criando-uma-carreira-notvel-em-desenvolvimento-de-software&quot; /&gt;&lt;param name=&quot;name&quot; value=&quot;__sse4928964&quot; /&gt;&lt;param name=&quot;allowfullscreen&quot; value=&quot;true&quot; /&gt;&lt;embed id=&quot;__sse4928964&quot; type=&quot;application/x-shockwave-flash&quot; width=&quot;425&quot; height=&quot;355&quot; src=&quot;http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=palestra-100809101346-phpapp02&amp;amp;stripped_title=criando-uma-carreira-notvel-em-desenvolvimento-de-software&quot; name=&quot;__sse4928964&quot; allowscriptaccess=&quot;always&quot; allowfullscreen=&quot;true&quot;&gt;&lt;/embed&gt;&lt;/object&gt;
+&lt;object id=&quot;__sse4928964&quot; classid=&quot;clsid:d27cdb6e-ae6d-11cf-96b8-444553540000&quot; width=&quot;425&quot; height=&quot;355&quot; codebase=&quot;http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0&quot;&gt;&lt;param name=&quot;allowFullScreen&quot; value=&quot;true&quot; /&gt;&lt;param name=&quot;allowScriptAccess&quot; value=&quot;always&quot; /&gt;&lt;param name=&quot;src&quot; value=&quot;http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=palestra-100809101346-phpapp02&amp;amp;stripped_title=criando-uma-carreira-notvel-em-desenvolvimento-de-software&quot; /&gt;&lt;param name=&quot;name&quot; value=&quot;__sse4928964&quot; /&gt;&lt;param name=&quot;allowfullscreen&quot; value=&quot;true&quot; /&gt;&lt;embed id=&quot;__sse4928964&quot; type=&quot;application/x-shockwave-flash&quot; width=&quot;425&quot; height=&quot;355&quot; src=&quot;http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=palestra-100809101346-phpapp02&amp;amp;stripped_title=criando-uma-carreira-notvel-em-desenvolvimento-de-software&quot; name=&quot;__sse4928964&quot; allowscriptaccess=&quot;always&quot; allowfullscreen=&quot;true&quot;&gt;&lt;/embed&gt;&lt;/object&gt;
 
-Se você pretende executar o código abaixo é necessário instalar a gem RubyInline antes:
-&lt;pre class=&quot;textmate-source&quot;&gt;&lt;span class=&quot;text text_plain&quot;&gt;&lt;span class=&quot;meta meta_paragraph meta_paragraph_text&quot;&gt;gem install RubyInline&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;
-Segue a brincadeira:
 
-&lt;pre class=&quot;textmate-source&quot;&gt;&lt;span class=&quot;source source_ruby source_ruby_rails&quot;&gt;&lt;span class=&quot;meta meta_require meta_require_ruby&quot;&gt;&lt;span class=&quot;keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_ruby&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby&quot;&gt;&quot;&lt;/span&gt;rubygems&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;meta meta_require meta_require_ruby&quot;&gt;&lt;span class=&quot;keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_ruby&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby&quot;&gt;&quot;&lt;/span&gt;inline&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;p&gt;Se você pretende executar o código abaixo é necessário instalar a gem RubyInline antes:&lt;/p&gt;
 
-&lt;span class=&quot;meta meta_rails meta_rails_controller&quot;&gt;&lt;span class=&quot;meta meta_class meta_class_ruby&quot;&gt;&lt;span class=&quot;keyword keyword_control keyword_control_class keyword_control_class_ruby&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby&quot;&gt;&lt;span class=&quot;variable variable_other variable_other_object variable_other_object_ruby&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; self&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
-  inline &lt;span class=&quot;keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby&quot;&gt;do &lt;/span&gt;&lt;span class=&quot;punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;variable variable_other variable_other_block variable_other_block_ruby&quot;&gt;builder&lt;/span&gt;&lt;span class=&quot;punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby&quot;&gt;|&lt;/span&gt;
-    builder&lt;span class=&quot;punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby&quot;&gt;.&lt;/span&gt;add_compile_flags &lt;span class=&quot;string string_quoted string_quoted_single string_quoted_single_ruby&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby&quot;&gt;'&lt;/span&gt;-fasm-blocks&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby&quot;&gt;'&lt;/span&gt;&lt;/span&gt;
-    builder&lt;span class=&quot;punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby&quot;&gt;.&lt;/span&gt;c &lt;span class=&quot;string string_quoted string_quoted_double string_quoted_double_ruby&quot;&gt;&lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby&quot;&gt;&quot;&lt;/span&gt;
+&lt;pre&gt;&lt;code&gt;gem install RubyInline
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Segue a brincadeira:&lt;/p&gt;
+
+&lt;p&gt;``` ruby&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;require &quot;rubygems&quot;
+require &quot;inline&quot;
+
+class &amp;lt;&amp;lt; self
+  inline do |builder|
+    builder.add_compile_flags '-fasm-blocks'
+    builder.c &quot;
       int sum(int num1, int num2) {
         int result;
-        
+
         __asm__{
           mov eax, num1
           mov ebx, num2
           add eax, ebx
           mov result, eax
         }
-        
+
         return result;
       }
-    &lt;span class=&quot;punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
-  &lt;span class=&quot;keyword keyword_control keyword_control_ruby&quot;&gt;end&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&quot;keyword keyword_control keyword_control_ruby&quot;&gt;end&lt;/span&gt;
+    &quot;
+  end
+end
 
-puts sum&lt;span class=&quot;punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;constant constant_numeric constant_numeric_ruby&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;constant constant_numeric constant_numeric_ruby&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby&quot;&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/pre&gt;
+puts sum(2, 3)
+&lt;/code&gt;&lt;/pre&gt;
 
-Se você não pôde estar presente, a boa notícia é que esse ano todas as palestras foram gravadas e devem ser disponibilizadas em breve!
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;Se você não pôde estar presente, a boa notícia é que esse ano todas as palestras foram gravadas e devem ser disponibilizadas em breve!&lt;/p&gt;
 </content>
   </entry>
   
@@ -553,31 +652,31 @@ Se você não pôde estar presente, a boa notícia é que esse ano todas as pale
     <link href="http://carlosbrando.github.com/2010/07/01/eu-quebrei-o-codigo/"/>
     <updated>2010-07-01T00:00:00-03:00</updated>
     <id>http://carlosbrando.github.com/2010/07/01/eu-quebrei-o-codigo</id>
-    <content type="html">No dia 9 de setembro de 1945 a equipe da Dr. Grace Hopper (que mais tarde se tornaria a criadora da linguagem COBOL) e de Howard H. Aiken estava diante de um problema na sala do computador Mark II.  Depois de uma análise minuciosa detectaram uma mariposa entre os contatos de um dos relés do computador. Ironicamente Grace documentou o incidente nos registros adicionando o inseto e a frase &quot;First atual case of bug being found&quot;.
+    <content type="html">&lt;p&gt;No dia 9 de setembro de 1945 a equipe da Dr. Grace Hopper (que mais tarde se tornaria a criadora da linguagem COBOL) e de Howard H. Aiken estava diante de um problema na sala do computador Mark II.  Depois de uma análise minuciosa detectaram uma mariposa entre os contatos de um dos relés do computador. Ironicamente Grace documentou o incidente nos registros adicionando o inseto e a frase &quot;First atual case of bug being found&quot;.&lt;/p&gt;
 
-[caption id=&quot;attachment_3372&quot; align=&quot;aligncenter&quot; width=&quot;740&quot; caption=&quot;Foto do que possívelmente seria o primeiro bug encontrado em um computador&quot;]&lt;a href=&quot;http://www.nomedojogo.com/wp-content/uploads/2010/07/H96566k.jpg&quot;&gt;&lt;img class=&quot;size-full wp-image-3372&quot; title=&quot;H96566k&quot; src=&quot;http://www.nomedojogo.com/wp-content/uploads/2010/07/H96566k.jpg&quot; alt=&quot;&quot; width=&quot;740&quot; height=&quot;583&quot; /&gt;&lt;/a&gt;[/caption]
+&lt;p&gt;&lt;img class='' src='http://www.nomedojogo.com/wp-content/uploads/2010/07/H96566k.jpg' width='' height='' alt='' title=''&gt;&lt;/p&gt;
 
-Existe um efeito psicologico muito forte quando um erro explode em um software. É dificil para um profissional assumir que cometeu um erro ou deixou de testar adequadamente antes de colocar algo em produção. Quando um bug aparece, a tendencia é sempre procurar pelo culpado ao invés de procurar pelo problema.
+&lt;p&gt;Existe um efeito psicologico muito forte quando um erro explode em um software. É dificil para um profissional assumir que cometeu um erro ou deixou de testar adequadamente antes de colocar algo em produção. Quando um bug aparece, a tendencia é sempre procurar pelo culpado ao invés de procurar pelo problema.&lt;/p&gt;
 
-Há alguns anos eu trabalhei em uma consultoria que mantinha uma lista na parede com um ranking dos programadores que mais deixavam bugs no código. Toda vez que um usuário ligava reclamando de algo, iniciava-se uma espécie de corrida para ver quem encontrava o culpado primeiro. Assim que o infeliz programador era apontado, ele era obrigado a vestir uma faixa com os dizeres: &lt;strong&gt;&quot;Eu quebrei o código&quot;&lt;/strong&gt; durante todo o dia de trabalho.
+&lt;p&gt;Há alguns anos eu trabalhei em uma consultoria que mantinha uma lista na parede com um ranking dos programadores que mais deixavam bugs no código. Toda vez que um usuário ligava reclamando de algo, iniciava-se uma espécie de corrida para ver quem encontrava o culpado primeiro. Assim que o infeliz programador era apontado, ele era obrigado a vestir uma faixa com os dizeres: &lt;strong&gt;&quot;Eu quebrei o código&quot;&lt;/strong&gt; durante todo o dia de trabalho.&lt;/p&gt;
 
-&lt;a href=&quot;http://www.nomedojogo.com/wp-content/uploads/2010/07/g2Ofy.jpg&quot;&gt;&lt;img class=&quot;aligncenter size-full wp-image-3379&quot; title=&quot;g2Ofy&quot; src=&quot;http://www.nomedojogo.com/wp-content/uploads/2010/07/g2Ofy.jpg&quot; alt=&quot;&quot; width=&quot;380&quot; height=&quot;380&quot; /&gt;&lt;/a&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.nomedojogo.com/wp-content/uploads/2010/07/g2Ofy.jpg&quot;&gt;&lt;img class=&quot;aligncenter size-full wp-image-3379&quot; title=&quot;g2Ofy&quot; src=&quot;http://www.nomedojogo.com/wp-content/uploads/2010/07/g2Ofy.jpg&quot; alt=&quot;&quot; width=&quot;380&quot; height=&quot;380&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
-Não é possível desenvolver um software isento de falhas. Infelizmente, os computadores ainda estão limitados a fazer aquilo que &lt;em&gt;mandamos&lt;/em&gt; ele fazer, e não necessariamente aquilo que &lt;em&gt;queremos&lt;/em&gt; que ele faça. E enquanto isso não se tornar uma realidade estaremos sempre em &lt;a href=&quot;http://www.nomedojogo.com/2009/03/12/um-pouco-mais-sobre-%E2%80%9Cdon%E2%80%99t-repeat-yourself%E2%80%9D/&quot;&gt;modo de manutenção&lt;/a&gt;.
+&lt;p&gt;Não é possível desenvolver um software isento de falhas. Infelizmente, os computadores ainda estão limitados a fazer aquilo que &lt;em&gt;mandamos&lt;/em&gt; ele fazer, e não necessariamente aquilo que &lt;em&gt;queremos&lt;/em&gt; que ele faça. E enquanto isso não se tornar uma realidade estaremos sempre em &lt;a href=&quot;http://www.nomedojogo.com/2009/03/12/um-pouco-mais-sobre-%E2%80%9Cdon%E2%80%99t-repeat-yourself%E2%80%9D/&quot;&gt;modo de manutenção&lt;/a&gt;.&lt;/p&gt;
 
-Desenvolver é um ciclo que envolve escrever algo original por alguns minutos e então passar algumas horas solucionando bugs. Escrever um código novo e então reescrever algo que aparentemente ficou ruim. Todos os programadores deveriam ter isso em mente antes de ingressarem nessa profissão.
+&lt;p&gt;Desenvolver é um ciclo que envolve escrever algo original por alguns minutos e então passar algumas horas solucionando bugs. Escrever um código novo e então reescrever algo que aparentemente ficou ruim. Todos os programadores deveriam ter isso em mente antes de ingressarem nessa profissão.&lt;/p&gt;
 
-Um bom programador precisa inicialmente desligar todos esses sistemas instintivos de defesa. Eu sei muito bem o que é estar procurando por um bug no código com o gerente de um lado e o cliente do outro observando cada passo que você dá. Concentre-se, não perca o foco.
+&lt;p&gt;Um bom programador precisa inicialmente desligar todos esses sistemas instintivos de defesa. Eu sei muito bem o que é estar procurando por um bug no código com o gerente de um lado e o cliente do outro observando cada passo que você dá. Concentre-se, não perca o foco.&lt;/p&gt;
 
-Pense em um médico. O paciente chega no consultório com dor de cabeça, nauseas, dor em certas partes do corpo, etc.. Se o médico tentar solucionar cada um dos sintomas de forma isolada ele estará mascarando o real problema do paciente. O objetivo é identificar o que está gerando todos esses sintomas. Ao localizar a raiz do problema e medicar o paciente corretamente, de forma natural todos os sintomas desaparecerão.
+&lt;p&gt;Pense em um médico. O paciente chega no consultório com dor de cabeça, nauseas, dor em certas partes do corpo, etc.. Se o médico tentar solucionar cada um dos sintomas de forma isolada ele estará mascarando o real problema do paciente. O objetivo é identificar o que está gerando todos esses sintomas. Ao localizar a raiz do problema e medicar o paciente corretamente, de forma natural todos os sintomas desaparecerão.&lt;/p&gt;
 
-Da mesma forma, o maior erro que um programador pode cometer ao tentar resolver uma falha em um sistema é atacar os sintomas. Isso normalmente só confundirá a sua mente.
+&lt;p&gt;Da mesma forma, o maior erro que um programador pode cometer ao tentar resolver uma falha em um sistema é atacar os sintomas. Isso normalmente só confundirá a sua mente.&lt;/p&gt;
 
-A maneira mais simples de encontrar um erro no código é explicando o problema para outro programador. A outra pessoa não precisa dizer uma única palavra, o simples fato de explicar passo-a-passo o que o código deveria fazer, normalmente é o suficiente para que você mesmo vislumbre o que pode estar causando a falha.
+&lt;p&gt;A maneira mais simples de encontrar um erro no código é explicando o problema para outro programador. A outra pessoa não precisa dizer uma única palavra, o simples fato de explicar passo-a-passo o que o código deveria fazer, normalmente é o suficiente para que você mesmo vislumbre o que pode estar causando a falha.&lt;/p&gt;
 
-Pode parecer simples demais, mas ao explicar o problema para outra pessoa você terá de entrar em detalhes que talvez estejam passando despercebidos por você. Isso lhe dará uma nova visão do problema.
+&lt;p&gt;Pode parecer simples demais, mas ao explicar o problema para outra pessoa você terá de entrar em detalhes que talvez estejam passando despercebidos por você. Isso lhe dará uma nova visão do problema.&lt;/p&gt;
 
-Solucionar bugs é parte da rotina de um programador. Algumas técnicas apenas diminuem a quantidade de incidencias no seu código, mas evitá-los totalmente é impossível. O mais importante é ter em mente que um erro no software, mesmo trabalhando em uma grande equipe nunca terá um culpado, ele sempre será um problema seu.
+&lt;p&gt;Solucionar bugs é parte da rotina de um programador. Algumas técnicas apenas diminuem a quantidade de incidencias no seu código, mas evitá-los totalmente é impossível. O mais importante é ter em mente que um erro no software, mesmo trabalhando em uma grande equipe nunca terá um culpado, ele sempre será um problema seu.&lt;/p&gt;
 </content>
   </entry>
   
@@ -586,19 +685,17 @@ Solucionar bugs é parte da rotina de um programador. Algumas técnicas apenas d
     <link href="http://carlosbrando.github.com/2010/06/04/programadores-nem-sempre-o-time-que-esta-ganhando-esta-ganhando/"/>
     <updated>2010-06-04T00:00:00-03:00</updated>
     <id>http://carlosbrando.github.com/2010/06/04/programadores-nem-sempre-o-time-que-esta-ganhando-esta-ganhando</id>
-    <content type="html">[caption id=&quot;attachment_3360&quot; align=&quot;aligncenter&quot; width=&quot;500&quot; caption=&quot;Foto de Marc Castejón&quot;]&lt;a href=&quot;http://www.nomedojogo.com/wp-content/uploads/2010/06/2628233713_80b72163f4.jpg&quot;&gt;&lt;img class=&quot;size-full wp-image-3360&quot; title=&quot;2628233713_80b72163f4&quot; src=&quot;http://www.nomedojogo.com/wp-content/uploads/2010/06/2628233713_80b72163f4.jpg&quot; alt=&quot;&quot; width=&quot;500&quot; height=&quot;334&quot; /&gt;&lt;/a&gt;[/caption]
-&lt;p style=&quot;text-align: center;&quot;&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;img class='' src='http://www.nomedojogo.com/wp-content/uploads/2010/06/2628233713_80b72163f4.jpg' width='' height='' alt='' title=''&gt;&lt;/p&gt;
 
+&lt;p&gt;Estou sempre recebendo e-mails de pessoas interessadas em Ruby me questionando se realmente vale a pena gastar o seu tempo estudando essa linguagem de programação ao invés de estudar linguagens mais conhecidas como Java ou C#. Tenho certeza que a mesma dúvida preenche a mente de qualquer um que esteja interessado em apostar em alguma tecnologia emergente.&lt;/p&gt;
 
-Estou sempre recebendo e-mails de pessoas interessadas em Ruby me questionando se realmente vale a pena gastar o seu tempo estudando essa linguagem de programação ao invés de estudar linguagens mais conhecidas como Java ou C#. Tenho certeza que a mesma dúvida preenche a mente de qualquer um que esteja interessado em apostar em alguma tecnologia emergente.
+&lt;p&gt;Por que alguém estaria disposto a gastar o seu precioso tempo estudando algo no qual não tem certeza se terá a oportunidade de ganhar dinheiro com isso depois?&lt;/p&gt;
 
-Por que alguém estaria disposto a gastar o seu precioso tempo estudando algo no qual não tem certeza se terá a oportunidade de ganhar dinheiro com isso depois?
+&lt;p&gt;A minha resposta sempre foi: &quot;paixão&quot;. Bons programadores são apaixonados pelo que fazem, isso explica o motivo deles adorarem estar sempre aprendendo coisas novas.&lt;/p&gt;
 
-A minha resposta sempre foi: &quot;paixão&quot;. Bons programadores são apaixonados pelo que fazem, isso explica o motivo deles adorarem estar sempre aprendendo coisas novas.
+&lt;p&gt;Mas existe um dilema cultural aqui. A maioria de nós vem de famílias que emergiram para a classe média apenas uma ou duas gerações atrás. Fomos ensinados por nossos pais e avós a colocar os interesses financeiros da família em primeiro lugar e deixar a satisfação profissional em segundo plano. Isso explica muito bem porque tantos profissionais continuam em empregos ruins, mesmo insatisfeitos.&lt;/p&gt;
 
-Mas existe um dilema cultural aqui. A maioria de nós vem de famílias que emergiram para a classe média apenas uma ou duas gerações atrás. Fomos ensinados por nossos pais e avós a colocar os interesses financeiros da família em primeiro lugar e deixar a satisfação profissional em segundo plano. Isso explica muito bem porque tantos profissionais continuam em empregos ruins, mesmo insatisfeitos.
-
-Seguindo o pensamento de nossos pais, não é mais inteligente apostar no time que está ganhando? De forma alguma. &lt;a href=&quot;http://www.nomedojogo.com/2010/04/23/investir-em-ruby-era-muito-arriscado/&quot;&gt;Correr riscos&lt;/a&gt; e estar satisfeito profissionalmente são sem dúvida a receita para o sucesso.
+&lt;p&gt;Seguindo o pensamento de nossos pais, não é mais inteligente apostar no time que está ganhando? De forma alguma. &lt;a href=&quot;http://www.nomedojogo.com/2010/04/23/investir-em-ruby-era-muito-arriscado/&quot;&gt;Correr riscos&lt;/a&gt; e estar satisfeito profissionalmente são sem dúvida a receita para o sucesso.&lt;/p&gt;
 </content>
   </entry>
   
@@ -609,7 +706,8 @@ Seguindo o pensamento de nossos pais, não é mais inteligente apostar no time q
     <id>http://carlosbrando.github.com/2010/05/28/textmate-autocomplete-routes</id>
     <content type="html">&lt;object width=&quot;560&quot; height=&quot;340&quot;&gt;&lt;param name=&quot;movie&quot; value=&quot;http://www.youtube.com/v/-JBNLxjJ-xc&amp;hl=pt_BR&amp;fs=1&amp;rel=0&quot;&gt;&lt;/param&gt;&lt;param name=&quot;allowFullScreen&quot; value=&quot;true&quot;&gt;&lt;/param&gt;&lt;param name=&quot;allowscriptaccess&quot; value=&quot;always&quot;&gt;&lt;/param&gt;&lt;embed src=&quot;http://www.youtube.com/v/-JBNLxjJ-xc&amp;hl=pt_BR&amp;fs=1&amp;rel=0&quot; type=&quot;application/x-shockwave-flash&quot; allowscriptaccess=&quot;always&quot; allowfullscreen=&quot;true&quot; width=&quot;560&quot; height=&quot;340&quot;&gt;&lt;/embed&gt;&lt;/object&gt;
 
-&lt;a href=&quot;http://github.com/carlosbrando/ruby-on-rails-tmbundle&quot;&gt;http://github.com/carlosbrando/ruby-on-rails-tmbundle&lt;/a&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://github.com/carlosbrando/ruby-on-rails-tmbundle&quot;&gt;http://github.com/carlosbrando/ruby-on-rails-tmbundle&lt;/a&gt;&lt;/p&gt;
 </content>
   </entry>
   

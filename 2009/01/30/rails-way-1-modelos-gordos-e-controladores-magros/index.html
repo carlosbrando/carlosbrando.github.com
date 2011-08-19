@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Rails Way: Modelos Gordos E Controladores Magros</h1>
+      <h1 class="entry-title">Rails Way: Modelos gordos e controladores magros</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2009-01-30 00:00:00 -0200" pubdate  updated >Jan 30<span>th</span>, 2009</time>
+<time datetime="2009-01-30 00:00:00 -0200" pubdate  updated >30 de Janeiro de 2009</time>
 
 
 </p>
@@ -113,18 +113,18 @@
   </header>
 
 
-<div class="entry-content">Existe um jargão na comunidade Ruby on Rails conhecido como o <strong>“Rails way”</strong>, ou em bom português o jeitão de fazer as coisas no Rails. Não existe uma regra escrita sobre como desenvolver código em Ruby usando o Rails, mas a comunidade tem apoiado algumas praticas que tem se mostrado úteis e inteligentes.
+<div class="entry-content"><p>Existe um jargão na comunidade Ruby on Rails conhecido como o <strong>“Rails way”</strong>, ou em bom português o jeitão de fazer as coisas no Rails. Não existe uma regra escrita sobre como desenvolver código em Ruby usando o Rails, mas a comunidade tem apoiado algumas praticas que tem se mostrado úteis e inteligentes.</p>
 
-Um grande problema que tenho encontrado com alguns alunos e até mesmo com profissionais “experientes” é que muitos que hoje programam em Ruby vieram de linguagens como Java, C# e PHP, e trazem para o Ruby on Rails os mesmos vícios que possuíam ao desenvolver nestas plataformas.
+<p>Um grande problema que tenho encontrado com alguns alunos e até mesmo com profissionais “experientes” é que muitos que hoje programam em Ruby vieram de linguagens como Java, C# e PHP, e trazem para o Ruby on Rails os mesmos vícios que possuíam ao desenvolver nestas plataformas.</p>
 
-Para facilitar a vida destes programadores vou tentar mostrar algumas das “boas práticas” que um bom desenvolvedor Rails costuma adotar. E a primeira delas é &#8220;modelos gordos e controladores magros&#8221;.
+<p>Para facilitar a vida destes programadores vou tentar mostrar algumas das “boas práticas” que um bom desenvolvedor Rails costuma adotar. E a primeira delas é &#8220;modelos gordos e controladores magros&#8221;.</p>
 
-[caption id=&#8221;attachment_2164&#8221; align=&#8221;aligncenter&#8221; width=&#8221;400&#8221; caption=&#8221;Modelo gordo e controlador magro&#8221;]<img class="size-full wp-image-2164" title="laurel-hardy-portrait" src="http://www.nomedojogo.com/wp-content/uploads/2009/01/laurel-hardy-portrait.jpg" alt="laurel-hardy-portrait" height="277" width="400">[/caption]
-<p style="text-align: center;"></p>
+<p><img class='' src='http://www.nomedojogo.com/wp-content/uploads/2009/01/laurel-hardy-portrait.jpg' width='' height='' alt='' title=''></p>
 
-A idéia é que toda a lógica para a manipulação de um recurso fique concentrada dentro da sua classe especifica. Esta idéia parece um pouco confusa e difícil de ser adota no inicio, mas para simplificar um pouco tente fazer o seguinte: Cada action de seus controllers deve chamar apenas um método de um modelo além de um <code>find</code> ou <code>new</code> iniciais, mesmo que seja necessário criar métodos <code>.new</code> ou <code>.update</code> personalizados.
+<p>A idéia é que toda a lógica para a manipulação de um recurso fique concentrada dentro da sua classe especifica. Esta idéia parece um pouco confusa e difícil de ser adota no inicio, mas para simplificar um pouco tente fazer o seguinte: Cada action de seus controllers deve chamar apenas um método de um modelo além de um <code>find</code> ou <code>new</code> iniciais, mesmo que seja necessário criar métodos <code>.new</code> ou <code>.update</code> personalizados.</p>
 
-Por exemplo:
+<p>Por exemplo:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">update</span></span>
   <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>account</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Account</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>params<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>id</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
 
@@ -136,9 +136,12 @@ Por exemplo:
     <span class="keyword keyword_control keyword_control_ruby">end</span>
   <span class="keyword keyword_control keyword_control_ruby">end</span>
 <span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-Veja que no código acima estou inicialmente chamando o método <code>find</code> da classe <code>Account</code> e logo em seguida o método <code>update_attributes</code>. Este é o mundo ideal, apenas um método além do <code>find</code> inicial, no caso o método <code>update_attributes</code>. Estou sendo repetitivo para fixar a ideia.
 
-Existem casos um pouco mais complexos que exigirão a criação de métodos personalizados e não há mal algum de cria-los. Imagine que no exemplo acima eu somente pudesse alterar os dados da conta (<code>Account</code>) do usuário atual. Neste caso eu poderia cria um novo método dentro da classe <code>Account</code> chamado <code>update_attributes_by_user</code> que além de receber o hash com os dados do formulário, também deve receber o usuário registrado na sessão atual:
+
+<p>Veja que no código acima estou inicialmente chamando o método <code>find</code> da classe <code>Account</code> e logo em seguida o método <code>update_attributes</code>. Este é o mundo ideal, apenas um método além do <code>find</code> inicial, no caso o método <code>update_attributes</code>. Estou sendo repetitivo para fixar a ideia.</p>
+
+<p>Existem casos um pouco mais complexos que exigirão a criação de métodos personalizados e não há mal algum de cria-los. Imagine que no exemplo acima eu somente pudesse alterar os dados da conta (<code>Account</code>) do usuário atual. Neste caso eu poderia cria um novo método dentro da classe <code>Account</code> chamado <code>update_attributes_by_user</code> que além de receber o hash com os dados do formulário, também deve receber o usuário registrado na sessão atual:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">update</span></span>
   <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>account</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Account</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>params<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>id</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
 
@@ -150,9 +153,11 @@ Existem casos um pouco mais complexos que exigirão a criação de métodos pers
     <span class="keyword keyword_control keyword_control_ruby">end</span>
   <span class="keyword keyword_control keyword_control_ruby">end</span>
 <span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-Não importa o código deste método, o que importa é que a lógica por traz dele está no lugar certo, dentro do modelo. Enfim, esta é a ideia.
 
-Em breve escreverei sobre outras boas praticas ao desenvolver softwares com Ruby on Rails.
+
+<p>Não importa o código deste método, o que importa é que a lógica por traz dele está no lugar certo, dentro do modelo. Enfim, esta é a ideia.</p>
+
+<p>Em breve escreverei sobre outras boas praticas ao desenvolver softwares com Ruby on Rails.</p>
 </div>
 
 
@@ -161,14 +166,14 @@ Em breve escreverei sobre outras boas praticas ao desenvolver softwares com Ruby
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2009-01-30 00:00:00 -0200" pubdate  updated >Jan 30<span>th</span>, 2009</time>
+<time datetime="2009-01-30 00:00:00 -0200" pubdate  updated >30 de Janeiro de 2009</time>
 
 
 

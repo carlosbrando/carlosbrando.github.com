@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">O Que Vem Por aí? Novidades Nas Fixtures</h1>
+      <h1 class="entry-title">O que vem por aí? Novidades nas Fixtures</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2007-10-27 00:00:00 -0200" pubdate  updated >Oct 27<span>th</span>, 2007</time>
+<time datetime="2007-10-27 00:00:00 -0200" pubdate  updated >27 de Outubro de 2007</time>
 
 
 </p>
@@ -113,13 +113,14 @@
   </header>
 
 
-<div class="entry-content"><img src="http://www.nomedojogo.com/wp-content/uploads/2007/10/1129159157_9c02a19aaa.jpg" />
+<div class="entry-content"><p><img src="http://www.nomedojogo.com/wp-content/uploads/2007/10/1129159157_9c02a19aaa.jpg" /></p>
 
-A partir da pr&oacute;xima vers&atilde;o do Rails teremos alguns recursos extras nas famosas fixtures.
+<p>A partir da pr&oacute;xima vers&atilde;o do Rails teremos alguns recursos extras nas famosas fixtures.</p>
 
 <h3>Gera&ccedil;&atilde;o de ID&#39;s autom&aacute;ticos</h3>
 
-Hoje &eacute; assim:
+
+<p>Hoje &eacute; assim:</p>
 
 <pre>
 george:
@@ -131,7 +132,8 @@ reginald:
   name: Reginald the Pirate
 </pre>
 
-Cadas uma das fixtures tem dois identificadores, um para o banco (id: 1) e outro para humanos (george, por exemplo). Por que n&atilde;o gerar a <strong>primary key</strong> automaticamente? Assim criar&iacute;amos as nossas fixtures assim:
+
+<p>Cadas uma das fixtures tem dois identificadores, um para o banco (id: 1) e outro para humanos (george, por exemplo). Por que n&atilde;o gerar a <strong>primary key</strong> automaticamente? Assim criar&iacute;amos as nossas fixtures assim:</p>
 
 <pre>
 george: # generated id: 503576764
@@ -141,13 +143,15 @@ reginald: # generated id: 324201669
   name: Reginald the Pirate
 </pre>
 
-A partir da pr&oacute;xima vers&atilde;o do Rails, o ActiveRecord ir&aacute; at&eacute; a classe correspondente &agrave; fixture e recuperar&aacute; o campo que representa o primary key, inserindo o registro no banco corretamente.
 
-O ID gerado &eacute; uma constante, ent&atilde;o n&oacute;s podemos descobrir o ID de qualquer fixture sem carregar nada, desde que saibamos qual o nome que foi dado ao registro.
+<p>A partir da pr&oacute;xima vers&atilde;o do Rails, o ActiveRecord ir&aacute; at&eacute; a classe correspondente &agrave; fixture e recuperar&aacute; o campo que representa o primary key, inserindo o registro no banco corretamente.</p>
+
+<p>O ID gerado &eacute; uma constante, ent&atilde;o n&oacute;s podemos descobrir o ID de qualquer fixture sem carregar nada, desde que saibamos qual o nome que foi dado ao registro.</p>
 
 <h3>Associa&ccedil;&otilde;es entre fixtures atrav&eacute;s dos nomes</h3>
 
-Especificar um relacionamento entre fixtures &eacute; problem&aacute;tico e fr&aacute;gil, sem contar a dificuldade para se ler. E j&aacute; que podemos remover o ID das fixtures, utilizando somente o nome, tamb&eacute;m poderemos realizar as associa&ccedil;&otilde;es diretamente pelo nome, assim:
+
+<p>Especificar um relacionamento entre fixtures &eacute; problem&aacute;tico e fr&aacute;gil, sem contar a dificuldade para se ler. E j&aacute; que podemos remover o ID das fixtures, utilizando somente o nome, tamb&eacute;m poderemos realizar as associa&ccedil;&otilde;es diretamente pelo nome, assim:</p>
 
 <pre>
 ### pirates.yml
@@ -161,7 +165,8 @@ george:
   pirate: reginald
 </pre>
 
-E se tivermos um relacionamento <strong>has_and_belongs_to_many</strong> podemos fazer assim:
+
+<p>E se tivermos um relacionamento <strong>has_and_belongs_to_many</strong> podemos fazer assim:</p>
 
 <pre>
 ### monkeys.yml
@@ -181,17 +186,20 @@ grape:
   name: grape
 </pre>
 
-Muito legal n&eacute;?
+
+<p>Muito legal n&eacute;?</p>
 
 <h3>Colunas do timestamp preenchidas automaticamente</h3>
 
-Se sua tabela tiver qualquer uma das colunas no formato padr&atilde;o dos timestamps do Rails (<strong>created_at</strong>, <strong>created_on</strong>, <strong>updated_at</strong>, <strong>updated_on</strong>), elas ser&atilde;o automaticamente preenchidas com um <strong>Time.now</strong>.
 
-Se voc&ecirc; quiser um valor diferente deste, voc&ecirc; vai precisar fazer da forma antiga, preenchendo o valor na fixture.
+<p>Se sua tabela tiver qualquer uma das colunas no formato padr&atilde;o dos timestamps do Rails (<strong>created_at</strong>, <strong>created_on</strong>, <strong>updated_at</strong>, <strong>updated_on</strong>), elas ser&atilde;o automaticamente preenchidas com um <strong>Time.now</strong>.</p>
+
+<p>Se voc&ecirc; quiser um valor diferente deste, voc&ecirc; vai precisar fazer da forma antiga, preenchendo o valor na fixture.</p>
 
 <h3>Suporte aos padr&otilde;es do YAML</h3>
 
-Voc&ecirc; com certeza sabe como usar o YAML para reutilizar informa&ccedil;&otilde;es no seu arquivo database.yml. Agora voc&ecirc; tamb&eacute;m pode fazer o mesmo em suas fixtures:
+
+<p>Voc&ecirc; com certeza sabe como usar o YAML para reutilizar informa&ccedil;&otilde;es no seu arquivo database.yml. Agora voc&ecirc; tamb&eacute;m pode fazer o mesmo em suas fixtures:</p>
 
 <pre>
 DEFAULTS: &DEFAULTS
@@ -206,9 +214,10 @@ second:
   <<: *DEFAULTS
 </pre>
 
-Estas s&atilde;o algumas das novidades que nos aguardam, mas n&atilde;o acabou, muita coisa ainda deve mudar at&eacute; a vers&atilde;o 2.0. Estou acompanhando de perto&#8230;
 
-Tudo isto e mais um pouco pode ser encontrado <a href="http://dev.rubyonrails.org/changeset/8036">aqui</a>.
+<p>Estas s&atilde;o algumas das novidades que nos aguardam, mas n&atilde;o acabou, muita coisa ainda deve mudar at&eacute; a vers&atilde;o 2.0. Estou acompanhando de perto&#8230;</p>
+
+<p>Tudo isto e mais um pouco pode ser encontrado <a href="http://dev.rubyonrails.org/changeset/8036">aqui</a>.</p>
 </div>
 
 
@@ -217,14 +226,14 @@ Tudo isto e mais um pouco pode ser encontrado <a href="http://dev.rubyonrails.or
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2007-10-27 00:00:00 -0200" pubdate  updated >Oct 27<span>th</span>, 2007</time>
+<time datetime="2007-10-27 00:00:00 -0200" pubdate  updated >27 de Outubro de 2007</time>
 
 
 

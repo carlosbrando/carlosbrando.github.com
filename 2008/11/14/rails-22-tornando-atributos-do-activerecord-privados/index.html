@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Rails 2.2: Tornando Atributos Do ActiveRecord Privados</h1>
+      <h1 class="entry-title">Rails 2.2: Tornando atributos do ActiveRecord privados</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-11-14 00:00:00 -0200" pubdate  updated >Nov 14<span>th</span>, 2008</time>
+<time datetime="2008-11-14 00:00:00 -0200" pubdate  updated >14 de Novembro de 2008</time>
 
 
 </p>
@@ -113,9 +113,10 @@
   </header>
 
 
-<div class="entry-content">No Rails 2.2 você poderá definir atributos do <strong>ActiveRecord</strong> como <strong>private</strong>. Como estes atributos são criados via metaprogramação, até agora isto era impossível.
+<div class="entry-content"><p>No Rails 2.2 você poderá definir atributos do <strong>ActiveRecord</strong> como <strong>private</strong>. Como estes atributos são criados via metaprogramação, até agora isto era impossível.</p>
 
-Para entender como isto funcionará, vamos tornar o atributo <strong>name</strong> da classe <strong>User</strong> privado:
+<p>Para entender como isto funcionará, vamos tornar o atributo <strong>name</strong> da classe <strong>User</strong> privado:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails source_ruby_rails_shoulda"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">User<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
 
   <span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">private</span>
@@ -124,7 +125,10 @@ Para entender como isto funcionará, vamos tornar o atributo <strong>name</stron
   <span class="keyword keyword_control keyword_control_ruby">end</span>
 
 </span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-Agora ao tentar recuperar o valor do atributo <strong>name</strong>:
+
+
+<p>Agora ao tentar recuperar o valor do atributo <strong>name</strong>:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">user <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>first
 <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; #&lt;User id: 1, name: "teste", created_at: "2008-09-26 21:55:23", updated_at: "2008-09-26 21:55:23"&gt;
 </span>
@@ -133,11 +137,17 @@ user<span class="punctuation punctuation_separator punctuation_separator_method 
 </span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>    from /Users/carlosbrando/Projects/sandbox/edge/vendor/rails/activerecord/lib/active_record/attribute_methods.rb:260:in `method_missing'
 </span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>    from /Users/carlosbrando/Projects/sandbox/edge/vendor/rails/activerecord/lib/active_record/attribute_methods.rb:236:in `method_missing'
 </span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>    from (irb):3</span></span></pre>
-Veja que uma exceção <strong>NoMethodError</strong> foi disparada ao executar o método que agora é privado. Por outro lado eu posso alterar o nome do usuário, já que o método <strong>name=</strong> ainda é público.
+
+
+<p>Veja que uma exceção <strong>NoMethodError</strong> foi disparada ao executar o método que agora é privado. Por outro lado eu posso alterar o nome do usuário, já que o método <strong>name=</strong> ainda é público.</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">user<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>name <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Carlos<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
 <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "Carlos"
 </span></span></pre>
+
+
 <hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades do Rails 2.2 no e-book “<a href="../2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">Ruby on Rails - O que há de novo?</a>“.</em>
+
 </div>
 
 
@@ -146,14 +156,14 @@ Veja que uma exceção <strong>NoMethodError</strong> foi disparada ao executar 
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-11-14 00:00:00 -0200" pubdate  updated >Nov 14<span>th</span>, 2008</time>
+<time datetime="2008-11-14 00:00:00 -0200" pubdate  updated >14 de Novembro de 2008</time>
 
 
 

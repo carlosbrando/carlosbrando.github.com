@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Rails Way #4: Métodos Destrutivos Ou Somente Perigosos?</h1>
+      <h1 class="entry-title">Rails Way #4: Métodos destrutivos ou somente perigosos?</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2009-02-27 00:00:00 -0300" pubdate  updated >Feb 27<span>th</span>, 2009</time>
+<time datetime="2009-02-27 00:00:00 -0300" pubdate  updated >27 de Fevereiro de 2009</time>
 
 
 </p>
@@ -113,27 +113,30 @@
   </header>
 
 
-<div class="entry-content">O <a href="http://www.nomedojogo.com/2009/02/13/rails-way-3-nomes-de-metodos-e-variaveis-devem-ser-obvios/">último artigo</a> desta série levantou uma certa polêmica em alguns pontos. Quero deixar claro que entendo muito bem que existem situações em que não é possível ou mesmo prático utilizar as sugestões descritas aqui. Você não deve encarar esta série de artigos como um livro de leis, mas somente como boas práticas adotadas pela maior parte da comunidade de desenvolvedores Rails.
+<div class="entry-content"><p>O <a href="http://www.nomedojogo.com/2009/02/13/rails-way-3-nomes-de-metodos-e-variaveis-devem-ser-obvios/">último artigo</a> desta série levantou uma certa polêmica em alguns pontos. Quero deixar claro que entendo muito bem que existem situações em que não é possível ou mesmo prático utilizar as sugestões descritas aqui. Você não deve encarar esta série de artigos como um livro de leis, mas somente como boas práticas adotadas pela maior parte da comunidade de desenvolvedores Rails.</p>
 
-O que quero é exatamente isto, levantar discussões sobre o que é bom ou ruim e o que é realmente prático ou simplesmente moda.
+<p>O que quero é exatamente isto, levantar discussões sobre o que é bom ou ruim e o que é realmente prático ou simplesmente moda.</p>
 
-Ao comentar sobre algumas boas práticas ao nomear métodos, mencionei sobre o uso dos sinais de exclamação (!) e interrogação (?) como uma forma de deixar os métodos mais descritivos. Meu erro talvez tenha ocorrido ao usar o nome ‘métodos destrutivos’ quando me referi aos métodos terminados com o sinal de exclamação.
+<p>Ao comentar sobre algumas boas práticas ao nomear métodos, mencionei sobre o uso dos sinais de exclamação (!) e interrogação (?) como uma forma de deixar os métodos mais descritivos. Meu erro talvez tenha ocorrido ao usar o nome ‘métodos destrutivos’ quando me referi aos métodos terminados com o sinal de exclamação.</p>
 
-Concordo em dizer que na verdade &#8216;!&#8217; no fim de um método não necessariamente significa &#8220;destrutivo&#8221;, mas sim que o método em questão é uma versão mais <strong>perigosa</strong> de um outro método com o mesmo nome, mas sem o sinal.
+<p>Concordo em dizer que na verdade &#8216;!&#8217; no fim de um método não necessariamente significa &#8220;destrutivo&#8221;, mas sim que o método em questão é uma versão mais <strong>perigosa</strong> de um outro método com o mesmo nome, mas sem o sinal.</p>
+
 <h2>Deixe-me explicar isto melhor</h2>
-[caption id=&#8221;attachment_2273&#8221; align=&#8221;alignright&#8221; width=&#8221;361&#8221; caption=&#8221;O sinal ! no nome de um método serve como um alerta de “perigo”&#8221;]<img class="size-full wp-image-2273" title="2990809708_b26fb9ef8c" src="http://www.nomedojogo.com/wp-content/uploads/2009/02/2990809708_b26fb9ef8c.jpg" alt="2990809708_b26fb9ef8c" width="361" height="500" />[/caption]
 
-O uso da expressão &#8216;método perigoso&#8217; é relativo. Dizer que um método terminado com ! é perigoso, não diz nada se você não possuir um outro método similar menos perigoso e sem o sinal de exclamação.
 
-Assim, a regra número um é que todo método terminado com ! deve vir acompanhado de um outro método com o mesmo nome, mas sem o sinal.
+<p><img class='' src='http://www.nomedojogo.com/wp-content/uploads/2009/02/2990809708_b26fb9ef8c.jpg' width='' height='' alt='' title=''></p>
 
-No Ruby e também no Rails encontramos muitos casos assim. Por exemplo, temos o método <code>gsub!</code> que é <em>mais perigoso</em> que o seu companheiro <code>gsub</code>. Assim como também temos o método <code>exit!</code> que é a versão <em>mais perigosa</em> do método <code>exit</code>, e assim por diante.
+<p>O uso da expressão &#8216;método perigoso&#8217; é relativo. Dizer que um método terminado com ! é perigoso, não diz nada se você não possuir um outro método similar menos perigoso e sem o sinal de exclamação.</p>
 
-Alguns acreditam que devem usar o sinal ! apenas quando o método alterar a sua própria instância. Embora muitos método perigosos façam isto, esta não a finalidade do sinal de exclamação. No próprio Ruby encontramos métodos que tem esta característica mas que não são considerados perigosos, como os métodos <code>Array#pop</code> e <code>Array#push</code>, apenas para citar alguns exemplos.
+<p>Assim, a regra número um é que todo método terminado com ! deve vir acompanhado de um outro método com o mesmo nome, mas sem o sinal.</p>
 
-Devemos apenas fazer uso do sinal ! quando criarmos um método que represente mais perigo que outro já criado. Tome como exemplo os métodos <code>save</code> e <code>save!</code> do <code>ActiveRecord</code>. O primeiro método simplesmente grava o registro no banco de dados e retorna verdadeiro ou falso de acordo com o resultado do procedimento. Utilizando o segundo método, caso algo dê errado não teremos de volta apenas um booleano falso, teremos o disparo de uma exceção, o que pode representar um certo risco se o seu aplicativo não estiver preparado para isto. Desta forma podemos considerar este método <em>mais perigoso</em> que o primeiro, merecendo assim a adição do sinal ! no final de seu nome.
+<p>No Ruby e também no Rails encontramos muitos casos assim. Por exemplo, temos o método <code>gsub!</code> que é <em>mais perigoso</em> que o seu companheiro <code>gsub</code>. Assim como também temos o método <code>exit!</code> que é a versão <em>mais perigosa</em> do método <code>exit</code>, e assim por diante.</p>
 
-A conclusão é que o uso de &#8220;!&#8221; no nome de um método não dirá a você exatamente o que ele fará ou de que forma ele representa perigo. Mas o sinal de exclamação (!) é  importante como um alerta de que o método em questão pode representar algum risco se usado de forma impensada.
+<p>Alguns acreditam que devem usar o sinal ! apenas quando o método alterar a sua própria instância. Embora muitos método perigosos façam isto, esta não a finalidade do sinal de exclamação. No próprio Ruby encontramos métodos que tem esta característica mas que não são considerados perigosos, como os métodos <code>Array#pop</code> e <code>Array#push</code>, apenas para citar alguns exemplos.</p>
+
+<p>Devemos apenas fazer uso do sinal ! quando criarmos um método que represente mais perigo que outro já criado. Tome como exemplo os métodos <code>save</code> e <code>save!</code> do <code>ActiveRecord</code>. O primeiro método simplesmente grava o registro no banco de dados e retorna verdadeiro ou falso de acordo com o resultado do procedimento. Utilizando o segundo método, caso algo dê errado não teremos de volta apenas um booleano falso, teremos o disparo de uma exceção, o que pode representar um certo risco se o seu aplicativo não estiver preparado para isto. Desta forma podemos considerar este método <em>mais perigoso</em> que o primeiro, merecendo assim a adição do sinal ! no final de seu nome.</p>
+
+<p>A conclusão é que o uso de &#8220;!&#8221; no nome de um método não dirá a você exatamente o que ele fará ou de que forma ele representa perigo. Mas o sinal de exclamação (!) é  importante como um alerta de que o método em questão pode representar algum risco se usado de forma impensada.</p>
 </div>
 
 
@@ -142,14 +145,14 @@ A conclusão é que o uso de &#8220;!&#8221; no nome de um método não dirá a 
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2009-02-27 00:00:00 -0300" pubdate  updated >Feb 27<span>th</span>, 2009</time>
+<time datetime="2009-02-27 00:00:00 -0300" pubdate  updated >27 de Fevereiro de 2009</time>
 
 
 

@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Explicando O Rails Metal - Parte 2</h1>
+      <h1 class="entry-title">Explicando o Rails Metal - Parte 2</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2009-01-15 00:00:00 -0200" pubdate  updated >Jan 15<span>th</span>, 2009</time>
+<time datetime="2009-01-15 00:00:00 -0200" pubdate  updated >15 de Janeiro de 2009</time>
 
 
 </p>
@@ -113,15 +113,16 @@
   </header>
 
 
-<div class="entry-content">No <a href="http://www.nomedojogo.com/2009/01/12/o-que-e-o-rails-metal/">primeiro artigo</a> desta série eu comentei sobre um dos novos recursos incluídos no Rails, chamado de <strong>Rails Metal</strong>. Agora vamos falar da funcionalidade que leva o nome “Metal”.
+<div class="entry-content"><p>No <a href="http://www.nomedojogo.com/2009/01/12/o-que-e-o-rails-metal/">primeiro artigo</a> desta série eu comentei sobre um dos novos recursos incluídos no Rails, chamado de <strong>Rails Metal</strong>. Agora vamos falar da funcionalidade que leva o nome “Metal”.</p>
 
-Imagine que você precise criar um serviço simples (como uma API pública, por exemplo) que faça uma ou duas consultas no banco de dados e devolva um string para o usuário e que precisa ser muito, muito rápido. É nestas horas que utilizaremos o Rails “Metal”, para realizar tarefas simples que precisam ser realmente rápidas.
+<p>Imagine que você precise criar um serviço simples (como uma API pública, por exemplo) que faça uma ou duas consultas no banco de dados e devolva um string para o usuário e que precisa ser muito, muito rápido. É nestas horas que utilizaremos o Rails “Metal”, para realizar tarefas simples que precisam ser realmente rápidas.</p>
 
-Para criar um serviço Rails Metal devemos usar o seguinte comando:
+<p>Para criar um serviço Rails Metal devemos usar o seguinte comando:</p>
 
 <pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">$ ./script/generate metal poller</span></span></pre>
 
-Com isto teremos um novo diretório chamado <code>app/metal</code>. Nele você encontrará o arquivo <code>poller.rb</code> que deve se parecer com o isto:
+
+<p>Com isto teremos um novo diretório chamado <code>app/metal</code>. Nele você encontrará o arquivo <code>poller.rb</code> que deve se parecer com o isto:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Allow the metal piece to run in isolation
 </span><span class="meta meta_require meta_require_ruby"><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">require</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="support support_class support_class_ruby">File</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>dirname<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_language variable_language_ruby">__FILE__</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">+</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>/../../config/environment<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_ruby">unless</span> <span class="keyword keyword_control keyword_control_pseudo-method keyword_control_pseudo-method_ruby">defined?</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_constant variable_other_constant_ruby">Rails</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span>
@@ -137,9 +138,10 @@ Com isto teremos um novo diretório chamado <code>app/metal</code>. Nele você e
 <span class="keyword keyword_control keyword_control_ruby">end</span>
 </span></pre>
 
-Neste modelo tudo o que ele faz é capturar as requisições feitas para <code>/poller</code> e retornar <code>‘Hello World’</code>. Quando a requisição não for para <code>/poller</code> ele retornará um status 404, que indica ao sistema de rotas do Rails que ele deve assumir à partir daí, cuidando da requisição.
 
-Para ficar mais claro, o código acima se fosse criado em um controller comum do Rails seria algo mais ou menos assim:
+<p>Neste modelo tudo o que ele faz é capturar as requisições feitas para <code>/poller</code> e retornar <code>‘Hello World’</code>. Quando a requisição não for para <code>/poller</code> ele retornará um status 404, que indica ao sistema de rotas do Rails que ele deve assumir à partir daí, cuidando da requisição.</p>
+
+<p>Para ficar mais claro, o código acima se fosse criado em um controller comum do Rails seria algo mais ou menos assim:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_controller"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">OldPollerController<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ApplicationController</span></span></span>
   <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">poller</span></span>
@@ -147,14 +149,20 @@ Para ficar mais claro, o código acima se fosse criado em um controller comum do
   <span class="keyword keyword_control keyword_control_ruby">end</span>
 </span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
 
-<a href="http://soylentfoo.jnewland.com/articles/2008/12/16/rails-metal-a-micro-framework-with-the-power-of-rails-m">Jesse Newland</a> fez um teste simples de performance e chegou ao seguinte resultado: Executando estes dois códigos, no modelo tradicional usando um controller comum teríamos 408.45 req/s e 2.448 ms, enquanto na versão Metal temos 1154.66 req/s e 0.866 ms. Ou seja, para um ridículo Hello World o Rails Metal se mostra 2.8x mais rápido que um Controller comum. Muito bom.
 
-Ao subir seu projeto Rails você já terá no ar o seu serviço Rails Metal. Mas se desejar também pode subir o serviço isoladamente através da ferramenta rackup:
+<p><a href="http://soylentfoo.jnewland.com/articles/2008/12/16/rails-metal-a-micro-framework-with-the-power-of-rails-m">Jesse Newland</a> fez um teste simples de performance e chegou ao seguinte resultado: Executando estes dois códigos, no modelo tradicional usando um controller comum teríamos 408.45 req/s e 2.448 ms, enquanto na versão Metal temos 1154.66 req/s e 0.866 ms. Ou seja, para um ridículo Hello World o Rails Metal se mostra 2.8x mais rápido que um Controller comum. Muito bom.</p>
+
+<p>Ao subir seu projeto Rails você já terá no ar o seu serviço Rails Metal. Mas se desejar também pode subir o serviço isoladamente através da ferramenta rackup:</p>
 
 <pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">rackup -s mongrel app/metal/poller.rb</span></span></pre>
 
+
+
+
 <h2>Usando outras ferramentas</h2>
-Além do modelo proposto também podemos fazer uso de outras ferramentas afim de simplificar a criação destes serviços. Veja um exemplo retirado da especificação do Rails de um código usando o <a href="http://sinatra.rubyforge.org/">Sinatra</a> para criar um serviço Rails Metal:
+
+
+<p>Além do modelo proposto também podemos fazer uso de outras ferramentas afim de simplificar a criação destes serviços. Veja um exemplo retirado da especificação do Rails de um código usando o <a href="http://sinatra.rubyforge.org/">Sinatra</a> para criar um serviço Rails Metal:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> app/metal/api.rb
 </span><span class="meta meta_require meta_require_ruby"><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">require</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>sinatra<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span>
@@ -165,8 +173,13 @@ get <span class="string string_quoted string_quoted_single string_quoted_single_
 </span>  <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Hello Sinatra!<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
 <span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
 
+
+
+
 <h2>Finalizando</h2>
-Como podem ver teremos o melhor de dois mundo na próxima versão do Rails. Mas é importante ressaltar que mesmo sendo possível criar um projeto inteiro usando apenas o Rails Metal, isto não é uma boa coisa a se fazer. O Rails Metal é uma ferramenta com uma finalidade especifica e somente deve ser usada para casos onde a performance é crucial para o sucesso do seu software.
+
+
+<p>Como podem ver teremos o melhor de dois mundo na próxima versão do Rails. Mas é importante ressaltar que mesmo sendo possível criar um projeto inteiro usando apenas o Rails Metal, isto não é uma boa coisa a se fazer. O Rails Metal é uma ferramenta com uma finalidade especifica e somente deve ser usada para casos onde a performance é crucial para o sucesso do seu software.</p>
 </div>
 
 
@@ -175,14 +188,14 @@ Como podem ver teremos o melhor de dois mundo na próxima versão do Rails. Mas 
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2009-01-15 00:00:00 -0200" pubdate  updated >Jan 15<span>th</span>, 2009</time>
+<time datetime="2009-01-15 00:00:00 -0200" pubdate  updated >15 de Janeiro de 2009</time>
 
 
 

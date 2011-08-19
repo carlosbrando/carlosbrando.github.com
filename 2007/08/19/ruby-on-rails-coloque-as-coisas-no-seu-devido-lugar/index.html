@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Ruby on Rails: Coloque as Coisas No Seu Devido Lugar.</h1>
+      <h1 class="entry-title">Ruby on Rails: Coloque as coisas no seu devido lugar.</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2007-08-19 00:00:00 -0300" pubdate  updated >Aug 19<span>th</span>, 2007</time>
+<time datetime="2007-08-19 00:00:00 -0300" pubdate  updated >19 de Agosto de 2007</time>
 
 
 </p>
@@ -114,29 +114,40 @@
 
 
 <div class="entry-content"><p><img src="http://www.nomedojogo.com/wp-content/uploads/2007/08/459207903-d5ce64f14a.jpg" style="border: 0px none " alt="459207903_d5ce64f14a" border="0" height="333" width="500" /> </p>
+
+
 <p>Regra: Coloque sempre links para stylesheets e javascript dentro da tag HEAD do HTML.</p>
+
+
 <p>N&atilde;o &eacute; que isto seja obrigat&oacute;rio, mas eu gosto de deixar as coisas bonitas. O problema com Rails neste caso &eacute; que quando uso o m&eacute;todo <strong>stylesheet_link_tag</strong> na p&aacute;gina que estou desenvolvendo, quando ela for renderizada, o link do css&nbsp;ficar&aacute; bem no meio da p&aacute;gina por causa do <strong>yield</strong> da p&aacute;gina de layout.</p>
+
+
 <p>Mas como tudo no Rails, existe uma solu&ccedil;&atilde;o muito simples para isto. Podemos usar o m&eacute;todo <strong>content_for</strong>.</p>
+
+
 <p>Para fazer o teste, crie um view de layout com o seguinte c&oacute;digo:</p>
+
+
 <p>[source:html]
 <html>
-	<head>
-		<%= yield :css %>
-	</head>
-	<body>
-		<%= yield %>
-	</body>
+    <head>
+        <%= yield :css %>
+    </head>
+    <body>
+        <%= yield %>
+    </body>
 </html>
 [/source]</p>
 <p>Veja que a p&aacute;gina tem dois yield, sendo que o primeiro recebe um par&acirc;metro <strong>:css</strong>.</p>
 <p>Agora crie outra&nbsp;view da seguinte forma:</p>
 <p>[source:html]
 <% content_for :css do %>
-	<%= stylesheet_link_tag 'css_da_minha_pagina' %>
+    <%= stylesheet_link_tag 'css_da_minha_pagina' %>
 <% end %>
 <h2>Minha P&aacute;gina</h2>
 [/source]</p>
 <p>Rode e veja como fica sua p&aacute;gina. Pronto, tudo no seu devido lugar.</p>
+
 </div>
 
 
@@ -145,14 +156,14 @@
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2007-08-19 00:00:00 -0300" pubdate  updated >Aug 19<span>th</span>, 2007</time>
+<time datetime="2007-08-19 00:00:00 -0300" pubdate  updated >19 de Agosto de 2007</time>
 
 
 

@@ -1,0 +1,597 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Nome do Jogo</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/page/48/index.html"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds2.feedburner.com/NomeDoJogo" rel="alternate" title="Nome do Jogo" type="application/atom+xml"/>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1249636-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Nome do Jogo</a></h1>
+  
+    <h2>por Carlos Brando</h2>
+  
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="http://feeds2.feedburner.com/NomeDoJogo" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/03/31/edge-rails-adicionada-opcao-de-confirmacao-no-submit_tag/">Edge Rails: Adicionada opção de confirmação no submit_tag</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-03-31 00:00:00 -0300" pubdate  updated >31 de Março de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Algo muito comum, é quando o usuário clica no botão submit de um formulário, desejarmos que ele confirme a ação antes de prosseguir. Até agora para que isto funcionasse era necessário dar um jeitinho no método <code>submit_tag</code>. Algo assim:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">submit_tag<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Save changes<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>onclick</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>return confirm('Are you sure?')<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
+
+
+<p>Mas este tipo de coisa não é mais necessário. Agora temos a opção <code>:confirm</code> neste método também. Ela funciona exatamente como no método <code>link_to</code>. Veja um exemplo:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">submit_tag<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Save changes<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>confirm</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Are you sure?<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
+
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/03/31/edge-rails-adicionada-opcao-de-confirmacao-no-submit_tag/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/03/29/edge-rails-novo-metodo-timezoneparse/">Edge Rails: Novo método TimeZone#parse</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-03-29 00:00:00 -0300" pubdate  updated >29 de Março de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Mais um método adicionado à classe <code>TimeZone</code>, o método: <code>parse</code>. Este método serve para criar uma nova instância de <code>ActiveSupport::TimeWithZone</code> à partir uma <code>string</code>, nada fora do que já conhecemos. Vamos aos exemplos:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>zone <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Hawaii<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "Hawaii"
+</span><span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>zone<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>parse<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>1999-12-31 14:00:00<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; Fri, 31 Dec 1999 14:00:00 HST -10:00
+</span>
+
+<span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>zone<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>now
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; Fri, 31 Dec 1999 14:00:00 HST -10:00
+</span><span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>zone<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>parse<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>22:30:00<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; Fri, 31 Dec 1999 22:30:00 HST -10:00</span></span></pre>
+
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/03/29/edge-rails-novo-metodo-timezoneparse/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/03/28/rails-podcast-brasil-episodio-11/">Rails Podcast Brasil - Episódio 11</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-03-28 00:00:00 -0300" pubdate  updated >28 de Março de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://www.nomedojogo.com/wp-content/uploads/2008/03/266377598_6235c047bc.jpg" alt="266377598_6235c047bc.jpg" /></p>
+
+<p>Mais um podcast no ar. Desta vez eu e o Fábio comentamos sobre as novidades no Edge Rails, falamos um pouco de Cells, HotRuby, Sapphire #1 e #2, SAP e comparamos o Windows com o Mac.</p>
+
+<p>Para ouvir: <a href="http://www.rubyonrails.pro.br/podcasts">http://www.rubyonrails.com.br/podcasts</a></p>
+
+<h3>Neste episódio:</h3>
+
+
+<ul>
+    <li><a href="http://blog.egenial.com.br/?p=139">O Slogan mais criativo</a></li>
+    <li><a href="http://www.nomedojogo.com/2008/03/22/edge-rails-dois-novos-helpers-para-criadores-de-plugins/">Edge Rails: Dois novos helpers para criadores de plugins</a></li>
+    <li><a href="http://blog.codefront.net/2008/03/27/living-on-the-edge-of-rails-13-git-scriptplugin-install-has_one-through/">Living on the edge (of Rails) #13 Â Git script/plugin install, has_one :through</a></li>
+    <li><a href="http://www.nomedojogo.com/2008/03/26/edge-rails-timewithzone-se-preparando-para-o-ruby-19/">Edge Rails: TimeWithZone se preparando para o Ruby 1.9</a></li>
+    <li><a href="http://www.undergoogle.com/blog/2008/03/google-lanca-api-de-traducao.html">Google lança API de tradução</a></li>
+    <li><a href="http://www.undergoogle.com/blog/2008/03/yahoo-tambem-integrara-opensocial.html">Yahoo! também integrará OpenSocial</a></li>
+    <li><a href="http://googlediscovery.com/2008/03/25/yahoo-microsoft-aumentara-a-oferta/">Yahoo: Microsoft aumentará a oferta</a></li>
+    <li><a href="http://mtnwestrubyconf.org/">MountainWest RubyConf 2008</a></li>
+    <li><a href="http://www.modrails.com/">Phusion Passenger (a.k.a. mod_rails for Apache) Preview</a></li>
+    <li><a href="http://www.workingwithrails.com/browse/people/country">Ruby on Rails Community</a></li>
+    <li><a href="http://www.rubyinside.com/is-windows-a-first-class-platform-for-ruby-823.html">Is Windows a First Class Platform for Ruby?</a></li>
+    <li><a href="http://weblog.rubyonrails.com/2008/3/26/pratik-joins-rails-core-retired-members-go-alumni">Pratik joins core, retired members go alumni</a></li>
+    <li><a href="http://blog.obiefernandez.com/content/2008/03/big-name-compan.html">Big Name Companies Using Ruby on Rails</a></li>
+    <li><a href="http://strokedb.com/">StrokeDB</a></li>
+    <li><a href="http://mikepence.wordpress.com/2008/03/22/removing-the-engines-dependency-from-cells/">Removing the Engines dependency from Cells</a></li>
+    <li><a href="http://www.rubyinside.com/scout-a-ruby-powered-web-monitoring-and-reporting-service-825.html">Scout: A Ruby Powered Web Monitoring and Reporting Service</a></li>
+    <li><a href="http://billsix.blogspot.com/2008/03/functional-collection-patterns-in-ruby.html">Functional Collection Patterns in Ruby</a></li>
+    <li><a href="http://www.rubyinside.com/hotruby-a-javascript-flash-virtual-machine-that-runs-ruby-821.html">HotRuby: A JavaScript &amp; Flash Virtual Machine That Runs Ruby</a></li>
+    <li><a href="http://www.rubyinside.com/sapphire-two-different-new-re-implementations-of-ruby-819.html">Sapphire Â Two New Re-Implementations of Ruby</a></li>
+    <li><a href="http://www.hokstad.com/writing-a-compiler-in-ruby-bottom-up-step-1.html">Writing a compiler in Ruby bottom up</a></li>
+    <li><a href="http://blog.obiefernandez.com/content/2008/03/sap-sued-for-ty.html?cid=108524068#comment-108524068">SAP Sued for Typical Ghetto Behavior</a></li>
+    <li><a href="http://www.nomedojogo.com/2008/03/26/analise-do-windows-vista-pela-apple/">Analise do Windows Vista pela Apple</a></li>
+</ul>
+
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/03/28/rails-podcast-brasil-episodio-11/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/03/28/edge-rails-instalando-plugins-a-partir-do-git/">Edge Rails: Instalando plugins à partir do Git</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-03-28 00:00:00 -0300" pubdate  updated >28 de Março de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Agora é exatamente 1:02 da manhõ, eu e o Fábio acabamos de gravar o podcast desta semana que em breve deve sair no site oficial do Rails daqui do Brasil e no podcast falamos sobre uma novidade no Edge Rails: agora podemos instalar plugins que estão em repositórios GIT com o <code>script/plugin install</code>, exatamente como fazemos para plugins que estão no SVN. Basicamente este script irá criar um clone do repositório no seu projeto.</p>
+
+<pre class="textmate-source"><span class="source source_shell">./script/plugin install git://github.com/SomeGuy/my_awesome_plugin.git</span></pre>
+
+
+<p>Mais um ponto para a galera do Git e para a galera do Rails.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/03/28/edge-rails-instalando-plugins-a-partir-do-git/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/03/28/edge-rails-expressoes-em-metodos-de-calculo-do-activerecord/">Edge Rails: Expressões em métodos de cálculo do ActiveRecord</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-03-28 00:00:00 -0300" pubdate  updated >28 de Março de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Agora podemos usar expressões em método de cálculo do <code>ActiveRecord</code>, como o método <code>sum</code>, por exemplo. Vejo o que é possível:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Person</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>sum<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>2 * age<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
+
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/03/28/edge-rails-expressoes-em-metodos-de-calculo-do-activerecord/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/03/27/edge-rails-dois-novos-metodos-timezoneat-e-datetimeto_f/">Edge Rails: Dois novos métodos TimeZone#at e DateTime#to_f</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-03-27 00:00:00 -0300" pubdate  updated >27 de Março de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A classe <code>DateTime</code> ganhou um novo método o <code>to_f</code> que retorna a data como um ponto flutuante que representa a quantidade de segundos desde o Unix epoch (época Unix). Em outras palavras, se não me engano, é a quantidade de segundos desde 1 de janeiro de 1970 às zero hora.</p>
+
+<p>E a classe <code>TimeZone</code> também recebeu um novo método, o <code>at</code>, que serve para criar uma nova instância de <code>ActiveSupport::TimeWithZone</code> à partir do número de segundos desde o Unix epoch. Exemplo:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>zone <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Hawaii<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "Hawaii"
+</span><span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>utc<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">2000</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>to_f  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; 946684800.0
+</span>
+<span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>zone<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>at<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">946684800.0</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; Fri, 31 Dec 1999 14:00:00 HST -10:00</span></span></pre>
+
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/03/27/edge-rails-dois-novos-metodos-timezoneat-e-datetimeto_f/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/03/26/edge-rails-timewithzone-se-preparando-para-o-ruby-19/">Edge Rails: TimeWithZone se preparando para o Ruby 1.9</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-03-26 00:00:00 -0300" pubdate  updated >26 de Março de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>No Ruby 1.9 teremos alguns métodos novos na classe <code>Time</code>, métodos como:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>now
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; Thu Nov 03 18:58:25 CET 2005
+</span>
+<span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>now<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>sunday?
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; false</span></span></pre>
+
+
+<p>Existe um para cada dia da semana.</p>
+
+<p>Outra curiosidade é que o método <code>to_s</code> do objeto <code>Time</code> também vai ter um retorno um pouco diferente. Hoje quando executamos <code>Time.new.to_s</code>, temos o seguite:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>to_s
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "Thu Oct 12 10:39:27 +0200 2006"</span></span></pre>
+
+
+<p>No Ruby 1.9 teremos:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>to_s
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "2006-10-12 10:39:24 +0200"</span></span></pre>
+
+
+<p>Estou escrevendo isto apenas para dizer que o Rails já está sendo preparado para lidar com estas alterações. A classe <code>TimeWithZone</code>, por exemplo, acabou de receber uma implementação para funcionar com os métodos do primeiro exemplo.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/03/26/edge-rails-timewithzone-se-preparando-para-o-ruby-19/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/03/26/edge-rails-bug-no-metodo-texthelperexcerpt-corrigido/">Edge Rails: Bug no método TextHelper#excerpt corrigido</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-03-26 00:00:00 -0300" pubdate  updated >26 de Março de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>O método <code>excerpt</code> é um helper que funciona assim:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">excerpt<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>This is an example<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>an<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">5</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "...s is an examp..."</span></span></pre>
+
+
+<p>Eu pedi para que ele localizasse dentro da frase &#8220;This is an example&#8221; a palavra &#8220;an&#8221; e me retornasse uma abreviação da frase com os cinco caracteres antes e depois da palavra, acrescentando quando necessário o sinal de &#8220;&#8230;&#8221;. O problema é que se você contar verá que depois a palavra ele trouxe na verdade seis caracteres e não cinco. BUG.</p>
+
+<p>Pois é, este é mais um dos bugs corrigidos para o Rails 2.1, onde o mesmo método acima retornaria o seguinte:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">excerpt<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>This is an example<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>an<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">5</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "...s is an exam..."</span></span></pre>
+
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/03/26/edge-rails-bug-no-metodo-texthelperexcerpt-corrigido/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/03/26/analise-do-windows-vista-pela-apple/">Analise do Windows Vista pela Apple</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-03-26 00:00:00 -0300" pubdate  updated >26 de Março de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><object width="425" height="355"><param name="movie" value="http://www.youtube.com/v/k3frcpxlMA8&hl=en"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/k3frcpxlMA8&hl=en" type="application/x-shockwave-flash" wmode="transparent" width="425" height="355"></embed></object>
+
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/03/26/analise-do-windows-vista-pela-apple/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/03/25/edge-rails-o-que-exatamente-o-metodo-findlast-retorna/">Edge Rails: O que exatamente o método find(:last) retorna?</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-03-25 00:00:00 -0300" pubdate  updated >25 de Março de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>No ultimo Rails Podcast eu falei sobre a alteração no método <code>find</code> do <code>ActiveRecord</code>, que agora permite usarmos a opção <code>:last</code>.</p>
+
+<p>Então o Akita levantou a questão: &#8220;Como este método é implementado?&#8221;, hmm, err&#8230; Bom, eu resolvi pesquisar e acho que a melhor forma de responder esta pergunta é mostrando um dos seus testes:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">test_find_last</span></span>
+  last  <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Developer</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>last</span>
+  assert_equal last<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="support support_class support_class_ruby">Developer</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>first</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>order</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>id desc<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+<p>Entendeu?</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/03/25/edge-rails-o-que-exatamente-o-metodo-findlast-retorna/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+<nav role="pagination">
+  <div>
+    
+      <a class="prev" href="/page/49/">&larr; Antigos</a>
+    
+    <a href="/blog/archives">Arquivo</a>
+    
+    <a class="next" href="/page/47/">Novos &rarr;</a>
+    
+  </div>
+</nav>
+
+<script type="text/javascript">
+    var disqus_shortname = 'carlosbrando';
+    (function () {
+      var s = document.createElement('script'); s.async = true;
+      s.type = 'text/javascript';
+      s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+      (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+
+</div>
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro anos de Nome do Jogo</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("carlosbrando", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/carlosbrando" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @carlosbrando</a>
+  
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

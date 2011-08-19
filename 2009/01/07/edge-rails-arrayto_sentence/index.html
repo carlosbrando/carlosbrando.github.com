@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2009-01-07 00:00:00 -0200" pubdate  updated >Jan 7<span>th</span>, 2009</time>
+<time datetime="2009-01-07 00:00:00 -0200" pubdate  updated > 7 de Janeiro de 2009</time>
 
 
 </p>
@@ -113,32 +113,39 @@
   </header>
 
 
-<div class="entry-content">Atualmente o método <code>Array#to_sentence</code> possui as opções <code>:connector</code> que permite configurar a palavra usada para ligar os dois últimos elementos da lista, normalmente a palavra “and” ou a letra “e” em português e <code>:skip_last_comma</code> que como diz o nome remove a última virgula da frase.
+<div class="entry-content"><p>Atualmente o método <code>Array#to_sentence</code> possui as opções <code>:connector</code> que permite configurar a palavra usada para ligar os dois últimos elementos da lista, normalmente a palavra “and” ou a letra “e” em português e <code>:skip_last_comma</code> que como diz o nome remove a última virgula da frase.</p>
 
-À partir do Rails 2.3 este método não terá mais as opções acima, que serão substituídas pelas seguintes:
+<p>À partir do Rails 2.3 este método não terá mais as opções acima, que serão substituídas pelas seguintes:</p>
 
-<strong>:words_connector</strong>
-O símbolo ou palavra que será usado para ligar os elementos na frase, somente quando o <code>Array</code> tem mais de dois elementos. O valor padrão é &#8220;, &#8220;.
+<p><strong>:words_connector</strong>
+O símbolo ou palavra que será usado para ligar os elementos na frase, somente quando o <code>Array</code> tem mais de dois elementos. O valor padrão é &#8220;, &#8220;.</p>
 
-<strong>:two_words_connector</strong>
-Esta opção funciona como a de cima, mas somente quando o <code>Array</code> possuir apenas dois elementos. O valor padrão é &#8221; and &#8220;.
+<p><strong>:two_words_connector</strong>
+Esta opção funciona como a de cima, mas somente quando o <code>Array</code> possuir apenas dois elementos. O valor padrão é &#8221; and &#8220;.</p>
 
-<strong>:last_word_connector</strong>
-Esta opção define o símbolo ou palavra que ligará os dois últimos elementos do <code>Array</code> na frase. O valor padrão é &#8220;, and &#8220;.
+<p><strong>:last_word_connector</strong>
+Esta opção define o símbolo ou palavra que ligará os dois últimos elementos do <code>Array</code> na frase. O valor padrão é &#8220;, and &#8220;.</p>
 
-A opção <code>:locale</code> que já existe hoje continuará existindo normalmente. Um exemplo de uso do novo método para conseguir uma frase em português seria:
+<p>A opção <code>:locale</code> que já existe hoje continuará existindo normalmente. Um exemplo de uso do novo método para conseguir uma frase em português seria:</p>
+
 <pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">&gt;&gt; ['Cachorro', 'Gato', 'Camelo'].to_sentence :last_word_connector =&gt; " e "
 =&gt; "Cachorro, Gato e Camelo"</span></span></pre>
-Você também deve configurar o seu arquivo de internacionalização para o novo formato:
+
+
+<p>Você também deve configurar o seu arquivo de internacionalização para o novo formato:</p>
+
 <pre class="textmate-source"><span class="source source_yaml"><span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">pt-BR</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
 </span>  <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">support</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
 </span>    <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">array</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
 </span>      <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">words_connector</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span> </span><span class="string string_quoted string_quoted_double string_quoted_double_yaml"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_yaml">"</span>, <span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_yaml">"</span></span>
       <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">two_words_connector</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span> </span><span class="string string_quoted string_quoted_double string_quoted_double_yaml"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_yaml">"</span> e <span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_yaml">"</span></span>
       <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">last_word_connector</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span> </span><span class="string string_quoted string_quoted_double string_quoted_double_yaml"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_yaml">"</span> e <span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_yaml">"</span></span></span></pre>
-Esta decisão foi tomada para facilitar o processo de internacionalização do Rails em algumas línguas.
+
+
+<p>Esta decisão foi tomada para facilitar o processo de internacionalização do Rails em algumas línguas.</p>
 
 <hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.3/3.0 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades acompanhando a série <a href="../category/edge-rails/">Edge Rails</a>.</em>
+
 </div>
 
 
@@ -147,14 +154,14 @@ Esta decisão foi tomada para facilitar o processo de internacionalização do R
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2009-01-07 00:00:00 -0200" pubdate  updated >Jan 7<span>th</span>, 2009</time>
+<time datetime="2009-01-07 00:00:00 -0200" pubdate  updated > 7 de Janeiro de 2009</time>
 
 
 

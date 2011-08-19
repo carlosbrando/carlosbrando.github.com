@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Edge Rails: Desabilitando O Cabeçalho Accept Em Requisições HTTP</h1>
+      <h1 class="entry-title">Edge Rails: Desabilitando o cabeçalho Accept em requisições HTTP</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-08-08 00:00:00 -0300" pubdate  updated >Aug 8<span>th</span>, 2008</time>
+<time datetime="2008-08-08 00:00:00 -0300" pubdate  updated > 8 de Agosto de 2008</time>
 
 
 </p>
@@ -113,7 +113,8 @@
   </header>
 
 
-<div class="entry-content">Quando usamos o método <strong>respond_to</strong> para fazer algo assim:
+<div class="entry-content"><p>Quando usamos o método <strong>respond_to</strong> para fazer algo assim:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">index</span></span>
   <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>people</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Person</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>all</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
 
@@ -123,23 +124,31 @@
   <span class="keyword keyword_control keyword_control_ruby">end</span>
 <span class="keyword keyword_control keyword_control_ruby">end</span>
 </span></pre>
-O Rails tem duas formas de identificar qual é o formato que deve ser usado, a primeira e mais comum é através do formato informado na URL (/index.<strong>xml</strong>, por exemplo) e a segunda forma para o caso de o formato não ter sido especificado é examinando o cabeçalho <strong>Accept</strong> da requisição HTTP.
 
-Para quem não sabe o cabeçalho <strong>Accept</strong> é aquele que informa o tipo do documento desejado em strings mais ou menos assim:
 
-<code>Accept: text/plain, text/html
-Accept: text/x-dvi; q=.8; mxb=100000; mxt=5.0, text/x-c</code>
+<p>O Rails tem duas formas de identificar qual é o formato que deve ser usado, a primeira e mais comum é através do formato informado na URL (/index.<strong>xml</strong>, por exemplo) e a segunda forma para o caso de o formato não ter sido especificado é examinando o cabeçalho <strong>Accept</strong> da requisição HTTP.</p>
+
+<p>Para quem não sabe o cabeçalho <strong>Accept</strong> é aquele que informa o tipo do documento desejado em strings mais ou menos assim:</p>
+
+<p><code>Accept: text/plain, text/html
+Accept: text/x-dvi; q=.8; mxb=100000; mxt=5.0, text/x-c</code></p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> recuperando esta informação via código
 </span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>request</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>env<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>HTTP_ACCEPT<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>text/javascript<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span></span></pre>
-<a href="http://www.developershome.com/wap/detection/detection.asp?page=httpHeaders">Aqui</a> você pode ver uma lista dos tipos mais comuns.
 
-Acontece que este cabeçalho é porcamente implementado na maioria dos browsers. E quando ele é usado em sites públicos algumas vezes estranhos erros acontecem quando robôs indexadores fazem seus <strong>requests</strong>.
 
-Assim, tomou-se a decisão de desativar este cabeçalho por padrão, depois voltou-se atrás e resolveu-se que era melhor deixar apenas a opção de desligar se desejado. Para isto basta incluir a seguinte linha no arquivo <strong>environment.rb</strong>:
+<p><a href="http://www.developershome.com/wap/detection/detection.asp?page=httpHeaders">Aqui</a> você pode ver uma lista dos tipos mais comuns.</p>
+
+<p>Acontece que este cabeçalho é porcamente implementado na maioria dos browsers. E quando ele é usado em sites públicos algumas vezes estranhos erros acontecem quando robôs indexadores fazem seus <strong>requests</strong>.</p>
+
+<p>Assim, tomou-se a decisão de desativar este cabeçalho por padrão, depois voltou-se atrás e resolveu-se que era melhor deixar apenas a opção de desligar se desejado. Para isto basta incluir a seguinte linha no arquivo <strong>environment.rb</strong>:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>action_controller<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>use_accept_header <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_language constant_language_ruby">false</span></span></pre>
-Quando desligado, caso o formato não seja informado na URL o Rails assumirá que deve usar o <strong>format.html</strong>.
 
-Existe um caso especial quando fazemos requisições usando ajax se o cabeçalho <strong>X-Requested-With</strong> estiver presente. Neste caso o formato <strong>format.js</strong> ainda será usado mesmo que o formato não tenha sido especificado (/people/1, por exemplo).
+
+<p>Quando desligado, caso o formato não seja informado na URL o Rails assumirá que deve usar o <strong>format.html</strong>.</p>
+
+<p>Existe um caso especial quando fazemos requisições usando ajax se o cabeçalho <strong>X-Requested-With</strong> estiver presente. Neste caso o formato <strong>format.js</strong> ainda será usado mesmo que o formato não tenha sido especificado (/people/1, por exemplo).</p>
 </div>
 
 
@@ -148,14 +157,14 @@ Existe um caso especial quando fazemos requisições usando ajax se o cabeçalho
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-08-08 00:00:00 -0300" pubdate  updated >Aug 8<span>th</span>, 2008</time>
+<time datetime="2008-08-08 00:00:00 -0300" pubdate  updated > 8 de Agosto de 2008</time>
 
 
 

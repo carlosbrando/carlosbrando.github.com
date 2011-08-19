@@ -1,0 +1,656 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Nome do Jogo</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/page/55/index.html"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds2.feedburner.com/NomeDoJogo" rel="alternate" title="Nome do Jogo" type="application/atom+xml"/>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1249636-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Nome do Jogo</a></h1>
+  
+    <h2>por Carlos Brando</h2>
+  
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="http://feeds2.feedburner.com/NomeDoJogo" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/02/09/mime-types-agora-podem-ser-comparados-com-simbolos/">Mime types agora podem ser comparados com símbolos</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-02-09 00:00:00 -0200" pubdate  updated > 9 de Fevereiro de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p align="justify">Atualmente no Rails você pode atribuir ao <strong>request.format</strong> um <strong>mime type</strong> usando um <strong>símbolo</strong>. Por exemplo:</p>
+
+
+
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">request<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>format <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>iphone</span></span></pre>
+
+
+<p align="justify">Mas por outro lado, você não pode determinar o <strong>mime type</strong> atribuído ao <font color="#333333"><strong>request.format</strong></font> usando um <strong>símbolo</strong>. Duh&#8230; O código abaixo falharia:</p>
+
+
+
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">request<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>format <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>iphone</span>
+assert_equal <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>iphone</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> request<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>format</span></pre>
+
+
+<p align="justify">No <strong>Edge Rails</strong> este problema já foi resolvido, permitindo que você use tanto um <strong>símbolo</strong> como uma <strong>string</strong> representando um <strong>mime type</strong> para realizar os seus testes.</p>
+
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/02/09/mime-types-agora-podem-ser-comparados-com-simbolos/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/02/08/rails-podcast-brasil-rss-feed/">Rails Podcast Brasil - RSS Feed</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-02-08 00:00:00 -0200" pubdate  updated > 8 de Fevereiro de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://feeds.feedburner.com/RailsPodcastBrasil"><img src="http://www.nomedojogo.com/wp-content/uploads/2008/02/podcast.jpg" alt="podcast.jpg" align="left" /></a>Bom, o site novo do podcast ainda não está pronto, estou meio enrolado com algumas coisas aqui, e não consegui terminar. Mas para provar que a comunidade Rails é a comunidade mais unida e pró-ativa que existe, o <a href="http://www.urubatan.com.br/">Rodrigo Urubatan</a> deu um jeitinho de descolar um RSS Feed para o podcast.</p>
+
+<p>O endereço: <a href="http://feeds.feedburner.com/RailsPodcastBrasil">http://feeds.feedburner.com/RailsPodcastBrasil
+</a>
+É um feed provisório, pelo menos até o site estar totalmente pronto.</p>
+
+<p>Muito obrigado Rodrigo!</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/02/08/rails-podcast-brasil-rss-feed/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/02/08/edge-rails-belongs_to-agora-suporta-dependencias/">Edge Rails: belongs_to agora suporta dependências</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-02-08 00:00:00 -0200" pubdate  updated > 8 de Fevereiro de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p align="justify">Na versão atual do Rails associações <strong><font color="#333333">belongs_to</font></strong> ignoram qualquer opção passada usando <font color="#333333"><strong>:dependent</strong></font>. Mas à partir da nova versão você poderá usar <font color="#333333"><strong>:dependent =&gt; :destroy</strong></font> e <font color="#333333"><strong>:delete</strong></font> em associações <strong><font color="#333333">belongs_to</font></strong>.</p>
+
+
+<p>Exemplos:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_function support_function_activerecord support_function_activerecord_rails">belongs_to</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>author_address</span>
+<span class="support support_function support_function_activerecord support_function_activerecord_rails">belongs_to</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>author_address</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>dependent</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>destroy</span>
+<span class="support support_function support_function_activerecord support_function_activerecord_rails">belongs_to</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>author_address_extra</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>dependent</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>delete</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>class_name</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>AuthorAddress<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span></span></pre>
+
+
+<p>E para aqueles que acham que isto não faz sentido, lembrem-se que o <font color="#333333"><strong>belongs_to</strong></font> não precisa ter o <font color="#333333"><strong>has_many</strong></font> na outra ponta para ser usado. Como no exemplo abaixo:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Person<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
+  <span class="support support_function support_function_activerecord support_function_activerecord_rails">belongs_to</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>address</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>dependent</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>destroy</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span>
+
+<span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Address<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/02/08/edge-rails-belongs_to-agora-suporta-dependencias/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/02/07/reconhecimento-de-rotas-ate-6-vezes-mais-rapido/">Reconhecimento de rotas até 6 vezes mais rápido</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-02-07 00:00:00 -0200" pubdate  updated > 7 de Fevereiro de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A implementação atual do reconhecimento de rotas percorre todas as rotas, uma-a-uma, e isto consome muito tempo. Uma nova implementação foi incluída no trunk do Rails (Edge Rails) e é mais inteligente, ela monta uma árvore de rotas e reconhece as rotas pelo prefixo, pulando rotas semelhantes. Só isto já diminui em aproximadamente 2.7 vezes o tempo de reconhecimento das rotas.</p>
+
+<p>Toda a nova implementação está no arquivo <em><a href="http://dev.rubyonrails.org/browser/trunk/actionpack/lib/action_controller/routing/recognition_optimisation.rb?rev=8674">recognition_optimisation.rb</a></em>, os detalhes de seu funcionamento estão bem explicados nos comentários. Para mais informações sobre isto veja a documentação no próprio código fonte.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/02/07/reconhecimento-de-rotas-ate-6-vezes-mais-rapido/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/02/07/rails-podcast-brasil-episodio-4/">Rails Podcast Brasil - Episódio 4</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-02-07 00:00:00 -0200" pubdate  updated > 7 de Fevereiro de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://www.rubyonrails.pro.br/podcasts"> http://www.rubyonrails.pro.br/podcasts</a></p>
+
+<p>Mais um episódio do seu programa favorito sobre Rails&#8230;</p>
+
+<p>Neste episódio comentamos sobre JRuby, Merb, Social Graph API, TextMate, mais uma vez sobre Zed Shaw e no final uma aula sobre Git.</p>
+
+<h3>Neste episódio:</h3>
+
+
+<ul>
+    <li><a href="http://reddit.com/r/rubybr/">rubybr.reddit.com</a></li>
+    <li><a href="http://googlediscovery.com/2008/02/01/extra-extra-extra-microsoft-oferece-usd-446-bilhoes-pela-yahoo/">Microsoft oferece USD$ 44,6 bilhões pela Yahoo!</a></li>
+    <li><a href="http://derenci.us/2008/2/sysadmin-com-vps">Dica De Sysadmin Para Quem Tem VPS</a></li>
+    <li><a href="http://derenci.us/2008/2/fastcgi-e-authenticate_or_request_with_http_basic">FastCGI E Authenticate_or_request_with_http_basic</a></li>
+    <li><a href="http://codefluency.com/articles/2008/02/04/ruby-19-presentation">Ruby 1.9 Presentation</a></li>
+    <li><a href="http://codefluency.com/articles/2008/02/06/ruby-1-9-comparison-app">Ruby 1.9 Comparison App</a></li>
+    <li><a href="http://www.redeparede.com">Rede Parede</a></li>
+    <li><a href="http://jasonrudolph.com/blog/2008/02/05/grails-goes-10/">Grails Goes 1.0</a></li>
+    <li><a href="http://www.rubyinside.com/merb-tutorials-and-resources-716.html">21 Merb Links, Tutorials and Other Resources</a></li>
+    <li><a href="http://blogs.sun.com/arungupta/entry/totd_24_getting_started_with">Getting Started with Rails 2.0.x in JRuby 1.0.3 and JRuby 1.1RC1</a></li>
+    <li><a href="http://rorblog.techcfl.com/2008/02/04/using-amazon-s3-ec2-sqs-lucene-and-ruby-for-web-spidering/">Using Amazon S3, EC2, SQS, Lucene, and Ruby for Web Spidering</a></li>
+    <li><a href="http://code.google.com/apis/socialgraph/">Social Graph API</a></li>
+    <li><a href="http://blog.codefront.net/2008/02/06/living-on-the-edge-of-rails-6-better-performance-git-support-and-more/">Living on the edge (of Rails) #6 - better performance, Git support, and more</a></li>
+    <li><a href="http://www.railsforum.com/viewtopic.php?id=14216">Restful Authentication with all the bells and whistles</a></li>
+    <li><a href="http://www.rubyinside.com/the-ultimate-list-of-rubycocoa-tutorials-tips-and-tools-728.html">The Ultimate List of RubyCocoa Tutorials, Tips and Tools</a></li>
+    <li><a href="http://peepcode.com/products/activemerchant-pdf">ActiveMerchant PDF</a></li>
+    <li><a href="http://www.infoq.com/articles/actors-rubinius-interview">Ruby Concurrency, Actors, and Rubinius - Interview with MenTaLguY</a></li>
+    <li><a href="http://drnicwilliams.com/2008/01/31/get-ready-for-the-textmate-trundle-to-rails-20-bundle/">Get ready for the TextMate &#8220;Trundle to Rails 2.0 Bundle&#8221;</a></li>
+    <li><strong>Git</strong>
+<ul>
+    <li><a href="http://www.advogato.org/person/apenwarr/diary/371.html">Git is the next Unix</a></li>
+    <li><a href="http://www.danielfischer.com/2008/02/01/all-that-git-talk-in-the-rails-world-what-gives/">All That Git Talk in The Rails World, What Gives?</a></li>
+    <li><a href="http://blog.teksol.info/2008/2/5/piston-is-now-on-gitorious">Piston is now on Gitorious</a></li>
+    <li><a href="http://drnicwilliams.com/2008/02/03/using-git-within-a-team/">Using Git within a project (forking around)</a></li>
+</ul>
+</li>
+    <li><a href="http://www.akitaonrails.com/2008/2/1/zed-shaw-ataca-novamente">Zed Shaw ataca novamente</a></li>
+    <li><a href="http://dojofloripa.wordpress.com/2006/11/03/top-5-desculpas-de-quem-nao-quer-programar-orientado-a-testes/">Top 5 desculpas de quem não quer programar orientado a testes</a></li>
+</ul>
+
+
+<p>Mais uma vez eu peço para que comentem sobre o episódio.</p>
+
+<p>Como de costume para baixar o episódio basta ir para o site do podcast no endereço:  <a href="http://www.rubyonrails.pro.br/podcasts">http://www.rubyonrails.pro.br/podcasts</a></p>
+
+<p>Ah, talvez seja necessário dar um refresh na página.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/02/07/rails-podcast-brasil-episodio-4/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/02/07/rails-para-desenvolvedores-php/">Rails para desenvolvedores PHP</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-02-07 00:00:00 -0200" pubdate  updated > 7 de Fevereiro de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://www.nomedojogo.com/wp-content/uploads/2008/02/ndphpr.jpg" alt="ndphpr.jpg" align="left" />Mais um livro da <a href="http://www.pragprog.com/titles/ndphpr">The Pragmatic Programmers</a>. O livro foi escrito por Derek DeVries e Mike Naberezny, dois experientes programadores PHP, Ruby e Rails. Em formato PDF custa 22 dólares.</p>
+
+<p>Inclusive os autores tem um <a href="http://railsforphp.com/">site bem interessante</a> sobre o tema, cheio de comparações com exemplos de código e tabelas mostrando as diferenças entre as linguagens e framework.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/02/07/rails-para-desenvolvedores-php/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/02/05/edge-rails-use-um-alias-para-declarar-o-maproot/">Edge Rails: Use um alias para declarar o map.root</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-02-05 00:00:00 -0200" pubdate  updated > 5 de Fevereiro de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://www.nomedojogo.com/wp-content/uploads/2008/02/2229679333_d99bf00914.jpg" alt="2229679333_d99bf00914.jpg" /></p>
+
+<p>Agora na hora de informar o map.root você pode ser um pouco mais DRY usando um alias para isto. Se antes você fazia assim:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>new_session <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>controller</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>sessions<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>action</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>new<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>root <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>controller</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>sessions<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>action</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>new<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span></pre>
+
+
+<p>Agora você pode fazer assim:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>new_session <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>controller</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>sessions<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>action</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>new<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>root <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>new_session</span></span></pre>
+
+
+<p>Ou assim:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>dashboard <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>/dashboard<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>controller</span><span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>dashboard<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>root <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>dashboard</span></span></pre>
+
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/02/05/edge-rails-use-um-alias-para-declarar-o-maproot/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/02/04/edge-rails-agregacoes-composed_of-agora-podem-ser-usadas-nas-pesquisas/">Edge Rails: Agregações (composed_of) agora podem ser usadas nas pesquisas</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-02-04 00:00:00 -0200" pubdate  updated > 4 de Fevereiro de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://www.nomedojogo.com/wp-content/uploads/2008/02/324395092_4e98f00930.jpg" alt="324395092_4e98f00930.jpg" /></p>
+
+<p>O método <strong>composed_of</strong> você já conhece. Veja este caso como exemplo:</p>
+
+<pre class="textmate-source"><span class="source source_sql">class Account <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_sql">&lt;</span> ActiveRecord::Base
+  composed_of :balance, :class_name <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_sql">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>Money"</span>, :mapping <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_sql">=&gt;</span> %w(balance amount)
+end</span></pre>
+
+
+<p>A partir de agora, você pode passar um objeto <strong>Money</strong> como parâmetro no método <strong>find</strong> da classe <strong>Account</strong>, assim:</p>
+
+<pre class="textmate-source"><span class="source source_sql">amount <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_sql">=</span> <span class="constant constant_numeric constant_numeric_sql">500</span>
+currency <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_sql">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>USD"</span>
+<span class="constant constant_other constant_other_database-name constant_other_database-name_sql">Account</span>.<span class="constant constant_other constant_other_table-name constant_other_table-name_sql">find</span>(:all, :conditions <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_sql">=&gt;</span> { :balance <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_sql">=&gt;</span> <span class="storage storage_type storage_type_sql">Money</span>.new(amount, currency) })</span></pre>
+
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/02/04/edge-rails-agregacoes-composed_of-agora-podem-ser-usadas-nas-pesquisas/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/02/02/edge-rails-uma-nova-estrategia-para-o-eager-loading/">Edge Rails: Uma nova estratégia para o Eager Loading</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-02-02 00:00:00 -0200" pubdate  updated > 2 de Fevereiro de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://www.nomedojogo.com/wp-content/uploads/2008/02/219781763_29850fce52.jpg" alt="219781763_29850fce52.jpg" /></p>
+
+<p>Para explicar esta nova funcionalidade vou precisar mostrar na prática. Vamos pegar como exemplo o código abaixo:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Author</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>all</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>include</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>posts</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>comments</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
+
+
+<p>Estou fazendo uma pesquisa na tabela <strong>authors</strong>, mas incluindo na minha query as tabelas <strong>posts</strong> e <strong>comments</strong>, relacionado-as pela coluna <strong>author_id</strong>. Para entender melhor veja a query gerada pelo Rails:</p>
+
+<pre class="textmate-source"><span class="source source_sql"><span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">SELECT</span>
+  authors.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>id"</span>          <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t0_r0,
+  authors.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>created_at"</span>  <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t0_r1,
+  authors.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>updated_at"</span>  <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t0_r2,
+  posts.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>id"</span>            <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t1_r0,
+  posts.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>author_id"</span>     <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t1_r1,
+  posts.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>created_at"</span>    <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t1_r2,
+  posts.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>updated_at"</span>    <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t1_r3,
+  comments.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>id"</span>         <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t2_r0,
+  comments.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>author_id"</span>  <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t2_r1,
+  comments.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>created_at"</span> <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t2_r2,
+  comments.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>updated_at"</span> <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t2_r3
+<span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">FROM</span>
+  authors
+  <span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">LEFT OUTER JOIN</span> posts <span class="keyword keyword_other keyword_other_DDL keyword_other_DDL_create keyword_other_DDL_create_II keyword_other_DDL_create_II_sql">ON</span> <span class="constant constant_other constant_other_database-name constant_other_database-name_sql">posts</span>.<span class="constant constant_other constant_other_table-name constant_other_table-name_sql">author_id</span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_sql">=</span> <span class="constant constant_other constant_other_database-name constant_other_database-name_sql">authors</span>.<span class="constant constant_other constant_other_table-name constant_other_table-name_sql">id</span>
+  <span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">LEFT OUTER JOIN</span> comments <span class="keyword keyword_other keyword_other_DDL keyword_other_DDL_create keyword_other_DDL_create_II keyword_other_DDL_create_II_sql">ON</span> <span class="constant constant_other constant_other_database-name constant_other_database-name_sql">comments</span>.<span class="constant constant_other constant_other_table-name constant_other_table-name_sql">author_id</span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_sql">=</span> <span class="constant constant_other constant_other_database-name constant_other_database-name_sql">authors</span>.<span class="constant constant_other constant_other_table-name constant_other_table-name_sql">id</span></span></pre>
+
+
+<p>Uma única query SQL foi criada contendo <strong>joins</strong> entre as tabelas <strong>authors</strong>, <strong>posts</strong> e <strong>comments</strong>. Chamamos isto de produto cartesiano.</p>
+
+<p>Acontece que isto nem sempre é performático, por isto foi alterado. Para a nova versão do Rails ao executar a mesma pesquisa na classe <strong>Author</strong>, o Rails usará uma outra estratégia para recuperar os dados das três tabelas. Ao invés de usar apenas uma query com todas as tabelas relacionadas, ele usará três querys menores, uma para cada tabela. Veja o resultado no log, após executar o mesmo código acima nesta nova versão Edge Rails:</p>
+
+<pre class="textmate-source"><span class="source source_sql"><span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">SELECT</span> <span class="keyword keyword_operator keyword_operator_star keyword_operator_star_sql">*</span> <span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">FROM</span> <span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>authors"</span>
+<span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">SELECT</span> posts.<span class="keyword keyword_operator keyword_operator_star keyword_operator_star_sql">*</span> <span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">FROM</span> <span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>posts"</span> <span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">WHERE</span> (<span class="constant constant_other constant_other_database-name constant_other_database-name_sql">posts</span>.<span class="constant constant_other constant_other_table-name constant_other_table-name_sql">author_id</span> <span class="keyword keyword_other keyword_other_data-integrity keyword_other_data-integrity_sql">IN</span> (<span class="constant constant_numeric constant_numeric_sql">1</span>))
+<span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">SELECT</span> comments.<span class="keyword keyword_operator keyword_operator_star keyword_operator_star_sql">*</span> <span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">FROM</span> <span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>comments"</span> <span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">WHERE</span> (<span class="constant constant_other constant_other_database-name constant_other_database-name_sql">comments</span>.<span class="constant constant_other constant_other_table-name constant_other_table-name_sql">author_id</span> <span class="keyword keyword_other keyword_other_data-integrity keyword_other_data-integrity_sql">IN</span> (<span class="constant constant_numeric constant_numeric_sql">1</span>))</span></pre>
+
+
+<p>Na &#8220;maioria&#8221; dos casos executar três querys simples é mais rápido que executar uma única query gigante.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/02/02/edge-rails-uma-nova-estrategia-para-o-eager-loading/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/01/31/novidades-no-rails-novo-metodo-label_tag/">Edge Rails: Novo método &#8220;label_tag&#8221;</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-01-31 00:00:00 -0200" pubdate  updated >31 de Janeiro de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://www.nomedojogo.com/wp-content/uploads/2008/01/79128791_69f2267c76.jpg" alt="79128791_69f2267c76.jpg" /></p>
+
+<p>Estou meio atrasado com a série &#8221;<strong><a href="http://www.nomedojogo.com/category/edge-rails/">Edge Rails</a></strong>&#8221; (preciso mudar este nome&#8230; se alguém tiver alguma sugestão&#8230;), mas vou tentar acelerar e documentar as novidades para a próxima versão do Ruby on Rails.</p>
+
+<p>Eu já falei do método <strong>label</strong> e para que servem os rótulos em HTML em um <a href="http://www.nomedojogo.com/2008/01/16/edge-rails-use-rotulos-nas-suas-paginas/">artigo mais antigo</a>, mas parece que a galera esqueceu de criar um método <strong>label_tag</strong> para os casos mais simples. Mas agora o método já foi criado e incluído no <strong>FormTagHelper</strong>.</p>
+
+<p>Este método funciona exatamente como o outro mas de uma forma mais simplista:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> label_tag <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>nome<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+<span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span>label <span class="keyword keyword_control keyword_control_ruby">for</span><span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>nome<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span><span class="variable variable_other variable_other_constant variable_other_constant_ruby">Nome</span><span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span><span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">/</span>label<span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span>
+
+<span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> label_tag <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>nome<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Seu nome<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+<span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span>label <span class="keyword keyword_control keyword_control_ruby">for</span><span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>nome<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span><span class="variable variable_other variable_other_constant variable_other_constant_ruby">Seu</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">Name</span><span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span><span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">/</span>label<span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span>
+
+<span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> label_tag <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>nome<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_language constant_language_ruby">nil</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>class</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>small_label<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+<span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span>label <span class="keyword keyword_control keyword_control_ruby">for</span><span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>nome<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="keyword keyword_control keyword_control_ruby">class</span><span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>small_label<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span><span class="variable variable_other variable_other_constant variable_other_constant_ruby">Nome</span><span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span><span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">/</span>label<span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span></span></pre>
+
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/01/31/novidades-no-rails-novo-metodo-label_tag/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+<nav role="pagination">
+  <div>
+    
+      <a class="prev" href="/page/56/">&larr; Antigos</a>
+    
+    <a href="/blog/archives">Arquivo</a>
+    
+    <a class="next" href="/page/54/">Novos &rarr;</a>
+    
+  </div>
+</nav>
+
+<script type="text/javascript">
+    var disqus_shortname = 'carlosbrando';
+    (function () {
+      var s = document.createElement('script'); s.async = true;
+      s.type = 'text/javascript';
+      s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+      (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+
+</div>
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro anos de Nome do Jogo</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("carlosbrando", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/carlosbrando" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @carlosbrando</a>
+  
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

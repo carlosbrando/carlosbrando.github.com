@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Edge Rails: Método Count Do ActiveRecord Não Inclui Um Alias Para Associações</h1>
+      <h1 class="entry-title">Edge Rails: Método count do ActiveRecord não inclui um alias para associações</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-09-27 00:00:00 -0300" pubdate  updated >Sep 27<span>th</span>, 2008</time>
+<time datetime="2008-09-27 00:00:00 -0300" pubdate  updated >27 de Setembro de 2008</time>
 
 
 </p>
@@ -113,26 +113,36 @@
   </header>
 
 
-<div class="entry-content">Digamos que temos a seguinte associação <strong>has_many :through</strong>:
+<div class="entry-content"><p>Digamos que temos a seguinte associação <strong>has_many :through</strong>:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Author<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
   <span class="support support_function support_function_activerecord support_function_activerecord_rails">has_many</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>authorships</span>
   <span class="support support_function support_function_activerecord support_function_activerecord_rails">has_many</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>books</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>through</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>authorships</span>
 </span><span class="keyword keyword_control keyword_control_ruby">end</span>
 </span></pre>
-Ao procurar por um livro você pode incluir a autoria em sua busca:
+
+
+<p>Ao procurar por um livro você pode incluir a autoria em sua busca:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">author<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>books<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>all</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>include</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>authorships</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
                   <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>conditions</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>authorships.primary = ?<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_language constant_language_ruby">true</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
 </span></pre>
-Isto funciona muito bem, sem erros. Mas tente fazer o mesmo com o método <strong>count</strong>:
+
+
+<p>Isto funciona muito bem, sem erros. Mas tente fazer o mesmo com o método <strong>count</strong>:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">author<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>books<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>count<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>include</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>authorships</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
                    <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>conditions</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>authorships.primary = ?<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_language constant_language_ruby">true</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
-Temos um erro. Isto acontece porque a tabela <strong>authorships</strong> foi incluída duas vezes na mesma query.
 
-O método <strong>find</strong> é mais esperto, porque ele cria um apelido para a tabela, coisa que o método <strong>count</strong> não faz. Eu sei que o exemplo dado não é muito bom, mas é apenas para tentar mostrar o problema com o método <strong>count</strong>.
 
-Esta falha foi corrigida. Agora o método count se comporta exatamente como o método find em relação ao <strong>:include</strong>.
+<p>Temos um erro. Isto acontece porque a tabela <strong>authorships</strong> foi incluída duas vezes na mesma query.</p>
+
+<p>O método <strong>find</strong> é mais esperto, porque ele cria um apelido para a tabela, coisa que o método <strong>count</strong> não faz. Eu sei que o exemplo dado não é muito bom, mas é apenas para tentar mostrar o problema com o método <strong>count</strong>.</p>
+
+<p>Esta falha foi corrigida. Agora o método count se comporta exatamente como o método find em relação ao <strong>:include</strong>.</p>
 
 <hr /><em>Este artigo pertence a série “Edge Rails”. Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. A intenção desta série é preparar antecipadamente os programadores para as próximas versões do framework.</em>
+
 </div>
 
 
@@ -141,14 +151,14 @@ Esta falha foi corrigida. Agora o método count se comporta exatamente como o m�
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-09-27 00:00:00 -0300" pubdate  updated >Sep 27<span>th</span>, 2008</time>
+<time datetime="2008-09-27 00:00:00 -0300" pubdate  updated >27 de Setembro de 2008</time>
 
 
 

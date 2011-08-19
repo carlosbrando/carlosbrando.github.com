@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Rails 2.2: Atualizando Uma Associação Através De Sua Foreign Key</h1>
+      <h1 class="entry-title">Rails 2.2: Atualizando uma associação através de sua foreign key</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-10-29 00:00:00 -0200" pubdate  updated >Oct 29<span>th</span>, 2008</time>
+<time datetime="2008-10-29 00:00:00 -0200" pubdate  updated >29 de Outubro de 2008</time>
 
 
 </p>
@@ -113,7 +113,8 @@
   </header>
 
 
-<div class="entry-content">Não sei dizer se isto é um bug ou não, mas na minha opinião isto representa um problema. Veja o código abaixo, onde tento alterar a conta de um usuário usando sua <strong>foreign key</strong> em um projeto Rails 2.1 ou anterior:
+<div class="entry-content"><p>Não sei dizer se isto é um bug ou não, mas na minha opinião isto representa um problema. Veja o código abaixo, onde tento alterar a conta de um usuário usando sua <strong>foreign key</strong> em um projeto Rails 2.1 ou anterior:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">User<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
   <span class="support support_function support_function_activerecord support_function_activerecord_rails">belongs_to</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>account</span>
 </span><span class="keyword keyword_control keyword_control_ruby">end</span>
@@ -130,9 +131,12 @@ user<span class="punctuation punctuation_separator punctuation_separator_method 
 user<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>account
 <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; #&lt;Account id: 1, name: "My Account"&gt;
 </span></span></pre>
-Note que estou alterando a conta do usuário, mas a associação não foi atualizada. Mesmo depois de salvar o objeto <strong>user</strong>, se ele não for recarregado, a associação continuará mostrando a conta errada.
 
-No Rails 2.2 este problema foi corrigido, veja:
+
+<p>Note que estou alterando a conta do usuário, mas a associação não foi atualizada. Mesmo depois de salvar o objeto <strong>user</strong>, se ele não for recarregado, a associação continuará mostrando a conta errada.</p>
+
+<p>No Rails 2.2 este problema foi corrigido, veja:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Comment<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
   <span class="support support_function support_function_activerecord support_function_activerecord_rails">belongs_to</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>post</span>
 </span><span class="keyword keyword_control keyword_control_ruby">end</span>
@@ -149,9 +153,12 @@ comment <span class="keyword keyword_operator keyword_operator_assignment keywor
 <span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> comment<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>post
 <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; #&lt;Post id: 2&gt;
 </span></span></pre>
-Veja que ao alterar o <strong>post</strong> por meio de sua foreign key, automaticamente a associação foi atualizada.
+
+
+<p>Veja que ao alterar o <strong>post</strong> por meio de sua foreign key, automaticamente a associação foi atualizada.</p>
 
 <hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades do Rails 2.2 no e-book “<a href="../2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">Ruby on Rails - O que há de novo?</a>“.</em>
+
 </div>
 
 
@@ -160,14 +167,14 @@ Veja que ao alterar o <strong>post</strong> por meio de sua foreign key, automat
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-10-29 00:00:00 -0200" pubdate  updated >Oct 29<span>th</span>, 2008</time>
+<time datetime="2008-10-29 00:00:00 -0200" pubdate  updated >29 de Outubro de 2008</time>
 
 
 

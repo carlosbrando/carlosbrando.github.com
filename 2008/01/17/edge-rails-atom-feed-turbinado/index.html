@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Edge Rails: Atom Feed Turbinado</h1>
+      <h1 class="entry-title">Edge Rails: Atom Feed turbinado</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-01-17 00:00:00 -0200" pubdate  updated >Jan 17<span>th</span>, 2008</time>
+<time datetime="2008-01-17 00:00:00 -0200" pubdate  updated >17 de Janeiro de 2008</time>
 
 
 </p>
@@ -113,11 +113,11 @@
   </header>
 
 
-<div class="entry-content"><img src="http://www.nomedojogo.com/wp-content/uploads/2008/01/286440543_052e5d6260.jpg" alt="286440543_052e5d6260.jpg" />
+<div class="entry-content"><p><img src="http://www.nomedojogo.com/wp-content/uploads/2008/01/286440543_052e5d6260.jpg" alt="286440543_052e5d6260.jpg" /></p>
 
-Conhece o método <span style="font-weight: bold">atom_feed</span>? Ele é uma novidade no <span style="font-style: italic; font-weight: bold">Rails 2.0</span>, que facilitou muito a criação de feeds Atom. Veja um exemplo de uso:
+<p>Conhece o método <span style="font-weight: bold">atom_feed</span>? Ele é uma novidade no <span style="font-style: italic; font-weight: bold">Rails 2.0</span>, que facilitou muito a criação de feeds Atom. Veja um exemplo de uso:</p>
 
-Em um arquivo index.atom.builder:
+<p>Em um arquivo index.atom.builder:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">atom_feed <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">feed</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
   feed<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Nome do Jogo<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
@@ -135,24 +135,34 @@ Em um arquivo index.atom.builder:
   <span class="keyword keyword_control keyword_control_ruby">end</span>
 <span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
 
+
+
+
 <h3>Mas, o que é um atom feed?</h3>
-Hmm&#8230; ok, tem bastante gente nova na área lendo este blog, então é melhor explicar o que é um Atom Feed.
 
-Atom é o nome de um estilo baseado em XML e meta data. Em outras palavras é um protocolo quer serve para publicar conteúdo na internet que é sempre atualizado, como este blog, por exemplo. Os feeds sempre são publicados em XML e no caso do Atom Feed ele é identificado como application/atom+xml media type.
 
-Se mesmo assim você não entendeu, <a href="http://feeds.feedburner.com/NomeDoJogo">clique aqui</a> para ver o que é um feed. Neste caso é um RSS Feed, mas é quase a mesma coisa. Quase, porque o Atom é um pouco mais sofisticado que o RSS.
+<p>Hmm&#8230; ok, tem bastante gente nova na área lendo este blog, então é melhor explicar o que é um Atom Feed.</p>
+
+<p>Atom é o nome de um estilo baseado em XML e meta data. Em outras palavras é um protocolo quer serve para publicar conteúdo na internet que é sempre atualizado, como este blog, por exemplo. Os feeds sempre são publicados em XML e no caso do Atom Feed ele é identificado como application/atom+xml media type.</p>
+
+<p>Se mesmo assim você não entendeu, <a href="http://feeds.feedburner.com/NomeDoJogo">clique aqui</a> para ver o que é um feed. Neste caso é um RSS Feed, mas é quase a mesma coisa. Quase, porque o Atom é um pouco mais sofisticado que o RSS.</p>
+
 <h3>Ok, entendi, e o que tem de novo neste método?</h3>
-Vamos lá&#8230;
 
-Atualmente este método aceita como parâmetros as opções <span style="font-weight: bold">:language</span>, <span style="font-weight: bold">:root_url</span> e <span style="font-weight: bold">:url</span>, para mais informações sobre este método <a href="http://rails.rubyonrails.org/classes/ActionView/Helpers/AtomFeedHelper.html#M000931">clique aqui</a>. Mas com a alteração realizada agora podemos incluir novos namespaces ao elemento root do feed. Por exemplo, se fizermos assim:
+
+<p>Vamos lá&#8230;</p>
+
+<p>Atualmente este método aceita como parâmetros as opções <span style="font-weight: bold">:language</span>, <span style="font-weight: bold">:root_url</span> e <span style="font-weight: bold">:url</span>, para mais informações sobre este método <a href="http://rails.rubyonrails.org/classes/ActionView/Helpers/AtomFeedHelper.html#M000931">clique aqui</a>. Mas com a alteração realizada agora podemos incluir novos namespaces ao elemento root do feed. Por exemplo, se fizermos assim:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">atom_feed<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>xmlns:app<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>http://www.w3.org/2007/app<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">feed</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span></span></pre>
 
-Ele retornará isto:
+
+<p>Ele retornará isto:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span>feed xml<span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>lang=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>en-US<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> xmlns<span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>http://www.w3.org/2005/Atom<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> xmlns<span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>app=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>http://www.w3.org/2007/app<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span></span></pre>
 
-Adaptando o exemplo anterior, poderíamos usá-lo assim:
+
+<p>Adaptando o exemplo anterior, poderíamos usá-lo assim:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">atom_feed<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>xmlns:app<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>http://www.w3.org/2007/app<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
            <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>xmlns:openSearch<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>http://a9.com/-/spec/opensearch/1.1/<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">feed</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
@@ -173,6 +183,7 @@ Adaptando o exemplo anterior, poderíamos usá-lo assim:
     <span class="keyword keyword_control keyword_control_ruby">end</span>
   <span class="keyword keyword_control keyword_control_ruby">end</span>
 <span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
 </div>
 
 
@@ -181,14 +192,14 @@ Adaptando o exemplo anterior, poderíamos usá-lo assim:
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-01-17 00:00:00 -0200" pubdate  updated >Jan 17<span>th</span>, 2008</time>
+<time datetime="2008-01-17 00:00:00 -0200" pubdate  updated >17 de Janeiro de 2008</time>
 
 
 

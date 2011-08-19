@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Remarkable Now Supports All ActiveRecord Validations</h1>
+      <h1 class="entry-title">Remarkable now supports all ActiveRecord validations</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2009-02-10 00:00:00 -0200" pubdate  updated >Feb 10<span>th</span>, 2009</time>
+<time datetime="2009-02-10 00:00:00 -0200" pubdate  updated >10 de Fevereiro de 2009</time>
 
 
 </p>
@@ -113,9 +113,12 @@
   </header>
 
 
-<div class="entry-content">Good times! It has been just one week since I announced <a href="http://www.diegocarrion.com/">Diego Carrion</a> and <a href="http://josevalim.blogspot.com/">José Valim</a> as members of the <a href="http://github.com/carlosbrando/remarkable/tree/master">Remarkable</a> core team and we already put some effort into making a new shiny release! We are going to cover what&#8217;s new on this <a href="http://github.com/carlosbrando/remarkable/tree/master">Remarkable</a> version, step by step.
+<div class="entry-content"><p>Good times! It has been just one week since I announced <a href="http://www.diegocarrion.com/">Diego Carrion</a> and <a href="http://josevalim.blogspot.com/">José Valim</a> as members of the <a href="http://github.com/carlosbrando/remarkable/tree/master">Remarkable</a> core team and we already put some effort into making a new shiny release! We are going to cover what&#8217;s new on this <a href="http://github.com/carlosbrando/remarkable/tree/master">Remarkable</a> version, step by step.</p>
+
 <h2>1. All ActiveRecord validations are supported with all options</h2>
-In other words, you can write your spec validation macros the same way as you do in <code>ActiveRecord</code>, without consulting the documentation, without worrying if any validation is supported or not, without checking which options are allowed or not. Check it out:
+
+
+<p>In other words, you can write your spec validation macros the same way as you do in <code>ActiveRecord</code>, without consulting the documentation, without worrying if any validation is supported or not, without checking which options are allowed or not. Check it out:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rspec"><span class="meta meta_rspec meta_rspec_behaviour"><span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_behaviour">describe</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">User</span> <span class="keyword keyword_control keyword_control_ruby keyword_control_ruby_start-block">do</span></span>
 <span class="meta meta_rspec meta_rspec_pending">  <span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_pending">it</span> <span class="string string_ruby">{ should validate_uniqueness_of(:email) }</span></span>
@@ -131,7 +134,8 @@ In other words, you can write your spec validation macros the same way as you do
 <span class="meta meta_rspec meta_rspec_pending">  <span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_pending">it</span> <span class="string string_ruby">{ should not_allow_mass_assignment_of(:salt, :hashed_password) }</span></span>
 <span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
 
-Or if you prefer:
+
+<p>Or if you prefer:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rspec"><span class="meta meta_rspec meta_rspec_behaviour"><span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_behaviour">describe</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">User</span> <span class="keyword keyword_control keyword_control_ruby keyword_control_ruby_start-block">do</span></span>
   should_validate_uniqueness_of <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>email</span>
@@ -147,41 +151,74 @@ Or if you prefer:
   should_not_allow_mass_assignment_of <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>salt</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>hashed_password</span>
 <span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
 
-We <a href="http://wiki.github.com/carlosbrando/remarkable/active-record-macros">updated the wiki</a> and it&#8217;s already reflecting the new macros. But you might ask, what happened with the older ones? The older ones are going to be deprecated and you will see a message while running the tests.
 
-What you might have noticed above is that <code>should_protect_attributes</code> now became <code>should_not_allow_mass_assignment_of</code>. This one was based on Shoulda last changes, so who are porting tests from Shoulda gets everything compatible.
+<p>We <a href="http://wiki.github.com/carlosbrando/remarkable/active-record-macros">updated the wiki</a> and it&#8217;s already reflecting the new macros. But you might ask, what happened with the older ones? The older ones are going to be deprecated and you will see a message while running the tests.</p>
+
+<p>What you might have noticed above is that <code>should_protect_attributes</code> now became <code>should_not_allow_mass_assignment_of</code>. This one was based on Shoulda last changes, so who are porting tests from Shoulda gets everything compatible.</p>
+
 <h2>2. Pending macros</h2>
-We are not just bringing macros to Rspec, we are bringng Rspec to macros! So let&#8217;s suppose you are doing some code refactoring and you know some tests will fail while you clean the house, what do you do then?
 
-In Rspec, you can do:
+
+<p>We are not just bringing macros to Rspec, we are bringng Rspec to macros! So let&#8217;s suppose you are doing some code refactoring and you know some tests will fail while you clean the house, what do you do then?</p>
+
+<p>In Rspec, you can do:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rspec">xit <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span>should validate_numericality_of<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>age</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span></span></pre>
-Well, now you can do just the same with macros:
+
+
+<p>Well, now you can do just the same with macros:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">xshould_validate_numericality_of <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>age</span></span></pre>
-And it&#8217;s even better because it shows you a nice message:
+
+
+<p>And it&#8217;s even better because it shows you a nice message:</p>
+
 <pre class="textmate-source"><span class="source source_shell"><span class="meta meta_scope meta_scope_group meta_scope_group_shell"><span class="meta meta_scope meta_scope_group meta_scope_group_shell"><span class="meta meta_scope meta_scope_group meta_scope_group_shell"><span class="meta meta_scope meta_scope_group meta_scope_group_shell"><span class="meta meta_scope meta_scope_group meta_scope_group_shell"><span class="meta meta_scope meta_scope_group meta_scope_group_shell"><span class="meta meta_scope meta_scope_group meta_scope_group_shell"><span class="meta meta_scope meta_scope_group meta_scope_group_shell"><span class="meta meta_scope meta_scope_group meta_scope_group_shell"><span class="meta meta_scope meta_scope_group meta_scope_group_shell">Example disabled: should validate numericality of age</span></span></span></span></span></span></span></span></span></span></span></pre>
-Yeah!
+
+
+<p>Yeah!</p>
+
 <h2>3. Full I18n support</h2>
-You know how validations macros (as <code>validate_presence_of</code>) work? Let&#8217;s talk about it a little bit.
 
-When you say that we should validate presence of e-mail, we set the e-mail to nil and save the object. Then we search in all error messages in e-mail, if it has a &#8220;can&#8217;t be blank&#8221; message, your validation is working properly and then the test passes, otherwise, the test fails. The problem is, if you change the error message in your application and do not change on the macro, we will never be able to find the message &#8220;can&#8217;t be blank&#8221; and then the tests will always pass.
 
-This is valid for almost rspec matchers, not only on Remarkable. But what&#8217;s new is, if you change the message using the I18n YAML files, we will find the message properly and you don&#8217;t have to pass <code>:message</code> in your macros. This is new and we are currently the only one doing this.
+<p>You know how validations macros (as <code>validate_presence_of</code>) work? Let&#8217;s talk about it a little bit.</p>
 
-But remember, if ever you set the message directly in your models like this:
+<p>When you say that we should validate presence of e-mail, we set the e-mail to nil and save the object. Then we search in all error messages in e-mail, if it has a &#8220;can&#8217;t be blank&#8221; message, your validation is working properly and then the test passes, otherwise, the test fails. The problem is, if you change the error message in your application and do not change on the macro, we will never be able to find the message &#8220;can&#8217;t be blank&#8221; and then the tests will always pass.</p>
+
+<p>This is valid for almost rspec matchers, not only on Remarkable. But what&#8217;s new is, if you change the message using the I18n YAML files, we will find the message properly and you don&#8217;t have to pass <code>:message</code> in your macros. This is new and we are currently the only one doing this.</p>
+
+<p>But remember, if ever you set the message directly in your models like this:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rspec">validates_inclusion_of <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>gender</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_other string_quoted_other_literal string_quoted_other_literal_lower string_quoted_other_literal_lower_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">%w(</span>m f<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">)</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>message</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>whoa! what are you then?<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span></pre>
-Don&#8217;t forget to do the same in your macros:
+
+
+<p>Don&#8217;t forget to do the same in your macros:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rspec">should_validate_inclusion_of <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>gender</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_other string_quoted_other_literal string_quoted_other_literal_lower string_quoted_other_literal_lower_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">%w(</span>m f<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">)</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>message</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>whoa! what are you then?<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span></pre>
-Deal?
+
+
+<p>Deal?</p>
+
 <h2>Conclusion</h2>
-<a href="http://github.com/carlosbrando/remarkable/tree/master">Remarkable is available on GitHub</a> and to install it, just do on your console:
+
+
+<p><a href="http://github.com/carlosbrando/remarkable/tree/master">Remarkable is available on GitHub</a> and to install it, just do on your console:</p>
+
 <pre class="textmate-source"><span class="source source_shell">gem sources -a http://gems.github.com/
 sudo gem install <span class="string string_quoted string_quoted_double string_quoted_double_shell"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_shell">"</span>carlosbrando-remarkable<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_shell">"</span></span></span></pre>
-And then on your <code>RAILS_ROOT/config/environment.rb</code>:
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>gem <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>carlosbrando-remarkable<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>lib</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>remarkable<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>source</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>http://gems.github.com/<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span></span></pre>
-<h2>Any doubts? Any bug?</h2>
-We want to hear you! So you can use the <a href="http://groups.google.com/group/remarkable-core">Remarkable google group</a>, our <a href="http://carlosbrando.lighthouseapp.com/projects/19775-remarkable/">bug tracking system</a>, Github comments, whatever suits you better!
 
-See you there!
+
+<p>And then on your <code>RAILS_ROOT/config/environment.rb</code>:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>gem <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>carlosbrando-remarkable<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>lib</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>remarkable<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>source</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>http://gems.github.com/<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span></span></pre>
+
+
+<h2>Any doubts? Any bug?</h2>
+
+
+<p>We want to hear you! So you can use the <a href="http://groups.google.com/group/remarkable-core">Remarkable google group</a>, our <a href="http://carlosbrando.lighthouseapp.com/projects/19775-remarkable/">bug tracking system</a>, Github comments, whatever suits you better!</p>
+
+<p>See you there!</p>
 </div>
 
 
@@ -190,14 +227,14 @@ See you there!
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2009-02-10 00:00:00 -0200" pubdate  updated >Feb 10<span>th</span>, 2009</time>
+<time datetime="2009-02-10 00:00:00 -0200" pubdate  updated >10 de Fevereiro de 2009</time>
 
 
 

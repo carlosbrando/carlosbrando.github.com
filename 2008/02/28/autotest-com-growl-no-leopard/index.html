@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Autotest Com Growl No Leopard</h1>
+      <h1 class="entry-title">Autotest com Growl no Leopard</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-02-28 00:00:00 -0300" pubdate  updated >Feb 28<span>th</span>, 2008</time>
+<time datetime="2008-02-28 00:00:00 -0300" pubdate  updated >28 de Fevereiro de 2008</time>
 
 
 </p>
@@ -113,17 +113,21 @@
   </header>
 
 
-<div class="entry-content">Para quem não sabe o <a href="http://growl.info/">Growl</a> é um sistema de notificações via janelas flutuantes que se integra com os principais software para Mac, como o Skype, Transmission, Adium e até mesmo ao <a href="http://zentest.rubyforge.org/ZenTest/">ZenTest</a> (Autotest).
+<div class="entry-content"><p>Para quem não sabe o <a href="http://growl.info/">Growl</a> é um sistema de notificações via janelas flutuantes que se integra com os principais software para Mac, como o Skype, Transmission, Adium e até mesmo ao <a href="http://zentest.rubyforge.org/ZenTest/">ZenTest</a> (Autotest).</p>
 
-Antes de migrar meu Mac para o Leopard eu gostava muito de usar o Autotest com o Growl, mas depois da migração ele não funcionou mais.
+<p>Antes de migrar meu Mac para o Leopard eu gostava muito de usar o Autotest com o Growl, mas depois da migração ele não funcionou mais.</p>
 
-Faz alguns dias que eu resolvi tentar novamente e descobri como colocar a integração entre o Autotest e o Growl para funcionar no Leopard. Vamos ao passo a passo:
+<p>Faz alguns dias que eu resolvi tentar novamente e descobri como colocar a integração entre o Autotest e o Growl para funcionar no Leopard. Vamos ao passo a passo:</p>
 
-A primeira coisa a fazer é baixar o Growl e instalar. Depois entre no terminal e execute:
+<p>A primeira coisa a fazer é baixar o Growl e instalar. Depois entre no terminal e execute:</p>
+
 <pre class="textmate-source"><span class="source source_shell">/Volumes/Growl<span class="constant constant_character constant_character_escape constant_character_escape_shell">\ </span>1.1.2/Extras/growlnotify/install.sh</span></pre>
-Esta linha de comando vai instalar o <code>growlnotify</code> na pasta <code>/usr/local/bin</code>.
 
-Agora crie o arquivo <code>~/.autotest</code> e abra-o no seu editor favorito (TextMate?), preencha o arquivo com o seguinte código:
+
+<p>Esta linha de comando vai instalar o <code>growlnotify</code> na pasta <code>/usr/local/bin</code>.</p>
+
+<p>Agora crie o arquivo <code>~/.autotest</code> e abra-o no seu editor favorito (TextMate?), preencha o arquivo com o seguinte código:</p>
+
 <pre class="textmate-source"><span class="source source_ruby"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> ~.autotest
 </span>
 <span class="meta meta_require meta_require_ruby"><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">require</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>autotest/redgreen<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span>
@@ -157,19 +161,24 @@ Agora crie o arquivo <code>~/.autotest</code> e abra-o no seu editor favorito (T
    <span class="keyword keyword_control keyword_control_ruby">end</span>
 
 <span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-Lembre-se de alterar o nome do usuário para o seu nome, né&#8230;
 
-Agora crie uma pasta chamada <code>.autotest_images</code> e jogue as duas imagens abaixo dentro dela.
 
-<img src="http://www.nomedojogo.com/wp-content/uploads/2008/02/pass.png" alt="pass.png" /><img src="http://www.nomedojogo.com/wp-content/uploads/2008/02/fail.png" alt="fail.png" />
+<p>Lembre-se de alterar o nome do usuário para o seu nome, né&#8230;</p>
 
-Agora vamos instalar o ZenTest:
+<p>Agora crie uma pasta chamada <code>.autotest_images</code> e jogue as duas imagens abaixo dentro dela.</p>
+
+<p><img src="http://www.nomedojogo.com/wp-content/uploads/2008/02/pass.png" alt="pass.png" /><img src="http://www.nomedojogo.com/wp-content/uploads/2008/02/fail.png" alt="fail.png" /></p>
+
+<p>Agora vamos instalar o ZenTest:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">sudo gem install <span class="variable variable_other variable_other_constant variable_other_constant_ruby">ZenTest</span></span></pre>
-Pronto! Agora quando você rodar o autotest na sua aplicação Rails, será alertado de erros via Growl. Para rodar o Autotest, basta entrar na pasta onde está o seu projeto e executar o comando <code>autotest</code>.
 
-Muito bom!
 
-P.S.: Outra dica legal (talvez até melhor que a acima) é dar uma olhada <a href="http://simplesideias.com.br/test-notifier-gem-para-ruby.">neste gem</a> que o Nando Vieira criou.
+<p>Pronto! Agora quando você rodar o autotest na sua aplicação Rails, será alertado de erros via Growl. Para rodar o Autotest, basta entrar na pasta onde está o seu projeto e executar o comando <code>autotest</code>.</p>
+
+<p>Muito bom!</p>
+
+<p>P.S.: Outra dica legal (talvez até melhor que a acima) é dar uma olhada <a href="http://simplesideias.com.br/test-notifier-gem-para-ruby.">neste gem</a> que o Nando Vieira criou.</p>
 </div>
 
 
@@ -178,14 +187,14 @@ P.S.: Outra dica legal (talvez até melhor que a acima) é dar uma olhada <a hre
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-02-28 00:00:00 -0300" pubdate  updated >Feb 28<span>th</span>, 2008</time>
+<time datetime="2008-02-28 00:00:00 -0300" pubdate  updated >28 de Fevereiro de 2008</time>
 
 
 

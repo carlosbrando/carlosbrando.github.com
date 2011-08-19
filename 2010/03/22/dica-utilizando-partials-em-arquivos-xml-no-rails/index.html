@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Dica: Utilizando Partials Em Arquivos XML No Rails</h1>
+      <h1 class="entry-title">Dica: Utilizando partials em arquivos XML no Rails</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2010-03-22 00:00:00 -0300" pubdate  updated >Mar 22<span>nd</span>, 2010</time>
+<time datetime="2010-03-22 00:00:00 -0300" pubdate  updated >22 de Março de 2010</time>
 
 
 </p>
@@ -113,15 +113,19 @@
   </header>
 
 
-<div class="entry-content">Trabalhando em um novo plugin, senti a necessidade de usar partials em uma view renderizada através do Builder (index.xml.builder, por exemplo). Porém não é possível utilizar partials em views desse tipo da mesma forma como fazemos no ERb. Nesses casos a linha abaixo não tem nenhum efeito:
+<div class="entry-content"><p>Trabalhando em um novo plugin, senti a necessidade de usar partials em uma view renderizada através do Builder (index.xml.builder, por exemplo). Porém não é possível utilizar partials em views desse tipo da mesma forma como fazemos no ERb. Nesses casos a linha abaixo não tem nenhum efeito:</p>
 
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_function support_function_actionpack support_function_actionpack_rails">render</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>partial</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>preferences<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span></span></pre>
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="n">render</span> <span class="ss">:partial</span> <span class="o">=&gt;</span> <span class="s2">&quot;preferences&quot;</span>
+</div></code></pre></td></tr></table></div></figure>
 
-Isso não funciona porque a partial receberá um novo objeto xml Builder quando estiver sendo renderizada. Há várias formas de solucionar isso, mas a mais simples é assim:
+<p>Isso não funciona porque a partial receberá um novo objeto xml Builder quando estiver sendo renderizada. Há várias formas de solucionar isso, mas a mais simples é assim:</p>
 
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">xml <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_augmented keyword_operator_assignment_augmented_ruby">&lt;&lt;</span> <span class="support support_function support_function_actionpack support_function_actionpack_rails">render</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>partial</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>preferences<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="n">xml</span> <span class="o">&lt;&lt;</span> <span class="n">render</span><span class="p">(</span><span class="ss">:partial</span> <span class="o">=&gt;</span> <span class="s2">&quot;preferences&quot;</span><span class="p">)</span>
+</div></code></pre></td></tr></table></div></figure>
 
-O objetivo desse post é deixar isso registrado para um eventual esquecimento meu.
+<p>O objetivo desse post é deixar isso registrado para um eventual esquecimento meu.</p>
 </div>
 
 
@@ -130,14 +134,14 @@ O objetivo desse post é deixar isso registrado para um eventual esquecimento me
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2010-03-22 00:00:00 -0300" pubdate  updated >Mar 22<span>nd</span>, 2010</time>
+<time datetime="2010-03-22 00:00:00 -0300" pubdate  updated >22 de Março de 2010</time>
 
 
 

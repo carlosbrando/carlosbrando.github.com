@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2009-02-05 00:00:00 -0200" pubdate  updated >Feb 5<span>th</span>, 2009</time>
+<time datetime="2009-02-05 00:00:00 -0200" pubdate  updated > 5 de Fevereiro de 2009</time>
 
 
 </p>
@@ -113,9 +113,10 @@
   </header>
 
 
-<div class="entry-content">Outro recurso que também foi muito solicitado e estará disponível com a versão 2.3 do Rails é uma melhoria nas nested transactions (transações aninhadas).
+<div class="entry-content"><p>Outro recurso que também foi muito solicitado e estará disponível com a versão 2.3 do Rails é uma melhoria nas nested transactions (transações aninhadas).</p>
 
-Atualmente no Rails já podemos aninhar transações, ou em um português mais simples podemos colocar uma transação dentro de outra. Veja um exemplo:
+<p>Atualmente no Rails já podemos aninhar transações, ou em um português mais simples podemos colocar uma transação dentro de outra. Veja um exemplo:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>transaction <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
 </span>  <span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>create<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>username</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Kotori<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
   <span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>transaction <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
@@ -126,9 +127,12 @@ Atualmente no Rails já podemos aninhar transações, ou em um português mais s
 
 <span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>all</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; empty
 </span></span></pre>
-Resumindo o exemplo acima: Criei uma transação e inclui um novo usuário no banco, então criei uma segunda transação dentro da primeira e inclui um segundo usuário, e no fim disparei uma exceção que faz com que a primeira transação e todas as suas filhas sejam desfeitas como você pode ver no resultado do método <code>find</code>.
 
-A novidade é a opção <code>:requires_new</code>. Quando usada em uma sub-transação, caso alguma coisa dê errado somente as alterações feitas dai em diante é que serão desfeitas. Veja um novo exemplo, agora com este recurso habilitado:
+
+<p>Resumindo o exemplo acima: Criei uma transação e inclui um novo usuário no banco, então criei uma segunda transação dentro da primeira e inclui um segundo usuário, e no fim disparei uma exceção que faz com que a primeira transação e todas as suas filhas sejam desfeitas como você pode ver no resultado do método <code>find</code>.</p>
+
+<p>A novidade é a opção <code>:requires_new</code>. Quando usada em uma sub-transação, caso alguma coisa dê errado somente as alterações feitas dai em diante é que serão desfeitas. Veja um novo exemplo, agora com este recurso habilitado:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>transaction <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
 </span>  <span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>create<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>username</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Kotori<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
   <span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>transaction<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>requires_new</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">true</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
@@ -138,11 +142,14 @@ A novidade é a opção <code>:requires_new</code>. Quando usada em uma sub-tran
 <span class="keyword keyword_control keyword_control_ruby">end</span>
 
 <span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>all</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; Returns only Kotori</span></span></pre>
-Como você pode ver no retorno do método <code>find</code>, ao realizar o rollback somente a inclusão do segundo usuário foi desfeita, já que estou usando a opção <code>:requires_new</code> habilitada na segunda transação.
 
-Nem todo banco de dados tem suporte real a nested transactions. Na verdade, até o momento somente o MS-SQL tem esta funcionalidade. Mas não se preocupe se você estiver usando outro banco de dados, o Active Record consegue emular nested transactions usando <a href="http://dev.mysql.com/doc/refman/5.0/en/savepoint.html">savepoints</a>.
 
-ATENÇÃO: Caso você esteja usando o MySQL, então não faça operações DDL em nested transactions que estiverem emulando savepoints. Ou seja, não tente executar algo como <code>‘CREATE TABLE’</code> nestes blocos. Isto acontece porque o MySQL automaticamente libera todos os savepoints após executar uma operação DDL. Então quando a transação terminar e tentar liberar os savepoints criados, ocorrerá um erro no banco já que todos os savepoints foram liberados antes da hora. Para entender melhor, veja o exemplo abaixo:
+<p>Como você pode ver no retorno do método <code>find</code>, ao realizar o rollback somente a inclusão do segundo usuário foi desfeita, já que estou usando a opção <code>:requires_new</code> habilitada na segunda transação.</p>
+
+<p>Nem todo banco de dados tem suporte real a nested transactions. Na verdade, até o momento somente o MS-SQL tem esta funcionalidade. Mas não se preocupe se você estiver usando outro banco de dados, o Active Record consegue emular nested transactions usando <a href="http://dev.mysql.com/doc/refman/5.0/en/savepoint.html">savepoints</a>.</p>
+
+<p>ATENÇÃO: Caso você esteja usando o MySQL, então não faça operações DDL em nested transactions que estiverem emulando savepoints. Ou seja, não tente executar algo como <code>‘CREATE TABLE’</code> nestes blocos. Isto acontece porque o MySQL automaticamente libera todos os savepoints após executar uma operação DDL. Então quando a transação terminar e tentar liberar os savepoints criados, ocorrerá um erro no banco já que todos os savepoints foram liberados antes da hora. Para entender melhor, veja o exemplo abaixo:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> INICIO
 </span><span class="support support_class support_class_ruby">Model</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>connection<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>transaction <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
 </span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> CRIA O SAVEPOINT active_record_1
@@ -153,9 +160,12 @@ ATENÇÃO: Caso você esteja usando o MySQL, então não faça operações DDL e
 </span>
 <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> ^^^^ BOOM! database error!
 </span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-Apesar deste pequeno detalhe, em todos os outros casos este recurso tem funcionado perfeitamente.
+
+
+<p>Apesar deste pequeno detalhe, em todos os outros casos este recurso tem funcionado perfeitamente.</p>
 
 <hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.3 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades acompanhando a série <a href="../category/rails-23/">Rails 2.3</a>.</em>
+
 </div>
 
 
@@ -164,14 +174,14 @@ Apesar deste pequeno detalhe, em todos os outros casos este recurso tem funciona
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2009-02-05 00:00:00 -0200" pubdate  updated >Feb 5<span>th</span>, 2009</time>
+<time datetime="2009-02-05 00:00:00 -0200" pubdate  updated > 5 de Fevereiro de 2009</time>
 
 
 

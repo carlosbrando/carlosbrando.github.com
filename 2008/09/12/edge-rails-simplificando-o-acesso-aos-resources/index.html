@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Edge Rails: Simplificando O Acesso Aos Resources</h1>
+      <h1 class="entry-title">Edge Rails: Simplificando o acesso aos resources</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-09-12 00:00:00 -0300" pubdate  updated >Sep 12<span>th</span>, 2008</time>
+<time datetime="2008-09-12 00:00:00 -0300" pubdate  updated >12 de Setembro de 2008</time>
 
 
 </p>
@@ -113,29 +113,40 @@
   </header>
 
 
-<div class="entry-content">Rotas aninhadas já não é mais novidade. Ao configurar nossas rotas é comum codificarmos algo mais ou menos assim:
+<div class="entry-content"><p>Rotas aninhadas já não é mais novidade. Ao configurar nossas rotas é comum codificarmos algo mais ou menos assim:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>users</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">user</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
   user<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>posts</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">post</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
     post<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>comments</span>
   <span class="keyword keyword_control keyword_control_ruby">end</span>
 <span class="keyword keyword_control keyword_control_ruby">end</span>
 </span></pre>
-No código acima estou deixando claro que meus usuários tem posts, que por sua vez tem comentários. Da forma como minhas rotas estão configuradas posso recuperar os posts de um usuário através da url &#8216;/users/1/posts&#8217;. Ou recuperar os comentários de um determinado post através da url &#8216;/users/1/posts/5/comments&#8217;.
 
-Com a nova opção <strong>:shallow =&gt; true</strong>, ganhamos mais flexibilidade. Note que ao adicionar esta opção no primeiro resource, todos os outros que estiverem abaixo dele herdarão esta característica.
+
+<p>No código acima estou deixando claro que meus usuários tem posts, que por sua vez tem comentários. Da forma como minhas rotas estão configuradas posso recuperar os posts de um usuário através da url &#8216;/users/1/posts&#8217;. Ou recuperar os comentários de um determinado post através da url &#8216;/users/1/posts/5/comments&#8217;.</p>
+
+<p>Com a nova opção <strong>:shallow =&gt; true</strong>, ganhamos mais flexibilidade. Note que ao adicionar esta opção no primeiro resource, todos os outros que estiverem abaixo dele herdarão esta característica.</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>users</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>shallow</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">true</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">user</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
   user<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>posts</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">post</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
     post<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>comments</span>
   <span class="keyword keyword_control keyword_control_ruby">end</span>
 <span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-Com esta opção habilitada eu posso continuar recuperando dados da mesma forma como fazia antes. A vantagem é que agora eu também posso recuperar todas os comentários de um post sem precisar informar o usuário, através da url &#8216;/posts/2/comments&#8217;. Ou recuperar um determinado post usando apenas a url &#8216;/posts/2&#8217;.
 
-A opção <strong>:shallow</strong> também funciona em recursos que estão usando as notações <strong>has_many</strong> ou <strong>has_one</strong>, por exemplo:
+
+<p>Com esta opção habilitada eu posso continuar recuperando dados da mesma forma como fazia antes. A vantagem é que agora eu também posso recuperar todas os comentários de um post sem precisar informar o usuário, através da url &#8216;/posts/2/comments&#8217;. Ou recuperar um determinado post usando apenas a url &#8216;/posts/2&#8217;.</p>
+
+<p>A opção <strong>:shallow</strong> também funciona em recursos que estão usando as notações <strong>has_many</strong> ou <strong>has_one</strong>, por exemplo:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>users</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>has_many</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>posts</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>comments</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>shallow</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">true</span></span></pre>
-Todos os helpers para acessar as rotas diretamente também são criados, como:
+
+
+<p>Todos os helpers para acessar as rotas diretamente também são criados, como:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">user_posts_path<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>user</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; '/users/1/posts'
 </span>posts_path <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; '/posts'
 </span>post_comments_path<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>post</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; /posts/5/comments</span></span></pre>
+
 </div>
 
 
@@ -144,14 +155,14 @@ Todos os helpers para acessar as rotas diretamente também são criados, como:
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-09-12 00:00:00 -0300" pubdate  updated >Sep 12<span>th</span>, 2008</time>
+<time datetime="2008-09-12 00:00:00 -0300" pubdate  updated >12 de Setembro de 2008</time>
 
 
 

@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Rails Way: Variáveis De Instância, Controllers E Views</h1>
+      <h1 class="entry-title">Rails Way: Variáveis de Instância, Controllers e Views</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2009-02-06 00:00:00 -0200" pubdate  updated >Feb 6<span>th</span>, 2009</time>
+<time datetime="2009-02-06 00:00:00 -0200" pubdate  updated > 6 de Fevereiro de 2009</time>
 
 
 </p>
@@ -113,15 +113,15 @@
   </header>
 
 
-<div class="entry-content">Mais uma sexta-feira e mais um artigo da série <a href="http://www.nomedojogo.com/category/rails-way/">Rails Way</a>, onde vou pouco a pouco mostrando a forma como os Rubistas mais experientes costumam programar no Ruby on Rails.
+<div class="entry-content"><p>Mais uma sexta-feira e mais um artigo da série <a href="http://www.nomedojogo.com/category/rails-way/">Rails Way</a>, onde vou pouco a pouco mostrando a forma como os Rubistas mais experientes costumam programar no Ruby on Rails.</p>
 
-Programadores iniciantes rapidamente ficam fascinados com o Ruby e principalmente com o Rails, e por serem uma linguagem e framework com uma curva de aprendizado muito curta é comum que ao terminarem seu primeiro projeto em Rails, percam um pouco o interesse em entender como determinadas coisas funcionam, assimilando tudo que o Rails faz como pura mágica.
+<p>Programadores iniciantes rapidamente ficam fascinados com o Ruby e principalmente com o Rails, e por serem uma linguagem e framework com uma curva de aprendizado muito curta é comum que ao terminarem seu primeiro projeto em Rails, percam um pouco o interesse em entender como determinadas coisas funcionam, assimilando tudo que o Rails faz como pura mágica.</p>
 
-Isto é extremamente prejudicial ao programador iniciante e pode levá-lo a se tornar um programador “experiente” com pouco ou nenhum conhecimento real sobre o funcionamento interno da sua ferramenta de trabalho.
+<p>Isto é extremamente prejudicial ao programador iniciante e pode levá-lo a se tornar um programador “experiente” com pouco ou nenhum conhecimento real sobre o funcionamento interno da sua ferramenta de trabalho.</p>
 
-A ideia desta série de artigos é expor algumas boas práticas de desenvolvimento ao mesmo tempo em que tento explicar de uma forma simples como as engrenagens funcionam. Por exemplo, já se perguntou como um controller e uma view compartilham as mesmas variáveis de instância?
+<p>A ideia desta série de artigos é expor algumas boas práticas de desenvolvimento ao mesmo tempo em que tento explicar de uma forma simples como as engrenagens funcionam. Por exemplo, já se perguntou como um controller e uma view compartilham as mesmas variáveis de instância?</p>
 
-Por definição uma variável de instância só existe dentro de uma única instância de um objeto. Mas quando estamos falando de controllers e view, estamos falando de dois objetos diferentes que compartilham as mesmas variáveis.
+<p>Por definição uma variável de instância só existe dentro de uma única instância de um objeto. Mas quando estamos falando de controllers e view, estamos falando de dois objetos diferentes que compartilham as mesmas variáveis.</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> books_controller.rb
 </span><span class="meta meta_rails meta_rails_controller"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">BooksController<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ApplicationController</span></span></span>
@@ -131,19 +131,23 @@ Por definição uma variável de instância só existe dentro de uma única inst
 </span><span class="keyword keyword_control keyword_control_ruby">end</span>
 </span></pre>
 
+
+
+
 <pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="comment comment_block comment_block_html"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_html">&lt;!--</span> index.html.erb <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_html">--&gt;</span></span>
 <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> <span class="keyword keyword_control keyword_control_ruby">for</span> book <span class="keyword keyword_control keyword_control_ruby">in</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>books</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
    <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> book<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
 <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> <span class="keyword keyword_control keyword_control_ruby">end</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
 </span></pre>
 
-Nos exemplos acima estou definindo uma variável de instância <code>@books</code> dentro do controller, e eu simplesmente assumo que a variável também estará disponível na view.
 
-Note que meu controller é uma extensão da classe <code>ApplicationController</code> que por sua vez é uma extensão da classe <code>ActionController::Base</code> e por isto é uma instância desta classe. Por outro lado a minha view é uma instância da classe <code>ActionView::Base</code>. Ou seja, meu controller é uma instância de um objeto enquanto minha view é uma instância de um outro objeto totalmente diferente.
+<p>Nos exemplos acima estou definindo uma variável de instância <code>@books</code> dentro do controller, e eu simplesmente assumo que a variável também estará disponível na view.</p>
 
-Então como é possível compartilhar uma variável de instância quando temos duas instância de objetos diferentes? Será mágica? Não, a resposta é mais simples do que você imagina.
+<p>Note que meu controller é uma extensão da classe <code>ApplicationController</code> que por sua vez é uma extensão da classe <code>ActionController::Base</code> e por isto é uma instância desta classe. Por outro lado a minha view é uma instância da classe <code>ActionView::Base</code>. Ou seja, meu controller é uma instância de um objeto enquanto minha view é uma instância de um outro objeto totalmente diferente.</p>
 
-O Rails acrescenta à classe <code>Object</code> um método chamado <code>copy_instance_variables_from</code> que faz exatamente o que o nome diz, copia variáveis de instância de uma classe para outro. Você pode até mesmo brincar um pouco com este método no console. Abra o terminal e após digitar o comando <code>irb</code>, copie e cole o código abaixo e veja o resultado:
+<p>Então como é possível compartilhar uma variável de instância quando temos duas instância de objetos diferentes? Será mágica? Não, a resposta é mais simples do que você imagina.</p>
+
+<p>O Rails acrescenta à classe <code>Object</code> um método chamado <code>copy_instance_variables_from</code> que faz exatamente o que o nome diz, copia variáveis de instância de uma classe para outro. Você pode até mesmo brincar um pouco com este método no console. Abra o terminal e após digitar o comando <code>irb</code>, copie e cole o código abaixo e veja o resultado:</p>
 
 <pre class="textmate-source"><span class="source source_ruby"><span class="meta meta_require meta_require_ruby"><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">require</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>rubygems<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span>
 <span class="meta meta_require meta_require_ruby"><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">require</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>active_support<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span>
@@ -172,24 +176,27 @@ a<span class="punctuation punctuation_separator punctuation_separator_method pun
 puts a<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>x <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "valor copiado da classe B"
 </span>puts a<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>y <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; 11</span></span></pre>
 
-Acabamos de copiar todas as variáveis de instância de um objeto para outro. É exatamente assim que acontece com controllers e views.
 
-O que acontece por debaixo dos panos é que quando o método <code>render</code> do controller é executado, primeiro ele copia todas as variáveis de instância que você criou para dentro de apenas uma variável chamada <code>@assigns</code>, que funciona como um <code>Hash</code>. E ao criar uma uma nova view, ele faz uma copia desta variável (<code>@assigns</code> com todas as suas variáveis dentro) para o novo objeto. Simples não?
+<p>Acabamos de copiar todas as variáveis de instância de um objeto para outro. É exatamente assim que acontece com controllers e views.</p>
+
+<p>O que acontece por debaixo dos panos é que quando o método <code>render</code> do controller é executado, primeiro ele copia todas as variáveis de instância que você criou para dentro de apenas uma variável chamada <code>@assigns</code>, que funciona como um <code>Hash</code>. E ao criar uma uma nova view, ele faz uma copia desta variável (<code>@assigns</code> com todas as suas variáveis dentro) para o novo objeto. Simples não?</p>
+
 <h2>O inferno das variáveis</h2>
-O que tenho visto muitas vezes é que alguns programadores tem abusado desta facilidade que o Rails oferece, criando inúmeras variáveis de instância no controller para recuperar todo tipo de informação na view.
 
-Manter muitas variáveis complica o gerenciamento do código, e em alguns casos acabamos até mesmo fazendo chamadas repetidas à associações de um modelo sem se dar conta disso, causando um problema de performance em nosso projeto.
 
-O ideal é que você compartilhe apenas uma variável de instância entre seu controller e sua view. Desta forma todas as chamadas para associações serão realizadas &#8220;on demand&#8221; evitando o consumo indevido de recursos e tornando a manutenção do código mais simples.
+<p>O que tenho visto muitas vezes é que alguns programadores tem abusado desta facilidade que o Rails oferece, criando inúmeras variáveis de instância no controller para recuperar todo tipo de informação na view.</p>
 
-[caption id=&#8221;attachment_2198&#8221; align=&#8221;aligncenter&#8221; width=&#8221;500&#8221; caption=&#8221;Apenas uma variável de instância entre seu controller e sua view&#8221;]<img class="size-full wp-image-2198" title="97493713_c72ee9a7bd" src="http://www.nomedojogo.com/wp-content/uploads/2009/02/97493713_c72ee9a7bd.jpg" alt="97493713_c72ee9a7bd" height="375" width="500">[/caption]
-<p style="text-align: center;"></p>
+<p>Manter muitas variáveis complica o gerenciamento do código, e em alguns casos acabamos até mesmo fazendo chamadas repetidas à associações de um modelo sem se dar conta disso, causando um problema de performance em nosso projeto.</p>
 
-Isto não quer dizer que você não possa compartilhar outras variáveis quando necessário. Mas é importante que você analise a real necessidade de se fazer isto. Por exemplo, é mais prático criar um helper <code>current_user</code> para recuperar o usuário atual do que sempre armazená-lo em uma variável <code>@current_user</code>.
+<p>O ideal é que você compartilhe apenas uma variável de instância entre seu controller e sua view. Desta forma todas as chamadas para associações serão realizadas &#8220;on demand&#8221; evitando o consumo indevido de recursos e tornando a manutenção do código mais simples.</p>
 
-Se no primeiro exemplo você precisasse recuperar também todos os livros relacionados ao livro atual, talvez parecesse razoável criar uma segunda variável <code>@related_books</code> contendo estes livros. Mas se você colocar em prática a <a href="http://www.nomedojogo.com/2009/01/30/rails-way-1-modelos-gordos-e-controladores-magros/">primeira dica</a> desta série e acrescentar o método <code>related_books</code> ao modelo <code>Book</code>, você poderá usar <code>@book.related_books</code> na sua view. Evitando a criação desnecessária de mais uma variável e deixando seu código mais limpo e organizado.
+<p><img class='' src='http://www.nomedojogo.com/wp-content/uploads/2009/02/97493713_c72ee9a7bd.jpg' width='' height='' alt='' title=''></p>
 
-Usem de bom senso.
+<p>Isto não quer dizer que você não possa compartilhar outras variáveis quando necessário. Mas é importante que você analise a real necessidade de se fazer isto. Por exemplo, é mais prático criar um helper <code>current_user</code> para recuperar o usuário atual do que sempre armazená-lo em uma variável <code>@current_user</code>.</p>
+
+<p>Se no primeiro exemplo você precisasse recuperar também todos os livros relacionados ao livro atual, talvez parecesse razoável criar uma segunda variável <code>@related_books</code> contendo estes livros. Mas se você colocar em prática a <a href="http://www.nomedojogo.com/2009/01/30/rails-way-1-modelos-gordos-e-controladores-magros/">primeira dica</a> desta série e acrescentar o método <code>related_books</code> ao modelo <code>Book</code>, você poderá usar <code>@book.related_books</code> na sua view. Evitando a criação desnecessária de mais uma variável e deixando seu código mais limpo e organizado.</p>
+
+<p>Usem de bom senso.</p>
 </div>
 
 
@@ -198,14 +205,14 @@ Usem de bom senso.
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2009-02-06 00:00:00 -0200" pubdate  updated >Feb 6<span>th</span>, 2009</time>
+<time datetime="2009-02-06 00:00:00 -0200" pubdate  updated > 6 de Fevereiro de 2009</time>
 
 
 

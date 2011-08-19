@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Rails 2.1: Bug in Method End_of_quarter</h1>
+      <h1 class="entry-title">Rails 2.1: Bug in method end_of_quarter</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-06-03 00:00:00 -0300" pubdate  updated >Jun 3<span>rd</span>, 2008</time>
+<time datetime="2008-06-03 00:00:00 -0300" pubdate  updated > 3 de Junho de 2008</time>
 
 
 </p>
@@ -113,25 +113,27 @@
   </header>
 
 
-<div class="entry-content">Neither came out the <strong>Rails 2.1</strong> and was already found a serious error. Access the <strong>irb</strong> and try to run this:
+<div class="entry-content"><p>Neither came out the <strong>Rails 2.1</strong> and was already found a serious error. Access the <strong>irb</strong> and try to run this:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Date</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">2008</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">5</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">31</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>end_of_quarter</span></pre>
 
-<span style="color: #ff0000;"><strong>ERROR!</strong></span>
 
-Why? The implementation of the method <strong>end_of_quarter</strong> was made of the wrong way, it moves until the last month of the quarter and then picks last day. The problem is that it only moves the month, but as the date is starting on May 31, it&#8217;s trying to create a new instance of the Date to June 31, which does not exist. The class Time not raise an exception, but returns the wrong date: July 31.
+<p><span style="color: #ff0000;"><strong>ERROR!</strong></span></p>
 
-In Edge Rails this has already been corrected, but who are using Rails 2.1 will have this problem.
+<p>Why? The implementation of the method <strong>end_of_quarter</strong> was made of the wrong way, it moves until the last month of the quarter and then picks last day. The problem is that it only moves the month, but as the date is starting on May 31, it&#8217;s trying to create a new instance of the Date to June 31, which does not exist. The class Time not raise an exception, but returns the wrong date: July 31.</p>
 
-Very careful, because this error only occurs if you use the method <strong>end_of_quarter</strong> in day 31 of May, July, and August. So, very careful.
+<p>In Edge Rails this has already been corrected, but who are using Rails 2.1 will have this problem.</p>
 
-For those who do not like to live dangerously by using the edge rails, I created a plugin with the code that fixes the bug. I will try to keep out this plugin updated whenever any corrections is released.
+<p>Very careful, because this error only occurs if you use the method <strong>end_of_quarter</strong> in day 31 of May, July, and August. So, very careful.</p>
 
-To install:
+<p>For those who do not like to live dangerously by using the edge rails, I created a plugin with the code that fixes the bug. I will try to keep out this plugin updated whenever any corrections is released.</p>
+
+<p>To install:</p>
 
 <pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">./script/plugin install git://github.com/carlosbrando/rails21_fixes.git</span></span></pre>
 
-Do you like it? <a href="http://www.workingwithrails.com/recommendation/new/person/8137-carlos-brando">Recommend me on Working With Rails</a>.
+
+<p>Do you like it? <a href="http://www.workingwithrails.com/recommendation/new/person/8137-carlos-brando">Recommend me on Working With Rails</a>.</p>
 </div>
 
 
@@ -140,14 +142,14 @@ Do you like it? <a href="http://www.workingwithrails.com/recommendation/new/pers
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-06-03 00:00:00 -0300" pubdate  updated >Jun 3<span>rd</span>, 2008</time>
+<time datetime="2008-06-03 00:00:00 -0300" pubdate  updated > 3 de Junho de 2008</time>
 
 
 

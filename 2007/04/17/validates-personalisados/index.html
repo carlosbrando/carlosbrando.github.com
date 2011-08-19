@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Mensagens Personalizadas Com Validates</h1>
+      <h1 class="entry-title">Mensagens personalizadas com validates</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2007-04-17 00:00:00 -0300" pubdate  updated >Apr 17<span>th</span>, 2007</time>
+<time datetime="2007-04-17 00:00:00 -0300" pubdate  updated >17 de Abril de 2007</time>
 
 
 </p>
@@ -113,81 +113,96 @@
   </header>
 
 
-<div class="entry-content"><center><img src="http://www.nomedojogo.com/wp-content/uploads/2007/04/windowslivewritervalidatespersonalisados-971dcustom-springs131.jpg" height="150" width="160" /></center>Um problema que temos com os validates &eacute; que ele insiste em colocar o nome do campo na frente da mensagem, mesmo quando personalizamos ela usando o :message.
+<div class="entry-content"><center><img src="http://www.nomedojogo.com/wp-content/uploads/2007/04/windowslivewritervalidatespersonalisados-971dcustom-springs131.jpg" height="150" width="160" /></center>
+
+
+<p>Um problema que temos com os validates &eacute; que ele insiste em colocar o nome do campo na frente da mensagem, mesmo quando personalizamos ela usando o :message.
 [source:ruby]validates_presence_of :title,
 :message =&gt; &#8220;O campo &#8216;T&iacute;tulo&#8217; deve ser preenchido&#8221;[/source]
-Na nossa view ficaria assim:
+Na nossa view ficaria assim:</p>
+
 <ul>
-	<li>Title O campo &#8216;T&iacute;tulo&#8217; deve ser preenchido</li>
+    <li>Title O campo &#8216;T&iacute;tulo&#8217; deve ser preenchido</li>
 </ul>
-Como resolver isto?
 
-Crie um arquivo .rb qualquer dentro da pasta lib com o seguinte conte&uacute;do:
-[source:ruby]module ActiveRecord
-	class Errors
-		def add(attribute, msg = @@default_error_messages[:invalid])
-			if replace_message?(msg)
-				msg = replace_message(attribute, msg)
-				attribute = :base
-			end
 
-			@errors[attribute.to_s] = [] if @errors[attribute.to_s].nil?
-			@errors[attribute.to_s] &lt;&lt; msg
-		end
+<p>Como resolver isto?</p>
 
-		# true se a mensagem for alter&aacute;vel
+<p>Crie um arquivo .rb qualquer dentro da pasta lib com o seguinte conte&uacute;do:
+[source:ruby]module ActiveRecord</p>
 
-		def replace_message?(msg)
-			(msg =~ /{?}/) || (msg.starts_with?&#8221;!&#8221;)
-		end
+<pre><code>class Errors
+    def add(attribute, msg = @@default_error_messages[:invalid])
+        if replace_message?(msg)
+            msg = replace_message(attribute, msg)
+            attribute = :base
+        end
 
-		# muda a mensagem
+        @errors[attribute.to_s] = [] if @errors[attribute.to_s].nil?
+        @errors[attribute.to_s] &amp;lt;&amp;lt; msg
+    end
 
-		def replace_message(attr, msg)
+    # true se a mensagem for alter&amp;aacute;vel
 
-			# se mensagem veio com {?}, agrega o nome do campo no meio do texto
+    def replace_message?(msg)
+        (msg =~ /{?}/) || (msg.starts_with?"!")
+    end
 
-			if msg =~ /{?}/
-				msg.gsub(/{?}/, attr.to_s.humanize)
-			elsif msg.starts_with?(&#8220;!&#8221;)              # se tiver ! no come&ccedil;o, remove
-				msg.from(1)
-			else
-				msg
-			end
-		end
+    # muda a mensagem
 
-		def add_on_blank(attributes, msg = @@default_error_messages[:blank])
-			for attr in [attributes].flatten
-				value = @base.respond_to?(attr.to_s) ? @base.send(attr.to_s) : @base[attr.to_s]
+    def replace_message(attr, msg)
 
-				# se mensagem veio com {?}, agrega o nome do campo no meio do texto
+        # se mensagem veio com {?}, agrega o nome do campo no meio do texto
 
-				if replace_message?(msg)
-					add(:base, replace_message(attr, msg)) if value.blank?
-				else
-					add(attr, msg) if value.blank? # fluxo normal
-				end
-			end
-		end
-	end
-end[/source]
-N&atilde;o vou entrar em detalhes sobre o que o c&oacute;digo faz (cabe a voc&ecirc; analisar), mas basicamente eu verifico se o texto passado no :message possui:
+        if msg =~ /{?}/
+            msg.gsub(/{?}/, attr.to_s.humanize)
+        elsif msg.starts_with?("!")              # se tiver ! no come&amp;ccedil;o, remove
+            msg.from(1)
+        else
+            msg
+        end
+    end
+
+    def add_on_blank(attributes, msg = @@default_error_messages[:blank])
+        for attr in [attributes].flatten
+            value = @base.respond_to?(attr.to_s) ? @base.send(attr.to_s) : @base[attr.to_s]
+
+            # se mensagem veio com {?}, agrega o nome do campo no meio do texto
+
+            if replace_message?(msg)
+                add(:base, replace_message(attr, msg)) if value.blank?
+            else
+                add(attr, msg) if value.blank? # fluxo normal
+            end
+        end
+    end
+end
+</code></pre>
+
+<p>end[/source]
+N&atilde;o vou entrar em detalhes sobre o que o c&oacute;digo faz (cabe a voc&ecirc; analisar), mas basicamente eu verifico se o texto passado no :message possui:</p>
+
 <ol>
-	<li>{?} em algum lugar do texto.</li>
-	<li>Ou come&ccedil;a com ! (exclama&ccedil;&atilde;o)</li>
+    <li>{?} em algum lugar do texto.</li>
+    <li>Ou come&ccedil;a com ! (exclama&ccedil;&atilde;o)</li>
 </ol>
-No primeiro caso, simplesmente subistituimos a string &#8220;{?}&#8221; pelo nome da coluna. O que nos permite criar algo assim: &#8220;O campo &#8216;{?}&#8217; deve ser preenchido&#8221;.
 
-No segundo caso, o c&oacute;digo verifica se a mensagem come&ccedil;a com o s&iacute;mbolo de exclama&ccedil;&atilde;o (!). Se sim, deixa a mensagem exatamente como est&aacute;, ignorando completamente o nome da coluna.
 
-Sendo assim, o c&oacute;digo dado como exemplo acima poderia ficar assim:
+<p>No primeiro caso, simplesmente subistituimos a string &#8220;{?}&#8221; pelo nome da coluna. O que nos permite criar algo assim: &#8220;O campo &#8216;{?}&#8217; deve ser preenchido&#8221;.</p>
+
+<p>No segundo caso, o c&oacute;digo verifica se a mensagem come&ccedil;a com o s&iacute;mbolo de exclama&ccedil;&atilde;o (!). Se sim, deixa a mensagem exatamente como est&aacute;, ignorando completamente o nome da coluna.</p>
+
+<p>Sendo assim, o c&oacute;digo dado como exemplo acima poderia ficar assim:
 [source:ruby]validates_presence_of :title,
 :message =&gt; &#8221;<strong>!</strong>O campo &#8216;T&iacute;tulo&#8217; deve ser preenchido&#8221;[/source]
-E o resultado na sua p&aacute;gina seria:
+E o resultado na sua p&aacute;gina seria:</p>
+
 <ul>
-	<li>O campo &#8216;T&iacute;tulo&#8217; deve ser preenchido</li>
+    <li>O campo &#8216;T&iacute;tulo&#8217; deve ser preenchido</li>
 </ul>
-Este &eacute; apenas um exemplo de como podemos alterar o Rails de forma simples para nossas necessidades.
+
+
+<p>Este &eacute; apenas um exemplo de como podemos alterar o Rails de forma simples para nossas necessidades.</p>
 </div>
 
 
@@ -196,14 +211,14 @@ Este &eacute; apenas um exemplo de como podemos alterar o Rails de forma simples
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2007-04-17 00:00:00 -0300" pubdate  updated >Apr 17<span>th</span>, 2007</time>
+<time datetime="2007-04-17 00:00:00 -0300" pubdate  updated >17 de Abril de 2007</time>
 
 
 

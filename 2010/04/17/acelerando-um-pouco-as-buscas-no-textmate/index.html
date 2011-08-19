@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Acelerando Um Pouco as Buscas No Textmate</h1>
+      <h1 class="entry-title">Acelerando um pouco as buscas no Textmate</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2010-04-17 00:00:00 -0300" pubdate  updated >Apr 17<span>th</span>, 2010</time>
+<time datetime="2010-04-17 00:00:00 -0300" pubdate  updated >17 de Abril de 2010</time>
 
 
 </p>
@@ -113,23 +113,23 @@
   </header>
 
 
-<div class="entry-content">Eu costumo trabalhar muito com o terminal, assim é natural usar o comando <code>mate .</code> para carregar um projeto Rails no meu Textmate.
+<div class="entry-content"><p>Eu costumo trabalhar muito com o terminal, assim é natural usar o comando <code>mate .</code> para carregar um projeto Rails no meu Textmate.</p>
 
-Em projetos grandes é normal utilizar o sistema de buscas da ferramenta para localizar um arquivo ou encontrar alguma declaração, por exemplo. Embora existam plugin como o excelente <a href="http://github.com/protocool/AckMate">AckMate</a> que melhorem perceptivelmente a performance dessas buscas, elas ainda costumam ser lentas. Um dos vilões nessa história são os arquivos temporários e logs que são inclusos no processo de busca, e normalmente esses arquivos costumam ser bem grandes. Além de deixarem a busca mais lenta, eles também acabam poluindo o resultado já que na maioria das vezes não estamos procurando por algo nos logs.
+<p>Em projetos grandes é normal utilizar o sistema de buscas da ferramenta para localizar um arquivo ou encontrar alguma declaração, por exemplo. Embora existam plugin como o excelente <a href="http://github.com/protocool/AckMate">AckMate</a> que melhorem perceptivelmente a performance dessas buscas, elas ainda costumam ser lentas. Um dos vilões nessa história são os arquivos temporários e logs que são inclusos no processo de busca, e normalmente esses arquivos costumam ser bem grandes. Além de deixarem a busca mais lenta, eles também acabam poluindo o resultado já que na maioria das vezes não estamos procurando por algo nos logs.</p>
 
-[caption id=&#8221;attachment_3270&#8221; align=&#8221;aligncenter&#8221; width=&#8221;563&#8221; caption=&#8221;Arquivos de log incluídos nas buscas &#8220;]<a href="http://www.nomedojogo.com/wp-content/uploads/2010/04/Screen-shot-2010-04-17-at-3.27.28-PM.png"><img class="size-full wp-image-3270" title="Screen shot 2010-04-17 at 3.27.28 PM" src="http://www.nomedojogo.com/wp-content/uploads/2010/04/Screen-shot-2010-04-17-at-3.27.28-PM.png" alt="" width="563" height="307" /></a>[/caption]
+<p><img class='' src='http://www.nomedojogo.com/wp-content/uploads/2010/04/Screen-shot-2010-04-17-at-3.27.28-PM.png' width='' height='' alt='' title=''></p>
 
-Inicialmente eu costumava remover os diretórios <code>tmp</code> e <code>log</code> depois de carregar o projeto no Textmate. Porém realizar essa operação todas as vezes não era nada prático.
+<p>Inicialmente eu costumava remover os diretórios <code>tmp</code> e <code>log</code> depois de carregar o projeto no Textmate. Porém realizar essa operação todas as vezes não era nada prático.</p>
 
-A solução mais simples e definitiva é alterar as configurações do Textmate para que ele ignore esses diretórios. Para isso abra as preferencias do editor de textos (<code>⌘,</code>) e na opção <strong>Advanced</strong> vá até a aba <strong>Folder References</strong>.
+<p>A solução mais simples e definitiva é alterar as configurações do Textmate para que ele ignore esses diretórios. Para isso abra as preferencias do editor de textos (<code>⌘,</code>) e na opção <strong>Advanced</strong> vá até a aba <strong>Folder References</strong>.</p>
 
-[caption id=&#8221;attachment_3275&#8221; align=&#8221;aligncenter&#8221; width=&#8221;448&#8221; caption=&#8221;Folder References&#8221;]<a href="http://www.nomedojogo.com/wp-content/uploads/2010/04/Screen-shot-2010-04-17-at-11.16.19-PM.png"><img class="size-full wp-image-3275" title="Screen shot 2010-04-17 at 11.16.19 PM" src="http://www.nomedojogo.com/wp-content/uploads/2010/04/Screen-shot-2010-04-17-at-11.16.19-PM.png" alt="" width="448" height="259" /></a>[/caption]
-<p style="text-align: center;"></p>
-Os dois campos acima são expressões regulares que determinam quais arquivos e diretórios devem ser carregados em um projeto. Isso é útil para impedir que o diretório do CVS apareça no Textmate, por exemplo.
+<p><img class='' src='http://www.nomedojogo.com/wp-content/uploads/2010/04/Screen-shot-2010-04-17-at-11.16.19-PM.png' width='' height='' alt='' title=''></p>
 
-Para adicionar os diretórios log e tmp nessa lista negra precisamos alterar o campo <strong>Folder Pattern</strong>. Adicione <code>|tmp|log</code> exatamente antes do <code>|CVS</code>. Pronto, de agora em diante toda vez que um projeto for carregado à partir de um diretório, essas pastas também serão ignoradas.
+<p>Os dois campos acima são expressões regulares que determinam quais arquivos e diretórios devem ser carregados em um projeto. Isso é útil para impedir que o diretório do CVS apareça no Textmate, por exemplo.</p>
 
-Além disso você também pode adicionar outros diretórios ou arquivos, como por exemplo a pasta <code>vendor</code> se você não pretende alterar ou visualizar o código de plugins e gems.
+<p>Para adicionar os diretórios log e tmp nessa lista negra precisamos alterar o campo <strong>Folder Pattern</strong>. Adicione <code>|tmp|log</code> exatamente antes do <code>|CVS</code>. Pronto, de agora em diante toda vez que um projeto for carregado à partir de um diretório, essas pastas também serão ignoradas.</p>
+
+<p>Além disso você também pode adicionar outros diretórios ou arquivos, como por exemplo a pasta <code>vendor</code> se você não pretende alterar ou visualizar o código de plugins e gems.</p>
 </div>
 
 
@@ -138,14 +138,14 @@ Além disso você também pode adicionar outros diretórios ou arquivos, como po
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2010-04-17 00:00:00 -0300" pubdate  updated >Apr 17<span>th</span>, 2010</time>
+<time datetime="2010-04-17 00:00:00 -0300" pubdate  updated >17 de Abril de 2010</time>
 
 
 

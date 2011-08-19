@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Como Montar Um Servidor De Gems Privado</h1>
+      <h1 class="entry-title">Como montar um servidor de gems privado</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2009-12-09 00:00:00 -0200" pubdate  updated >Dec 9<span>th</span>, 2009</time>
+<time datetime="2009-12-09 00:00:00 -0200" pubdate  updated > 9 de Dezembro de 2009</time>
 
 
 </p>
@@ -113,31 +113,49 @@
   </header>
 
 
-<div class="entry-content"><img class="alignleft size-full wp-image-2980" title="rubygems" src="http://www.nomedojogo.com/wp-content/uploads/2009/12/new_rubygems.png" alt="rubygems" width="112" height="112" />Não é segredo para ninguém que eu estou exaustivamente trabalhando em um <a href="http://www.nomedojogo.com/2009/10/13/os-slides-da-minha-apresentacao-no-rails-summit-latin-america-2009/">novo framework</a> para o desenvolvimento de aplicativos sociais de forma ultra-rápida. Porém ainda não está na hora de liberar o projeto como open source, mas é certo que isto acontecerá em breve.
+<div class="entry-content"><p><img class="alignleft size-full wp-image-2980" title="rubygems" src="http://www.nomedojogo.com/wp-content/uploads/2009/12/new_rubygems.png" alt="rubygems" width="112" height="112" />Não é segredo para ninguém que eu estou exaustivamente trabalhando em um <a href="http://www.nomedojogo.com/2009/10/13/os-slides-da-minha-apresentacao-no-rails-summit-latin-america-2009/">novo framework</a> para o desenvolvimento de aplicativos sociais de forma ultra-rápida. Porém ainda não está na hora de liberar o projeto como open source, mas é certo que isto acontecerá em breve.</p>
 
-O framework já está em sua versão 0.5.2 e em pleno uso e desenvolvimento. Como decidimos não liberar o projeto até que ele esteja finalizado, não podemos simplesmente disponibilizar as gems em serviços como o <a href="http://gemcutter.org/">Gemcutter</a>. Assim, toda vez que precisamos instalar ou atualizar as bibliotecas em nossos servidores temos de fazer isto manualmente, copiando os arquivos <code>.gem</code> para o servidor e instalando a partir deles. Este processo é realmente irritante, então surgiu a necessidade de montar o no nosso próprio servidor de gems privativo.
+<p>O framework já está em sua versão 0.5.2 e em pleno uso e desenvolvimento. Como decidimos não liberar o projeto até que ele esteja finalizado, não podemos simplesmente disponibilizar as gems em serviços como o <a href="http://gemcutter.org/">Gemcutter</a>. Assim, toda vez que precisamos instalar ou atualizar as bibliotecas em nossos servidores temos de fazer isto manualmente, copiando os arquivos <code>.gem</code> para o servidor e instalando a partir deles. Este processo é realmente irritante, então surgiu a necessidade de montar o no nosso próprio servidor de gems privativo.</p>
 
-A solução é ridiculamente simples. Mas como acredito que muita gente também pode se beneficiar disso, segue a receita de bolo.
+<p>A solução é ridiculamente simples. Mas como acredito que muita gente também pode se beneficiar disso, segue a receita de bolo.</p>
+
 <h2>A forma simples</h2>
-A primeira alternativa é utilizar o seu próprio computador como um servidor de gems. Para fazer isto basta executar o seguinte comando no terminal:
+
+
+<p>A primeira alternativa é utilizar o seu próprio computador como um servidor de gems. Para fazer isto basta executar o seguinte comando no terminal:</p>
+
 <pre class="textmate-source"><span class="source source_shell">gem server</span></pre>
-Pronto! Desta maneira você já estará compartilhando todas a gems que estão instaladas em sua máquina através do endereço <code>http://SEU_IP:8808</code>.
+
+
+<p>Pronto! Desta maneira você já estará compartilhando todas a gems que estão instaladas em sua máquina através do endereço <code>http://SEU_IP:8808</code>.</p>
+
 <h2>Uma alternativa melhor</h2>
-Como em nosso caso era importante manter o serviço o tempo todo no ar, a solução foi hospedar as bibliotecas em um servidor web.
 
-O processo também é muito simples. Crie um diretório qualquer em uma área pública do seu servidor web (digamos que você criou um diretório com o nome de <code>meusgems</code>). Crie então um subdiretório chamado <code>gems</code> e copie todos os seus arquivos <code>.gem</code> para dentro dele.
 
-Antes de continuar certifique-se de ter o RubyGems instalado em seu servidor. Então execute o seguinte comando dentro do diretório <code>meusgems</code>:
+<p>Como em nosso caso era importante manter o serviço o tempo todo no ar, a solução foi hospedar as bibliotecas em um servidor web.</p>
+
+<p>O processo também é muito simples. Crie um diretório qualquer em uma área pública do seu servidor web (digamos que você criou um diretório com o nome de <code>meusgems</code>). Crie então um subdiretório chamado <code>gems</code> e copie todos os seus arquivos <code>.gem</code> para dentro dele.</p>
+
+<p>Antes de continuar certifique-se de ter o RubyGems instalado em seu servidor. Então execute o seguinte comando dentro do diretório <code>meusgems</code>:</p>
+
 <pre class="textmate-source"><span class="source source_shell">gem generate_index</span></pre>
-Feito! Seu servidor privado de gems está no ar. Quando adicionar ou atualizar alguma biblioteca, basta executar o comando acima novamente.
+
+
+<p>Feito! Seu servidor privado de gems está no ar. Quando adicionar ou atualizar alguma biblioteca, basta executar o comando acima novamente.</p>
+
 <h2>Instalando gems a partir do seu servidor</h2>
-Para fazer com que o comando <code>gem install</code> encontre as bibliotecas que estão no seu servidor, você deve adicionar o endereço na lista de fontes do RubyGems. Para isto execute o seguinte comando no computador onde os gems devem ser instalados:
+
+
+<p>Para fazer com que o comando <code>gem install</code> encontre as bibliotecas que estão no seu servidor, você deve adicionar o endereço na lista de fontes do RubyGems. Para isto execute o seguinte comando no computador onde os gems devem ser instalados:</p>
+
 <pre class="textmate-source"><span class="source source_shell">gem sources --add http://gems.meu_servidor.com</span></pre>
-Claro que você deve alterar o endereço acima para a URL correta do seu servidor. Depois disso basta instalar as suas bibliotecas normalmente, através do comando <code>gem install nome_do_gem</code>.
 
-Caso seu repositório de gems comece a crescer muito, talvez seja interessante configurar o projeto <a href="http://github.com/qrush/gemcutter">Gemcutter</a> em seu servidor.
 
-Esta pode ser uma alternativa bem interessante para estimular a reutilização de código dentro de sua empresa, sem precisar liberar todas as suas bibliotecas como open source.
+<p>Claro que você deve alterar o endereço acima para a URL correta do seu servidor. Depois disso basta instalar as suas bibliotecas normalmente, através do comando <code>gem install nome_do_gem</code>.</p>
+
+<p>Caso seu repositório de gems comece a crescer muito, talvez seja interessante configurar o projeto <a href="http://github.com/qrush/gemcutter">Gemcutter</a> em seu servidor.</p>
+
+<p>Esta pode ser uma alternativa bem interessante para estimular a reutilização de código dentro de sua empresa, sem precisar liberar todas as suas bibliotecas como open source.</p>
 </div>
 
 
@@ -146,14 +164,14 @@ Esta pode ser uma alternativa bem interessante para estimular a reutilização d
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2009-12-09 00:00:00 -0200" pubdate  updated >Dec 9<span>th</span>, 2009</time>
+<time datetime="2009-12-09 00:00:00 -0200" pubdate  updated > 9 de Dezembro de 2009</time>
 
 
 

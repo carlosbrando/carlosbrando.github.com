@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Isto é Um Bug No Javascript?</h1>
+      <h1 class="entry-title">Isto é um bug no Javascript?</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2009-08-17 00:00:00 -0300" pubdate  updated >Aug 17<span>th</span>, 2009</time>
+<time datetime="2009-08-17 00:00:00 -0300" pubdate  updated >17 de Agosto de 2009</time>
 
 
 </p>
@@ -113,72 +113,127 @@
   </header>
 
 
-<div class="entry-content">[caption id=&#8221;attachment_2715&#8221; align=&#8221;aligncenter&#8221; width=&#8221;500&#8221; caption=&#8221;Foto de Dustin Diaz&#8221;]<img class="size-full wp-image-2715" title="2279116910_4d699d91cb" src="http://www.nomedojogo.com/wp-content/uploads/2009/08/2279116910_4d699d91cb.jpg" alt="2279116910_4d699d91cb" width="500" height="336" />[/caption]
-<p style="text-align: center;"></p>
+<div class="entry-content"><p><img class='' src='http://www.nomedojogo.com/wp-content/uploads/2009/08/2279116910_4d699d91cb.jpg' width='' height='' alt='' title=''></p>
 
-Javascript é uma linguagem controversa. Muitos programadores adoram trabalhar com ela, mas com certeza o número de programadores que a odeiam é maior ainda. Não importa se você está no primeiro ou no segundo grupo, se você é um desenvolvedor web simplesmente não pode evitá-la.
+<p>Javascript é uma linguagem controversa. Muitos programadores adoram trabalhar com ela, mas com certeza o número de programadores que a odeiam é maior ainda. Não importa se você está no primeiro ou no segundo grupo, se você é um desenvolvedor web simplesmente não pode evitá-la.</p>
 
-Eu particularmente sempre estou em cima do muro quando o assunto é Javascript, já passei por momentos bem agradaveis criando coisas com esta linguagem, mas também já me irritei com algumas caracteristicas ruins da sua implementação em muitas outras ocasiões.
+<p>Eu particularmente sempre estou em cima do muro quando o assunto é Javascript, já passei por momentos bem agradaveis criando coisas com esta linguagem, mas também já me irritei com algumas caracteristicas ruins da sua implementação em muitas outras ocasiões.</p>
 
-O fato é que para se dar bem com Javascript é importante conhecer um pouco mais da linguagem do que o usual. Mas a maioria dos programadores só estão interessados em conhecer o suficiente da linguagem para realizar pequenas tarefas e criar alguns scripts simples (Ctrl+C e Ctrl+V). Assim, quando alguma coisa imprevista acontece na execução do código, logo jogamos a culpa no pobre Javascript.
+<p>O fato é que para se dar bem com Javascript é importante conhecer um pouco mais da linguagem do que o usual. Mas a maioria dos programadores só estão interessados em conhecer o suficiente da linguagem para realizar pequenas tarefas e criar alguns scripts simples (Ctrl+C e Ctrl+V). Assim, quando alguma coisa imprevista acontece na execução do código, logo jogamos a culpa no pobre Javascript.</p>
 
-Em uma dessas madrugadas em claro, eu comecei a enumerar alguns trechos de código que parecem bugs, mas não são. Segue uma explicação sobre cada um deles e algumas dicas para evitar resultados inesperados. E antes que atirem pedras em mim, os subtítulos não devem ser levados a sério.
+<p>Em uma dessas madrugadas em claro, eu comecei a enumerar alguns trechos de código que parecem bugs, mas não são. Segue uma explicação sobre cada um deles e algumas dicas para evitar resultados inesperados. E antes que atirem pedras em mim, os subtítulos não devem ser levados a sério.</p>
+
 <h2>Javascript não sabe somar</h2>
-<pre class="textmate-source"><span class="source source_js source_js_jquery"><span class="keyword keyword_operator keyword_operator_js">&gt;&gt;&gt;</span> <span class="constant constant_numeric constant_numeric_js">0.1</span> <span class="keyword keyword_operator keyword_operator_js">+</span> <span class="constant constant_numeric constant_numeric_js">0.2</span>
-<span class="constant constant_numeric constant_numeric_js">0.30000000000000004</span>
-</span></pre>
-Números em Javascript são representados internamente com 64 bits e cada número pode ter no máximo 17 dígitos significativos. Isto tem algumas consequências interessantes como demonstrado no exemplo acima. É preciso ser bem cuidadoso com certos cálculos, principalmente quando a precisão é algo muito importante para o aplicativo.
+
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+</pre></td><td class='code' width='100%'><pre><code class='javascript'><div class='line'><span class="o">&gt;&gt;&gt;</span> <span class="mf">0.1</span> <span class="o">+</span> <span class="mf">0.2</span>
+</div><div class='line'><span class="mf">0.30000000000000004</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Números em Javascript são representados internamente com 64 bits e cada número pode ter no máximo 17 dígitos significativos. Isto tem algumas consequências interessantes como demonstrado no exemplo acima. É preciso ser bem cuidadoso com certos cálculos, principalmente quando a precisão é algo muito importante para o aplicativo.</p>
+
 <h2>Javascript não sabe somar - parte 2</h2>
-<pre class="textmate-source"><span class="source source_js"><span class="keyword keyword_operator keyword_operator_js">&gt;&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">"</span>3<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">"</span></span> <span class="keyword keyword_operator keyword_operator_js">+</span> <span class="constant constant_numeric constant_numeric_js">4</span> <span class="keyword keyword_operator keyword_operator_js">+</span> <span class="constant constant_numeric constant_numeric_js">5</span>
-<span class="keyword keyword_operator keyword_operator_js">=&gt;</span> <span class="constant constant_numeric constant_numeric_js">345</span>
 
-<span class="keyword keyword_operator keyword_operator_js">&gt;&gt;</span> <span class="constant constant_numeric constant_numeric_js">3</span> <span class="keyword keyword_operator keyword_operator_js">+</span> <span class="constant constant_numeric constant_numeric_js">4</span> <span class="keyword keyword_operator keyword_operator_js">+</span> <span class="string string_quoted string_quoted_double string_quoted_double_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">"</span>5<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">"</span></span>
-<span class="keyword keyword_operator keyword_operator_js">=&gt;</span> <span class="constant constant_numeric constant_numeric_js">75</span></span></pre>
-No Javascript, o operador de soma (<code>+</code>) é usado tanto para somar valores numéricos como também para concatenar strings. Precisamos estar atentos a seguinte regra: durante uma operação de soma, quando um dos valores é do tipo string, então tudo é convertido para este mesmo tipo e uma concatenação é realizada.
 
-No primeiro exemplo, como iniciamos a soma com um string, todos os valores seguintes são imediatamente convertidos para este mesmo formato e depois são concatenados. Já no segundo exemplo, temos inicialmente uma soma numéria (<code>3 + 4 = 7</code>) que é realizada normalmente, mas como a próxima soma a ser realizada não será com outro valor número, mas sim com o string <code>"5"</code>, então o Javascript realiza a conversão do primeiro resultado e em seguida realiza uma concatenação com os valores, devolvendo no final o string <code>"75"</code>.
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+</pre></td><td class='code' width='100%'><pre><code class='javascript'><div class='line'><span class="o">&gt;&gt;</span> <span class="s2">&quot;3&quot;</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">5</span>
+</div><div class='line'><span class="o">=&gt;</span> <span class="mi">345</span>
+</div><div class='line'>
+</div><div class='line'><span class="o">&gt;&gt;</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">+</span> <span class="s2">&quot;5&quot;</span>
+</div><div class='line'><span class="o">=&gt;</span> <span class="mi">75</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>No Javascript, o operador de soma (<code>+</code>) é usado tanto para somar valores numéricos como também para concatenar strings. Precisamos estar atentos a seguinte regra: durante uma operação de soma, quando um dos valores é do tipo string, então tudo é convertido para este mesmo tipo e uma concatenação é realizada.</p>
+
+<p>No primeiro exemplo, como iniciamos a soma com um string, todos os valores seguintes são imediatamente convertidos para este mesmo formato e depois são concatenados. Já no segundo exemplo, temos inicialmente uma soma numéria (<code>3 + 4 = 7</code>) que é realizada normalmente, mas como a próxima soma a ser realizada não será com outro valor número, mas sim com o string <code>"5"</code>, então o Javascript realiza a conversão do primeiro resultado e em seguida realiza uma concatenação com os valores, devolvendo no final o string <code>"75"</code>.</p>
+
 <h2>Javascript não sabe converter string para números</h2>
-<pre class="textmate-source"><span class="source source_js source_js_jquery"><span class="keyword keyword_operator keyword_operator_js">&gt;&gt;&gt;</span> <span class="support support_function support_function_js">parseInt</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_double string_quoted_double_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">"</span>010<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">"</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span>
-<span class="constant constant_numeric constant_numeric_js">8</span>
 
-<span class="keyword keyword_operator keyword_operator_js">&gt;&gt;&gt;</span> <span class="support support_function support_function_js">parseInt</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_double string_quoted_double_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">"</span>010<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">"</span></span><span class="meta meta_delimiter meta_delimiter_object meta_delimiter_object_comma meta_delimiter_object_comma_js">, </span><span class="constant constant_numeric constant_numeric_js">10</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span>
-<span class="constant constant_numeric constant_numeric_js">10</span>
-</span></pre>
-O método <code>parseInt</code> é muito utilizado e tem por objetivo converter strings em números inteiros. Basicamente o método aceita dois parâmetros: o primeiro é um string contendo o valor a ser convertido e o segundo é um inteiro que representa a base (decimal, binário, hexadecimal, etc.) na qual o string em questão está sendo representado.
 
-O problema aqui é que alguns livros e sites costumam explicar que o valor padrão da base (para quando ele não é informado) é 10, o que não é necessariamente uma verdade. Quando não informamos a base (radix) ou a definimos com o valor 0, então o método utiliza a seguinte regra:
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+</pre></td><td class='code' width='100%'><pre><code class='javascript'><div class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">parseInt</span><span class="p">(</span><span class="s2">&quot;010&quot;</span><span class="p">)</span>
+</div><div class='line'><span class="mi">8</span>
+</div><div class='line'>
+</div><div class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">parseInt</span><span class="p">(</span><span class="s2">&quot;010&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</div><div class='line'><span class="mi">10</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>O método <code>parseInt</code> é muito utilizado e tem por objetivo converter strings em números inteiros. Basicamente o método aceita dois parâmetros: o primeiro é um string contendo o valor a ser convertido e o segundo é um inteiro que representa a base (decimal, binário, hexadecimal, etc.) na qual o string em questão está sendo representado.</p>
+
+<p>O problema aqui é que alguns livros e sites costumam explicar que o valor padrão da base (para quando ele não é informado) é 10, o que não é necessariamente uma verdade. Quando não informamos a base (radix) ou a definimos com o valor 0, então o método utiliza a seguinte regra:</p>
+
 <ul>
-	<li>Se o string que estamos convertendo iniciar com <code>"0x"</code>, então o método assumirá a conversão com a base 16 (hexadecimal).</li>
-	<li>Se o string começar com <code>"0"</code> (como no primeiro exemplo) a base utilizada será 8 (octal).</li>
-	<li>Se o string iniciar com qualquer outro valor numérico, então a base padrão será 10 (decimal).</li>
-	<li>E se o primeiro caractere do string não puder ser convertido para um número, então <code>parseInt</code> retornará <code>NaN.</code> (&#8220;not a number&#8221;).</li>
+    <li>Se o string que estamos convertendo iniciar com <code>"0x"</code>, então o método assumirá a conversão com a base 16 (hexadecimal).</li>
+    <li>Se o string começar com <code>"0"</code> (como no primeiro exemplo) a base utilizada será 8 (octal).</li>
+    <li>Se o string iniciar com qualquer outro valor numérico, então a base padrão será 10 (decimal).</li>
+    <li>E se o primeiro caractere do string não puder ser convertido para um número, então <code>parseInt</code> retornará <code>NaN.</code> (&#8220;not a number&#8221;).</li>
 </ul>
-Desta forma, a regra é sempre informar a base na qual a conversão deve ser realizada, exatamente como foi feito no segundo exemplo.
+
+
+<p>Desta forma, a regra é sempre informar a base na qual a conversão deve ser realizada, exatamente como foi feito no segundo exemplo.</p>
+
 <h2>Javascript não sabe fazer comparações</h2>
-<pre class="textmate-source"><span class="source source_js source_js_jquery"><span class="keyword keyword_operator keyword_operator_js">&gt;&gt;</span> <span class="constant constant_numeric constant_numeric_js">1</span> <span class="keyword keyword_operator keyword_operator_js">==</span> <span class="constant constant_language constant_language_boolean constant_language_boolean_true constant_language_boolean_true_js">true</span>
-<span class="keyword keyword_operator keyword_operator_js">=&gt;</span> <span class="constant constant_language constant_language_boolean constant_language_boolean_true constant_language_boolean_true_js">true</span>
-</span></pre>
-Podemos realizar comparações em Javascript com os símbolos <code>&lt;, &gt;, &lt;= e &gt;=</code>. Eles funcionam tanto para numerais como para strings. Mas quando o assunto é a comparações de igualdade, precisamos prestar atenção a alguns fatores.
 
-O operador de igualdade duplo realiza uma coerção de tipos caso você esteja comparando dois valores de tipos diferentes, como acontece no exemplo acima. Embora aparentemente este seja um resultado normal, em outros casos podemos ter resultados inesperados, como na seguinte comparação:
-<pre class="textmate-source"><span class="source source_js source_js_jquery"><span class="keyword keyword_operator keyword_operator_js">&gt;&gt;</span> <span class="constant constant_language constant_language_null constant_language_null_js">null</span> <span class="keyword keyword_operator keyword_operator_js">==</span> <span class="constant constant_language constant_language_boolean constant_language_boolean_false constant_language_boolean_false_js">false</span>
-<span class="keyword keyword_operator keyword_operator_js">=&gt;</span> <span class="constant constant_language constant_language_boolean constant_language_boolean_false constant_language_boolean_false_js">false</span></span></pre>
-A linguagem também conta com um operador de igualdade tripo, que ignora a coerção de tipos:
-<pre class="textmate-source"><span class="source source_js source_js_jquery"><span class="keyword keyword_operator keyword_operator_js">&gt;&gt;</span> <span class="constant constant_numeric constant_numeric_js">1</span> <span class="keyword keyword_operator keyword_operator_js">===</span> <span class="constant constant_language constant_language_boolean constant_language_boolean_true constant_language_boolean_true_js">true</span>
-<span class="keyword keyword_operator keyword_operator_js">=&gt;</span> <span class="constant constant_language constant_language_boolean constant_language_boolean_false constant_language_boolean_false_js">false</span></span></pre>
-Eu particularmente tenho como regra sempre utilizar o operador triplo ao realizar comparações de valores, isto tem me ajudado a evitar alguns erros de interpretação ao analisar o código e eventuais bugs decorrentes desta característica da linguagem.
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+</pre></td><td class='code' width='100%'><pre><code class='javascript'><div class='line'><span class="o">&gt;&gt;</span> <span class="mi">1</span> <span class="o">==</span> <span class="kc">true</span>
+</div><div class='line'><span class="o">=&gt;</span> <span class="kc">true</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Podemos realizar comparações em Javascript com os símbolos <code>&lt;, &gt;, &lt;= e &gt;=</code>. Eles funcionam tanto para numerais como para strings. Mas quando o assunto é a comparações de igualdade, precisamos prestar atenção a alguns fatores.</p>
+
+<p>O operador de igualdade duplo realiza uma coerção de tipos caso você esteja comparando dois valores de tipos diferentes, como acontece no exemplo acima. Embora aparentemente este seja um resultado normal, em outros casos podemos ter resultados inesperados, como na seguinte comparação:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+</pre></td><td class='code' width='100%'><pre><code class='javascript'><div class='line'><span class="o">&gt;&gt;</span> <span class="kc">null</span> <span class="o">==</span> <span class="kc">false</span>
+</div><div class='line'><span class="o">=&gt;</span> <span class="kc">false</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>A linguagem também conta com um operador de igualdade tripo, que ignora a coerção de tipos:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+</pre></td><td class='code' width='100%'><pre><code class='javascript'><div class='line'><span class="o">&gt;&gt;</span> <span class="mi">1</span> <span class="o">===</span> <span class="kc">true</span>
+</div><div class='line'><span class="o">=&gt;</span> <span class="kc">false</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Eu particularmente tenho como regra sempre utilizar o operador triplo ao realizar comparações de valores, isto tem me ajudado a evitar alguns erros de interpretação ao analisar o código e eventuais bugs decorrentes desta característica da linguagem.</p>
+
 <h2>Javascript também não sabe contar</h2>
-<pre class="textmate-source"><span class="source source_js source_js_jquery"><span class="keyword keyword_operator keyword_operator_js">&gt;&gt;</span> <span class="storage storage_type storage_type_js">var</span> a <span class="keyword keyword_operator keyword_operator_js">=</span> <span class="meta meta_brace meta_brace_square meta_brace_square_js">[</span><span class="string string_quoted string_quoted_double string_quoted_double_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">"</span>dog<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">"</span></span><span class="meta meta_delimiter meta_delimiter_object meta_delimiter_object_comma meta_delimiter_object_comma_js">, </span><span class="string string_quoted string_quoted_double string_quoted_double_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">"</span>cat<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">"</span></span><span class="meta meta_delimiter meta_delimiter_object meta_delimiter_object_comma meta_delimiter_object_comma_js">, </span><span class="string string_quoted string_quoted_double string_quoted_double_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">"</span>hen<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">"</span></span><span class="meta meta_brace meta_brace_square meta_brace_square_js">]</span><span class="punctuation punctuation_terminator punctuation_terminator_statement punctuation_terminator_statement_js">;</span>
-<span class="keyword keyword_operator keyword_operator_js">&gt;&gt;</span> a<span class="meta meta_brace meta_brace_square meta_brace_square_js">[</span><span class="constant constant_numeric constant_numeric_js">100</span><span class="meta meta_brace meta_brace_square meta_brace_square_js">]</span> <span class="keyword keyword_operator keyword_operator_js">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">"</span>fox<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">"</span></span><span class="punctuation punctuation_terminator punctuation_terminator_statement punctuation_terminator_statement_js">;</span>
-<span class="keyword keyword_operator keyword_operator_js">&gt;&gt;</span> a<span class="support support_function support_function_js support_function_js_jquery">.length</span>
-<span class="keyword keyword_operator keyword_operator_js">=&gt;</span> <span class="constant constant_numeric constant_numeric_js">101</span></span></pre>
-A propriedade <code>length</code> de objetos do tipo array em Javascript sempre retornará um número acima da maior posição do array e não necessariamente a quantidade de itens no objeto, conforme você pôde ver no exemplo acima.
 
-Se você tentar recuperar o valor em uma posição não existente no array ele devolverá <code>undefined</code>.
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+</pre></td><td class='code' width='100%'><pre><code class='javascript'><div class='line'><span class="o">&gt;&gt;</span> <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;dog&quot;</span><span class="p">,</span> <span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="s2">&quot;hen&quot;</span><span class="p">];</span>
+</div><div class='line'><span class="o">&gt;&gt;</span> <span class="nx">a</span><span class="p">[</span><span class="mi">100</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;fox&quot;</span><span class="p">;</span>
+</div><div class='line'><span class="o">&gt;&gt;</span> <span class="nx">a</span><span class="p">.</span><span class="nx">length</span>
+</div><div class='line'><span class="o">=&gt;</span> <span class="mi">101</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>A propriedade <code>length</code> de objetos do tipo array em Javascript sempre retornará um número acima da maior posição do array e não necessariamente a quantidade de itens no objeto, conforme você pôde ver no exemplo acima.</p>
+
+<p>Se você tentar recuperar o valor em uma posição não existente no array ele devolverá <code>undefined</code>.</p>
+
 <h2>Eu amo Javascript</h2>
-Javascript possui muitas características realmente boas, e da mesma forma também possui algumas implementações realmente ruins (pretendo falar sobre isto em outro artigo). Por isto é importante gastar um pouco mais de tempo estudando mais a fundo o comportamento da linguagem. Depois de entender como algumas coisas realmente funcionam, descobrimos que nem tudo é bug.
 
-Estas são apenas algumas poucas curiosidades que consegui coletar em alguns minutos brincando com a linguagem, você conhece mais alguma?
+
+<p>Javascript possui muitas características realmente boas, e da mesma forma também possui algumas implementações realmente ruins (pretendo falar sobre isto em outro artigo). Por isto é importante gastar um pouco mais de tempo estudando mais a fundo o comportamento da linguagem. Depois de entender como algumas coisas realmente funcionam, descobrimos que nem tudo é bug.</p>
+
+<p>Estas são apenas algumas poucas curiosidades que consegui coletar em alguns minutos brincando com a linguagem, você conhece mais alguma?</p>
 </div>
 
 
@@ -187,14 +242,14 @@ Estas são apenas algumas poucas curiosidades que consegui coletar em alguns min
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2009-08-17 00:00:00 -0300" pubdate  updated >Aug 17<span>th</span>, 2009</time>
+<time datetime="2009-08-17 00:00:00 -0300" pubdate  updated >17 de Agosto de 2009</time>
 
 
 

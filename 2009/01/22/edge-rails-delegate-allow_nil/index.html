@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Edge Rails: Delegate :allow_nil</h1>
+      <h1 class="entry-title">Edge Rails: delegate :allow_nil</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2009-01-22 00:00:00 -0200" pubdate  updated >Jan 22<span>nd</span>, 2009</time>
+<time datetime="2009-01-22 00:00:00 -0200" pubdate  updated >22 de Janeiro de 2009</time>
 
 
 </p>
@@ -113,7 +113,8 @@
   </header>
 
 
-<div class="entry-content">O método <code>delegate</code> é util para expor métodos de terceiros em uma classe como se fossem dela. Para aqueles que não conhecem este método, vamos pegar um exemplo:
+<div class="entry-content"><p>O método <code>delegate</code> é util para expor métodos de terceiros em uma classe como se fossem dela. Para aqueles que não conhecem este método, vamos pegar um exemplo:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Greeter<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
   <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">hello</span></span>
     <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>hello<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
@@ -127,11 +128,14 @@
 
 <span class="support support_class support_class_ruby">Foo</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>hello   <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "hello"
 </span></span></pre>
-Como você pode ver no exemplo acima estou executando o método <code>hello</code> como se ele pertencesse a classe <code>Foo</code>, embora ele realmente pertença a classe <code>Greeter</code>.
 
-Mas o que aconteceria se a associação não existisse e o objeto <code>greeter</code> fosse nulo? Teríamos um erro do tipo <code>NoMethodError</code> ao executar o método <code>hello</code> já que por debaixo dos panos estaríamos executando <code>nil.hello</code>.
 
-Para contornar este tipo de problema foi adicionado ao método <code>delegate</code> a opção <code>:allow_nil</code> que impede o retorno de uma exceção nesses casos.
+<p>Como você pode ver no exemplo acima estou executando o método <code>hello</code> como se ele pertencesse a classe <code>Foo</code>, embora ele realmente pertença a classe <code>Greeter</code>.</p>
+
+<p>Mas o que aconteceria se a associação não existisse e o objeto <code>greeter</code> fosse nulo? Teríamos um erro do tipo <code>NoMethodError</code> ao executar o método <code>hello</code> já que por debaixo dos panos estaríamos executando <code>nil.hello</code>.</p>
+
+<p>Para contornar este tipo de problema foi adicionado ao método <code>delegate</code> a opção <code>:allow_nil</code> que impede o retorno de uma exceção nesses casos.</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Foo</span></span>
   <span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">attr_accessor</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>bar</span>
   <span class="meta meta_function meta_function_method meta_function_method_with-arguments meta_function_method_with-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">initialize</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">(</span><span class="variable variable_parameter variable_parameter_function variable_parameter_function_ruby">bar <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_language constant_language_ruby">nil</span></span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">)</span></span>
@@ -141,9 +145,12 @@ Para contornar este tipo de problema foi adicionado ao método <code>delegate</c
 <span class="keyword keyword_control keyword_control_ruby">end</span>
 
 <span class="support support_class support_class_ruby">Foo</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>zoo <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> returns nil</span></span></pre>
-No exemplo acima mesmo que o objeto <code>bar</code> seja nulo, o método <code>zoo</code> não disparará uma exceção, ele retornará <code>nil</code>.
+
+
+<p>No exemplo acima mesmo que o objeto <code>bar</code> seja nulo, o método <code>zoo</code> não disparará uma exceção, ele retornará <code>nil</code>.</p>
 
 <hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.3/3.0 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades acompanhando a série <a href="../category/edge-rails/">Edge Rails</a>.</em>
+
 </div>
 
 
@@ -152,14 +159,14 @@ No exemplo acima mesmo que o objeto <code>bar</code> seja nulo, o método <code>
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2009-01-22 00:00:00 -0200" pubdate  updated >Jan 22<span>nd</span>, 2009</time>
+<time datetime="2009-01-22 00:00:00 -0200" pubdate  updated >22 de Janeiro de 2009</time>
 
 
 

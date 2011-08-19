@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-12-23 00:00:00 -0200" pubdate  updated >Dec 23<span>rd</span>, 2008</time>
+<time datetime="2008-12-23 00:00:00 -0200" pubdate  updated >23 de Dezembro de 2008</time>
 
 
 </p>
@@ -113,9 +113,10 @@
   </header>
 
 
-<div class="entry-content">Já ouviu falar do plugin <a href="http://www.thoughtbot.com/projects/quietbacktrace">Quiet Backtrace</a> criado pela <a href="http://www.thoughtbot.com/">Thoughtbot</a>, a mesma galera por trás do <a href="http://www.thoughtbot.com/projects/paperclip/">Paperclip</a> e <a href="http://www.thoughtbot.com/projects/shoulda">Shoulda</a>? Este plugin é muito interessante porque ele permite que você remova certas linhas do backtrace do Rails, tornando o log muito menor e simplificando a localização de problemas.
+<div class="entry-content"><p>Já ouviu falar do plugin <a href="http://www.thoughtbot.com/projects/quietbacktrace">Quiet Backtrace</a> criado pela <a href="http://www.thoughtbot.com/">Thoughtbot</a>, a mesma galera por trás do <a href="http://www.thoughtbot.com/projects/paperclip/">Paperclip</a> e <a href="http://www.thoughtbot.com/projects/shoulda">Shoulda</a>? Este plugin é muito interessante porque ele permite que você remova certas linhas do backtrace do Rails, tornando o log muito menor e simplificando a localização de problemas.</p>
 
-O conceito por trás deste plugin foi adicionado ao Rails. Um novo initializer chamado <code>backtrace_silencers.rb</code> foi criado e virá com algumas linhas de exemplo comentadas, assim:
+<p>O conceito por trás deste plugin foi adicionado ao Rails. Um novo initializer chamado <code>backtrace_silencers.rb</code> foi criado e virá com algumas linhas de exemplo comentadas, assim:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Be sure to restart your server when you modify this file.
 </span>
 <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> You can add backtrace silencers for libraries that you're using but don't wish to see in your backtraces.
@@ -123,15 +124,27 @@ O conceito por trás deste plugin foi adicionado ao Rails. Um novo initializer c
 </span>
 <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> You can also remove all the silencers if you're trying do debug a problem that might steem from framework code.
 </span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Rails.backtrace_cleaner.remove_silencers!</span></span></pre>
-Neste arquivo você pode incluir silenciadores e filtros para o backtrace. Por exemplo o seguinte silenciador removerá do backtrace qualquer linha que contenha a palavra mongrel:
+
+
+<p>Neste arquivo você pode incluir silenciadores e filtros para o backtrace. Por exemplo o seguinte silenciador removerá do backtrace qualquer linha que contenha a palavra mongrel:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Rails</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>backtrace_cleaner<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>add_silencer <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">line</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> line <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">=~</span> <span class="string string_regexp string_regexp_classic string_regexp_classic_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span>mongrel<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span></span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span></span></pre>
-Os filtros funcionam de uma maneira um pouco diferente, não removendo a linha, mas substituindo trechos do backtrace por alguma outra coisa. No exemplo abaixo estou fazendo com que toda vez que a palavra mongrel aparecer no backtrace ela seja substituída por &#8216;aeiou&#8217;:
+
+
+<p>Os filtros funcionam de uma maneira um pouco diferente, não removendo a linha, mas substituindo trechos do backtrace por alguma outra coisa. No exemplo abaixo estou fazendo com que toda vez que a palavra mongrel aparecer no backtrace ela seja substituída por &#8216;aeiou&#8217;:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Rails</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>backtrace_cleaner<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>add_filter <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">line</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> line<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>gsub<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>mongrel<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>aeiou<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span></span></pre>
-Para desligar esta funcionalidade temporariamente basta tirar o comentário da linha abaixo:
+
+
+<p>Para desligar esta funcionalidade temporariamente basta tirar o comentário da linha abaixo:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Rails</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>backtrace_cleaner<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>remove_silencers!</span></pre>
-Usado com sabedoria, este novo recurso pode se tornar uma ferramenta poderosa.
+
+
+<p>Usado com sabedoria, este novo recurso pode se tornar uma ferramenta poderosa.</p>
 
 <hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.3/3.0 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades acompanhando a série <a href="../category/edge-rails/">Edge Rails</a>.</em>
+
 </div>
 
 
@@ -140,14 +153,14 @@ Usado com sabedoria, este novo recurso pode se tornar uma ferramenta poderosa.
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-12-23 00:00:00 -0200" pubdate  updated >Dec 23<span>rd</span>, 2008</time>
+<time datetime="2008-12-23 00:00:00 -0200" pubdate  updated >23 de Dezembro de 2008</time>
 
 
 

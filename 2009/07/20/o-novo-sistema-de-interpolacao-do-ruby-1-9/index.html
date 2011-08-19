@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">O Novo Sistema De Interpolação De Strings Do Ruby 1.9</h1>
+      <h1 class="entry-title">O novo sistema de interpolação de Strings do Ruby 1.9</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2009-07-20 00:00:00 -0300" pubdate  updated >Jul 20<span>th</span>, 2009</time>
+<time datetime="2009-07-20 00:00:00 -0300" pubdate  updated >20 de Julho de 2009</time>
 
 
 </p>
@@ -113,125 +113,229 @@
   </header>
 
 
-<div class="entry-content">Embora o Ruby 1.9 já tenha sido liberado há algum tempo, infelizmente ele ainda é inacessível para muitos de nós, já que muitos projetos foram iniciados em versões mais antigas do Rails, quando ele ainda era incompatível com esta nova versão do Ruby. E mesmo aqueles que estão utilizando as versões mais recentes do Rails, também precisam tomar certos cuidados já que nem todos os plugins e gems já foram preparados e testados para serem executados nesta versão do Ruby.
+<div class="entry-content"><p>Embora o Ruby 1.9 já tenha sido liberado há algum tempo, infelizmente ele ainda é inacessível para muitos de nós, já que muitos projetos foram iniciados em versões mais antigas do Rails, quando ele ainda era incompatível com esta nova versão do Ruby. E mesmo aqueles que estão utilizando as versões mais recentes do Rails, também precisam tomar certos cuidados já que nem todos os plugins e gems já foram preparados e testados para serem executados nesta versão do Ruby.</p>
 
-Já faz um tempo que o core team do Rails vêm aceitando patches que implementam certos recursos presentes apenas no Ruby 1.9, permitindo que mesmo projetos rodando sob as versões 1.8.x também possam se beneficiar destas novas funcionalidades. Uma dessas novidades que recentemente foi incluída na versão de desenvolvimento do Rails (Edge Rails) e que estará presente no próximo release, foi o novo sistema de interpolação de Strings do Ruby 1.9.
+<p>Já faz um tempo que o core team do Rails vêm aceitando patches que implementam certos recursos presentes apenas no Ruby 1.9, permitindo que mesmo projetos rodando sob as versões 1.8.x também possam se beneficiar destas novas funcionalidades. Uma dessas novidades que recentemente foi incluída na versão de desenvolvimento do Rails (Edge Rails) e que estará presente no próximo release, foi o novo sistema de interpolação de Strings do Ruby 1.9.</p>
 
-Atualmente utilizamos muito o conhecido <code>#{}</code> para realizar esta atividade, como demonstrado no exemplo abaixo.
+<p>Atualmente utilizamos muito o conhecido <code>#{}</code> para realizar esta atividade, como demonstrado no exemplo abaixo.</p>
 
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">firstname  <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Carlos<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
-familyname <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Brando<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="n">firstname</span>  <span class="o">=</span> <span class="s2">&quot;Carlos&quot;</span>
+</div><div class='line'><span class="n">familyname</span> <span class="o">=</span> <span class="s2">&quot;Brando&quot;</span>
+</div><div class='line'>
+</div><div class='line'><span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">firstname</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">familyname</span><span class="si">}</span><span class="s2">&quot;</span>
+</div><div class='line'><span class="c1"># =&gt; &quot;Carlos Brando&quot;</span>
+</div></code></pre></td></tr></table></div></figure>
 
-puts <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span><span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>firstname<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span> <span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>familyname<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "Carlos Brando"</span></span></pre>
+<p>No Ruby 1.9, além da forma exibida acima, também podemos utilizar <code>%{}</code> para informar os valores a serem interpolados através de um objeto do tipo Hash. Seguindo a seguinte sintaxe:</p>
 
-No Ruby 1.9, além da forma exibida acima, também podemos utilizar <code>%{}</code> para informar os valores a serem interpolados através de um objeto do tipo Hash. Seguindo a seguinte sintaxe:
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="n">person</span> <span class="o">=</span> <span class="p">{</span><span class="ss">:firstname</span> <span class="o">=&gt;</span> <span class="s2">&quot;Carlos&quot;</span><span class="p">,</span> <span class="ss">:familyname</span> <span class="o">=&gt;</span> <span class="s2">&quot;Brando&quot;</span><span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'><span class="nb">puts</span> <span class="s2">&quot;%{firstname} %{familyname}&quot;</span> <span class="o">%</span> <span class="n">person</span>
+</div><div class='line'><span class="c1"># =&gt; &quot;Carlos Brando&quot;</span>
+</div></code></pre></td></tr></table></div></figure>
 
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">person <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>firstname</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Carlos<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>familyname</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Brando<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
+<p>Se você gosta de viver no limite e utiliza a versão de desenvolvimento do Rails em seus projetos, então já pode começar a utilizar este novo recurso, mesmo que ainda nem tenha o Ruby 1.9 instalado em seu computador. Mas, se você é um pouco mais conservador e não gosta de arriscar (o que pode evitar alguns problemas com bugs), você tem duas opções: esperar pelo Rails 2.3.3 (ou quem sabe o 3.0, não sei qual será o próximo) ou implantar você mesmo esta funcionalidade no seu projeto Rails atual.</p>
 
-puts <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>%{firstname} %{familyname}<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">%</span> person
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "Carlos Brando"</span></span></pre>
+<p>Se você optou pela segunda opção, basta criar um arquivo qualquer no diretório <code>lib</code> do seu projeto e incluir o seguinte código nele:</p>
 
-Se você gosta de viver no limite e utiliza a versão de desenvolvimento do Rails em seus projetos, então já pode começar a utilizar este novo recurso, mesmo que ainda nem tenha o Ruby 1.9 instalado em seu computador. Mas, se você é um pouco mais conservador e não gosta de arriscar (o que pode evitar alguns problemas com bugs), você tem duas opções: esperar pelo Rails 2.3.3 (ou quem sabe o 3.0, não sei qual será o próximo) ou implantar você mesmo esta funcionalidade no seu projeto Rails atual.
+<div><figure role=code><figcaption><span>string.rb </span></figcaption>
+ <div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+<span class='line'>20</span>
+<span class='line'>21</span>
+<span class='line'>22</span>
+<span class='line'>23</span>
+<span class='line'>24</span>
+<span class='line'>25</span>
+<span class='line'>26</span>
+<span class='line'>27</span>
+<span class='line'>28</span>
+<span class='line'>29</span>
+<span class='line'>30</span>
+<span class='line'>31</span>
+<span class='line'>32</span>
+<span class='line'>33</span>
+<span class='line'>34</span>
+<span class='line'>35</span>
+<span class='line'>36</span>
+<span class='line'>37</span>
+<span class='line'>38</span>
+<span class='line'>39</span>
+<span class='line'>40</span>
+<span class='line'>41</span>
+<span class='line'>42</span>
+<span class='line'>43</span>
+<span class='line'>44</span>
+<span class='line'>45</span>
+<span class='line'>46</span>
+<span class='line'>47</span>
+<span class='line'>48</span>
+<span class='line'>49</span>
+<span class='line'>50</span>
+<span class='line'>51</span>
+<span class='line'>52</span>
+<span class='line'>53</span>
+<span class='line'>54</span>
+<span class='line'>55</span>
+<span class='line'>56</span>
+<span class='line'>57</span>
+<span class='line'>58</span>
+<span class='line'>59</span>
+<span class='line'>60</span>
+<span class='line'>61</span>
+<span class='line'>62</span>
+<span class='line'>63</span>
+<span class='line'>64</span>
+<span class='line'>65</span>
+<span class='line'>66</span>
+<span class='line'>67</span>
+<span class='line'>68</span>
+<span class='line'>69</span>
+<span class='line'>70</span>
+<span class='line'>71</span>
+<span class='line'>72</span>
+<span class='line'>73</span>
+<span class='line'>74</span>
+<span class='line'>75</span>
+<span class='line'>76</span>
+<span class='line'>77</span>
+<span class='line'>78</span>
+<span class='line'>79</span>
+<span class='line'>80</span>
+<span class='line'>81</span>
+<span class='line'>82</span>
+<span class='line'>83</span>
+<span class='line'>84</span>
+<span class='line'>85</span>
+<span class='line'>86</span>
+<span class='line'>87</span>
+</pre></td><td class='code' width='100%'><pre><code class='rb'><div class='line'><span class="k">if</span> <span class="no">RUBY_VERSION</span> <span class="o">&lt;</span> <span class="s1">&#39;1.9&#39;</span>
+</div><div class='line'>
+</div><div class='line'><span class="cm">=begin</span>
+</div><div class='line'><span class="cm">  string.rb - Extension for String.</span>
+</div><div class='line'>
+</div><div class='line'><span class="cm">  Copyright (C) 2005-2009 Masao Mutoh</span>
+</div><div class='line'>
+</div><div class='line'><span class="cm">  You may redistribute it and/or modify it under the same</span>
+</div><div class='line'><span class="cm">  license terms as Ruby.</span>
+</div><div class='line'><span class="cm">=end</span>
+</div><div class='line'>
+</div><div class='line'><span class="c1"># This feature is included in Ruby 1.9 or later but not occur TypeError.</span>
+</div><div class='line'><span class="c1">#</span>
+</div><div class='line'><span class="c1"># String#% method which accepts named arguments. Particularly useful if the</span>
+</div><div class='line'><span class="c1"># string is to be used by a translator because named arguments mean more</span>
+</div><div class='line'><span class="c1"># than %s/%d style.</span>
+</div><div class='line'><span class="k">class</span> <span class="nc">String</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="k">unless</span> <span class="nb">instance_methods</span><span class="o">.</span><span class="n">find</span> <span class="p">{</span><span class="o">|</span><span class="n">m</span><span class="o">|</span> <span class="n">m</span><span class="o">.</span><span class="n">to_s</span> <span class="o">==</span> <span class="s1">&#39;bytesize&#39;</span><span class="p">}</span>
+</div><div class='line'>    <span class="c1"># For older ruby (such as ruby-1.8.5)</span>
+</div><div class='line'>    <span class="k">alias</span> <span class="ss">:bytesize</span> <span class="ss">:size</span>
+</div><div class='line'>  <span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="k">alias</span> <span class="ss">:_old_format_m</span> <span class="ss">:%</span> <span class="c1"># :nodoc:</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="no">PERCENT_MATCH_RE</span> <span class="o">=</span> <span class="no">Regexp</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="sr"></span>
+</div><div class='line'><span class="sr">      /%%/</span><span class="p">,</span><span class="sr"></span>
+</div><div class='line'><span class="sr">      /%\{(\w+)\}/</span><span class="p">,</span><span class="sr"></span>
+</div><div class='line'><span class="sr">      /%&lt;(\w+)&gt;(.*?\d*\.?\d*[bBdiouxXeEfgGcps])/</span>
+</div><div class='line'>  <span class="p">)</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="c1"># call-seq:</span>
+</div><div class='line'>  <span class="c1">#   %(arg)</span>
+</div><div class='line'>  <span class="c1">#   %(hash)</span>
+</div><div class='line'>  <span class="c1">#</span>
+</div><div class='line'>  <span class="c1"># Format - Uses str as a format specification, and returns the result of applying it to arg.</span>
+</div><div class='line'>  <span class="c1"># If the format specification contains more than one substitution, then arg must be</span>
+</div><div class='line'>  <span class="c1"># an Array containing the values to be substituted. See Kernel::sprintf for details of the</span>
+</div><div class='line'>  <span class="c1"># format string. This is the default behavior of the String class.</span>
+</div><div class='line'>  <span class="c1">#   * arg: an Array or other class except Hash.</span>
+</div><div class='line'>  <span class="c1">#   * Returns: formatted String</span>
+</div><div class='line'>  <span class="c1"># Example:</span>
+</div><div class='line'>  <span class="c1">#    &quot;%s, %s&quot; % [&quot;Masao&quot;, &quot;Mutoh&quot;]</span>
+</div><div class='line'>  <span class="c1">#</span>
+</div><div class='line'>  <span class="c1"># Also you can use a Hash as the &quot;named argument&quot;. This is recommended way so translators</span>
+</div><div class='line'>  <span class="c1"># can understand the meanings of the msgids easily.</span>
+</div><div class='line'>  <span class="c1">#   * hash: {:key1 =&gt; value1, :key2 =&gt; value2, ... }</span>
+</div><div class='line'>  <span class="c1">#   * Returns: formatted String</span>
+</div><div class='line'>  <span class="c1"># Example:</span>
+</div><div class='line'>  <span class="c1">#   For strings.</span>
+</div><div class='line'>  <span class="c1">#   &quot;%{firstname}, %{familyname}&quot; % {:firstname =&gt; &quot;Masao&quot;, :familyname =&gt; &quot;Mutoh&quot;}</span>
+</div><div class='line'>  <span class="c1">#</span>
+</div><div class='line'>  <span class="c1">#   With field type to specify format such as d(decimal), f(float),...</span>
+</div><div class='line'>  <span class="c1">#   &quot;%&lt;age&gt;d, %&lt;weight&gt;.1f&quot; % {:age =&gt; 10, :weight =&gt; 43.4}</span>
+</div><div class='line'>  <span class="k">def</span> <span class="nf">%</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+</div><div class='line'>    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">kind_of?</span><span class="p">(</span><span class="no">Hash</span><span class="p">)</span>
+</div><div class='line'>      <span class="n">ret</span> <span class="o">=</span> <span class="nb">dup</span>
+</div><div class='line'>      <span class="n">ret</span><span class="o">.</span><span class="n">gsub!</span><span class="p">(</span><span class="no">PERCENT_MATCH_RE</span><span class="p">)</span> <span class="p">{</span><span class="o">|</span><span class="n">match</span><span class="o">|</span>
+</div><div class='line'>        <span class="k">if</span> <span class="n">match</span> <span class="o">==</span> <span class="s1">&#39;%%&#39;</span>
+</div><div class='line'>          <span class="s1">&#39;%&#39;</span>
+</div><div class='line'>        <span class="k">elsif</span> <span class="vg">$1</span>
+</div><div class='line'>          <span class="n">key</span> <span class="o">=</span> <span class="vg">$1</span><span class="o">.</span><span class="n">to_sym</span>
+</div><div class='line'>          <span class="n">args</span><span class="o">.</span><span class="n">has_key?</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="p">?</span> <span class="n">args</span><span class="o">[</span><span class="n">key</span><span class="o">]</span> <span class="p">:</span> <span class="n">match</span>
+</div><div class='line'>        <span class="k">elsif</span> <span class="vg">$2</span>
+</div><div class='line'>          <span class="n">key</span> <span class="o">=</span> <span class="vg">$2</span><span class="o">.</span><span class="n">to_sym</span>
+</div><div class='line'>          <span class="n">args</span><span class="o">.</span><span class="n">has_key?</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="p">?</span> <span class="nb">sprintf</span><span class="p">(</span><span class="s2">&quot;%</span><span class="si">#{</span><span class="vg">$3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">args</span><span class="o">[</span><span class="n">key</span><span class="o">]</span><span class="p">)</span> <span class="p">:</span> <span class="n">match</span>
+</div><div class='line'>        <span class="k">end</span>
+</div><div class='line'>      <span class="p">}</span>
+</div><div class='line'>      <span class="n">ret</span>
+</div><div class='line'>    <span class="k">else</span>
+</div><div class='line'>      <span class="n">ret</span> <span class="o">=</span> <span class="nb">gsub</span><span class="p">(</span><span class="sr">/%([{&lt;])/</span><span class="p">,</span> <span class="s1">&#39;%%\1&#39;</span><span class="p">)</span>
+</div><div class='line'>      <span class="k">begin</span>
+</div><div class='line'>        <span class="n">ret</span><span class="o">.</span><span class="n">_old_format_m</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+</div><div class='line'>      <span class="k">rescue</span> <span class="no">ArgumentError</span> <span class="o">=&gt;</span> <span class="n">e</span>
+</div><div class='line'>        <span class="k">if</span> <span class="vg">$DEBUG</span>
+</div><div class='line'>          <span class="vg">$stderr</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;  The string:</span><span class="si">#{</span><span class="n">ret</span><span class="si">}</span><span class="s2">&quot;</span>
+</div><div class='line'>          <span class="vg">$stderr</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;  args:</span><span class="si">#{</span><span class="n">args</span><span class="o">.</span><span class="n">inspect</span><span class="si">}</span><span class="s2">&quot;</span>
+</div><div class='line'>          <span class="nb">puts</span> <span class="n">e</span><span class="o">.</span><span class="n">backtrace</span>
+</div><div class='line'>        <span class="k">else</span>
+</div><div class='line'>          <span class="k">raise</span> <span class="no">ArgumentError</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">message</span>
+</div><div class='line'>        <span class="k">end</span>
+</div><div class='line'>      <span class="k">end</span>
+</div><div class='line'>    <span class="k">end</span>
+</div><div class='line'>  <span class="k">end</span>
+</div><div class='line'><span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'><span class="k">end</span>
+</div></code></pre></td></tr></table></div></figure></div>
 
-Se você optou pela segunda opção, basta criar um arquivo qualquer no diretório <code>lib</code> do seu projeto e incluir o seguinte código nele:
 
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="keyword keyword_control keyword_control_ruby">if</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">RUBY_VERSION</span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>1.9<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+<p>Não esqueça de carregar o arquivo utilizando o método <code>require</code> antes de utiliza-lo. É recomendado que você faça isto em algum arquivo do diretório <code>initializers</code> (talvez seja bom criar um arquivo apenas para esta finalidade). Também recomendo estudar o código acima para entender o que está acontecendo antes de simplesmente sair usando.</p>
 
-<span class="comment comment_block comment_block_documentation comment_block_documentation_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">=begin</span>
-  string.rb - Extension for String.
+<p>Ah, e você também pode definir tipos numéricos assim:</p>
 
-  Copyright (C) 2005-2009 Masao Mutoh
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="s2">&quot;%&lt;age&gt;d, %&lt;weight&gt;.1f&quot;</span> <span class="o">%</span> <span class="p">{</span><span class="ss">:age</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span> <span class="ss">:weight</span> <span class="o">=&gt;</span> <span class="mi">43</span><span class="o">.</span><span class="mi">4</span><span class="p">}</span>
+</div><div class='line'><span class="c1"># =&gt; &quot;10, 43.4&quot;</span>
+</div></code></pre></td></tr></table></div></figure>
 
-  You may redistribute it and/or modify it under the same
-  license terms as Ruby.
-<span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">=end</span></span>
-
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> This feature is included in Ruby 1.9 or later but not occur TypeError.
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> String#% method which accepts named arguments. Particularly useful if the
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> string is to be used by a translator because named arguments mean more
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> than %s/%d style.
-</span><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">String</span></span>
-
-  <span class="keyword keyword_control keyword_control_ruby">unless</span> instance_methods<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">m</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> m<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>to_s <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">==</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>bytesize<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">    <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> For older ruby (such as ruby-1.8.5)
-</span>    <span class="keyword keyword_control keyword_control_pseudo-method keyword_control_pseudo-method_ruby">alias</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>bytesize</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>size</span>
-  <span class="keyword keyword_control keyword_control_ruby">end</span>
-
-  <span class="keyword keyword_control keyword_control_pseudo-method keyword_control_pseudo-method_ruby">alias</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>_old_format_m</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>%</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> :nodoc:
-</span>
-  <span class="variable variable_other variable_other_constant variable_other_constant_ruby">PERCENT_MATCH_RE</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Regexp</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>union<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>
-      <span class="string string_regexp string_regexp_classic string_regexp_classic_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span>%%<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
-      <span class="string string_regexp string_regexp_classic string_regexp_classic_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span>%<span class="constant constant_character constant_character_escape constant_character_escape_ruby">\{</span><span class="string string_regexp string_regexp_group string_regexp_group_ruby"><span class="punctuation punctuation_definition punctuation_definition_group punctuation_definition_group_ruby">(</span><span class="constant constant_character constant_character_escape constant_character_escape_ruby">\w</span>+<span class="punctuation punctuation_definition punctuation_definition_group punctuation_definition_group_ruby">)</span></span><span class="constant constant_character constant_character_escape constant_character_escape_ruby">\}</span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
-      <span class="string string_regexp string_regexp_classic string_regexp_classic_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span>%&lt;<span class="string string_regexp string_regexp_group string_regexp_group_ruby"><span class="punctuation punctuation_definition punctuation_definition_group punctuation_definition_group_ruby">(</span><span class="constant constant_character constant_character_escape constant_character_escape_ruby">\w</span>+<span class="punctuation punctuation_definition punctuation_definition_group punctuation_definition_group_ruby">)</span></span>&gt;<span class="string string_regexp string_regexp_group string_regexp_group_ruby"><span class="punctuation punctuation_definition punctuation_definition_group punctuation_definition_group_ruby">(</span>.*?<span class="constant constant_character constant_character_escape constant_character_escape_ruby">\d</span>*<span class="constant constant_character constant_character_escape constant_character_escape_ruby">\.</span>?<span class="constant constant_character constant_character_escape constant_character_escape_ruby">\d</span>*<span class="string string_regexp string_regexp_character-class string_regexp_character-class_ruby"><span class="punctuation punctuation_definition punctuation_definition_character-class punctuation_definition_character-class_ruby">[</span>bBdiouxXeEfgGcps<span class="punctuation punctuation_definition punctuation_definition_character-class punctuation_definition_character-class_ruby">]</span></span><span class="punctuation punctuation_definition punctuation_definition_group punctuation_definition_group_ruby">)</span></span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span></span>
-  <span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> call-seq:
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>   %(arg)
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>   %(hash)
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Format - Uses str as a format specification, and returns the result of applying it to arg.
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> If the format specification contains more than one substitution, then arg must be
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> an Array containing the values to be substituted. See Kernel::sprintf for details of the
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> format string. This is the default behavior of the String class.
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>   * arg: an Array or other class except Hash.
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>   * Returns: formatted String
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Example:
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>    "%s, %s" % ["Masao", "Mutoh"]
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Also you can use a Hash as the "named argument". This is recommended way so translators
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> can understand the meanings of the msgids easily.
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>   * hash: {:key1 =&gt; value1, :key2 =&gt; value2, ... }
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>   * Returns: formatted String
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Example:
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>   For strings.
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>   "%{firstname}, %{familyname}" % {:firstname =&gt; "Masao", :familyname =&gt; "Mutoh"}
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>   With field type to specify format such as d(decimal), f(float),...
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>   "%&lt;age&gt;d, %&lt;weight&gt;.1f" % {:age =&gt; 10, :weight =&gt; 43.4}
-</span>  <span class="meta meta_function meta_function_method meta_function_method_with-arguments meta_function_method_with-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">%</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">(</span><span class="variable variable_parameter variable_parameter_function variable_parameter_function_ruby">args</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">)</span></span>
-    <span class="keyword keyword_control keyword_control_ruby">if</span> args<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>kind_of?<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_constant variable_other_constant_ruby">Hash</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-      ret <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> dup
-      ret<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>gsub!<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_constant variable_other_constant_ruby">PERCENT_MATCH_RE</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">match</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
-        <span class="keyword keyword_control keyword_control_ruby">if</span> match <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">==</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>%%<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
-          <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>%<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
-        <span class="keyword keyword_control keyword_control_ruby">elsif</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_global variable_other_readwrite_global_pre-defined variable_other_readwrite_global_pre-defined_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">$</span>1</span>
-          key <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_global variable_other_readwrite_global_pre-defined variable_other_readwrite_global_pre-defined_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">$</span>1</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>to_sym
-          args<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>has_key?<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>key<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">?</span> args<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span>key<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span> <span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">:</span> match
-        <span class="keyword keyword_control keyword_control_ruby">elsif</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_global variable_other_readwrite_global_pre-defined variable_other_readwrite_global_pre-defined_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">$</span>2</span>
-          key <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_global variable_other_readwrite_global_pre-defined variable_other_readwrite_global_pre-defined_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">$</span>2</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>to_sym
-          args<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>has_key?<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>key<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">?</span> sprintf<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>%<span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_global variable_other_readwrite_global_pre-defined variable_other_readwrite_global_pre-defined_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">$</span>3</span><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> args<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span>key<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">:</span> match
-        <span class="keyword keyword_control keyword_control_ruby">end</span>
-      <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
-      ret
-    <span class="keyword keyword_control keyword_control_ruby">else</span>
-      ret <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> gsub<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_regexp string_regexp_classic string_regexp_classic_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span>%<span class="string string_regexp string_regexp_group string_regexp_group_ruby"><span class="punctuation punctuation_definition punctuation_definition_group punctuation_definition_group_ruby">(</span><span class="string string_regexp string_regexp_character-class string_regexp_character-class_ruby"><span class="punctuation punctuation_definition punctuation_definition_character-class punctuation_definition_character-class_ruby">[</span>{&lt;<span class="punctuation punctuation_definition punctuation_definition_character-class punctuation_definition_character-class_ruby">]</span></span><span class="punctuation punctuation_definition punctuation_definition_group punctuation_definition_group_ruby">)</span></span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>%%\1<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-      <span class="keyword keyword_control keyword_control_ruby">begin</span>
-        ret<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>_old_format_m<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>args<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-      <span class="keyword keyword_control keyword_control_ruby">rescue</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">ArgumentError</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> e
-        <span class="keyword keyword_control keyword_control_ruby">if</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_global variable_other_readwrite_global_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">$</span>DEBUG</span>
-          <span class="variable variable_other variable_other_readwrite variable_other_readwrite_global variable_other_readwrite_global_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">$</span>stderr</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>puts <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>  The string:<span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>ret<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
-          <span class="variable variable_other variable_other_readwrite variable_other_readwrite_global variable_other_readwrite_global_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">$</span>stderr</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>puts <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>  args:<span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>args<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>inspect<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
-          puts e<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>backtrace
-        <span class="keyword keyword_control keyword_control_ruby">else</span>
-          <span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">raise</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">ArgumentError</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> e<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>message
-        <span class="keyword keyword_control keyword_control_ruby">end</span>
-      <span class="keyword keyword_control keyword_control_ruby">end</span>
-    <span class="keyword keyword_control keyword_control_ruby">end</span>
-  <span class="keyword keyword_control keyword_control_ruby">end</span>
-<span class="keyword keyword_control keyword_control_ruby">end</span>
-
-<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-
-Não esqueça de carregar o arquivo utilizando o método <code>require</code> antes de utiliza-lo. É recomendado que você faça isto em algum arquivo do diretório <code>initializers</code> (talvez seja bom criar um arquivo apenas para esta finalidade). Também recomendo estudar o código acima para entender o que está acontecendo antes de simplesmente sair usando.
-
-Ah, e você também pode definir tipos numéricos assim:
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>%&lt;age&gt;d, %&lt;weight&gt;.1f<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">%</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>age</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">10</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>weight</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">43.4</span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "10, 43.4"</span></span></pre>
-
-Para mais informações sobre as novidades do Rails, siga-me no Twitter: <a href="http://twitter.com/carlosbrando">@carlosbrando</a>.
+<p>Para mais informações sobre as novidades do Rails, siga-me no Twitter: <a href="http://twitter.com/carlosbrando">@carlosbrando</a>.</p>
 </div>
 
 
@@ -240,14 +344,14 @@ Para mais informações sobre as novidades do Rails, siga-me no Twitter: <a href
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2009-07-20 00:00:00 -0300" pubdate  updated >Jul 20<span>th</span>, 2009</time>
+<time datetime="2009-07-20 00:00:00 -0300" pubdate  updated >20 de Julho de 2009</time>
 
 
 

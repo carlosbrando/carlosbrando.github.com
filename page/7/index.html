@@ -1,0 +1,997 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Nome do Jogo</title>
+  <meta name="author" content="Carlos Brando">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://carlosbrando.github.com/page/7/index.html"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds2.feedburner.com/NomeDoJogo" rel="alternate" title="Nome do Jogo" type="application/atom+xml"/>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1249636-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">Nome do Jogo</a></h1>
+  
+    <h2>por Carlos Brando</h2>
+  
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="http://feeds2.feedburner.com/NomeDoJogo" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:carlosbrando.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/08/17/isto-e-um-bug-no-javascript/">Isto é um bug no Javascript?</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-08-17 00:00:00 -0300" pubdate  updated >17 de Agosto de 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class='' src='http://www.nomedojogo.com/wp-content/uploads/2009/08/2279116910_4d699d91cb.jpg' width='' height='' alt='' title=''></p>
+
+<p>Javascript é uma linguagem controversa. Muitos programadores adoram trabalhar com ela, mas com certeza o número de programadores que a odeiam é maior ainda. Não importa se você está no primeiro ou no segundo grupo, se você é um desenvolvedor web simplesmente não pode evitá-la.</p>
+
+<p>Eu particularmente sempre estou em cima do muro quando o assunto é Javascript, já passei por momentos bem agradaveis criando coisas com esta linguagem, mas também já me irritei com algumas caracteristicas ruins da sua implementação em muitas outras ocasiões.</p>
+
+<p>O fato é que para se dar bem com Javascript é importante conhecer um pouco mais da linguagem do que o usual. Mas a maioria dos programadores só estão interessados em conhecer o suficiente da linguagem para realizar pequenas tarefas e criar alguns scripts simples (Ctrl+C e Ctrl+V). Assim, quando alguma coisa imprevista acontece na execução do código, logo jogamos a culpa no pobre Javascript.</p>
+
+<p>Em uma dessas madrugadas em claro, eu comecei a enumerar alguns trechos de código que parecem bugs, mas não são. Segue uma explicação sobre cada um deles e algumas dicas para evitar resultados inesperados. E antes que atirem pedras em mim, os subtítulos não devem ser levados a sério.</p>
+
+<h2>Javascript não sabe somar</h2>
+
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+</pre></td><td class='code' width='100%'><pre><code class='javascript'><div class='line'><span class="o">&gt;&gt;&gt;</span> <span class="mf">0.1</span> <span class="o">+</span> <span class="mf">0.2</span>
+</div><div class='line'><span class="mf">0.30000000000000004</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Números em Javascript são representados internamente com 64 bits e cada número pode ter no máximo 17 dígitos significativos. Isto tem algumas consequências interessantes como demonstrado no exemplo acima. É preciso ser bem cuidadoso com certos cálculos, principalmente quando a precisão é algo muito importante para o aplicativo.</p>
+
+<h2>Javascript não sabe somar - parte 2</h2>
+
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+</pre></td><td class='code' width='100%'><pre><code class='javascript'><div class='line'><span class="o">&gt;&gt;</span> <span class="s2">&quot;3&quot;</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">5</span>
+</div><div class='line'><span class="o">=&gt;</span> <span class="mi">345</span>
+</div><div class='line'>
+</div><div class='line'><span class="o">&gt;&gt;</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">+</span> <span class="s2">&quot;5&quot;</span>
+</div><div class='line'><span class="o">=&gt;</span> <span class="mi">75</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>No Javascript, o operador de soma (<code>+</code>) é usado tanto para somar valores numéricos como também para concatenar strings. Precisamos estar atentos a seguinte regra: durante uma operação de soma, quando um dos valores é do tipo string, então tudo é convertido para este mesmo tipo e uma concatenação é realizada.</p>
+
+<p>No primeiro exemplo, como iniciamos a soma com um string, todos os valores seguintes são imediatamente convertidos para este mesmo formato e depois são concatenados. Já no segundo exemplo, temos inicialmente uma soma numéria (<code>3 + 4 = 7</code>) que é realizada normalmente, mas como a próxima soma a ser realizada não será com outro valor número, mas sim com o string <code>"5"</code>, então o Javascript realiza a conversão do primeiro resultado e em seguida realiza uma concatenação com os valores, devolvendo no final o string <code>"75"</code>.</p>
+
+<h2>Javascript não sabe converter string para números</h2>
+
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+</pre></td><td class='code' width='100%'><pre><code class='javascript'><div class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">parseInt</span><span class="p">(</span><span class="s2">&quot;010&quot;</span><span class="p">)</span>
+</div><div class='line'><span class="mi">8</span>
+</div><div class='line'>
+</div><div class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">parseInt</span><span class="p">(</span><span class="s2">&quot;010&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</div><div class='line'><span class="mi">10</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>O método <code>parseInt</code> é muito utilizado e tem por objetivo converter strings em números inteiros. Basicamente o método aceita dois parâmetros: o primeiro é um string contendo o valor a ser convertido e o segundo é um inteiro que representa a base (decimal, binário, hexadecimal, etc.) na qual o string em questão está sendo representado.</p>
+
+<p>O problema aqui é que alguns livros e sites costumam explicar que o valor padrão da base (para quando ele não é informado) é 10, o que não é necessariamente uma verdade. Quando não informamos a base (radix) ou a definimos com o valor 0, então o método utiliza a seguinte regra:</p>
+
+<ul>
+    <li>Se o string que estamos convertendo iniciar com <code>"0x"</code>, então o método assumirá a conversão com a base 16 (hexadecimal).</li>
+    <li>Se o string começar com <code>"0"</code> (como no primeiro exemplo) a base utilizada será 8 (octal).</li>
+    <li>Se o string iniciar com qualquer outro valor numérico, então a base padrão será 10 (decimal).</li>
+    <li>E se o primeiro caractere do string não puder ser convertido para um número, então <code>parseInt</code> retornará <code>NaN.</code> (&#8220;not a number&#8221;).</li>
+</ul>
+
+
+<p>Desta forma, a regra é sempre informar a base na qual a conversão deve ser realizada, exatamente como foi feito no segundo exemplo.</p>
+
+<h2>Javascript não sabe fazer comparações</h2>
+
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+</pre></td><td class='code' width='100%'><pre><code class='javascript'><div class='line'><span class="o">&gt;&gt;</span> <span class="mi">1</span> <span class="o">==</span> <span class="kc">true</span>
+</div><div class='line'><span class="o">=&gt;</span> <span class="kc">true</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Podemos realizar comparações em Javascript com os símbolos <code>&lt;, &gt;, &lt;= e &gt;=</code>. Eles funcionam tanto para numerais como para strings. Mas quando o assunto é a comparações de igualdade, precisamos prestar atenção a alguns fatores.</p>
+
+<p>O operador de igualdade duplo realiza uma coerção de tipos caso você esteja comparando dois valores de tipos diferentes, como acontece no exemplo acima. Embora aparentemente este seja um resultado normal, em outros casos podemos ter resultados inesperados, como na seguinte comparação:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+</pre></td><td class='code' width='100%'><pre><code class='javascript'><div class='line'><span class="o">&gt;&gt;</span> <span class="kc">null</span> <span class="o">==</span> <span class="kc">false</span>
+</div><div class='line'><span class="o">=&gt;</span> <span class="kc">false</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>A linguagem também conta com um operador de igualdade tripo, que ignora a coerção de tipos:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+</pre></td><td class='code' width='100%'><pre><code class='javascript'><div class='line'><span class="o">&gt;&gt;</span> <span class="mi">1</span> <span class="o">===</span> <span class="kc">true</span>
+</div><div class='line'><span class="o">=&gt;</span> <span class="kc">false</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Eu particularmente tenho como regra sempre utilizar o operador triplo ao realizar comparações de valores, isto tem me ajudado a evitar alguns erros de interpretação ao analisar o código e eventuais bugs decorrentes desta característica da linguagem.</p>
+
+<h2>Javascript também não sabe contar</h2>
+
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+</pre></td><td class='code' width='100%'><pre><code class='javascript'><div class='line'><span class="o">&gt;&gt;</span> <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;dog&quot;</span><span class="p">,</span> <span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="s2">&quot;hen&quot;</span><span class="p">];</span>
+</div><div class='line'><span class="o">&gt;&gt;</span> <span class="nx">a</span><span class="p">[</span><span class="mi">100</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;fox&quot;</span><span class="p">;</span>
+</div><div class='line'><span class="o">&gt;&gt;</span> <span class="nx">a</span><span class="p">.</span><span class="nx">length</span>
+</div><div class='line'><span class="o">=&gt;</span> <span class="mi">101</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>A propriedade <code>length</code> de objetos do tipo array em Javascript sempre retornará um número acima da maior posição do array e não necessariamente a quantidade de itens no objeto, conforme você pôde ver no exemplo acima.</p>
+
+<p>Se você tentar recuperar o valor em uma posição não existente no array ele devolverá <code>undefined</code>.</p>
+
+<h2>Eu amo Javascript</h2>
+
+
+<p>Javascript possui muitas características realmente boas, e da mesma forma também possui algumas implementações realmente ruins (pretendo falar sobre isto em outro artigo). Por isto é importante gastar um pouco mais de tempo estudando mais a fundo o comportamento da linguagem. Depois de entender como algumas coisas realmente funcionam, descobrimos que nem tudo é bug.</p>
+
+<p>Estas são apenas algumas poucas curiosidades que consegui coletar em alguns minutos brincando com a linguagem, você conhece mais alguma?</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2009/08/17/isto-e-um-bug-no-javascript/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/08/12/uma-grande-festa-rails-oxente/">Uma grande festa Rails! Oxente!</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-08-12 00:00:00 -0300" pubdate  updated >12 de Agosto de 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class='' src='http://www.nomedojogo.com/wp-content/uploads/2009/08/IMG_2707.JPG' width='' height='' alt='' title=''></p>
+
+<p>Chegamos em Natal na quinta-feira depois de uma longa viagem de 7 horas com escala em Brasília e logo de cara fomos recepcionados por um senhor muito simpático chamado Aroldo, que foi nosso motorista durante todo o período do evento. No caminho para o hotel passamos em frente a um bar/restaurante e pelo carro já consegui avistar Fábio Akita, Marcos Tapajós, Silvestre Mergulhão e mais algumas pessoas (que eu acredito ser o Rafael Souza e o Henrique Bastos, embora eu não tenha conseguido ver direito) em uma mesa. E na maior euforia Tapajós vem até o carro dizer que estão indo para um passeio de buggy pelas dunas.</p>
+
+<p>Este foi o ritmo que guiou o Oxente Rails. Ótimas palestras, a maior interação entre palestrantes e participantes que eu já presenciei e muita (muita mesmo) festa. E tudo isto com a linda cidade de Natal servindo como pano de fundo.</p>
+
+<p>Tudo o que precisava ser dito sobre as palestras e sobre o evento já foi dito por meus amigos <a href="http://tapajos.me/2009/8/10/oxente-rails">Tapajós</a> e <a href="http://akitaonrails.com/2009/08/11/oxente-rails-its-a-wrap">Akita</a> e aqueles que não assistiram ao evento pela transmissão ao vivo poderão fazer isto assim que os vídeos forem disponibilizados gratuitamente na web. Mas o evento não foi marcante somente pelo bom nível das palestras, mas sim pela animação dos participantes e principalmente pelas horas extras!</p>
+
+<p>Tive o privilégio de permanecer por mais dois dias e meio em Natal depois do evento e conhecer um pouco mais da cidade. Quero agradecer ao <a href="http://twitter.com/fagiani">Paulo Fagiani</a> que recebeu a mim e a minha esposa como se fossemos membros de sua família e a Karen que nos serviu de guia em todos os passeios que fizemos pela cidade.</p>
+
+<p>O próximo evento agora será o <a href="http://railsforkids.com/">Rails for Kids</a> que acontecerá no dia 12 de setembro, 100%  online. Também vou estar participando com uma palestra sobre minha experiencia com o OpenSocial + Ruby.</p>
+
+<p>E nos dias 13 e 14 de outubro teremos o tão esperado <a href="http://www.railssummit.com.br/">Rails Summit Latin America 2009</a>!</p>
+
+<p>P.S.: Em breve publicarei algumas fotos e vídeos do evento e da cidade de Natal no meu twitter: <a href="http://twitter.com/carlosbrando">@carlosbrando</a>.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2009/08/12/uma-grande-festa-rails-oxente/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/07/27/nao-tenho-tempo-para-conquistar-meus-sonhos/">Não tenho tempo para conquistar meus sonhos</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-07-27 00:00:00 -0300" pubdate  updated >27 de Julho de 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class='' src='http://www.nomedojogo.com/wp-content/uploads/2009/07/3554039151_8a041c0949.jpg' width='' height='' alt='' title=''></p>
+
+<p>Você já sonhou com a abertura de sua própria empresa, a criação de um produto para a internet ou simplesmente ensaiou criar um blog sobre programação ou qualquer outro assunto de seu interesse? Se a resposta para essas perguntas, ou para uma similar a essas, for afirmativa, espero que você já tenha iniciado algum plano para atingir a sua meta. Caso contrário, por que ainda não começou a trabalhar para conquistar o seu sonho?</p>
+
+<p>Infelizmente a maioria das pessoas padece sempre do mesmo mal, a falta de tempo. Se você também é uma dessas pessoas que além de trabalhar, precisa dedicar tempo a sua família, cuidar da sua saúde e cumprir com um número sem fim de responsabilidades, e por isto nunca consegue tempo para correr atrás do seu sonho, eu sou obrigado a lhe dizer: <strong>Você é um preguiçoso</strong> (e eu não estou falando <a href="http://akitaonrails.com/2009/07/23/tradu--o-o-que-faz-um-bom-programador">deste tipo bom de preguiçoso</a>).</p>
+
+<p>Sempre há tempo suficiente. O problema é que a maior parte das pessoas gasta todo o seu tempo livre em atividades que não são tão importantes e o que sobra não é o suficiente para correr atrás do seu sonho.</p>
+
+<p>Todas as grandes pessoas que eu conheço, também estão sobrecarregadas com as mesmas responsabilidades familiares, profissionais e outras atividades importantes que consomem muito do nosso tempo. A diferença entre os que apenas sonham e os que realizam seus sonhos pode ser resumida em apenas uma única palavra, <strong>equilíbrio</strong>. Simplesmente não existe uma pessoa no mundo que esteja totalmente livre de obrigações. Desta forma, ouvir a expressão &#8220;não tenho tempo para me tornar grande&#8221; sempre soará como uma bela desculpa para a preguiça.</p>
+
+<p>Não possuir muito tempo para começar é natural, mas isto não significa que você nunca tem um tempo livre para começar. As pessoas em geral usam a falta de tempo como uma desculpa para não se sentirem tão mal por nunca terem realizado nada grandioso.</p>
+
+<p>Este tipo de desculpa é ainda mais deprimente quando vem daqueles que ainda estão estudando. &#8220;Eu preciso estudar tanto&#8230; Tenho tantas aulas&#8230; Tantos trabalhos para entregar&#8230;&#8221;. Se você está tão atolado com seus estudos que não há tempo de aprender nada fora da escola, então definitivamente alguma coisa está errada.</p>
+
+<p>Certa vez uma pessoa muito inteligente disse: nunca deixe sua escola interferir com a sua educação. Mais uma vez, equilíbrio é muito importante.</p>
+
+<p>Veja o caso do criador do Rails, David Heinemeier Hansson. Ele comentou certa vez em uma entrevista que durante seu período na escola ele recebeu muitas notas B e C, e que ele se sentia muito orgulhoso destas notas já que elas vinham com quase ou nenhum tempo gasto estudando. Enquanto isso ele usou a maior parte do seu tempo livre estudando coisas de seu interesse por conta própria e iniciando seus projetos pessoais e a criação da sua própria empresa.</p>
+
+<p>E ele conseguiu. Mesmo estudando, ele criou o <a href="http://www.instiki.org/show/HomePage">Instiki</a>, o <a href="http://www.rubyonrails.pro.br/">Ruby on Rails</a> e o <a href="http://www.basecamphq.com/">Basecamp</a> e ainda se tornou sócio da <a href="http://www.37signals.com/">37signals</a>. Você acha que ele conseguiria tudo isso se suas maiores preocupações fossem tirar notas A na escola e jogar videogame? Com certeza, não.</p>
+
+<p>Se você realmente deseja conquistar algo, então você conseguirá tempo para isto, independente de quais são as suas outras obrigações. Não deixe seus sonhos para depois.</p>
+
+<p>Mas se eu posso ser realmente honesto com você, eu prefiro que você continue apenas se desculpando com a falta de tempo e que nunca inicie nada, isto é melhor para mim&#8230; menos concorrência.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2009/07/27/nao-tenho-tempo-para-conquistar-meus-sonhos/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/07/20/o-novo-sistema-de-interpolacao-do-ruby-1-9/">O novo sistema de interpolação de Strings do Ruby 1.9</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-07-20 00:00:00 -0300" pubdate  updated >20 de Julho de 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Embora o Ruby 1.9 já tenha sido liberado há algum tempo, infelizmente ele ainda é inacessível para muitos de nós, já que muitos projetos foram iniciados em versões mais antigas do Rails, quando ele ainda era incompatível com esta nova versão do Ruby. E mesmo aqueles que estão utilizando as versões mais recentes do Rails, também precisam tomar certos cuidados já que nem todos os plugins e gems já foram preparados e testados para serem executados nesta versão do Ruby.</p>
+
+<p>Já faz um tempo que o core team do Rails vêm aceitando patches que implementam certos recursos presentes apenas no Ruby 1.9, permitindo que mesmo projetos rodando sob as versões 1.8.x também possam se beneficiar destas novas funcionalidades. Uma dessas novidades que recentemente foi incluída na versão de desenvolvimento do Rails (Edge Rails) e que estará presente no próximo release, foi o novo sistema de interpolação de Strings do Ruby 1.9.</p>
+
+<p>Atualmente utilizamos muito o conhecido <code>#{}</code> para realizar esta atividade, como demonstrado no exemplo abaixo.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="n">firstname</span>  <span class="o">=</span> <span class="s2">&quot;Carlos&quot;</span>
+</div><div class='line'><span class="n">familyname</span> <span class="o">=</span> <span class="s2">&quot;Brando&quot;</span>
+</div><div class='line'>
+</div><div class='line'><span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">firstname</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">familyname</span><span class="si">}</span><span class="s2">&quot;</span>
+</div><div class='line'><span class="c1"># =&gt; &quot;Carlos Brando&quot;</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>No Ruby 1.9, além da forma exibida acima, também podemos utilizar <code>%{}</code> para informar os valores a serem interpolados através de um objeto do tipo Hash. Seguindo a seguinte sintaxe:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="n">person</span> <span class="o">=</span> <span class="p">{</span><span class="ss">:firstname</span> <span class="o">=&gt;</span> <span class="s2">&quot;Carlos&quot;</span><span class="p">,</span> <span class="ss">:familyname</span> <span class="o">=&gt;</span> <span class="s2">&quot;Brando&quot;</span><span class="p">}</span>
+</div><div class='line'>
+</div><div class='line'><span class="nb">puts</span> <span class="s2">&quot;%{firstname} %{familyname}&quot;</span> <span class="o">%</span> <span class="n">person</span>
+</div><div class='line'><span class="c1"># =&gt; &quot;Carlos Brando&quot;</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Se você gosta de viver no limite e utiliza a versão de desenvolvimento do Rails em seus projetos, então já pode começar a utilizar este novo recurso, mesmo que ainda nem tenha o Ruby 1.9 instalado em seu computador. Mas, se você é um pouco mais conservador e não gosta de arriscar (o que pode evitar alguns problemas com bugs), você tem duas opções: esperar pelo Rails 2.3.3 (ou quem sabe o 3.0, não sei qual será o próximo) ou implantar você mesmo esta funcionalidade no seu projeto Rails atual.</p>
+
+<p>Se você optou pela segunda opção, basta criar um arquivo qualquer no diretório <code>lib</code> do seu projeto e incluir o seguinte código nele:</p>
+
+<div><figure role=code><figcaption><span>string.rb </span></figcaption>
+ <div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+<span class='line'>20</span>
+<span class='line'>21</span>
+<span class='line'>22</span>
+<span class='line'>23</span>
+<span class='line'>24</span>
+<span class='line'>25</span>
+<span class='line'>26</span>
+<span class='line'>27</span>
+<span class='line'>28</span>
+<span class='line'>29</span>
+<span class='line'>30</span>
+<span class='line'>31</span>
+<span class='line'>32</span>
+<span class='line'>33</span>
+<span class='line'>34</span>
+<span class='line'>35</span>
+<span class='line'>36</span>
+<span class='line'>37</span>
+<span class='line'>38</span>
+<span class='line'>39</span>
+<span class='line'>40</span>
+<span class='line'>41</span>
+<span class='line'>42</span>
+<span class='line'>43</span>
+<span class='line'>44</span>
+<span class='line'>45</span>
+<span class='line'>46</span>
+<span class='line'>47</span>
+<span class='line'>48</span>
+<span class='line'>49</span>
+<span class='line'>50</span>
+<span class='line'>51</span>
+<span class='line'>52</span>
+<span class='line'>53</span>
+<span class='line'>54</span>
+<span class='line'>55</span>
+<span class='line'>56</span>
+<span class='line'>57</span>
+<span class='line'>58</span>
+<span class='line'>59</span>
+<span class='line'>60</span>
+<span class='line'>61</span>
+<span class='line'>62</span>
+<span class='line'>63</span>
+<span class='line'>64</span>
+<span class='line'>65</span>
+<span class='line'>66</span>
+<span class='line'>67</span>
+<span class='line'>68</span>
+<span class='line'>69</span>
+<span class='line'>70</span>
+<span class='line'>71</span>
+<span class='line'>72</span>
+<span class='line'>73</span>
+<span class='line'>74</span>
+<span class='line'>75</span>
+<span class='line'>76</span>
+<span class='line'>77</span>
+<span class='line'>78</span>
+<span class='line'>79</span>
+<span class='line'>80</span>
+<span class='line'>81</span>
+<span class='line'>82</span>
+<span class='line'>83</span>
+<span class='line'>84</span>
+<span class='line'>85</span>
+<span class='line'>86</span>
+<span class='line'>87</span>
+</pre></td><td class='code' width='100%'><pre><code class='rb'><div class='line'><span class="k">if</span> <span class="no">RUBY_VERSION</span> <span class="o">&lt;</span> <span class="s1">&#39;1.9&#39;</span>
+</div><div class='line'>
+</div><div class='line'><span class="cm">=begin</span>
+</div><div class='line'><span class="cm">  string.rb - Extension for String.</span>
+</div><div class='line'>
+</div><div class='line'><span class="cm">  Copyright (C) 2005-2009 Masao Mutoh</span>
+</div><div class='line'>
+</div><div class='line'><span class="cm">  You may redistribute it and/or modify it under the same</span>
+</div><div class='line'><span class="cm">  license terms as Ruby.</span>
+</div><div class='line'><span class="cm">=end</span>
+</div><div class='line'>
+</div><div class='line'><span class="c1"># This feature is included in Ruby 1.9 or later but not occur TypeError.</span>
+</div><div class='line'><span class="c1">#</span>
+</div><div class='line'><span class="c1"># String#% method which accepts named arguments. Particularly useful if the</span>
+</div><div class='line'><span class="c1"># string is to be used by a translator because named arguments mean more</span>
+</div><div class='line'><span class="c1"># than %s/%d style.</span>
+</div><div class='line'><span class="k">class</span> <span class="nc">String</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="k">unless</span> <span class="nb">instance_methods</span><span class="o">.</span><span class="n">find</span> <span class="p">{</span><span class="o">|</span><span class="n">m</span><span class="o">|</span> <span class="n">m</span><span class="o">.</span><span class="n">to_s</span> <span class="o">==</span> <span class="s1">&#39;bytesize&#39;</span><span class="p">}</span>
+</div><div class='line'>    <span class="c1"># For older ruby (such as ruby-1.8.5)</span>
+</div><div class='line'>    <span class="k">alias</span> <span class="ss">:bytesize</span> <span class="ss">:size</span>
+</div><div class='line'>  <span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="k">alias</span> <span class="ss">:_old_format_m</span> <span class="ss">:%</span> <span class="c1"># :nodoc:</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="no">PERCENT_MATCH_RE</span> <span class="o">=</span> <span class="no">Regexp</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="sr"></span>
+</div><div class='line'><span class="sr">      /%%/</span><span class="p">,</span><span class="sr"></span>
+</div><div class='line'><span class="sr">      /%\{(\w+)\}/</span><span class="p">,</span><span class="sr"></span>
+</div><div class='line'><span class="sr">      /%&lt;(\w+)&gt;(.*?\d*\.?\d*[bBdiouxXeEfgGcps])/</span>
+</div><div class='line'>  <span class="p">)</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="c1"># call-seq:</span>
+</div><div class='line'>  <span class="c1">#   %(arg)</span>
+</div><div class='line'>  <span class="c1">#   %(hash)</span>
+</div><div class='line'>  <span class="c1">#</span>
+</div><div class='line'>  <span class="c1"># Format - Uses str as a format specification, and returns the result of applying it to arg.</span>
+</div><div class='line'>  <span class="c1"># If the format specification contains more than one substitution, then arg must be</span>
+</div><div class='line'>  <span class="c1"># an Array containing the values to be substituted. See Kernel::sprintf for details of the</span>
+</div><div class='line'>  <span class="c1"># format string. This is the default behavior of the String class.</span>
+</div><div class='line'>  <span class="c1">#   * arg: an Array or other class except Hash.</span>
+</div><div class='line'>  <span class="c1">#   * Returns: formatted String</span>
+</div><div class='line'>  <span class="c1"># Example:</span>
+</div><div class='line'>  <span class="c1">#    &quot;%s, %s&quot; % [&quot;Masao&quot;, &quot;Mutoh&quot;]</span>
+</div><div class='line'>  <span class="c1">#</span>
+</div><div class='line'>  <span class="c1"># Also you can use a Hash as the &quot;named argument&quot;. This is recommended way so translators</span>
+</div><div class='line'>  <span class="c1"># can understand the meanings of the msgids easily.</span>
+</div><div class='line'>  <span class="c1">#   * hash: {:key1 =&gt; value1, :key2 =&gt; value2, ... }</span>
+</div><div class='line'>  <span class="c1">#   * Returns: formatted String</span>
+</div><div class='line'>  <span class="c1"># Example:</span>
+</div><div class='line'>  <span class="c1">#   For strings.</span>
+</div><div class='line'>  <span class="c1">#   &quot;%{firstname}, %{familyname}&quot; % {:firstname =&gt; &quot;Masao&quot;, :familyname =&gt; &quot;Mutoh&quot;}</span>
+</div><div class='line'>  <span class="c1">#</span>
+</div><div class='line'>  <span class="c1">#   With field type to specify format such as d(decimal), f(float),...</span>
+</div><div class='line'>  <span class="c1">#   &quot;%&lt;age&gt;d, %&lt;weight&gt;.1f&quot; % {:age =&gt; 10, :weight =&gt; 43.4}</span>
+</div><div class='line'>  <span class="k">def</span> <span class="nf">%</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+</div><div class='line'>    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">kind_of?</span><span class="p">(</span><span class="no">Hash</span><span class="p">)</span>
+</div><div class='line'>      <span class="n">ret</span> <span class="o">=</span> <span class="nb">dup</span>
+</div><div class='line'>      <span class="n">ret</span><span class="o">.</span><span class="n">gsub!</span><span class="p">(</span><span class="no">PERCENT_MATCH_RE</span><span class="p">)</span> <span class="p">{</span><span class="o">|</span><span class="n">match</span><span class="o">|</span>
+</div><div class='line'>        <span class="k">if</span> <span class="n">match</span> <span class="o">==</span> <span class="s1">&#39;%%&#39;</span>
+</div><div class='line'>          <span class="s1">&#39;%&#39;</span>
+</div><div class='line'>        <span class="k">elsif</span> <span class="vg">$1</span>
+</div><div class='line'>          <span class="n">key</span> <span class="o">=</span> <span class="vg">$1</span><span class="o">.</span><span class="n">to_sym</span>
+</div><div class='line'>          <span class="n">args</span><span class="o">.</span><span class="n">has_key?</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="p">?</span> <span class="n">args</span><span class="o">[</span><span class="n">key</span><span class="o">]</span> <span class="p">:</span> <span class="n">match</span>
+</div><div class='line'>        <span class="k">elsif</span> <span class="vg">$2</span>
+</div><div class='line'>          <span class="n">key</span> <span class="o">=</span> <span class="vg">$2</span><span class="o">.</span><span class="n">to_sym</span>
+</div><div class='line'>          <span class="n">args</span><span class="o">.</span><span class="n">has_key?</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="p">?</span> <span class="nb">sprintf</span><span class="p">(</span><span class="s2">&quot;%</span><span class="si">#{</span><span class="vg">$3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">args</span><span class="o">[</span><span class="n">key</span><span class="o">]</span><span class="p">)</span> <span class="p">:</span> <span class="n">match</span>
+</div><div class='line'>        <span class="k">end</span>
+</div><div class='line'>      <span class="p">}</span>
+</div><div class='line'>      <span class="n">ret</span>
+</div><div class='line'>    <span class="k">else</span>
+</div><div class='line'>      <span class="n">ret</span> <span class="o">=</span> <span class="nb">gsub</span><span class="p">(</span><span class="sr">/%([{&lt;])/</span><span class="p">,</span> <span class="s1">&#39;%%\1&#39;</span><span class="p">)</span>
+</div><div class='line'>      <span class="k">begin</span>
+</div><div class='line'>        <span class="n">ret</span><span class="o">.</span><span class="n">_old_format_m</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+</div><div class='line'>      <span class="k">rescue</span> <span class="no">ArgumentError</span> <span class="o">=&gt;</span> <span class="n">e</span>
+</div><div class='line'>        <span class="k">if</span> <span class="vg">$DEBUG</span>
+</div><div class='line'>          <span class="vg">$stderr</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;  The string:</span><span class="si">#{</span><span class="n">ret</span><span class="si">}</span><span class="s2">&quot;</span>
+</div><div class='line'>          <span class="vg">$stderr</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;  args:</span><span class="si">#{</span><span class="n">args</span><span class="o">.</span><span class="n">inspect</span><span class="si">}</span><span class="s2">&quot;</span>
+</div><div class='line'>          <span class="nb">puts</span> <span class="n">e</span><span class="o">.</span><span class="n">backtrace</span>
+</div><div class='line'>        <span class="k">else</span>
+</div><div class='line'>          <span class="k">raise</span> <span class="no">ArgumentError</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">message</span>
+</div><div class='line'>        <span class="k">end</span>
+</div><div class='line'>      <span class="k">end</span>
+</div><div class='line'>    <span class="k">end</span>
+</div><div class='line'>  <span class="k">end</span>
+</div><div class='line'><span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'><span class="k">end</span>
+</div></code></pre></td></tr></table></div></figure></div>
+
+
+<p>Não esqueça de carregar o arquivo utilizando o método <code>require</code> antes de utiliza-lo. É recomendado que você faça isto em algum arquivo do diretório <code>initializers</code> (talvez seja bom criar um arquivo apenas para esta finalidade). Também recomendo estudar o código acima para entender o que está acontecendo antes de simplesmente sair usando.</p>
+
+<p>Ah, e você também pode definir tipos numéricos assim:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="s2">&quot;%&lt;age&gt;d, %&lt;weight&gt;.1f&quot;</span> <span class="o">%</span> <span class="p">{</span><span class="ss">:age</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span> <span class="ss">:weight</span> <span class="o">=&gt;</span> <span class="mi">43</span><span class="o">.</span><span class="mi">4</span><span class="p">}</span>
+</div><div class='line'><span class="c1"># =&gt; &quot;10, 43.4&quot;</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Para mais informações sobre as novidades do Rails, siga-me no Twitter: <a href="http://twitter.com/carlosbrando">@carlosbrando</a>.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2009/07/20/o-novo-sistema-de-interpolacao-do-ruby-1-9/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/07/16/quantas-horas-eu-devo-trabalhar-por-semana/">Quantas horas eu devo trabalhar por semana?</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-07-16 00:00:00 -0300" pubdate  updated >16 de Julho de 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class='' src='http://www.nomedojogo.com/wp-content/uploads/2009/07/3410093137_85d367e66f.jpg' width='' height='' alt='' title=''></p>
+
+<p>Normalmente eu costumo trabalhar apenas quarenta horas por semana, sempre deixando os finais de semana livres para um merecido descanso. Mas esta semana em particular estou trabalhando muito, cerca de 18 horas por dia. Meus companheiros de trabalho também estão dando o sangue para conseguirmos entregar um projeto no prazo.</p>
+
+<p>Sei que este tipo de esforço vez por outra é realmente inevitável e que você muito provavelmente já passou por algumas situações assim. Meditando um pouco sobre isto, eu comecei a me questionar se estes períodos de muito trabalho são realmente produtivos.</p>
+
+<p>Cheguei a conclusão de que na verdade a quantidade de horas que você trabalha não importa muito, o que realmente conta é como você está gastando todas estas horas que passa trabalhando e o quão importante é o trabalho que você está realizando.</p>
+
+<p>Na década de 80 costumava-se valorizar muito os profissionais workaholics. Mas atualmente, cada vez mais as empresa estão deixando de dar valor à profissionais viciados em trabalho, dando preferencia à pessoas menos tensas e mais humanas. O argumento é de que você precisa de tempo para oxigenar suas ideias, afim de se tornar realmente produtivo.</p>
+
+<p>Durante alguns anos eu trabalhei em uma conhecida empresa multinacional. Neste tempo, perdi a conta de quantas vezes cheguei pela manhã no escritório e encontrei alguns colegas que passaram a madrugada trabalhando ou que dormiram no escritório. Acredite, ainda existem pessoas que pensam que precisam trabalhar 80-100 horas por semana para provarem seu valor.</p>
+
+<p>Sinto informar, mas super-heróis não existem. Uma semana comum de trabalho, que normalmente não passa de quarenta horas, já é bem desgastante. De fato, se analisarmos friamente, um prazo apertado e um tempo curto deveriam induzi-lo a valorizar mais o pouco tempo que você tem, focando nas coisas que realmente importam ao invés de induzi-lo a trabalhar mais horas ou ignorar o fim de semana.</p>
+
+<p>Só há tempo para o básico. E se você tem a intenção de criar algo realmente grandioso é exatamente do básico que você precisa. Muitos projetos, que hoje são grandes sucessos, foram criados nas poucas horas de uma noite de insonia, ou no quase inexistente tempo livre que uma pessoa possuía depois do trabalho.</p>
+
+<p>Se quarenta horas em uma semana é muito pouco para realizar o seu trabalho, então você não tem tempo para focar em qualquer outra coisa além do básico. Talvez você só consiga fazer algumas poucas coisas neste tempo, mas as fará realmente bem. Sem distrações.</p>
+
+<p>Trabalhar demais é um péssimo hábito. Uma vez que você começa a correr a corrida dos ratos, é difícil parar. Preocupe-se com a qualidade das suas horas de trabalho e não com a quantidade. Isto é o que realmente importa.</p>
+
+<p>Mas vez por outra, não temos alternativa&#8230; então me deixa voltar ao trabalho. ;)</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2009/07/16/quantas-horas-eu-devo-trabalhar-por-semana/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/07/09/the-humans-are-dead/">The Humans Are Dead</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-07-09 00:00:00 -0300" pubdate  updated > 9 de Julho de 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>No último <a href="http://www.railsenvy.com/2009/7/8/rails-envy-podcast-episode-086-07-08-2009">Rails Envy Podcast</a> (episódio 86) Gregg Pollack nos mostrou como robôs cantam&#8230; e postou o link com o clipe no <a href="http://www.youtube.com/watch?v=B1BdQcJ2ZYY&amp;feature=related">YouTube</a>. Por acaso eu encontrei um outro vídeo da dupla cômica <a href="http://www.conchords.co.nz/">Flight of the Conchords</a> cantando a mesma canção e com legendas em português.</p>
+
+<p>Divirta-se com &#8220;The Humans Are Dead&#8221;:</p>
+
+<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="500" height="405" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="src" value="http://www.youtube.com/v/EeLdKtYdvC8&amp;hl=en&amp;fs=1&amp;border=1" /><param name="allowfullscreen" value="true" /><embed type="application/x-shockwave-flash" width="500" height="405" src="http://www.youtube.com/v/EeLdKtYdvC8&amp;hl=en&amp;fs=1&amp;border=1" allowscriptaccess="always" allowfullscreen="true"></embed></object>
+
+
+<p>Se a legenda não aparecer, clique no botão CC no canto inferior direito do vídeo e escolha o idioma.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2009/07/09/the-humans-are-dead/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/07/07/interrupcao-nao-e-colaboracao/">Interrupção não é colaboração</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-07-07 00:00:00 -0300" pubdate  updated > 7 de Julho de 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Recentemente passei por um episódio interessante que me fez pensar um pouco sobre o quanto a tecnologia realmente auxilia na produtividade. Fiz uma viagem para o casamento de um amigo e como trabalho remotamente, decidi que permaneceria mais tempo na cidade afim de aproveitar o fim de semana. Para estas viagens tenho sempre comigo um modem 3G que me mantém conectado a uma velocidade razoável, pelo menos na maioria dos lugares para onde vou.</p>
+
+<p>Acontece que esta cidade especificamente não possuía um sinal 3G de qualidade, aliás às vezes não possuía nenhum tipo de sinal. Então tive de passar 3 dias com uma conexão pior que as antigas conexões discada. A comunicação com a equipe foi obviamente prejudicada, já que usamos Skype na maior parte do tempo. Até mesmo acessar uma simples página na internet se tornou um doloroso exercício de paciência, nem mesmo o Campfire era possível de se utilizar. Depois de pouco tempo, simplesmente abandonei o modem e passei a trabalhar 100% desconectado, por três dias, mantendo contato com a empresa apenas pelo telefone quando um assunto era questão de vida ou morte.</p>
+
+<p><img class='' src='http://www.nomedojogo.com/wp-content/uploads/2009/07/2576339565_4f9cc47eff.jpg' width='' height='' alt='' title=''></p>
+
+<p>Já ouvi muitas vezes frases como: &#8220;A tecnologia está tornando cada vez mais fácil a colaboração&#8221;. Pois eu posso dizer, agora com a máxima convicção, que você pode trocar a palavra colaboração por interrupção na frase acima sem pensar duas vezes. Cada vez mais produtos e serviços visam nos deixar online por mais tempo, alegando que a possibilidade de ser encontrado e poder encontrar qualquer membro da sua equipe, não importa onde ele esteja (no escritório, no carro, no supermercado ou em casa) pode tornar seu time muito mais produtivo. Eu já acreditei nesta estória, mas agora eu vejo as coisas por um ângulo diferente.</p>
+
+<p>Durante estes três dias eu me mantive desconectado, incomunicável e isolado. Mas também foi um período de alta produtividade e foco para mim. O motivo? Eu estava isolado, por isto não podia ser interrompido. Consegui concluir neste tempo muitas tarefas que estavam pendentes por semanas e a cada dia ao terminar o trabalho sentia aquela boa sensação de dever cumprido.</p>
+
+<p>Ser produtivo não é algo que simplesmente acontece. Não basta apenas se sentar e sair produzindo. Entrar na zona de produtividade leva tempo. Às vezes pode levar 15 minutos, em outras ocasiões meia hora, ou uma hora ou até mais para entrarmos neste estado de concentração. Mas basta um simples telefonema, e-mail ou mensagem para lhe colocar novamente no inicio do ciclo.</p>
+
+<p>Agora, toda vez que vejo algum site ou revista comentando sobre a nova ferramenta colaborativa da vez, em minha mente só consigo pensar que não passa de mais uma forma de conseguirem me interromper. <strong>E interrupção é o pior inimigo da produtividade.</strong> Pode soar estranho dizer isto, mas uma dose saudável de isolamento social e virtual pode fazer um bem extraordinário para sua alma. Se você desejar ser realmente produtivo, precisa de mais tempo sozinho.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2009/07/07/interrupcao-nao-e-colaboracao/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/07/01/todos-os-metodos-devem-ser-publicos-definitivamente-nao/">Todos os métodos devem ser públicos? Definitivamente não!</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-07-01 00:00:00 -0300" pubdate  updated > 1 de Julho de 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Recentemente fiz a seguinte pergunta no <a href="http://twitter.com/carlosbrando">Twitter</a>:</p>
+
+<p><img class='' src='http://www.nomedojogo.com/wp-content/uploads/2009/07/Picture-1.png' width='' height='' alt='' title=''></p>
+
+<p>As respostas que recebi apenas confirmaram o que eu já imaginava.</p>
+
+<p><img class='' src='http://www.nomedojogo.com/wp-content/uploads/2009/07/Picture-2.png' width='' height='' alt='' title=''></p>
+
+<p><img class='' src='http://www.nomedojogo.com/wp-content/uploads/2009/07/Picture-4.png' width='' height='' alt='' title=''></p>
+
+<p>O motivo da pesquisa é que recentemente eu estava lendo um artigo onde o autor argumentava que o ideal seria criarmos classes somente com métodos públicos, evitando ao máximo métodos privados ou protegidos. E entre outros argumentos, um dos motivos para se fazer isto era simplificar a criação de testes.</p>
+
+<p>Uma coisa que me preocupa no Ruby é que é muito comum encontrar programadores que não estão nem um pouco preocupados se os seus métodos são públicos, protegidos ou privados. Pior ainda, quando tomam decisões apoiando-se em argumentos como o acima.</p>
+
+<p>Um clássico exemplo são os métodos de callback de validações do Active Record, que em praticamente 99% dos casos deveriam ser privados ou protegidos, mas é normal encontrá-los entre os métodos públicos de um modelo na maioria dos projetos Rails. Acredito que isto aconteça porque programadores iniciantes entusiasmados com as facilidades do Active Record apenas saem incluindo seus códigos sem pensar muito no que estão fazendo.</p>
+
+<p>Eu também não tenho o hábito de testar métodos privados, pelas mesmas razões mencionadas pelos amigos do Twitter. Mas no Ruby, se você realmente desejar, é trivial realizar uma chamada em um método privado de um objeto. Uma das técnicas mais usadas por “testadores de métodos privados” é se valer das características dinâmicas da linguagem para transformar todos os métodos privados de uma classe em métodos públicos durante os testes. Diferente de outras linguagens, como C# por exemplo, onde você tem uma barreira formal para impedi-lo de acessar métodos privados, no Ruby é ridiculamente simples ultrapassar esta barreira.</p>
+
+<p>Pensando desta maneira, definir um método como privado no Ruby pode não significar muita coisa, já que outro programador pode alterar esta característica com facilidade. Mas ainda assim, definir um método como privado é como dizer aos outros programadores que aquele método faz parte do funcionamento interno daquela classe e que o programador original quer se manter no direito de realizar qualquer tipo de alteração necessária sem se preocupar se alguém está usando ou não aquele método. Isto tem tudo a ver com encapsulamento, e pode fazer toda a diferença quando surgir a necessidade de alterar algum comportamento do objeto.</p>
+
+<p>Toda vez que você constrói um novo objeto, você está construindo uma nova API. Cabe a você então decidir o que deve ser exposto e o que faz parte dos mecanismos internos deste objeto. Desta forma, quando surgir a necessidade de alterar alguma coisa, você não precisará se preocupar tanto com quantas classes serão afetadas pela mudança. Ao marcar um método como privado, você está se resguardando e garantindo que não causará danos ao restante do sistema, já que você está dentro da fronteira do encapsulamento, podendo assim refatorar seu código sem dor na consciência.</p>
+
+<p>Por favor, não saia simplesmente injetando código em suas classes. Pense!</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2009/07/01/todos-os-metodos-devem-ser-publicos-definitivamente-nao/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/06/23/quanto-cobrar-por-seus-produtos-na-internet/">Quanto cobrar por seus produtos na internet?</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-06-23 00:00:00 -0300" pubdate  updated >23 de Junho de 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Eu havia planejado um artigo mais técnico para esta semana, mas infelizmente não consegui terminá-lo a tempo. Então vai mais uma tradução de um artigo bem interessante do blog <a href="http://www.37signals.com/svn/posts/1287-ask-37signals-how-did-you-come-up-with-pricing-for-your-products">Signal vs. Noise</a>:</p>
+
+<p><img class='' src='http://www.nomedojogo.com/wp-content/uploads/2009/06/2125697998_b053ac13e1.jpg' width='' height='' alt='' title=''></p>
+
+<p>Mattijs perguntou:</p>
+
+<p style="padding-left: 30px;">Estou desenvolvendo um produto para a internet e está chegando a hora em que será necessário criar uma tabela de preços para este produto. Problema: Não sei nem por onde começar! Fiz algumas pesquisas que mostraram uma ampla gama de produtos semelhantes com regimes de preços totalmente diferentes. Quando a 37signals estava desenvolvendo o Basecamp, como é que vocês definiram os seus preços?</p>
+
+
+<p>Quando sentamos para decidir os preços do <a href="http://www.basecamphq.com/">Basecamp</a> pela primeira vez em fevereiro de 2004, decidimos usar os seguintes preços: $9, $19, $39 e $59. Não houve muita ciência por trás disso. Simplesmente perguntamos a nós mesmos:</p>
+
+<ol>
+<li>Quanto eu pagaria?</li>
+<li>Estes números soam bem?</li>
+</ol>
+
+
+<h2>Quanto eu pagaria?</h2>
+
+
+<p>Penso que esta é a pergunta mais importante. Se você está projetando um produto que você vai usar, então é justo perguntar quanto você aceitaria pagar se você fosse comprá-lo de alguém. Os números que surgiram pareciam justos e razoável. 9 dólares era um bom preço inicial enquanto 59 dólares parecia um ótimo preço para o plano mais caro. Já mudamos estes preços, mas esses números funcionaram bem para um produto que ainda era desconhecido no mercado.</p>
+
+<p>Esta linha de pensamento acabou mudando um pouco nosso conceito quando estávamos decidindo os preços de nosso outro produto, o <a href="http://www.campfirenow.com/">Campfire</a>. Originalmente o preço seria de 5 dólares por chat no Campfire. A ideia era que as pessoas pudessem criar uma sala temporária no Campfire para coincidir com uma reunião ou conferência telefônica. Sentimos que cobrar $5/reunião/ligação seria um preço interessante.</p>
+
+<p>Mas então pensamos um pouco mais sobre isso. Perguntamos a nós mesmos se realmente pegaríamos o cartão de crédito para pagar $5 por algo que usaríamos somente por alguns minutos? Nós decidimos que provavelmente não faríamos isso. Isso mudou todo o foco do produto. A ideia de chats temporários se foi e surgiu então a ideia de uma sala de chat persistente que nunca se fecharia. Então, nós adotamos uma tabela de preços similar a do Basecamp, com o sistema de mensalidades. Estamos confiantes de que tomamos a melhor decisão.</p>
+
+<h2>Estes números soam bem?</h2>
+
+
+<p>Há um grande lado psicológico e emocional quando falamos de preços. Um amigo que trabalhava no Wal-Mart, uma vez me disse que lá um preço nunca terminava com um 9. Eles sempre terminavam em 8 (ou 6 ou 4) ou qualquer outro diferente de 9. Eles querem que o cliente saiba que o Wal-Mart está sempre trabalhando duro para diminuir nem que seja um centavo do preço dos produtos - daí o incomum 8 no lugar do familiar 9.</p>
+
+<p>Não adotamos nenhuma regra para decidir nossos preços. Talvez devêssemos adotar uma, mas não fizemos. Nossa linha de preços no Basecamp é de $12, $24, $49, $99 e $149. Estamos mantendo esses preços em vigor por alguns anos e gostamos da combinação. Eles soam bem. Cada nível é praticamente o dobro do nível anterior, mas nós entregamos mais do que o dobro em benefícios.</p>
+
+<p>Por exemplo, no Basecamp Basic ($24/mês), o cliente pode criar até 15 projetos e tem 3GB para armazenamento de arquivos. No Basecamp Plus ($49/mês), o cliente pode criar até 35 projetos (mais do dobro do nível básico) e tem 10GB para armazenamento de arquivos (mais de três vezes o nível básico). Portanto, o preço é o dobro, mas os benefícios são mais do que o dobro. Este padrão persiste em todos os nossos planos de preços.</p>
+
+<h2>Você pode mudar os preços, se precisar</h2>
+
+
+<p>Lembre-se que se você decidiu por um preço errado, você pode fazer correções ocasionalmente. Nós fizemos uma grande alteração nos preços do Basecamp e uma alteração menor nos preços do <a href="http://www.backpackit.com/">Backpack</a>. Os preços do Backpack mudaram quando lançamos a versão multi-usuário. Reduzimos principalmente os preços dos planos maiores e diminuímos a diferença entre o preço do primeiro nível para o segundo nível (que costumava ser de $5 -&gt; $9, mas foi alterado para $5 -&gt; $7).</p>
+
+<p>A alteração do preço pode ser um pouco dolorosa no curto prazo, mas se você fizer a sua parte, aumentando os benefícios junto com o preço, alertando seus clientes com bastante antecedência sobre o aumento (uns 90 dias, vamos dizer), considerar a possibilidade de manter os preços anteriores para os clientes mais antigos e manter o seu preço justo, a alteração de acontecer sem maiores problemas.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2009/06/23/quanto-cobrar-por-seus-produtos-na-internet/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/06/15/como-a-37signals-faturou-um-milhao-com-o-conteudo-criado-em-seu-blog/">Como a 37signals faturou um milhão com o seu blog</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-06-15 00:00:00 -0300" pubdate  updated >15 de Junho de 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class='' src='http://www.nomedojogo.com/wp-content/uploads/2009/06/419050330_27d0a2c69d.jpg' width='' height='' alt='' title=''></p>
+
+<p>Ganhar dinheiro com a internet hoje em dia não é uma coisa muito difícil. Eu mesmo já andei ganhando uma graninha com a venda do meu último livro, que não passava de uma compilação dos textos deste blog traduzidos para o inglês. Não ganhei muita coisa, mas esta também nunca foi a intenção, mas tem muita gente ganhando dinheiro com seus blogs, principalmente fora do Brasil.</p>
+
+<p>Se você cria um conteúdo de qualidade, não é difícil ganhar dinheiro com ele, desde que você não tenha vergonha de fazer dinheiro. Mas o mais impressionante é que algumas pessoas conseguem ganhar dinheiro mais de uma vez com o mesmo conteúdo.</p>
+
+<p>Não é de hoje que expresso minha admiração pela <a href="http://37signals.com/">37signals</a>, e os caras realmente a merecem. Você muito provavelmente já ouviu falar do livro <a href="http://gettingreal.37signals.com/">Getting Real</a> (<a href="http://gettingreal.37signals.com/GR_por.php">Caia na Real</a>), onde eles documentam alguns de seus insight sobre a forma como eles criam e vendem produtos na web. O mais interessante é que tudo começou com uma série de artigos publicados no seu blog <a href="http://www.37signals.com/svn/">Signal vs Noise</a>. Veja a seguir como eles ganharam dinheiro 4 vezes com o mesmo conteúdo.</p>
+
+<h2>Ganhando dinheiro pela primeira vez</h2>
+
+
+<p>Durante muito tempo eles escreveram, baseados em suas experiências, artigos muito originais sobre o processo de construção de um produto para a internet em seu blog. Estes artigos obviamente geravam muito tráfego e desta forma eles conseguiram alguns milhares de dólares com anúncios na barra lateral do site.</p>
+
+<h2>Ganhando dinheiro pela segunda vez</h2>
+
+
+<p>Quando já estavam com um número bem vasto de artigos sobre a sua filosofia de desenvolvimento publicados no blog, eles decidiram compilar os melhores posts no formato de um ebook. Nasceu assim o Getting Real, e cada cópia em PDF era vendida por 19 dólares. Desta forma eles conseguiram angariar aproximadamente 100 mil dólares.</p>
+
+<h2>Ganhando dinheiro pela terceira vez</h2>
+
+
+<p>Depois de um tempo, ele pegaram o Getting Real em PDF e transformaram-no em um livro impresso através do site <a href="http://www.lulu.com/">Lulu.com</a>. Cada livro era vendido por 25 dólares e eles conseguiram mais alguns milhares de dólares apenas no primeiro mês. O livro ainda encontra-se a venda no site e até pouco tempo atrás estava classificado como o quarto livro mais vendido.</p>
+
+<h2>Ganhando dinheiro pela quarta vez</h2>
+
+
+<p>Por último, eles pegaram o conteúdo do livro e produziram uma série de conferencias sobre a filosofia que eles criaram. Eles ganham em média $50 mil por conferencia e já realizaram mais de 5 delas.</p>
+
+<h2>Somando os resultados</h2>
+
+
+<p>Bom, vamos calcular quanto eles conseguiram ganhar com o mesmo conteúdo. Com anúncios eles conseguiram por volta de 100 mil dólares (é importante considerar que eles utilizam o <a href="http://decknetwork.net/">The Deck</a> como seu principal sistema de anúncios, e eles são sócios fundadores da empresa, então provavelmente devem receber um pouco mais do que o normal por anúncio). Com o livro em formato PDF eles ganharam por volta de 350 mil dólares e com o livro impresso eles conseguiram mais ou menos 65 mil. E por último eles já conseguiram 250 mil com as conferencias.</p>
+
+<p>Isto dá um ganho total de 765.000 dólares ao longo de alguns anos, explorando o mesmo conteúdo, insight e idéias sobre como eles executam o seus negócios. Artigos publicados no blog, PDF, livro impresso e conferencias.</p>
+
+<p>É claro que provavelmente eles também devem ter ganho mais algum dinheiro com negócios indiretos conseguidos através do sucesso do livro, como novas oportunidades  para a empresa. Mas somente com o conteúdo criado eles chegaram a quase 1 milhão de dólares. Muito bom para um conteúdo que foi originalmente publicada de graça em um blog, não?</p>
+
+<p>Se você ainda não leu o <a href="http://gettingreal.37signals.com/">Getting Real</a>, caia na real e trate de lê-lo agora. Temos até mesmo uma <a href="http://gettingreal.37signals.com/GR_por.php">versão em português</a>, totalmente gratuita, traduzida pela comunidade Rails brasileira.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2009/06/15/como-a-37signals-faturou-um-milhao-com-o-conteudo-criado-em-seu-blog/">Ler mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+<nav role="pagination">
+  <div>
+    
+      <a class="prev" href="/page/8/">&larr; Antigos</a>
+    
+    <a href="/blog/archives">Arquivo</a>
+    
+    <a class="next" href="/page/6/">Novos &rarr;</a>
+    
+  </div>
+</nav>
+
+<script type="text/javascript">
+    var disqus_shortname = 'carlosbrando';
+    (function () {
+      var s = document.createElement('script'); s.async = true;
+      s.type = 'text/javascript';
+      s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+      (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+
+</div>
+<aside role=sidebar>
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/03/colorific/">Colorific</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro anos de Nome do Jogo</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("carlosbrando", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/carlosbrando" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @carlosbrando</a>
+  
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - Carlos Brando -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

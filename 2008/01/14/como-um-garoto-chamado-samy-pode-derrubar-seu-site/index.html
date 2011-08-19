@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Como Um Garoto Chamado Samy Pode Derrubar Seu Site</h1>
+      <h1 class="entry-title">Como um garoto chamado Samy pode derrubar seu site</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-01-14 00:00:00 -0200" pubdate  updated >Jan 14<span>th</span>, 2008</time>
+<time datetime="2008-01-14 00:00:00 -0200" pubdate  updated >14 de Janeiro de 2008</time>
 
 
 </p>
@@ -113,9 +113,9 @@
   </header>
 
 
-<div class="entry-content"><img src="http://www.nomedojogo.com/wp-content/uploads/2008/01/354217642_74da4a6073.jpg" alt="354217642_74da4a6073.jpg" />
+<div class="entry-content"><p><img src="http://www.nomedojogo.com/wp-content/uploads/2008/01/354217642_74da4a6073.jpg" alt="354217642_74da4a6073.jpg" /></p>
 
-J&aacute; criou algo no Rails 2.0? Mesmo que apenas para testar? J&aacute; viu o arquivo application.rb?
+<p>J&aacute; criou algo no Rails 2.0? Mesmo que apenas para testar? J&aacute; viu o arquivo application.rb?</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_controller"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">ApplicationController<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActionController::Base</span></span></span>
   <span class="support support_function support_function_actionpack support_function_actionpack_rails">helper</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>all</span>
@@ -123,30 +123,46 @@ J&aacute; criou algo no Rails 2.0? Mesmo que apenas para testar? J&aacute; viu o
   protect_from_forgery
 </span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
 
-Hmm&#8230; <strong>protect_from_forgery</strong>? Para que diabos serve isto? Antes de explicar, me deixa contar uma hist&oacute;ria&#8230;
+
+<p>Hmm&#8230; <strong>protect_from_forgery</strong>? Para que diabos serve isto? Antes de explicar, me deixa contar uma hist&oacute;ria&#8230;</p>
+
 <h3>Calma &eacute; uma hist&oacute;ria chata, mas &eacute; curta, e depois fica legal</h3>
-J&aacute; ouviu falar de <em>Cross Site Scripting</em>? Este &eacute; o nome de uma falha de seguran&ccedil;a encontrada facilmente em grande parte dos websites e aplica&ccedil;&otilde;es web que permite &agrave; pessoas maldosas (aqui estou me referindo &agrave; adolescentes sem nada para fazer e sem vida social) alterarem o conte&uacute;do de p&aacute;ginas web, inclu&iacute;rem conte&uacute;do hostil, executarem ataques de <a href="http://pt.wikipedia.org/wiki/Phishing">phishing</a>, obterem o controle do navegador atrav&eacute;s de c&oacute;digos JavaScript e na maioria dos casos for&ccedil;arem o usu&aacute;rio a executar algum comando que eles desejem. Este &uacute;ltimo tipo de ataque se chama crossÂ­site request forgeries.
 
-O <em>Cross Site Request Forgeries</em> &eacute; um tipo de ataque que consiste em obrigar usu&aacute;rios leg&iacute;timos a executarem uma s&eacute;rie de comandos sem nem mesmo saberem disto. E agora com o aumento do uso de Ajax, a coisa tem ficado ainda pior. J&aacute; ouviu falar do Samy Worm?
+
+<p>J&aacute; ouviu falar de <em>Cross Site Scripting</em>? Este &eacute; o nome de uma falha de seguran&ccedil;a encontrada facilmente em grande parte dos websites e aplica&ccedil;&otilde;es web que permite &agrave; pessoas maldosas (aqui estou me referindo &agrave; adolescentes sem nada para fazer e sem vida social) alterarem o conte&uacute;do de p&aacute;ginas web, inclu&iacute;rem conte&uacute;do hostil, executarem ataques de <a href="http://pt.wikipedia.org/wiki/Phishing">phishing</a>, obterem o controle do navegador atrav&eacute;s de c&oacute;digos JavaScript e na maioria dos casos for&ccedil;arem o usu&aacute;rio a executar algum comando que eles desejem. Este &uacute;ltimo tipo de ataque se chama crossÂ­site request forgeries.</p>
+
+<p>O <em>Cross Site Request Forgeries</em> &eacute; um tipo de ataque que consiste em obrigar usu&aacute;rios leg&iacute;timos a executarem uma s&eacute;rie de comandos sem nem mesmo saberem disto. E agora com o aumento do uso de Ajax, a coisa tem ficado ainda pior. J&aacute; ouviu falar do Samy Worm?</p>
+
 <h3>Samy &eacute; o meu her&oacute;i</h3>
-Talvez voc&ecirc; n&atilde;o o conhe&ccedil;a, mas o MySpace.com conhece muito bem, na verdade conhece mais do que gostaria. Gra&ccedil;as a uma falha de seguran&ccedil;a em um c&oacute;digo JavaScript, o tal do &#8220;Samy&#8221;, um garoto solit&aacute;rio e sem amigos (e por isso, um cara muito mal), descobriu uma forma nova de fazer amizades na internet. Ele conseguiu atr&aacute;ves de t&eacute;cnicas de <em>Cross Site Scripting</em> injetar um bloco de c&oacute;digo (JavaScript) na sua p&aacute;gina pessoal. Este c&oacute;digo fez nada mais, nada menos que adicionar automaticamente como &#8220;amigo&#8221; cada pessoa que entrasse na sua p&aacute;gina. O mais interessante &eacute; que depois disso o c&oacute;digo tamb&eacute;m era passado para a p&aacute;gina do novo &#8220;amigo&#8221; e ainda inclu&iacute;a a frase &#8220;O Samy &eacute; meu her&oacute;i&#8221; no perfil da pessoa. Em quest&atilde;o de poucas horas ele ser tornou o her&oacute;i de mais de um milh&atilde;o de pessoas e o grande amig&atilde;o do MySpace. E provavelmente deve ter levado uma bela surra dos seus pais quando a policia chegou na sua casa.
 
-Gra&ccedil;as ao Samy, o MySpace caiu, os funcion&aacute;rios levaram uma boa ralada do chefe e sofreram durante alguns dias para se recuperarem dos danos.
+
+<p>Talvez voc&ecirc; n&atilde;o o conhe&ccedil;a, mas o MySpace.com conhece muito bem, na verdade conhece mais do que gostaria. Gra&ccedil;as a uma falha de seguran&ccedil;a em um c&oacute;digo JavaScript, o tal do &#8220;Samy&#8221;, um garoto solit&aacute;rio e sem amigos (e por isso, um cara muito mal), descobriu uma forma nova de fazer amizades na internet. Ele conseguiu atr&aacute;ves de t&eacute;cnicas de <em>Cross Site Scripting</em> injetar um bloco de c&oacute;digo (JavaScript) na sua p&aacute;gina pessoal. Este c&oacute;digo fez nada mais, nada menos que adicionar automaticamente como &#8220;amigo&#8221; cada pessoa que entrasse na sua p&aacute;gina. O mais interessante &eacute; que depois disso o c&oacute;digo tamb&eacute;m era passado para a p&aacute;gina do novo &#8220;amigo&#8221; e ainda inclu&iacute;a a frase &#8220;O Samy &eacute; meu her&oacute;i&#8221; no perfil da pessoa. Em quest&atilde;o de poucas horas ele ser tornou o her&oacute;i de mais de um milh&atilde;o de pessoas e o grande amig&atilde;o do MySpace. E provavelmente deve ter levado uma bela surra dos seus pais quando a policia chegou na sua casa.</p>
+
+<p>Gra&ccedil;as ao Samy, o MySpace caiu, os funcion&aacute;rios levaram uma boa ralada do chefe e sofreram durante alguns dias para se recuperarem dos danos.</p>
+
 <h3>O que isso tem a ver com Rails?</h3>
-Tudo! O caso do MySpace foi algo bem simples, que se resolveu apagando o &#8220;Samy&#8221; do banco de dados. Mas com certeza voc&ecirc; n&atilde;o gostaria de ter o Samy cadastrado em seu site, correto? O problema &eacute; que existem muitos Samys por a&iacute;&#8230;
+
+
+<p>Tudo! O caso do MySpace foi algo bem simples, que se resolveu apagando o &#8220;Samy&#8221; do banco de dados. Mas com certeza voc&ecirc; n&atilde;o gostaria de ter o Samy cadastrado em seu site, correto? O problema &eacute; que existem muitos Samys por a&iacute;&#8230;</p>
+
 <h3>E a droga do m&eacute;todo protect_from_forgery, para que serve???</h3>
-Calma! O m&eacute;todo <strong>protect_from_forgery</strong> serve para te proteger do Samy!
 
-Na verdade, este m&eacute;todo serve para nos assegurar de que todos os formul&aacute;rios que sua aplica&ccedil;&atilde;o est&aacute; recebendo est&atilde;o vindo dela mesma, e n&atilde;o de um link perdido de algum outro site. Ele consegue isto incluindo um token (se voc&ecirc; n&atilde;o sabe o que &eacute; um token, <a href="http://pt.wikipedia.org/wiki/Token">clique aqui</a>) baseado na sess&atilde;o em todos os formul&aacute;rios e requisi&ccedil;&otilde;es Ajax geradas pelo Rails, e depois verifica a autenticidade deste token no controller.
 
-H&aacute;, eu j&aacute; ia me esquecendo&#8230; requisi&ccedil;&otilde;es via GET n&atilde;o s&atilde;o protegidas. Mas isto n&atilde;o &eacute; um problema, afinal elas s&oacute; devem ser usadas para nos trazer dados, e n&oacute;s nunca &agrave;s usamos para alterar ou gravar algo em nosso banco de dados, n&atilde;o &eacute; verdade? N&Atilde;O &Eacute; VERDADE?
+<p>Calma! O m&eacute;todo <strong>protect_from_forgery</strong> serve para te proteger do Samy!</p>
 
-Se quiser aprender mais sobre CSRF(Cross-Site Request Forgery, u&eacute;) use os links abaixo:
+<p>Na verdade, este m&eacute;todo serve para nos assegurar de que todos os formul&aacute;rios que sua aplica&ccedil;&atilde;o est&aacute; recebendo est&atilde;o vindo dela mesma, e n&atilde;o de um link perdido de algum outro site. Ele consegue isto incluindo um token (se voc&ecirc; n&atilde;o sabe o que &eacute; um token, <a href="http://pt.wikipedia.org/wiki/Token">clique aqui</a>) baseado na sess&atilde;o em todos os formul&aacute;rios e requisi&ccedil;&otilde;es Ajax geradas pelo Rails, e depois verifica a autenticidade deste token no controller.</p>
+
+<p>H&aacute;, eu j&aacute; ia me esquecendo&#8230; requisi&ccedil;&otilde;es via GET n&atilde;o s&atilde;o protegidas. Mas isto n&atilde;o &eacute; um problema, afinal elas s&oacute; devem ser usadas para nos trazer dados, e n&oacute;s nunca &agrave;s usamos para alterar ou gravar algo em nosso banco de dados, n&atilde;o &eacute; verdade? N&Atilde;O &Eacute; VERDADE?</p>
+
+<p>Se quiser aprender mais sobre CSRF(Cross-Site Request Forgery, u&eacute;) use os links abaixo:</p>
+
 <ul>
-	<li><a href="isc.sans.org/diary.html?storyid=1750">isc.sans.org/diary.html?storyid=1750</a></li>
-	<li><a href="isc.sans.org/diary.html?storyid=1750">en.wikipedia.org/wiki/Cross-site_request_forgery</a></li>
+    <li><a href="isc.sans.org/diary.html?storyid=1750">isc.sans.org/diary.html?storyid=1750</a></li>
+    <li><a href="isc.sans.org/diary.html?storyid=1750">en.wikipedia.org/wiki/Cross-site_request_forgery</a></li>
 </ul>
-Mas lembre-se que isto N&Atilde;O &eacute; uma solu&ccedil;&atilde;o definitiva para nosso problema, ou como costumamos dizer, n&atilde;o &eacute; uma bala de prata. Continuem espertos, e por favor deixem este m&eacute;todo l&aacute;.
+
+
+<p>Mas lembre-se que isto N&Atilde;O &eacute; uma solu&ccedil;&atilde;o definitiva para nosso problema, ou como costumamos dizer, n&atilde;o &eacute; uma bala de prata. Continuem espertos, e por favor deixem este m&eacute;todo l&aacute;.</p>
 </div>
 
 
@@ -155,14 +171,14 @@ Mas lembre-se que isto N&Atilde;O &eacute; uma solu&ccedil;&atilde;o definitiva 
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-01-14 00:00:00 -0200" pubdate  updated >Jan 14<span>th</span>, 2008</time>
+<time datetime="2008-01-14 00:00:00 -0200" pubdate  updated >14 de Janeiro de 2008</time>
 
 
 

@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2009-01-27 00:00:00 -0200" pubdate  updated >Jan 27<span>th</span>, 2009</time>
+<time datetime="2009-01-27 00:00:00 -0200" pubdate  updated >27 de Janeiro de 2009</time>
 
 
 </p>
@@ -113,30 +113,46 @@
   </header>
 
 
-<div class="entry-content">Finders dinâmicos não são mais novidades no Ruby on Rails há muito tempo, qualquer um que já tenha trabalhado em um simples projeto Rails, já fez algo assim:
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find_by_first_name_and_age<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Pedro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">20</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
-Sabemos que o método acima não existe, mas graças aos finders dinâmicos podemos usá-lo para recuperar todos os usuários que tenham como primeiro nome ‘Pedro’ e 20 anos de idade.
+<div class="entry-content"><p>Finders dinâmicos não são mais novidades no Ruby on Rails há muito tempo, qualquer um que já tenha trabalhado em um simples projeto Rails, já fez algo assim:</p>
 
-Outro recurso, um pouco mais novo, que também tem se mostrado muito útil são os named scopes. Com este recurso podemos definir um escopo como base para uma pesquisa. Por exemplo:
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find_by_first_name_and_age<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Pedro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">20</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
+
+
+<p>Sabemos que o método acima não existe, mas graças aos finders dinâmicos podemos usá-lo para recuperar todos os usuários que tenham como primeiro nome ‘Pedro’ e 20 anos de idade.</p>
+
+<p>Outro recurso, um pouco mais novo, que também tem se mostrado muito útil são os named scopes. Com este recurso podemos definir um escopo como base para uma pesquisa. Por exemplo:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Article<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
   <span class="support support_function support_function_activerecord support_function_activerecord_rails">named_scope</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>published</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>conditions</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>published</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">true</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
 </span><span class="keyword keyword_control keyword_control_ruby">end</span>
 
 <span class="support support_class support_class_ruby">Article</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>published<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>all <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>limit</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">5</span>
 </span></pre>
-No exemplo acima estou usando o escopo <code>published</code> que ajustará minha pesquisa para que apenas artigos publicados sejam devolvidos, mas acrescentando o método <code>all</code> também posso limitar a quantidade de artigos retornados em cinco. Este tipo de flexibilidade não é possível em finders dinâmicos.
 
-Para resolver esta deficiência foi adicionado um novo recurso ao Rails chamado dynamic scopes (escopos dinâmicos). Imagine esta funcionalidade como uma mistura dos dois conceitos que acabamos de ver.
 
-Agora você poderá criar escopos de forma dinâmica, da mesma forma como já fazíamos através do <code>find_by</code>. Desta forma:
+<p>No exemplo acima estou usando o escopo <code>published</code> que ajustará minha pesquisa para que apenas artigos publicados sejam devolvidos, mas acrescentando o método <code>all</code> também posso limitar a quantidade de artigos retornados em cinco. Este tipo de flexibilidade não é possível em finders dinâmicos.</p>
+
+<p>Para resolver esta deficiência foi adicionado um novo recurso ao Rails chamado dynamic scopes (escopos dinâmicos). Imagine esta funcionalidade como uma mistura dos dois conceitos que acabamos de ver.</p>
+
+<p>Agora você poderá criar escopos de forma dinâmica, da mesma forma como já fazíamos através do <code>find_by</code>. Desta forma:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>scoped_by_first_name_and_age <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Pedro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">20</span></span></pre>
-Mas com a vantagem de poder usar toda a flexibilidade de um escopo:
+
+
+<p>Mas com a vantagem de poder usar toda a flexibilidade de um escopo:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>scoped_by_first_name_and_age<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Pedro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">20</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>all<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>limit</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">5</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
-Da mesma forma como fazíamos em escopos comuns, também podemos preceder um escopo com outro escopo:
+
+
+<p>Da mesma forma como fazíamos em escopos comuns, também podemos preceder um escopo com outro escopo:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>scoped_by_first_name<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Pedro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>scoped_by_age<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">20</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
-Enfim, mais um grande ganho à nossa produtividade.
+
+
+<p>Enfim, mais um grande ganho à nossa produtividade.</p>
 
 <hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.3/3.0 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades acompanhando a série <a href="../category/edge-rails/">Edge Rails</a>.</em>
+
 </div>
 
 
@@ -145,14 +161,14 @@ Enfim, mais um grande ganho à nossa produtividade.
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2009-01-27 00:00:00 -0200" pubdate  updated >Jan 27<span>th</span>, 2009</time>
+<time datetime="2009-01-27 00:00:00 -0200" pubdate  updated >27 de Janeiro de 2009</time>
 
 
 

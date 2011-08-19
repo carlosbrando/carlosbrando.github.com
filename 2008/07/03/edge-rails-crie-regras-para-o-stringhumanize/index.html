@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Edge Rails: Crie Regras Para O String#humanize</h1>
+      <h1 class="entry-title">Edge Rails: Crie regras para o String#humanize</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-07-03 00:00:00 -0300" pubdate  updated >Jul 3<span>rd</span>, 2008</time>
+<time datetime="2008-07-03 00:00:00 -0300" pubdate  updated > 3 de Julho de 2008</time>
 
 
 </p>
@@ -113,16 +113,20 @@
   </header>
 
 
-<div class="entry-content">Já faz um certo tempo que <strong>Pratik Naik</strong> está tentando colocar este patch no Rails e parece que finalmente conseguiu.
+<div class="entry-content"><p>Já faz um certo tempo que <strong>Pratik Naik</strong> está tentando colocar este patch no Rails e parece que finalmente conseguiu.</p>
 
-No arquivo <strong>config/initializers/inflections.rb</strong> você tem a opção de acrescentar novas inflexões para pluralização, singularização e outros:
+<p>No arquivo <strong>config/initializers/inflections.rb</strong> você tem a opção de acrescentar novas inflexões para pluralização, singularização e outros:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Inflector</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>inflections <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">inflect</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
   inflect<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>plural <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">/</span><span class="keyword keyword_operator keyword_operator_logical keyword_operator_logical_ruby">^</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>ox<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_global variable_other_readwrite_global_pre-defined variable_other_readwrite_global_pre-defined_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">$</span>/</span>i<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>\1en<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
   inflect<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>singular <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">/</span><span class="keyword keyword_operator keyword_operator_logical keyword_operator_logical_ruby">^</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>ox<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>en<span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">/</span>i<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>\1<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
   inflect<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>irregular <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>person<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>people<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
   inflect<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>uncountable <span class="string string_quoted string_quoted_other string_quoted_other_literal string_quoted_other_literal_lower string_quoted_other_literal_lower_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">%w(</span> fish sheep <span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">)</span></span>
 <span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-Na próxima versão do Rails você também poderá incluir inflexões para o método <a href="http://rails-doc.org/docs/ActiveSupport/CoreExtensions/String/Inflections/humanize">humanize</a> da classe <strong>String</strong>. Vamos aos famosos exemplos:
+
+
+<p>Na próxima versão do Rails você também poderá incluir inflexões para o método <a href="http://rails-doc.org/docs/ActiveSupport/CoreExtensions/String/Inflections/humanize">humanize</a> da classe <strong>String</strong>. Vamos aos famosos exemplos:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>jargon_cnt<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>humanize <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "Jargon cnt"
 </span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>nomedojogo<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>humanize <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "Nomedojogo"
 </span>
@@ -133,6 +137,7 @@ Na próxima versão do Rails você também poderá incluir inflexões para o mé
 
 <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>jargon_cnt<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>humanize <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "Jargon count"
 </span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>nomedojogo<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>humanize <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "Nome do jogo"</span></span></pre>
+
 </div>
 
 
@@ -141,14 +146,14 @@ Na próxima versão do Rails você também poderá incluir inflexões para o mé
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-07-03 00:00:00 -0300" pubdate  updated >Jul 3<span>rd</span>, 2008</time>
+<time datetime="2008-07-03 00:00:00 -0300" pubdate  updated > 3 de Julho de 2008</time>
 
 
 

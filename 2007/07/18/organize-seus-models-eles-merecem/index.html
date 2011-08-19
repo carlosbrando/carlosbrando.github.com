@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Organize Seus Models. Eles Merecem!</h1>
+      <h1 class="entry-title">Organize seus models. Eles merecem!</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2007-07-18 00:00:00 -0300" pubdate  updated >Jul 18<span>th</span>, 2007</time>
+<time datetime="2007-07-18 00:00:00 -0300" pubdate  updated >18 de Julho de 2007</time>
 
 
 </p>
@@ -113,9 +113,18 @@
   </header>
 
 
-<div class="entry-content"><center><img src="http://farm2.static.flickr.com/1131/533400835_1b45f3e3bf.jpg?v=0"></center><br />Eu vi isto em algum blog sobre <b>Rails</b> nacional, mas confesso que n&atilde;o me lembro em qual foi, por isto se voc&ecirc; souber me avisa que coloco o link aqui.
+<div class="entry-content"><center><img src="http://farm2.static.flickr.com/1131/533400835_1b45f3e3bf.jpg?v=0"></center>
+
+
+<br />Eu vi isto em algum blog sobre <b>Rails</b> nacional, mas confesso que n&atilde;o me lembro em qual foi, por isto se voc&ecirc; souber me avisa que coloco o link aqui.
+
+
 <br/><p>Quando se atinge um n&uacute;mero muito grande de <b>models</b> no seu projeto, fica meio dif&iacute;cil encontrar rapidamente o que deseja. Sem contar a falta de organiza&ccedil;&atilde;o que isto gera.</p>
+
+
 <p>A forma mais f&aacute;cil de organizar os models &eacute; usando <b>namespaces</b>. Mas namespaces n&atilde;o era uma solu&ccedil;&atilde;o interessante no meu caso. A melhor op&ccedil;&atilde;o seria dividir meus models em pastas assim:</p>
+
+
 <ul>
 <li>app
 <ul>
@@ -125,17 +134,28 @@
 <li>cache
 <li>database
 <li>tableless </li></ul></li></ul></li></ul>
+
+
 <p>Tinha visto em algum lugar que bastava apenas criar as pastas e mover os arquivos para dentro delas. Mas isto n&atilde;o funciona nas vers&otilde;es 1.2+ do Rails. Se este for o seu caso, &eacute; necess&aacute;rio incluir o seguinte c&oacute;digo em seu arquivo <b>environment.rb</b>:</p>
-[source:ruby]
-  config.load_paths += %W[
-    #{RAILS_ROOT}/app/models/api
-    #{RAILS_ROOT}/app/models/cache
-    #{RAILS_ROOT}/app/models/database
-    #{RAILS_ROOT}/app/models/tableless
-  ]
-[/source]
+
+
+<p>[source:ruby]
+  config.load_paths += %W[</p>
+
+<pre><code>#{RAILS_ROOT}/app/models/api
+#{RAILS_ROOT}/app/models/cache
+#{RAILS_ROOT}/app/models/database
+#{RAILS_ROOT}/app/models/tableless
+</code></pre>
+
+<p>  ]
+[/source]</p>
+
 <p>Inclua o c&oacute;digo acima dentro do bloco <b>Rails::Initializer.run</b>.</p>
+
+
 <p>Agora sim, meu models ficaram organizados!</p>
+
 </div>
 
 
@@ -144,14 +164,14 @@
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2007-07-18 00:00:00 -0300" pubdate  updated >Jul 18<span>th</span>, 2007</time>
+<time datetime="2007-07-18 00:00:00 -0300" pubdate  updated >18 de Julho de 2007</time>
 
 
 

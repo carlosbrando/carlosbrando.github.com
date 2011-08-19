@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Colocando Links Para Redes Sociais No Seu Projeto Rails</h1>
+      <h1 class="entry-title">Colocando links para redes sociais no seu projeto Rails</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2007-06-25 00:00:00 -0300" pubdate  updated >Jun 25<span>th</span>, 2007</time>
+<time datetime="2007-06-25 00:00:00 -0300" pubdate  updated >25 de Junho de 2007</time>
 
 
 </p>
@@ -113,46 +113,55 @@
   </header>
 
 
-<div class="entry-content">Vi esta dica no blog do <strong><a href="http://www.igvita.com/blog/2006/10/20/adding-social-bookmarks-in-rails/">Ilya  Grigorik</a></strong>.
+<div class="entry-content"><p>Vi esta dica no blog do <strong><a href="http://www.igvita.com/blog/2006/10/20/adding-social-bookmarks-in-rails/">Ilya  Grigorik</a></strong>.</p>
 
-O c&oacute;digo:
+<p>O c&oacute;digo:
 [source:ruby]
 &lt;%  current_uri = u(request.protocol &lt;&lt; request.host_with_port &lt;&lt; request.request_uri)
-title = u(@title)
+title = u(@title)</p>
 
-bookmarklets = {
+<p>bookmarklets = {
 :delicious =&gt;   [&#8216;del.icio.us&#8217;, &#8216;delicious.gif&#8217; ,&#8217;http://del.icio.us/post?url=&amp;title=&#8217;],
 :digg =&gt;        [&#8216;digg it&#8217;, &#8216;digg.gif&#8217;, &#8216;http://digg.com/submit?phase=2&amp;url=&amp;title=&#8217;],
-:spurl =&gt;       [&#8216;spurl&#8217;, &#8216;spurl.gif&#8217;, &#8216;http://www.spurl.net/spurl.php?title=&amp;url=&#8217;],
-#  :wists =&gt;       [&#8216;wists&#8217;, &#8216;wists.gif&#8217;, &#8216;http://wists.com/r.php?c=&amp;r=&amp;title=&#8217;],
-:simpy =&gt;       [&#8216;simpy&#8217;, &#8216;simpy.gif&#8217;, &#8216;http://www.simpy.com/simpy/LinkAdd.do?href=&amp;title=&#8217;],
-#  :newsvine =&gt;    [&#8216;newsvine&#8217;, &#8216;newsvine.gif&#8217;, &#8216;http://www.newsvine.com/_tools/seed&amp;save?u=&amp;h=&#8217;],
-:blinklist =&gt;   [&#8216;blinklist&#8217;, &#8216;blinklist.gif&#8217;, &#8216;http://www.blinklist.com/index.php?Action=Blink/addblink.php&amp;Description=&amp;Url=&amp;Title=&#8217;],
+:spurl =&gt;       [&#8216;spurl&#8217;, &#8216;spurl.gif&#8217;, &#8216;http://www.spurl.net/spurl.php?title=&amp;url=&#8217;],</p>
+
+<h1>:wists =&gt;       [&#8216;wists&#8217;, &#8216;wists.gif&#8217;, &#8216;http://wists.com/r.php?c=&amp;r=&amp;title=&#8217;],</h1>
+
+<p>:simpy =&gt;       [&#8216;simpy&#8217;, &#8216;simpy.gif&#8217;, &#8216;http://www.simpy.com/simpy/LinkAdd.do?href=&amp;title=&#8217;],</p>
+
+<h1>:newsvine =&gt;    [&#8216;newsvine&#8217;, &#8216;newsvine.gif&#8217;, &#8216;http://www.newsvine.com/_tools/seed&amp;save?u=&amp;h=&#8217;],</h1>
+
+<p>:blinklist =&gt;   [&#8216;blinklist&#8217;, &#8216;blinklist.gif&#8217;, &#8216;http://www.blinklist.com/index.php?Action=Blink/addblink.php&amp;Description=&amp;Url=&amp;Title=&#8217;],
 :furl =&gt;        [&#8216;furl&#8217;, &#8216;furl.gif&#8217;, &#8216;http://www.furl.net/storeIt.jsp?u=&amp;t=&#8217;],
-:reddit =&gt;      [&#8216;reddit&#8217;, &#8216;reddit.gif&#8217;, &#8216;http://reddit.com/submit?url=&amp;title=&#8217;],
-#  :fark =&gt;        [&#8216;fark&#8217;,&#8217;fark.gif&#8217;, &#8216;http://cgi.fark.com/cgi/fark/edit.pl?new_url=&amp;new_comment=&amp;linktype=&#8217;],
-:blogmarks =&gt;   [&#8216;blogmarks&#8217;, &#8216;blogmarks.gif&#8217;, &#8216;http://blogmarks.net/my/new.php?mini=1&amp;simple=1&amp;url=&amp;title=&#8217;],
-:yahoo =&gt;       [&#8216;yahoo&#8217;, &#8216;yahoo.gif&#8217;, &#8216;http://myweb2.search.yahoo.com/myresults/bookmarklet?u=&amp;t=&#8217;],
-#  :smarking =&gt;    [&#8216;smarking&#8217;, &#8216;smarking.gif&#8217;, &#8216;http://smarking.com&#8217;],
-#  :segnalo =&gt;     [&#8216;segnalo&#8217;, &#8216;segnalo.gif&#8217;, &#8216;http://segnalo.com/post.html.php?url=&amp;title=&#8217;],
-:magnolia =&gt;    [&#8216;magnolia&#8217;, &#8216;magnolia.gif&#8217;, &#8216;http://ma.gnolia.com/bookmarklet/add?url=&amp;title=&#8217;]
-}
+:reddit =&gt;      [&#8216;reddit&#8217;, &#8216;reddit.gif&#8217;, &#8216;http://reddit.com/submit?url=&amp;title=&#8217;],</p>
 
-%&gt;
+<h1>:fark =&gt;        [&#8216;fark&#8217;,&#8217;fark.gif&#8217;, &#8216;http://cgi.fark.com/cgi/fark/edit.pl?new_url=&amp;new_comment=&amp;linktype=&#8217;],</h1>
 
-&lt;% bookmarklets.each_value { |bookmarklet|
-bookmarklet[2].gsub!(/\{\{url\}\}/, current_uri)
-bookmarklet[2].gsub!(/(\{\{url_encoded_title\}\})|(\{\{title\}\})/, title) -%&gt;<a href="http://www.nomedojogo.com/wp-admin/%3C%=%20bookmarklet%5B-1%5D%20%%3E" title="&lt;%= bookmarklet[0] %&gt;:&lt;%= title %&gt;">
+<p>:blogmarks =&gt;   [&#8216;blogmarks&#8217;, &#8216;blogmarks.gif&#8217;, &#8216;http://blogmarks.net/my/new.php?mini=1&amp;simple=1&amp;url=&amp;title=&#8217;],
+:yahoo =&gt;       [&#8216;yahoo&#8217;, &#8216;yahoo.gif&#8217;, &#8216;http://myweb2.search.yahoo.com/myresults/bookmarklet?u=&amp;t=&#8217;],</p>
+
+<h1>:smarking =&gt;    [&#8216;smarking&#8217;, &#8216;smarking.gif&#8217;, &#8216;http://smarking.com&#8217;],</h1>
+
+<h1>:segnalo =&gt;     [&#8216;segnalo&#8217;, &#8216;segnalo.gif&#8217;, &#8216;http://segnalo.com/post.html.php?url=&amp;title=&#8217;],</h1>
+
+<p>:magnolia =&gt;    [&#8216;magnolia&#8217;, &#8216;magnolia.gif&#8217;, &#8216;http://ma.gnolia.com/bookmarklet/add?url=&amp;title=&#8217;]
+}</p>
+
+<p>%&gt;</p>
+
+<p>&lt;% bookmarklets.each_value { |bookmarklet|
+bookmarklet[2].gsub!(/{{url}}/, current_uri)
+bookmarklet[2].gsub!(/({{url_encoded_title}})|({{title}})/, title) -%&gt;<a href="http://www.nomedojogo.com/wp-admin/%3C%=%20bookmarklet%5B-1%5D%20%%3E" title="&lt;%= bookmarklet[0] %&gt;:&lt;%= title %&gt;">
 <img src="http://www.nomedojogo.com/images/social/%3C%=%20bookmarklet%5B1%5D%20%%3E" alt="&lt;%= bookmarklet[0] %&gt;" /> &lt;%= bookmarklet[0] %&gt;
-</a>
+</a></p>
 
-&lt;% } %&gt;
+<p>&lt;% } %&gt;</p>
 
-[/source]
+<p>[/source]</p>
 
-Para funcionar do jeito que est&aacute;, basta ter uma vari&aacute;vel <strong>@title</strong> com o t&iacute;tulo da sua p&aacute;gina.
+<p>Para funcionar do jeito que est&aacute;, basta ter uma vari&aacute;vel <strong>@title</strong> com o t&iacute;tulo da sua p&aacute;gina.</p>
 
-Para pegar os <strong>&iacute;cones </strong>e ver o artigo original, <a href="http://www.igvita.com/blog/2006/10/20/adding-social-bookmarks-in-rails/">clique aqui</a>.
+<p>Para pegar os <strong>&iacute;cones </strong>e ver o artigo original, <a href="http://www.igvita.com/blog/2006/10/20/adding-social-bookmarks-in-rails/">clique aqui</a>.</p>
 </div>
 
 
@@ -161,14 +170,14 @@ Para pegar os <strong>&iacute;cones </strong>e ver o artigo original, <a href="h
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2007-06-25 00:00:00 -0300" pubdate  updated >Jun 25<span>th</span>, 2007</time>
+<time datetime="2007-06-25 00:00:00 -0300" pubdate  updated >25 de Junho de 2007</time>
 
 
 

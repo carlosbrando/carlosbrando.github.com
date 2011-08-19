@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-02-22 00:00:00 -0300" pubdate  updated >Feb 22<span>nd</span>, 2008</time>
+<time datetime="2008-02-22 00:00:00 -0300" pubdate  updated >22 de Fevereiro de 2008</time>
 
 
 </p>
@@ -113,21 +113,25 @@
   </header>
 
 
-<div class="entry-content">Caramba! Desta vez acho que ficou legal. Interessante como algo que criei para meu uso pessoal pode ter mudado tanto à partir do momento que liberei como um plugin.
+<div class="entry-content"><p>Caramba! Desta vez acho que ficou legal. Interessante como algo que criei para meu uso pessoal pode ter mudado tanto à partir do momento que liberei como um plugin.</p>
 
-Mas acredito que desta vez cheguei à versão definitiva. Esqueça tudo que você sabe sobre este plugin. Vamos começar novamente. Para ter suas URLs totalmente em português sem precisar alterar o seu código já existente, ou deixar tudo meio português/meio inglês. Simplesmente inclua estas linhas no seu arquivo <em>routes.rb</em>:
+<p>Mas acredito que desta vez cheguei à versão definitiva. Esqueça tudo que você sabe sobre este plugin. Vamos começar novamente. Para ter suas URLs totalmente em português sem precisar alterar o seu código já existente, ou deixar tudo meio português/meio inglês. Simplesmente inclua estas linhas no seu arquivo <em>routes.rb</em>:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>aliases <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>resources</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>posts</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>artigos<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
   <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>comments</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>comentarios<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
 
 map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>aliases <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>actions</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>new</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>novo<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>edit</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>editar<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
   <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>logout</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>sair<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span></pre>
-Pronto!
 
-O detalhe é que tudo que estiver DEPOIS destas linhas usará esta configuração como padrão. Então se tiver algo onde você não queira usar a tradução, coloque ANTES destas duas linhas.
 
-Outro ponto importante é que apenas a opção <code>:as</code> continua valendo para o <code>map.resources</code>, no caso de você querer sobrescrever um nome no <code>map.aliases :resources</code>.
+<p>Pronto!</p>
 
-Veja como ficou o meu <em>routes.rb</em> com todas as URLs em português:
+<p>O detalhe é que tudo que estiver DEPOIS destas linhas usará esta configuração como padrão. Então se tiver algo onde você não queira usar a tradução, coloque ANTES destas duas linhas.</p>
+
+<p>Outro ponto importante é que apenas a opção <code>:as</code> continua valendo para o <code>map.resources</code>, no caso de você querer sobrescrever um nome no <code>map.aliases :resources</code>.</p>
+
+<p>Veja como ficou o meu <em>routes.rb</em> com todas as URLs em português:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">ActionController</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">Routing</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">Routes</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>draw <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">map</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
   map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>aliases <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>resources</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>posts</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> "artigos"<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
     <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>comments</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> "comentarios"
@@ -142,9 +146,11 @@ Veja como ficou o meu <em>routes.rb</em> com todas as URLs em português:
 
   map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>posts</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>has_many</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>comments</span>
 <span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-Para detalhes completos sobre como instalar e usar acesse a página do projeto no menu ao lado, ou <a href="http://www.nomedojogo.com/559/">clique aqui</a>.
 
-Qualquer dúvida, usem os comentários!
+
+<p>Para detalhes completos sobre como instalar e usar acesse a página do projeto no menu ao lado, ou <a href="http://www.nomedojogo.com/559/">clique aqui</a>.</p>
+
+<p>Qualquer dúvida, usem os comentários!</p>
 </div>
 
 
@@ -153,14 +159,14 @@ Qualquer dúvida, usem os comentários!
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-02-22 00:00:00 -0300" pubdate  updated >Feb 22<span>nd</span>, 2008</time>
+<time datetime="2008-02-22 00:00:00 -0300" pubdate  updated >22 de Fevereiro de 2008</time>
 
 
 

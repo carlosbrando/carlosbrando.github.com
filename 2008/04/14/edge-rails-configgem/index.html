@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-04-14 00:00:00 -0300" pubdate  updated >Apr 14<span>th</span>, 2008</time>
+<time datetime="2008-04-14 00:00:00 -0300" pubdate  updated >14 de Abril de 2008</time>
 
 
 </p>
@@ -113,27 +113,39 @@
   </header>
 
 
-<div class="entry-content">Também falamos disto no <a href="http://www.nomedojogo.com/2008/04/07/rails-podcast-brasil-episodio-12/">podcast #12</a>. No Rails 2.1 teremos outro problema que dá dor de cabeça nos desenvolvedores resolvido.
+<div class="entry-content"><p>Também falamos disto no <a href="http://www.nomedojogo.com/2008/04/07/rails-podcast-brasil-episodio-12/">podcast #12</a>. No Rails 2.1 teremos outro problema que dá dor de cabeça nos desenvolvedores resolvido.</p>
 
-Toda vez que você entra em um projeto novo, existe uma sequência inicial que precisa ser seguida, e os dois primeiros passos são: baixar o fonte na sua máquina e instalar todos os gems necessários. Este segundo passo é especialmente chato.
+<p>Toda vez que você entra em um projeto novo, existe uma sequência inicial que precisa ser seguida, e os dois primeiros passos são: baixar o fonte na sua máquina e instalar todos os gems necessários. Este segundo passo é especialmente chato.</p>
 
-Era chato, porque agora no Rails podemos usar o novo recurso <code>config.gem</code>. No arquivo <code>environment.rb</code> você &#8220;deve&#8221; adicionar quais gems seu projeto depende, assim:
+<p>Era chato, porque agora no Rails podemos usar o novo recurso <code>config.gem</code>. No arquivo <code>environment.rb</code> você &#8220;deve&#8221; adicionar quais gems seu projeto depende, assim:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>gem <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>bj<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
 
 config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>gem <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>hpricot<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>version</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>0.6<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
                       <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>source</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>http://code.whytheluckystiff.net<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
 
 config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>gem <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>aws-s3<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>lib</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>aws/s3<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span></span></pre>
-Depois sua equipe, ou você mesmo, pode instalar todas as dependências de uma só vez com o comando:
+
+
+<p>Depois sua equipe, ou você mesmo, pode instalar todas as dependências de uma só vez com o comando:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Instala todos os gems listados
 </span>rake gems<span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>install</span></span></pre>
-Também é possível listar quais gems estão sendo usados no projeto executando:
+
+
+<p>Também é possível listar quais gems estão sendo usados no projeto executando:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Lista todos os gems dependentes
 </span>rake gems</span></pre>
-E se algum dos gems tiver um arquivo <code>rails/init.rb</code> e você quiser <a href="http://www.nomedojogo.com/2008/04/09/edge-rails-gems-podem-ser-plugins/">levar o gem junto com sua aplicação</a>, rode:
+
+
+<p>E se algum dos gems tiver um arquivo <code>rails/init.rb</code> e você quiser <a href="http://www.nomedojogo.com/2008/04/09/edge-rails-gems-podem-ser-plugins/">levar o gem junto com sua aplicação</a>, rode:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Copia o gem especifícado para vendor/gems/nome_do_gem-x.x.x
 </span>rake gems<span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>unpack</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">GEM</span><span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span>nome_do_gem</span></pre>
-E o gem será copiado para o diretório <code>vendor/gems/gem_name-x.x.x</code>.
+
+
+<p>E o gem será copiado para o diretório <code>vendor/gems/gem_name-x.x.x</code>.</p>
 </div>
 
 
@@ -142,14 +154,14 @@ E o gem será copiado para o diretório <code>vendor/gems/gem_name-x.x.x</code>.
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-04-14 00:00:00 -0300" pubdate  updated >Apr 14<span>th</span>, 2008</time>
+<time datetime="2008-04-14 00:00:00 -0300" pubdate  updated >14 de Abril de 2008</time>
 
 
 

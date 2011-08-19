@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Edge Rails: Erro Ao Usar O Método End_of_quarter</h1>
+      <h1 class="entry-title">Edge Rails: Erro ao usar o método end_of_quarter</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-06-03 00:00:00 -0300" pubdate  updated >Jun 3<span>rd</span>, 2008</time>
+<time datetime="2008-06-03 00:00:00 -0300" pubdate  updated > 3 de Junho de 2008</time>
 
 
 </p>
@@ -113,25 +113,27 @@
   </header>
 
 
-<div class="entry-content">Nem bem saiu o <a href="http://www.nomedojogo.com/2008/06/01/agora-e-oficial-ruby-on-rails-21/">Rails 2.1</a> e já foi encontrado um erro sério. Entre no <strong>irb</strong> e tente rodar isto:
+<div class="entry-content"><p>Nem bem saiu o <a href="http://www.nomedojogo.com/2008/06/01/agora-e-oficial-ruby-on-rails-21/">Rails 2.1</a> e já foi encontrado um erro sério. Entre no <strong>irb</strong> e tente rodar isto:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Date</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">2008</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">5</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">31</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>end_of_quarter</span></pre>
 
-<strong>ERRO!</strong>
 
-Por que? A implementação do método <strong>end_of_quarter</strong> foi feita da maneira errada, ele avança até o último mês do trimestre e depois pega último dia. O problema é que ele apenas avança o mês, e como estou partindo do dia 31 de maio, ele tentar criar uma nova instância do objeto <strong>Date</strong> para 31 de junho, que não existe. Com o objeto <strong>Time</strong> não é disparado uma exceção, mas ele retorna a data errada: 31 de <strong>julho</strong>.
+<p><strong>ERRO!</strong></p>
 
-No Edge Rails isto já foi corrigido, mas quem estiver usando o Rails 2.1 vai ter este problema.
+<p>Por que? A implementação do método <strong>end_of_quarter</strong> foi feita da maneira errada, ele avança até o último mês do trimestre e depois pega último dia. O problema é que ele apenas avança o mês, e como estou partindo do dia 31 de maio, ele tentar criar uma nova instância do objeto <strong>Date</strong> para 31 de junho, que não existe. Com o objeto <strong>Time</strong> não é disparado uma exceção, mas ele retorna a data errada: 31 de <strong>julho</strong>.</p>
 
-Muito cuidado, porque este erro só ocorrerá se usarmos o método <strong>end_of_quarter</strong> nos dias 31 de maio, julho e agosto. Então&#8230; muito cuidado.
+<p>No Edge Rails isto já foi corrigido, mas quem estiver usando o Rails 2.1 vai ter este problema.</p>
 
-Para quem não gosta de viver perigosamente usando o edge rails, e também não quer deixar sua aplicação com um erro que pode aparecer de uma hora para a outra, eu criei um plugin com o código que corrige o bug. Na verdade, toda vez que alguma correção sair vou tentar manter este plugin atualizado.
+<p>Muito cuidado, porque este erro só ocorrerá se usarmos o método <strong>end_of_quarter</strong> nos dias 31 de maio, julho e agosto. Então&#8230; muito cuidado.</p>
 
-Para instalar:
+<p>Para quem não gosta de viver perigosamente usando o edge rails, e também não quer deixar sua aplicação com um erro que pode aparecer de uma hora para a outra, eu criei um plugin com o código que corrige o bug. Na verdade, toda vez que alguma correção sair vou tentar manter este plugin atualizado.</p>
+
+<p>Para instalar:</p>
 
 <pre class="textmate-source"><span class="source source_shell">./script/plugin install git://github.com/carlosbrando/rails21_fixes.git</span></pre>
 
-Gostou? Que tal me <a href="http://www.workingwithrails.com/recommendation/new/person/8137-carlos-brando">recomendar no WWR</a>. É só <a href="http://www.workingwithrails.com/recommendation/new/person/8137-carlos-brando">clicar aqui</a> e pronto!
+
+<p>Gostou? Que tal me <a href="http://www.workingwithrails.com/recommendation/new/person/8137-carlos-brando">recomendar no WWR</a>. É só <a href="http://www.workingwithrails.com/recommendation/new/person/8137-carlos-brando">clicar aqui</a> e pronto!</p>
 </div>
 
 
@@ -140,14 +142,14 @@ Gostou? Que tal me <a href="http://www.workingwithrails.com/recommendation/new/p
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-06-03 00:00:00 -0300" pubdate  updated >Jun 3<span>rd</span>, 2008</time>
+<time datetime="2008-06-03 00:00:00 -0300" pubdate  updated > 3 de Junho de 2008</time>
 
 
 

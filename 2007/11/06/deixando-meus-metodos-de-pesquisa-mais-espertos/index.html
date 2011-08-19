@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Deixando Meus Métodos De Pesquisa Mais Espertos</h1>
+      <h1 class="entry-title">Deixando meus métodos de pesquisa mais espertos</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2007-11-06 00:00:00 -0200" pubdate  updated >Nov 6<span>th</span>, 2007</time>
+<time datetime="2007-11-06 00:00:00 -0200" pubdate  updated > 6 de Novembro de 2007</time>
 
 
 </p>
@@ -113,14 +113,18 @@
   </header>
 
 
-<div class="entry-content"><img src="http://www.nomedojogo.com/wp-content/uploads/2007/11/1858685882_35f2f01bca.jpg" alt="1858685882_35f2f01bca.jpg" />
+<div class="entry-content"><p><img src="http://www.nomedojogo.com/wp-content/uploads/2007/11/1858685882_35f2f01bca.jpg" alt="1858685882_35f2f01bca.jpg" /></p>
 
-Imagine o seguinte m&eacute;todo:
+<p>Imagine o seguinte m&eacute;todo:</p>
+
 <pre>
 def count_users(type)
   User.count(:all, :conditions =&gt; ["type = ?", type])
 end</pre>
-&Eacute; um m&eacute;todo simples, que ir&aacute; me retornar a quantidade de usu&aacute;rios de um determinado tipo. Agora, vamos testar nosso m&eacute;todo (preste aten&ccedil;&atilde;o aos comandos <strong>SQL</strong> gerados):
+
+
+<p>&Eacute; um m&eacute;todo simples, que ir&aacute; me retornar a quantidade de usu&aacute;rios de um determinado tipo. Agora, vamos testar nosso m&eacute;todo (preste aten&ccedil;&atilde;o aos comandos <strong>SQL</strong> gerados):</p>
+
 <pre>
 &gt;&gt; count_users(1)
 =&gt; 2
@@ -129,19 +133,28 @@ SELECT count(*) AS count_all FROM users WHERE (type = 1)
 &gt;&gt; count_users(2)
 =&gt; 5
 SELECT count(*) AS count_all FROM users WHERE (type = 2)</pre>
-Ok, at&eacute; aqui tudo funciona perfeitamente, mas e se eu desejasse contar todos os usu&aacute;rios que tivessem a coluna <strong>type</strong> com o valor <strong>NULL</strong>?
+
+
+<p>Ok, at&eacute; aqui tudo funciona perfeitamente, mas e se eu desejasse contar todos os usu&aacute;rios que tivessem a coluna <strong>type</strong> com o valor <strong>NULL</strong>?</p>
+
 <pre>
 &gt;&gt; count_users(nil)
 =&gt; 0
 SELECT count(*) AS count_all FROM users WHERE (type = NULL)</pre>
-Opa, eu tenho um registro no meu banco com o valor <strong>NULL</strong>, mas o meu m&eacute;todo retornou zero. O que saiu errado? Note a <strong>query</strong> gerado pelo comando, <strong>type = NULL </strong>est&aacute; errado, dever&iacute;amos usar <strong>type IS NULL</strong>.
 
-Preciso alterar meu m&eacute;todo:
+
+<p>Opa, eu tenho um registro no meu banco com o valor <strong>NULL</strong>, mas o meu m&eacute;todo retornou zero. O que saiu errado? Note a <strong>query</strong> gerado pelo comando, <strong>type = NULL </strong>est&aacute; errado, dever&iacute;amos usar <strong>type IS NULL</strong>.</p>
+
+<p>Preciso alterar meu m&eacute;todo:</p>
+
 <pre>
 def count_users(type)
   User.count(:all, :conditions =&gt; {:type =&gt; type})
 end</pre>
-Note que alterei a forma como o par&acirc;metro <strong>:conditions</strong> estava sendo usado. Neste caso especifico, meu m&eacute;todo ficou muito mais robusto. Veja alguns exemplos:
+
+
+<p>Note que alterei a forma como o par&acirc;metro <strong>:conditions</strong> estava sendo usado. Neste caso especifico, meu m&eacute;todo ficou muito mais robusto. Veja alguns exemplos:</p>
+
 <pre>
 &gt;&gt; count_users(1)
 =&gt; 2
@@ -162,7 +175,9 @@ SELECT count(*) AS count_all FROM users WHERE (users."type" IN (1,3))
 &gt;&gt; count_users(1..3)
 =&gt; 8
 SELECT count(*) AS count_all FROM users WHERE (users."type" BETWEEN 1 AND 3)</pre>
-Note que agora, mesmo passando <strong>nil</strong> ou um <strong>array</strong> para o m&eacute;todo, ele criar&aacute; a <strong>query</strong> de pesquisa da forma correta de acordo com o tipo do objeto usado.
+
+
+<p>Note que agora, mesmo passando <strong>nil</strong> ou um <strong>array</strong> para o m&eacute;todo, ele criar&aacute; a <strong>query</strong> de pesquisa da forma correta de acordo com o tipo do objeto usado.</p>
 </div>
 
 
@@ -171,14 +186,14 @@ Note que agora, mesmo passando <strong>nil</strong> ou um <strong>array</strong>
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2007-11-06 00:00:00 -0200" pubdate  updated >Nov 6<span>th</span>, 2007</time>
+<time datetime="2007-11-06 00:00:00 -0200" pubdate  updated > 6 de Novembro de 2007</time>
 
 
 

@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Edge Rails: Definindo O Separador De Palavras Em Mensagens De Erro</h1>
+      <h1 class="entry-title">Edge Rails: Definindo o separador de palavras em mensagens de erro</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2009-01-08 00:00:00 -0200" pubdate  updated >Jan 8<span>th</span>, 2009</time>
+<time datetime="2009-01-08 00:00:00 -0200" pubdate  updated > 8 de Janeiro de 2009</time>
 
 
 </p>
@@ -113,11 +113,12 @@
   </header>
 
 
-<div class="entry-content">Este novo recurso acrescentado ao Rails dificilmente será usado por nós, mas vale a pela curiosidade. Foi acrescentado ao ActiveRecord um novo parâmetro de configuração para internacionalização que permite definir o separador de palavras em mensagens de erro.
+<div class="entry-content"><p>Este novo recurso acrescentado ao Rails dificilmente será usado por nós, mas vale a pela curiosidade. Foi acrescentado ao ActiveRecord um novo parâmetro de configuração para internacionalização que permite definir o separador de palavras em mensagens de erro.</p>
 
-Como?
+<p>Como?</p>
 
-No inglês e no português não faz o menor sentido, mas pegue o seguinte arquivo de internacionalização criado para um projeto em japonês:
+<p>No inglês e no português não faz o menor sentido, mas pegue o seguinte arquivo de internacionalização criado para um projeto em japonês:</p>
+
 <pre class="textmate-source"><span class="source source_yaml"><span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">ja-JP</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
 </span>  <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">activerecord</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
 </span>    <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">models</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
@@ -129,13 +130,16 @@ No inglês e no português não faz o menor sentido, mas pegue o seguinte arquiv
 </span>      <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">messages</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
 </span>        <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">blank</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span> </span>を入力してください。
 </span></pre>
-Quando o atributo <code>name</code> do objeto <code>User</code> estiver em branco a seguinte mensagem será devolvida pelo AR:
 
-名前 を入力してください。
 
-Talvez você não tenha percebido mas existe um espaço em branco entre o nome do atributo e a mensagem de erro, o que não está certo no japonês, onde as palavras normalmente não são separadas por espaços.
+<p>Quando o atributo <code>name</code> do objeto <code>User</code> estiver em branco a seguinte mensagem será devolvida pelo AR:</p>
 
-Com este novo recurso um Railer japonês pode configurar em seu arquivo:
+<p>名前 を入力してください。</p>
+
+<p>Talvez você não tenha percebido mas existe um espaço em branco entre o nome do atributo e a mensagem de erro, o que não está certo no japonês, onde as palavras normalmente não são separadas por espaços.</p>
+
+<p>Com este novo recurso um Railer japonês pode configurar em seu arquivo:</p>
+
 <pre class="textmate-source"><span class="source source_yaml"><span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">ja-JP</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
 </span>  <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">activerecord</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
 </span>    <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">errors</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
@@ -143,13 +147,16 @@ Com este novo recurso um Railer japonês pode configurar em seu arquivo:
 </span>        <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> Sets the separator between the words
 </span>        <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">separator</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span> </span><span class="string string_quoted string_quoted_double string_quoted_double_yaml"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_yaml">"</span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_yaml">"</span></span>
 </span></pre>
-E ter seguinte mensagem de erro sem espaços separando as palavras:
 
-名前を入力してください。
 
-Curioso ou não?
+<p>E ter seguinte mensagem de erro sem espaços separando as palavras:</p>
+
+<p>名前を入力してください。</p>
+
+<p>Curioso ou não?</p>
 
 <hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.3/3.0 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades acompanhando a série <a href="../category/edge-rails/">Edge Rails</a>.</em>
+
 </div>
 
 
@@ -158,14 +165,14 @@ Curioso ou não?
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2009-01-08 00:00:00 -0200" pubdate  updated >Jan 8<span>th</span>, 2009</time>
+<time datetime="2009-01-08 00:00:00 -0200" pubdate  updated > 8 de Janeiro de 2009</time>
 
 
 

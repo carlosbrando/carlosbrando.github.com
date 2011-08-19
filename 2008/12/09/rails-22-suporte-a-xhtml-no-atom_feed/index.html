@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Rails 2.2: Suporte a XHTML No Atom_feed</h1>
+      <h1 class="entry-title">Rails 2.2: Suporte a XHTML no atom_feed</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-12-09 00:00:00 -0200" pubdate  updated >Dec 9<span>th</span>, 2008</time>
+<time datetime="2008-12-09 00:00:00 -0200" pubdate  updated > 9 de Dezembro de 2008</time>
 
 
 </p>
@@ -113,13 +113,17 @@
   </header>
 
 
-<div class="entry-content">O helper <strong>atom_feed</strong> agora possui um builder interno que permite a criação de XHTML simplesmente acrescentando <strong>:type=&gt;&#8221;xhtml&#8221;</strong> em qualquer elemento <strong>content</strong>, <strong>rights</strong>, <strong>title</strong>, <strong>subtitle</strong> ou <strong>summary</strong>. Assim:
+<div class="entry-content"><p>O helper <strong>atom_feed</strong> agora possui um builder interno que permite a criação de XHTML simplesmente acrescentando <strong>:type=&gt;&#8221;xhtml&#8221;</strong> em qualquer elemento <strong>content</strong>, <strong>rights</strong>, <strong>title</strong>, <strong>subtitle</strong> ou <strong>summary</strong>. Assim:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">entry<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>summary<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>type</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>xhtml<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">xhtml</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
   xhtml<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>p <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>A XHTML summary<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
   xhtml<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>p post<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>body
 <span class="keyword keyword_control keyword_control_ruby">end</span>
 </span></pre>
-Veja como este bloco se encaixa dentro do <strong>atom_feed</strong>:
+
+
+<p>Veja como este bloco se encaixa dentro do <strong>atom_feed</strong>:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">atom_feed <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">feed</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
   feed<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>My great blog!<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
   feed<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>updated<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">((</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>posts</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>first<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>created_at<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">))</span>
@@ -139,11 +143,14 @@ Veja como este bloco se encaixa dentro do <strong>atom_feed</strong>:
     <span class="keyword keyword_control keyword_control_ruby">end</span>
   <span class="keyword keyword_control keyword_control_ruby">end</span>
 <span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-Desta forma o builder interno do <strong>atom_feed</strong> irá incluir o XHTML gerado dentro de uma tag DIV.
 
-Claro que ainda podemos fazer da forma antiga passando todo o HTML dentro de uma string, mas desta forma nosso código fica mais limpo.
+
+<p>Desta forma o builder interno do <strong>atom_feed</strong> irá incluir o XHTML gerado dentro de uma tag DIV.</p>
+
+<p>Claro que ainda podemos fazer da forma antiga passando todo o HTML dentro de uma string, mas desta forma nosso código fica mais limpo.</p>
 
 <hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades do Rails 2.2 no e-book “<a href="../2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">Ruby on Rails - O que há de novo?</a>“.</em>
+
 </div>
 
 
@@ -152,14 +159,14 @@ Claro que ainda podemos fazer da forma antiga passando todo o HTML dentro de uma
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-12-09 00:00:00 -0200" pubdate  updated >Dec 9<span>th</span>, 2008</time>
+<time datetime="2008-12-09 00:00:00 -0200" pubdate  updated > 9 de Dezembro de 2008</time>
 
 
 

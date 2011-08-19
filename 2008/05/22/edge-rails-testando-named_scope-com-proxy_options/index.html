@@ -86,7 +86,7 @@
 </form>
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/archives">Arquivo</a></li>
 </ul>
 
 </nav>
@@ -97,7 +97,7 @@
   
   <header>
     
-      <h1 class="entry-title">Edge Rails: Testando Named_scope Com Proxy_options</h1>
+      <h1 class="entry-title">Edge Rails: Testando named_scope com proxy_options</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
 
 
 
-<time datetime="2008-05-22 00:00:00 -0300" pubdate  updated >May 22<span>nd</span>, 2008</time>
+<time datetime="2008-05-22 00:00:00 -0300" pubdate  updated >22 de Maio de 2008</time>
 
 
 </p>
@@ -113,18 +113,22 @@
   </header>
 
 
-<div class="entry-content">Uma novidade legal no Rails 2.1, que inclusive já foi assunto desta série é o <a href="http://www.nomedojogo.com/2008/04/06/edge-rails-named_scope/"><strong>named_scope</strong></a>. Depois de &#8220;brincar&#8221; um pouco com este recurso, fomos descobrindo que era muito difícil testar se o escopo estava sendo gerado corretamente, principalmente quando usávamos estruturas mais complexas.
+<div class="entry-content"><p>Uma novidade legal no Rails 2.1, que inclusive já foi assunto desta série é o <a href="http://www.nomedojogo.com/2008/04/06/edge-rails-named_scope/"><strong>named_scope</strong></a>. Depois de &#8220;brincar&#8221; um pouco com este recurso, fomos descobrindo que era muito difícil testar se o escopo estava sendo gerado corretamente, principalmente quando usávamos estruturas mais complexas.</p>
 
-Veja um exemplo:
+<p>Veja um exemplo:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Shirt<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
   named_scope <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>colored</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> lambda <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">color</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
     <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>conditions</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>color</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> color <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
   <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
 </span><span class="keyword keyword_control keyword_control_ruby">end</span>
 </span></pre>
-Como criar um teste que valide a geração correta do escopo?
 
-Para facilitar isto foi criado o método <strong>proxy_options</strong>, que permite examinar as opções que estão sendo usadas no <strong>named_scope</strong>. Para testar o exemplo acima, poderíamos fazer assim:
+
+<p>Como criar um teste que valide a geração correta do escopo?</p>
+
+<p>Para facilitar isto foi criado o método <strong>proxy_options</strong>, que permite examinar as opções que estão sendo usadas no <strong>named_scope</strong>. Para testar o exemplo acima, poderíamos fazer assim:</p>
+
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_unit_test"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">ShirtTest<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> Test::Unit</span></span></span>
   <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">test_colored_scope</span></span>
     red_scope <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>conditions</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>colored</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>red<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
@@ -133,6 +137,7 @@ Para facilitar isto foi criado o método <strong>proxy_options</strong>, que per
     assert_equal blue_scope<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="support support_class support_class_ruby">Shirt</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>colored<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>blue<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>scope_options
   <span class="keyword keyword_control keyword_control_ruby">end</span>
 </span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
 </div>
 
 
@@ -141,14 +146,14 @@ Para facilitar isto foi criado o método <strong>proxy_options</strong>, que per
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Carlos Brando</span></span>
+<span class="byline author vcard">Publicado por <span class="fn">Carlos Brando</span></span>
 
       
 
 
 
 
-<time datetime="2008-05-22 00:00:00 -0300" pubdate  updated >May 22<span>nd</span>, 2008</time>
+<time datetime="2008-05-22 00:00:00 -0300" pubdate  updated >22 de Maio de 2008</time>
 
 
 
