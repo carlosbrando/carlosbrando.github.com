@@ -100,6 +100,108 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2008/11/20/rails-22-suporte-a-banco-de-dados-ibm-db-no-gerador-do-rails/">Rails 2.2: Suporte à banco de dados IBM DB no gerador do Rails</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-11-20 00:00:00 -0200" pubdate  updated >20 de Novembro de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Foi adicionado ao generator do Rails a opção <strong>IBM DB</strong> para o banco de dados. Para usá-la basta executar no terminal o seguinte comando ao criar o projeto Rails:</p>
+
+<pre>rails app_name -d ibm_db</pre>
+
+
+<p>Isto criará seu projeto com o seguinte arquivo <strong>database.yml</strong>:</p>
+
+<pre class="textmate-source"><span class="source source_yaml"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> IBM Dataservers
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> Home Page
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> http://rubyforge.org/projects/rubyibm/
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> To install the ibm_db gem:
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> On Linux:
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> Source the db2profile file and set the necessary environment variables:
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> . /home/db2inst1/sqllib/db2profile
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> export IBM_DB_DIR=/opt/ibm/db2/V9.1
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> export IBM_DB_LIB=/opt/ibm/db2/V9.1/lib32
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> Then issue the command: gem install ibm_db
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> On Windows:
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> Issue the command: gem install ibm_db
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> If prompted, select the mswin32 option
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> For more details on the installation refer to http://rubyforge.org/docman/view.php/2361/7682/IBM_DB_GEM.pdf
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> For more details on the connection parameters below refer to:
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> http://rubyibm.rubyforge.org/docs/adapter/0.9.0/rdoc/classes/ActiveRecord/ConnectionAdapters/IBM_DBAdapter.html
+</span>
+<span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">development</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
+</span>  <span class="string string_unquoted string_unquoted_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">adapter<span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span></span> <span class="string string_unquoted string_unquoted_yaml">ibm_db</span></span>
+  <span class="string string_unquoted string_unquoted_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">username<span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span></span> <span class="string string_unquoted string_unquoted_yaml">db2inst1</span></span>
+  <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">password</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
+</span>  <span class="string string_unquoted string_unquoted_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">database<span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span></span> <span class="string string_unquoted string_unquoted_yaml">app_name_dev</span></span>
+  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>schema: db2inst1
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>host: localhost
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>port: 50000
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>account: my_account
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>app_user: my_app_user
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>application: my_application
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>workstation: my_workstation
+</span>
+<span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">test</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
+</span>  <span class="string string_unquoted string_unquoted_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">adapter<span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span></span> <span class="string string_unquoted string_unquoted_yaml">ibm_db</span></span>
+  <span class="string string_unquoted string_unquoted_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">username<span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span></span> <span class="string string_unquoted string_unquoted_yaml">db2inst1</span></span>
+  <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">password</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
+</span>  <span class="string string_unquoted string_unquoted_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">database<span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span></span> <span class="string string_unquoted string_unquoted_yaml">app_name_tst</span></span>
+  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>schema: db2inst1
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>host: localhost
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>port: 50000
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>account: my_account
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>app_user: my_app_user
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>application: my_application
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>workstation: my_workstation
+</span>
+<span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">production</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
+</span>  <span class="string string_unquoted string_unquoted_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">adapter<span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span></span> <span class="string string_unquoted string_unquoted_yaml">ibm_db</span></span>
+  <span class="string string_unquoted string_unquoted_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">username<span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span></span> <span class="string string_unquoted string_unquoted_yaml">db2inst1</span></span>
+  <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">password</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
+</span>  <span class="string string_unquoted string_unquoted_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">database<span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span></span> <span class="string string_unquoted string_unquoted_yaml">app_name_prd</span></span>
+  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>schema: db2inst1
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>host: localhost
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>port: 50000
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>account: my_account
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>app_user: my_app_user
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>application: my_application
+</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span>workstation: my_workstation</span></span></pre>
+
+
+<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades do Rails 2.2 no e-book “<a href="../2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">Ruby on Rails - O que há de novo?</a>“.</em>
+
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/11/20/rails-22-suporte-a-banco-de-dados-ibm-db-no-gerador-do-rails/">Leia mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/11/20/rails-22-alterada-a-mensagem-do-metodo-assert_difference/">Rails 2.2: Alterada a mensagem do método assert_difference</a></h1>
     
     
@@ -620,70 +722,6 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/11/14/rails-22-tornando-atributos-do-activerecord-privados/">Rails 2.2: Tornando atributos do ActiveRecord privados</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-<time datetime="2008-11-14 00:00:00 -0200" pubdate  updated >14 de Novembro de 2008</time>
-
-
-</p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>No Rails 2.2 você poderá definir atributos do <strong>ActiveRecord</strong> como <strong>private</strong>. Como estes atributos são criados via metaprogramação, até agora isto era impossível.</p>
-
-<p>Para entender como isto funcionará, vamos tornar o atributo <strong>name</strong> da classe <strong>User</strong> privado:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails source_ruby_rails_shoulda"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">User<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
-
-  <span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">private</span>
-  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">name</span></span>
-    <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>I'm private<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
-  <span class="keyword keyword_control keyword_control_ruby">end</span>
-
-</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-
-
-<p>Agora ao tentar recuperar o valor do atributo <strong>name</strong>:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">user <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>first
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; #&lt;User id: 1, name: "teste", created_at: "2008-09-26 21:55:23", updated_at: "2008-09-26 21:55:23"&gt;
-</span>
-user<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>name
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; NoMethodError: undefined method `NoMethodError' for #&lt;User:0x234df08&gt;
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>    from /Users/carlosbrando/Projects/sandbox/edge/vendor/rails/activerecord/lib/active_record/attribute_methods.rb:260:in `method_missing'
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>    from /Users/carlosbrando/Projects/sandbox/edge/vendor/rails/activerecord/lib/active_record/attribute_methods.rb:236:in `method_missing'
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>    from (irb):3</span></span></pre>
-
-
-<p>Veja que uma exceção <strong>NoMethodError</strong> foi disparada ao executar o método que agora é privado. Por outro lado eu posso alterar o nome do usuário, já que o método <strong>name=</strong> ainda é público.</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">user<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>name <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Carlos<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "Carlos"
-</span></span></pre>
-
-
-<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades do Rails 2.2 no e-book “<a href="../2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">Ruby on Rails - O que há de novo?</a>“.</em>
-
-</div>
-  <footer>
-    <a rel="full-article" href="/2008/11/14/rails-22-tornando-atributos-do-activerecord-privados/">Leia mais &rarr;</a>
-  </footer>
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -714,6 +752,10 @@ user<span class="punctuation punctuation_separator punctuation_separator_method 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/08/19/blogando-como-um-hacker/">Blogando Como Um Hacker</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
       </li>
     
@@ -727,10 +769,6 @@ user<span class="punctuation punctuation_separator punctuation_separator_method 
     
       <li class="post">
         <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro anos de Nome do Jogo</a>
       </li>
     
   </ul>

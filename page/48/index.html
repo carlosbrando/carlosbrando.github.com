@@ -100,6 +100,44 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2008/03/31/edge-rails-uma-nova-velha-forma-de-pesquisar-dados-no-activerecord/">Edge Rails: Uma nova (velha) forma de pesquisar dados no ActiveRecord</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-03-31 00:00:00 -0300" pubdate  updated >31 de Março de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>O ActiveRecord recebeu três novos métodos para pesquisa: <code>all</code>, <code>first</code> e <code>last</code>. Os três métodos são <strong>alias</strong> para os já conhecidos <code>find(:all)</code>, <code>find(:first)</code> e <code>find(:last)</code>.</p>
+
+<p>Em outras palavras, na hora de pesquisar seus dados, agora você poderá fazer assim:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Topic</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>all
+<span class="support support_class support_class_ruby">Topic</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>first
+<span class="support support_class support_class_ruby">Topic</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>last
+<span class="support support_class support_class_ruby">Topic</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>first<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>conditions</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>name = ?<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Chris<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
+
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/03/31/edge-rails-uma-nova-velha-forma-de-pesquisar-dados-no-activerecord/">Leia mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/03/31/edge-rails-adicionada-opcao-de-confirmacao-no-submit_tag/">Edge Rails: Adicionada opção de confirmação no submit_tag</a></h1>
     
     
@@ -471,46 +509,6 @@
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/03/25/edge-rails-o-que-exatamente-o-metodo-findlast-retorna/">Edge Rails: O que exatamente o método find(:last) retorna?</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-<time datetime="2008-03-25 00:00:00 -0300" pubdate  updated >25 de Março de 2008</time>
-
-
-</p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>No ultimo Rails Podcast eu falei sobre a alteração no método <code>find</code> do <code>ActiveRecord</code>, que agora permite usarmos a opção <code>:last</code>.</p>
-
-<p>Então o Akita levantou a questão: &#8220;Como este método é implementado?&#8221;, hmm, err&#8230; Bom, eu resolvi pesquisar e acho que a melhor forma de responder esta pergunta é mostrando um dos seus testes:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">test_find_last</span></span>
-  last  <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Developer</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>last</span>
-  assert_equal last<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="support support_class support_class_ruby">Developer</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>first</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>order</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>id desc<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-
-
-<p>Entendeu?</p>
-</div>
-  <footer>
-    <a rel="full-article" href="/2008/03/25/edge-rails-o-que-exatamente-o-metodo-findlast-retorna/">Leia mais &rarr;</a>
-  </footer>
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -541,6 +539,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/08/19/blogando-como-um-hacker/">Blogando Como Um Hacker</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
       </li>
     
@@ -554,10 +556,6 @@
     
       <li class="post">
         <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro anos de Nome do Jogo</a>
       </li>
     
   </ul>

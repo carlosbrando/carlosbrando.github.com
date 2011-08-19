@@ -100,6 +100,52 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2008/01/31/novidades-no-rails-novo-metodo-label_tag/">Edge Rails: Novo método &#8220;label_tag&#8221;</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-01-31 00:00:00 -0200" pubdate  updated >31 de Janeiro de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/01/79128791_69f2267c76.jpg" alt="79128791_69f2267c76.jpg" /></p>
+
+<p>Estou meio atrasado com a série &#8221;<strong><a href="http://www.nomedojogo.com/category/edge-rails/">Edge Rails</a></strong>&#8221; (preciso mudar este nome&#8230; se alguém tiver alguma sugestão&#8230;), mas vou tentar acelerar e documentar as novidades para a próxima versão do Ruby on Rails.</p>
+
+<p>Eu já falei do método <strong>label</strong> e para que servem os rótulos em HTML em um <a href="http://www.nomedojogo.com/2008/01/16/edge-rails-use-rotulos-nas-suas-paginas/">artigo mais antigo</a>, mas parece que a galera esqueceu de criar um método <strong>label_tag</strong> para os casos mais simples. Mas agora o método já foi criado e incluído no <strong>FormTagHelper</strong>.</p>
+
+<p>Este método funciona exatamente como o outro mas de uma forma mais simplista:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> label_tag <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>nome<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+<span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span>label <span class="keyword keyword_control keyword_control_ruby">for</span><span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>nome<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span><span class="variable variable_other variable_other_constant variable_other_constant_ruby">Nome</span><span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span><span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">/</span>label<span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span>
+
+<span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> label_tag <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>nome<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Seu nome<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+<span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span>label <span class="keyword keyword_control keyword_control_ruby">for</span><span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>nome<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span><span class="variable variable_other variable_other_constant variable_other_constant_ruby">Seu</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">Name</span><span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span><span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">/</span>label<span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span>
+
+<span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> label_tag <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>nome<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_language constant_language_ruby">nil</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>class</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>small_label<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+<span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span>label <span class="keyword keyword_control keyword_control_ruby">for</span><span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>nome<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="keyword keyword_control keyword_control_ruby">class</span><span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>small_label<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span><span class="variable variable_other variable_other_constant variable_other_constant_ruby">Nome</span><span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span><span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">/</span>label<span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span></span></pre>
+
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/01/31/novidades-no-rails-novo-metodo-label_tag/">Leia mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/01/30/rails-podcast-brasil-episodio-3/">Rails Podcast Brasil - Episódio 3</a></h1>
     
     
@@ -600,42 +646,6 @@
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/01/17/mudanca-de-servidor-quase-no-fim/">Mudança de servidor quase no fim</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-<time datetime="2008-01-17 00:00:00 -0200" pubdate  updated >17 de Janeiro de 2008</time>
-
-
-</p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/01/163601614_5ce0afc5bf.jpg" alt="163601614_5ce0afc5bf.jpg" /></p>
-
-<p>Ufa, acho que já foi quase tudo&#8230; Agora só falta terminar o upload das imagens, vídeos e áudios.</p>
-
-<p>Eu não imaginava que seria tão problemática uma simples troca de servidor. O principal problema foi com o banco de dados (MySQL). Mas acho que tudo deve estar certo agora. Se por acaso vocês avistarem algo de errado, alguma imagem faltando ou algum erro, me avisem por favor!</p>
-
-<p>Agora com o servidor novo acredito que não terei mais problemas com quedas devido à  quantidade de acessos e downloads, que estavam derrubando este site.</p>
-</div>
-  <footer>
-    <a rel="full-article" href="/2008/01/17/mudanca-de-servidor-quase-no-fim/">Leia mais &rarr;</a>
-  </footer>
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -666,6 +676,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/08/19/blogando-como-um-hacker/">Blogando Como Um Hacker</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
       </li>
     
@@ -679,10 +693,6 @@
     
       <li class="post">
         <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro anos de Nome do Jogo</a>
       </li>
     
   </ul>

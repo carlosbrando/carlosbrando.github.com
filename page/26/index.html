@@ -100,6 +100,65 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2008/09/05/lancado-o-rails-211-muitas-correcoes-de-bugs/">Rails 2.1.1: Muitas correções de bugs</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-09-05 00:00:00 -0300" pubdate  updated > 5 de Setembro de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Todos estão esperando o Rails 2.2. Mas acabou de sair o <strong>Ruby on Rails 2.1.1</strong> como um release de manutenção.</p>
+
+<p>O principal motivo por trás deste release é a correção da vulnerabilidade de <a href="http://akitaonrails.com/2008/8/23/vulnerabilidade-de-denial-of-service-no-rexml-atualizem-seus-rails">Denial of Service no REXML</a>. Outras correções também foram incluídas nesta versão. Para ver quais foram <a href="http://gist.github.com/8959">clique aqui</a>.</p>
+
+<p>Para atualizar o Rails basta executar no terminal:</p>
+
+<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">gem install rails --version 2.1.1</span></span></pre>
+
+
+<p>DHH também adianta o que nós já sabiamos. Em breve teremos um <strong>beta</strong> da versão <strong>2.2</strong>, assim como aconteceu com o Rails 2.1.</p>
+
+<p>A grande maioria das correções já foram mencionadas neste blog. Para relembrar eu selecionei algumas delas. Clique para ver o que foi alterado em <strong>português</strong>.</p>
+
+<ul>
+    <li><a href="http://www.nomedojogo.com/2008/08/01/edge-rails-define_javascript_functions/">Deprecate define_javascript_functions, javascript_include_tag and friends are much better.</a></li>
+    <li><a href="http://www.nomedojogo.com/2008/07/17/edge-rails-polymorphic_url-agora-e-capaz-de-lidar-com-recursos-singleton/">Fix polymorphic_url with singleton resources.</a></li>
+    <li><a href="http://www.nomedojogo.com/2008/07/09/edge-rails-definindo-como-o-metodo-validates_length_of-deve-funcionar/">Add :tokenizer option to validates_length_of to specify how to split up the attribute string.</a></li>
+    <li><a href="http://www.nomedojogo.com/2008/07/22/edge-rails-tratando-a-opcao-limit-como-bytes/">Always treat integer :limit as byte length.</a></li>
+    <li><a href="http://www.nomedojogo.com/2008/07/21/edge-rails-correcoes-de-bugs/">Partial updates don&#8217;t update lock_version if nothing changed.</a></li>
+    <li><a href="http://www.nomedojogo.com/2008/07/21/edge-rails-correcoes-de-bugs/">Fix column collision with named_scope and :joins.</a></li>
+    <li><a href="http://www.nomedojogo.com/2008/07/07/edge-rails-correcao-nas-tarefas-dbmigratedown-e-up/">db:migrate:down and :up update schema_migrations.</a></li>
+    <li><a href="http://www.nomedojogo.com/2008/07/07/edge-rails-correcao-nas-tarefas-dbmigratedown-e-up/">PostgreSQL: support :conditions =&gt; [&#8216;:foo::integer&#8217;, { :foo =&gt; 1 }] without treating the ::integer typecast as a bind variable.</a></li>
+    <li><a href="http://www.nomedojogo.com/2008/07/04/edge-rails-solucao-de-bug-no-metodo-rename_column/">MySQL: rename_column preserves column defaults.</a></li>
+    <li><a href="http://www.nomedojogo.com/2008/06/27/edge-rails-nova-opcao-from-para-metodos-de-calculo-do-activerecord/">Add :from option to calculations.</a></li>
+    <li><a href="http://www.nomedojogo.com/2008/06/20/edge-rails-nova-opcao-para-associacoes-validate/">Add :validate option to associations to enable/disable the automatic validation of associated models.</a></li>
+    <li><a href="http://www.nomedojogo.com/2008/06/06/edge-rails-stringquestioneer-renomeado-para-stringinquirer/">Added StringQuestioneer for doing things like StringQuestioneer.new(&#8220;production&#8221;).production? # =&gt; true and StringQuestioneer.new(&#8220;production&#8221;).development? # =&gt; false</a></li>
+    <li><a href="http://www.nomedojogo.com/2008/06/03/edge-rails-erro-ao-usar-o-metodo-end_of_quarter/">Fixed Date#end_of_quarter to not blow up on May 31st</a></li>
+    <li><a href="http://www.nomedojogo.com/2008/07/23/edge-rails-correcao-de-bug-no-scriptabout-e-alteracoes-nos-metodos-render_file-e-auto_link/">Fix script/about in production mode.</a></li>
+</ul>
+
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/09/05/lancado-o-rails-211-muitas-correcoes-de-bugs/">Leia mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/09/05/edge-rails-migrationproxy/">Edge Rails: MigrationProxy</a></h1>
     
     
@@ -479,54 +538,6 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/02/edge-rails-fazendo-o-configgem-nao-carregar-o-gem/">Edge Rails: Fazendo o config.gem não carregar o gem</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-<time datetime="2008-09-02 00:00:00 -0300" pubdate  updated > 2 de Setembro de 2008</time>
-
-
-</p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Uma das novidades introduzidas no Rails 2.1 foi o <strong><a href="http://www.nomedojogo.com/2008/04/14/edge-rails-configgem/">config.gem</a></strong>, que nos permitia configurar de quais gems nosso projeto era dependente.</p>
-
-<p>Com isto ganhamos diversas tarefas que facilitaram nosso trabalho, como o <strong>rake gems:install</strong> que instala todas as dependências automaticamente.</p>
-
-<p>Mas tínhamos de tomar alguns cuidados ao configurar as dependências, porque em alguns casos o nome da gem não é necessariamente o nome da biblioteca que o método <strong>require</strong> precisa carregar. Por exemplo, a gem <strong>aws-s3</strong> deve ser carregada com o nome <strong>&#8220;aws/s3&#8221;</strong>, trocando o traço por uma barra invertida. Prevendo este tipo de coisa, foi incluído no <strong>config.gem</strong> a opção <strong>:lib</strong>. Veja como ficaria o caso acima:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>gem <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>aws-s3<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>lib</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>aws/s3<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
-</span></pre>
-
-
-<p>Depois de um tempo surgiu um outro problema, meu projeto depende desta gem, mas eu não quero que ela seja carregada neste momento. Como fazer?</p>
-
-<p>Neste momento nada, mas na próxima versão do Rails poderemos configurar a opção <strong>:lib</strong> como <strong>false</strong> e isto fará com que o Rails não carregue a gem.</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>gem <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>aws-s3<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>lib</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">false</span>
-</span></pre>
-
-
-<p>Mesmo sem carregá-la ela ainda será instalada caso você execute a tarefa <strong>rake gems:install</strong> e estará incluída em qualquer outra tarefa relacionada a gems.</p>
-</div>
-  <footer>
-    <a rel="full-article" href="/2008/09/02/edge-rails-fazendo-o-configgem-nao-carregar-o-gem/">Leia mais &rarr;</a>
-  </footer>
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -557,6 +568,10 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/08/19/blogando-como-um-hacker/">Blogando Como Um Hacker</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
       </li>
     
@@ -570,10 +585,6 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
     
       <li class="post">
         <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro anos de Nome do Jogo</a>
       </li>
     
   </ul>

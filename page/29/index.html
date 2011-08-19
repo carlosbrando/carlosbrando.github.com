@@ -100,6 +100,68 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2008/08/17/edge-rails-uma-forma-mais-simples-de-usar-etags/">Edge Rails: Uma forma mais simples de usar ETags</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-08-17 00:00:00 -0300" pubdate  updated >17 de Agosto de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Se você ainda não sabe o que são ETags, leia o <a href="http://www.nomedojogo.com/2008/08/15/edge-rails-melhorando-a-performance-usando-etags/">último post desta série</a>.</p>
+
+<p>Este recurso já foi efetivamente incluido no branch oficial do Rails, mas junto com ele também ganhamos mais dois novos métodos que devem facilitar a forma como vamos implementar isto em nosso código. Os métodos <strong>etag!</strong> e <strong>last_modified!</strong>.</p>
+
+<p>Veja a implementação destes métodos direto do código fonte do Rails:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Sets the Last-Modified response header. Returns 304 Not Modified if the
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> If-Modified-Since request header is &lt;= last modified.
+</span><span class="meta meta_function meta_function_method meta_function_method_with-arguments meta_function_method_with-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">last_modified!</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">(</span><span class="variable variable_parameter variable_parameter_function variable_parameter_function_ruby">utc_time</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">)</span></span>
+  head<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>not_modified</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_ruby">if</span> response<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>last_modified!<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>utc_time<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Sets the ETag response header. Returns 304 Not Modified if the
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> If-None-Match request header matches.
+</span><span class="meta meta_function meta_function_method meta_function_method_with-arguments meta_function_method_with-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">etag!</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">(</span><span class="variable variable_parameter variable_parameter_function variable_parameter_function_ruby">etag</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">)</span></span>
+  head<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>not_modified</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_ruby">if</span> response<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>etag!<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>etag<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+</span></pre>
+
+
+<p>Isto facilita muito as coisas. Veja como ficaria o exemplo dado no último post usando estes novos métodos:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_controller"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">ArticlesController<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ApplicationController</span></span></span>
+  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">show</span></span>
+    <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>article</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Article</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>params<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>id</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+
+    etag! <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>article</span>
+    last_modified! <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>article</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>published_at<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>utc
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+<p>Bem mais simples!</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/08/17/edge-rails-uma-forma-mais-simples-de-usar-etags/">Leia mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/08/15/edge-rails-melhorando-a-performance-usando-etags/">Edge Rails: Melhorando a performance usando ETags</a></h1>
     
     
@@ -556,49 +618,6 @@ Accept: text/x-dvi; q=.8; mxb=100000; mxt=5.0, text/x-c</code></p>
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/08/06/the-big-bang-theory/">The Big Bang Theory</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-<time datetime="2008-08-06 00:00:00 -0300" pubdate  updated > 6 de Agosto de 2008</time>
-
-
-</p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="alignnone size-full wp-image-1034" title="2271998567_72f1f35306" src="http://old.nomedojogo.com/wp-content/uploads/2008/08/2271998567_72f1f35306.jpg" alt="" /></p>
-
-<p>Tentei assistir este seriado tempos atrás, mas nunca consegui porque minha esposa simplesmente não achava a menor graça <em>cof</em> não entendia as piadas <em>cof</em> e por isto sempre acabávamos assistindo outra coisa.</p>
-
-<p>Fica claro então que este é um seriado 100% nerd e que eu teria de assistir sozinho, como um bom nerd que sou.</p>
-
-<p>Aproveitei que minha esposa está viajando esta semana e estou sozinho em casa e preparei uma maratona para saciar minha sede de conteúdo nerd, coisa que infelizmente só consigo fazer nestas ocasiões.</p>
-
-<p>A série é um sitcom que conta a história de uma turma de nerds super espertos, que tentam se dar bem socialmente. Mas a grande graça da série vem do alto número de referencias a cultura pop e piadas que somente um nerd de carteirinha conseguiria entender.</p>
-
-<p>Terminei minha maratona exatamente agora. No total foram 17 episódios regados a refrigerante, pizza e muita risada. Recomendado.</p>
-
-<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="425" height="344" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowFullScreen" value="true" /><param name="src" value="http://www.youtube.com/v/9eTUz61LNjo&amp;hl=en&amp;fs=1" /><embed type="application/x-shockwave-flash" width="425" height="344" src="http://www.youtube.com/v/9eTUz61LNjo&amp;hl=en&amp;fs=1" allowfullscreen="true"></embed></object>
-
-</div>
-  <footer>
-    <a rel="full-article" href="/2008/08/06/the-big-bang-theory/">Leia mais &rarr;</a>
-  </footer>
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -629,6 +648,10 @@ Accept: text/x-dvi; q=.8; mxb=100000; mxt=5.0, text/x-c</code></p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/08/19/blogando-como-um-hacker/">Blogando Como Um Hacker</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
       </li>
     
@@ -642,10 +665,6 @@ Accept: text/x-dvi; q=.8; mxb=100000; mxt=5.0, text/x-c</code></p>
     
       <li class="post">
         <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro anos de Nome do Jogo</a>
       </li>
     
   </ul>

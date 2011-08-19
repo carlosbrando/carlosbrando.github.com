@@ -100,6 +100,70 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2008/11/14/rails-22-tornando-atributos-do-activerecord-privados/">Rails 2.2: Tornando atributos do ActiveRecord privados</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-11-14 00:00:00 -0200" pubdate  updated >14 de Novembro de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>No Rails 2.2 você poderá definir atributos do <strong>ActiveRecord</strong> como <strong>private</strong>. Como estes atributos são criados via metaprogramação, até agora isto era impossível.</p>
+
+<p>Para entender como isto funcionará, vamos tornar o atributo <strong>name</strong> da classe <strong>User</strong> privado:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails source_ruby_rails_shoulda"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">User<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
+
+  <span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">private</span>
+  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">name</span></span>
+    <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>I'm private<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+
+</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+<p>Agora ao tentar recuperar o valor do atributo <strong>name</strong>:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">user <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>first
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; #&lt;User id: 1, name: "teste", created_at: "2008-09-26 21:55:23", updated_at: "2008-09-26 21:55:23"&gt;
+</span>
+user<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>name
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; NoMethodError: undefined method `NoMethodError' for #&lt;User:0x234df08&gt;
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>    from /Users/carlosbrando/Projects/sandbox/edge/vendor/rails/activerecord/lib/active_record/attribute_methods.rb:260:in `method_missing'
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>    from /Users/carlosbrando/Projects/sandbox/edge/vendor/rails/activerecord/lib/active_record/attribute_methods.rb:236:in `method_missing'
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>    from (irb):3</span></span></pre>
+
+
+<p>Veja que uma exceção <strong>NoMethodError</strong> foi disparada ao executar o método que agora é privado. Por outro lado eu posso alterar o nome do usuário, já que o método <strong>name=</strong> ainda é público.</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">user<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>name <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Carlos<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "Carlos"
+</span></span></pre>
+
+
+<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades do Rails 2.2 no e-book “<a href="../2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">Ruby on Rails - O que há de novo?</a>“.</em>
+
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/11/14/rails-22-tornando-atributos-do-activerecord-privados/">Leia mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/11/14/rails-22-rc2/">Rails 2.2 RC2</a></h1>
     
     
@@ -669,69 +733,6 @@ client<span class="punctuation punctuation_separator punctuation_separator_metho
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/11/05/rails-podcast-brasil-episodio-36/">Rails Podcast Brasil - Episódio 36</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-<time datetime="2008-11-05 00:00:00 -0200" pubdate  updated > 5 de Novembro de 2008</time>
-
-
-</p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="alignnone size-full wp-image-1735" title="2698966435_9c3fe7105a" src="http://old.nomedojogo.com/wp-content/uploads/2008/11/2698966435_9c3fe7105a.jpg" alt="" /></p>
-
-<p>De volta a nossa programação normal, um podcast com as últimas noticias desta e da última semana. Neste episódio falamos sobre o <strong>Rails Rumble</strong>, a polêmica do <strong>Nokogiri</strong>, <strong>Paperclip</strong>, o novo gem de autenticação <strong>Authlogic</strong> e <strong>CouchDB</strong>.</p>
-
-<p>Estamos preparando um episódio especial sobre o Rails 2.2, em breve!</p>
-
-<h2>Neste Episódio</h2>
-
-
-<ul>
-    <li><a href="http://blog.railsrumble.com/2008/11/2/the-results">Rails Rumble</a></li>
-    <li><a href="http://blog.phusion.nl/2008/10/29/phusion-passenger-now-with-global-queuing/">Phusion Passenger, now with Global Queuing</a></li>
-    <li><a href="http://peepcode.com/products/thinking-sphinx-pdf">PeepCode Lançamentos</a></li>
-    <li><a href="http://www.rubyinside.com/nokogiri-ruby-html-parser-and-xml-parser-1288.html">Nokogiri: A Faster, Better HTML and XML Parser for Ruby (than Hpricot)</a></li>
-    <li><a href="http://hackety.org/2008/11/03/hpricotStrikesBack.html">Hpricot Strikes Back</a></li>
-    <li><a href="http://www.nomedojogo.com/2008/10/28/why%E2%80%99s-poignant-guide-to-ruby-em-portugues/">Why’s (Poignant) Guide to Ruby em português</a></li>
-    <li><a href="http://blog.headius.com/2008/10/ffi-for-ruby-now-available.html">FFI for Ruby Now Available</a></li>
-    <li><a href="http://thewebfellas.com/blog/2008/11/2/goodbye-attachment_fu-hello-paperclip">Goodbye attachment_fu, hello Paperclip</a></li>
-    <li><a href="http://www.mouseoverstudio.com/blog/2008/10/27/criando-gems-com-gemhub-nunca-foi-tao-simples/#comment-2204">Criando gems com GemHub, nunca foi tão simples</a></li>
-    <li><a href="http://railstips.org/2008/10/27/using-gmail-with-imap-to-receive-email-in-rails">Using Gmail with IMAP to Receive Email in Rails</a></li>
-    <li><a href="http://dev.massivebraingames.com/">A DB admin interface written in Rails</a></li>
-    <li><a href="http://www.binarylogic.com/2008/11/3/tutorial-authlogic-basic-setup">Tutorial: Authlogic Basic Setup</a></li>
-    <li><a href="http://www.rubyinside.com/merb-1-0-rc2-available-1268.html">Merb 1.0 RC2 Now Available: Merb 1.0 Not Far Behind!</a></li>
-    <li><a href="http://www.dcmanges.com/blog/rails-application-visualization-with-munin">Rails Application Visualization</a></li>
-    <li><a href="http://www.railsinside.com/tools/138-rails-application-generators.html">suprails and rg: Two Rails Application Generators</a></li>
-    <li><a href="http://giantrobots.thoughtbot.com/2008/10/21/suspenders">Suspenders</a></li>
-    <li><a href="http://jshoulda.scriptia.net/">jShoulda – Shoulda for JavaScript</a></li>
-    <li><a href="http://jchris.mfdz.com/posts/122">CouchDB</a></li>
-</ul>
-
-
-<p><strong>Download</strong>: <a href="http://download.podcast.rubyonrails.pro.br/RailsPodcastBrasil_036.mp3">Episódio #36</a>
-iTunes: <a href="http://podcast.rubyonrails.pro.br/rss">http://podcast.rubyonrails.pro.br/rss</a>
-Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podcast.rubyonrails.pro.br/</a><a href="http://podcast.rubyonrails.pro.br/"></a></p>
-</div>
-  <footer>
-    <a rel="full-article" href="/2008/11/05/rails-podcast-brasil-episodio-36/">Leia mais &rarr;</a>
-  </footer>
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -762,6 +763,10 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/08/19/blogando-como-um-hacker/">Blogando Como Um Hacker</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
       </li>
     
@@ -775,10 +780,6 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
     
       <li class="post">
         <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro anos de Nome do Jogo</a>
       </li>
     
   </ul>

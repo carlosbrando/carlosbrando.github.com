@@ -100,6 +100,48 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2008/04/04/edge-rails-simple_format-pode-receber-atributos-html/">Edge Rails: simple_format pode receber atributos HTML</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-04-04 00:00:00 -0300" pubdate  updated > 4 de Abril de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="aligncenter size-full wp-image-651" title="157601482_3f3b74824e" src="http://old.nomedojogo.com/wp-content/uploads/2008/04/157601482_3f3b74824e.jpg" alt="" /></p>
+
+<p>O método <code>simple_format</code> basicamente recebe como parâmetro um texto qualquer e o formata de uma forma simples em HTML. Quando eu digo &#8220;simples&#8221;, estou dizendo BEM simples mesmo.</p>
+
+<p>O que ele faz  é pegar o texto e substituir uma quebra de linha (<code>\n</code>) pela tag <code>&lt;br /&gt;</code>. E quando temos duas quebras de linha seguidas (<code>\n\n</code>) ele separa o texto entre parágrafos, usando a tag <code>&lt;p&gt;</code>.</p>
+
+<p>No Rails 2.1 este método irá receber um novo parâmetro opcional. Além do texto poderemos também informar quais atributos HTML gostaríamos que a tag <code>&lt;p&gt;</code> tivesse. Vamos aos famosos exemplos:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">simple_format<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Oi mõe!<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>class</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>description<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "&lt;p class='description'&gt;Oi mõe!&lt;/p&gt;"</span></span></pre>
+
+
+<p>Os atributos HTML informados serão acrescentados em todas as tags <code>&lt;p&gt;</code> criadas pelo método.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/04/04/edge-rails-simple_format-pode-receber-atributos-html/">Leia mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/04/03/edge-rails-has_one-through-aceita-source_type/">Edge Rails: has_one :through, aceita :source_type</a></h1>
     
     
@@ -504,44 +546,6 @@ number_to_currency<span class="punctuation punctuation_section punctuation_secti
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/03/31/edge-rails-uma-nova-velha-forma-de-pesquisar-dados-no-activerecord/">Edge Rails: Uma nova (velha) forma de pesquisar dados no ActiveRecord</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-<time datetime="2008-03-31 00:00:00 -0300" pubdate  updated >31 de Março de 2008</time>
-
-
-</p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>O ActiveRecord recebeu três novos métodos para pesquisa: <code>all</code>, <code>first</code> e <code>last</code>. Os três métodos são <strong>alias</strong> para os já conhecidos <code>find(:all)</code>, <code>find(:first)</code> e <code>find(:last)</code>.</p>
-
-<p>Em outras palavras, na hora de pesquisar seus dados, agora você poderá fazer assim:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Topic</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>all
-<span class="support support_class support_class_ruby">Topic</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>first
-<span class="support support_class support_class_ruby">Topic</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>last
-<span class="support support_class support_class_ruby">Topic</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>first<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>conditions</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>name = ?<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Chris<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
-
-</div>
-  <footer>
-    <a rel="full-article" href="/2008/03/31/edge-rails-uma-nova-velha-forma-de-pesquisar-dados-no-activerecord/">Leia mais &rarr;</a>
-  </footer>
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -572,6 +576,10 @@ number_to_currency<span class="punctuation punctuation_section punctuation_secti
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/08/19/blogando-como-um-hacker/">Blogando Como Um Hacker</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
       </li>
     
@@ -585,10 +593,6 @@ number_to_currency<span class="punctuation punctuation_section punctuation_secti
     
       <li class="post">
         <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/02/08/quatro-anos-de-nome-do-jogo/">Quatro anos de Nome do Jogo</a>
       </li>
     
   </ul>
