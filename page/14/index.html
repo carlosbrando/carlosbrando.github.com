@@ -100,6 +100,102 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2009/01/15/explicando-o-rails-metal-parte-2/">Explicando o Rails Metal - Parte 2</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-01-15 00:00:00 -0200" pubdate  updated >15 de Janeiro de 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>No <a href="http://www.nomedojogo.com/2009/01/12/o-que-e-o-rails-metal/">primeiro artigo</a> desta série eu comentei sobre um dos novos recursos incluídos no Rails, chamado de <strong>Rails Metal</strong>. Agora vamos falar da funcionalidade que leva o nome “Metal”.</p>
+
+<p>Imagine que você precise criar um serviço simples (como uma API pública, por exemplo) que faça uma ou duas consultas no banco de dados e devolva um string para o usuário e que precisa ser muito, muito rápido. É nestas horas que utilizaremos o Rails “Metal”, para realizar tarefas simples que precisam ser realmente rápidas.</p>
+
+<p>Para criar um serviço Rails Metal devemos usar o seguinte comando:</p>
+
+<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">$ ./script/generate metal poller</span></span></pre>
+
+
+<p>Com isto teremos um novo diretório chamado <code>app/metal</code>. Nele você encontrará o arquivo <code>poller.rb</code> que deve se parecer com o isto:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Allow the metal piece to run in isolation
+</span><span class="meta meta_require meta_require_ruby"><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">require</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="support support_class support_class_ruby">File</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>dirname<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_language variable_language_ruby">__FILE__</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">+</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>/../../config/environment<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_ruby">unless</span> <span class="keyword keyword_control keyword_control_pseudo-method keyword_control_pseudo-method_ruby">defined?</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_constant variable_other_constant_ruby">Rails</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span>
+
+<span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Poller</span></span>
+  <span class="meta meta_function meta_function_method meta_function_method_with-arguments meta_function_method_with-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">self.call</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">(</span><span class="variable variable_parameter variable_parameter_function variable_parameter_function_ruby">env</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">)</span></span>
+    <span class="keyword keyword_control keyword_control_ruby">if</span> env<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>PATH_INFO<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">=~</span> <span class="string string_regexp string_regexp_classic string_regexp_classic_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span>^<span class="constant constant_character constant_character_escape constant_character_escape_ruby">\/</span>poller<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span></span>
+      <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_numeric constant_numeric_ruby">200</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Content-Type<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>text/html<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Hello, World!<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]]</span>
+    <span class="keyword keyword_control keyword_control_ruby">else</span>
+      <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_numeric constant_numeric_ruby">404</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Content-Type<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>text/html<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Not Found<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]]</span>
+    <span class="keyword keyword_control keyword_control_ruby">end</span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+</span></pre>
+
+
+<p>Neste modelo tudo o que ele faz é capturar as requisições feitas para <code>/poller</code> e retornar <code>‘Hello World’</code>. Quando a requisição não for para <code>/poller</code> ele retornará um status 404, que indica ao sistema de rotas do Rails que ele deve assumir à partir daí, cuidando da requisição.</p>
+
+<p>Para ficar mais claro, o código acima se fosse criado em um controller comum do Rails seria algo mais ou menos assim:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_controller"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">OldPollerController<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ApplicationController</span></span></span>
+  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">poller</span></span>
+    <span class="support support_function support_function_actionpack support_function_actionpack_rails">render</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>text</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Hello World!<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+<p><a href="http://soylentfoo.jnewland.com/articles/2008/12/16/rails-metal-a-micro-framework-with-the-power-of-rails-m">Jesse Newland</a> fez um teste simples de performance e chegou ao seguinte resultado: Executando estes dois códigos, no modelo tradicional usando um controller comum teríamos 408.45 req/s e 2.448 ms, enquanto na versão Metal temos 1154.66 req/s e 0.866 ms. Ou seja, para um ridículo Hello World o Rails Metal se mostra 2.8x mais rápido que um Controller comum. Muito bom.</p>
+
+<p>Ao subir seu projeto Rails você já terá no ar o seu serviço Rails Metal. Mas se desejar também pode subir o serviço isoladamente através da ferramenta rackup:</p>
+
+<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">rackup -s mongrel app/metal/poller.rb</span></span></pre>
+
+
+
+
+<h2>Usando outras ferramentas</h2>
+
+
+<p>Além do modelo proposto também podemos fazer uso de outras ferramentas afim de simplificar a criação destes serviços. Veja um exemplo retirado da especificação do Rails de um código usando o <a href="http://sinatra.rubyforge.org/">Sinatra</a> para criar um serviço Rails Metal:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> app/metal/api.rb
+</span><span class="meta meta_require meta_require_ruby"><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">require</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>sinatra<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span>
+<span class="support support_class support_class_ruby">Sinatra</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">Application</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>default_options<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>merge!<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>run</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">false</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>env</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>production</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="variable variable_other variable_other_constant variable_other_constant_ruby">Api</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Sinatra</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>application <span class="keyword keyword_control keyword_control_ruby">unless</span> <span class="keyword keyword_control keyword_control_pseudo-method keyword_control_pseudo-method_ruby">defined?</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">Api</span>
+
+get <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>/interesting/new/ideas<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
+</span>  <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Hello Sinatra!<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+
+
+<h2>Finalizando</h2>
+
+
+<p>Como podem ver teremos o melhor de dois mundo na próxima versão do Rails. Mas é importante ressaltar que mesmo sendo possível criar um projeto inteiro usando apenas o Rails Metal, isto não é uma boa coisa a se fazer. O Rails Metal é uma ferramenta com uma finalidade especifica e somente deve ser usada para casos onde a performance é crucial para o sucesso do seu software.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2009/01/15/explicando-o-rails-metal-parte-2/">Leia mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2009/01/14/curso-gratis-de-ruby/">Curso Grátis de Ruby</a></h1>
     
     
@@ -566,49 +662,6 @@ Esta opção define o símbolo ou palavra que ligará os dois últimos elementos
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/12/30/edge-rails-railsroot/">Edge Rails: Rails.root</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-<time datetime="2008-12-30 00:00:00 -0200" pubdate  updated >30 de Dezembro de 2008</time>
-
-
-</p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>O método <code>Rails.root</code> foi alterado para não mais retornar um <code>String</code> com o caminho físico do seu projeto Rails, mas sim um objeto do tipo <code>Pathname</code>.</p>
-
-<p>É uma alteração simples, mas que agrega muito ao desenvolvimento. Por exemplo, veja o seguinte trecho de código:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span><span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span><span class="support support_class support_class_ruby">Rails</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>root<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span>/app/controllers<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span></span></pre>
-
-
-<p>Ele pode ser facilmente substituído, pela nova implementação do método <code>Rails.root</code>, assim:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Rails</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>root<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>join<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>app<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>controllers<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
-
-
-<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.3/3.0 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades acompanhando a série <a href="../category/edge-rails/">Edge Rails</a>.</em>
-
-</div>
-  <footer>
-    <a rel="full-article" href="/2008/12/30/edge-rails-railsroot/">Leia mais &rarr;</a>
-  </footer>
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -639,6 +692,10 @@ Esta opção define o símbolo ou palavra que ligará os dois últimos elementos
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
       </li>
     
@@ -652,10 +709,6 @@ Esta opção define o símbolo ou palavra que ligará os dois últimos elementos
     
       <li class="post">
         <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
       </li>
     
   </ul>

@@ -100,6 +100,42 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2008/04/11/edge-rails-problema-com-migrations-resolvido/">Edge Rails: Problema com migrations resolvido</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-04-11 00:00:00 -0300" pubdate  updated >11 de Abril de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Agora à pouco eu falei sobre <a href="http://www.nomedojogo.com/2008/04/11/edge-rails-timestamped-migrations/">Timestamped Migrations</a>, e reclamei que isto ainda não resolvia o problema com as migrations. Depois disso eu pensei que talvez a solução fosse armazenar na tabela <code>schema_info</code> todas as migrations executadas e cada vez que rodássemos um <code>rake db:migrate</code> o Rails verificasse quais scripts não foram executados, fizesse um rollback até o primeiro não executado e então rodasse tudo denovo até o fim. Na teoria isto resolveria os problemas das migrations.</p>
+
+<p>Pois é, não fui só eu que pensei nisto&#8230;</p>
+
+<p>Isto já está implementado para o Rails 2.1. A única diferença da minha idéia é que criaram uma outra tabela para isto, chamada <code>schema_migrations</code>.</p>
+
+<p>Não sei, mas acho que isto resolve o problema com as migrations.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/04/11/edge-rails-problema-com-migrations-resolvido/">Leia mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/04/11/edge-rails-dirty-objects/">Edge Rails: Dirty Objects</a></h1>
     
     
@@ -505,70 +541,6 @@ plugin<span class="punctuation punctuation_separator punctuation_separator_metho
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/04/06/edge-rails-named_scope/">Edge Rails: named_scope</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-<time datetime="2008-04-06 00:00:00 -0300" pubdate  updated > 6 de Abril de 2008</time>
-
-
-</p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>O gem <strong>has_finder</strong> foi incorporado ao Rails, mas com um nome diferente: <code>named_scope</code>.</p>
-
-<p>Uma documentação mais completa sobre o gem original você pode encontrar neste endereço: <a href="http://pivots.pivotallabs.com/users/nick/blog/articles/284-hasfinder-it-s-now-easier-than-ever-to-create-complex-re-usable-sql-queries">clique aqui</a>.</p>
-
-<p>Para entender o que isto acrescenta de novo ao Rails veja os exemplos abaixo:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Article<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
-  named_scope <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>published</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>conditions</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>published</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">true</span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
-  named_scope <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>containing_the_letter_a</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>conditions</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>body LIKE '%a%'<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
-</span><span class="keyword keyword_control keyword_control_ruby">end</span>
-
-<span class="support support_class support_class_ruby">Article</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>published<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>paginate<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>page</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-<span class="support support_class support_class_ruby">Article</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>published<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>containing_the_letter_a<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>count
-<span class="support support_class support_class_ruby">Article</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>containing_the_letter_a<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>first</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-<span class="support support_class support_class_ruby">Article</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>containing_the_letter_a<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>all</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>conditions</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">...</span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
-
-
-<p>Ao invés de criar um método <code>published</code> para retornar os posts já publicados, estou usando o <code>named_scope</code> para fazer isto.</p>
-
-<p>Mas o método é um pouco mais robusto do que isto. Veja mais alguns exemplos de como ele pode ser usado:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">named_scope <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>written_before</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> lambda <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">time</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
-  <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>conditions</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>written_on &lt; ?<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> time<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
-<span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
-
-named_scope <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>anonymous_extension</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
-</span>  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">one</span></span>
-    <span class="constant constant_numeric constant_numeric_ruby">1</span>
-  <span class="keyword keyword_control keyword_control_ruby">end</span>
-<span class="keyword keyword_control keyword_control_ruby">end</span>
-
-named_scope <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>named_extension</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>extend</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">NamedExtension</span>
-
-named_scope <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>multiple_extensions</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>extend</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="variable variable_other variable_other_constant variable_other_constant_ruby">MultipleExtensionTwo</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">MultipleExtensionOne</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span></span></pre>
-
-</div>
-  <footer>
-    <a rel="full-article" href="/2008/04/06/edge-rails-named_scope/">Leia mais &rarr;</a>
-  </footer>
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -599,6 +571,10 @@ named_scope <span class="constant constant_other constant_other_symbol constant_
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
       </li>
     
@@ -612,10 +588,6 @@ named_scope <span class="constant constant_other constant_other_symbol constant_
     
       <li class="post">
         <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
       </li>
     
   </ul>

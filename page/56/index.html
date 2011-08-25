@@ -100,6 +100,72 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2008/02/02/edge-rails-uma-nova-estrategia-para-o-eager-loading/">Edge Rails: Uma nova estratégia para o Eager Loading</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-02-02 00:00:00 -0200" pubdate  updated > 2 de Fevereiro de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/02/219781763_29850fce52.jpg" alt="219781763_29850fce52.jpg" /></p>
+
+<p>Para explicar esta nova funcionalidade vou precisar mostrar na prática. Vamos pegar como exemplo o código abaixo:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Author</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>all</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>include</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>posts</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>comments</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
+
+
+<p>Estou fazendo uma pesquisa na tabela <strong>authors</strong>, mas incluindo na minha query as tabelas <strong>posts</strong> e <strong>comments</strong>, relacionado-as pela coluna <strong>author_id</strong>. Para entender melhor veja a query gerada pelo Rails:</p>
+
+<pre class="textmate-source"><span class="source source_sql"><span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">SELECT</span>
+  authors.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>id"</span>          <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t0_r0,
+  authors.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>created_at"</span>  <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t0_r1,
+  authors.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>updated_at"</span>  <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t0_r2,
+  posts.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>id"</span>            <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t1_r0,
+  posts.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>author_id"</span>     <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t1_r1,
+  posts.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>created_at"</span>    <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t1_r2,
+  posts.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>updated_at"</span>    <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t1_r3,
+  comments.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>id"</span>         <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t2_r0,
+  comments.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>author_id"</span>  <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t2_r1,
+  comments.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>created_at"</span> <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t2_r2,
+  comments.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>updated_at"</span> <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t2_r3
+<span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">FROM</span>
+  authors
+  <span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">LEFT OUTER JOIN</span> posts <span class="keyword keyword_other keyword_other_DDL keyword_other_DDL_create keyword_other_DDL_create_II keyword_other_DDL_create_II_sql">ON</span> <span class="constant constant_other constant_other_database-name constant_other_database-name_sql">posts</span>.<span class="constant constant_other constant_other_table-name constant_other_table-name_sql">author_id</span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_sql">=</span> <span class="constant constant_other constant_other_database-name constant_other_database-name_sql">authors</span>.<span class="constant constant_other constant_other_table-name constant_other_table-name_sql">id</span>
+  <span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">LEFT OUTER JOIN</span> comments <span class="keyword keyword_other keyword_other_DDL keyword_other_DDL_create keyword_other_DDL_create_II keyword_other_DDL_create_II_sql">ON</span> <span class="constant constant_other constant_other_database-name constant_other_database-name_sql">comments</span>.<span class="constant constant_other constant_other_table-name constant_other_table-name_sql">author_id</span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_sql">=</span> <span class="constant constant_other constant_other_database-name constant_other_database-name_sql">authors</span>.<span class="constant constant_other constant_other_table-name constant_other_table-name_sql">id</span></span></pre>
+
+
+<p>Uma única query SQL foi criada contendo <strong>joins</strong> entre as tabelas <strong>authors</strong>, <strong>posts</strong> e <strong>comments</strong>. Chamamos isto de produto cartesiano.</p>
+
+<p>Acontece que isto nem sempre é performático, por isto foi alterado. Para a nova versão do Rails ao executar a mesma pesquisa na classe <strong>Author</strong>, o Rails usará uma outra estratégia para recuperar os dados das três tabelas. Ao invés de usar apenas uma query com todas as tabelas relacionadas, ele usará três querys menores, uma para cada tabela. Veja o resultado no log, após executar o mesmo código acima nesta nova versão Edge Rails:</p>
+
+<pre class="textmate-source"><span class="source source_sql"><span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">SELECT</span> <span class="keyword keyword_operator keyword_operator_star keyword_operator_star_sql">*</span> <span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">FROM</span> <span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>authors"</span>
+<span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">SELECT</span> posts.<span class="keyword keyword_operator keyword_operator_star keyword_operator_star_sql">*</span> <span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">FROM</span> <span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>posts"</span> <span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">WHERE</span> (<span class="constant constant_other constant_other_database-name constant_other_database-name_sql">posts</span>.<span class="constant constant_other constant_other_table-name constant_other_table-name_sql">author_id</span> <span class="keyword keyword_other keyword_other_data-integrity keyword_other_data-integrity_sql">IN</span> (<span class="constant constant_numeric constant_numeric_sql">1</span>))
+<span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">SELECT</span> comments.<span class="keyword keyword_operator keyword_operator_star keyword_operator_star_sql">*</span> <span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">FROM</span> <span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>comments"</span> <span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">WHERE</span> (<span class="constant constant_other constant_other_database-name constant_other_database-name_sql">comments</span>.<span class="constant constant_other constant_other_table-name constant_other_table-name_sql">author_id</span> <span class="keyword keyword_other keyword_other_data-integrity keyword_other_data-integrity_sql">IN</span> (<span class="constant constant_numeric constant_numeric_sql">1</span>))</span></pre>
+
+
+<p>Na &#8220;maioria&#8221; dos casos executar três querys simples é mais rápido que executar uma única query gigante.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/02/02/edge-rails-uma-nova-estrategia-para-o-eager-loading/">Leia mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/01/31/novidades-no-rails-novo-metodo-label_tag/">Edge Rails: Novo método &#8220;label_tag&#8221;</a></h1>
     
     
@@ -608,44 +674,6 @@
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/01/17/problema-com-acentuacao-resolvido/">Problema com acentuação resolvido?</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-<time datetime="2008-01-17 00:00:00 -0200" pubdate  updated >17 de Janeiro de 2008</time>
-
-
-</p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/01/143359854_6fb7f5136c.jpg" alt="143359854_6fb7f5136c.jpg" /></p>
-
-<p>Aiai&#8230; eu sabia que teria problemas com a mudança de servidor, mas não imaginei que seriam tantos. Espero que agora tudo esteja certo.</p>
-
-<p>Me façam um favor, se você está lendo este post pelo seu leitor de feeds, comente no blog se está tudo certo com os caracteres, se está com algum problema ou erro&#8230;</p>
-
-<p>Obrigado!</p>
-
-<p>Ah, e os arquivos já estão todos no servidor novo, então quem quiser baixar os vídeos pode <a href="http://www.nomedojogo.com/category/screencast/">clicar aqui</a>.</p>
-</div>
-  <footer>
-    <a rel="full-article" href="/2008/01/17/problema-com-acentuacao-resolvido/">Leia mais &rarr;</a>
-  </footer>
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -676,6 +704,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
       </li>
     
@@ -689,10 +721,6 @@
     
       <li class="post">
         <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
       </li>
     
   </ul>

@@ -100,6 +100,51 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2010/03/17/metodos-macarronicos-sao-mais-rapidos-ou-nao/">Métodos macarrônicos são mais rápidos, ou não&#8230;</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2010-03-17 00:00:00 -0300" pubdate  updated >17 de Março de 2010</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class='center ' src='http://old.nomedojogo.com/wp-content/uploads/2010/03/1544234007_dd7686d788.jpg' width='' height='' alt='' title=''></p>
+
+<p>Se você está preocupado com a performance do seu programa, saiba que métodos macarrônicos são mais velozes. Ao escrever todo o código dentro de um único método você estará evitando todos os custos envolvidos na chamada de outros métodos, reduzindo o tempo de execução do seu código.</p>
+
+<p>Embora o argumento acima não seja falso, é triste reconhecer que muitos programadores ainda possuem esse tipo de pensamento. Talvez não de uma forma tão radical, mas são poucos os profissionais que entendem que programar é muito mais do que escrever instruções para um computador, mas que o código que escrevemos também será lido por outras pessoas.</p>
+
+<p>O tamanho do método é proporcional a dificuldade de manutenção e entendimento. Quando damos prioridade a escrever métodos pequenos e com nomes descritivos aumentamos a produtividade do time (incluindo o autor do código).</p>
+
+<p>Métodos pequenos, com poucas linhas de código, facilitam a manutenção e a inserção de novas funcionalidades. Use as características da linguagem a seu favor. Não é feio criar um método com um nome longo e descritivo em Ruby. Respeite a pontuação. Acrescente o sinal de interrogação no final quando o método retornar um booleano.</p>
+
+<p>Não estamos apenas escrevendo código, estamos nos comunicando.</p>
+
+<hr/>
+
+
+<p>P.S.: Sim, eu acabei de ver uma coisa que me deixou irritado.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2010/03/17/metodos-macarronicos-sao-mais-rapidos-ou-nao/">Leia mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2010/03/04/como-estimar-prazos-precisos-e-imprecisos/">Como estimar prazos precisos e imprecisos</a></h1>
     
     
@@ -437,7 +482,6 @@
 
 <h2>Não existe uma linguagem perfeita</h2>
 
-
 <p><strong>Bill Venners:</strong> Dave Thomas, co-autor do livro &#8220;Programming Ruby: A Pragmatic Programmer&#8217;s Guide&#8221; me disse que você não acredita que uma linguagem de programação possa deve ser perfeita. Por que não?</p>
 
 <p><strong>Yukihiro Matsumoto:</strong> Desenvolvedores querem criar a linguagem de programação perfeita. Eles querem poder dizer: &#8220;Veja, a minha linguagem é perfeita. Com ela você pode fazer qualquer coisa&#8221;. Mas é simplesmente impossível conceber uma linguagem perfeita, porque existem duas maneiras de se olhar para uma linguagem de programação. Uma maneira é olhar para o que pode ser feito com essa linguagem. A outra é observar como nos sentimos usando essa linguagem - como nos sentimos durante o tempo que estamos programando.</p>
@@ -721,184 +765,6 @@ irb/init.rb
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/12/24/classes-sao-modulos-no-ruby/">Classes são Módulos no Ruby</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-<time datetime="2009-12-24 00:00:00 -0200" pubdate  updated >24 de Dezembro de 2009</time>
-
-
-</p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Qual é a diferença entre uma classe e um módulo no Ruby? Nenhuma, uma classe é um módulo no Ruby. Não acredita em mim?</p>
-
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="no">Class</span><span class="o">.</span><span class="n">is_a?</span><span class="p">(</span><span class="no">Module</span><span class="p">)</span> <span class="c1"># =&gt; true</span>
-</div></code></pre></td></tr></table></div></figure>
-
-<p>Agora que você já confia em mim, posso explicar com um pouco mais de calma.</p>
-
-<h2>O que são módulos?</h2>
-
-
-<p>Um módulo pode ser definido de forma grosseira como uma coleção de métodos e constantes. Você encontrará dois tipos de métodos em um módulo: métodos de instância e métodos de módulo. Um método de módulo é aquele que pode ser executado sem a necessidade de que o módulo seja incluído em outro objeto:</p>
-
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="k">module</span> <span class="nn">MeuModulo</span>
-</div><div class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">meu_metodo_de_modulo</span>
-</div><div class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Sou um m茅todo de m贸dulo!&quot;</span>
-</div><div class='line'>  <span class="k">end</span>
-</div><div class='line'><span class="k">end</span>
-</div><div class='line'>
-</div><div class='line'><span class="no">MeuModulo</span><span class="o">.</span><span class="n">meu_metodo_de_modulo</span> <span class="c1"># =&gt; Sou um m茅todo de m贸dulo!</span>
-</div></code></pre></td></tr></table></div></figure>
-
-<p>Por outro lado, métodos de instância, como o nome diz, precisam ser executados a partir de uma instância de um objeto. Módulos podem ser acoplados dentro de outros objetos, tornando assim estes métodos de instância acessíveis.</p>
-
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-<span class='line'>8</span>
-<span class='line'>9</span>
-<span class='line'>10</span>
-<span class='line'>11</span>
-<span class='line'>12</span>
-<span class='line'>13</span>
-<span class='line'>14</span>
-<span class='line'>15</span>
-<span class='line'>16</span>
-</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="k">module</span> <span class="nn">MeuModulo</span>
-</div><div class='line'>  <span class="k">def</span> <span class="nf">meu_metodo_de_intancia</span>
-</div><div class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Método de instância!&quot;</span>
-</div><div class='line'>  <span class="k">end</span>
-</div><div class='line'><span class="k">end</span>
-</div><div class='line'>
-</div><div class='line'><span class="k">class</span> <span class="nc">MinhaClasse</span>
-</div><div class='line'>  <span class="c1"># Acoplando o MeuModulo</span>
-</div><div class='line'>  <span class="kp">include</span> <span class="no">MeuModulo</span>
-</div><div class='line'><span class="k">end</span>
-</div><div class='line'>
-</div><div class='line'><span class="c1"># Criando uma instância de MinhaClasse</span>
-</div><div class='line'><span class="n">minha_classe</span> <span class="o">=</span> <span class="no">MinhaClasse</span><span class="o">.</span><span class="n">new</span>
-</div><div class='line'>
-</div><div class='line'><span class="c1"># Executando o método de instância que foi criado em MeuModulo</span>
-</div><div class='line'><span class="nb">puts</span> <span class="n">minha_classe</span><span class="o">.</span><span class="n">meu_metodo_de_intancia</span> <span class="c1"># =&gt; Método de instância!</span>
-</div></code></pre></td></tr></table></div></figure>
-
-<h2>O que são classes?</h2>
-
-
-<p>Assim como os módulos, classes também são repositórios de métodos. Então qual é a diferença entre um e o outro?</p>
-
-<p>Podemos ver claramente a diferença entre classes e módulos examinando o objeto <code>Class</code> mais de perto:</p>
-
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="no">Class</span><span class="o">.</span><span class="n">superclass</span> <span class="c1"># =&gt; Module</span>
-</div><div class='line'>
-</div><div class='line'><span class="no">Class</span><span class="o">.</span><span class="n">instance_methods</span><span class="p">(</span><span class="kp">false</span><span class="p">)</span>
-</div><div class='line'><span class="c1"># =&gt; [&quot;superclass&quot;, &quot;allocate&quot;, &quot;new&quot;, &quot;to_yaml&quot;]</span>
-</div></code></pre></td></tr></table></div></figure>
-
-<p>Como você pode ver no código acima, <code>Class</code> é uma subclasse de <code>Module</code>, mas com quatro métodos a mais. E é exatamente nestes métodos que encontraremos a resposta para a questão levantada acima.</p>
-
-<p>Para esclarecer ainda mais, vamos imaginar como seria a classe <code>Class</code> implementada em Ruby:</p>
-
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-<span class='line'>8</span>
-<span class='line'>9</span>
-<span class='line'>10</span>
-<span class='line'>11</span>
-<span class='line'>12</span>
-<span class='line'>13</span>
-<span class='line'>14</span>
-<span class='line'>15</span>
-<span class='line'>16</span>
-<span class='line'>17</span>
-</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="k">class</span> <span class="nc">Class</span> <span class="o">&lt;</span> <span class="no">Module</span>
-</div><div class='line'>  <span class="c1"># Você já sabe como funciona o método new,</span>
-</div><div class='line'>  <span class="c1"># já que o utilizamos o tempo todo</span>
-</div><div class='line'>  <span class="k">def</span> <span class="nf">initialize</span>
-</div><div class='line'>  <span class="k">end</span>
-</div><div class='line'>
-</div><div class='line'>  <span class="c1"># Devolve a superclasse da classe atual</span>
-</div><div class='line'>  <span class="k">def</span> <span class="nf">superclass</span>
-</div><div class='line'>  <span class="k">end</span>
-</div><div class='line'>
-</div><div class='line'>  <span class="c1"># Dá suporte ao método new</span>
-</div><div class='line'>  <span class="k">def</span> <span class="nf">allocate</span>
-</div><div class='line'>  <span class="k">end</span>
-</div><div class='line'>
-</div><div class='line'>  <span class="k">def</span> <span class="nf">to_yaml</span>
-</div><div class='line'>  <span class="k">end</span>
-</div><div class='line'><span class="k">end</span>
-</div></code></pre></td></tr></table></div></figure>
-
-<p>Os três primeiros métodos são responsáveis por permitir que você consiga criar uma instância de um objeto e trabalhar com o conceito de hierarquia de classes. O método <code>to_yaml</code> serve apenas como uma interface que dispara um erro do tipo <code>TypeError</code> caso ele não seja implementado por uma subclasse.</p>
-
-<p>O método <code>superclass</code> é fácil de entender, já que a sua única finalidade é informar qual é a superclasse de um objeto. Se uma superclasse não for definida ele retornará <code>nil</code>.</p>
-
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="nb">Integer</span><span class="o">.</span><span class="n">superclass</span> <span class="c1"># =&gt; Numeric</span>
-</div><div class='line'><span class="no">Object</span><span class="o">.</span><span class="n">superclass</span> <span class="c1"># =&gt; nil</span>
-</div></code></pre></td></tr></table></div></figure>
-
-<p>O método <code>allocate</code> é responsável por reservar um espaço na memória para a nova instância do objeto que estamos criando. O método devolve esta instância pronta.</p>
-
-<p>E por último, o método <code>initialize</code> (<code>new</code>) tem duas funções. Primeiro ele executa o método <code>allocate</code>, que constrói um novo objeto da classe <code>Class</code> (ou de qualquer outra classe, afinal todas elas são subclasses de <code>Class)</code>. Em seguida ele dispara o método <code>initialize</code> deste objeto, passando os argumentos para ele.</p>
-
-<h2>Finalizando</h2>
-
-
-<p>Se você chegou até aqui, então já entendeu as diferenças entre um módulo e uma classe em Ruby. Basta pensar que ambos são basicamente a mesma coisa (com estas significantes diferenças) e que quase tudo o que vale para um também vale para o outro.</p>
-
-<p>A principal razão de existir estes dois tipos de objetos tão parecidos e ao mesmo tempo tão diferentes é que desta forma podemos deixar nosso código muito mais expressivo.</p>
-
-<p>Normalmente você usará um módulo quando precisar incluí-lo em outro objeto ou usá-lo como um namespace. E você usará uma classe quando precisar de uma instância de um objeto ou utilizar o sistema de heranças. Cada um tem o seu propósito e você será melhor sucedido se utilizar o recurso certo na hora certa.</p>
-
-<hr />
-
-
-<p><em>Este artigo é o primeiro de muitos com a finalidade de explicar como o Ruby e Rails funcionam por dentro, conforme prometido durante a minha palestra no <a href="http://www.nomedojogo.com/palestras/">Rails Summit</a>.</em></p>
-</div>
-  <footer>
-    <a rel="full-article" href="/2009/12/24/classes-sao-modulos-no-ruby/">Leia mais &rarr;</a>
-  </footer>
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -929,6 +795,10 @@ irb/init.rb
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
       </li>
     
@@ -942,10 +812,6 @@ irb/init.rb
     
       <li class="post">
         <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
       </li>
     
   </ul>

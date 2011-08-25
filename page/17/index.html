@@ -100,6 +100,95 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2008/12/04/criando-um-template-padrao-de-um-projeto-rails-ou-adeus-bort-blank-suspenders-e-outros/">Criando um template padrão de um projeto Rails, ou adeus Bort, Blank, Suspenders e outros</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-12-04 00:00:00 -0200" pubdate  updated > 4 de Dezembro de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>De um tempo para cá parece que virou moda a criação de projetos Rails semi-prontos. Em uma rápida pesquisa no GitHub encontrei o <a href="http://jimneath.org/2008/09/09/bort-base-rails-application/">Bort</a>, <a href="http://jamesgolick.com/2008/10/10/blank-a-starter-app-for-r_c-and-shoulda-users">Blank</a>, <a href="http://giantrobots.thoughtbot.com/2008/10/21/suspenders">Suspenders</a>, <a href="http://github.com/pat-maddox/starter-app/tree/master">starter-app</a>, <a href="http://appstarter.latticepurple.com/">appstarter</a> e mais alguns menos conhecidos.</p>
+
+<p>E isto é muito bom, já que na maioria das vezes usamos sempre a mesma estrutura para criar nossos projetos, os mesmos gems e plugins e o mesmo sistema de autenticação. Eu mesmo já experimentei alguns dos projetos que mencionei acima, mas eles são projetos semi-prontos criados para suprir as necessidades das equipes que os criaram e não as minhas necessidades.</p>
+
+<p>Existe um projeto mais interessante do que todos estes, chamado <a href="http://github.com/jeremymcanally/rg/tree/master">rg</a>. Jeremy McAnally teve a idéia de criar um script na qual você pudesse montar a sua própria estrutura de projeto, apenas relatando quais gems e plugins você deseja usar, quais arquivos criar e com que conteúdo, etc..</p>
+
+<p>Percebendo a necessidade dos desenvolvedores por tais projetos semi-prontos, o core team do Rails decidiu incluir o rg no Rails. Assim ganhamos a opção de carregar um template ao criar um novo projeto Rails de forma nativa.</p>
+
+<p>Nunca foi tão fácil criar um template padrão para um projeto Rails. Veja um exemplo de um template:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Install plugins from git or svn
+</span>plugin <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>will-paginate<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>git</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>git://github.com/mislav/will_paginate.git<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+plugin <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>old-restful-auth<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>svn</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>http://svn.techno-weenie.net/projects/plugins/restful_authentication/<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Add gems to environment.rb
+</span>gem <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>jeremymcanally-context<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+gem <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>bluecloth<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+
+lib<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>crypto.rb<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
+</span>  <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>crypted_special_value = '<span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>rand<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span>--<span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span><span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>now<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span>--<span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>rand<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">1337</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span>--'<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> ...file data from block return value.
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> #initializer creates a new initializer file
+</span>initializer<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>crypto.rb<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
+</span>  salt <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>--<span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span><span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>now<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span>--<span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>rand<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span>--<span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>srand<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>now<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>to_i<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+
+  <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>SPECIAL_SALT = '<span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>salt<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span>'<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+
+rakefile<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>bootstrap.rake<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
+</span>  project <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> ask<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>What is the UNIX name of your project?<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+
+  <span class="string string_unquoted string_unquoted_heredoc string_unquoted_heredoc_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">&lt;&lt;-TASK</span>
+    namespace :<span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>project<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span> do
+    task :bootstrap do
+      puts "i like boots!"
+    end
+  end
+<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">  TASK</span></span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+
+route <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>map.root :controller =&gt; :welcome<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span></span></pre>
+
+
+<p>No código acima estou definindo quais plugins devem ser instalados, quais gems devem ser adicionadas no arquivo environment.rb, também estou criando um arquivo chamado crypto.rb na pasta lib e um initializer com o mesmo nome, uma tarefa rake e adicicionando uma rota no arquivo conifg/routes.rb.</p>
+
+<p>Este script pode estar armazenado na sua máquina, ou mesmo em algum site como o <a href="http://gist.github.com/">Gist</a> do <a href="https://github.com/">GitHub,</a> por exemplo. E para criar um projeto baseado neste template basta fazer assim:</p>
+
+<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text"># Usando um arquivo local:
+$ rails &lt;application name&gt; -m /path/to/my/template.rb
+</span>
+<span class="meta meta_paragraph meta_paragraph_text"># Ou através de um URL:
+$ rails &lt;application name&gt; --template=<span class="markup markup_underline markup_underline_link markup_underline_link_text">http://gist.github.com/31208.txt</span></span></span></pre>
+
+
+<p>Adeus Bort, Blank, Suspenders, starter-app, appstarter e tantos outros!</p>
+
+<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.3/3.0 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades acompanhando a série <a href="http://www.nomedojogo.com/category/edge-rails/">Edge Rails</a>.</em>
+
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/12/04/criando-um-template-padrao-de-um-projeto-rails-ou-adeus-bort-blank-suspenders-e-outros/">Leia mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/12/03/rails-22-bug-ao-testar-rotas-nomeadas/">Rails 2.2: Bug ao testar rotas nomeadas</a></h1>
     
     
@@ -642,57 +731,6 @@ person<span class="punctuation punctuation_separator punctuation_separator_metho
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/11/23/rails-22/">Rails 2.2 - Finalmente</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-<time datetime="2008-11-23 00:00:00 -0200" pubdate  updated >23 de Novembro de 2008</time>
-
-
-</p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Finalmente a versão final do Rails 2.2 saiu!</p>
-
-<p>Acho que já cobrimos todas as novidades desta nova versão, e de várias formas possíveis. Para ficar sabendo de tudo que temos de novo você tem três formas:</p>
-
-<p>Série Edge Rails (Rails 2.2): <a href="http://www.nomedojogo.com/category/rails-22/">clique aqui</a>.</p>
-
-<p>Rails Podcast Especial Rails 2.2: <a href="http://www.nomedojogo.com/2008/11/18/rails-podcast-brasil-episodio-38-especial-rails-22/">clique aqui</a>.</p>
-
-<p>Livro &#8220;Ruby on Rails 2.2 - O que há de novo?&#8221;: <a href="http://www.nomedojogo.com/2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">clique aqui</a>.</p>
-
-<hr/>
-
-
-<p>Para atualizar, primeiro você precisa ter a versão 1.3.1 do RubyGems:</p>
-
-<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">gem update --system</span></span></pre>
-
-
-<p>Então instale a última versão do Rails:</p>
-
-<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">gem install rails</span></span></pre>
-
-</div>
-  <footer>
-    <a rel="full-article" href="/2008/11/23/rails-22/">Leia mais &rarr;</a>
-  </footer>
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -723,6 +761,10 @@ person<span class="punctuation punctuation_separator punctuation_separator_metho
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
       </li>
     
@@ -736,10 +778,6 @@ person<span class="punctuation punctuation_separator punctuation_separator_metho
     
       <li class="post">
         <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
       </li>
     
   </ul>

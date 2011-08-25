@@ -100,6 +100,67 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2008/03/19/como-vai-funcionar-o-novo-suporte-a-timezones-na-proxima-versao-do-rails/">Como vai funcionar o novo suporte a TimeZones na próxima versão do Rails?</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-03-19 00:00:00 -0300" pubdate  updated >19 de Março de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/03/103050700_09e2ff6b95.jpg" alt="103050700_09e2ff6b95.jpg" /></p>
+
+<p>Não sabemos ainda quando a versão 2.1(?) do Rails sairá, mas quem acompanha este blog já sabe das grandes novidades que acompanharão esta nova versão. Acredito que a mais interessante e importante novidade será o novo suporte nativo a timezones.</p>
+
+<p>Criar um sistema que trabalha com fusos-horários diferentes hoje só é possível graças a gems como o <strong>TZInfo</strong>. Mas isto será trivial na próxima versão do Rails.</p>
+
+<p>Para entender a necessidade disto, imagine um sistema simples para uma empresa de cursos de idiomas online, onde alunos do mundo todo podem agendar horários para suas aulas. Se eu agendar uma aula aqui para uma hora da tarde, meu professor que mora no Canadá deve ser avisado que a aula ocorrerá às dez horas da manhõ no horário dele. Se isto não acontecer, teremos uma tremenda confusão e um sistema assim seria um fracasso.</p>
+
+<p>A solução para o problema é sempre convertermos os horários para o padrão UTC e na hora de exibir ou receber usarmos a hora local do usuário. Consegue imaginar o problema? Que problema? Isto será trivial, assim:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> informa o fuso-horário local
+</span><span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>zone <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Pacific Time (US &amp; Canada)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Agora todas as datas/horas irão refletir o fuso-horário local
+</span>event <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Event</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span>
+event<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>when <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>utc<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">2008</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">0</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+event<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>when <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; Mon, 31 Dec 2007 16:00:00 PST -08:00</span></span></pre>
+
+
+<p>Para facilitar ainda mais podemos usar um filtro no <code>ApplicationController</code>, algo assim:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_controller"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">ApplicationController<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActionController::Base</span></span></span>
+  <span class="support support_function support_function_actionpack support_function_actionpack_rails">before_filter</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>set_timezone</span>
+
+  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">set_timezone</span></span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">    <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> current_user.time_zone #=&gt; 'Pacific Time (US &amp; Canada)'
+</span>    <span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>zone <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> current_user<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>time_zone
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+<p>Pronto, problema resolvido.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/03/19/como-vai-funcionar-o-novo-suporte-a-timezones-na-proxima-versao-do-rails/">Leia mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/03/18/ruby-on-rails-21/">Ruby on Rails 2.1</a></h1>
     
     
@@ -480,62 +541,6 @@ O resultado final você pode ver <a href="http://www.backpackit.com/images/bp-ca
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/03/12/como-testar-um-metodo-privado/">Como testar um método privado?</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-<time datetime="2008-03-12 00:00:00 -0300" pubdate  updated >12 de Março de 2008</time>
-
-
-</p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/03/148963020_54c3f1b723.jpg" alt="148963020_54c3f1b723.jpg" /></p>
-
-<p>Vi esta dica no blog do <a href="http://jasonrudolph.com/blog/2007/11/02/evan-phoenix-on-testing-private-methods-in-ruby/">Jason Rudolph</a>, mas ele mesmo ouvi isto do Evan Phoenix no RubyConf no ano passado. Durante uma discussão sobre como testar isoladamente métodos privados, Evan chegou com a seguinte idéia, veja o método</p>
-
-<pre class="textmate-source"><span class="source source_ruby"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Ninja</span></span>
-  <span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">private</span>
-  <span class="meta meta_function meta_function_method meta_function_method_with-arguments meta_function_method_with-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">kill</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">(</span><span class="variable variable_parameter variable_parameter_function variable_parameter_function_ruby">num_victims</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">)</span></span>
-    <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span><span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>num_victims<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span> victims are no longer with us.<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
-  <span class="keyword keyword_control keyword_control_ruby">end</span>
-<span class="keyword keyword_control keyword_control_ruby">end</span>
-</span></pre>
-
-
-<p>Ok, agora como testar isto? A sugestão foi definir um novo método público na classe, que chamará o método privado. Tudo isto na classe de teste. Veja como:</p>
-
-<pre class="textmate-source"><span class="source source_ruby"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">NinjaTest<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> Test::Unit::TestCase</span></span></span>
-  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">test_should_punish_sloppy_coders</span></span>
-    <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>ninja</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Ninja</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span>
-    <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span></span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>ninja</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>flog_publicly<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">*</span>args<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-      kill<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">*</span>args<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-    <span class="keyword keyword_control keyword_control_ruby">end</span>
-    assert_equal Â<span class="constant constant_numeric constant_numeric_ruby">3</span> victims are no longer with us<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>Â<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>ninja</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>flog_publicly<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">3</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-  <span class="keyword keyword_control keyword_control_ruby">end</span>
-<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-
-
-<p>Entendeu? Criamos um novo método público chamado <code>flog_publicly</code> e o inserimos na instancia de <code>ninja</code>, este método por sua vez, chama nosso método privado.</p>
-</div>
-  <footer>
-    <a rel="full-article" href="/2008/03/12/como-testar-um-metodo-privado/">Leia mais &rarr;</a>
-  </footer>
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -566,6 +571,10 @@ O resultado final você pode ver <a href="http://www.backpackit.com/images/bp-ca
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
       </li>
     
@@ -579,10 +588,6 @@ O resultado final você pode ver <a href="http://www.backpackit.com/images/bp-ca
     
       <li class="post">
         <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
       </li>
     
   </ul>

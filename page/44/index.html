@@ -100,6 +100,45 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2008/04/29/edge-rails-path-names/">Edge Rails: Path Names</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-04-29 00:00:00 -0300" pubdate  updated >29 de Abril de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Todos já devem conhecer o meu plugin <a href="http://www.nomedojogo.com/custom-resource-name-plugin/">Custom Resource Name</a>. Acho que ele pode estar com seus dias contados&#8230; :(</p>
+
+<p>Já faz algum tempo que um desenvolvedor chamado <strong>Ivan Vega</strong> me procurou por email para montar um patch para o Rails baseando-se no meu plugin. Na verdade ele já tinha um código parecido e queria adaptar para funcionar mais ou menos como o meu funcionava. Trocamos algumas idéias, e ele criou o patch (com <strong>algumas alterações</strong> para ficar da forma como ele achou que seria melhor) e conseguiu com ele fosse <strong>incluído no Rails</strong>.</p>
+
+<p>No Rails você já podia incluir a opção <code>:as</code> na suas rotas (coisa que fiz questão de implementar igual no meu plugin, para manter a compatibilidade), agora você também terá a opção <code>:path_names</code> para alterar os nomes das actions.</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resource <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>schools</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>as</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>escolas<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>path_names</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>new</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>nova<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span></span></pre>
+
+
+<p>Para entender como funciona o meu plugin, <a href="http://www.nomedojogo.com/custom-resource-name-plugin/">clique aqui</a>.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/04/29/edge-rails-path-names/">Leia mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/04/29/edge-rails-mais-json/">Edge Rails: Mais JSON</a></h1>
     
     
@@ -616,44 +655,6 @@ rex<span class="punctuation punctuation_separator punctuation_separator_method p
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/04/23/edge-rails-acessando-helpers-fora-das-views/">Edge Rails: Acessando Helpers fora das Views</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-<time datetime="2008-04-23 00:00:00 -0300" pubdate  updated >23 de Abril de 2008</time>
-
-
-</p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Aí está mais uma alteração que gostei. Quantas vezes eu não criei um helper e depois quis usá-lo dentro do meu controller&#8230; Para conseguir isto só incluindo o módulo do mesmo no controller, mas isto sempre me deixava com uma sensação de sujeira.</p>
-
-<p>Para o Rails 2.1 foi criado um proxy para acessar os helpers de fora das views. Funciona de maneira muito simples:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Para acessar o método simple_format, por exemplo
-</span><span class="support support_class support_class_ruby">ApplicationController</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>helpers<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>simple_format<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>text<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
-
-
-<p>Simples e limpo!</p>
-</div>
-  <footer>
-    <a rel="full-article" href="/2008/04/23/edge-rails-acessando-helpers-fora-das-views/">Leia mais &rarr;</a>
-  </footer>
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -684,6 +685,10 @@ rex<span class="punctuation punctuation_separator punctuation_separator_method p
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
       </li>
     
@@ -697,10 +702,6 @@ rex<span class="punctuation punctuation_separator punctuation_separator_method p
     
       <li class="post">
         <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
       </li>
     
   </ul>

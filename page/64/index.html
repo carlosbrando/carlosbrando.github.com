@@ -100,6 +100,40 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2007/11/07/dica-rapida-duas-listas-interessantes/">Dica rápida: Duas listas interessantes</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2007-11-07 00:00:00 -0200" pubdate  updated > 7 de Novembro de 2007</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/11/155884100_053e873db1.jpg" alt="155884100_053e873db1.jpg" /></p>
+
+<p>Uma lista com <a href="http://www.zanypixel.com/blog/ruby-web-apps/">101 projetos criados em Ruby on Rails</a>. Vale a penas dar uma olhada.</p>
+
+<p>E como a moda agora &eacute; comprar um Mac, um <a href="http://chris.pirillo.com/2007/11/06/top-100-mac-apps/">top 100 aplicativos para Mac</a>.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2007/11/07/dica-rapida-duas-listas-interessantes/">Leia mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2007/11/06/radrails-091/">RadRails 0.9.1</a></h1>
     
     
@@ -642,140 +676,6 @@ metodo b
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/10/27/o-que-vem-por-ai-novidades-nas-fixtures/">O que vem por aí? Novidades nas Fixtures</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-<time datetime="2007-10-27 00:00:00 -0200" pubdate  updated >27 de Outubro de 2007</time>
-
-
-</p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/10/1129159157_9c02a19aaa.jpg" /></p>
-
-<p>A partir da pr&oacute;xima vers&atilde;o do Rails teremos alguns recursos extras nas famosas fixtures.</p>
-
-<h3>Gera&ccedil;&atilde;o de ID&#39;s autom&aacute;ticos</h3>
-
-
-<p>Hoje &eacute; assim:</p>
-
-<pre>
-george:
-  id: 1
-  name: George the Monkey
-
-reginald:
-  id: 2
-  name: Reginald the Pirate
-</pre>
-
-
-<p>Cadas uma das fixtures tem dois identificadores, um para o banco (id: 1) e outro para humanos (george, por exemplo). Por que n&atilde;o gerar a <strong>primary key</strong> automaticamente? Assim criar&iacute;amos as nossas fixtures assim:</p>
-
-<pre>
-george: # generated id: 503576764
-  name: George the Monkey
-
-reginald: # generated id: 324201669
-  name: Reginald the Pirate
-</pre>
-
-
-<p>A partir da pr&oacute;xima vers&atilde;o do Rails, o ActiveRecord ir&aacute; at&eacute; a classe correspondente &agrave; fixture e recuperar&aacute; o campo que representa o primary key, inserindo o registro no banco corretamente.</p>
-
-<p>O ID gerado &eacute; uma constante, ent&atilde;o n&oacute;s podemos descobrir o ID de qualquer fixture sem carregar nada, desde que saibamos qual o nome que foi dado ao registro.</p>
-
-<h3>Associa&ccedil;&otilde;es entre fixtures atrav&eacute;s dos nomes</h3>
-
-
-<p>Especificar um relacionamento entre fixtures &eacute; problem&aacute;tico e fr&aacute;gil, sem contar a dificuldade para se ler. E j&aacute; que podemos remover o ID das fixtures, utilizando somente o nome, tamb&eacute;m poderemos realizar as associa&ccedil;&otilde;es diretamente pelo nome, assim:</p>
-
-<pre>
-### pirates.yml
-reginald:
-  name: Reginald the Pirate
-  monkey: george
-
-### monkeys.yml
-george:
-  name: George the Monkey
-  pirate: reginald
-</pre>
-
-
-<p>E se tivermos um relacionamento <strong>has_and_belongs_to_many</strong> podemos fazer assim:</p>
-
-<pre>
-### monkeys.yml
-george:
-  name: George the Monkey
-  pirate: reginald
-  fruits: apple, orange, grape
-
-### fruits.yml
-apple:
-  name: apple
-
-orange:
-  name: orange
-
-grape:
-  name: grape
-</pre>
-
-
-<p>Muito legal n&eacute;?</p>
-
-<h3>Colunas do timestamp preenchidas automaticamente</h3>
-
-
-<p>Se sua tabela tiver qualquer uma das colunas no formato padr&atilde;o dos timestamps do Rails (<strong>created_at</strong>, <strong>created_on</strong>, <strong>updated_at</strong>, <strong>updated_on</strong>), elas ser&atilde;o automaticamente preenchidas com um <strong>Time.now</strong>.</p>
-
-<p>Se voc&ecirc; quiser um valor diferente deste, voc&ecirc; vai precisar fazer da forma antiga, preenchendo o valor na fixture.</p>
-
-<h3>Suporte aos padr&otilde;es do YAML</h3>
-
-
-<p>Voc&ecirc; com certeza sabe como usar o YAML para reutilizar informa&ccedil;&otilde;es no seu arquivo database.yml. Agora voc&ecirc; tamb&eacute;m pode fazer o mesmo em suas fixtures:</p>
-
-<pre>
-DEFAULTS: &DEFAULTS
-  created_on: <%= 3.weeks.ago.to_s(:db) %>
-
-first:
-  name: Smurf
-  <<: *DEFAULTS
-
-second:
-  name: Fraggle
-  <<: *DEFAULTS
-</pre>
-
-
-<p>Estas s&atilde;o algumas das novidades que nos aguardam, mas n&atilde;o acabou, muita coisa ainda deve mudar at&eacute; a vers&atilde;o 2.0. Estou acompanhando de perto&#8230;</p>
-
-<p>Tudo isto e mais um pouco pode ser encontrado <a href="http://dev.rubyonrails.org/changeset/8036">aqui</a>.</p>
-</div>
-  <footer>
-    <a rel="full-article" href="/2007/10/27/o-que-vem-por-ai-novidades-nas-fixtures/">Leia mais &rarr;</a>
-  </footer>
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -806,6 +706,10 @@ second:
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
       </li>
     
@@ -819,10 +723,6 @@ second:
     
       <li class="post">
         <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
       </li>
     
   </ul>

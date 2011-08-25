@@ -100,6 +100,52 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2008/06/14/edge-rails-novo-metodo-enumberableseveral/">Edge Rails: Novo método Enumerable#many?</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-06-14 00:00:00 -0300" pubdate  updated >14 de Junho de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Um novo método foi adicionado ao módulo <strong>Enumerable</strong>: <strong>many?</strong>. E como o nome mesmo diz, ele verifica se a coleção possui mais de um objeto, ou em outras palavras se tem <strong>muitos</strong> objetos associados.</p>
+
+<p>Este método é um alias para <strong>collection.size &gt; 1</strong>. Vamos ver alguns exemplos:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[]</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>many?
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; false
+</span>
+<span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span> <span class="constant constant_numeric constant_numeric_ruby">1</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>many?
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; false
+</span>
+<span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span> <span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">2</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>many?
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; true</span></span></pre>
+
+
+<p>É engraçado, mas o DHH parece que gosta destas coisinhas. Toda vez que aparece algo assim, pode ter certeza que ele está envolvido.</p>
+
+<p>P.S.: Só uma curiosidade, o método deveria se chamar <strong>several?</strong>, mas foi alterado depois para <strong>many?</strong>.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/06/14/edge-rails-novo-metodo-enumberableseveral/">Leia mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/06/13/em-breve/">Em breve&#8230;</a></h1>
     
     
@@ -588,58 +634,6 @@ sudo gem install user-plugin --source=http://gems.github.com</span></pre>
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/06/06/edge-rails-stringquestioneer-renomeado-para-stringinquirer/">Edge Rails: StringQuestioneer renomeado para StringInquirer</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-<time datetime="2008-06-06 00:00:00 -0300" pubdate  updated > 6 de Junho de 2008</time>
-
-
-</p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Hoje de manhã eu <a href="http://www.nomedojogo.com/2008/06/06/edge-rails-stringquestioneer/">falei desta nova classe</a> no Rails, e comentei que estavam querendo mudar o seu nome. Pois bem, isto aconteceu mesmo!</p>
-
-<p>Agora a classe se chama <strong>StringInquirer</strong>. Além disso ela também foi incluída no namespace <strong>ActiveSupport</strong>.</p>
-
-<p>Vejam o mesmo exemplo usado no artigo anterior, mas adaptado para funcionar com estas alterações:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Cliente</span></span>
-  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">status</span></span>
-    <span class="support support_class support_class_ruby">ActiveSupport</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">StringInquirer</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>ativo<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-  <span class="keyword keyword_control keyword_control_ruby">end</span>
-<span class="keyword keyword_control keyword_control_ruby">end</span>
-
-c <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Cliente</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span>
-c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>status
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "ativo"
-</span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Agora vem a grande diferença:
-</span>c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>status<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>ativo?
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; true
-</span>
-c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>status<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>inativo?
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; false</span></span></pre>
-
-</div>
-  <footer>
-    <a rel="full-article" href="/2008/06/06/edge-rails-stringquestioneer-renomeado-para-stringinquirer/">Leia mais &rarr;</a>
-  </footer>
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -670,6 +664,10 @@ c<span class="punctuation punctuation_separator punctuation_separator_method pun
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
       </li>
     
@@ -683,10 +681,6 @@ c<span class="punctuation punctuation_separator punctuation_separator_method pun
     
       <li class="post">
         <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
       </li>
     
   </ul>

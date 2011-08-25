@@ -100,6 +100,49 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2008/12/30/edge-rails-railsroot/">Edge Rails: Rails.root</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-12-30 00:00:00 -0200" pubdate  updated >30 de Dezembro de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>O método <code>Rails.root</code> foi alterado para não mais retornar um <code>String</code> com o caminho físico do seu projeto Rails, mas sim um objeto do tipo <code>Pathname</code>.</p>
+
+<p>É uma alteração simples, mas que agrega muito ao desenvolvimento. Por exemplo, veja o seguinte trecho de código:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span><span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span><span class="support support_class support_class_ruby">Rails</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>root<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span>/app/controllers<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span></span></pre>
+
+
+<p>Ele pode ser facilmente substituído, pela nova implementação do método <code>Rails.root</code>, assim:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Rails</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>root<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>join<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>app<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>controllers<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
+
+
+<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.3/3.0 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades acompanhando a série <a href="../category/edge-rails/">Edge Rails</a>.</em>
+
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/12/30/edge-rails-railsroot/">Leia mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/12/29/edge-rails-assert_valid-deprecated/">Edge Rails: assert_valid (deprecated)</a></h1>
     
     
@@ -526,50 +569,6 @@ sudo gem install carlosbrando-remarkable</span></span></pre>
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/12/17/edge-rails-teste-seus-helpers/">Edge Rails: Teste seus Helpers</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-<time datetime="2008-12-17 00:00:00 -0200" pubdate  updated >17 de Dezembro de 2008</time>
-
-
-</p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Atualmente não existe nenhum incentivo no Rails para a criação de testes para helpers. Quando criamos um novo modelo ou controller, o próprio script de criação já se encarrega de gerar os arquivos para testes unitários e funcionais, mas nada é criado para que possamos testar nossos helpers.</p>
-
-<p>Na próxima versão do Rails ao executar um dos scripts geradores de código, como o <code>controller</code>, <code>resource</code> ou <code>scaffold</code>, você ganhará também um arquivo de teste pré-criado para testar seus helpers. Um novo diretório chamado <code>helpers</code> será criado dentro do diretório <code>test/unit</code>, e nele arquivos seguindo a nomenclatura <code>[controller]_helper_test.rb</code> conterão os testes dos seus helpers.</p>
-
-<p>Veja um exemplo de um arquivo pré-criado pelo comando <code>script/generate scaffold photos</code>:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_require meta_require_ruby"><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">require</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>test_helper<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span>
-
-<span class="meta meta_rails meta_rails_unit_test"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">PhotosHelperTest<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActionView::TestCase</span></span></span>
-</span><span class="keyword keyword_control keyword_control_ruby">end</span>
-</span></pre>
-
-
-<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.3/3.0 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades acompanhando a série <a href="../category/edge-rails/">Edge Rails</a>.</em>
-
-</div>
-  <footer>
-    <a rel="full-article" href="/2008/12/17/edge-rails-teste-seus-helpers/">Leia mais &rarr;</a>
-  </footer>
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -600,6 +599,10 @@ sudo gem install carlosbrando-remarkable</span></span></pre>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
       </li>
     
@@ -613,10 +616,6 @@ sudo gem install carlosbrando-remarkable</span></span></pre>
     
       <li class="post">
         <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
       </li>
     
   </ul>

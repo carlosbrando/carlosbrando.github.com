@@ -100,6 +100,54 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2008/10/02/edge-rails-melhorando-a-performance-nos-metodos-association_ids/">Edge Rails: Melhorando a performance nos métodos association_ids</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2008-10-02 00:00:00 -0300" pubdate  updated > 2 de Outubro de 2008</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Se você tiver dois modelos: <strong>Post</strong> e <strong>Comment</strong>. Onde <strong>Post</strong> tem muitos (<strong>has_many</strong>) comentários. Se você executar:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Post</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>first<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>comment_ids</span></pre>
+
+
+<p>O Rails usará a seguinte query para recuperar os ids:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="variable variable_other variable_other_constant variable_other_constant_ruby">SELECT</span> <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">*</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">FROM</span> <span class="string string_interpolated string_interpolated_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">`</span>comments<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">`</span></span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">WHERE</span> <span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_interpolated string_interpolated_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">`</span>comments<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">`</span></span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>post_id <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
+
+
+<p>Mas neste caso, não precisamos dos objetos inteiros. A seguinte query seria mais do que suficiente para o funcionamento deste método, além de possuir uma performance melhor:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="variable variable_other variable_other_constant variable_other_constant_ruby">SELECT</span> <span class="string string_interpolated string_interpolated_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">`</span>comments<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">`</span></span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>id <span class="variable variable_other variable_other_constant variable_other_constant_ruby">FROM</span> <span class="string string_interpolated string_interpolated_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">`</span>comments<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">`</span></span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">WHERE</span> <span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_interpolated string_interpolated_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">`</span>comments<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">`</span></span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>post_id <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
+
+
+<p>Tanto para associações <strong>has_many</strong>, como para associações <strong>has_many :through</strong> o código foi alterado para incluir esta melhora de performance a partir do Rails 2.2.</p>
+
+<hr /><em>Este artigo pertence a série “Edge Rails”. Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. A intenção desta série é preparar antecipadamente os programadores para as próximas versões do framework.</em>
+
+</div>
+  <footer>
+    <a rel="full-article" href="/2008/10/02/edge-rails-melhorando-a-performance-nos-metodos-association_ids/">Leia mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/10/01/shoulda-20/">Shoulda 2.0</a></h1>
     
     
@@ -597,49 +645,6 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/23/esqueca-atribuicoes-em-massa-no-rails-pelo-menos-por-enquanto/">Esqueça atribuições em massa no Rails, pelo menos por enquanto</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-<time datetime="2008-09-23 00:00:00 -0300" pubdate  updated >23 de Setembro de 2008</time>
-
-
-</p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Lembra-se destes dois artigos?</p>
-
-<ul>
-    <li><a href="http://www.nomedojogo.com/2008/07/28/edge-rails-usando-a-opcao-accessible-para-fazer-atribuicoes-em-massa-no-activerecord/">Edge Rails: Usando a opção :accessible para fazer atribuições em massa no ActiveRecord</a></li>
-    <li><a href="http://www.nomedojogo.com/2008/07/29/edge-rails-fazendo-uso-da-opcao-accessible-em-formularios/">Edge Rails: Fazendo uso da opção accessible em formulários</a></li>
-</ul>
-
-
-<p>Pois bem, esqueça. Esta funcionalidade foi removida do Rails, pois não estava totalmente completa e não daria tempo de terminar tudo até o lançamento do Rails 2.2.</p>
-
-<p>Provavelmente ela deve voltar no futuro, mas dificilmente a tempo do próximo release.</p>
-
-<hr /><em>Este artigo pertence a série “Edge Rails”. Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. A intenção desta série é preparar antecipadamente os programadores para as próximas versões do framework.</em>
-
-</div>
-  <footer>
-    <a rel="full-article" href="/2008/09/23/esqueca-atribuicoes-em-massa-no-rails-pelo-menos-por-enquanto/">Leia mais &rarr;</a>
-  </footer>
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -670,6 +675,10 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
       </li>
     
@@ -683,10 +692,6 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
     
       <li class="post">
         <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
       </li>
     
   </ul>

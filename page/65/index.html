@@ -100,6 +100,140 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2007/10/27/o-que-vem-por-ai-novidades-nas-fixtures/">O que vem por aí? Novidades nas Fixtures</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2007-10-27 00:00:00 -0200" pubdate  updated >27 de Outubro de 2007</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/10/1129159157_9c02a19aaa.jpg" /></p>
+
+<p>A partir da pr&oacute;xima vers&atilde;o do Rails teremos alguns recursos extras nas famosas fixtures.</p>
+
+<h3>Gera&ccedil;&atilde;o de ID&#39;s autom&aacute;ticos</h3>
+
+
+<p>Hoje &eacute; assim:</p>
+
+<pre>
+george:
+  id: 1
+  name: George the Monkey
+
+reginald:
+  id: 2
+  name: Reginald the Pirate
+</pre>
+
+
+<p>Cadas uma das fixtures tem dois identificadores, um para o banco (id: 1) e outro para humanos (george, por exemplo). Por que n&atilde;o gerar a <strong>primary key</strong> automaticamente? Assim criar&iacute;amos as nossas fixtures assim:</p>
+
+<pre>
+george: # generated id: 503576764
+  name: George the Monkey
+
+reginald: # generated id: 324201669
+  name: Reginald the Pirate
+</pre>
+
+
+<p>A partir da pr&oacute;xima vers&atilde;o do Rails, o ActiveRecord ir&aacute; at&eacute; a classe correspondente &agrave; fixture e recuperar&aacute; o campo que representa o primary key, inserindo o registro no banco corretamente.</p>
+
+<p>O ID gerado &eacute; uma constante, ent&atilde;o n&oacute;s podemos descobrir o ID de qualquer fixture sem carregar nada, desde que saibamos qual o nome que foi dado ao registro.</p>
+
+<h3>Associa&ccedil;&otilde;es entre fixtures atrav&eacute;s dos nomes</h3>
+
+
+<p>Especificar um relacionamento entre fixtures &eacute; problem&aacute;tico e fr&aacute;gil, sem contar a dificuldade para se ler. E j&aacute; que podemos remover o ID das fixtures, utilizando somente o nome, tamb&eacute;m poderemos realizar as associa&ccedil;&otilde;es diretamente pelo nome, assim:</p>
+
+<pre>
+### pirates.yml
+reginald:
+  name: Reginald the Pirate
+  monkey: george
+
+### monkeys.yml
+george:
+  name: George the Monkey
+  pirate: reginald
+</pre>
+
+
+<p>E se tivermos um relacionamento <strong>has_and_belongs_to_many</strong> podemos fazer assim:</p>
+
+<pre>
+### monkeys.yml
+george:
+  name: George the Monkey
+  pirate: reginald
+  fruits: apple, orange, grape
+
+### fruits.yml
+apple:
+  name: apple
+
+orange:
+  name: orange
+
+grape:
+  name: grape
+</pre>
+
+
+<p>Muito legal n&eacute;?</p>
+
+<h3>Colunas do timestamp preenchidas automaticamente</h3>
+
+
+<p>Se sua tabela tiver qualquer uma das colunas no formato padr&atilde;o dos timestamps do Rails (<strong>created_at</strong>, <strong>created_on</strong>, <strong>updated_at</strong>, <strong>updated_on</strong>), elas ser&atilde;o automaticamente preenchidas com um <strong>Time.now</strong>.</p>
+
+<p>Se voc&ecirc; quiser um valor diferente deste, voc&ecirc; vai precisar fazer da forma antiga, preenchendo o valor na fixture.</p>
+
+<h3>Suporte aos padr&otilde;es do YAML</h3>
+
+
+<p>Voc&ecirc; com certeza sabe como usar o YAML para reutilizar informa&ccedil;&otilde;es no seu arquivo database.yml. Agora voc&ecirc; tamb&eacute;m pode fazer o mesmo em suas fixtures:</p>
+
+<pre>
+DEFAULTS: &DEFAULTS
+  created_on: <%= 3.weeks.ago.to_s(:db) %>
+
+first:
+  name: Smurf
+  <<: *DEFAULTS
+
+second:
+  name: Fraggle
+  <<: *DEFAULTS
+</pre>
+
+
+<p>Estas s&atilde;o algumas das novidades que nos aguardam, mas n&atilde;o acabou, muita coisa ainda deve mudar at&eacute; a vers&atilde;o 2.0. Estou acompanhando de perto&#8230;</p>
+
+<p>Tudo isto e mais um pouco pode ser encontrado <a href="http://dev.rubyonrails.org/changeset/8036">aqui</a>.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/2007/10/27/o-que-vem-por-ai-novidades-nas-fixtures/">Leia mais &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2007/10/26/working-with-rails-de-cara-nova/">Working with Rails de cara nova</a></h1>
     
     
@@ -489,64 +623,6 @@
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/10/15/subversion-no-mac-os-x/">Subversion no Mac OS X</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-<time datetime="2007-10-15 00:00:00 -0200" pubdate  updated >15 de Outubro de 2007</time>
-
-
-</p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Â <img src="http://old.nomedojogo.com/wp-content/uploads/2007/10/896909842_5709747bea.jpg" alt="896909842_5709747bea.jpg" /></p>
-
-<p>N&atilde;o &eacute; minha inten&ccedil;&atilde;o usar este blog para ensinar a usar um Mac. Mas gosto de compartilhar com voc&ecirc;s minhas experi&ecirc;ncias ao desenvolver em Rails. Ent&atilde;o&#8230;</p>
-
-<p>Quando se fala Rails e Mac a primeira coisa que v&ecirc;m a nossa cabe&ccedil;a &eacute; TextMate. Mas com certeza voc&ecirc; precisa de muito mais do que isto para come&ccedil;ar a criar algo em RoR em um Mac. Passei todo meu fim de semana preparando o ambiente para poder trabalhar em meus projetos Rails, e encontrei um pouco de dificuldade ao instalar o SubVersion.</p>
-
-<p>Como para mim tudo ainda &eacute; muito novo no mundo do Mac, talvez exista uma forma melhor de se fazer isto, mas&#8230;</p>
-
-<p>Bom, para come&ccedil;ar instalei o <a href="http://www.macports.org/">MacPorts</a>, que &eacute; uma esp&eacute;cie de apt-get para o Mac. Logo em seguida executei no terminal:</p>
-
-<pre>
-sudo port subversion +tools</pre>
-
-
-<p>Depois de algumas horas (isto mesmo, demorou horas) estava com o subversion instalado em minha m&aacute;quina. Para facilitar o uso optei por usar o <a href="http://www.apple.com/downloads/macosx/development_tools/svnx.html">SvnX</a> como ferramenta gr&aacute;fica.</p>
-
-<p>At&eacute; a&iacute; tudo bem. Mas o primeiro problema que enfrentei foi ao tentar acessar um reposit&oacute;rio https que estava com o certificado digital vencido pelo SvnX. A ferramenta me avisava do problema mas n&atilde;o tinha nenhuma op&ccedil;&atilde;o para me permitir usar o certificado desta maneira. Depois de uma pesquisa no google, descobri como resolver.</p>
-
-<p>No terminal basta digitar o seguinte:</p>
-
-<pre>
-tcsh
-
-/opt/local/bin/svn list https://svn.nomedojogo.com/svn/meu_repositorio</pre>
-
-
-<p>E quanto for questionado sobre o certificado digital, aceite permanentemente. Logo em seguida ao tentar pelo SvnX tudo funcionou.</p>
-
-<p>Se voc&ecirc; tamb&eacute;m estiver indo para o Mac, tenho certeza que este post ser&aacute; &uacute;til.</p>
-</div>
-  <footer>
-    <a rel="full-article" href="/2007/10/15/subversion-no-mac-os-x/">Leia mais &rarr;</a>
-  </footer>
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -577,6 +653,10 @@ tcsh
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
       </li>
     
@@ -590,10 +670,6 @@ tcsh
     
       <li class="post">
         <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/24/convite-para-o-grok-podcast/">Convite para o Grok Podcast!</a>
       </li>
     
   </ul>
