@@ -81,9 +81,10 @@
 
 <div class="entry-content"><p>Qual é a diferença entre uma classe e um módulo no Ruby? Nenhuma, uma classe é um módulo no Ruby. Não acredita em mim?</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 </pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="no">Class</span><span class="o">.</span><span class="n">is_a?</span><span class="p">(</span><span class="no">Module</span><span class="p">)</span> <span class="c1"># =&gt; true</span>
 </div></code></pre></td></tr></table></div></figure>
+
 
 <p>Agora que você já confia em mim, posso explicar com um pouco mais de calma.</p>
 
@@ -92,7 +93,7 @@
 
 <p>Um módulo pode ser definido de forma grosseira como uma coleção de métodos e constantes. Você encontrará dois tipos de métodos em um módulo: métodos de instância e métodos de módulo. Um método de módulo é aquele que pode ser executado sem a necessidade de que o módulo seja incluído em outro objeto:</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 <span class='line'>3</span>
 <span class='line'>4</span>
@@ -108,9 +109,10 @@
 </div><div class='line'><span class="no">MeuModulo</span><span class="o">.</span><span class="n">meu_metodo_de_modulo</span> <span class="c1"># =&gt; Sou um m茅todo de m贸dulo!</span>
 </div></code></pre></td></tr></table></div></figure>
 
+
 <p>Por outro lado, métodos de instância, como o nome diz, precisam ser executados a partir de uma instância de um objeto. Módulos podem ser acoplados dentro de outros objetos, tornando assim estes métodos de instância acessíveis.</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 <span class='line'>3</span>
 <span class='line'>4</span>
@@ -144,6 +146,9 @@
 </div><div class='line'><span class="nb">puts</span> <span class="n">minha_classe</span><span class="o">.</span><span class="n">meu_metodo_de_intancia</span> <span class="c1"># =&gt; Método de instância!</span>
 </div></code></pre></td></tr></table></div></figure>
 
+
+
+
 <h2>O que são classes?</h2>
 
 
@@ -151,7 +156,7 @@
 
 <p>Podemos ver claramente a diferença entre classes e módulos examinando o objeto <code>Class</code> mais de perto:</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 <span class='line'>3</span>
 <span class='line'>4</span>
@@ -161,11 +166,12 @@
 </div><div class='line'><span class="c1"># =&gt; [&quot;superclass&quot;, &quot;allocate&quot;, &quot;new&quot;, &quot;to_yaml&quot;]</span>
 </div></code></pre></td></tr></table></div></figure>
 
+
 <p>Como você pode ver no código acima, <code>Class</code> é uma subclasse de <code>Module</code>, mas com quatro métodos a mais. E é exatamente nestes métodos que encontraremos a resposta para a questão levantada acima.</p>
 
 <p>Para esclarecer ainda mais, vamos imaginar como seria a classe <code>Class</code> implementada em Ruby:</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 <span class='line'>3</span>
 <span class='line'>4</span>
@@ -201,15 +207,17 @@
 </div><div class='line'><span class="k">end</span>
 </div></code></pre></td></tr></table></div></figure>
 
+
 <p>Os três primeiros métodos são responsáveis por permitir que você consiga criar uma instância de um objeto e trabalhar com o conceito de hierarquia de classes. O método <code>to_yaml</code> serve apenas como uma interface que dispara um erro do tipo <code>TypeError</code> caso ele não seja implementado por uma subclasse.</p>
 
 <p>O método <code>superclass</code> é fácil de entender, já que a sua única finalidade é informar qual é a superclasse de um objeto. Se uma superclasse não for definida ele retornará <code>nil</code>.</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 </pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="nb">Integer</span><span class="o">.</span><span class="n">superclass</span> <span class="c1"># =&gt; Numeric</span>
 </div><div class='line'><span class="no">Object</span><span class="o">.</span><span class="n">superclass</span> <span class="c1"># =&gt; nil</span>
 </div></code></pre></td></tr></table></div></figure>
+
 
 <p>O método <code>allocate</code> é responsável por reservar um espaço na memória para a nova instância do objeto que estamos criando. O método devolve esta instância pronta.</p>
 
@@ -319,7 +327,7 @@
 <section>
   <h1>Últimos Tweets</h1>
   <ul id="tweets">
-    <li class="loading">Atualizando&#8230;</li>
+    <li class="loading">Atualizando...</li>
   </ul>
   <script type="text/javascript">
     $.domReady(function(){
@@ -336,7 +344,7 @@
 <section>
   <h1>Open Source</h1>
   <ul id="gh_repos">
-    <li class="loading">Atualizando&#8230;</li>
+    <li class="loading">Atualizando...</li>
   </ul>
   
   <a href="https://github.com/carlosbrando">@carlosbrando</a> no Github

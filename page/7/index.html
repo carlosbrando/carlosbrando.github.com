@@ -175,18 +175,23 @@
 <h2>Javascript não sabe somar</h2>
 
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+
+
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 </pre></td><td class='code' width='100%'><pre><code class='javascript'><div class='line'><span class="o">&gt;&gt;&gt;</span> <span class="mf">0.1</span> <span class="o">+</span> <span class="mf">0.2</span>
 </div><div class='line'><span class="mf">0.30000000000000004</span>
 </div></code></pre></td></tr></table></div></figure>
+
 
 <p>Números em Javascript são representados internamente com 64 bits e cada número pode ter no máximo 17 dígitos significativos. Isto tem algumas consequências interessantes como demonstrado no exemplo acima. É preciso ser bem cuidadoso com certos cálculos, principalmente quando a precisão é algo muito importante para o aplicativo.</p>
 
 <h2>Javascript não sabe somar - parte 2</h2>
 
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+
+
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 <span class='line'>3</span>
 <span class='line'>4</span>
@@ -198,6 +203,7 @@
 </div><div class='line'><span class="o">=&gt;</span> <span class="mi">75</span>
 </div></code></pre></td></tr></table></div></figure>
 
+
 <p>No Javascript, o operador de soma (<code>+</code>) é usado tanto para somar valores numéricos como também para concatenar strings. Precisamos estar atentos a seguinte regra: durante uma operação de soma, quando um dos valores é do tipo string, então tudo é convertido para este mesmo tipo e uma concatenação é realizada.</p>
 
 <p>No primeiro exemplo, como iniciamos a soma com um string, todos os valores seguintes são imediatamente convertidos para este mesmo formato e depois são concatenados. Já no segundo exemplo, temos inicialmente uma soma numéria (<code>3 + 4 = 7</code>) que é realizada normalmente, mas como a próxima soma a ser realizada não será com outro valor número, mas sim com o string <code>"5"</code>, então o Javascript realiza a conversão do primeiro resultado e em seguida realiza uma concatenação com os valores, devolvendo no final o string <code>"75"</code>.</p>
@@ -205,7 +211,9 @@
 <h2>Javascript não sabe converter string para números</h2>
 
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+
+
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 <span class='line'>3</span>
 <span class='line'>4</span>
@@ -216,6 +224,7 @@
 </div><div class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">parseInt</span><span class="p">(</span><span class="s2">&quot;010&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 </div><div class='line'><span class="mi">10</span>
 </div></code></pre></td></tr></table></div></figure>
+
 
 <p>O método <code>parseInt</code> é muito utilizado e tem por objetivo converter strings em números inteiros. Basicamente o método aceita dois parâmetros: o primeiro é um string contendo o valor a ser convertido e o segundo é um inteiro que representa a base (decimal, binário, hexadecimal, etc.) na qual o string em questão está sendo representado.</p>
 
@@ -234,36 +243,43 @@
 <h2>Javascript não sabe fazer comparações</h2>
 
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+
+
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 </pre></td><td class='code' width='100%'><pre><code class='javascript'><div class='line'><span class="o">&gt;&gt;</span> <span class="mi">1</span> <span class="o">==</span> <span class="kc">true</span>
 </div><div class='line'><span class="o">=&gt;</span> <span class="kc">true</span>
 </div></code></pre></td></tr></table></div></figure>
 
+
 <p>Podemos realizar comparações em Javascript com os símbolos <code>&lt;, &gt;, &lt;= e &gt;=</code>. Eles funcionam tanto para numerais como para strings. Mas quando o assunto é a comparações de igualdade, precisamos prestar atenção a alguns fatores.</p>
 
 <p>O operador de igualdade duplo realiza uma coerção de tipos caso você esteja comparando dois valores de tipos diferentes, como acontece no exemplo acima. Embora aparentemente este seja um resultado normal, em outros casos podemos ter resultados inesperados, como na seguinte comparação:</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 </pre></td><td class='code' width='100%'><pre><code class='javascript'><div class='line'><span class="o">&gt;&gt;</span> <span class="kc">null</span> <span class="o">==</span> <span class="kc">false</span>
 </div><div class='line'><span class="o">=&gt;</span> <span class="kc">false</span>
 </div></code></pre></td></tr></table></div></figure>
 
+
 <p>A linguagem também conta com um operador de igualdade tripo, que ignora a coerção de tipos:</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 </pre></td><td class='code' width='100%'><pre><code class='javascript'><div class='line'><span class="o">&gt;&gt;</span> <span class="mi">1</span> <span class="o">===</span> <span class="kc">true</span>
 </div><div class='line'><span class="o">=&gt;</span> <span class="kc">false</span>
 </div></code></pre></td></tr></table></div></figure>
+
 
 <p>Eu particularmente tenho como regra sempre utilizar o operador triplo ao realizar comparações de valores, isto tem me ajudado a evitar alguns erros de interpretação ao analisar o código e eventuais bugs decorrentes desta característica da linguagem.</p>
 
 <h2>Javascript também não sabe contar</h2>
 
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+
+
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 <span class='line'>3</span>
 <span class='line'>4</span>
@@ -272,6 +288,7 @@
 </div><div class='line'><span class="o">&gt;&gt;</span> <span class="nx">a</span><span class="p">.</span><span class="nx">length</span>
 </div><div class='line'><span class="o">=&gt;</span> <span class="mi">101</span>
 </div></code></pre></td></tr></table></div></figure>
+
 
 <p>A propriedade <code>length</code> de objetos do tipo array em Javascript sempre retornará um número acima da maior posição do array e não necessariamente a quantidade de itens no objeto, conforme você pôde ver no exemplo acima.</p>
 
@@ -417,7 +434,7 @@
 
 <p>Atualmente utilizamos muito o conhecido <code>#{}</code> para realizar esta atividade, como demonstrado no exemplo abaixo.</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 <span class='line'>3</span>
 <span class='line'>4</span>
@@ -429,9 +446,10 @@
 </div><div class='line'><span class="c1"># =&gt; &quot;Carlos Brando&quot;</span>
 </div></code></pre></td></tr></table></div></figure>
 
+
 <p>No Ruby 1.9, além da forma exibida acima, também podemos utilizar <code>%{}</code> para informar os valores a serem interpolados através de um objeto do tipo Hash. Seguindo a seguinte sintaxe:</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 <span class='line'>3</span>
 <span class='line'>4</span>
@@ -441,11 +459,12 @@
 </div><div class='line'><span class="c1"># =&gt; &quot;Carlos Brando&quot;</span>
 </div></code></pre></td></tr></table></div></figure>
 
+
 <p>Se você gosta de viver no limite e utiliza a versão de desenvolvimento do Rails em seus projetos, então já pode começar a utilizar este novo recurso, mesmo que ainda nem tenha o Ruby 1.9 instalado em seu computador. Mas, se você é um pouco mais conservador e não gosta de arriscar (o que pode evitar alguns problemas com bugs), você tem duas opções: esperar pelo Rails 2.3.3 (ou quem sabe o 3.0, não sei qual será o próximo) ou implantar você mesmo esta funcionalidade no seu projeto Rails atual.</p>
 
 <p>Se você optou pela segunda opção, basta criar um arquivo qualquer no diretório <code>lib</code> do seu projeto e incluir o seguinte código nele:</p>
 
-<div><figure role=code><figcaption><span>string.rb </span></figcaption>
+<figure role=code><figcaption><span>string.rb </span></figcaption>
  <div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 <span class='line'>3</span>
@@ -620,18 +639,19 @@
 </div><div class='line'><span class="k">end</span>
 </div><div class='line'>
 </div><div class='line'><span class="k">end</span>
-</div></code></pre></td></tr></table></div></figure></div>
+</div></code></pre></td></tr></table></div></figure>
 
 
 <p>Não esqueça de carregar o arquivo utilizando o método <code>require</code> antes de utiliza-lo. É recomendado que você faça isto em algum arquivo do diretório <code>initializers</code> (talvez seja bom criar um arquivo apenas para esta finalidade). Também recomendo estudar o código acima para entender o que está acontecendo antes de simplesmente sair usando.</p>
 
 <p>Ah, e você também pode definir tipos numéricos assim:</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 </pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="s2">&quot;%&lt;age&gt;d, %&lt;weight&gt;.1f&quot;</span> <span class="o">%</span> <span class="p">{</span><span class="ss">:age</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span> <span class="ss">:weight</span> <span class="o">=&gt;</span> <span class="mi">43</span><span class="o">.</span><span class="mi">4</span><span class="p">}</span>
 </div><div class='line'><span class="c1"># =&gt; &quot;10, 43.4&quot;</span>
 </div></code></pre></td></tr></table></div></figure>
+
 
 <p>Para mais informações sobre as novidades do Rails, siga-me no Twitter: <a href="http://twitter.com/carlosbrando">@carlosbrando</a>.</p>
 </div>

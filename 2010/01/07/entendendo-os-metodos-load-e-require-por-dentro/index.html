@@ -81,13 +81,14 @@
 
 <div class="entry-content"><p>Você sabe explicar a diferença entre as duas linhas abaixo?</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 <span class='line'>3</span>
 </pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="nb">require</span> <span class="s2">&quot;my_library&quot;</span>
 </div><div class='line'>
 </div><div class='line'><span class="nb">load</span> <span class="s2">&quot;my_library.rb&quot;</span>
 </div></code></pre></td></tr></table></div></figure>
+
 
 <p>Se você já trabalhou ao menos um pouco com Ruby, então sabe que <code>load</code> é útil quando se deseja executar o código de um arquivo enquanto <code>require</code> é utilizado para importar uma biblioteca para dentro do código do seu programa.</p>
 
@@ -101,9 +102,12 @@
 <h2>O método require por dentro</h2>
 
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+
+
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 </pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="nb">require</span> <span class="s2">&quot;my_library&quot;</span>
 </div></code></pre></td></tr></table></div></figure>
+
 
 <p>Quanto <code>rb_load</code> é executado através do método <code>require</code>, fazendo com que ele carregue uma biblioteca no seu código, o nome do arquivo especificado é adicionado a uma lista. Esta lista pode ser vista através da variável global <code>$LOADED_FEATURES</code> (<code>$"</code>).</p>
 
@@ -127,25 +131,30 @@ irb/init.rb
 
 <p>O método também permite que você seja mais especifico, informando o diretório exato onde o arquivo se encontra.</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 </pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="nb">require</span> <span class="s1">&#39;../my_library.rb&#39;</span>
 </div></code></pre></td></tr></table></div></figure>
 
+
 <p>No exemplo acima o Ruby <strong>não tentará</strong> localizar o recurso em outros diretórios, caso não o encontre no local que você especificou. Porém, é importante estar atento a um problema comum ao utilizar este recurso. Veja o código abaixo:</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 </pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="nb">require</span> <span class="s1">&#39;my_library&#39;</span>
 </div><div class='line'><span class="nb">require</span> <span class="s1">&#39;./my_library.rb&#39;</span>
 </div></code></pre></td></tr></table></div></figure>
 
+
 <p>Neste exemplo, nas duas linhas de código eu estou carregando o mesmo recurso. Na primeira linha eu informo somente o nome do arquivo e na segunda eu informo também o diretório. O método <code>require</code> não armazena o caminho absoluto do recurso em <code>$LOADED_FEATURES</code>, ele armazena a <code>string</code> exata informada na chamada do método. Neste caso o arquivo <code>my_library.rb</code> será carregado duas vezes. Analisando a variável <code>$LOADED_FEATURES</code> encontraremos o seguinte:</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 </pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="o">&gt;&gt;</span> <span class="vg">$&quot;</span><span class="o">.</span><span class="n">grep</span><span class="sr"> /my_library/</span>
 </div><div class='line'><span class="o">=&gt;</span> <span class="o">[</span><span class="s2">&quot;my_library.rb&quot;</span><span class="p">,</span> <span class="s2">&quot;./my_library.rb&quot;</span><span class="o">]</span>
 </div></code></pre></td></tr></table></div></figure>
+
+
+
 
 <h2>O método load por dentro</h2>
 
@@ -160,15 +169,17 @@ irb/init.rb
 
 <p>Você pode obrigar o método <code>load</code> a manter suas constantes para si mesmo, passando um segundo parametro na chamada do método:</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 </pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="nb">load</span> <span class="s1">&#39;my_library.rb&#39;</span><span class="p">,</span> <span class="kp">true</span>
 </div></code></pre></td></tr></table></div></figure>
 
+
 <p>Quando você carrega um recurso desta maneira, o Ruby criará um módulo anônimo e usará este módulo como um namespace, evitando conflitos entre o código do arquivo e o seu código. Ao terminar a execução este módulo é destruído. No exemplo acima, true é um atalho. Se desejar, você pode ser mais especifico fazendo também desta maneira:</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 </pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="nb">load</span> <span class="s2">&quot;my_library.rb&quot;</span><span class="p">,</span> <span class="ss">:wrap</span> <span class="o">=&gt;</span> <span class="kp">true</span>
 </div></code></pre></td></tr></table></div></figure>
+
 
 <p>O efeito é o mesmo.</p>
 
@@ -269,7 +280,7 @@ irb/init.rb
 <section>
   <h1>Últimos Tweets</h1>
   <ul id="tweets">
-    <li class="loading">Atualizando&#8230;</li>
+    <li class="loading">Atualizando...</li>
   </ul>
   <script type="text/javascript">
     $.domReady(function(){
@@ -286,7 +297,7 @@ irb/init.rb
 <section>
   <h1>Open Source</h1>
   <ul id="gh_repos">
-    <li class="loading">Atualizando&#8230;</li>
+    <li class="loading">Atualizando...</li>
   </ul>
   
   <a href="https://github.com/carlosbrando">@carlosbrando</a> no Github

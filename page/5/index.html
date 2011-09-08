@@ -84,9 +84,10 @@
 
   <div class="entry-content"><p>Qual é a diferença entre uma classe e um módulo no Ruby? Nenhuma, uma classe é um módulo no Ruby. Não acredita em mim?</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 </pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="no">Class</span><span class="o">.</span><span class="n">is_a?</span><span class="p">(</span><span class="no">Module</span><span class="p">)</span> <span class="c1"># =&gt; true</span>
 </div></code></pre></td></tr></table></div></figure>
+
 
 <p>Agora que você já confia em mim, posso explicar com um pouco mais de calma.</p>
 
@@ -95,7 +96,7 @@
 
 <p>Um módulo pode ser definido de forma grosseira como uma coleção de métodos e constantes. Você encontrará dois tipos de métodos em um módulo: métodos de instância e métodos de módulo. Um método de módulo é aquele que pode ser executado sem a necessidade de que o módulo seja incluído em outro objeto:</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 <span class='line'>3</span>
 <span class='line'>4</span>
@@ -111,9 +112,10 @@
 </div><div class='line'><span class="no">MeuModulo</span><span class="o">.</span><span class="n">meu_metodo_de_modulo</span> <span class="c1"># =&gt; Sou um m茅todo de m贸dulo!</span>
 </div></code></pre></td></tr></table></div></figure>
 
+
 <p>Por outro lado, métodos de instância, como o nome diz, precisam ser executados a partir de uma instância de um objeto. Módulos podem ser acoplados dentro de outros objetos, tornando assim estes métodos de instância acessíveis.</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 <span class='line'>3</span>
 <span class='line'>4</span>
@@ -147,6 +149,9 @@
 </div><div class='line'><span class="nb">puts</span> <span class="n">minha_classe</span><span class="o">.</span><span class="n">meu_metodo_de_intancia</span> <span class="c1"># =&gt; Método de instância!</span>
 </div></code></pre></td></tr></table></div></figure>
 
+
+
+
 <h2>O que são classes?</h2>
 
 
@@ -154,7 +159,7 @@
 
 <p>Podemos ver claramente a diferença entre classes e módulos examinando o objeto <code>Class</code> mais de perto:</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 <span class='line'>3</span>
 <span class='line'>4</span>
@@ -164,11 +169,12 @@
 </div><div class='line'><span class="c1"># =&gt; [&quot;superclass&quot;, &quot;allocate&quot;, &quot;new&quot;, &quot;to_yaml&quot;]</span>
 </div></code></pre></td></tr></table></div></figure>
 
+
 <p>Como você pode ver no código acima, <code>Class</code> é uma subclasse de <code>Module</code>, mas com quatro métodos a mais. E é exatamente nestes métodos que encontraremos a resposta para a questão levantada acima.</p>
 
 <p>Para esclarecer ainda mais, vamos imaginar como seria a classe <code>Class</code> implementada em Ruby:</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 <span class='line'>3</span>
 <span class='line'>4</span>
@@ -204,15 +210,17 @@
 </div><div class='line'><span class="k">end</span>
 </div></code></pre></td></tr></table></div></figure>
 
+
 <p>Os três primeiros métodos são responsáveis por permitir que você consiga criar uma instância de um objeto e trabalhar com o conceito de hierarquia de classes. O método <code>to_yaml</code> serve apenas como uma interface que dispara um erro do tipo <code>TypeError</code> caso ele não seja implementado por uma subclasse.</p>
 
 <p>O método <code>superclass</code> é fácil de entender, já que a sua única finalidade é informar qual é a superclasse de um objeto. Se uma superclasse não for definida ele retornará <code>nil</code>.</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 </pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="nb">Integer</span><span class="o">.</span><span class="n">superclass</span> <span class="c1"># =&gt; Numeric</span>
 </div><div class='line'><span class="no">Object</span><span class="o">.</span><span class="n">superclass</span> <span class="c1"># =&gt; nil</span>
 </div></code></pre></td></tr></table></div></figure>
+
 
 <p>O método <code>allocate</code> é responsável por reservar um espaço na memória para a nova instância do objeto que estamos criando. O método devolve esta instância pronta.</p>
 
@@ -303,17 +311,19 @@
 
 <p>Seu último patch é referente a inclusão das opções <code>:alert</code>, <code>:notice</code> e <code>:flash</code> no método <code>redirect_to</code>. Assim, se antes fazíamos desta maneira:</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 </pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="n">flash</span><span class="o">[</span><span class="ss">:notice</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;Post was created&#39;</span>
 </div><div class='line'><span class="n">redirect_to</span><span class="p">(</span><span class="vi">@post</span><span class="p">)</span>
 </div></code></pre></td></tr></table></div></figure>
 
+
 <p>Agora podemos fazer assim:</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 </pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="n">redirect_to</span><span class="p">(</span><span class="vi">@post</span><span class="p">,</span> <span class="ss">:notice</span> <span class="o">=&gt;</span> <span class="s1">&#39;Post was created&#39;</span><span class="p">)</span>
 </div></code></pre></td></tr></table></div></figure>
+
 
 <p>Esse sem dúvida é um recurso interessante e nos ajudará a diminuir a quantidade de linhas de código que escrevemos. Porém alguns desenvolvedores não gostaram desta implementação argumentando que não costumam utilizar <code>flash[:alert]</code> como sinalizador de problemas, mas sim <code>flash[:error]</code>.</p>
 
@@ -323,7 +333,7 @@
 
 <p>Outros exemplos extraídos da documentação:</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 <span class='line'>3</span>
 <span class='line'>4</span>
@@ -343,6 +353,9 @@
 </div><div class='line'><span class="n">redirect_to</span> <span class="p">{</span> <span class="ss">:action</span><span class="o">=&gt;</span><span class="s1">&#39;atom&#39;</span> <span class="p">},</span> <span class="ss">:alert</span> <span class="o">=&gt;</span> <span class="s2">&quot;Something serious happened&quot;</span>
 </div></code></pre></td></tr></table></div></figure>
 
+
+
+
 <h3>[Atualização 18/12/2009 18:20]</h3>
 
 
@@ -350,13 +363,14 @@
 
 <p>Além disso, também esqueci de mencionar que foram criados métodos mais convenientes para facilitar o acesso ao <code>flash[:notice]</code> e <code>flash[:alert]</code>. Podemos acessar estes recursos simplesmente assim:</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 <span class='line'>3</span>
 </pre></td><td class='code' width='100%'><pre><code class='html'><div class='line'><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;notice&quot;</span><span class="nt">&gt;</span><span class="err">&lt;</span>%= notice %&gt;<span class="nt">&lt;/p&gt;</span>
 </div><div class='line'>
 </div><div class='line'><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;alert&quot;</span><span class="nt">&gt;</span><span class="err">&lt;</span>%= alert %&gt;<span class="nt">&lt;/p&gt;</span>
 </div></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -391,7 +405,7 @@
 
 <p>O Rails 3 ainda está em desenvolvimento, isto significa que o código da DSL pode sofrer alterações até o lançamento oficial. De qualquer forma você pode ir matando a curiosidade analisando o novo arquivo <code>config/routes.rb</code> que está sendo gerado pelo <code>Rails 3.0.pre</code> neste momento. Eu tomei a liberdade de traduzir os comentários para facilitar o entendimento.</p>
 
-<div><figure role=code><figcaption><span>routes.rb </span></figcaption>
+<figure role=code><figcaption><span>routes.rb </span></figcaption>
  <div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 <span class='line'>3</span>
@@ -532,20 +546,21 @@
 </div><div class='line'>  <span class="c1"># linha se estiver usando rotas nomeadas e recursos.</span>
 </div><div class='line'>  <span class="n">match</span> <span class="s1">&#39;:controller(/:action(/:id(.:format)))&#39;</span>
 </div><div class='line'><span class="k">end</span>
-</div></code></pre></td></tr></table></div></figure></div>
+</div></code></pre></td></tr></table></div></figure>
 
 
 <h4>[ATUALIZAÇÃO 21/12/2009 3:00]</h4>
 
 <p>A DSL sofreu uma leve alteração que simplifica ainda mais a especificação de rotas.</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 <span class='line'>3</span>
 </pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="c1"># As duas linhas a seguir fazem a mesma coisa</span>
 </div><div class='line'><span class="n">match</span> <span class="s1">&#39;products/:id&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;catalog#view&#39;</span>
 </div><div class='line'><span class="n">match</span> <span class="s1">&#39;products/:id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;catalog#view&#39;</span>
 </div></code></pre></td></tr></table></div></figure>
+
 </div>
   
   
@@ -787,7 +802,7 @@ $ ./all.bash</span></span></pre>
 
 <p>Se tudo correu bem, você já tem o seu ambiente pronto para começar a programar em Go. E nada melhor do que um &#8220;Hello, world&#8221; para começar. Crie um arquivo com o nome helloworld.go e adicione o seguinte código nele:</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 <span class='line'>3</span>
 <span class='line'>4</span>
@@ -802,6 +817,7 @@ $ ./all.bash</span></span></pre>
 </div><div class='line'>  <span class="n">fmt</span><span class="p">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">&quot;Hello, world\n&quot;</span><span class="p">);</span>
 </div><div class='line'><span class="p">}</span>
 </div></code></pre></td></tr></table></div></figure>
+
 
 <p>Primeiro compile o arquivo com o comando:</p>
 

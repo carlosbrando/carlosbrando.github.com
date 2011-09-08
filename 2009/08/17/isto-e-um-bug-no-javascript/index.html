@@ -92,18 +92,23 @@
 <h2>Javascript não sabe somar</h2>
 
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+
+
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 </pre></td><td class='code' width='100%'><pre><code class='javascript'><div class='line'><span class="o">&gt;&gt;&gt;</span> <span class="mf">0.1</span> <span class="o">+</span> <span class="mf">0.2</span>
 </div><div class='line'><span class="mf">0.30000000000000004</span>
 </div></code></pre></td></tr></table></div></figure>
+
 
 <p>Números em Javascript são representados internamente com 64 bits e cada número pode ter no máximo 17 dígitos significativos. Isto tem algumas consequências interessantes como demonstrado no exemplo acima. É preciso ser bem cuidadoso com certos cálculos, principalmente quando a precisão é algo muito importante para o aplicativo.</p>
 
 <h2>Javascript não sabe somar - parte 2</h2>
 
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+
+
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 <span class='line'>3</span>
 <span class='line'>4</span>
@@ -115,6 +120,7 @@
 </div><div class='line'><span class="o">=&gt;</span> <span class="mi">75</span>
 </div></code></pre></td></tr></table></div></figure>
 
+
 <p>No Javascript, o operador de soma (<code>+</code>) é usado tanto para somar valores numéricos como também para concatenar strings. Precisamos estar atentos a seguinte regra: durante uma operação de soma, quando um dos valores é do tipo string, então tudo é convertido para este mesmo tipo e uma concatenação é realizada.</p>
 
 <p>No primeiro exemplo, como iniciamos a soma com um string, todos os valores seguintes são imediatamente convertidos para este mesmo formato e depois são concatenados. Já no segundo exemplo, temos inicialmente uma soma numéria (<code>3 + 4 = 7</code>) que é realizada normalmente, mas como a próxima soma a ser realizada não será com outro valor número, mas sim com o string <code>"5"</code>, então o Javascript realiza a conversão do primeiro resultado e em seguida realiza uma concatenação com os valores, devolvendo no final o string <code>"75"</code>.</p>
@@ -122,7 +128,9 @@
 <h2>Javascript não sabe converter string para números</h2>
 
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+
+
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 <span class='line'>3</span>
 <span class='line'>4</span>
@@ -133,6 +141,7 @@
 </div><div class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">parseInt</span><span class="p">(</span><span class="s2">&quot;010&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 </div><div class='line'><span class="mi">10</span>
 </div></code></pre></td></tr></table></div></figure>
+
 
 <p>O método <code>parseInt</code> é muito utilizado e tem por objetivo converter strings em números inteiros. Basicamente o método aceita dois parâmetros: o primeiro é um string contendo o valor a ser convertido e o segundo é um inteiro que representa a base (decimal, binário, hexadecimal, etc.) na qual o string em questão está sendo representado.</p>
 
@@ -151,36 +160,43 @@
 <h2>Javascript não sabe fazer comparações</h2>
 
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+
+
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 </pre></td><td class='code' width='100%'><pre><code class='javascript'><div class='line'><span class="o">&gt;&gt;</span> <span class="mi">1</span> <span class="o">==</span> <span class="kc">true</span>
 </div><div class='line'><span class="o">=&gt;</span> <span class="kc">true</span>
 </div></code></pre></td></tr></table></div></figure>
 
+
 <p>Podemos realizar comparações em Javascript com os símbolos <code>&lt;, &gt;, &lt;= e &gt;=</code>. Eles funcionam tanto para numerais como para strings. Mas quando o assunto é a comparações de igualdade, precisamos prestar atenção a alguns fatores.</p>
 
 <p>O operador de igualdade duplo realiza uma coerção de tipos caso você esteja comparando dois valores de tipos diferentes, como acontece no exemplo acima. Embora aparentemente este seja um resultado normal, em outros casos podemos ter resultados inesperados, como na seguinte comparação:</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 </pre></td><td class='code' width='100%'><pre><code class='javascript'><div class='line'><span class="o">&gt;&gt;</span> <span class="kc">null</span> <span class="o">==</span> <span class="kc">false</span>
 </div><div class='line'><span class="o">=&gt;</span> <span class="kc">false</span>
 </div></code></pre></td></tr></table></div></figure>
 
+
 <p>A linguagem também conta com um operador de igualdade tripo, que ignora a coerção de tipos:</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 </pre></td><td class='code' width='100%'><pre><code class='javascript'><div class='line'><span class="o">&gt;&gt;</span> <span class="mi">1</span> <span class="o">===</span> <span class="kc">true</span>
 </div><div class='line'><span class="o">=&gt;</span> <span class="kc">false</span>
 </div></code></pre></td></tr></table></div></figure>
+
 
 <p>Eu particularmente tenho como regra sempre utilizar o operador triplo ao realizar comparações de valores, isto tem me ajudado a evitar alguns erros de interpretação ao analisar o código e eventuais bugs decorrentes desta característica da linguagem.</p>
 
 <h2>Javascript também não sabe contar</h2>
 
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+
+
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
 <span class='line'>2</span>
 <span class='line'>3</span>
 <span class='line'>4</span>
@@ -189,6 +205,7 @@
 </div><div class='line'><span class="o">&gt;&gt;</span> <span class="nx">a</span><span class="p">.</span><span class="nx">length</span>
 </div><div class='line'><span class="o">=&gt;</span> <span class="mi">101</span>
 </div></code></pre></td></tr></table></div></figure>
+
 
 <p>A propriedade <code>length</code> de objetos do tipo array em Javascript sempre retornará um número acima da maior posição do array e não necessariamente a quantidade de itens no objeto, conforme você pôde ver no exemplo acima.</p>
 
@@ -291,7 +308,7 @@
 <section>
   <h1>Últimos Tweets</h1>
   <ul id="tweets">
-    <li class="loading">Atualizando&#8230;</li>
+    <li class="loading">Atualizando...</li>
   </ul>
   <script type="text/javascript">
     $.domReady(function(){
@@ -308,7 +325,7 @@
 <section>
   <h1>Open Source</h1>
   <ul id="gh_repos">
-    <li class="loading">Atualizando&#8230;</li>
+    <li class="loading">Atualizando...</li>
   </ul>
   
   <a href="https://github.com/carlosbrando">@carlosbrando</a> no Github
