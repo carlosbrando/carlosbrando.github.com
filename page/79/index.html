@@ -64,6 +64,62 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2007/03/27/ruby-on-rails-no-dreamhost/">Ruby on Rails no DreamHost</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+
+  
+
+
+
+<time datetime="2007-03-27T00:00:00-03:00" pubdate  data-updated="true" >27 de Março de 2007</time></p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ontem instalei meu primeiro projeto &#8216;ruby on rails&#8217; no <a href="http://www.dreamhost.com/" target="_blank">DreamHost</a>. Para realizar a fa&ccedil;anha, segui o excelente tutorial do <a href="http://blog.klaus.pro.br/" target="_blank">Klaus Paiva</a>.</p>
+
+<p><a href="http://blog.klaus.pro.br/ler/ruby-on-rails/2007/ruby-on-rails-na-dreamhost/7/index.html" target="_blank">Clique aqui para acessar o tutorial.</a></p>
+
+<p>Somente me deparei com um problema no finalzinho, no momento de criar uma <a href="http://en.wikipedia.org/wiki/Cron" target="_blank">cron job</a>.</p>
+
+<p>No tutorial, pede-se para executarmos o comando &#8221;<strong>crontab -e</strong>&#8221; e incluir a seguinte linha:</p>
+
+<pre class="prettyprint">0,5,10,15,20,25,30,35,40,45,50,55 * * * *
+curl -s http://seudominio.com/?`date +%s`</pre>
+
+
+<p>Foi quando me deparei com o erro:</p>
+
+<p><strong>1: bad minute
+errors in crontab file, can&#8217;t install.</strong></p>
+
+<p>No momento em que digitei o texto acima na <a href="http://en.wikipedia.org/wiki/Cron" target="_blank">cron job</a>, acontece uma quebra de linha, o que &eacute; normal. Mas, quando fui salvar o arquivo ele retornava este erro que n&atilde;o explica nada.</p>
+
+<p>Pesquisei em alguns f&oacute;runs e descobri uma forma de contornar o problema.</p>
+
+<p>Crie um arquivo (.txt) na sua m&aacute;quina com o texto acima em apenas uma linha e envie via FTP para o diret&oacute;rio do seu dom&iacute;nio no dreamhost. Agora basta executar o comando &#8221;<strong>crontab meuarquivo.txt</strong>&#8221;.</p>
+
+<p>Problema resolvido.</p>
+
+<p>Agrade&ccedil;o ao <a href="http://blog.klaus.pro.br/" target="_blank">Klaus Paiva</a> pelo excelente tutorial.</p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2007/03/24/so-tenho-uma-coisa-a-dizer-ruby-on-rails/">Só tenho uma coisa a dizer: &#8220;Ruby on Rails&#8221;</a></h1>
     
     
@@ -425,41 +481,6 @@ Porque s&oacute; consigo pensar no que serei, e tudo que ficou para tr&aacute;s 
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/03/16/eu-queria-ser-um-don/">Eu queria ser um Don</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-
-  
-
-
-
-<time datetime="2007-03-16T00:00:00-03:00" pubdate  data-updated="true" >16 de Março de 2007</time></p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://old.nomedojogo.com/wp-content/uploads/2007/03/two-dons-sharma31oct03.gif" rel="lightbox" title="Two-Dons-Sharma31oct03.GIF"><img src="http://old.nomedojogo.com/wp-content/uploads/2007/03/two-dons-sharma31oct03-tn.jpg" style="DISPLAY: inline; FLOAT: right; WIDTH: 185px; HEIGHT: 200px" title="Two-Dons-Sharma31oct03.GIF" height="200" width="185" alt="Two-Dons-Sharma31oct03.GIF" border="0" id="urn:zoundry:jid:Two-Dons-Sharma31oct03.GIF"/></a>Todo homem gostaria de ser um Don.<br/>Isso significa proteger a fam&iacute;lia, ser reconhecido no trabalho e ter o respeito dos amigos.<br/>Don Vito conseguiu tudo isso, Don Michael n&atilde;o.<br/><br/>Que Don eu serei?<br/>Talvez um Anthony Soprano, tirando a parte dos assassinatos e da m&atilde;e louca&#8230;<br/><br/>Mesmo um Don pode ter ataques de p&acirc;nico, medo e incerteza.<br/>N&atilde;o vou procurar uma psicanalista.<br/>Ainda tenho o pr&eacute;-conceito que isso &eacute; coisa pra maluco, e que &eacute; muito caro.<br/><br/>A quest&atilde;o &eacute;:<br/>&Eacute; muito mais dif&iacute;cil hoje ser um Don do que era h&aacute; alguns anos atr&aacute;s&#8230;<br/>Na &eacute;poca do meu pai, que foi uma esp&eacute;cie peculiar de Don, os homens n&atilde;o conheciam o estresse e a depress&atilde;o.<br/>Isso n&atilde;o era coisa de Homem, era coisa de fresco.
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2007/03/16/eu-queria-ser-um-don/">Read on &rarr;</a>
-    </footer>
-  
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -490,6 +511,10 @@ Porque s&oacute; consigo pensar no que serei, e tudo que ficou para tr&aacute;s 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
@@ -503,10 +528,6 @@ Porque s&oacute; consigo pensar no que serei, e tudo que ficou para tr&aacute;s 
     
       <li class="post">
         <a href="/2011/06/03/colorific/">Colorific</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
       </li>
     
   </ul>

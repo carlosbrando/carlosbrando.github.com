@@ -64,6 +64,52 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2008/06/24/edge-rails-metodo-merge_conditions-do-activerecord-agora-e-publico/">Edge Rails: Método merge_conditions do ActiveRecord agora é público</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+
+  
+
+
+
+<time datetime="2008-06-24T00:00:00-03:00" pubdate  data-updated="true" >24 de Junho de 2008</time></p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>O método <strong>merge_conditions</strong> do <strong>ActiveRecord</strong> agora é um método público. O que significa que ele estará presente em todas os seus <strong>Models</strong>.</p>
+
+<p>Este método faz exatamente o que o nome diz, você pode informar várias <strong>conditions</strong> separadas em seus parâmetros e ele junta tudo em uma <strong>condition</strong> só. Por exemplo:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Post<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span>
+
+a <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>author</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Carlos Brando<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
+b <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>title = ?<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Edge Rails<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span>
+
+<span class="support support_class support_class_ruby">Post</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>merge_conditions<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>a<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> b<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "(\"posts\".\"author\" = 'Carlos Brando') AND (title = 'Edge Rails')"
+</span></span></pre>
+
+
+<p>Note que ele une as conditions com um <strong>AND</strong>, sempre.</p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/06/23/edge-rails-validacoes-para-associacoes-belongs_to-desativadas-por-padrao/">Edge Rails: Validações para associações belongs_to desativadas por padrão</a></h1>
     
     
@@ -524,53 +570,6 @@ puts log<span class="punctuation punctuation_separator punctuation_separator_met
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/06/15/ruby-on-rails-21-whats-new-second-edition/">Ruby on Rails 2.1 What&#8217;s New - Second Edition</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-
-  
-
-
-
-<time datetime="2008-06-15T00:00:00-03:00" pubdate  data-updated="true" >15 de Junho de 2008</time></p>
-    
-  </header>
-
-
-  <div class="entry-content"><h4>In English</h4>
-
-
-<p><a href="http://brunomiranda.com">Bruno Miranda</a> revised the English version of the book, fixing some typos. So I&#8217;m publishing a second edition of the book with all adjustments.</p>
-
-<p>This doesn&#8217;t mean that the first version contained errors, but the translation was done very quickly. Then imagine this version as a version made with more time.</p>
-
-<p>To download the updated version, <a href="http://www.nomedojogo.com/livro/carlosbrando-rubyonrails21_en.pdf">click here</a>.</p>
-
-<h4>Em português</h4>
-
-
-<p>O <a href="http://brunomiranda.com">Bruno Miranda</a> fez uma revisão monstro na versão em inglês do livro, corrigindo alguns erros de gramática e ajustando os textos. Por isto estou publicando uma segunda edição do livro em inglês com todos os ajustes realizados.</p>
-
-<p>Isto não significa que a primeira versão continha erros, mas realmente a tradução foi feita muita rápido, já que a idéia era lançar o livro primeiro que todo mundo, e é fato que isto impediu uma revisão mais detalhada. Então imaginem esta versão como uma versão feita com mais tempo.</p>
-
-<p>Para fazer o download da versão atualizada, <a href="http://www.nomedojogo.com/livro/carlosbrando-rubyonrails21_en.pdf">clique aqui</a>.</p>
-</div>
-  
-  
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -601,6 +600,10 @@ puts log<span class="punctuation punctuation_separator punctuation_separator_met
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
@@ -614,10 +617,6 @@ puts log<span class="punctuation punctuation_separator punctuation_separator_met
     
       <li class="post">
         <a href="/2011/06/03/colorific/">Colorific</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
       </li>
     
   </ul>

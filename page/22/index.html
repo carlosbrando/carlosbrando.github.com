@@ -64,6 +64,46 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2008/10/21/como-ter-bom-gosto/">Como ter bom gosto?</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+
+  
+
+
+
+<time datetime="2008-10-21T00:00:00-02:00" pubdate  data-updated="true" >21 de Outubro de 2008</time></p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ter bom gosto é uma das características mais importantes em designers, programadores, administradores e similares. Ser capaz de separar o que é bom daquilo que é ruim. Qual dos milhares de possíveis pequenos detalhes são fundamentais para fazer o que quer que você esteja fazendo simplesmente dar certo?</p>
+
+<p>O problema com o conceito do bom gosto é que ele não é efêmero. Em uma visão simplista do mundo definimos que algumas pessoas simplesmente tem e outros não. Se você teve a sorte de ter nascido com isso você será eternamente impressionante, caso contrário você será sempre um cara condenado a fazer cagadas. Isto é algo que eu não concordo.</p>
+
+<p>Acho que bom gosto é principalmente sobre como desenvolver um olho critico para os pormenores que importam e é algo que absolutamente pode ser aprendido. A melhor maneira de aprender sobre quais detalhes realmente importam é examinar os detalhes dos grandes e dos não tão grandes trabalhos, contrastando e comparando-os.</p>
+
+<p>É necessário determinação e dedicação para desenvolver um olho critico, para desenvolver o seu bom gosto, mas é algo absolutamente possível. Alguns podem ser predispostos, mas qualquer um que se esforce pode chegar lá. Então, o que você está esperando?</p>
+
+<hr /><em>Este artigo é uma tradução/adaptação do texto escrito por <strong>David Heinemeier Hansson</strong> para o blog  <a href="http://blogcabin.37signals.com/svn/">Signal vs. Noise</a>. Para ler o texto original <a href="http://www.37signals.com/svn/posts/1325-acquire-taste">clique aqui</a>.</em>
+
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/10/20/rails-summit-chad-fowler/">Rails Summit: Chad Fowler</a></h1>
     
     
@@ -446,55 +486,6 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br">http://podcas
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/10/03/edge-rails-novo-metodo-each_with_object/">Edge Rails: Novo método each_with_object</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-
-  
-
-
-
-<time datetime="2008-10-03T00:00:00-03:00" pubdate  data-updated="true" > 3 de Outubro de 2008</time></p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>O método <strong>each_with_object</strong> do Ruby 1.9 foi adicionado ao Rails, caso você ainda não esteja usando a nova versão do Ruby. Este método é bem interessante, pois ele funciona como o conhecido método <strong>each</strong>, com um pequeno diferencial. Cada iteração além de receber um elemento da coleção, recebe também um objeto que chamamos de <strong>memo</strong>.</p>
-
-<p>Por exemplo, vamos dizer que eu pretenda preencher um hash com valores de uma coleção:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="string string_quoted string_quoted_other string_quoted_other_literal string_quoted_other_literal_lower string_quoted_other_literal_lower_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">%w(</span>first second third<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">)</span></span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>each_with_object<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{}</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">str</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">,</span> <span class="variable variable_other variable_other_block variable_other_block_ruby">hash</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
-  hash<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span>str<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>to_sym<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> str
-<span class="keyword keyword_control keyword_control_ruby">end</span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; {:second=&gt;"second", :first=&gt;"first", :third=&gt;"third"}</span></span></pre>
-
-
-<p>Note que no exemplo acima o memo é um hash vazio (<strong>{}</strong>). Dentro do bloco eu preencho este hash com os itens da minha coleção.</p>
-
-<p>Apenas um alerta: Não podemos usar objetos imutáveis como memo, tais como números, true e false. No exemplo abaixo o retorno sempre será 1, já que o número um não pode ser alterado:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">..</span><span class="constant constant_numeric constant_numeric_ruby">5</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>each_with_object<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">value</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">,</span> <span class="variable variable_other variable_other_block variable_other_block_ruby">memo</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> memo <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_augmented keyword_operator_assignment_augmented_ruby">*=</span> value <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; 1</span></span></pre>
-
-
-<hr /><em>Este artigo pertence a série “Edge Rails”. Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. A intenção desta série é preparar antecipadamente os programadores para as próximas versões do framework.</em>
-
-</div>
-  
-  
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -525,6 +516,10 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br">http://podcas
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
@@ -538,10 +533,6 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br">http://podcas
     
       <li class="post">
         <a href="/2011/06/03/colorific/">Colorific</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
       </li>
     
   </ul>

@@ -64,6 +64,49 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2008/05/09/edge-rails-mem_cache_store-agora-aceita-opcoes/">Edge Rails: mem_cache_store agora aceita opções</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+
+  
+
+
+
+<time datetime="2008-05-09T00:00:00-03:00" pubdate  data-updated="true" > 9 de Maio de 2008</time></p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A inclusão do <strong><a href="http://dev.robotcoop.com/Libraries/memcache-client/index.html">Memcache-Client</a></strong> no <strong>ActiveSupport::Cache</strong> facilitou muito as coisas, mas também removeu a flexibilidade, não deixando personalizar mais nada além do IP do servidor do memcached.</p>
+
+<p><strong>Jonathan Weiss</strong> criou um patch, que foi incluído no Rails, incluindo opções extras, como estas:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">ActiveSupport</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">Cache</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>lookup_store <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>mem_cache_store</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>localhost<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+
+<span class="support support_class support_class_ruby">ActiveSupport</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">Cache</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>lookup_store <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>mem_cache_store</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>localhost<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>192.168.1.1<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>namespace</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>foo<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span></pre>
+
+
+<p>ou</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>action_controller<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>fragment_cache_store <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>mem_cache_store</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>localhost<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>compression</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">true</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>debug</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">true</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>namespace</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>foo<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span></span></pre>
+
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/05/09/edge-rails-correcao-de-bug-no-change_column/">Edge Rails: Correção de bug no change_column</a></h1>
     
     
@@ -463,50 +506,6 @@
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/05/03/edge-rails-timecurrent/">Edge Rails: Time.current</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-
-  
-
-
-
-<time datetime="2008-05-03T00:00:00-03:00" pubdate  data-updated="true" > 3 de Maio de 2008</time></p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Novo método para a classe <code>Time</code>. O retorno do método <code>current</code> depende do <code>config.time_zone</code>, se ele foi especificado antes, o método retornará um <code>Time.zone.now</code>, caso contrário será um <code>Time.now</code>.</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> o retorno depende do config.time_zone
-</span><span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>current</span></pre>
-
-
-<p>Os métodos since e ago também terão seus retornos alterados, devolvendo um <code>TimeWithZone</code> caso o<code> config.time_zone</code> tiver sido especificado.</p>
-
-<p>Isto torna o método <code>Time.current</code> o novo método padrão para se recuperar a <strong>hora atual</strong>, substituindo o <code>Time.now</code> (que continua existindo, mas não leva em conta o fuso-horário especificado).</p>
-
-<h4>Atualização</h4>
-
-
-<p>Os métodos <code>datetime_select</code>, <code>select_datetime</code> e <code>select_time</code> também foram atualizados para terem seus valores default como <code>Time.current</code>.</p>
-</div>
-  
-  
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -537,6 +536,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
@@ -550,10 +553,6 @@
     
       <li class="post">
         <a href="/2011/06/03/colorific/">Colorific</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
       </li>
     
   </ul>

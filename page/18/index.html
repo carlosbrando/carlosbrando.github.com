@@ -64,6 +64,53 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2008/11/25/edge-rails-activeresourcebase-to_xml-e-to_json/">Rails 2.2: ActiveResource::Base #to_xml e #to_json</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+
+  
+
+
+
+<time datetime="2008-11-25T00:00:00-02:00" pubdate  data-updated="true" >25 de Novembro de 2008</time></p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Mais dois novos métodos foram acrescentados ao <strong>ActiveResource::Base</strong>: <strong>to_xml</strong> e <strong>to_json</strong>. O primeiro converte o recurso em uma string XML e o segundo retorna também uma string, mas no formato JSON representando o modelo.</p>
+
+<p>O método <strong>to_json</strong> pode ser configurado através de um parâmetro opcional com as opções <strong>:only</strong> e <strong>:except</strong>, permitindo restringir ou remover determinados atributos. Por exemplo:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">person <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Person</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>first_name</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Carlos<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>last_name</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Brando<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+person<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>to_json
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; {"first_name": "Carlos", "last_name": "Brando"}
+</span>
+person<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>to_json<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>only</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>first_name<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; {"first_name": "Carlos"}
+</span>
+person<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>to_json<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>except</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>first_name<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; {"last_name": "Brando"}</span></span></pre>
+
+
+<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades do Rails 2.2 no e-book “<a href="../2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">Ruby on Rails - O que há de novo?</a>“.</em>
+
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/11/23/rails-22/">Rails 2.2 - Finalmente</a></h1>
     
     
@@ -650,66 +697,6 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/11/17/mito-1-rails-e-dificil-de-implantar/">Mito #1: Rails é difícil de implantar</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-
-  
-
-
-
-<time datetime="2008-11-17T00:00:00-02:00" pubdate  data-updated="true" >17 de Novembro de 2008</time></p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>David Heinemeier Hansson iniciou uma série de artigos em seu <a href="http://www.loudthinking.com/posts/29-the-rails-myths">blog pessoal</a> <span style="color: #000000;"><span style="font-family: &quot;Lucida Grande&quot;,&quot;Lucida Sans Unicode&quot;,Tahoma,Verdana,sans-serif;">desmistificando</span></span> algumas crenças sobre o Ruby on Rails. Este texto não é uma tradução literal e sim uma explanação do <a href="http://www.loudthinking.com/posts/30-myth-1-rails-is-hard-to-deploy#mod_rails">primeiro artigo</a> de David.</p>
-
-<p>Quando David lançou o <a href="http://www.basecamphq.com/">Basecamp</a> sob <a href="http://www.modruby.net/en/">mod_ruby,</a> há alguns anos atrás, ele não estava preocupado com o fato de que precisaria executar várias instâncias de um projeto Rails, tanto é que na época isto era um pouco complicado de se fazer, sem uma bela de uma gambiarra.</p>
-
-<p>Naquela época só era possível executar o Rails sob CGI. Depois veio o FCGI, que ainda hoje é uma plataforma viável. Os softwares da 37signals foram executados sob esta plataforma durante alguns anos, mas esta parecia ser uma plataforma moribunda.</p>
-
-<h2>Mongrel</h2>
-
-
-<p>Foi nesta época em que apareceu o <a href="http://mongrel.rubyforge.org/">Mongrel</a>, e junto com ele a sensação de que não precisávamos de mais nenhum outro protocolo para fazer com que os servidores de aplicação e os servidores web conversassem.  Nós simplesmente podíamos usar HTTP! Hoje Mongrel, <a href="http://code.macournoyer.com/thin/">Thin</a>, <a href="http://ebb.rubyforge.org/">Ebb</a> e outros servidores web baseados em Ruby predominam nos ambientes de produção. E existem boas razões para isto, afinal eles são estáveis, versáteis e rápidos.</p>
-
-<h2>Muitas opções</h2>
-
-
-<p>Até aqui tudo parece muito bem, mas um problema apareceu: Entre tantas opções, qual é a melhor para colocar meu projeto em produção? Devo ir de Apache, nginx, ou quem sabe de lighttpd? Devo confiar nos proxies dos servidores web ou usar algo como o HAProxy ou Pound? Quantos processos do Mongrel devo usar? Seria bom usar alguma ferramenta para monitorar os processos? God ou Monit?</p>
-
-<p>Todas estas são boas opções, mas isto gera um paradoxo das Boas Opções. Entre elas qual é a melhor? Este grande numero de Boas Opções é exatamente o que cria este primeiro mito sobre o Ruby on Rails. <strong>Sem saber exatamente qual ferramenta usar, conclui-se que é difícil implantar um projeto Rails.</strong></p>
-
-<p>Como resolver este tipo de problema?</p>
-
-<h2>Phusion Passenger™</h2>
-
-
-<p><a href="http://www.modrails.com/">Passenger (mod_rails)</a>, é uma solução única que torna o deploy de aplicativos Rails tão fácil quanto um mod_php. Após um deploy ridiculamente simples, você tem um Apache se comportando como um web server, load balancer, application server e monitorador de processos. Você simplesmente joga seu aplicativo, altera o arquivo tmp/restart.txt e pronto, você está no ar!</p>
-
-<p>Isto ainda não quer dizer que todos os grandes projetos Rails estão usando Passenger. Atualmente até mesmo os projetos da 37signals ainda não estão usando-o, pelo menos por enquanto.</p>
-
-<p>O fato importante é que se houver alguma razão para isso, você pode montar todo o seu ambiente de produção manualmente com algumas das soluções mencionadas acima. Mas caso queira algo realmente simples e rápido, pode optar pelo Passenger, e confiar que esta é uma excelente opção.</p>
-
-<p><strong>Resumindo, Rails é difícil de implantar? Não! Phusion Passenger tornou o processo de implantação de projetos Rails ridiculamente simples.</strong></p>
-</div>
-  
-  
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -740,6 +727,10 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
@@ -753,10 +744,6 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
     
       <li class="post">
         <a href="/2011/06/03/colorific/">Colorific</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
       </li>
     
   </ul>

@@ -64,6 +64,67 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2008/01/22/edge-rails-uma-nova-forma-de-usar-partials/">Edge Rails: Uma nova forma de usar partials</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+
+  
+
+
+
+<time datetime="2008-01-22T00:00:00-02:00" pubdate  data-updated="true" >22 de Janeiro de 2008</time></p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/01/139492695_d53db5ba06.jpg" alt="139492695_d53db5ba06.jpg" /></p>
+
+<p>Algo muito normal no desenvolvimento de softwares em Rails é o uso de partial para evitar a repetição de código. Vejamos um exemplo de seu uso:</p>
+
+<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> form_for <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>user</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>url</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> users_path <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+    <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> <span class="support support_function support_function_actionpack support_function_actionpack_rails">render</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>partial</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> ÂformÂ <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+    <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> submit_tag Â<span class="variable variable_other variable_other_constant variable_other_constant_ruby">Create</span>Â <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+<span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> <span class="keyword keyword_control keyword_control_ruby">end</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span></span></pre>
+
+
+<p>Não vou ficar explicando o que são partials, acredito que é um conceito bem simples e se você lê este blog deve estar mais interessado em ver o que vem de novo por aí, do que aprender o que é uma partial.</p>
+
+<h3>Está bem, uma explicação bem rápida, então&#8230;</h3>
+
+
+<p>Partial é um fragmento de código (um template). A vantagem de se usar uma partial é evitar a repetição desnecessária de código. Para usar uma partial é muito simples, você pode começar com algo mais ou menos assim: <strong>render :partial =&gt; &#8220;name&#8221;</strong>. Depois deve criar um arquivo com o mesmo nome da partial, mas com um underscore na frente, só isso.</p>
+
+<h3>Vamos ao que realmente interessa</h3>
+
+
+<p>Viu o código acima? Ok, esta é a forma como estamos acostumados a fazer hoje, mas na próxima versão do Rails, faremos a mesma coisa de uma forma um pouco diferente, assim:</p>
+
+<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> form_for<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>user</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">f</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+  <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> <span class="support support_function support_function_actionpack support_function_actionpack_rails">render</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>partial</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> f <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+  <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> submit_tag <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Create<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+<span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> <span class="keyword keyword_control keyword_control_ruby">end</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span></span></pre>
+
+
+<p>Neste exemplo nós vamos renderizar a partial <strong>&#8220;users/_form&#8221;</strong>, que receberá uma variável chamada <strong>form</strong> com as referencias criadas pelo FormBuilder. É uma mudança bem simples, mas eu não podia deixar de documentar.</p>
+
+<p>Ah, e pelo que parece, a forma antiga também vai continuar funcionando.</p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/01/17/problema-com-acentuacao-resolvido/">Problema com acentuação resolvido?</a></h1>
     
     
@@ -598,81 +659,6 @@ Se antes você desejasse usá-lo nos testes seria necessário incluir um <span s
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/01/05/edge-rails-cache-e-prototype-1601/">Edge Rails: Cache e Prototype 1.6.0.1</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-
-  
-
-
-
-<time datetime="2008-01-05T00:00:00-02:00" pubdate  data-updated="true" > 5 de Janeiro de 2008</time></p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/01/375147944_49f541ad21.jpg" alt="375147944_49f541ad21.jpg" /></p>
-
-<p>O time de desenvolvimento do Rails continua forte nas altera&ccedil;&otilde;es para torn&aacute;-lo compat&iacute;vel com o <strong>Ruby 1.9</strong>, mas isto n&atilde;o significa que o resto ser&aacute; deixado de lado. Como voc&ecirc;s ver&atilde;o nas altera&ccedil;&otilde;es relacionadas abaixo muita coisa est&aacute; sendo feita para melhorar o sistema de cache e tamb&eacute;m o c&oacute;digo como um todo. Vamos as &uacute;ltimas altera&ccedil;&otilde;es:</p>
-
-<h3>Code refactoring</h3>
-
-
-<p>Foi feito um refactoring no <a href="http://dev.rubyonrails.org/browser/trunk/actionpack/lib/action_controller/verification.rb?rev=8543">ActionController::Verification</a> e aproveitaram para melhorar a documenta&ccedil;&atilde;o.</p>
-
-<h3>Cache</h3>
-
-
-<p>David tamb&eacute;m aproveitou para mudar algumas coisas nas classes de cache.</p>
-
-<p>Todos os m&eacute;todos <strong>fragment_cache_key</strong> agora retornam por padr&atilde;o o namespace &#39;view/&#39; na frente.</p>
-
-<p>Todos os <em>caching stores</em> foram retirados de <strong>ActionController::Caching::Fragments::<em></strong> e agora est&atilde;o em <strong>ActiveSupport::Cache::</em></strong>. Neste caso se voc&ecirc; faz refer&ecirc;ncia a um <em>store</em>, como <strong>ActionController::Caching::Fragments::MemoryStore</strong>, por exemplo, ser&aacute; necess&aacute;rio alterar sua refer&ecirc;ncia para <strong>ActiveSupport::Cache::MemoryStore</strong>.</p>
-
-<p><strong>ActionController::Base.fragment_cache_store</strong> deixa de existir e d&aacute; lugar &agrave; <strong>ActionController::Base.cache_store</strong>.</p>
-
-<p>Foi inclu&iacute;do no <strong>ActiveRecord::Base</strong> o m&eacute;todo <strong>cache_key</strong> para facilitar o armazenamento em cache de Active Records pelas novas bibliotecas <strong>ActiveSupport::Cache::*</strong>. Este m&eacute;todo funciona assim:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> <span class="support support_class support_class_ruby">Product</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>cache_key
-<span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>products/new<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
-<span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> <span class="support support_class support_class_ruby">Product</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">5</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>cache_key
-<span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>products/5<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
-<span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span><span class="support support_class support_class_ruby">Person</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">5</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>cache_key
-<span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>people/5-20071224150000<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span></span></pre>
-
-
-<p>Foi inclu&iacute;do o <strong>ActiveSupport::Gzip.decompress/compress</strong> para facilitar o <em>wrapper</em> para o <em>Zlib</em>.</p>
-
-<p>Agora voc&ecirc; pode usar entre as op&ccedil;&otilde;es de <em>environment</em> o <strong>config.cache_store</strong> para informar o local padr&atilde;o de armazenamento do cache. Vale lembrar que se o diret&oacute;rio tmp/cache existir o padr&atilde;o &eacute; o <strong>FileStore</strong>, caso contr&aacute;rio o <strong>MemoryStore</strong> &eacute; usado. Voc&ecirc; pode configurar das seguintes formas:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>cache_store <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>memory_store</span>
-config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>cache_store <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>file_store</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>/path/to/cache/directory<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
-config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>cache_store <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>drb_store</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>druby://localhost:9192<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
-config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>cache_store <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>mem_cache_store</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>localhost<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
-config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>cache_store <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">MyOwnStore</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>parameter<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
-
-
-<h3>Prototype e script.aculo.us</h3>
-
-
-<p>O Rails passa a usar a partir de agora a vers&atilde;o <em>1.6.0.1 do Prototype</em>. Isto serve como um preparat&oacute;rio para a vers&atilde;o <em>1.8.1 do script.aculo.us</em>.</p>
-</div>
-  
-  
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -703,6 +689,10 @@ config<span class="punctuation punctuation_separator punctuation_separator_metho
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
@@ -716,10 +706,6 @@ config<span class="punctuation punctuation_separator punctuation_separator_metho
     
       <li class="post">
         <a href="/2011/06/03/colorific/">Colorific</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
       </li>
     
   </ul>

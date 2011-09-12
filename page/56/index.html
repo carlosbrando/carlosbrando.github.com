@@ -64,6 +64,51 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2008/02/04/edge-rails-agregacoes-composed_of-agora-podem-ser-usadas-nas-pesquisas/">Edge Rails: Agregações (composed_of) agora podem ser usadas nas pesquisas</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+
+  
+
+
+
+<time datetime="2008-02-04T00:00:00-02:00" pubdate  data-updated="true" > 4 de Fevereiro de 2008</time></p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/02/324395092_4e98f00930.jpg" alt="324395092_4e98f00930.jpg" /></p>
+
+<p>O método <strong>composed_of</strong> você já conhece. Veja este caso como exemplo:</p>
+
+<pre class="textmate-source"><span class="source source_sql">class Account <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_sql">&lt;</span> ActiveRecord::Base
+  composed_of :balance, :class_name <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_sql">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>Money"</span>, :mapping <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_sql">=&gt;</span> %w(balance amount)
+end</span></pre>
+
+
+<p>A partir de agora, você pode passar um objeto <strong>Money</strong> como parâmetro no método <strong>find</strong> da classe <strong>Account</strong>, assim:</p>
+
+<pre class="textmate-source"><span class="source source_sql">amount <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_sql">=</span> <span class="constant constant_numeric constant_numeric_sql">500</span>
+currency <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_sql">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>USD"</span>
+<span class="constant constant_other constant_other_database-name constant_other_database-name_sql">Account</span>.<span class="constant constant_other constant_other_table-name constant_other_table-name_sql">find</span>(:all, :conditions <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_sql">=&gt;</span> { :balance <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_sql">=&gt;</span> <span class="storage storage_type storage_type_sql">Money</span>.new(amount, currency) })</span></pre>
+
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/02/02/edge-rails-uma-nova-estrategia-para-o-eager-loading/">Edge Rails: Uma nova estratégia para o Eager Loading</a></h1>
     
     
@@ -587,67 +632,6 @@
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/01/22/edge-rails-uma-nova-forma-de-usar-partials/">Edge Rails: Uma nova forma de usar partials</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-
-  
-
-
-
-<time datetime="2008-01-22T00:00:00-02:00" pubdate  data-updated="true" >22 de Janeiro de 2008</time></p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/01/139492695_d53db5ba06.jpg" alt="139492695_d53db5ba06.jpg" /></p>
-
-<p>Algo muito normal no desenvolvimento de softwares em Rails é o uso de partial para evitar a repetição de código. Vejamos um exemplo de seu uso:</p>
-
-<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> form_for <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>user</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>url</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> users_path <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
-    <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> <span class="support support_function support_function_actionpack support_function_actionpack_rails">render</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>partial</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> ÂformÂ <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
-    <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> submit_tag Â<span class="variable variable_other variable_other_constant variable_other_constant_ruby">Create</span>Â <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
-<span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> <span class="keyword keyword_control keyword_control_ruby">end</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span></span></pre>
-
-
-<p>Não vou ficar explicando o que são partials, acredito que é um conceito bem simples e se você lê este blog deve estar mais interessado em ver o que vem de novo por aí, do que aprender o que é uma partial.</p>
-
-<h3>Está bem, uma explicação bem rápida, então&#8230;</h3>
-
-
-<p>Partial é um fragmento de código (um template). A vantagem de se usar uma partial é evitar a repetição desnecessária de código. Para usar uma partial é muito simples, você pode começar com algo mais ou menos assim: <strong>render :partial =&gt; &#8220;name&#8221;</strong>. Depois deve criar um arquivo com o mesmo nome da partial, mas com um underscore na frente, só isso.</p>
-
-<h3>Vamos ao que realmente interessa</h3>
-
-
-<p>Viu o código acima? Ok, esta é a forma como estamos acostumados a fazer hoje, mas na próxima versão do Rails, faremos a mesma coisa de uma forma um pouco diferente, assim:</p>
-
-<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> form_for<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>user</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">f</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
-  <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> <span class="support support_function support_function_actionpack support_function_actionpack_rails">render</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>partial</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> f <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
-  <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> submit_tag <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Create<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
-<span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> <span class="keyword keyword_control keyword_control_ruby">end</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span></span></pre>
-
-
-<p>Neste exemplo nós vamos renderizar a partial <strong>&#8220;users/_form&#8221;</strong>, que receberá uma variável chamada <strong>form</strong> com as referencias criadas pelo FormBuilder. É uma mudança bem simples, mas eu não podia deixar de documentar.</p>
-
-<p>Ah, e pelo que parece, a forma antiga também vai continuar funcionando.</p>
-</div>
-  
-  
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -678,6 +662,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
@@ -691,10 +679,6 @@
     
       <li class="post">
         <a href="/2011/06/03/colorific/">Colorific</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
       </li>
     
   </ul>

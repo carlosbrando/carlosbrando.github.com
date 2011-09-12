@@ -64,6 +64,73 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2007/07/12/acelere-o-rails-com-c/">Acelere o Rails com C</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+
+  
+
+
+
+<time datetime="2007-07-12T00:00:00-03:00" pubdate  data-updated="true" >12 de Julho de 2007</time></p>
+    
+  </header>
+
+
+  <div class="entry-content"><center><img src="http://farm1.static.flickr.com/145/360459302_f7504ec9d6.jpg?v=0" height="375" width="500" /></center>
+
+
+<br/>Ao contr&aacute;rio do que alguns podem dizer, <strong>Ruby on Rails</strong> n&atilde;o &eacute; lento. Mas podem surgir situa&ccedil;&otilde;es onde voc&ecirc; precise de mais velocidade. Nestes casos, existe a op&ccedil;&atilde;o de incluir c&oacute;digo em <strong>C</strong> no seu projeto Ruby on Rails.<br/><br/>Uma maneira de se conseguir isto &eacute; usar o <a href="http://www.zenspider.com/ZSS/Products/RubyInline/"><strong>RubyInline</strong></a>. O RubyInline funciona como um gem do ruby, que pode ser instalado normalmente.
+
+
+<p>[source:ruby]sudo gem install RubyInline[/source]</p>
+
+<p>Depois de instalado voc&ecirc; pode fazer algo assim:</p>
+
+<p>[source:ruby]
+class MyTest</p>
+
+<p>  def factorial(n)</p>
+
+<pre><code>f = 1
+n.downto(2) { |x| f *= x }
+f
+</code></pre>
+
+<p>  end</p>
+
+<p>  inline do |builder|</p>
+
+<pre><code>builder.c "
+long factorial_c(int max) {
+  int i=max, result=1;
+  while (i &gt;= 2) { result *= i--; }
+  return result;
+}"
+</code></pre>
+
+<p>  end
+end
+[/source]</p>
+
+<p>De acordo com o autor deste gem (<a href="http://www.zenspider.com/RWD/">Ryan Davis</a>) o ganho de performance &eacute; consider&aacute;vel. Se voc&ecirc; precisa desenvolver algo que deve ser executado mais r&aacute;pido do que Ruby lhe permite, esta &eacute; uma alternativa interessante.</p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2007/07/10/remova-codigos-nao-utilizados-dos-seus-arquivos-css/">Remova códigos não utilizados dos seus arquivos CSS</a></h1>
     
     
@@ -406,40 +473,6 @@ Screencast: <a href="http://www.aptana.tv/movies/iphone_screencast/iphone.html" 
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/06/28/um-videozinho-meio-sem-graa-do-railsconf-2007/">Um videozinho meio sem graça do RailsConf 2007</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-
-  
-
-
-
-<time datetime="2007-06-28T00:00:00-03:00" pubdate  data-updated="true" >28 de Junho de 2007</time></p>
-    
-  </header>
-
-
-  <div class="entry-content"><center><embed src="http://www.youtube.com/v/9rhX0CY_218" width="425" height="350" type="application/x-shockwave-flash" wmode="transparent"></embed>&nbsp;</center>
-
-
-<p> <center>&nbsp;</center></p>
-</div>
-  
-  
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -470,6 +503,10 @@ Screencast: <a href="http://www.aptana.tv/movies/iphone_screencast/iphone.html" 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
@@ -483,10 +520,6 @@ Screencast: <a href="http://www.aptana.tv/movies/iphone_screencast/iphone.html" 
     
       <li class="post">
         <a href="/2011/06/03/colorific/">Colorific</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
       </li>
     
   </ul>

@@ -64,6 +64,103 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2008/09/07/edge-rails-aumentando-as-possibilidades-com-partials/">Edge Rails: Aumentando as possibilidades com partials</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+
+  
+
+
+
+<time datetime="2008-09-07T00:00:00-03:00" pubdate  data-updated="true" > 7 de Setembro de 2008</time></p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Vamos pegar o seguinte exemplo:</p>
+
+<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="comment comment_block comment_block_html"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_html">&lt;!--</span> Arquivo _layout.html.erb <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_html">--&gt;</span></span>
+inicio
+<span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> <span class="keyword keyword_control keyword_control_pseudo-method keyword_control_pseudo-method_ruby">yield</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+fim
+
+<span class="comment comment_block comment_block_html"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_html">&lt;!--</span> uma view qualquer <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_html">--&gt;</span></span>
+<span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> <span class="support support_function support_function_actionpack support_function_actionpack_rails">render</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>layout</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>layout<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+meio
+<span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> <span class="keyword keyword_control keyword_control_ruby">end</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span></span></pre>
+
+
+<p>O resultado deste código seria:</p>
+
+<pre class="textmate-source"><span class="text text_html text_html_ruby">inicio
+meio
+fim
+</span></pre>
+
+
+<p>No exemplo acima estou incluindo uma partial dentro da minha view e usando o método <strong>yield</strong> para personalizar o conteúdo, que é passado dentro de um bloco através do método <strong>render</strong>.</p>
+
+<p>Porém, hoje você não pode passar nenhum argumento dentro do bloco. No Rails 2.2. isto será possível. Você poderá fazer coisas realmente legais. Veja um exemplo usando uma coleção de livros:</p>
+
+<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="comment comment_block comment_block_html"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_html">&lt;!--</span> app/views/books/_book.html.erb <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_html">--&gt;</span></span>
+<span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">div</span> <span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_html">class</span>=<span class="string string_quoted string_quoted_double string_quoted_double_html"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_html">"</span>book<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_html">"</span></span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+  Price: $<span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> book<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>price <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+  <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> <span class="keyword keyword_control keyword_control_pseudo-method keyword_control_pseudo-method_ruby">yield</span> book <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+<span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">div</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+
+<span class="comment comment_block comment_block_html"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_html">&lt;!--</span> app/views/books/index.html.erb <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_html">--&gt;</span></span>
+<span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> <span class="support support_function support_function_actionpack support_function_actionpack_rails">render</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>layout</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>books</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">book</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+  Title: <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> book<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+<span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> <span class="keyword keyword_control keyword_control_ruby">end</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+</span></pre>
+
+
+<p>Isto devolveria algo como:</p>
+
+<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">div</span> <span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_html">class</span>=<span class="string string_quoted string_quoted_double string_quoted_double_html"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_html">"</span>book<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_html">"</span></span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+  Price: $29.74
+  Title: Advanced Rails
+<span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">div</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+</span></pre>
+
+
+<p>Veja que dentro do bloco estou informando o título do livro, mas em uma outra view eu poderia informar também a quantidade em estoque ou outras informações relevantes, sempre usando a mesma partial.</p>
+
+<p>Você também poderia usar a mesma partial várias vezes na mesma view e usar blocos para diferenciar as seções dentro da página, por exemplo:</p>
+
+<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="comment comment_block comment_block_html"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_html">&lt;!--</span> app/views/books/_book.html.erb <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_html">--&gt;</span></span>
+<span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">div</span> <span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_html">class</span>=<span class="string string_quoted string_quoted_double string_quoted_double_html"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_html">"</span>book<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_html">"</span></span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+  <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> <span class="keyword keyword_control keyword_control_pseudo-method keyword_control_pseudo-method_ruby">yield</span> book<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>header</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+  Price: $<span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> book<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>price <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+  <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> <span class="keyword keyword_control keyword_control_pseudo-method keyword_control_pseudo-method_ruby">yield</span> book<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>footer</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+<span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">div</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+
+<span class="comment comment_block comment_block_html"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_html">&lt;!--</span> app/views/books/index.html.erb <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_html">--&gt;</span></span>
+<span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> <span class="support support_function support_function_actionpack support_function_actionpack_rails">render</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>layout</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>books</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">book</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">,</span> <span class="variable variable_other variable_other_block variable_other_block_ruby">section</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+  <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%-</span> <span class="keyword keyword_control keyword_control_ruby">case</span> section <span class="keyword keyword_control keyword_control_ruby">when</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>header</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">-%&gt;</span></span>
+    Title: <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> book<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+  <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%-</span> <span class="keyword keyword_control keyword_control_ruby">when</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>footer</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">-%&gt;</span></span>
+    (<span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> book<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>reviews<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>count <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span> customer reviews)
+  <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%-</span> <span class="keyword keyword_control keyword_control_ruby">end</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">-%&gt;</span></span>
+<span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> <span class="keyword keyword_control keyword_control_ruby">end</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span></span></pre>
+
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/09/06/edge-rails-mais-novidades-na-classe-memoizable/">Edge Rails: Mais novidades na classe Memoizable</a></h1>
     
     
@@ -480,48 +577,6 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/03/edge-rails-ligando-e-desligando-carga-de-dependencias/">Edge Rails: Ligando e desligando carga de dependências</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-
-  
-
-
-
-<time datetime="2008-09-03T00:00:00-03:00" pubdate  data-updated="true" > 3 de Setembro de 2008</time></p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Se você desejar permitir ou restringir a carga de dependências durante o ciclo de um requisição, pode fazer uso de um novo parâmetro de configuração.</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>dependency_loading <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_language constant_language_ruby">true</span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> ou
-</span>config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>dependency_loading <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_language constant_language_ruby">false</span></span></pre>
-
-
-<p>Se <strong>dependency_loading</strong> for alterado para <strong>true</strong> (verdadeiro) ele permitirá que novas classes sejam carregadas durante uma requisição. Alterando para <strong>false</strong> (falso) este comportamento será desativado.</p>
-
-<p>Se você quiser rodar seu projeto em um ambiente que permita concorrências, deve desabilitar esta opção e carregar (usando <strong>require</strong>, por exemplo) todas as suas dependências nos arquivos de inicialização.</p>
-
-<p>Se a opção <a href="http://www.nomedojogo.com/2008/09/01/edge-rails-cache_classes-agora-estara-ligado-por-padrao/">cache_classes</a> estiver desabilitada, a carga de dependências estará sempre ligada.</p>
-</div>
-  
-  
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -552,6 +607,10 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
@@ -565,10 +624,6 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
     
       <li class="post">
         <a href="/2011/06/03/colorific/">Colorific</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
       </li>
     
   </ul>

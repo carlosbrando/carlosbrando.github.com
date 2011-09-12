@@ -64,6 +64,45 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2008/02/24/custom-resource-name-plugin-103/">Custom Resource Name Plugin 1.0.3</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+
+  
+
+
+
+<time datetime="2008-02-24T00:00:00-03:00" pubdate  data-updated="true" >24 de Fevereiro de 2008</time></p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Acabei de pegar e resolver um bug no plugin para quem está usando uma versão do Rails menor que a 2.0. Se este for o seu caso, por favor, atualize.</p>
+
+<p>Um dos maiores desafios que tive na construção deste plugin foi exatamente isto, manter a compatibilidade com todas as versões do Rails. Neste momento todos os meus testes estão passando nas versões 1.2.6 e 2.0.2.</p>
+
+<p>Agora, eu gostaria de pedir um favor para vocês, fiéis leitores e amigos. Poderiam por favor, testar o plugin em seus softwares e me retornar se tudo funciona perfeitamente? De preferência me informando qual versão do Ruby e do Rails vocês estão usando.</p>
+
+<p>Acredito que este plugin vai resolver o problema de muita gente que desenvolve sistemas para empresas ou público que não falam inglês. Mas para ficar tranquilo preciso ter certeza de que tudo está funcionando bem.</p>
+
+<p>Eu agradeço muito a todos que me ajudaram com sugestões nos comentários e e-mails.</p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/02/24/capistrano/">Capistrano</a></h1>
     
     
@@ -518,56 +557,6 @@ map<span class="punctuation punctuation_separator punctuation_separator_method p
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/02/19/edge-rails-form_for-e-fields_for-agora-aceita-a-opcao-index/">Edge Rails: form_for e fields_for, agora aceitam a opção :index</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-
-  
-
-
-
-<time datetime="2008-02-19T00:00:00-03:00" pubdate  data-updated="true" >19 de Fevereiro de 2008</time></p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>No episódio <a href="http://railscasts.com/episodes/75">75 do Railscast</a> de <strong>Ryan Bates</strong> , ele reclama ao ter de fazer uma gambiarra incluindo um <font color="#333333"><strong>:index  =&gt; nil</strong></font> em cada objeto de um formulário para impedir que o Rails acrescentasse o ID do registro no nome do objeto (<strong><font color="#333333">project[task_attributes][41][name]</font></strong>) quando na verdade ele queria sem o ID (<strong><font color="#333333">project[task_attributes][][name]</font></strong>).</p>
-
-<p>No vídeo, o código dele ficava mais ou menos assim:</p>
-
-<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> fields_for <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>project[task_attributes][]<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> task <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">f</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
-  <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> f<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>text_field <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>name</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>index</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">nil</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
-  <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> f<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>hidden_field <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>id</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>index</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">nil</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
-  <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> f<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>hidden_field <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>should_destroy</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>index</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">nil</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
-<span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> <span class="keyword keyword_control keyword_control_ruby">end</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span></span></pre>
-
-
-<p>Para evitar este tipo de sujeira a opção <font color="#333333"><strong>:index</strong></font> foi incluída também no <font color="#333333"><strong>form_for</strong></font> e no <strong><font color="#333333">fields_for</font></strong>. Assim fica mais fácil e limpo:</p>
-
-<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> fields_for <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>project[task_attributes][]<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> task<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
-              <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>index</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">nil</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">f</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
-  <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> f<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>text_field <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>name</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
-  <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> f<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>hidden_field <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>id</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
-  <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> f<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>hidden_field <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>should_destroy</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
-<span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> <span class="keyword keyword_control keyword_control_ruby">end</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span></span></pre>
-
-</div>
-  
-  
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -598,6 +587,10 @@ map<span class="punctuation punctuation_separator punctuation_separator_method p
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
@@ -611,10 +604,6 @@ map<span class="punctuation punctuation_separator punctuation_separator_method p
     
       <li class="post">
         <a href="/2011/06/03/colorific/">Colorific</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
       </li>
     
   </ul>

@@ -64,6 +64,81 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2008/01/05/edge-rails-cache-e-prototype-1601/">Edge Rails: Cache e Prototype 1.6.0.1</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+
+  
+
+
+
+<time datetime="2008-01-05T00:00:00-02:00" pubdate  data-updated="true" > 5 de Janeiro de 2008</time></p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/01/375147944_49f541ad21.jpg" alt="375147944_49f541ad21.jpg" /></p>
+
+<p>O time de desenvolvimento do Rails continua forte nas altera&ccedil;&otilde;es para torn&aacute;-lo compat&iacute;vel com o <strong>Ruby 1.9</strong>, mas isto n&atilde;o significa que o resto ser&aacute; deixado de lado. Como voc&ecirc;s ver&atilde;o nas altera&ccedil;&otilde;es relacionadas abaixo muita coisa est&aacute; sendo feita para melhorar o sistema de cache e tamb&eacute;m o c&oacute;digo como um todo. Vamos as &uacute;ltimas altera&ccedil;&otilde;es:</p>
+
+<h3>Code refactoring</h3>
+
+
+<p>Foi feito um refactoring no <a href="http://dev.rubyonrails.org/browser/trunk/actionpack/lib/action_controller/verification.rb?rev=8543">ActionController::Verification</a> e aproveitaram para melhorar a documenta&ccedil;&atilde;o.</p>
+
+<h3>Cache</h3>
+
+
+<p>David tamb&eacute;m aproveitou para mudar algumas coisas nas classes de cache.</p>
+
+<p>Todos os m&eacute;todos <strong>fragment_cache_key</strong> agora retornam por padr&atilde;o o namespace &#39;view/&#39; na frente.</p>
+
+<p>Todos os <em>caching stores</em> foram retirados de <strong>ActionController::Caching::Fragments::<em></strong> e agora est&atilde;o em <strong>ActiveSupport::Cache::</em></strong>. Neste caso se voc&ecirc; faz refer&ecirc;ncia a um <em>store</em>, como <strong>ActionController::Caching::Fragments::MemoryStore</strong>, por exemplo, ser&aacute; necess&aacute;rio alterar sua refer&ecirc;ncia para <strong>ActiveSupport::Cache::MemoryStore</strong>.</p>
+
+<p><strong>ActionController::Base.fragment_cache_store</strong> deixa de existir e d&aacute; lugar &agrave; <strong>ActionController::Base.cache_store</strong>.</p>
+
+<p>Foi inclu&iacute;do no <strong>ActiveRecord::Base</strong> o m&eacute;todo <strong>cache_key</strong> para facilitar o armazenamento em cache de Active Records pelas novas bibliotecas <strong>ActiveSupport::Cache::*</strong>. Este m&eacute;todo funciona assim:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> <span class="support support_class support_class_ruby">Product</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>cache_key
+<span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>products/new<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+<span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> <span class="support support_class support_class_ruby">Product</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">5</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>cache_key
+<span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>products/5<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+<span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span><span class="support support_class support_class_ruby">Person</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">5</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>cache_key
+<span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>people/5-20071224150000<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span></span></pre>
+
+
+<p>Foi inclu&iacute;do o <strong>ActiveSupport::Gzip.decompress/compress</strong> para facilitar o <em>wrapper</em> para o <em>Zlib</em>.</p>
+
+<p>Agora voc&ecirc; pode usar entre as op&ccedil;&otilde;es de <em>environment</em> o <strong>config.cache_store</strong> para informar o local padr&atilde;o de armazenamento do cache. Vale lembrar que se o diret&oacute;rio tmp/cache existir o padr&atilde;o &eacute; o <strong>FileStore</strong>, caso contr&aacute;rio o <strong>MemoryStore</strong> &eacute; usado. Voc&ecirc; pode configurar das seguintes formas:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>cache_store <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>memory_store</span>
+config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>cache_store <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>file_store</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>/path/to/cache/directory<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>cache_store <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>drb_store</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>druby://localhost:9192<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>cache_store <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>mem_cache_store</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>localhost<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>cache_store <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">MyOwnStore</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>parameter<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
+
+
+<h3>Prototype e script.aculo.us</h3>
+
+
+<p>O Rails passa a usar a partir de agora a vers&atilde;o <em>1.6.0.1 do Prototype</em>. Isto serve como um preparat&oacute;rio para a vers&atilde;o <em>1.8.1 do script.aculo.us</em>.</p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/01/04/rails-ou-django/">Rails ou Django?</a></h1>
     
     
@@ -499,48 +574,6 @@ player2<span class="punctuation punctuation_separator punctuation_separator_meth
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/12/22/edge-rails-nova-opcao-para-o-metodo-time_zone_select/">Edge Rails - Nova opção para o método time_zone_select</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-
-  
-
-
-
-<time datetime="2007-12-22T00:00:00-02:00" pubdate  data-updated="true" >22 de Dezembro de 2007</time></p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/12/1164608259_7a1ad35f5e.jpg" alt="1164608259_7a1ad35f5e.jpg" /></p>
-
-<p>Uma nova op&ccedil;&atilde;o foi acrescentada ao m&eacute;todo <strong>time_zone_select</strong>, agora voc&ecirc; pode indicar um valor padr&atilde;o para os casos em que o seu usu&aacute;rio ainda n&atilde;o tenha selecionado nada, como a coluna no banco de dados sendo nula, por exemplo. Para isto foi criada a op&ccedil;&atilde;o <strong>:default</strong>, ent&atilde;o voc&ecirc; poder&aacute; usar o m&eacute;todo das seguintes maneiras:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">time_zone_select<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>user<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>time_zone<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_language constant_language_ruby">nil</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>include_blank</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">true</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-
-time_zone_select<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>user<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>time_zone<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_language constant_language_ruby">nil</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>default</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Pacific Time (US &amp; Canada)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-
-time_zone_select<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>user<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>time_zone<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="support support_class support_class_ruby">TimeZone</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>us_zones<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>default</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Pacific Time (US &amp; Canada)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
-
-
-<p>Onde estamos informando a op&ccedil;&atilde;o <strong>:default</strong> deve aparecer com o time zone escolhido j&aacute; selecionado.</p>
-</div>
-  
-  
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -571,6 +604,10 @@ time_zone_select<span class="punctuation punctuation_section punctuation_section
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
@@ -584,10 +621,6 @@ time_zone_select<span class="punctuation punctuation_section punctuation_section
     
       <li class="post">
         <a href="/2011/06/03/colorific/">Colorific</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
       </li>
     
   </ul>

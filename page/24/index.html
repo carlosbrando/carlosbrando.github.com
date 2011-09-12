@@ -64,6 +64,52 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2008/09/24/porque-country_select-virou-um-plugin/">Porque country_select virou um plugin</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+
+  
+
+
+
+<time datetime="2008-09-24T00:00:00-03:00" pubdate  data-updated="true" >24 de Setembro de 2008</time></p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ontem eu <a href="http://www.nomedojogo.com/2008/09/23/edge-rails-country_select-removido-do-rails/">mencionei</a> aqui no blog que o helper <strong>country_select</strong> foi removido do Rails e virou um plugin. Eu não tinha entendido muito bem, mas o <a href="http://queroseragil.wordpress.com/">Rafael Mueller</a> me ajudou a esclarecer o assunto.</p>
+
+<p>O problema todo é que Taiwan segundo a norma ISO 3166, se chama na verdade &#8220;Taiwan, Province of China&#8221;. E foi exatamente assim que Michael Koziarski deixou no método.</p>
+
+<p>Então, Jamis Buck questionou se não seria possível deixar apenas &#8220;Taiwan&#8221;, já que o &#8220;Province of China&#8221; parece ser politicamente agressivo. No GitHub iniciou-se então uma série de <a href="http://github.com/rails/rails/commit/3353b85b0eae76bf36ae7c2f7b6adc1863278a8e#comments">comentários</a> que foram entrando cada vez mais em questões politicas e deixando o técnico totalmente de lado.</p>
+
+<p>Mas, Michael Koziarski foi categórico em afirmar que essas questões politicas estão muito além do que poderíamos resolver com uma simples alteração no código. E se aceitasse esta alteração, logo outras seriam solicitadas para países como Kosovo, Ossétia do Sul, Abecásia, Transnístria e uma longa lista.</p>
+
+<p>A melhor solução, ou pelo menos a que geraria menos controvérsias, foi remover o helper do Rails e disponibiliza-lo na forma de um <a href="http://github.com/rails/country_select/tree/master">plugin</a>. Desta forma qualquer um poderia facilmente criar um fork e montar sua própria lista da forma como mais lhe agradar.</p>
+
+<p>Foi uma ótima forma de resolver o conflito.</p>
+
+<p>Apenas uma correção: No último post mencionei que gravariamos no banco de dados apenas a sigla do nome do país. Isto não é verdade, continuaremos gravando o nome inteiro do país, mas com a nova nomenclatura.</p>
+
+<hr /><em>Este artigo pertence a série “Edge Rails”. Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. A intenção desta série é preparar antecipadamente os programadores para as próximas versões do framework.</em>
+
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/09/23/esqueca-atribuicoes-em-massa-no-rails-pelo-menos-por-enquanto/">Esqueça atribuições em massa no Rails, pelo menos por enquanto</a></h1>
     
     
@@ -518,51 +564,6 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/15/edge-rails-polymorphic-routes/">Edge Rails: Polymorphic Routes</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-
-  
-
-
-
-<time datetime="2008-09-15T00:00:00-03:00" pubdate  data-updated="true" >15 de Setembro de 2008</time></p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Os métodos <strong><em>_polymorphic_url</strong> e <strong></em>_polymorphic_path</strong>, muito usados para gerar URLs a partir de registros do banco de dados, receberam um novo parâmetro opcional. Agora, além dos parâmetros normais eles também aceitam um hash de opções, tornando possível gerar rotas com parâmetros adicionais na url.</p>
-
-<p>Vamos aos famosos exemplos, com o método equivalente nos comentários:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">edit_polymorphic_url<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>article</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>param1</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>10<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; edit_article_url(@article, :param1 =&gt; '10')
-</span>
-polymorphic_url<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>article</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>param1</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>10<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; article_url(@article, :param1 =&gt; '10')
-</span>
-polymorphic_url<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>article</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>format</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>pdf</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>param1</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>10<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; formatted_article_url(@article, :pdf, :param1 =&gt; '10')</span></span></pre>
-
-
-<p>Eu escrevi sobres este métodos quando eles foram lançados. Para relembrar <a href="http://www.nomedojogo.com/2008/02/18/edge-rails-usando-urls-polimorficas/">clique aqui</a>.</p>
-</div>
-  
-  
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -593,6 +594,10 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
@@ -606,10 +611,6 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
     
       <li class="post">
         <a href="/2011/06/03/colorific/">Colorific</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
       </li>
     
   </ul>

@@ -64,6 +64,70 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/2007/09/19/railsconf-europa-2007-incluindo-um-menu-em-seu-software-rails-em-5-minutos/">RailsConf Europa 2007: Incluindo um menu em seu software Rails em 5 minutos</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+
+  
+
+
+
+<time datetime="2007-09-19T00:00:00-03:00" pubdate  data-updated="true" >19 de Setembro de 2007</time></p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://farm2.static.flickr.com/1043/1402333650_456ffe9191.jpg?v=0">
+<p>O <a href="http://www.railsconfeurope.com/">Railsconf Europe 2007</a> terminou e foi um sucesso. N&atilde;o, eu tamb&eacute;m n&atilde;o pude participar&#8230; Quem sabe no ano que vem.
+<p>Mas vamos ao que interessa: Vendo uma <a href="http://conferences.oreillynet.com/presentations/railsconfeurope07/re7_paolodona.zip">apresenta&ccedil;&atilde;o</a> de Paolo Dona sobre um tal de TabNav e Widgets fiquei impressionado com o plugin criado por ele.
+<p>O TabNav &eacute; um plugin que basicamente monta um menu (tab) baseado em seus controllers. Fiz um teste e &eacute; muito, mas muito simples e r&aacute;pido de usar. Coisa de 5 minutos mesmo.
+<p>Para instalar basta executar:
+<p><pre>ruby script/plugin install svn://svn.seesaw.it/widgets/trunk</pre>
+<p>e depois rodar o gerador do tabnav:
+<p><pre>ruby script/generate tabnav</pre>
+<p>Depois basta incluir&nbsp;algo parecido com isto em seu view:
+<p>
+[source:ruby]
+<%
+render_tabnav :main, :generate_css => true do
+    add_tab do |t|
+        t.named &#8216;Home&#8217;
+        t.links_to :controller => &#8216;home&#8217;
+    end
+
+    add_tab do |t|
+        t.named &#8216;Users&#8217;
+        t.links_to :controller => &#8216;users&#8217;
+    end if current_user.admin?
+end
+%>
+[/source]
+</p>
+<p>Se estiver interessado em saber mais (recomendo) d&ecirc; uma olhada nestes tr&ecirc;s links:
+<ul>
+<li><a href="http://blog.seesaw.it/articles/2007/08/18/tabnav-retires-enter-widgets">Tabnav retires, enter Widgets!</a>
+<li><a href="http://blog.seesaw.it/articles/2007/09/03/what-changes-in-the-new-widgets-tabnav">What changes in the new Widgets Tabnav</a>
+<li><a href="http://blog.seesaw.it/articles/2006/07/23/the-easiest-way-to-add-tabbed-navigation-to-your-rails-app">The easiest way to add tabbed navigation to your Rails app!</a></li></ul>
+<p>O plugin n&atilde;o cont&eacute;m somente o TabNav, tem muito mais. Para conferir veja o slide da <a href="http://conferences.oreillynet.com/presentations/railsconfeurope07/re7_paolodona.zip">apresenta&ccedil;&atilde;o</a>.</p>
+<p>Dica: para ver&nbsp;a apresenta&ccedil;&atilde;o&nbsp;abra o arquivo slideshow.xul no Firefox.</p>
+
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/2007/09/18/rails-est-ficando-cada-vez-mais-sexy/">Rails está ficando cada vez mais sexy</a></h1>
     
     
@@ -537,40 +601,6 @@ Que isso nos sirva como um grande aprendizado.</blockquote>
 
   </article>
 
-
-  <article>
-    
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/09/09/ruby-on-rails-no-netbeans/">Ruby on Rails no Netbeans</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-
-  
-
-
-
-<time datetime="2007-09-09T00:00:00-03:00" pubdate  data-updated="true" > 9 de Setembro de 2007</time></p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img height="438" alt="nb6-ror-sep6-1" src="http://old.nomedojogo.com/wp-content/uploads/2007/09/nb6-ror-sep6-11.png" width="640" border="0"> </p>
-
-
-<p> <p>Um post r&aacute;pido p&oacute;s-feriado, s&oacute; para n&atilde;o passar em branco.</p> <p>Para quem n&atilde;o teve a oportunidade de baixar a nova vers&atilde;o do <a href="http://www.netbeans.org/community/releases/60/index.html">Netbeans 6</a> e ver como ficou o m&oacute;dulo para desenvolvedores Rails. Pode ver alguns screenshots no blog do <a href="http://weblogs.java.net/blog/arungupta/archive/2007/09/jruby_on_rails_1.html">Arun Gupta</a>.</p></p>
-</div>
-  
-  
-
-
-  </article>
-
 <nav role="pagination">
   <div>
     
@@ -601,6 +631,10 @@ Que isso nos sirva como um grande aprendizado.</blockquote>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
@@ -614,10 +648,6 @@ Que isso nos sirva como um grande aprendizado.</blockquote>
     
       <li class="post">
         <a href="/2011/06/03/colorific/">Colorific</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/29/quem-disse-que-gravar-um-podcast-e-facil/">Quem disse que gravar um podcast é fácil?</a>
       </li>
     
   </ul>
