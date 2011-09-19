@@ -15,8 +15,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-
-  <link rel="canonical" href="http://nomedojogo.com/2011/01/03/como-funcionam-os-metodos-puts-e-print-no-ruby/"/>
+  
+    <link rel="canonical" href="http://nomedojogo.com/2011/01/03/como-funcionam-os-metodos-puts-e-print-no-ruby/">
   <link href="/favicon.png" rel="shortcut icon" />
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -83,18 +83,18 @@
 
 <p>Se você vem de outra linguagem de programação talvez tenha logo especulado que eles sejam palavras reservadas do Ruby. Mas isso não é verdade. Ambos são métodos comuns, como qualquer outro. Veja por si mesmo:</p>
 
-<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="no">Object</span><span class="o">.</span><span class="n">send</span> <span class="ss">:puts</span><span class="p">,</span> <span class="s2">&quot;um texto qualquer&quot;</span>
-</div><div class='line'><span class="c1"># =&gt; um texto qualquer</span>
-</div></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Object</span><span class="o">.</span><span class="n">send</span> <span class="ss">:puts</span><span class="p">,</span> <span class="s2">&quot;um texto qualquer&quot;</span>
+</span><span class='line'><span class="c1"># =&gt; um texto qualquer</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Como você pode ver no exemplo acima, esses métodos foram inteligentemente incluidos na classe <code>Object</code>, e como no Ruby tudo é um objeto&#8230;</p>
 
-<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="nb">puts</span> <span class="nb">send</span><span class="p">(</span><span class="ss">:class</span><span class="p">)</span> <span class="c1"># =&gt; Object</span>
-</div></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">puts</span> <span class="nb">send</span><span class="p">(</span><span class="ss">:class</span><span class="p">)</span> <span class="c1"># =&gt; Object</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>O módulo Kernel</h2>
@@ -103,21 +103,21 @@
 
 <p>O interessante é que você pode tirar proveito desse mecanismo. Se você adicionar um método ao módulo <code>Kernel</code> ele funcionará exatamente como os métodos citados acima. Veja:</p>
 
-<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="k">module</span> <span class="nn">Kernel</span>
-</div><div class='line'>    <span class="k">def</span> <span class="nf">print_line</span>
-</div><div class='line'>        <span class="nb">puts</span> <span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">20</span>
-</div><div class='line'>    <span class="k">end</span>
-</div><div class='line'><span class="k">end</span>
-</div><div class='line'>
-</div><div class='line'><span class="n">print_line</span> <span class="c1"># =&gt; --------------------</span>
-</div></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">Kernel</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">print_line</span>
+</span><span class='line'>        <span class="nb">puts</span> <span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">20</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">print_line</span> <span class="c1"># =&gt; --------------------</span>
+</span></code></pre></td></tr></table></div></figure>
 
 </div>
 

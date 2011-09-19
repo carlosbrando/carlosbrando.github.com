@@ -15,8 +15,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-
-  <link rel="canonical" href="http://nomedojogo.com/2010/03/22/dica-utilizando-partials-em-arquivos-xml-no-rails/"/>
+  
+    <link rel="canonical" href="http://nomedojogo.com/2010/03/22/dica-utilizando-partials-em-arquivos-xml-no-rails/">
   <link href="/favicon.png" rel="shortcut icon" />
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,16 +81,16 @@
 
 <div class="entry-content"><p>Trabalhando em um novo plugin, senti a necessidade de usar partials em uma view renderizada através do Builder (index.xml.builder, por exemplo). Porém não é possível utilizar partials em views desse tipo da mesma forma como fazemos no ERb. Nesses casos a linha abaixo não tem nenhum efeito:</p>
 
-<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="n">render</span> <span class="ss">:partial</span> <span class="o">=&gt;</span> <span class="s2">&quot;preferences&quot;</span>
-</div></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">render</span> <span class="ss">:partial</span> <span class="o">=&gt;</span> <span class="s2">&quot;preferences&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Isso não funciona porque a partial receberá um novo objeto xml Builder quando estiver sendo renderizada. Há várias formas de solucionar isso, mas a mais simples é assim:</p>
 
-<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="n">xml</span> <span class="o">&lt;&lt;</span> <span class="n">render</span><span class="p">(</span><span class="ss">:partial</span> <span class="o">=&gt;</span> <span class="s2">&quot;preferences&quot;</span><span class="p">)</span>
-</div></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">xml</span> <span class="o">&lt;&lt;</span> <span class="n">render</span><span class="p">(</span><span class="ss">:partial</span> <span class="o">=&gt;</span> <span class="s2">&quot;preferences&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>O objetivo desse post é deixar isso registrado para um eventual esquecimento meu.</p>

@@ -15,8 +15,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-
-  <link rel="canonical" href="http://nomedojogo.com/2009/09/21/dica-de-ruby-quem-disparou-este-metodo/"/>
+  
+    <link rel="canonical" href="http://nomedojogo.com/2009/09/21/dica-de-ruby-quem-disparou-este-metodo/">
   <link href="/favicon.png" rel="shortcut icon" />
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -85,27 +85,27 @@
 
 <p>Este método pode ser muito útil quando se deseja descobrir a causa de uma exceção em um aplicativo. Veja um exemplo:</p>
 
-<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-<span class='line'>8</span>
-<span class='line'>9</span>
-<span class='line'>10</span>
-</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="k">def</span> <span class="nf">metodo_a</span>
-</div><div class='line'>    <span class="nb">puts</span> <span class="nb">caller</span>
-</div><div class='line'><span class="k">end</span>
-</div><div class='line'>
-</div><div class='line'><span class="k">def</span> <span class="nf">metodo_b</span>
-</div><div class='line'>    <span class="n">metodo_a</span>
-</div><div class='line'><span class="k">end</span>
-</div><div class='line'>
-</div><div class='line'><span class="n">metodo_b</span>
-</div><div class='line'><span class="c1"># =&gt; [&quot;untitled:6:in `metodo_b&#39;&quot;, &quot;untitled:9&quot;]</span>
-</div></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">metodo_a</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="nb">caller</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">metodo_b</span>
+</span><span class='line'>    <span class="n">metodo_a</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">metodo_b</span>
+</span><span class='line'><span class="c1"># =&gt; [&quot;untitled:6:in `metodo_b&#39;&quot;, &quot;untitled:9&quot;]</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Conforme você pôde ver no exemplo acima, o primeiro item no <code>array</code> informa que o <code>metodo_a</code> foi disparado pelo <code>metodo_b</code> na linha <code>6</code> e que o <code>metodo_b</code> foi disparado na linha <code>9</code>.</p>

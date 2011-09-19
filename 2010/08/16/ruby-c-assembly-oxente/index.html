@@ -15,8 +15,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-
-  <link rel="canonical" href="http://nomedojogo.com/2010/08/16/ruby-c-assembly-oxente/"/>
+  
+    <link rel="canonical" href="http://nomedojogo.com/2010/08/16/ruby-c-assembly-oxente/">
   <link href="/favicon.png" rel="shortcut icon" />
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -93,55 +93,55 @@
 
 <p>Segue a brincadeira:</p>
 
-<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-<span class='line'>8</span>
-<span class='line'>9</span>
-<span class='line'>10</span>
-<span class='line'>11</span>
-<span class='line'>12</span>
-<span class='line'>13</span>
-<span class='line'>14</span>
-<span class='line'>15</span>
-<span class='line'>16</span>
-<span class='line'>17</span>
-<span class='line'>18</span>
-<span class='line'>19</span>
-<span class='line'>20</span>
-<span class='line'>21</span>
-<span class='line'>22</span>
-<span class='line'>23</span>
-<span class='line'>24</span>
-</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="nb">require</span> <span class="s2">&quot;rubygems&quot;</span>
-</div><div class='line'><span class="nb">require</span> <span class="s2">&quot;inline&quot;</span>
-</div><div class='line'>
-</div><div class='line'><span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span>
-</div><div class='line'>  <span class="n">inline</span> <span class="k">do</span> <span class="o">|</span><span class="n">builder</span><span class="o">|</span>
-</div><div class='line'>    <span class="n">builder</span><span class="o">.</span><span class="n">add_compile_flags</span> <span class="s1">&#39;-fasm-blocks&#39;</span>
-</div><div class='line'>    <span class="n">builder</span><span class="o">.</span><span class="n">c</span> <span class="s2">&quot;</span>
-</div><div class='line'><span class="s2">      int sum(int num1, int num2) {</span>
-</div><div class='line'><span class="s2">        int result;</span>
-</div><div class='line'><span class="s2">    </span>
-</div><div class='line'><span class="s2">        __asm__{</span>
-</div><div class='line'><span class="s2">          mov eax, num1</span>
-</div><div class='line'><span class="s2">          mov ebx, num2</span>
-</div><div class='line'><span class="s2">          add eax, ebx</span>
-</div><div class='line'><span class="s2">          mov result, eax</span>
-</div><div class='line'><span class="s2">        }</span>
-</div><div class='line'><span class="s2">    </span>
-</div><div class='line'><span class="s2">        return result;</span>
-</div><div class='line'><span class="s2">      }</span>
-</div><div class='line'><span class="s2">    &quot;</span>
-</div><div class='line'>  <span class="k">end</span>
-</div><div class='line'><span class="k">end</span>
-</div><div class='line'>
-</div><div class='line'><span class="nb">puts</span> <span class="n">sum</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-</div></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s2">&quot;rubygems&quot;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s2">&quot;inline&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span>
+</span><span class='line'>  <span class="n">inline</span> <span class="k">do</span> <span class="o">|</span><span class="n">builder</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">builder</span><span class="o">.</span><span class="n">add_compile_flags</span> <span class="s1">&#39;-fasm-blocks&#39;</span>
+</span><span class='line'>    <span class="n">builder</span><span class="o">.</span><span class="n">c</span> <span class="s2">&quot;</span>
+</span><span class='line'><span class="s2">      int sum(int num1, int num2) {</span>
+</span><span class='line'><span class="s2">        int result;</span>
+</span><span class='line'><span class="s2">    </span>
+</span><span class='line'><span class="s2">        __asm__{</span>
+</span><span class='line'><span class="s2">          mov eax, num1</span>
+</span><span class='line'><span class="s2">          mov ebx, num2</span>
+</span><span class='line'><span class="s2">          add eax, ebx</span>
+</span><span class='line'><span class="s2">          mov result, eax</span>
+</span><span class='line'><span class="s2">        }</span>
+</span><span class='line'><span class="s2">    </span>
+</span><span class='line'><span class="s2">        return result;</span>
+</span><span class='line'><span class="s2">      }</span>
+</span><span class='line'><span class="s2">    &quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="n">sum</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Se você não pôde estar presente, a boa notícia é que esse ano todas as palestras foram gravadas e devem ser disponibilizadas em breve!</p>

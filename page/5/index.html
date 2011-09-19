@@ -15,8 +15,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-
-  <link rel="canonical" href="http://nomedojogo.com/page/5/index.html"/>
+  
+    <link rel="canonical" href="http://nomedojogo.com/page/5/">
   <link href="/favicon.png" rel="shortcut icon" />
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -143,9 +143,9 @@
 
   <div class="entry-content"><p>Qual é a diferença entre uma classe e um módulo no Ruby? Nenhuma, uma classe é um módulo no Ruby. Não acredita em mim?</p>
 
-<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="no">Class</span><span class="o">.</span><span class="n">is_a?</span><span class="p">(</span><span class="no">Module</span><span class="p">)</span> <span class="c1"># =&gt; true</span>
-</div></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Class</span><span class="o">.</span><span class="n">is_a?</span><span class="p">(</span><span class="no">Module</span><span class="p">)</span> <span class="c1"># =&gt; true</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Agora que você já confia em mim, posso explicar com um pouco mais de calma.</p>
@@ -155,58 +155,58 @@
 
 <p>Um módulo pode ser definido de forma grosseira como uma coleção de métodos e constantes. Você encontrará dois tipos de métodos em um módulo: métodos de instância e métodos de módulo. Um método de módulo é aquele que pode ser executado sem a necessidade de que o módulo seja incluído em outro objeto:</p>
 
-<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="k">module</span> <span class="nn">MeuModulo</span>
-</div><div class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">meu_metodo_de_modulo</span>
-</div><div class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Sou um m茅todo de m贸dulo!&quot;</span>
-</div><div class='line'>  <span class="k">end</span>
-</div><div class='line'><span class="k">end</span>
-</div><div class='line'>
-</div><div class='line'><span class="no">MeuModulo</span><span class="o">.</span><span class="n">meu_metodo_de_modulo</span> <span class="c1"># =&gt; Sou um m茅todo de m贸dulo!</span>
-</div></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">MeuModulo</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">meu_metodo_de_modulo</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Sou um m茅todo de m贸dulo!&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">MeuModulo</span><span class="o">.</span><span class="n">meu_metodo_de_modulo</span> <span class="c1"># =&gt; Sou um m茅todo de m贸dulo!</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Por outro lado, métodos de instância, como o nome diz, precisam ser executados a partir de uma instância de um objeto. Módulos podem ser acoplados dentro de outros objetos, tornando assim estes métodos de instância acessíveis.</p>
 
-<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-<span class='line'>8</span>
-<span class='line'>9</span>
-<span class='line'>10</span>
-<span class='line'>11</span>
-<span class='line'>12</span>
-<span class='line'>13</span>
-<span class='line'>14</span>
-<span class='line'>15</span>
-<span class='line'>16</span>
-</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="k">module</span> <span class="nn">MeuModulo</span>
-</div><div class='line'>  <span class="k">def</span> <span class="nf">meu_metodo_de_intancia</span>
-</div><div class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Método de instância!&quot;</span>
-</div><div class='line'>  <span class="k">end</span>
-</div><div class='line'><span class="k">end</span>
-</div><div class='line'>
-</div><div class='line'><span class="k">class</span> <span class="nc">MinhaClasse</span>
-</div><div class='line'>  <span class="c1"># Acoplando o MeuModulo</span>
-</div><div class='line'>  <span class="kp">include</span> <span class="no">MeuModulo</span>
-</div><div class='line'><span class="k">end</span>
-</div><div class='line'>
-</div><div class='line'><span class="c1"># Criando uma instância de MinhaClasse</span>
-</div><div class='line'><span class="n">minha_classe</span> <span class="o">=</span> <span class="no">MinhaClasse</span><span class="o">.</span><span class="n">new</span>
-</div><div class='line'>
-</div><div class='line'><span class="c1"># Executando o método de instância que foi criado em MeuModulo</span>
-</div><div class='line'><span class="nb">puts</span> <span class="n">minha_classe</span><span class="o">.</span><span class="n">meu_metodo_de_intancia</span> <span class="c1"># =&gt; Método de instância!</span>
-</div></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">MeuModulo</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">meu_metodo_de_intancia</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Método de instância!&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">MinhaClasse</span>
+</span><span class='line'>  <span class="c1"># Acoplando o MeuModulo</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="no">MeuModulo</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Criando uma instância de MinhaClasse</span>
+</span><span class='line'><span class="n">minha_classe</span> <span class="o">=</span> <span class="no">MinhaClasse</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Executando o método de instância que foi criado em MeuModulo</span>
+</span><span class='line'><span class="nb">puts</span> <span class="n">minha_classe</span><span class="o">.</span><span class="n">meu_metodo_de_intancia</span> <span class="c1"># =&gt; Método de instância!</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 
@@ -218,67 +218,67 @@
 
 <p>Podemos ver claramente a diferença entre classes e módulos examinando o objeto <code>Class</code> mais de perto:</p>
 
-<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="no">Class</span><span class="o">.</span><span class="n">superclass</span> <span class="c1"># =&gt; Module</span>
-</div><div class='line'>
-</div><div class='line'><span class="no">Class</span><span class="o">.</span><span class="n">instance_methods</span><span class="p">(</span><span class="kp">false</span><span class="p">)</span>
-</div><div class='line'><span class="c1"># =&gt; [&quot;superclass&quot;, &quot;allocate&quot;, &quot;new&quot;, &quot;to_yaml&quot;]</span>
-</div></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Class</span><span class="o">.</span><span class="n">superclass</span> <span class="c1"># =&gt; Module</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Class</span><span class="o">.</span><span class="n">instance_methods</span><span class="p">(</span><span class="kp">false</span><span class="p">)</span>
+</span><span class='line'><span class="c1"># =&gt; [&quot;superclass&quot;, &quot;allocate&quot;, &quot;new&quot;, &quot;to_yaml&quot;]</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Como você pode ver no código acima, <code>Class</code> é uma subclasse de <code>Module</code>, mas com quatro métodos a mais. E é exatamente nestes métodos que encontraremos a resposta para a questão levantada acima.</p>
 
 <p>Para esclarecer ainda mais, vamos imaginar como seria a classe <code>Class</code> implementada em Ruby:</p>
 
-<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-<span class='line'>8</span>
-<span class='line'>9</span>
-<span class='line'>10</span>
-<span class='line'>11</span>
-<span class='line'>12</span>
-<span class='line'>13</span>
-<span class='line'>14</span>
-<span class='line'>15</span>
-<span class='line'>16</span>
-<span class='line'>17</span>
-</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="k">class</span> <span class="nc">Class</span> <span class="o">&lt;</span> <span class="no">Module</span>
-</div><div class='line'>  <span class="c1"># Você já sabe como funciona o método new,</span>
-</div><div class='line'>  <span class="c1"># já que o utilizamos o tempo todo</span>
-</div><div class='line'>  <span class="k">def</span> <span class="nf">initialize</span>
-</div><div class='line'>  <span class="k">end</span>
-</div><div class='line'>
-</div><div class='line'>  <span class="c1"># Devolve a superclasse da classe atual</span>
-</div><div class='line'>  <span class="k">def</span> <span class="nf">superclass</span>
-</div><div class='line'>  <span class="k">end</span>
-</div><div class='line'>
-</div><div class='line'>  <span class="c1"># Dá suporte ao método new</span>
-</div><div class='line'>  <span class="k">def</span> <span class="nf">allocate</span>
-</div><div class='line'>  <span class="k">end</span>
-</div><div class='line'>
-</div><div class='line'>  <span class="k">def</span> <span class="nf">to_yaml</span>
-</div><div class='line'>  <span class="k">end</span>
-</div><div class='line'><span class="k">end</span>
-</div></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Class</span> <span class="o">&lt;</span> <span class="no">Module</span>
+</span><span class='line'>  <span class="c1"># Você já sabe como funciona o método new,</span>
+</span><span class='line'>  <span class="c1"># já que o utilizamos o tempo todo</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Devolve a superclasse da classe atual</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">superclass</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Dá suporte ao método new</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">allocate</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">to_yaml</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Os três primeiros métodos são responsáveis por permitir que você consiga criar uma instância de um objeto e trabalhar com o conceito de hierarquia de classes. O método <code>to_yaml</code> serve apenas como uma interface que dispara um erro do tipo <code>TypeError</code> caso ele não seja implementado por uma subclasse.</p>
 
 <p>O método <code>superclass</code> é fácil de entender, já que a sua única finalidade é informar qual é a superclasse de um objeto. Se uma superclasse não for definida ele retornará <code>nil</code>.</p>
 
-<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="nb">Integer</span><span class="o">.</span><span class="n">superclass</span> <span class="c1"># =&gt; Numeric</span>
-</div><div class='line'><span class="no">Object</span><span class="o">.</span><span class="n">superclass</span> <span class="c1"># =&gt; nil</span>
-</div></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">Integer</span><span class="o">.</span><span class="n">superclass</span> <span class="c1"># =&gt; Numeric</span>
+</span><span class='line'><span class="no">Object</span><span class="o">.</span><span class="n">superclass</span> <span class="c1"># =&gt; nil</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>O método <code>allocate</code> é responsável por reservar um espaço na memória para a nova instância do objeto que estamos criando. O método devolve esta instância pronta.</p>
@@ -370,18 +370,18 @@
 
 <p>Seu último patch é referente a inclusão das opções <code>:alert</code>, <code>:notice</code> e <code>:flash</code> no método <code>redirect_to</code>. Assim, se antes fazíamos desta maneira:</p>
 
-<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="n">flash</span><span class="o">[</span><span class="ss">:notice</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;Post was created&#39;</span>
-</div><div class='line'><span class="n">redirect_to</span><span class="p">(</span><span class="vi">@post</span><span class="p">)</span>
-</div></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">flash</span><span class="o">[</span><span class="ss">:notice</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;Post was created&#39;</span>
+</span><span class='line'><span class="n">redirect_to</span><span class="p">(</span><span class="vi">@post</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Agora podemos fazer assim:</p>
 
-<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="n">redirect_to</span><span class="p">(</span><span class="vi">@post</span><span class="p">,</span> <span class="ss">:notice</span> <span class="o">=&gt;</span> <span class="s1">&#39;Post was created&#39;</span><span class="p">)</span>
-</div></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">redirect_to</span><span class="p">(</span><span class="vi">@post</span><span class="p">,</span> <span class="ss">:notice</span> <span class="o">=&gt;</span> <span class="s1">&#39;Post was created&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Esse sem dúvida é um recurso interessante e nos ajudará a diminuir a quantidade de linhas de código que escrevemos. Porém alguns desenvolvedores não gostaram desta implementação argumentando que não costumam utilizar <code>flash[:alert]</code> como sinalizador de problemas, mas sim <code>flash[:error]</code>.</p>
@@ -392,25 +392,25 @@
 
 <p>Outros exemplos extraídos da documentação:</p>
 
-<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-<span class='line'>8</span>
-<span class='line'>9</span>
-</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="n">redirect_to</span> <span class="n">post_url</span><span class="p">(</span><span class="vi">@post</span><span class="p">),</span> <span class="ss">:alert</span> <span class="o">=&gt;</span> <span class="s2">&quot;Watch it, mister!&quot;</span>
-</div><div class='line'>
-</div><div class='line'><span class="n">redirect_to</span> <span class="n">post_url</span><span class="p">(</span><span class="vi">@post</span><span class="p">),</span> <span class="ss">:status</span><span class="o">=&gt;</span> <span class="ss">:found</span><span class="p">,</span>
-</div><div class='line'>  <span class="ss">:notice</span> <span class="o">=&gt;</span> <span class="s2">&quot;Pay attention to the road&quot;</span>
-</div><div class='line'>
-</div><div class='line'><span class="n">redirect_to</span> <span class="n">post_url</span><span class="p">(</span><span class="vi">@post</span><span class="p">),</span> <span class="ss">:status</span> <span class="o">=&gt;</span> <span class="mi">301</span><span class="p">,</span>
-</div><div class='line'>  <span class="ss">:flash</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:updated_post_id</span> <span class="o">=&gt;</span> <span class="vi">@post</span><span class="o">.</span><span class="n">id</span> <span class="p">}</span>
-</div><div class='line'>
-</div><div class='line'><span class="n">redirect_to</span> <span class="p">{</span> <span class="ss">:action</span><span class="o">=&gt;</span><span class="s1">&#39;atom&#39;</span> <span class="p">},</span> <span class="ss">:alert</span> <span class="o">=&gt;</span> <span class="s2">&quot;Something serious happened&quot;</span>
-</div></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">redirect_to</span> <span class="n">post_url</span><span class="p">(</span><span class="vi">@post</span><span class="p">),</span> <span class="ss">:alert</span> <span class="o">=&gt;</span> <span class="s2">&quot;Watch it, mister!&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">redirect_to</span> <span class="n">post_url</span><span class="p">(</span><span class="vi">@post</span><span class="p">),</span> <span class="ss">:status</span><span class="o">=&gt;</span> <span class="ss">:found</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:notice</span> <span class="o">=&gt;</span> <span class="s2">&quot;Pay attention to the road&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">redirect_to</span> <span class="n">post_url</span><span class="p">(</span><span class="vi">@post</span><span class="p">),</span> <span class="ss">:status</span> <span class="o">=&gt;</span> <span class="mi">301</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:flash</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:updated_post_id</span> <span class="o">=&gt;</span> <span class="vi">@post</span><span class="o">.</span><span class="n">id</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">redirect_to</span> <span class="p">{</span> <span class="ss">:action</span><span class="o">=&gt;</span><span class="s1">&#39;atom&#39;</span> <span class="p">},</span> <span class="ss">:alert</span> <span class="o">=&gt;</span> <span class="s2">&quot;Something serious happened&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 
@@ -422,13 +422,13 @@
 
 <p>Além disso, também esqueci de mencionar que foram criados métodos mais convenientes para facilitar o acesso ao <code>flash[:notice]</code> e <code>flash[:alert]</code>. Podemos acessar estes recursos simplesmente assim:</p>
 
-<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-</pre></td><td class='code' width='100%'><pre><code class='html'><div class='line'><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;notice&quot;</span><span class="nt">&gt;</span><span class="err">&lt;</span>%= notice %&gt;<span class="nt">&lt;/p&gt;</span>
-</div><div class='line'>
-</div><div class='line'><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;alert&quot;</span><span class="nt">&gt;</span><span class="err">&lt;</span>%= alert %&gt;<span class="nt">&lt;/p&gt;</span>
-</div></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;notice&quot;</span><span class="nt">&gt;</span><span class="err">&lt;</span>%= notice %&gt;<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;alert&quot;</span><span class="nt">&gt;</span><span class="err">&lt;</span>%= alert %&gt;<span class="nt">&lt;/p&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 </div>
   
@@ -464,161 +464,161 @@
 
 <p>O Rails 3 ainda está em desenvolvimento, isto significa que o código da DSL pode sofrer alterações até o lançamento oficial. De qualquer forma você pode ir matando a curiosidade analisando o novo arquivo <code>config/routes.rb</code> que está sendo gerado pelo <code>Rails 3.0.pre</code> neste momento. Eu tomei a liberdade de traduzir os comentários para facilitar o entendimento.</p>
 
-<figure role=code><figcaption><span>routes.rb </span></figcaption>
- <div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-<span class='line'>8</span>
-<span class='line'>9</span>
-<span class='line'>10</span>
-<span class='line'>11</span>
-<span class='line'>12</span>
-<span class='line'>13</span>
-<span class='line'>14</span>
-<span class='line'>15</span>
-<span class='line'>16</span>
-<span class='line'>17</span>
-<span class='line'>18</span>
-<span class='line'>19</span>
-<span class='line'>20</span>
-<span class='line'>21</span>
-<span class='line'>22</span>
-<span class='line'>23</span>
-<span class='line'>24</span>
-<span class='line'>25</span>
-<span class='line'>26</span>
-<span class='line'>27</span>
-<span class='line'>28</span>
-<span class='line'>29</span>
-<span class='line'>30</span>
-<span class='line'>31</span>
-<span class='line'>32</span>
-<span class='line'>33</span>
-<span class='line'>34</span>
-<span class='line'>35</span>
-<span class='line'>36</span>
-<span class='line'>37</span>
-<span class='line'>38</span>
-<span class='line'>39</span>
-<span class='line'>40</span>
-<span class='line'>41</span>
-<span class='line'>42</span>
-<span class='line'>43</span>
-<span class='line'>44</span>
-<span class='line'>45</span>
-<span class='line'>46</span>
-<span class='line'>47</span>
-<span class='line'>48</span>
-<span class='line'>49</span>
-<span class='line'>50</span>
-<span class='line'>51</span>
-<span class='line'>52</span>
-<span class='line'>53</span>
-<span class='line'>54</span>
-<span class='line'>55</span>
-<span class='line'>56</span>
-<span class='line'>57</span>
-<span class='line'>58</span>
-<span class='line'>59</span>
-<span class='line'>60</span>
-<span class='line'>61</span>
-<span class='line'>62</span>
-<span class='line'>63</span>
-<span class='line'>64</span>
-<span class='line'>65</span>
-<span class='line'>66</span>
-<span class='line'>67</span>
-<span class='line'>68</span>
-<span class='line'>69</span>
-<span class='line'>70</span>
-</pre></td><td class='code' width='100%'><pre><code class='rb'><div class='line'><span class="no">ActionController</span><span class="o">::</span><span class="no">Routing</span><span class="o">::</span><span class="no">Routes</span><span class="o">.</span><span class="n">draw</span> <span class="k">do</span> <span class="o">|</span><span class="n">map</span><span class="o">|</span>
-</div><div class='line'>  <span class="c1"># A prioridade é baseada na ordem da criação:</span>
-</div><div class='line'>  <span class="c1"># criado primeiro -&gt; maior prioridade.</span>
-</div><div class='line'>
-</div><div class='line'>  <span class="c1"># Exemplo de uma rota comum:</span>
-</div><div class='line'>  <span class="n">match</span> <span class="s1">&#39;products/:id&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;catalog#view&#39;</span>
-</div><div class='line'>  <span class="c1"># Tenha em mente que você pode atribuir outros valores</span>
-</div><div class='line'>  <span class="c1"># além de :controller e :action</span>
-</div><div class='line'>
-</div><div class='line'>  <span class="c1"># Exemplo de uma rota nomeada:</span>
-</div><div class='line'>  <span class="n">match</span> <span class="s1">&#39;products/:id/purchase&#39;</span><span class="p">,</span>
-</div><div class='line'>    <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;catalog#purchase&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:purchase</span>
-</div><div class='line'>  <span class="c1"># Esta rota pode ser invocada utilizando</span>
-</div><div class='line'>  <span class="c1"># purchase_url(:id =&gt; product.id)</span>
-</div><div class='line'>
-</div><div class='line'>  <span class="c1"># Exemplo utilizando resources (mapeia verbos HTTP</span>
-</div><div class='line'>  <span class="c1"># para ações do controller automaticamente)</span>
-</div><div class='line'>  <span class="n">resources</span> <span class="ss">:products</span>
-</div><div class='line'>
-</div><div class='line'>  <span class="c1"># Exemplo utilizando resources com opções:</span>
-</div><div class='line'>  <span class="n">resources</span> <span class="ss">:products</span> <span class="k">do</span>
-</div><div class='line'>    <span class="n">member</span> <span class="k">do</span>
-</div><div class='line'>      <span class="n">get</span> <span class="ss">:short</span>
-</div><div class='line'>      <span class="n">post</span> <span class="ss">:toggle</span>
-</div><div class='line'>    <span class="k">end</span>
-</div><div class='line'>
-</div><div class='line'>    <span class="n">collection</span> <span class="k">do</span>
-</div><div class='line'>      <span class="n">get</span> <span class="ss">:sold</span>
-</div><div class='line'>    <span class="k">end</span>
-</div><div class='line'>  <span class="k">end</span>
-</div><div class='line'>
-</div><div class='line'>  <span class="c1"># Exemplo utilizando resource com sub-resources:</span>
-</div><div class='line'>  <span class="n">resources</span> <span class="ss">:products</span> <span class="k">do</span>
-</div><div class='line'>    <span class="n">resources</span> <span class="ss">:comments</span><span class="p">,</span> <span class="ss">:sales</span>
-</div><div class='line'>    <span class="n">resource</span> <span class="ss">:seller</span>
-</div><div class='line'>  <span class="k">end</span>
-</div><div class='line'>
-</div><div class='line'>  <span class="c1"># Exemplo mais complexo de uso de resources com </span>
-</div><div class='line'>  <span class="c1"># sub-resources:</span>
-</div><div class='line'>  <span class="n">resources</span> <span class="ss">:products</span> <span class="k">do</span>
-</div><div class='line'>    <span class="n">resources</span> <span class="ss">:comments</span>
-</div><div class='line'>    <span class="n">resources</span> <span class="ss">:sales</span> <span class="k">do</span>
-</div><div class='line'>      <span class="n">get</span> <span class="ss">:recent</span><span class="p">,</span> <span class="ss">:on</span> <span class="o">=&gt;</span> <span class="ss">:collection</span>
-</div><div class='line'>    <span class="k">end</span>
-</div><div class='line'>  <span class="k">end</span>
-</div><div class='line'>
-</div><div class='line'>  <span class="c1"># Exeplo utilizando resource com um namespace:</span>
-</div><div class='line'>  <span class="n">namespace</span> <span class="ss">:admin</span> <span class="k">do</span>
-</div><div class='line'>    <span class="c1"># Direciona /admin/products/* para </span>
-</div><div class='line'>    <span class="c1"># Admin::ProductsController</span>
-</div><div class='line'>    <span class="c1"># (app/controllers/admin/products_controller.rb)</span>
-</div><div class='line'>    <span class="n">resources</span> <span class="ss">:products</span>
-</div><div class='line'>  <span class="k">end</span>
-</div><div class='line'>
-</div><div class='line'>  <span class="c1"># Você pode definir a home do seu site utilizando </span>
-</div><div class='line'>  <span class="c1"># &quot;root&quot;. </span>
-</div><div class='line'>  <span class="c1"># Lembre-se de apagar o arquivo public/index.html.</span>
-</div><div class='line'>  <span class="n">root</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s2">&quot;welcome&quot;</span>
-</div><div class='line'>
-</div><div class='line'>  <span class="c1"># Você pode listar todas as rotas disponíveis com </span>
-</div><div class='line'>  <span class="c1"># &quot;rake routes&quot;</span>
-</div><div class='line'>
-</div><div class='line'>  <span class="c1"># Deixe a rota padrão com a prioridade mais baixa </span>
-</div><div class='line'>  <span class="c1"># possível.</span>
-</div><div class='line'>  <span class="c1"># Nota: A rota padrão torna todas as actions em </span>
-</div><div class='line'>  <span class="c1"># qualquer controller acessíveis via solicitações GET. </span>
-</div><div class='line'>  <span class="c1"># Você deve considerar a remoção ou comentar esta </span>
-</div><div class='line'>  <span class="c1"># linha se estiver usando rotas nomeadas e recursos.</span>
-</div><div class='line'>  <span class="n">match</span> <span class="s1">&#39;:controller(/:action(/:id(.:format)))&#39;</span>
-</div><div class='line'><span class="k">end</span>
-</div></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span>routes.rb </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="no">ActionController</span><span class="o">::</span><span class="no">Routing</span><span class="o">::</span><span class="no">Routes</span><span class="o">.</span><span class="n">draw</span> <span class="k">do</span> <span class="o">|</span><span class="n">map</span><span class="o">|</span>
+</span><span class='line'>  <span class="c1"># A prioridade é baseada na ordem da criação:</span>
+</span><span class='line'>  <span class="c1"># criado primeiro -&gt; maior prioridade.</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Exemplo de uma rota comum:</span>
+</span><span class='line'>  <span class="n">match</span> <span class="s1">&#39;products/:id&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;catalog#view&#39;</span>
+</span><span class='line'>  <span class="c1"># Tenha em mente que você pode atribuir outros valores</span>
+</span><span class='line'>  <span class="c1"># além de :controller e :action</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Exemplo de uma rota nomeada:</span>
+</span><span class='line'>  <span class="n">match</span> <span class="s1">&#39;products/:id/purchase&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;catalog#purchase&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:purchase</span>
+</span><span class='line'>  <span class="c1"># Esta rota pode ser invocada utilizando</span>
+</span><span class='line'>  <span class="c1"># purchase_url(:id =&gt; product.id)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Exemplo utilizando resources (mapeia verbos HTTP</span>
+</span><span class='line'>  <span class="c1"># para ações do controller automaticamente)</span>
+</span><span class='line'>  <span class="n">resources</span> <span class="ss">:products</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Exemplo utilizando resources com opções:</span>
+</span><span class='line'>  <span class="n">resources</span> <span class="ss">:products</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">member</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">get</span> <span class="ss">:short</span>
+</span><span class='line'>      <span class="n">post</span> <span class="ss">:toggle</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">collection</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">get</span> <span class="ss">:sold</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Exemplo utilizando resource com sub-resources:</span>
+</span><span class='line'>  <span class="n">resources</span> <span class="ss">:products</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">resources</span> <span class="ss">:comments</span><span class="p">,</span> <span class="ss">:sales</span>
+</span><span class='line'>    <span class="n">resource</span> <span class="ss">:seller</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Exemplo mais complexo de uso de resources com </span>
+</span><span class='line'>  <span class="c1"># sub-resources:</span>
+</span><span class='line'>  <span class="n">resources</span> <span class="ss">:products</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">resources</span> <span class="ss">:comments</span>
+</span><span class='line'>    <span class="n">resources</span> <span class="ss">:sales</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">get</span> <span class="ss">:recent</span><span class="p">,</span> <span class="ss">:on</span> <span class="o">=&gt;</span> <span class="ss">:collection</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Exeplo utilizando resource com um namespace:</span>
+</span><span class='line'>  <span class="n">namespace</span> <span class="ss">:admin</span> <span class="k">do</span>
+</span><span class='line'>    <span class="c1"># Direciona /admin/products/* para </span>
+</span><span class='line'>    <span class="c1"># Admin::ProductsController</span>
+</span><span class='line'>    <span class="c1"># (app/controllers/admin/products_controller.rb)</span>
+</span><span class='line'>    <span class="n">resources</span> <span class="ss">:products</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Você pode definir a home do seu site utilizando </span>
+</span><span class='line'>  <span class="c1"># &quot;root&quot;. </span>
+</span><span class='line'>  <span class="c1"># Lembre-se de apagar o arquivo public/index.html.</span>
+</span><span class='line'>  <span class="n">root</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s2">&quot;welcome&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Você pode listar todas as rotas disponíveis com </span>
+</span><span class='line'>  <span class="c1"># &quot;rake routes&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Deixe a rota padrão com a prioridade mais baixa </span>
+</span><span class='line'>  <span class="c1"># possível.</span>
+</span><span class='line'>  <span class="c1"># Nota: A rota padrão torna todas as actions em </span>
+</span><span class='line'>  <span class="c1"># qualquer controller acessíveis via solicitações GET. </span>
+</span><span class='line'>  <span class="c1"># Você deve considerar a remoção ou comentar esta </span>
+</span><span class='line'>  <span class="c1"># linha se estiver usando rotas nomeadas e recursos.</span>
+</span><span class='line'>  <span class="n">match</span> <span class="s1">&#39;:controller(/:action(/:id(.:format)))&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h4>[ATUALIZAÇÃO 21/12/2009 3:00]</h4>
 
 <p>A DSL sofreu uma leve alteração que simplifica ainda mais a especificação de rotas.</p>
 
-<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="c1"># As duas linhas a seguir fazem a mesma coisa</span>
-</div><div class='line'><span class="n">match</span> <span class="s1">&#39;products/:id&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;catalog#view&#39;</span>
-</div><div class='line'><span class="n">match</span> <span class="s1">&#39;products/:id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;catalog#view&#39;</span>
-</div></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># As duas linhas a seguir fazem a mesma coisa</span>
+</span><span class='line'><span class="n">match</span> <span class="s1">&#39;products/:id&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;catalog#view&#39;</span>
+</span><span class='line'><span class="n">match</span> <span class="s1">&#39;products/:id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;catalog#view&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 </div>
   
@@ -861,21 +861,21 @@ $ ./all.bash</span></span></pre>
 
 <p>Se tudo correu bem, você já tem o seu ambiente pronto para começar a programar em Go. E nada melhor do que um &#8220;Hello, world&#8221; para começar. Crie um arquivo com o nome helloworld.go e adicione o seguinte código nele:</p>
 
-<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-</pre></td><td class='code' width='100%'><pre><code class='go'><div class='line'><span class="k">package</span> <span class="n">main</span>
-</div><div class='line'>
-</div><div class='line'><span class="k">import</span> <span class="n">fmt</span> <span class="s">&quot;fmt&quot;</span>
-</div><div class='line'>
-</div><div class='line'><span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
-</div><div class='line'>  <span class="n">fmt</span><span class="p">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">&quot;Hello, world\n&quot;</span><span class="p">);</span>
-</div><div class='line'><span class="p">}</span>
-</div></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='go'><span class='line'><span class="k">package</span> <span class="n">main</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">import</span> <span class="n">fmt</span> <span class="s">&quot;fmt&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">fmt</span><span class="p">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">&quot;Hello, world\n&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Primeiro compile o arquivo com o comando:</p>
