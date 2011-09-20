@@ -84,7 +84,7 @@
 
 
 
-<p>Sem d&uacute;vida nenhuma o Ruby tem algumas m&aacute;gicas que impressionam. Imagine por exemplo que eu queira pegar um <strong>array</strong> de <strong>strings</strong> e converter todas as palavras para mai&uacute;sculo, eu poderia fazer assim:</p>
+<p>Sem dúvida nenhuma o Ruby tem algumas mágicas que impressionam. Imagine por exemplo que eu queira pegar um <strong>array</strong> de <strong>strings</strong> e converter todas as palavras para maiúsculo, eu poderia fazer assim:</p>
 
 
 
@@ -98,7 +98,7 @@
 </pre>
 
 
-<p>Bem simples. Para cada item do array eu executo o m&eacute;todo upcase e armazeno o resultado na vari&aacute;vel <strong>meu_array</strong>. Mas eu tamb&eacute;m poderia fazer assim:</p>
+<p>Bem simples. Para cada item do array eu executo o m&eacute;todo upcase e armazeno o resultado na variável <strong>meu_array</strong>. Mas eu tamb&eacute;m poderia fazer assim:</p>
 
 <pre>
 >> meu_array = %w(ruby on rails)
@@ -113,7 +113,7 @@
 
 <p>Como isto funciona?</p>
 
-<p>Quando usamos o operador <strong>&amp;</strong> na frente do nome de uma vari&aacute;vel estamos dizendo que esta vari&aacute;vel &eacute; um bloco. Mas no nosso caso <strong>:upcase</strong> n&atilde;o &eacute; um bloco e sim um s&iacute;mbolo. Neste caso o Ruby tenta converter nosso s&iacute;mbolo em um bloco chamando o m&eacute;todo <strong>to_proc</strong> da classe <strong>Symbol</strong>. Mas veja o c&oacute;digo do <a href="http://api.rubyonrails.org/classes/Symbol.html">m&eacute;todo</a> <strong>to_proc</strong>:</p>
+<p>Quando usamos o operador <strong>&amp;</strong> na frente do nome de uma variável estamos dizendo que esta variável &eacute; um bloco. Mas no nosso caso <strong>:upcase</strong> não &eacute; um bloco e sim um s&iacute;mbolo. Neste caso o Ruby tenta converter nosso s&iacute;mbolo em um bloco chamando o m&eacute;todo <strong>to_proc</strong> da classe <strong>Symbol</strong>. Mas veja o c&oacute;digo do <a href="http://api.rubyonrails.org/classes/Symbol.html">m&eacute;todo</a> <strong>to_proc</strong>:</p>
 
 <pre>
 def to_proc
@@ -122,7 +122,7 @@ end
 </pre>
 
 
-<p>J&aacute; entendeu? Este m&eacute;todo transforma o s&iacute;mbolo <strong>:upcase</strong> em um bloco, fazendo com que o exemplo acima na verdade seja executado desta maneira:</p>
+<p>Já entendeu? Este m&eacute;todo transforma o s&iacute;mbolo <strong>:upcase</strong> em um bloco, fazendo com que o exemplo acima na verdade seja executado desta maneira:</p>
 
 <pre>
 >> meu_array = meu_array.map {|*args| args.shift.__send__(:upcase, *args)}
@@ -130,7 +130,7 @@ end
 </pre>
 
 
-<p>M&aacute;gica? Voc&ecirc; ainda n&atilde;o viu nada.</p>
+<p>Mágica? Você ainda não viu nada.</p>
 
 <p>Agora imagine que eu tenha um classe <strong>User</strong> no Rails. Usando este recurso eu poderia fazer algo assim:</p>
 
@@ -147,7 +147,7 @@ user = User.find(:all)
 </pre>
 
 
-<p>O <strong>Ruby</strong> tem as suas m&aacute;gicas e o <strong>Rails</strong> sabe usa-las muito bem.</p>
+<p>O <strong>Ruby</strong> tem as suas mágicas e o <strong>Rails</strong> sabe usa-las muito bem.</p>
 </div>
 
 

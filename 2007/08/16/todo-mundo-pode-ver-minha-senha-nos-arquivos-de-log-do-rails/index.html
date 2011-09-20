@@ -85,13 +85,13 @@
 <p><img src="http://farm2.static.flickr.com/1039/1101698626_d15d566a94.jpg?v=0"> </p>
 
 
-<p>Um recurso muito &uacute;til no <strong>Rails</strong> s&atilde;o os arquivos de log. Por meio deles n&oacute;s podemos acompanhar exatamente o que est&aacute; acontecendo com nosso software, vendo inclusive os comandos <strong>SQL</strong> enviados para o banco de dados.</p>
+<p>Um recurso muito útil no <strong>Rails</strong> são os arquivos de log. Por meio deles n&oacute;s podemos acompanhar exatamente o que está acontecendo com nosso software, vendo inclusive os comandos <strong>SQL</strong> enviados para o banco de dados.</p>
 
 
-<p>Mas este recurso tem um s&eacute;rio problema de seguran&ccedil;a. Uma simples p&aacute;gina de login ou cadastro de usu&aacute;rios, pode fazer com que o <strong>Rails</strong> grave a senha do usu&aacute;rio nos arquivos de log. Quando enviamos dados via post (usado nestes casos) o <strong>Rails</strong> grava todos os parametros enviados no arquivo de log, inclusive sua senha. Fa&ccedil;a o teste e comprove.</p>
+<p>Mas este recurso tem um s&eacute;rio problema de seguran&ccedil;a. Uma simples página de login ou cadastro de usuários, pode fazer com que o <strong>Rails</strong> grave a senha do usuário nos arquivos de log. Quando enviamos dados via post (usado nestes casos) o <strong>Rails</strong> grava todos os parametros enviados no arquivo de log, inclusive sua senha. Fa&ccedil;a o teste e comprove.</p>
 
 
-<p>Para evitar este tipo de problema, voc&ecirc; pode utilizar um filtro no seu arquivo de controller:</p>
+<p>Para evitar este tipo de problema, você pode utilizar um filtro no seu arquivo de controller:</p>
 
 
 <p>[source:ruby]
@@ -99,8 +99,8 @@ class WelcomeController < ApplicationController
     filter_parameter_logging "password"
 end
 [/source]</p>
-<p>Onde <strong>&#8220;password&#8221;</strong> &eacute; o nome do campo que voc&ecirc; est&aacute; usando para armazenar sua senha.</p>
-<p>Agora fa&ccedil;a o teste novamente. Ao inv&eacute;s de o <strong>Rails</strong> registrar a senha do usu&aacute;rio no log, ele trocar&aacute; por <strong>[FILTERED]</strong>.</p>
+<p>Onde <strong>&#8220;password&#8221;</strong> &eacute; o nome do campo que você está usando para armazenar sua senha.</p>
+<p>Agora fa&ccedil;a o teste novamente. Ao inv&eacute;s de o <strong>Rails</strong> registrar a senha do usuário no log, ele trocará por <strong>[FILTERED]</strong>.</p>
 
 </div>
 

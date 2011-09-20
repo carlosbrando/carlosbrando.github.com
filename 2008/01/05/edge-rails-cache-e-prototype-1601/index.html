@@ -81,23 +81,23 @@
 
 <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/01/375147944_49f541ad21.jpg" alt="375147944_49f541ad21.jpg" /></p>
 
-<p>O time de desenvolvimento do Rails continua forte nas altera&ccedil;&otilde;es para torn&aacute;-lo compat&iacute;vel com o <strong>Ruby 1.9</strong>, mas isto n&atilde;o significa que o resto ser&aacute; deixado de lado. Como voc&ecirc;s ver&atilde;o nas altera&ccedil;&otilde;es relacionadas abaixo muita coisa est&aacute; sendo feita para melhorar o sistema de cache e tamb&eacute;m o c&oacute;digo como um todo. Vamos as &uacute;ltimas altera&ccedil;&otilde;es:</p>
+<p>O time de desenvolvimento do Rails continua forte nas altera&ccedil;ões para torná-lo compat&iacute;vel com o <strong>Ruby 1.9</strong>, mas isto não significa que o resto será deixado de lado. Como vocês verão nas altera&ccedil;ões relacionadas abaixo muita coisa está sendo feita para melhorar o sistema de cache e tamb&eacute;m o c&oacute;digo como um todo. Vamos as últimas altera&ccedil;ões:</p>
 
 <h3>Code refactoring</h3>
 
 
-<p>Foi feito um refactoring no <a href="http://dev.rubyonrails.org/browser/trunk/actionpack/lib/action_controller/verification.rb?rev=8543">ActionController::Verification</a> e aproveitaram para melhorar a documenta&ccedil;&atilde;o.</p>
+<p>Foi feito um refactoring no <a href="http://dev.rubyonrails.org/browser/trunk/actionpack/lib/action_controller/verification.rb?rev=8543">ActionController::Verification</a> e aproveitaram para melhorar a documenta&ccedil;ão.</p>
 
 <h3>Cache</h3>
 
 
 <p>David tamb&eacute;m aproveitou para mudar algumas coisas nas classes de cache.</p>
 
-<p>Todos os m&eacute;todos <strong>fragment_cache_key</strong> agora retornam por padr&atilde;o o namespace &#39;view/&#39; na frente.</p>
+<p>Todos os m&eacute;todos <strong>fragment_cache_key</strong> agora retornam por padrão o namespace &#39;view/&#39; na frente.</p>
 
-<p>Todos os <em>caching stores</em> foram retirados de <strong>ActionController::Caching::Fragments::<em></strong> e agora est&atilde;o em <strong>ActiveSupport::Cache::</em></strong>. Neste caso se voc&ecirc; faz refer&ecirc;ncia a um <em>store</em>, como <strong>ActionController::Caching::Fragments::MemoryStore</strong>, por exemplo, ser&aacute; necess&aacute;rio alterar sua refer&ecirc;ncia para <strong>ActiveSupport::Cache::MemoryStore</strong>.</p>
+<p>Todos os <em>caching stores</em> foram retirados de <strong>ActionController::Caching::Fragments::<em></strong> e agora estão em <strong>ActiveSupport::Cache::</em></strong>. Neste caso se você faz referência a um <em>store</em>, como <strong>ActionController::Caching::Fragments::MemoryStore</strong>, por exemplo, será necessário alterar sua referência para <strong>ActiveSupport::Cache::MemoryStore</strong>.</p>
 
-<p><strong>ActionController::Base.fragment_cache_store</strong> deixa de existir e d&aacute; lugar &agrave; <strong>ActionController::Base.cache_store</strong>.</p>
+<p><strong>ActionController::Base.fragment_cache_store</strong> deixa de existir e dá lugar &agrave; <strong>ActionController::Base.cache_store</strong>.</p>
 
 <p>Foi inclu&iacute;do no <strong>ActiveRecord::Base</strong> o m&eacute;todo <strong>cache_key</strong> para facilitar o armazenamento em cache de Active Records pelas novas bibliotecas <strong>ActiveSupport::Cache::*</strong>. Este m&eacute;todo funciona assim:</p>
 
@@ -111,7 +111,7 @@
 
 <p>Foi inclu&iacute;do o <strong>ActiveSupport::Gzip.decompress/compress</strong> para facilitar o <em>wrapper</em> para o <em>Zlib</em>.</p>
 
-<p>Agora voc&ecirc; pode usar entre as op&ccedil;&otilde;es de <em>environment</em> o <strong>config.cache_store</strong> para informar o local padr&atilde;o de armazenamento do cache. Vale lembrar que se o diret&oacute;rio tmp/cache existir o padr&atilde;o &eacute; o <strong>FileStore</strong>, caso contr&aacute;rio o <strong>MemoryStore</strong> &eacute; usado. Voc&ecirc; pode configurar das seguintes formas:</p>
+<p>Agora você pode usar entre as op&ccedil;ões de <em>environment</em> o <strong>config.cache_store</strong> para informar o local padrão de armazenamento do cache. Vale lembrar que se o diret&oacute;rio tmp/cache existir o padrão &eacute; o <strong>FileStore</strong>, caso contrário o <strong>MemoryStore</strong> &eacute; usado. Você pode configurar das seguintes formas:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>cache_store <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>memory_store</span>
 config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>cache_store <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>file_store</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>/path/to/cache/directory<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
@@ -123,7 +123,7 @@ config<span class="punctuation punctuation_separator punctuation_separator_metho
 <h3>Prototype e script.aculo.us</h3>
 
 
-<p>O Rails passa a usar a partir de agora a vers&atilde;o <em>1.6.0.1 do Prototype</em>. Isto serve como um preparat&oacute;rio para a vers&atilde;o <em>1.8.1 do script.aculo.us</em>.</p>
+<p>O Rails passa a usar a partir de agora a versão <em>1.6.0.1 do Prototype</em>. Isto serve como um preparat&oacute;rio para a versão <em>1.8.1 do script.aculo.us</em>.</p>
 </div>
 
 

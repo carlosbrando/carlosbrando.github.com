@@ -81,41 +81,41 @@
 
 <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/01/92697433_aa5c016a77.jpg" alt="92697433_aa5c016a77.jpg" /></p>
 
-<p>David acabou de publicar algumas altera&ccedil;&otilde;es no trunk do Rails. Vamos a elas:</p>
+<p>David acabou de publicar algumas altera&ccedil;ões no trunk do Rails. Vamos a elas:</p>
 
 <h3>Rails:update</h3>
 
 
-<p>A partir de agora toda vez que rodarmos a tarefa &#39;<strong>rake rails:freeze:edge</strong>&#39; tamb&eacute;m ser&aacute; executado o &#39;<strong>rails:update</strong>&#39;, atualizando os arquivos de configura&ccedil;&atilde;o e JavaScript. Esta &eacute; uma altera&ccedil;&atilde;o simples mas importante, porque na maioria das vezes que congelamos uma vers&atilde;o do Rails em nosso projeto, precisamos rodar um &#39;<strong>rake rails:update</strong>&#39;, mas muita gente se esquece disso. Agora n&atilde;o ser&aacute; mais necess&aacute;rio.</p>
+<p>A partir de agora toda vez que rodarmos a tarefa &#39;<strong>rake rails:freeze:edge</strong>&#39; tamb&eacute;m será executado o &#39;<strong>rails:update</strong>&#39;, atualizando os arquivos de configura&ccedil;ão e JavaScript. Esta &eacute; uma altera&ccedil;ão simples mas importante, porque na maioria das vezes que congelamos uma versão do Rails em nosso projeto, precisamos rodar um &#39;<strong>rake rails:update</strong>&#39;, mas muita gente se esquece disso. Agora não será mais necessário.</p>
 
 <h3>Titleize</h3>
 
 
-<p>Existe um bug no m&eacute;todo <strong>String#titleize</strong> quando tentamos us&aacute;-lo em uma string que contenha o <em><strong>&#39;s</strong></em>. Fa&ccedil;a um teste no console de sua aplica&ccedil;&atilde;o Rails executando o c&oacute;digo abaixo:</p>
+<p>Existe um bug no m&eacute;todo <strong>String#titleize</strong> quando tentamos usá-lo em uma string que contenha o <em><strong>&#39;s</strong></em>. Fa&ccedil;a um teste no console de sua aplica&ccedil;ão Rails executando o c&oacute;digo abaixo:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>brando's blog<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>titleize
 <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Brando'S Blog<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span></span></pre>
 
 
-<p>Notou que o <em><strong>&#39;s</strong></em> retornou mai&uacute;sculo? Este problema foi corrigido. Se voc&ecirc; executar o mesmo c&oacute;digo na vers&atilde;o Edge do Rails, o retorno ser&aacute; o texto correto: &quot;Brando&#39;s Blog&quot;.</p>
+<p>Notou que o <em><strong>&#39;s</strong></em> retornou maiúsculo? Este problema foi corrigido. Se você executar o mesmo c&oacute;digo na versão Edge do Rails, o retorno será o texto correto: &quot;Brando&#39;s Blog&quot;.</p>
 
 <h3>Increment e decrement</h3>
 
 
-<p>Os m&eacute;todos <strong>increment</strong>, <strong>increment!</strong>, <strong>decrement</strong> e <strong>decrement!</strong> do <em><strong>ActiveRecord</strong></em> receberam mais um par&acirc;metro como opcional. Hoje voc&ecirc; pode usar estes m&eacute;todos para aumentar ou diminuir o valor de uma coluna em 1 (um). Mas a partir da pr&oacute;xima vers&atilde;o do Rails voc&ecirc; poder&aacute; especificar o valor a ser adicionado ou subtra&iacute;do se desejar. Assim:</p>
+<p>Os m&eacute;todos <strong>increment</strong>, <strong>increment!</strong>, <strong>decrement</strong> e <strong>decrement!</strong> do <em><strong>ActiveRecord</strong></em> receberam mais um par&acirc;metro como opcional. Hoje você pode usar estes m&eacute;todos para aumentar ou diminuir o valor de uma coluna em 1 (um). Mas a partir da pr&oacute;xima versão do Rails você poderá especificar o valor a ser adicionado ou subtra&iacute;do se desejar. Assim:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">player1<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>increment!<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>points</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">5</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
 player2<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>decrement!<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>points</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">2</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
 
 
-<p>No exemplo acima estou somando 5 &agrave; pontua&ccedil;&atilde;o atual do jogador 1 e subtraindo 2 da pontua&ccedil;&atilde;o atual do jogador 2. Como este par&acirc;metro &eacute; opcional, os seus c&oacute;digos antigos n&atilde;o ser&atilde;o afetados.</p>
+<p>No exemplo acima estou somando 5 &agrave; pontua&ccedil;ão atual do jogador 1 e subtraindo 2 da pontua&ccedil;ão atual do jogador 2. Como este par&acirc;metro &eacute; opcional, os seus c&oacute;digos antigos não serão afetados.</p>
 
 <h3>127.0.0.1 e DRY</h3>
 
 
 <p>Em um <a href="http://www.nomedojogo.com/2007/12/16/edge-rails-%e2%80%93-ruby-19-seguranca-e-muito-zelo/">post antigo</a> eu mencionei que o arquivo <a href="http://dev.rubyonrails.org/browser/trunk/railties/lib/tasks/databases.rake?rev=8388">databases.rake</a> havia sido alterado para suportar o <strong>IP 127.0.0.1</strong> na tarefa <em><strong>create</strong></em>. Agora isto foi estendido para a tarefa <em><strong>drop</strong></em> e o arquivo recebeu um <em>refactory</em> para tornar o c&oacute;digo menos repetitivo.</p>
 
-<h4>Refer&ecirc;ncias:</h4>
+<h4>Referências:</h4>
 
 
 <ul>

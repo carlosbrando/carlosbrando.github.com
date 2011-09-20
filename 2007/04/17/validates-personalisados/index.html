@@ -94,7 +94,7 @@ Na nossa view ficaria assim:</p>
 
 <p>Como resolver isto?</p>
 
-<p>Crie um arquivo .rb qualquer dentro da pasta lib com o seguinte conte&uacute;do:
+<p>Crie um arquivo .rb qualquer dentro da pasta lib com o seguinte conteúdo:
 [source:ruby]module ActiveRecord</p>
 
 <pre><code>class Errors
@@ -108,7 +108,7 @@ Na nossa view ficaria assim:</p>
         @errors[attribute.to_s] &amp;lt;&amp;lt; msg
     end
 
-    # true se a mensagem for alter&amp;aacute;vel
+    # true se a mensagem for alterável
 
     def replace_message?(msg)
         (msg =~ /{?}/) || (msg.starts_with?"!")
@@ -146,22 +146,22 @@ end
 </code></pre>
 
 <p>end[/source]
-N&atilde;o vou entrar em detalhes sobre o que o c&oacute;digo faz (cabe a voc&ecirc; analisar), mas basicamente eu verifico se o texto passado no :message possui:</p>
+Não vou entrar em detalhes sobre o que o c&oacute;digo faz (cabe a você analisar), mas basicamente eu verifico se o texto passado no :message possui:</p>
 
 <ol>
     <li>{?} em algum lugar do texto.</li>
-    <li>Ou come&ccedil;a com ! (exclama&ccedil;&atilde;o)</li>
+    <li>Ou come&ccedil;a com ! (exclama&ccedil;ão)</li>
 </ol>
 
 
 <p>No primeiro caso, simplesmente subistituimos a string &#8220;{?}&#8221; pelo nome da coluna. O que nos permite criar algo assim: &#8220;O campo &#8216;{?}&#8217; deve ser preenchido&#8221;.</p>
 
-<p>No segundo caso, o c&oacute;digo verifica se a mensagem come&ccedil;a com o s&iacute;mbolo de exclama&ccedil;&atilde;o (!). Se sim, deixa a mensagem exatamente como est&aacute;, ignorando completamente o nome da coluna.</p>
+<p>No segundo caso, o c&oacute;digo verifica se a mensagem come&ccedil;a com o s&iacute;mbolo de exclama&ccedil;ão (!). Se sim, deixa a mensagem exatamente como está, ignorando completamente o nome da coluna.</p>
 
 <p>Sendo assim, o c&oacute;digo dado como exemplo acima poderia ficar assim:
 [source:ruby]validates_presence_of :title,
 :message =&gt; &#8221;<strong>!</strong>O campo &#8216;T&iacute;tulo&#8217; deve ser preenchido&#8221;[/source]
-E o resultado na sua p&aacute;gina seria:</p>
+E o resultado na sua página seria:</p>
 
 <ul>
     <li>O campo &#8216;T&iacute;tulo&#8217; deve ser preenchido</li>

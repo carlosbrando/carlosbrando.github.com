@@ -85,10 +85,10 @@
 <p>Regra: Coloque sempre links para stylesheets e javascript dentro da tag HEAD do HTML.</p>
 
 
-<p>N&atilde;o &eacute; que isto seja obrigat&oacute;rio, mas eu gosto de deixar as coisas bonitas. O problema com Rails neste caso &eacute; que quando uso o m&eacute;todo <strong>stylesheet_link_tag</strong> na p&aacute;gina que estou desenvolvendo, quando ela for renderizada, o link do css&nbsp;ficar&aacute; bem no meio da p&aacute;gina por causa do <strong>yield</strong> da p&aacute;gina de layout.</p>
+<p>Não &eacute; que isto seja obrigat&oacute;rio, mas eu gosto de deixar as coisas bonitas. O problema com Rails neste caso &eacute; que quando uso o m&eacute;todo <strong>stylesheet_link_tag</strong> na página que estou desenvolvendo, quando ela for renderizada, o link do css&nbsp;ficará bem no meio da página por causa do <strong>yield</strong> da página de layout.</p>
 
 
-<p>Mas como tudo no Rails, existe uma solu&ccedil;&atilde;o muito simples para isto. Podemos usar o m&eacute;todo <strong>content_for</strong>.</p>
+<p>Mas como tudo no Rails, existe uma solu&ccedil;ão muito simples para isto. Podemos usar o m&eacute;todo <strong>content_for</strong>.</p>
 
 
 <p>Para fazer o teste, crie um view de layout com o seguinte c&oacute;digo:</p>
@@ -104,15 +104,15 @@
     </body>
 </html>
 [/source]</p>
-<p>Veja que a p&aacute;gina tem dois yield, sendo que o primeiro recebe um par&acirc;metro <strong>:css</strong>.</p>
+<p>Veja que a página tem dois yield, sendo que o primeiro recebe um par&acirc;metro <strong>:css</strong>.</p>
 <p>Agora crie outra&nbsp;view da seguinte forma:</p>
 <p>[source:html]
 <% content_for :css do %>
     <%= stylesheet_link_tag 'css_da_minha_pagina' %>
 <% end %>
-<h2>Minha P&aacute;gina</h2>
+<h2>Minha Página</h2>
 [/source]</p>
-<p>Rode e veja como fica sua p&aacute;gina. Pronto, tudo no seu devido lugar.</p>
+<p>Rode e veja como fica sua página. Pronto, tudo no seu devido lugar.</p>
 
 </div>
 
