@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ruby | Nome do Jogo]]></title>
+  <link href="http://nomedojogo.com/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://nomedojogo.com/"/>
+  <updated>2011-10-17T10:01:06-02:00</updated>
+  <id>http://nomedojogo.com/</id>
+  <author>
+    <name><![CDATA[Carlos Brando]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Remarkable 2.0.1 e Atualização do (Comovente) Guia de Ruby do Why]]></title>
+    <link href="http://nomedojogo.com/2008/12/19/remarkable-201-e-atualizacao-do-comovente-guia-de-ruby-do-why/"/>
+    <updated>2008-12-19T00:00:00-02:00</updated>
+    <id>http://nomedojogo.com/2008/12/19/remarkable-201-e-atualizacao-do-comovente-guia-de-ruby-do-why</id>
+    <content type="html"><![CDATA[<p>Desde que lancei a primeira versão do <a href="http://www.nomedojogo.com/2008/11/13/shoulda-para-rspec-e-remarkable/">Remarkable</a> tenho visto cada vez mais pessoas aderindo ao projeto para criar seus testes com maior rapidez. E com uma quantidade maior de pessoas usando nas mais diversas aplicações é claro que os bugs começaram a aparecer.</p>
+
+<p>A maior parte dos problemas ocorriam por uma falha na arquitetura inicial do Remarkable, o que tornou necessário um refactoring no projeto inteiro para estruturá-lo melhor.  Na primeira versão, internamente havia uma separação muito clara entre as duas sintaxes que o projeto oferecia. Com a reestruturação não existe mais esta separação, não importa qual é o seu estilo, <a href="http://github.com/carlosbrando/remarkable/wikis/rspec-macros">RSpec</a> ou <a href="http://github.com/carlosbrando/remarkable/wikis/shoulda-macros">Shoulda</a>, internamente você sempre usará o mesmo código para realizar os testes.</p>
+
+<p>Desta forma, acabamos por ganhar muitas macros novas.</p>
+
+<p>Enquanto na versão em RSpec isto já era algo comum:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rspec"><span class="meta meta_rspec meta_rspec_behaviour"><span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_behaviour">describe</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">Dog</span> <span class="keyword keyword_control keyword_control_ruby keyword_control_ruby_start-block">do</span></span>
+<span class="meta meta_rspec meta_rspec_pending">  <span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_pending">it</span> <span class="string string_ruby">{ should belong_to(:user) }</span></span>
+<span class="meta meta_rspec meta_rspec_pending">  <span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_pending">it</span> <span class="string string_ruby">{ should_not have_many(:fleas) }</span></span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+<p>Na sintaxe do Shoulda apenas possuíamos macros <code>should<em>[alguma coisa]</code> e quase nenhuma <code>should_not</em>[alguma coisa]</code>. Mas agora todas as macros possuem as duas opções, assim:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rspec"><span class="meta meta_rspec meta_rspec_behaviour"><span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_behaviour">describe</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">Dog</span> <span class="keyword keyword_control keyword_control_ruby keyword_control_ruby_start-block">do</span></span>
+  should_belong_to <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>user</span>
+  should_not_have_many <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>fleas</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+<p>Além disso mais testes foram adicionados para garantir que problemas antigos não voltem para nos assombrar.</p>
+
+<p>Para atualizar o Remarkable, execute no terminal (lembrando que no Windows não precisa usar o <code>sudo</code>):</p>
+
+<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">gem sources -a <span class="markup markup_underline markup_underline_link markup_underline_link_text">http://gems.github.com</span>
+sudo gem install carlosbrando-remarkable</span></span></pre>
+
+
+<p>Ainda falta um logo e um site para o projeto. Alguém se habilita?</p>
+
+<h2>O (Comovente) Guia de Ruby do Why</h2>
+
+
+<p>Acabei de atualizar o <a href="http://why.nomedojogo.com/">livro</a> com novas traduções e correções. Devido a minha falta de tempo, acabei demorando para aplicar alguns dos patches que me foram enviados.</p>
+
+<p>Na maioria das vezes, os colaboradores são rápidos demais e várias pessoas corrigem o mesmo texto de formas diferentes, e isto complica um pouco na hora de aceitar uma atualização. Eu tenho de olhar arquivo por arquivo antes de decidir qual será aplicado. Mas isto é bom, porque garante uma maior qualidade à tradução, embora torne o processo um pouco mais lento.</p>
+
+<p>O livro pode ser encontrado na url: <a href="http://why.nomedojogo.com">http://why.nomedojogo.com</a>. Também existe uma versão para impressão em <a href="http://why.nomedojogo.com/print.html">http://why.nomedojogo.com/print.html</a>.</p>
+
+<p>A processo de tradução já foi finalizado, todo o livro já está em português. Ainda falta ajustar algumas imagens e formatações de texto, mas acredito que se conseguirmos mais colaboradores teremos o livro completo e finalizado até o fim do ano.</p>
+
+<p>Quer ajudar? Comece lendo o <a href="http://why.nomedojogo.com/">livro</a> e quando encontrar algo errado altere <a href="http://github.com/carlosbrando/poignant-br/tree/master">aqui</a>.</p>
+]]></content>
+  </entry>
+  
+</feed>
