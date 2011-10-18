@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="O método excerpt é um helper que funciona assim:excerpt('This is an example', 'an', 5)# =&gt; "...s is an examp..."Eu pedi para que ele localizasse...">
+  <meta name="description" content="No Ruby 1.9 teremos alguns métodos novos na classe Time, métodos como:Time.now# =&gt; Thu Nov 03 18:58:25 CET 2005Time.now.sunday?# =&gt; falseExis...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,6 +74,63 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/03/26/edge-rails-timewithzone-se-preparando-para-o-ruby-19/">Edge Rails: TimeWithZone se preparando para o Ruby 1.9</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2008-03-26T00:00:00-03:00" pubdate  data-updated="true" >26 de Março de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>No Ruby 1.9 teremos alguns métodos novos na classe <code>Time</code>, métodos como:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>now
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; Thu Nov 03 18:58:25 CET 2005
+</span>
+<span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>now<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>sunday?
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; false</span></span></pre>
+
+
+<p>Existe um para cada dia da semana.</p>
+
+<p>Outra curiosidade é que o método <code>to_s</code> do objeto <code>Time</code> também vai ter um retorno um pouco diferente. Hoje quando executamos <code>Time.new.to_s</code>, temos o seguite:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>to_s
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "Thu Oct 12 10:39:27 +0200 2006"</span></span></pre>
+
+
+<p>No Ruby 1.9 teremos:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>to_s
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "2006-10-12 10:39:24 +0200"</span></span></pre>
+
+
+<p>Estou escrevendo isto apenas para dizer que o Rails já está sendo preparado para lidar com estas alterações. A classe <code>TimeWithZone</code>, por exemplo, acabou de receber uma implementação para funcionar com os métodos do primeiro exemplo.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -513,63 +570,6 @@ authors<span class="punctuation punctuation_separator punctuation_separator_meth
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/03/20/edge-rails-o-metodo-squish-ficou-mais-rapido/">Edge Rails: O método squish ficou mais rápido</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2008-03-20T00:00:00-03:00" pubdate  data-updated="true" >20 de Março de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Nesta série de artigos eu já falei do novo método <code>squish</code>. <a href="http://www.nomedojogo.com/2008/02/26/edge-rails-removendo-espacos-em-branco-com-o-metodo-squish/">Lembra-se?</a></p>
-
-<p>Pois é, este método e a sua versão destrutiva, o <code>squish!</code>, foram alterados para ficarem mais rápidos. Veja como ficou a nova versão:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_module meta_module_ruby"><span class="keyword keyword_control keyword_control_module keyword_control_module_ruby">module</span> <span class="entity entity_name entity_name_type entity_name_type_module entity_name_type_module_ruby">ActiveSupport</span></span>
-<span class="meta meta_module meta_module_ruby">  <span class="keyword keyword_control keyword_control_module keyword_control_module_ruby">module</span> <span class="entity entity_name entity_name_type entity_name_type_module entity_name_type_module_ruby">CoreExtensions</span></span>
-<span class="meta meta_module meta_module_ruby">    <span class="keyword keyword_control keyword_control_module keyword_control_module_ruby">module</span> <span class="entity entity_name entity_name_type entity_name_type_module entity_name_type_module_ruby">String</span></span>
-<span class="meta meta_module meta_module_ruby">      <span class="keyword keyword_control keyword_control_module keyword_control_module_ruby">module</span> <span class="entity entity_name entity_name_type entity_name_type_module entity_name_type_module_ruby">Filters</span></span>
-
-        <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">squish</span></span>
-          dup<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>squish!
-        <span class="keyword keyword_control keyword_control_ruby">end</span>
-
-        <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">squish!</span></span>
-          strip!
-          gsub!<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_regexp string_regexp_classic string_regexp_classic_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span><span class="constant constant_character constant_character_escape constant_character_escape_ruby">\s</span>+<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span> <span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-          <span class="variable variable_language variable_language_ruby">self</span>
-        <span class="keyword keyword_control keyword_control_ruby">end</span>
-
-      <span class="keyword keyword_control keyword_control_ruby">end</span>
-    <span class="keyword keyword_control keyword_control_ruby">end</span>
-  <span class="keyword keyword_control keyword_control_ruby">end</span>
-<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/50/">&larr; Antigos</a>
@@ -587,6 +587,10 @@ authors<span class="punctuation punctuation_separator punctuation_separator_meth
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
@@ -600,10 +604,6 @@ authors<span class="punctuation punctuation_separator punctuation_separator_meth
     
       <li class="post">
         <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/06/03/colorific/">Colorific</a>
       </li>
     
   </ul>

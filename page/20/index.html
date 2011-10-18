@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Este texto é uma tradução do artigo &#8221;Average environments beget average work&#8221;.Grady Booch soltou o seguinte axioma no BrainstormTECH: &...">
+  <meta name="description" content="Para tornar o ActiveRecord mais consistente foi adicionado o método de instância Model#delete. Ele é similar ao método de classe com o mesmo nome. ...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,6 +74,49 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/11/07/rails-22-novo-metodo-de-instancia-modeldelete/">Rails 2.2: Novo método de instância Model#delete</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2008-11-07T00:00:00-02:00" pubdate  data-updated="true" > 7 de Novembro de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Para tornar o <strong>ActiveRecord</strong> mais consistente foi adicionado o método de instância <strong>Model#delete</strong>. Ele é similar ao método de classe com o mesmo nome. O método <strong>delete</strong>, diferente do método <strong>destroy</strong>, apaga o registro do banco de dados sem disparar callbacks, como o <strong>before_destroy</strong> e o <strong>after_destroy</strong>.</p>
+
+<p>Este método também não aplicará nenhuma das regras impostas na associação através de cláusulas como <strong>:dependent</strong>.</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">client <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Client</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+client<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>delete</span></pre>
+
+
+<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades do Rails 2.2 no e-book “<a href="../2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">Ruby on Rails - O que há de novo?</a>“.</em>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -617,92 +660,6 @@ comment <span class="keyword keyword_operator keyword_operator_assignment keywor
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/10/28/why%25e2%2580%2599s-poignant-guide-to-ruby-em-portugues/">Why&#8217;s (Poignant) Guide to Ruby em português</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2008-10-28T00:00:00-02:00" pubdate  data-updated="true" >28 de Outubro de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="alignnone size-medium wp-image-1713" title="aboutthepoignantguide-333" src="http://old.nomedojogo.com/wp-content/uploads/2008/10/aboutthepoignantguide-333.jpg" alt="" /></p>
-
-<p>Resolvi liberar uma versão &#8220;alpha&#8221; do livro <a href="http://why.nomedojogo.com/"><strong>Why’s (Poignant) Guide to Ruby em português</strong></a>. A tradução total do livro ainda não foi finalizada, mas como precisamos de um gás para terminar, estou liberando o que temos até agora para que a comunidade possa se animar e ajudar a traduzir e revisar o pouco que falta.</p>
-
-<p>Não preciso dizer que o livro é aclamado como uma das maiores referencias sobre a linguagem Ruby, e termos este livro em português é um sonho esperado por muitos.</p>
-
-<p>O processo de tradução começou a 5 meses atrás e agora estamos com 99% do livro pronto, contando com as imagens e quadrinhos que o ilustram. A tradução deste livro é um esforço de vários membros da comunidade brasileira:</p>
-
-<ul>
-    <li>Carlos Brando</li>
-    <li><span id="profile_name">Fernando Campos (elefante)</span></li>
-    <li><span id="profile_name">Rafael Barbosa (escobera)</span></li>
-    <li><span id="profile_name">Marcos Piccinini (nofxx)</span></li>
-    <li><span id="profile_name">Hallison Batista</span></li>
-    <li><span id="profile_name">Hugo Borges (agaelebe)</span></li>
-    <li><span id="profile_name">Christian Guimarães</span></li>
-    <li><span id="profile_name">Carlisia Campos (carlisia)</span></li>
-    <li><span id="profile_name">Fabio Nascimento</span></li>
-    <li><span id="profile_name">Sandro Duarte</span></li>
-    <li><span id="profile_name">Thiago Pradi (tchandy)</span></li>
-    <li><span id="profile_name">Estevão Lucas</span></li>
-    <li><span id="profile_name">apeligrini</span></li>
-    <li><span id="profile_name">Ricardo Yasuda</span></li>
-    <li><span id="profile_name">Henry Hamon</span></li>
-    <li><span id="profile_name">Rafael F. Bittencourt</span></li>
-    <li><span id="profile_name">Maykon</span></li>
-    <li><span id="profile_name">Kristopher Murata</span></li>
-    <li><span id="profile_name">Dirceu Pauka Jr.</span></li>
-    <li><span id="profile_name">Fred Maranhão</span></li>
-    <li><span id="profile_name">Bruno Pedroso</span></li>
-    <li><span id="profile_name">Renato Nitta</span></li>
-    <li>Renato Willi</li>
-    <li>Julia de Castro</li>
-    <li>Wesley Rocha</li>
-</ul>
-
-
-<p>Com destaques para nossos amigos <span id="profile_name">Rafael Barbosa e </span><span id="profile_name">Marcos Piccinini que sozinhos traduziram dezenas de capítulos e me ajudaram a gerenciar o projeto. A toda a galera da </span><a href="http://www.seatecnologia.com.br/">SEA tecnologia</a> (preciso do nome de cada um), que chegaram a criar uma fonte só para deixar as imagens do livro o mais próximo do original possível. Aliás tenho de dar um agradecimento especial a SEA, por ser uma empresa apoiadora deste tipo de trabalho. Também o Renato Nitta que está traduzindo algumas imagens literalmente na mão, redesenhando alguns dos esboços do Why.</p>
-
-<p>Espero não ter me esquecido do nome de ninguém.</p>
-
-<p>Enfim, é um trabalho muito grande e que está tendo um resultado impressionante. Mas infelizmente ainda faltam alguns trechos e imagens que necessitam de tradução e revisão. E é neste momento que faço mais um apelo a comunidade para arregaçarem as mangas e ajudarem, para que possamos ter este maravilhoso livro 100% em português o mais rápido possível.</p>
-
-<p>Para colaborar é muito fácil:</p>
-
-<ul>
-    <li>Grupo de discussão do projeto: <a href="http://groups.google.com.br/group/whys-poignant-guide-to-ruby---portugues?hl=pt-BR">clique aqui</a>.</li>
-    <li>Repositório do projeto no GitHub: <a href="http://github.com/carlosbrando/poignant-br/tree/master">clique aqui</a>.</li>
-    <li>Planilha com nome dos tradutores e revisores: <a href="https://spreadsheets.google.com/ccc?key=pU_MriAPjg2AHUgj-pIVeRQ&amp;hl=en">clique aqui</a>.</li>
-</ul>
-
-
-<p>Qualquer tipo de colaboração é bem-vinda!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/21/">&larr; Antigos</a>
@@ -720,6 +677,10 @@ comment <span class="keyword keyword_operator keyword_operator_assignment keywor
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
@@ -733,10 +694,6 @@ comment <span class="keyword keyword_operator keyword_operator_assignment keywor
     
       <li class="post">
         <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/06/03/colorific/">Colorific</a>
       </li>
     
   </ul>

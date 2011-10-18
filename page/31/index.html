@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Existe uma tarefa rake no Rails que pouca gente conhece mas que é muito útil:rake test:uncommittedComo o nome já diz esta tarefa roda os testes ape...">
+  <meta name="description" content="Mais um método que deixará de existir na próxima versão do Rails: define_javascript_functions.Também faz sentido já que métodos como javascript_inc...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,6 +74,42 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/08/01/edge-rails-define_javascript_functions/">Edge Rails: define_javascript_functions</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2008-08-01T00:00:00-03:00" pubdate  data-updated="true" > 1 de Agosto de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Mais um método que deixará de existir na próxima versão do Rails: <a href="http://rails-doc.org/rails/ActionView/Helpers/JavaScriptHelper/define_javascript_functions">define_javascript_functions</a>.</p>
+
+<p>Também faz sentido já que métodos como <a href="http://rails-doc.org/rails/ActionView/Helpers/AssetTagHelper/javascript_include_tag">javascript_include_tag</a> e outros realizam a mesma tarefa de uma forma melhor.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -589,95 +625,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/07/22/edge-rails-seus-problemas-acabaram-o-rails-tambem-vai-falar-portugues/">Edge Rails: Seus problemas acabaram, o Rails também vai falar português!</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2008-07-22T00:00:00-03:00" pubdate  data-updated="true" >22 de Julho de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://old.nomedojogo.com/wp-content/uploads/2008/07/1417766186_85663b2a70.jpg"><img class="alignnone size-medium wp-image-908" title="1417766186_85663b2a70" src="http://old.nomedojogo.com/wp-content/uploads/2008/07/1417766186_85663b2a70.jpg" alt="" /></a></p>
-
-<h6>Foto de <a title="Link to chrys' photostream" href="http://flickr.com/photos/chrys/"><strong>chrys</strong></a></h6>
-
-
-<p>Algumas pessoas estão comentando que o <strong>Ruby on Rails 2.2</strong> deve ser lançado até setembro, a tempo do <a href="http://en.oreilly.com/railseurope2008/public/content/home">RailsConf Europe</a>, e acredito que esta é uma das novidades que mais nos interessa.</p>
-
-<p>Tudo começou em setembro de 2007 quando um grupo de desenvolvedores começaram a construção de um plugin para o Rails chamado <a href="http://groups.google.com/group/rails-i18n">rails-I18n</a>, que visava eliminar a necessidade de monkey patching no Rails para internacionalizar uma aplicação.</p>
-
-<h3>Peraí, antes de começar, o que é I18n?</h3>
-
-
-<p>Há claro, não posso começar um artigo sobre <strong>I18n</strong> sem explicar o que isto significa. Primeiro, para entender o porque deste nome, precisamos ter um conhecimento profundo de cálculos matemáticos. Conte comigo, quantas letras temos entre o <strong>I</strong> e o <strong>n</strong> na palavra <strong>Internationalization</strong>? 18. Muito bom, <strong>I18n</strong>.</p>
-
-<p>O mesmo vale para <strong>Localization</strong> e <strong>L10n</strong>.</p>
-
-<p>Já viu quando um site tem aquelas bandeirinhas no topo, permitindo que você escolha em que língua quer navegar? Quando você clica em uma delas, todos os textos do site mudam para a língua correspondente daquele país.</p>
-
-<p>Isto é Internationalization, ou I18n.</p>
-
-<p>Claro que estou sendo muito simplista, na maioria das vezes não é só os textos que mudam de um país para outro. Não podemos nos esquecer do formato da data, fuso-horário, padrões de peso e medida. E talvez o mais importante a moeda.</p>
-
-<h3>I18n e L10n, qual a diferença?</h3>
-
-
-<p>Internacionalização é preparar seu software para que pessoas de outros países e línguas possam usá-lo.</p>
-
-<p>Localização (L10n) é adaptar o seu produto as necessidades de um país. É como pegar um site americano que só aceita pagamento via PayPal e adaptá-lo para aceitar boleto bancário, por exemplo.</p>
-
-<h3>O que tem de novo no Rails?</h3>
-
-
-<p>No Rails 2.2 este plugin de internacionalização será integrado ao seu código fonte.</p>
-
-<p>Isto não significa que o Rails sofrerá grandes alterações. Na verdade quase nada muda no Rails, ele continuará sendo o mesmo framework de sempre, com todas as suas mensagens de validações em inglês e tudo mais.</p>
-
-<p>A diferença é que se quiséssemos estas mensagem em português, ou em outro idioma, hoje, teríamos de criar um monkey patch para isto. Não posso deixar de citar como exemplo o famoso <a href="http://www.improveit.com.br/software_livre/brazilian_rails">Brazilian Rails</a>, que faz exatamente isto para traduzir as mensagens do <strong>ActiveRecord</strong>.</p>
-
-<p>A novidade é que a partir do Rails 2.2 teremos uma forma padronizada e mais simples de fazer isto, usando uma interface comum.</p>
-
-<h3>Como isto vai funcionar?</h3>
-
-
-<p>Básicamente este gem é dividido em duas partes:</p>
-
-<ul>
-    <li>A primeira acrescenta à API do Rails uma coleção de novos métodos, estes métodos basicamente servirão para acessar a segunda parte do gem.</li>
-    <li>A segunda parte é um <strong>backend</strong> simples que implementa toda a lógica para fazer o Rails funcionar exatamente como funciona hoje, usando a localização <strong>en-US</strong>.</li>
-</ul>
-
-
-<p>Okey, até aí, não mudou nada. A grande sacada é que esta segunda parte poderá ser substituída por uma que dê suporte à internacionalização que você deseja. Melhor ainda, uma série de plugins que serão lançados irão fazer exatamente isto.</p>
-
-<p>E é claro que teremos um em português. Talvez uma adaptação do Brazilian Rails? Tomara que desta vez com um nome um pouco mais bonito&#8230;</p>
-
-<p>No próximo artigo vou dar mais detalhes desta implementação, usando código.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/32/">&larr; Antigos</a>
@@ -695,6 +642,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
@@ -708,10 +659,6 @@
     
       <li class="post">
         <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/06/03/colorific/">Colorific</a>
       </li>
     
   </ul>

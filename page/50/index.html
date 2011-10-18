@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Todo ano a Locaweb promove um evento, o ELPI que já está na décima edição. E este ano eles abriram ao publico para indicarem quem desejam ver pales...">
+  <meta name="description" content="Nesta série de artigos eu já falei do novo método squish. Lembra-se?Pois é, este método e a sua versão destrutiva, o squish!, foram alterados para ...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,6 +74,63 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/03/20/edge-rails-o-metodo-squish-ficou-mais-rapido/">Edge Rails: O método squish ficou mais rápido</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2008-03-20T00:00:00-03:00" pubdate  data-updated="true" >20 de Março de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Nesta série de artigos eu já falei do novo método <code>squish</code>. <a href="http://www.nomedojogo.com/2008/02/26/edge-rails-removendo-espacos-em-branco-com-o-metodo-squish/">Lembra-se?</a></p>
+
+<p>Pois é, este método e a sua versão destrutiva, o <code>squish!</code>, foram alterados para ficarem mais rápidos. Veja como ficou a nova versão:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_module meta_module_ruby"><span class="keyword keyword_control keyword_control_module keyword_control_module_ruby">module</span> <span class="entity entity_name entity_name_type entity_name_type_module entity_name_type_module_ruby">ActiveSupport</span></span>
+<span class="meta meta_module meta_module_ruby">  <span class="keyword keyword_control keyword_control_module keyword_control_module_ruby">module</span> <span class="entity entity_name entity_name_type entity_name_type_module entity_name_type_module_ruby">CoreExtensions</span></span>
+<span class="meta meta_module meta_module_ruby">    <span class="keyword keyword_control keyword_control_module keyword_control_module_ruby">module</span> <span class="entity entity_name entity_name_type entity_name_type_module entity_name_type_module_ruby">String</span></span>
+<span class="meta meta_module meta_module_ruby">      <span class="keyword keyword_control keyword_control_module keyword_control_module_ruby">module</span> <span class="entity entity_name entity_name_type entity_name_type_module entity_name_type_module_ruby">Filters</span></span>
+
+        <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">squish</span></span>
+          dup<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>squish!
+        <span class="keyword keyword_control keyword_control_ruby">end</span>
+
+        <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">squish!</span></span>
+          strip!
+          gsub!<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_regexp string_regexp_classic string_regexp_classic_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span><span class="constant constant_character constant_character_escape constant_character_escape_ruby">\s</span>+<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span> <span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+          <span class="variable variable_language variable_language_ruby">self</span>
+        <span class="keyword keyword_control keyword_control_ruby">end</span>
+
+      <span class="keyword keyword_control keyword_control_ruby">end</span>
+    <span class="keyword keyword_control keyword_control_ruby">end</span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -512,44 +569,6 @@ Resposta: Crie softwares que ajude as pessoas a fazer (ou ganhar) dinheiro.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/03/12/radrails-10/">RadRails 1.0</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2008-03-12T00:00:00-03:00" pubdate  data-updated="true" >12 de Março de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Saiu a versão <a href="http://www.aptana.com/node/320">1.0 do RadRails</a>. Eu costumava usar este software quando ainda era usuário do Windows, quando mudei para Linux comecei a usar mais o NetBeans e no Mac só TextMate.</p>
-
-<p>Pelo que andei observando ele está bem mais robusto que na época em que eu o usava. Uma das coisas legais que eu usava muito na época eram os atalhos (Bundles) que copiavam os do TextMate. Isto foi bom na hora da mudança.</p>
-
-<p>Outra coisa legal destas ferramentas (acho que o NetBeans também faz isto) é permitir o debug de aplicativos como eu fazia na época do .Net, tudo em interface gráfica. Eu gostava, mas hoje já não sinto tanta falta disto mais&#8230;</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/51/">&larr; Antigos</a>
@@ -567,6 +586,10 @@ Resposta: Crie softwares que ajude as pessoas a fazer (ou ganhar) dinheiro.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
@@ -580,10 +603,6 @@ Resposta: Crie softwares que ajude as pessoas a fazer (ou ganhar) dinheiro.</p>
     
       <li class="post">
         <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/06/03/colorific/">Colorific</a>
       </li>
     
   </ul>

@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Foi adicionado à classe Enumerable um novo método chamado none?. Este método nos auxiliará nos momentos em que se faz necessário verificar se nenhu...">
+  <meta name="description" content="Desde que lancei a primeira versão do Remarkable tenho visto cada vez mais pessoas aderindo ao projeto para criar seus testes com maior rapidez. E ...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,6 +74,83 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/12/19/remarkable-201-e-atualizacao-do-comovente-guia-de-ruby-do-why/">Remarkable 2.0.1 e Atualização do (Comovente) Guia de Ruby do Why</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2008-12-19T00:00:00-02:00" pubdate  data-updated="true" >19 de Dezembro de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Desde que lancei a primeira versão do <a href="http://www.nomedojogo.com/2008/11/13/shoulda-para-rspec-e-remarkable/">Remarkable</a> tenho visto cada vez mais pessoas aderindo ao projeto para criar seus testes com maior rapidez. E com uma quantidade maior de pessoas usando nas mais diversas aplicações é claro que os bugs começaram a aparecer.</p>
+
+<p>A maior parte dos problemas ocorriam por uma falha na arquitetura inicial do Remarkable, o que tornou necessário um refactoring no projeto inteiro para estruturá-lo melhor.  Na primeira versão, internamente havia uma separação muito clara entre as duas sintaxes que o projeto oferecia. Com a reestruturação não existe mais esta separação, não importa qual é o seu estilo, <a href="http://github.com/carlosbrando/remarkable/wikis/rspec-macros">RSpec</a> ou <a href="http://github.com/carlosbrando/remarkable/wikis/shoulda-macros">Shoulda</a>, internamente você sempre usará o mesmo código para realizar os testes.</p>
+
+<p>Desta forma, acabamos por ganhar muitas macros novas.</p>
+
+<p>Enquanto na versão em RSpec isto já era algo comum:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rspec"><span class="meta meta_rspec meta_rspec_behaviour"><span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_behaviour">describe</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">Dog</span> <span class="keyword keyword_control keyword_control_ruby keyword_control_ruby_start-block">do</span></span>
+<span class="meta meta_rspec meta_rspec_pending">  <span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_pending">it</span> <span class="string string_ruby">{ should belong_to(:user) }</span></span>
+<span class="meta meta_rspec meta_rspec_pending">  <span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_pending">it</span> <span class="string string_ruby">{ should_not have_many(:fleas) }</span></span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+<p>Na sintaxe do Shoulda apenas possuíamos macros <code>should<em>[alguma coisa]</code> e quase nenhuma <code>should_not</em>[alguma coisa]</code>. Mas agora todas as macros possuem as duas opções, assim:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rspec"><span class="meta meta_rspec meta_rspec_behaviour"><span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_behaviour">describe</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">Dog</span> <span class="keyword keyword_control keyword_control_ruby keyword_control_ruby_start-block">do</span></span>
+  should_belong_to <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>user</span>
+  should_not_have_many <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>fleas</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+<p>Além disso mais testes foram adicionados para garantir que problemas antigos não voltem para nos assombrar.</p>
+
+<p>Para atualizar o Remarkable, execute no terminal (lembrando que no Windows não precisa usar o <code>sudo</code>):</p>
+
+<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">gem sources -a <span class="markup markup_underline markup_underline_link markup_underline_link_text">http://gems.github.com</span>
+sudo gem install carlosbrando-remarkable</span></span></pre>
+
+
+<p>Ainda falta um logo e um site para o projeto. Alguém se habilita?</p>
+
+<h2>O (Comovente) Guia de Ruby do Why</h2>
+
+
+<p>Acabei de atualizar o <a href="http://why.nomedojogo.com/">livro</a> com novas traduções e correções. Devido a minha falta de tempo, acabei demorando para aplicar alguns dos patches que me foram enviados.</p>
+
+<p>Na maioria das vezes, os colaboradores são rápidos demais e várias pessoas corrigem o mesmo texto de formas diferentes, e isto complica um pouco na hora de aceitar uma atualização. Eu tenho de olhar arquivo por arquivo antes de decidir qual será aplicado. Mas isto é bom, porque garante uma maior qualidade à tradução, embora torne o processo um pouco mais lento.</p>
+
+<p>O livro pode ser encontrado na url: <a href="http://why.nomedojogo.com">http://why.nomedojogo.com</a>. Também existe uma versão para impressão em <a href="http://why.nomedojogo.com/print.html">http://why.nomedojogo.com/print.html</a>.</p>
+
+<p>A processo de tradução já foi finalizado, todo o livro já está em português. Ainda falta ajustar algumas imagens e formatações de texto, mas acredito que se conseguirmos mais colaboradores teremos o livro completo e finalizado até o fim do ano.</p>
+
+<p>Quer ajudar? Comece lendo o <a href="http://why.nomedojogo.com/">livro</a> e quando encontrar algo errado altere <a href="http://github.com/carlosbrando/poignant-br/tree/master">aqui</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -602,41 +679,6 @@ The name 'Admin::PostsHelper' is either already used in your application or rese
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/12/09/no-que-estou-pensando-ultimamente/">No que estou pensando ultimamente&#8230;</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2008-12-09T00:00:00-02:00" pubdate  data-updated="true" > 9 de Dezembro de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p style="text-align: center;"><a title="Wordle: Carlos Brando" href="http://www.wordle.net/gallery/wrdl/372376/Carlos_Brando"><img class="aligncenter" style="border: 1px solid #dddddd; padding: 4px;" src="http://www.wordle.net/thumb/wrdl/372376/Carlos_Brando" alt="" width="160" height="120" /></a></p>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/17/">&larr; Antigos</a>
@@ -654,6 +696,10 @@ The name 'Admin::PostsHelper' is either already used in your application or rese
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
@@ -667,10 +713,6 @@ The name 'Admin::PostsHelper' is either already used in your application or rese
     
       <li class="post">
         <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/06/03/colorific/">Colorific</a>
       </li>
     
   </ul>

@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Durante o último mês passei a receber mais visitas do que o comum. Isto graças ao lançamento do meu plugin e também à menções em sites como o Ruby ...">
+  <meta name="description" content="No Rails 2.1 quando você criar um novo projeto, fique atento ao fato de que o time zone padrão será o UTC. No arquivo environment.rb:config.time_zo...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,6 +74,45 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/04/07/edge-rails-novos-projetos-terao-fuso-horario-padrao-como-utc/">Edge Rails: Novos projetos terão fuso-horário padrão como UTC</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2008-04-07T00:00:00-03:00" pubdate  data-updated="true" > 7 de Abril de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>No Rails 2.1 quando você criar um novo projeto, fique atento ao fato de que o time zone padrão será o UTC. No arquivo environment.rb:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>time_zone <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>UTC<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span></pre>
+
+
+<p>Claro que você pode mudar isto se for preciso. Para descobrir quais nomes você pode usar, veja <a href="http://www.nomedojogo.com/2008/04/02/edge-rails-como-saber-quais-time-zones-posso-usar/">este post</a> onde explico sobre as novas tarefas rake que listam os time zones possíveis.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -535,51 +574,6 @@ named_scope <span class="constant constant_other constant_other_symbol constant_
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/04/01/edge-rails-o-metodo-timein_time_zone/">Edge Rails: O método Time#in_time_zone</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2008-04-01T00:00:00-03:00" pubdate  data-updated="true" > 1 de Abril de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Eu já falei do método <code><a href="http://www.nomedojogo.com/2008/02/15/edge-rails-mais-timezone-e-prototype/">in_current_time_zone</a></code>. Desta vez este método foi removido para dar lugar a outro método, o <code>in_time_zone</code>. Este método é similar ao <code>Time#localtime</code>, exceto pelo fato de que usa o <code>Time.zone</code> no lugar do fuso-horário do sistema operacional.</p>
-
-<p>Você pode passar como parâmetro um <code>TimeZone</code> ou uma <code>string</code>. Vejamos alguns exemplos:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>zone <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Hawaii<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
-<span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>utc<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">2000</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>in_time_zone
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; Fri, 31 Dec 1999 14:00:00 HST -10:00
-</span>
-
-<span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>utc<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">2000</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>in_time_zone<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Alaska<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; Fri, 31 Dec 1999 15:00:00 AKST -09:00 </span></span></pre>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/48/">&larr; Antigos</a>
@@ -597,6 +591,10 @@ named_scope <span class="constant constant_other constant_other_symbol constant_
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
@@ -610,10 +608,6 @@ named_scope <span class="constant constant_other constant_other_symbol constant_
     
       <li class="post">
         <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/06/03/colorific/">Colorific</a>
       </li>
     
   </ul>

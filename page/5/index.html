@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="O ano começou muito bem para os leitores deste blog. No finalzinho de 2008, logo após o lançamento do Rails 2.2, eu havia publicado em parceria com...">
+  <meta name="description" content="Você sabe explicar a diferença entre as duas linhas abaixo?123require &quot;my_library&quot;load &quot;my_library.rb&quot;Se você já trabalhou ao m...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,6 +74,149 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/01/07/entendendo-os-metodos-load-e-require-por-dentro/">Entendendo os métodos load e require por dentro</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2010-01-07T00:00:00-02:00" pubdate  data-updated="true" > 7 de Janeiro de 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Você sabe explicar a diferença entre as duas linhas abaixo?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s2">&quot;my_library&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">load</span> <span class="s2">&quot;my_library.rb&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Se você já trabalhou ao menos um pouco com Ruby, então sabe que <code>load</code> é útil quando se deseja executar o código de um arquivo enquanto <code>require</code> é utilizado para importar uma biblioteca para dentro do código do seu programa.</p>
+
+<p>Esta definição está correta, mas eu gostaria de me aprofundar um pouco mais no assunto&#8230;</p>
+
+<h2>A Base</h2>
+
+
+<p>Para entender como esses métodos realmente funcionam por dentro, precisamos primeiro saber que ambos possuem a mesma base. No <strong>Ruby 1.8.7</strong> esta base é o método <code>rb_load</code> (internamente escrito em C e encontrado no arquivo <a href="http://gist.github.com/267618">eval.c</a>). A função do <code>rb_load</code> é determinar se o arquivo especificado na chamada dos métodos <code>require</code> e <code>load</code> se encontra no diretório atual do aplicativo ou em um dos diretórios listados no <code>$LOAD_PATH</code> (<code>$:</code>) e então carregar este arquivo seguindo a regra própria de cada um dos métodos.</p>
+
+<h2>O método require por dentro</h2>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s2">&quot;my_library&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Quanto <code>rb_load</code> é executado através do método <code>require</code>, fazendo com que ele carregue uma biblioteca no seu código, o nome do arquivo especificado é adicionado a uma lista. Esta lista pode ser vista através da variável global <code>$LOADED_FEATURES</code> (<code>$"</code>).</p>
+
+<p>Você pode verificar quais arquivos já foram carregados em seu código através do método <code>require</code> analisando o conteúdo desta variável.</p>
+
+<pre><code>[carlosbrando:~]$ irb
+&gt;&gt; puts $LOADED_FEATURES
+enumerator.so
+e2mmap.rb
+irb/init.rb
+...
+</code></pre>
+
+<p>Ao executar o método <code>require</code>, o Ruby primeiro verificará se o nome do arquivo que você especificou se encontra em <code>$LOADED_FEATURES</code>. Se ele <strong>não encontrar</strong> o nome na lista, então ele tentará carregar o arquivo e se for bem sucedido retornará <code>true</code>. Caso o nome já se encontre na lista de recursos carregados, então o método simplesmente retornará <code>false</code> e <strong>não carregará</strong> o arquivo novamente.</p>
+
+<p>O segundo passo é determinar em que diretório o arquivo se encontra. Para isto o Ruby consultará uma outra variável global chamada <code>$LOAD_PATH</code>. Esta variável armazena todos os diretórios onde <code>rb_load</code> deve procurar por bibliotecas. Se o arquivo não for encontrado no diretório raiz do seu aplicativo e nem na lista de diretórios do <code>$LOAD_PATH</code>, então o método <code>rb_load</code> disparará um erro do tipo <code>LoadError</code>.</p>
+
+<p>Caso você não informe uma extensão para o nome do arquivo, como no exemplo no inicio deste tópico, o método <code>require</code> procurará por arquivos com as seguintes extensões: <code>.rb</code>, <code>.o</code>, <code>.so</code>, <code>.dylib</code>, <code>.dll</code>, exatamente nesta ordem. Por último o Ruby procurará pelo nome do arquivo sem nenhuma extensão. Se o arquivo possuir a extensão <code>.rb</code> ele será carregado como um código Ruby puro. As demais extensões serão carregadas como extensões Ruby de acordo com o sistema operacional na qual você estiver executando o seu código.</p>
+
+<p><strong>Atenção:</strong> Se você informar a extensão do arquivo na chamada do método <code>require</code> (i.e. <code>require 'my_lib.rb'</code>) e o Ruby não conseguir encontrar o arquivo da forma como foi especificado, ele ignorará a extensão que você definiu e procurará por arquivos com o mesmo nome seguindo a regra mencionada no parágrafo anterior.</p>
+
+<p>O método também permite que você seja mais especifico, informando o diretório exato onde o arquivo se encontra.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;../my_library.rb&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>No exemplo acima o Ruby <strong>não tentará</strong> localizar o recurso em outros diretórios, caso não o encontre no local que você especificou. Porém, é importante estar atento a um problema comum ao utilizar este recurso. Veja o código abaixo:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;my_library&#39;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;./my_library.rb&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Neste exemplo, nas duas linhas de código eu estou carregando o mesmo recurso. Na primeira linha eu informo somente o nome do arquivo e na segunda eu informo também o diretório. O método <code>require</code> não armazena o caminho absoluto do recurso em <code>$LOADED_FEATURES</code>, ele armazena a <code>string</code> exata informada na chamada do método. Neste caso o arquivo <code>my_library.rb</code> será carregado duas vezes. Analisando a variável <code>$LOADED_FEATURES</code> encontraremos o seguinte:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="vg">$&quot;</span><span class="o">.</span><span class="n">grep</span><span class="sr"> /my_library/</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[</span><span class="s2">&quot;my_library.rb&quot;</span><span class="p">,</span> <span class="s2">&quot;./my_library.rb&quot;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<h2>O método load por dentro</h2>
+
+
+<p>O método <code>load</code> funciona de uma forma muito parecida com o método <code>require</code>. A principal diferença é que ele não mantém uma lista de recursos, fazendo com que um arquivo seja carregado tantas vezes quanto for solicitado.</p>
+
+<p>Outra importante diferença é que a extensão do arquivo é obrigatória, embora ela não seja restrita apenas a <code>.rb</code> e aos outros formatos que vimos acima. Qualquer outra extensão é aceita, embora o conteúdo do arquivo seja sempre tratado como código Ruby puro.</p>
+
+<p>Você também pode especificar o caminho exato onde o arquivo se encontra. Desta vez, sem nenhum efeito colateral. Porém, se você informar somente o nome do arquivo, o Ruby tentará encontrá-lo primeiro no seu diretório atual e depois na lista de diretórios do <code>$LOAD_PATH</code>.</p>
+
+<p>O método <code>load</code> tem algumas opções extras. Muito provavelmente o arquivo que você estará carregando definirá algumas variáveis e classes. Variáveis locais em nenhuma circunstancia serão propagadas para o seu ambiente, porém o mesmo não acontece com constantes. O resultado é que ao carregar um recurso em seu projeto você pode ter um conflito se já houver uma constante com o mesmo nome no seu código. O mesmo vale para nomes de classes, que como<a href="http://www.nomedojogo.com/2009/05/25/curiosidades-do-ruby-o-screencast/"> já aprendemos</a> também são constantes.</p>
+
+<p>Você pode obrigar o método <code>load</code> a manter suas constantes para si mesmo, passando um segundo parametro na chamada do método:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">load</span> <span class="s1">&#39;my_library.rb&#39;</span><span class="p">,</span> <span class="kp">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Quando você carrega um recurso desta maneira, o Ruby criará um módulo anônimo e usará este módulo como um namespace, evitando conflitos entre o código do arquivo e o seu código. Ao terminar a execução este módulo é destruído. No exemplo acima, true é um atalho. Se desejar, você pode ser mais especifico fazendo também desta maneira:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">load</span> <span class="s2">&quot;my_library.rb&quot;</span><span class="p">,</span> <span class="ss">:wrap</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>O efeito é o mesmo.</p>
+
+<h2>Finalizando</h2>
+
+
+<p>O método <code>require</code> não tem opções extras. Se você está importando uma biblioteca então faz sentido que constantes e classes permaneçam em seu código. Por outro lado, se você deseja apenas executar o código que está em um arquivo, provavelmente você não vai querer poluir o seu programa com recursos desnecessários.</p>
+
+<p>Os dois métodos são muito parecidos, embora eles tenham sido construídos para finalidades diferentes. Entender como cada um funciona por dentro pode ajudá-lo a utilizar o recurso certo na hora certa.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -990,64 +1133,6 @@ Hello, world</span></span></pre>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/11/06/a-principal-habilidade-do-programador-nao-e-codificar/">A principal habilidade do programador não é codificar</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2009-11-06T00:00:00-02:00" pubdate  data-updated="true" > 6 de Novembro de 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="aligncenter size-full wp-image-2856" title="PDHeadInSand" src="http://old.nomedojogo.com/wp-content/uploads/2009/11/PDHeadInSand.gif" alt="PDHeadInSand" /></p>
-
-<p>Programadores são naturalmente introvertidos e não sabem se comunicar. Deve ser por isso que existem tantos programadores ruins. Programar é um exercício de comunicação.</p>
-
-<p>Anos de experiência desenvolvendo software, conhecer muitas linguagens de programação, escrever códigos de qualidade, nada disso tem valor se você não conseguir se comunicar com outras pessoas. De nada vale ter muito conteúdo e guardar isto só para você.</p>
-
-<p>Aqueles que desejam uma carreira bem sucedida como programadores, além possuir um conhecimento técnico acima da média também precisam estar constantemente melhorando suas habilidades de comunicação.</p>
-
-<p>Inevitavelmente passamos horas em reuniões. Precisamos interagir com clientes e entender as suas necessidades. Escrevemos propostas e relatórios. Estamos em uma luta sem fim tentando convencer nossos companheiros e empregadores a adotarem uma nova tecnologia ou prática que tornará nosso trabalho mais produtivo e divertido. E acima de tudo: escrevemos muito código.</p>
-
-<p>O código é uma combinação de signos utilizados para transmitir uma mensagem. Porém a comunicação só se concretizará se o receptor souber decodificar a mensagem. Computadores costumam fazer isto muito bem, mas não estamos escrevendo código apenas para máquinas. Um código mal escrito e cheio de ruído dificultará o trabalho de outros programadores quando houver a necessidade de estudá-lo.</p>
-
-<p>Nosso trabalho se resume a pura e simplesmente comunicar-se, por isso é tão importante fazer isso bem.</p>
-
-<p>Não importa se você está escrevendo um livro/relatório/e-mail ou se preparando para uma reunião, planejamento é tudo. Um dos segredos dos bons comunicadores é saber o que dizer, antes de sair abrindo a boca e despejando pensamentos. Pergunte-se: &#8220;Se eu falar desta maneira, será que todos entenderão com clareza a informação que eu estou tentando passar?&#8221;. Repita esta pergunta para si mesmo até que esteja convicto disso. Anote estas ideias e planeje como aborda-las.</p>
-
-<p>Comunicação é repassar informações. Para que isto seja possível é vital que todas as pessoas presentes entendam o que você está dizendo. Antes de começar a argumentar sobre as vantagens de se utilizar um banco de dados não relacional no projeto, certifique-se de que todos sabem do que você está falando. Caso contrário, você não estará impressionando ninguém. Estará apenas sendo chato.</p>
-
-<p>Se você está vendendo uma ideia, certifique-se de conhecer cada uma das pessoas envolvidas na negociação e fale somente o que ela precisa ouvir, nem mais nem menos. Talvez você precise convencer o seu gerente, o pessoal de marketing, o usuário final do aplicativo e até outros desenvolvedores. Trate cada grupo de forma individual.</p>
-
-<p>Tão importante quanto dizer a coisa certa, é dizer na hora certa. Pegar seu gerente no corredor, logo após o seu supervisor lhe chamar a atenção por ele ter entregue um aplicativo cheio de bugs é uma excelente oportunidade para convencê-lo a adotar testes automatizados nos próximos projetos. Mas também será uma péssima hora para pedir um upgrade na sua máquina.</p>
-
-<p>Para ser tornar um bom escritor é necessário ler muito, seguindo o mesmo principio se você deseja  falar bem é importante escutar. Programadores tem sérios problemas para escutar. Durante uma reunião, assim que o cliente começa a explicar uma funcionalidade do novo aplicativo, a mente do programador abandona a sala e automaticamente já começa a trabalhar no código que precisará ser desenvolvido. Deste momento em diante tudo o que for dito na sala será ignorado. Concentre-se. Se você não escutar o que os outros estão dizendo, como espera ser ouvido?</p>
-
-<p>Lembre-se disso: Não é somente o que você diz, mas também como você diz. A menos que você esteja trabalhando sozinho dentro de uma bolha, você deve ser capaz de se comunicar. E quanto mais eficaz for a sua habilidade de comunicação, mais influente você se tornará.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/6/">&larr; Antigos</a>
@@ -1065,6 +1150,10 @@ Hello, world</span></span></pre>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
@@ -1078,10 +1167,6 @@ Hello, world</span></span></pre>
     
       <li class="post">
         <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/06/03/colorific/">Colorific</a>
       </li>
     
   </ul>

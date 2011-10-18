@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Lembra do método label_tag?Agora ele aceita a opção :for, veja um exemplo:label(:post, :title, nil, :for =&gt; "my_for")Isto vai retornar algo assi...">
+  <meta name="description" content="This gem set the autotest (ZenTest) to send messages to software as Growl, LibNotify, and Snarl, displaying a window with the results.http://github...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,6 +74,113 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/05/14/the-autotest-notification-gem/">The Autotest Notification Gem</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2008-05-14T00:00:00-03:00" pubdate  data-updated="true" >14 de Maio de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This gem set the autotest (ZenTest) to send messages to software as Growl, LibNotify, and Snarl, displaying a window with the results.</p>
+
+<p><a href="http://github.com/carlosbrando/autotest-notification/">http://github.com/carlosbrando/autotest-notification/</a></p>
+
+<h2>Requirements</h2>
+
+
+<p>Independent of operating system you are using, you must install the ZenTest.</p>
+
+<pre><code>gem install ZenTest</code></pre>
+
+
+<h3>If you&#8217;re using a Mac</h3>
+
+
+<p style="padding-left:1em;">You need to have Growl and growlnotify installed on your machine.</p>
+
+
+<p style="padding-left:1em;">Download the <a href="http://growl.info/index.php">Growl</a> and install it like any other application on your Mac</p>
+
+
+<p style="padding-left:1em;">Then you must install the growlnotify.</p>
+
+
+<p style="padding-left:1em;">In your shell, cd to the directory on the Growl disk image containing growlnotify, and type <code>./install.sh</code>. That script will install growlnotify to /usr/local/bin and the manpage to /usr/local/man.</p>
+
+
+
+
+<h3>If you&#8217;re using Windows (with cygwin)</h3>
+
+
+<p style="padding-left:1em;">You need to have Snarl and sncmd installed on your machine.</p>
+
+
+<p style="padding-left:1em;">Download <a href="http://www.fullphat.net/">Snarl</a> and install it like any other application on your machine.</p>
+
+
+
+
+<p style="padding-left:1em;">Then download <a href="http://www.k23productions.com/download.php?view.105">sncmd</a> open the zip file and place
+the executable from the zip in any directory in windows <span class="caps">PATH</span> (for example c:\windows).
+<h3>If you&#8217;re using Windows (without cygwin)</h3>
+<p style="padding-left:1em;">You need to have Snarl, diffutils and ruby-snarl installed on your machine.</p>
+<p style="padding-left:1em;">Download <a href="http://www.fullphat.net/">Snarl</a> and install it like any other application on your machine.</p>
+<p style="padding-left:1em;">Download <a href="http://gnuwin32.sourceforge.net/packages/diffutils.htm">DiffUtils for Windows</a> and follow the installation instructions on the site.</p>
+<p style="padding-left:1em;">Run in the command prompt: <code>gem install ruby-snarl</code></p>
+<p style="padding-left:1em;">After all that. You must update the environment variable <span class="caps">PATH</span> with the path to the bin of diffutils.</p>
+<p style="padding-left:1em;">It&#8217;s the price that was paid for using Windows (try cygwin).</p>
+
+<h3>If you&#8217;re using Linux</h3>
+<p style="padding-left:1em;">You need to have libnotify binaries installed.</p>
+<p style="padding-left:1em;">For ubuntu this means: <code>sudo apt-get install libnotify-bin</code></p>
+<p style="padding-left:1em;">Other distributions may package it with other names, do a search for libnotify using your distribution package manager.</p>
+<p style="padding-left:1em;">If you use <span class="caps">KDE</span> and do not have libnotify-bin installed, it will try to use kdialog wich is part of <span class="caps">KDE</span>. It also works if you have zenity installed.</p>
+
+<h2>Install</h2>
+<pre><code>sudo gem install carlosbrando-autotest-notification --source=http://gems.github.com</code></pre>
+Run it to let the notifier in automatic mode:
+<pre><code>an-install</code></pre>
+In Windows without cygwin, it&#8217;s necessary to install in the directory of the project:
+<pre><code>an-install -p C:\projects\my_project</code></pre>
+To turn off the notifier:
+<pre><code>an-uninstall</code></pre>
+<h2>Contributors</h2>
+<ul>
+    <li><a href="http://www.workingwithrails.com/recommendation/new/person/8137-carlos-brando">carlosbrando</a></li>
+    <li><a href="http://alexandredasilva.wordpress.com">simpsomboy</a></li>
+    <li><a href="http://www.workingwithrails.com/recommendation/new/person/9213-rodrigo-urubatan-ferreira-jardim">urubatan</a></li>
+    <li><a href="http://www.workingwithrails.com/recommendation/new/person/8473-carlos-henrique-j-nior">chjunior</a></li>
+    <li><a href="http://www.workingwithrails.com/recommendation/new/person/6680-davis-zanetti-cabral">daviscabral</a></li>
+    <li><a href="http://www.workingwithrails.com/recommendation/new/person/7526-marcos-c-ssio-tapaj-s-martins-do-couto">tapajos</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -564,44 +671,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/05/09/nunca-mais-esqueca-uma-senha/">Nunca mais esqueça uma senha</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2008-05-09T00:00:00-03:00" pubdate  data-updated="true" > 9 de Maio de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="aligncenter size-full wp-image-713" title="password_notepad_inuse" src="http://old.nomedojogo.com/wp-content/uploads/2008/05/password_notepad_inuse.jpg" alt="" /></p>
-
-<p>Segurança é tudo! Mas como você faz para lembrar as senhas (diferentes, afinal segurança é tudo) de cada site na internet que você já se cadastrou? A solução está <a href="http://www.thinkgeek.com/homeoffice/supplies/a475/">aqui</a>.</p>
-
-<p>Use principalmente para anotar as suas senhas do banco. E para não correr o risco de perder o papel e esquecer suas senhas, tire uma cópia e me envie, eu terei o maior prazer em guardar para você!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/42/">&larr; Antigos</a>
@@ -619,6 +688,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
@@ -632,10 +705,6 @@
     
       <li class="post">
         <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/06/03/colorific/">Colorific</a>
       </li>
     
   </ul>

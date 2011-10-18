@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Mais um ano bem agitado se passou. Muito trabalho e diversão fizeram de 2010 um excelente ano para mim. Porém, o que mais me marcou esse ano foi o ...">
+  <meta name="description" content="Se você já experimentou Ruby com certeza já conheceu os famosos métodos puts, print e outros semelhantes a esses. Talvez você tenha notado que esse...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,6 +74,79 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/01/03/como-funcionam-os-metodos-puts-e-print-no-ruby/">Como funcionam os métodos puts e print no Ruby</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2011-01-03T00:00:00-02:00" pubdate  data-updated="true" > 3 de Janeiro de 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Se você já experimentou Ruby com certeza já conheceu os famosos métodos <code>puts</code>, <code>print</code> e outros semelhantes a esses. Talvez você tenha notado que esses métodos, diferente de como aprendemos, podem ser executados sem que seja necessário informar um objeto.</p>
+
+<p>Se você vem de outra linguagem de programação talvez tenha logo especulado que eles sejam palavras reservadas do Ruby. Mas isso não é verdade. Ambos são métodos comuns, como qualquer outro. Veja por si mesmo:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Object</span><span class="o">.</span><span class="n">send</span> <span class="ss">:puts</span><span class="p">,</span> <span class="s2">&quot;um texto qualquer&quot;</span>
+</span><span class='line'><span class="c1"># =&gt; um texto qualquer</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Como você pode ver no exemplo acima, esses métodos foram inteligentemente incluidos na classe <code>Object</code>, e como no Ruby tudo é um objeto&#8230;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">puts</span> <span class="nb">send</span><span class="p">(</span><span class="ss">:class</span><span class="p">)</span> <span class="c1"># =&gt; Object</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>O módulo Kernel</h2>
+
+<p>Embora esses métodos sejam disponibilizados por meio de <code>Object</code>, eles estão implementados em um módulo chamado <code>Kernel</code>, que é então incluido na classe.</p>
+
+<p>O interessante é que você pode tirar proveito desse mecanismo. Se você adicionar um método ao módulo <code>Kernel</code> ele funcionará exatamente como os métodos citados acima. Veja:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">Kernel</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">print_line</span>
+</span><span class='line'>        <span class="nb">puts</span> <span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">20</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">print_line</span> <span class="c1"># =&gt; --------------------</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -489,105 +562,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/08/16/ruby-c-assembly-oxente/">Ruby + C + Assembly = Oxente!</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2010-08-16T00:00:00-03:00" pubdate  data-updated="true" >16 de Agosto de 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Nos dias 6 e 7 de agosto desse ano estive presente na segunda edição do <a href="http://oxenterails.com/">Oxente Rails</a> em Natal no Rio Grande do Norte. E para variar o evento superou as expectativas. Programadores de qualquer linguagem e pessoas interessadas em empreendedorismo não podem perder esse evento, simples assim.</p>
-
-<p>Abaixo estão os slides da minha apresentação e um trecho de código que será facilmente entendido por aqueles que assistiram a minha palestra.</p>
-
-<object id="__sse4928964" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="425" height="355" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowFullScreen" value="true" /><param name="allowScriptAccess" value="always" /><param name="src" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=palestra-100809101346-phpapp02&amp;stripped_title=criando-uma-carreira-notvel-em-desenvolvimento-de-software" /><param name="name" value="__sse4928964" /><param name="allowfullscreen" value="true" /><embed id="__sse4928964" type="application/x-shockwave-flash" width="425" height="355" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=palestra-100809101346-phpapp02&amp;stripped_title=criando-uma-carreira-notvel-em-desenvolvimento-de-software" name="__sse4928964" allowscriptaccess="always" allowfullscreen="true"></embed></object>
-
-
-<p>Se você pretende executar o código abaixo é necessário instalar a gem RubyInline antes:</p>
-
-<pre><code>gem install RubyInline
-</code></pre>
-
-<p>Segue a brincadeira:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s2">&quot;rubygems&quot;</span>
-</span><span class='line'><span class="nb">require</span> <span class="s2">&quot;inline&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span>
-</span><span class='line'>  <span class="n">inline</span> <span class="k">do</span> <span class="o">|</span><span class="n">builder</span><span class="o">|</span>
-</span><span class='line'>    <span class="n">builder</span><span class="o">.</span><span class="n">add_compile_flags</span> <span class="s1">&#39;-fasm-blocks&#39;</span>
-</span><span class='line'>    <span class="n">builder</span><span class="o">.</span><span class="n">c</span> <span class="s2">&quot;</span>
-</span><span class='line'><span class="s2">      int sum(int num1, int num2) {</span>
-</span><span class='line'><span class="s2">        int result;</span>
-</span><span class='line'><span class="s2">    </span>
-</span><span class='line'><span class="s2">        __asm__{</span>
-</span><span class='line'><span class="s2">          mov eax, num1</span>
-</span><span class='line'><span class="s2">          mov ebx, num2</span>
-</span><span class='line'><span class="s2">          add eax, ebx</span>
-</span><span class='line'><span class="s2">          mov result, eax</span>
-</span><span class='line'><span class="s2">        }</span>
-</span><span class='line'><span class="s2">    </span>
-</span><span class='line'><span class="s2">        return result;</span>
-</span><span class='line'><span class="s2">      }</span>
-</span><span class='line'><span class="s2">    &quot;</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">puts</span> <span class="n">sum</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Se você não pôde estar presente, a boa notícia é que esse ano todas as palestras foram gravadas e devem ser disponibilizadas em breve!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/3/">&larr; Antigos</a>
@@ -605,6 +579,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
@@ -618,10 +596,6 @@
     
       <li class="post">
         <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/06/03/colorific/">Colorific</a>
       </li>
     
   </ul>

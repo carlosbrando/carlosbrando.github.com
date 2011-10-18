@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Ao contrário do que alguns podem dizer, Ruby on Rails não &eacute; lento. Mas podem surgir situa&ccedil;ões onde você precise de mais velocidade. N...">
+  <meta name="description" content="&Eacute; uma boa prática colocar todos os seus m&eacute;todos find nos models, disto todo mundo sabe. Se não sabe deveriar ler a tradu&ccedil;ão qu...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,6 +74,88 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2007/07/13/204/">Torne seus métodos de pesquisa mais poderosos</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2007-07-13T00:00:00-03:00" pubdate  data-updated="true" >13 de Julho de 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><center><img src="http://farm2.static.flickr.com/1168/778334917_4947b3e0b7.jpg?v=0" alt="Turbo" /></center>
+
+
+<br/>&Eacute; uma boa prática colocar todos os seus m&eacute;todos find nos <strong>models</strong>, disto todo mundo sabe. Se não sabe deveriar ler a tradu&ccedil;ão que o Akita fez do artigo &quot;<a href="http://www.rubyonbr.org/articles/2007/01/18/a-dieta-dos-controllers/">A dieta dos controller</a>&quot;.
+
+
+<br/>Neste artigo ele dá um exemplo assim:
+
+
+<p>[source:ruby]
+module FindExtensions</p>
+
+<pre><code>def find_recentes
+    find(:all, :order =&amp;gt; 'created_at desc')
+end
+</code></pre>
+
+<p>end
+[/source]</p>
+
+<p>Fa&ccedil;a um favor para seu c&oacute;digo e projetos, leia o artigo do Akita.</p>
+
+<br/>Colocando na prática esta dieta, resolvi dar uma melhorada nos m&eacute;todos que fui criando nos models.
+
+
+<br/>A grande maioria dos programadores <strong>Ruby on Rails</strong> já conhece o m&eacute;todo <strong>with_scope</strong> do <strong>ActiveRecord</strong>. Usando este recurso pode-se criar m&eacute;todos de pesquisa e cria&ccedil;ão nos models sem perder a flexibilidade.
+
+
+<br/>Podemos fazer algo bem simples, assim:
+
+
+<p>[source:ruby]
+def find_recentes (options = {})</p>
+
+<pre><code>with_scope :find =&amp;gt; options do
+    find(:all, :order =&amp;gt; 'created_at desc')
+end
+</code></pre>
+
+<p>end
+[/source]</p>
+
+<p>Com isto deixamos nossos controllers magrinhos, e ainda criamos m&eacute;todos de pesquisa totalmente flex&iacute;veis. No caso acima poder&iacute;amos fazer algo assim em nosso controller:</p>
+
+<p>[source:ruby]
+find_ recentes :limit =: 20
+[/source]</p>
+
+<p>Assim ter&iacute;amos o mesmo m&eacute;todo de antes, mas agora trazendo apenas os 20 primeiros registros.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -465,60 +547,6 @@ Página do projeto: <a href="http://railslogvislzr.rubyforge.org/" title="http:/
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/06/29/criando-aplicativos-para-o-iphone/">Criando aplicativos para o iPhone</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2007-06-29T00:00:00-03:00" pubdate  data-updated="true" >29 de Junho de 2007</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><center><img src="http://farm1.static.flickr.com/146/352687304_3ee8ca1a09.jpg?v=0" /></center>
-
-
-<p>Está todo mundo falando do <strong>iPhone</strong>, e já deve ter gente construindo aplicativos para o novo celular, ou pelo menos pensando nisto. Neste caso, mais uma vez minha interface RAD predileta (o <strong>Aptana</strong>) saiu na frente e já tem um plugin para desenvolvimento de aplicativos para o iPhone.</p>
-
-<p>O plugin oferece:</p>
-
-<ul>
-    <li>Visualiza&ccedil;ão de projetos para o iPhone na vertical e horizontal.</li>
-    <li>Aplicativos de modelo para quem está comen&ccedil;ando.</li>
-    <li>Um sistema de importa&ccedil;ão de projetos Ajax para projetos do iPhone.</li>
-    <li>E mais algumas coisinhas interessantes.</li>
-</ul>
-
-
-<p>Os caras ainda prometem lan&ccedil;ar um kit de deployment e uma documenta&ccedil;ão para desenvolvimento.</p>
-
-<p>Mais uma vez o pessoal do Aptana mandando bem. Parab&eacute;ns para eles.</p>
-
-<p>Página do plugin: <a href="http://aptana.com/iphone/" title="http://aptana.com/iphone/">http://aptana.com/iphone/</a>
-Screencast: <a href="http://www.aptana.tv/movies/iphone_screencast/iphone.html" title="http://www.aptana.tv/movies/iphone_screencast/iphone.html">http://www.aptana.tv/movies/iphone_screencast/iphone.html</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/74/">&larr; Antigos</a>
@@ -536,6 +564,10 @@ Screencast: <a href="http://www.aptana.tv/movies/iphone_screencast/iphone.html" 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
@@ -549,10 +581,6 @@ Screencast: <a href="http://www.aptana.tv/movies/iphone_screencast/iphone.html" 
     
       <li class="post">
         <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/06/03/colorific/">Colorific</a>
       </li>
     
   </ul>

@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Eu sou um fã da 37signals e principalmente do blog Signal vs. Noise, e isto não é segredo para ninguém. Mas existe algumas séries de artigos que el...">
+  <meta name="description" content="Saiu a versão 1.0 do RadRails. Eu costumava usar este software quando ainda era usuário do Windows, quando mudei para Linux comecei a usar mais o N...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,6 +74,44 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/03/12/radrails-10/">RadRails 1.0</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2008-03-12T00:00:00-03:00" pubdate  data-updated="true" >12 de Março de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Saiu a versão <a href="http://www.aptana.com/node/320">1.0 do RadRails</a>. Eu costumava usar este software quando ainda era usuário do Windows, quando mudei para Linux comecei a usar mais o NetBeans e no Mac só TextMate.</p>
+
+<p>Pelo que andei observando ele está bem mais robusto que na época em que eu o usava. Uma das coisas legais que eu usava muito na época eram os atalhos (Bundles) que copiavam os do TextMate. Isto foi bom na hora da mudança.</p>
+
+<p>Outra coisa legal destas ferramentas (acho que o NetBeans também faz isto) é permitir o debug de aplicativos como eu fazia na época do .Net, tudo em interface gráfica. Eu gostava, mas hoje já não sinto tanta falta disto mais&#8230;</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -518,70 +556,6 @@ Retorna dia 31 de dezembro às 23:59:59</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/03/02/o-metodo-try/">O método try()</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2008-03-02T00:00:00-03:00" pubdate  data-updated="true" > 2 de Março de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/03/494863115_d6ee04b511.jpg" alt="494863115_d6ee04b511.jpg" /></p>
-
-<p>Vi esta dica no blog do <a href="http://ozmm.org/posts/try.html">Chris Wanstrath</a>, um dos funcionários da <strong>Ett Free</strong>. Pense em quantas vezes você já fez algo assim:</p>
-
-<pre class="textmate-source"><span class="source source_ruby"><span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">name</span></span>
-  <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>person</span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">?</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>person</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>name <span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">:</span> <span class="constant constant_language constant_language_ruby">nil</span>
-<span class="keyword keyword_control keyword_control_ruby">end</span>
-</span></pre>
-
-
-<p>Agora imagine como seria fácil se pudéssemos fazer a mesma coisa assim:</p>
-
-<pre class="textmate-source"><span class="source source_ruby"><span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">name</span></span>
-  <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>person</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>try<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>name</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-
-
-<p>Pois é&#8230; inclua este código abaixo em seu projeto e seja feliz.</p>
-
-<pre class="textmate-source"><span class="source source_ruby"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Object</span></span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>#
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>   @person ? @person.name : nil
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> vs
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>   @person.try(:name)
-</span>  <span class="meta meta_function meta_function_method meta_function_method_with-arguments meta_function_method_with-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">try</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">(</span><span class="variable variable_parameter variable_parameter_function variable_parameter_function_ruby">method</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">)</span></span>
-    send method <span class="keyword keyword_control keyword_control_ruby">if</span> respond_to? method
-  <span class="keyword keyword_control keyword_control_ruby">end</span>
-<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-
-
-<p>É engraçado como normalmente as melhores soluções são as mais simples&#8230;</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/52/">&larr; Antigos</a>
@@ -599,6 +573,10 @@ Retorna dia 31 de dezembro às 23:59:59</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
@@ -612,10 +590,6 @@ Retorna dia 31 de dezembro às 23:59:59</p>
     
       <li class="post">
         <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/06/03/colorific/">Colorific</a>
       </li>
     
   </ul>

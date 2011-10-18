@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="In EnglishBruno Miranda revised the English version of the book, fixing some typos. So I&#8217;m publishing a second edition of the book with all a...">
+  <meta name="description" content="Se você tem o costume de evitar repetições em suas views criando helpers, com certeza já usou o método concat. Se você nunca usou este método, saib...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,6 +74,48 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/06/16/edge-rails-alteracao-no-metodo-concat/">Edge Rails: Alteração no método concat</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2008-06-16T00:00:00-03:00" pubdate  data-updated="true" >16 de Junho de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Se você tem o costume de evitar repetições em suas views criando helpers, com certeza já usou o método <strong>concat</strong>. Se você nunca usou este método, saiba que ele é como o <strong>puts</strong> para uma view.</p>
+
+<p>A implementação atual do método recebe dois parâmetros, uma <strong>string</strong> com o texto que será exibido na view e um segundo chamado <strong>binding</strong>. Acontece que devido a melhoria no código, embora ele ainda espere estes dois parâmetros, o <strong>binding</strong> não é mais necessário, na verdade o método simplesmente não o usa mais.</p>
+
+<p>Então este segundo parâmetro foi deprecado, ou seja, se você estiver informando ele à chamada do método e rodando o edge rails, receberá a seguinte mensagem ao subir o seu servidor:</p>
+
+<p><strong>The binding argument of #concat is no longer needed.  Please remove it from your views and helpers.</strong></p>
+
+<p>Em uma futura versão do Rails, este segundo parâmetro será removido.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -577,77 +619,6 @@ sudo gem install user-plugin --source=http://gems.github.com</span></pre>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/06/07/agora-e-a-sua-vez/">Agora é a sua vez!</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2008-06-07T00:00:00-03:00" pubdate  data-updated="true" > 7 de Junho de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Confesso que antes de lançar o e-book de Rails 2.1 eu estava um pouco preocupado quanto a reação da comunidade brasileira, afinal todo o texto do livro está também neste blog. Por que alguém ia se interessar em um livro assim? Nesta hora agradeço ao Marcos Tapajós pela iniciativa em me ajudar a montar o livro.</p>
-
-<p>Agora imaginem a minha alegria ao ver tanta gente baixando o livro, comentando no blog, enviando emails e mandando mensagens via Twitter? Até agora de acordo com os logs do meu servidor já foram realizados mais de <strong>700 downloads</strong> do livro à partir deste site.</p>
-
-<p>Isto tudo já é muito legal e me estimula a continuar contribuindo com a comunidade brasileira ainda mais. Agora melhor do que isto é ver o reconhecimento internacional pelo trabalho que estamos realizando.</p>
-
-<p>Antes de qualquer coisa eu sou um programador como vocês e tenho todo interesse em ver o Ruby e o Rails se tornarem fortes neste país. Tenho mais interesse ainda em ver empresas de outros países interessadas em nós brasileiros, como já está acontecendo. Como costumo dizer, isto é bom para os negócios&#8230; :)</p>
-
-<p>Mas ainda não atingimos nosso potencial máximo. Para isto precisamos mostrar do que somos capazes. Este post é mais do que um post de agradecimento ou informativo, é uma convocação para levantarmos nossos traseiros gordos da cadeira e fazermos alguma coisa. Ou melhor ainda, já que passamos horas e horas sentados na frente de um computador, ao invés de gastarmos nosso tempo vendo vídeos no YouTube ou mandando scraps pelo Orkut, que tal participar em algo grande como a tradução do livro &#8220;Why&#8217;s (Poignant) Guide to Ruby&#8221; para português, ou da tradução do livro &#8220;Ruby on Rails 2.1 - O que há de novo?&#8221; para inglês?</p>
-
-<p>Os dois projetos estão tendo uma ótima visibilidade lá fora e quando estiverem completos, chamarão à atenção. E os envolvidos nesses projetos terão seus nomes divulgados. São esses nomes que as empresas estão interessadas em contratar. Pessoas tão apaixonadas pelo que fazem, que mesmo em suas horas vagas programam, escrevem ou ajudam em traduções como forma de diversão.</p>
-
-<p>Tem muita coisa acontecendo lá fora e aqui no Brasil. Quem vai ficar de fora?</p>
-
-<h4>Tradução do livro Ruby on Rails 2.1 - O que há de novo:</h4>
-
-
-<p><strong>Responsável:</strong> Marcos Tapajós</p>
-
-<p><strong>Repositório:</strong> <a href="http://github.com/carlosbrando/rails21-book/tree/master">http://github.com/carlosbrando/rails21-book/tree/master</a>
-<strong> Grupo: </strong><a href="http://groups.google.com/group/rails21">http://groups.google.com/group/rails21</a>
-<strong> Relação de capítulos já traduzidos:</strong> <a href="https://spreadsheets.google.com/ccc?key=pq5hAbcwH_ZlY60ptewslaw&amp;hl=en">Clique aqui
-</a></p>
-
-<p><strong>Convocação feita pelo site GitHub:</strong> <a href="http://github.com/blog/81-rails-2-1-book-translation">http://github.com/blog/81-rails-2-1-book-translation</a></p>
-
-<h4>Tradução do livro Why&#8217;s (Poignant) Guide to Ruby:</h4>
-
-
-<p><strong>Responsável:</strong> Carlos Brando</p>
-
-<p><strong>Repositório:</strong> <a href="http://github.com/carlosbrando/poignant-br/tree/master">http://github.com/carlosbrando/poignant-br/tree/master</a>
-<strong> Grupo:</strong> <a href="http://groups.google.com/group/whys-poignant-guide-to-ruby---portugues">http://groups.google.com/group/whys-poignant-guide-to-ruby&#8212;portugues</a>
-<strong>Relação de capítulos já traduzidos:</strong> <a href="https://spreadsheets.google.com/ccc?key=pU_MriAPjg2AHUgj-pIVeRQ&amp;hl=en">Clique aqui
-</a></p>
-
-<p><strong>Sinta o nível de qualidade da tradução:</strong> <a href="http://github.com/brunopedroso/poignant-br/commit/b12b451598ac5e881381d4ac2062ec51605a5f0a">Clique aqui
-</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/37/">&larr; Antigos</a>
@@ -665,6 +636,10 @@ sudo gem install user-plugin --source=http://gems.github.com</span></pre>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
@@ -678,10 +653,6 @@ sudo gem install user-plugin --source=http://gems.github.com</span></pre>
     
       <li class="post">
         <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/06/03/colorific/">Colorific</a>
       </li>
     
   </ul>

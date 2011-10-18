@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="O método each_with_object do Ruby 1.9 foi adicionado ao Rails, caso você ainda não esteja usando a nova versão do Ruby. Este método é bem interessa...">
+  <meta name="description" content="Todas as mensagens de log que continham uma indicação do tempo que determinado processo levou para ser executado, foram alteradas para exibir o tem...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,6 +74,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/10/06/edge-rails-benchmarking-reports-em-milisegundos/">Edge Rails: Benchmarking reports em milisegundos</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+<time datetime="2008-10-06T00:00:00-03:00" pubdate  data-updated="true" > 6 de Outubro de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Todas as mensagens de log que continham uma indicação do tempo que determinado processo levou para ser executado, foram alteradas para exibir o tempo em milisegundos.</p>
+
+<p>Por exemplo, a mensagem:</p>
+
+<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">Completed in 0.10000 (4 reqs/sec) | Rendering: 0.04000 (40%) | DB: 0.00400 (4%) | 200 OK [<span class="markup markup_underline markup_underline_link markup_underline_link_text">http://example.com</span>]</span></span></pre>
+
+
+<p>Agora será exibida da seguinte forma:</p>
+
+<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">Completed in 100ms (View: 40, DB: 4) | 200 OK [<span class="markup markup_underline markup_underline_link markup_underline_link_text">http://example.com</span>]</span></span></pre>
+
+
+<hr /><em>Este artigo pertence a série “Edge Rails”. Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. A intenção desta série é preparar antecipadamente os programadores para as próximas versões do framework.</em>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -623,51 +670,6 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/25/edge-rails-nova-versao-destrutiva-dos-metodos-de-pesquisa-do-activerecord/">Edge Rails: Nova versão destrutiva dos métodos de pesquisa do ActiveRecord</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-<time datetime="2008-09-25T00:00:00-03:00" pubdate  data-updated="true" >25 de Setembro de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Os métodos dinâmicos de pesquisa do <strong>ActiveRecord</strong> receberam uma versão destrutiva, que dispara um erro do tipo <strong>RecordNotFound</strong> caso nenhum registro seja encontrado, ao invés de apenas retornar <strong>nil</strong> como acontece com a versão original.</p>
-
-<p>Para usar esta versão destrutiva, basta adicionar o sinal de exclamação no final do método. Veja um exemplo:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Topic</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find_by_title!<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>The First Topic!<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; ActiveRecord::RecordNotFound</span></span></pre>
-
-
-<p>Esta alteração é muito bem vinda.</p>
-
-<hr /><em>Este artigo pertence a série “Edge Rails”. Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. A intenção desta série é preparar antecipadamente os programadores para as próximas versões do framework.</em>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/24/">&larr; Antigos</a>
@@ -685,6 +687,10 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
@@ -698,10 +704,6 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
     
       <li class="post">
         <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/06/03/colorific/">Colorific</a>
       </li>
     
   </ul>
