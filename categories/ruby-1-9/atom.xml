@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ruby 1.9 | Nome do Jogo]]></title>
+  <link href="http://nomedojogo.com/categories/ruby-1-9/atom.xml" rel="self"/>
+  <link href="http://nomedojogo.com/"/>
+  <updated>2011-10-18T20:54:12-02:00</updated>
+  <id>http://nomedojogo.com/</id>
+  <author>
+    <name><![CDATA[Carlos Brando]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Colorific]]></title>
+    <link href="http://nomedojogo.com/2011/06/03/colorific/"/>
+    <updated>2011-06-03T00:00:00-03:00</updated>
+    <id>http://nomedojogo.com/2011/06/03/colorific</id>
+    <content type="html"><![CDATA[<p>Já faz algum tempo que desenvolvi uma gem para imprimir o resultado dos meus testes de uma forma mais intuitiva, menos poluída e mais... <strong><span style="color: #ff0000;">c</span><span style="color: #ff9900;">o</span><span style="color: #ff00ff;">l</span><span style="color: #339966;">o</span><span style="color: #0000ff;">r</span><span style="color: #666699;">i</span><span style="color: #993366;">d</span><span style="color: #333399;">a</span></strong>! Não sei bem porque, mas não divulguei muito essa gem na época. De qualquer forma, ai está:</p>
+
+<iframe width="560" height="349" src="http://www.youtube.com/embed/BQm4nFlJcco" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Para instalar é fácil, basta adicionar o seguinte código no seu arquivo Gemfile:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem 'colorific', :group => :test</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Se desejar contribuir com algo, essa biblioteca tem 78 linhas de código apenas. E todo o código encontra-se no GitHub: <a href="https://github.com/carlosbrando/colorific/blob/master/lib/colorific.rb">https://github.com/carlosbrando/colorific/blob/master/lib/colorific.rb</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby 1.9 #1: Argumentos em blocos]]></title>
+    <link href="http://nomedojogo.com/2009/03/04/ruby-19-1-argumentos-em-blocos/"/>
+    <updated>2009-03-04T00:00:00-03:00</updated>
+    <id>http://nomedojogo.com/2009/03/04/ruby-19-1-argumentos-em-blocos</id>
+    <content type="html"><![CDATA[<p>O Ruby 1.9 está ai e já passou da hora de começarmos a ver quais são algumas das novidades mais importantes desta nova versão da nossa linguagem de programação preferida.</p>
+
+<p>À partir da versão 1.9 argumentos criados dentro de blocos terão seu escopo limitado ao mesmo. Para entender melhor, vejamos um exemplo de código executado na versão 1.8.6 e logo em seguida na versão 1.9:</p>
+
+<pre class="textmate-source"><span class="source source_ruby">i <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Olá<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+<span class="constant constant_numeric constant_numeric_ruby">3</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>times <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">i</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> puts i <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
+puts i
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> 0
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> 1
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> 2
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> 2</span></span></pre>
+
+
+<p>Note que no código acima ao alterar a variável <code>i</code> dentro do bloco (o método <code>times</code> atribui  um novo valor a cada execução) acabamos também alterando a variável com o mesmo nome que foi declarada fora do bloco. Embora isto não seja um bug, mas sim uma característica do Ruby nesta versão, raramente (talvez nunca) vamos desejar este comportamento.</p>
+
+<p>Agora o mesmo código sendo executado na versão 1.9:</p>
+
+<pre class="textmate-source"><span class="source source_ruby">i <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Olá<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+<span class="constant constant_numeric constant_numeric_ruby">3</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>times <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">i</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> puts i <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
+puts i
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> 0
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> 1
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> 2
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> "Olá"</span></span></pre>
+
+
+<p>Desta vez a execução do bloco não alterou a variável externa <code>i</code>. Toda variável criada dentro de um bloco no Ruby 1.9 só existirá dentro do escopo do bloco, por isto cuidado com seus códigos malucos ao migrar para esta nova versão!</p>
+]]></content>
+  </entry>
+  
+</feed>

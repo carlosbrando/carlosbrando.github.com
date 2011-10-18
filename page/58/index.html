@@ -89,12 +89,9 @@
 
 
 
-
   
 
-
-
-<time datetime="2008-01-06T00:00:00-02:00" pubdate  data-updated="true" > 6 de Janeiro de 2008</time>
+<time datetime="2008-01-06T00:00:00-02:00" pubdate> 6 de Janeiro de 2008</time>
         
       </p>
     
@@ -131,12 +128,9 @@
 
 
 
-
   
 
-
-
-<time datetime="2008-01-05T00:00:00-02:00" pubdate  data-updated="true" > 5 de Janeiro de 2008</time>
+<time datetime="2008-01-05T00:00:00-02:00" pubdate> 5 de Janeiro de 2008</time>
         
       </p>
     
@@ -145,25 +139,25 @@
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/01/375147944_49f541ad21.jpg" alt="375147944_49f541ad21.jpg" /></p>
 
-<p>O time de desenvolvimento do Rails continua forte nas altera&ccedil;ões para torná-lo compat&iacute;vel com o <strong>Ruby 1.9</strong>, mas isto não significa que o resto será deixado de lado. Como vocês verão nas altera&ccedil;ões relacionadas abaixo muita coisa está sendo feita para melhorar o sistema de cache e tamb&eacute;m o c&oacute;digo como um todo. Vamos as últimas altera&ccedil;ões:</p>
+<p>O time de desenvolvimento do Rails continua forte nas alterações para torná-lo compatível com o <strong>Ruby 1.9</strong>, mas isto não significa que o resto será deixado de lado. Como vocês verão nas alterações relacionadas abaixo muita coisa está sendo feita para melhorar o sistema de cache e também o código como um todo. Vamos as últimas alterações:</p>
 
 <h3>Code refactoring</h3>
 
 
-<p>Foi feito um refactoring no <a href="http://dev.rubyonrails.org/browser/trunk/actionpack/lib/action_controller/verification.rb?rev=8543">ActionController::Verification</a> e aproveitaram para melhorar a documenta&ccedil;ão.</p>
+<p>Foi feito um refactoring no <a href="http://dev.rubyonrails.org/browser/trunk/actionpack/lib/action_controller/verification.rb?rev=8543">ActionController::Verification</a> e aproveitaram para melhorar a documentação.</p>
 
 <h3>Cache</h3>
 
 
-<p>David tamb&eacute;m aproveitou para mudar algumas coisas nas classes de cache.</p>
+<p>David também aproveitou para mudar algumas coisas nas classes de cache.</p>
 
-<p>Todos os m&eacute;todos <strong>fragment_cache_key</strong> agora retornam por padrão o namespace &#39;view/&#39; na frente.</p>
+<p>Todos os métodos <strong>fragment_cache_key</strong> agora retornam por padrão o namespace &#39;view/&#39; na frente.</p>
 
 <p>Todos os <em>caching stores</em> foram retirados de <strong>ActionController::Caching::Fragments::<em></strong> e agora estão em <strong>ActiveSupport::Cache::</em></strong>. Neste caso se você faz referência a um <em>store</em>, como <strong>ActionController::Caching::Fragments::MemoryStore</strong>, por exemplo, será necessário alterar sua referência para <strong>ActiveSupport::Cache::MemoryStore</strong>.</p>
 
-<p><strong>ActionController::Base.fragment_cache_store</strong> deixa de existir e dá lugar &agrave; <strong>ActionController::Base.cache_store</strong>.</p>
+<p><strong>ActionController::Base.fragment_cache_store</strong> deixa de existir e dá lugar à <strong>ActionController::Base.cache_store</strong>.</p>
 
-<p>Foi inclu&iacute;do no <strong>ActiveRecord::Base</strong> o m&eacute;todo <strong>cache_key</strong> para facilitar o armazenamento em cache de Active Records pelas novas bibliotecas <strong>ActiveSupport::Cache::*</strong>. Este m&eacute;todo funciona assim:</p>
+<p>Foi incluído no <strong>ActiveRecord::Base</strong> o método <strong>cache_key</strong> para facilitar o armazenamento em cache de Active Records pelas novas bibliotecas <strong>ActiveSupport::Cache::*</strong>. Este método funciona assim:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> <span class="support support_class support_class_ruby">Product</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>cache_key
 <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>products/new<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
@@ -173,9 +167,9 @@
 <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>people/5-20071224150000<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span></span></pre>
 
 
-<p>Foi inclu&iacute;do o <strong>ActiveSupport::Gzip.decompress/compress</strong> para facilitar o <em>wrapper</em> para o <em>Zlib</em>.</p>
+<p>Foi incluído o <strong>ActiveSupport::Gzip.decompress/compress</strong> para facilitar o <em>wrapper</em> para o <em>Zlib</em>.</p>
 
-<p>Agora você pode usar entre as op&ccedil;ões de <em>environment</em> o <strong>config.cache_store</strong> para informar o local padrão de armazenamento do cache. Vale lembrar que se o diret&oacute;rio tmp/cache existir o padrão &eacute; o <strong>FileStore</strong>, caso contrário o <strong>MemoryStore</strong> &eacute; usado. Você pode configurar das seguintes formas:</p>
+<p>Agora você pode usar entre as opções de <em>environment</em> o <strong>config.cache_store</strong> para informar o local padrão de armazenamento do cache. Vale lembrar que se o diretório tmp/cache existir o padrão é o <strong>FileStore</strong>, caso contrário o <strong>MemoryStore</strong> é usado. Você pode configurar das seguintes formas:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>cache_store <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>memory_store</span>
 config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>cache_store <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>file_store</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>/path/to/cache/directory<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
@@ -187,7 +181,7 @@ config<span class="punctuation punctuation_separator punctuation_separator_metho
 <h3>Prototype e script.aculo.us</h3>
 
 
-<p>O Rails passa a usar a partir de agora a versão <em>1.6.0.1 do Prototype</em>. Isto serve como um preparat&oacute;rio para a versão <em>1.8.1 do script.aculo.us</em>.</p>
+<p>O Rails passa a usar a partir de agora a versão <em>1.6.0.1 do Prototype</em>. Isto serve como um preparatório para a versão <em>1.8.1 do script.aculo.us</em>.</p>
 </div>
   
   
@@ -209,12 +203,9 @@ config<span class="punctuation punctuation_separator punctuation_separator_metho
 
 
 
-
   
 
-
-
-<time datetime="2008-01-04T00:00:00-02:00" pubdate  data-updated="true" > 4 de Janeiro de 2008</time>
+<time datetime="2008-01-04T00:00:00-02:00" pubdate> 4 de Janeiro de 2008</time>
         
       </p>
     
@@ -223,19 +214,19 @@ config<span class="punctuation punctuation_separator punctuation_separator_metho
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/01/164576023_462ad17de8.jpg" alt="164576023_462ad17de8.jpg" /></p>
 
-<p>Compara&ccedil;ões entre frameworks e linguagens de programa&ccedil;ão sempre geram <a href="http://pt.wikipedia.org/wiki/Flaming">flame wars</a> e isto &eacute; simplesmente inevitável, afinal de contas &eacute; puramente uma questão de gosto.</p>
+<p>Comparações entre frameworks e linguagens de programação sempre geram <a href="http://pt.wikipedia.org/wiki/Flaming">flame wars</a> e isto é simplesmente inevitável, afinal de contas é puramente uma questão de gosto.</p>
 
-<p>Mas a maioria de n&oacute;s Railers temos nossos p&eacute;s no chão e sabemos que cedo ou tarde teremos um novo framework ou linguagem que se mostrará mais interessante que o Ruby ou o Rails, e estaremos prontos para mudar se for necessário. Mas no momento, pelo menos na minha opinião, não existe nada comparado ao Rails. Existem diversos frameworks que me chamam a aten&ccedil;ão mas nenhum deles ainda me convenceu.</p>
+<p>Mas a maioria de nós Railers temos nossos pés no chão e sabemos que cedo ou tarde teremos um novo framework ou linguagem que se mostrará mais interessante que o Ruby ou o Rails, e estaremos prontos para mudar se for necessário. Mas no momento, pelo menos na minha opinião, não existe nada comparado ao Rails. Existem diversos frameworks que me chamam a atenção mas nenhum deles ainda me convenceu.</p>
 
-<p>A questão &eacute; como discutir sobre as diferen&ccedil;as entre frameworks sem entrar em uma guerra? &Eacute; simplesmente imposs&iacute;vel. Então o melhor a se fazer &eacute; estudar por si s&oacute; cada framework ou linguagem de programa&ccedil;ão que apare&ccedil;a at&eacute; encontrar algo que lhe agrade, e enquanto isto não acontecer continue onde está.</p>
+<p>A questão é como discutir sobre as diferenças entre frameworks sem entrar em uma guerra? &Eacute; simplesmente impossível. Então o melhor a se fazer é estudar por si só cada framework ou linguagem de programação que apareça até encontrar algo que lhe agrade, e enquanto isto não acontecer continue onde está.</p>
 
-<p>Conhe&ccedil;o alguns Railers que estão indo para o Django e alguns que assim como eu preferiram ficar no Rails. Mas afinal de contas qual dos dois &eacute; melhor? Depende de você e de sua preferência.</p>
+<p>Conheço alguns Railers que estão indo para o Django e alguns que assim como eu preferiram ficar no Rails. Mas afinal de contas qual dos dois é melhor? Depende de você e de sua preferência.</p>
 
 <p>Estudando sobre o Django eu encontrei um documento bem interessante que compara as duas ferramentas de um ponto de vista bem neutro. Se quiser conferir <a href="http://www.vaporbase.com/rails-django">clique aqui</a>.</p>
 
-<p>O segredo &eacute; sempre se manter atualizado com tudo que aparece. Nunca se sabe o que vem por a&iacute;&#8230;</p>
+<p>O segredo é sempre se manter atualizado com tudo que aparece. Nunca se sabe o que vem por aí&#8230;</p>
 
-<p>Há, e recentemente o <a href="http://akitaonrails.com/">Fábio Akita</a> tamb&eacute;m entrevistou <a href="http://www.holovaty.com/">Adrian Holovaty</a> o criador do Django, vale a pena conferir a <a href="http://akitaonrails.com/2008/1/1/conversando-com-adrian-holovaty">entrevista</a>.</p>
+<p>Há, e recentemente o <a href="http://akitaonrails.com/">Fábio Akita</a> também entrevistou <a href="http://www.holovaty.com/">Adrian Holovaty</a> o criador do Django, vale a pena conferir a <a href="http://akitaonrails.com/2008/1/1/conversando-com-adrian-holovaty">entrevista</a>.</p>
 </div>
   
   
@@ -257,12 +248,9 @@ config<span class="punctuation punctuation_separator punctuation_separator_metho
 
 
 
-
   
 
-
-
-<time datetime="2008-01-03T00:00:00-02:00" pubdate  data-updated="true" > 3 de Janeiro de 2008</time>
+<time datetime="2008-01-03T00:00:00-02:00" pubdate> 3 de Janeiro de 2008</time>
         
       </p>
     
@@ -271,16 +259,16 @@ config<span class="punctuation punctuation_separator punctuation_separator_metho
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/01/1425520052_5c711d2e50.jpg" alt="1425520052_5c711d2e50.jpg" /></p>
 
-<p>O site com a maior concentra&ccedil;ão de Railers do mundo está quase atingindo a marca de 10.000 usuários cadastrados. At&eacute; agora já são mais de 9.600 usuários.</p>
+<p>O site com a maior concentração de Railers do mundo está quase atingindo a marca de 10.000 usuários cadastrados. Até agora já são mais de 9.600 usuários.</p>
 
 <p>E para comemorar este feito, o <a href="http://www.workingwithrails.com/home/winipod">WWR</a> vai <strike>sortear</strike> dar um iPod Touch <strike>entre os</strike> para o 10.000Â° usuário a se cadastrar <strike>primeiros cadastrados</strike> no site. Se você ainda não se cadastrou, está <a href="http://www.workingwithrails.com/person/new">esperando o que</a>?</p>
 
-<p>E como não eu não podia deixar de falar, quando se cadastrar, não esque&ccedil;a de <a href="http://workingwithrails.com/recommendation/new/person/8137-carlos-brando">me recomendar</a>.</p>
+<p>E como não eu não podia deixar de falar, quando se cadastrar, não esqueça de <a href="http://workingwithrails.com/recommendation/new/person/8137-carlos-brando">me recomendar</a>.</p>
 
 <h4>[Atualizado: 04/01/2008 11:01]</h4>
 
 
-<p>Quem ganha na verdade &eacute; o 10.000Â° usuário cadastrado. Não &eacute; um sorteio, como o Daniel Luz alertou.</p>
+<p>Quem ganha na verdade é o 10.000Â° usuário cadastrado. Não é um sorteio, como o Daniel Luz alertou.</p>
 </div>
   
   
@@ -302,12 +290,9 @@ config<span class="punctuation punctuation_separator punctuation_separator_metho
 
 
 
-
   
 
-
-
-<time datetime="2008-01-03T00:00:00-02:00" pubdate  data-updated="true" > 3 de Janeiro de 2008</time>
+<time datetime="2008-01-03T00:00:00-02:00" pubdate> 3 de Janeiro de 2008</time>
         
       </p>
     
@@ -316,39 +301,39 @@ config<span class="punctuation punctuation_separator punctuation_separator_metho
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/01/92697433_aa5c016a77.jpg" alt="92697433_aa5c016a77.jpg" /></p>
 
-<p>David acabou de publicar algumas altera&ccedil;ões no trunk do Rails. Vamos a elas:</p>
+<p>David acabou de publicar algumas alterações no trunk do Rails. Vamos a elas:</p>
 
 <h3>Rails:update</h3>
 
 
-<p>A partir de agora toda vez que rodarmos a tarefa &#39;<strong>rake rails:freeze:edge</strong>&#39; tamb&eacute;m será executado o &#39;<strong>rails:update</strong>&#39;, atualizando os arquivos de configura&ccedil;ão e JavaScript. Esta &eacute; uma altera&ccedil;ão simples mas importante, porque na maioria das vezes que congelamos uma versão do Rails em nosso projeto, precisamos rodar um &#39;<strong>rake rails:update</strong>&#39;, mas muita gente se esquece disso. Agora não será mais necessário.</p>
+<p>A partir de agora toda vez que rodarmos a tarefa &#39;<strong>rake rails:freeze:edge</strong>&#39; também será executado o &#39;<strong>rails:update</strong>&#39;, atualizando os arquivos de configuração e JavaScript. Esta é uma alteração simples mas importante, porque na maioria das vezes que congelamos uma versão do Rails em nosso projeto, precisamos rodar um &#39;<strong>rake rails:update</strong>&#39;, mas muita gente se esquece disso. Agora não será mais necessário.</p>
 
 <h3>Titleize</h3>
 
 
-<p>Existe um bug no m&eacute;todo <strong>String#titleize</strong> quando tentamos usá-lo em uma string que contenha o <em><strong>&#39;s</strong></em>. Fa&ccedil;a um teste no console de sua aplica&ccedil;ão Rails executando o c&oacute;digo abaixo:</p>
+<p>Existe um bug no método <strong>String#titleize</strong> quando tentamos usá-lo em uma string que contenha o <em><strong>&#39;s</strong></em>. Faça um teste no console de sua aplicação Rails executando o código abaixo:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>brando's blog<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>titleize
 <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Brando'S Blog<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span></span></pre>
 
 
-<p>Notou que o <em><strong>&#39;s</strong></em> retornou maiúsculo? Este problema foi corrigido. Se você executar o mesmo c&oacute;digo na versão Edge do Rails, o retorno será o texto correto: &quot;Brando&#39;s Blog&quot;.</p>
+<p>Notou que o <em><strong>&#39;s</strong></em> retornou maiúsculo? Este problema foi corrigido. Se você executar o mesmo código na versão Edge do Rails, o retorno será o texto correto: &quot;Brando&#39;s Blog&quot;.</p>
 
 <h3>Increment e decrement</h3>
 
 
-<p>Os m&eacute;todos <strong>increment</strong>, <strong>increment!</strong>, <strong>decrement</strong> e <strong>decrement!</strong> do <em><strong>ActiveRecord</strong></em> receberam mais um par&acirc;metro como opcional. Hoje você pode usar estes m&eacute;todos para aumentar ou diminuir o valor de uma coluna em 1 (um). Mas a partir da pr&oacute;xima versão do Rails você poderá especificar o valor a ser adicionado ou subtra&iacute;do se desejar. Assim:</p>
+<p>Os métodos <strong>increment</strong>, <strong>increment!</strong>, <strong>decrement</strong> e <strong>decrement!</strong> do <em><strong>ActiveRecord</strong></em> receberam mais um par&acirc;metro como opcional. Hoje você pode usar estes métodos para aumentar ou diminuir o valor de uma coluna em 1 (um). Mas a partir da próxima versão do Rails você poderá especificar o valor a ser adicionado ou subtraído se desejar. Assim:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">player1<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>increment!<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>points</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">5</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
 player2<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>decrement!<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>points</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">2</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
 
 
-<p>No exemplo acima estou somando 5 &agrave; pontua&ccedil;ão atual do jogador 1 e subtraindo 2 da pontua&ccedil;ão atual do jogador 2. Como este par&acirc;metro &eacute; opcional, os seus c&oacute;digos antigos não serão afetados.</p>
+<p>No exemplo acima estou somando 5 à pontuação atual do jogador 1 e subtraindo 2 da pontuação atual do jogador 2. Como este par&acirc;metro é opcional, os seus códigos antigos não serão afetados.</p>
 
 <h3>127.0.0.1 e DRY</h3>
 
 
-<p>Em um <a href="http://www.nomedojogo.com/2007/12/16/edge-rails-%e2%80%93-ruby-19-seguranca-e-muito-zelo/">post antigo</a> eu mencionei que o arquivo <a href="http://dev.rubyonrails.org/browser/trunk/railties/lib/tasks/databases.rake?rev=8388">databases.rake</a> havia sido alterado para suportar o <strong>IP 127.0.0.1</strong> na tarefa <em><strong>create</strong></em>. Agora isto foi estendido para a tarefa <em><strong>drop</strong></em> e o arquivo recebeu um <em>refactory</em> para tornar o c&oacute;digo menos repetitivo.</p>
+<p>Em um <a href="http://www.nomedojogo.com/2007/12/16/edge-rails-%e2%80%93-ruby-19-seguranca-e-muito-zelo/">post antigo</a> eu mencionei que o arquivo <a href="http://dev.rubyonrails.org/browser/trunk/railties/lib/tasks/databases.rake?rev=8388">databases.rake</a> havia sido alterado para suportar o <strong>IP 127.0.0.1</strong> na tarefa <em><strong>create</strong></em>. Agora isto foi estendido para a tarefa <em><strong>drop</strong></em> e o arquivo recebeu um <em>refactory</em> para tornar o código menos repetitivo.</p>
 
 <h4>Referências:</h4>
 
@@ -381,12 +366,9 @@ player2<span class="punctuation punctuation_separator punctuation_separator_meth
 
 
 
-
   
 
-
-
-<time datetime="2008-01-02T00:00:00-02:00" pubdate  data-updated="true" > 2 de Janeiro de 2008</time>
+<time datetime="2008-01-02T00:00:00-02:00" pubdate> 2 de Janeiro de 2008</time>
         
       </p>
     
@@ -427,12 +409,9 @@ player2<span class="punctuation punctuation_separator punctuation_separator_meth
 
 
 
-
   
 
-
-
-<time datetime="2007-12-29T00:00:00-02:00" pubdate  data-updated="true" >29 de Dezembro de 2007</time>
+<time datetime="2007-12-29T00:00:00-02:00" pubdate>29 de Dezembro de 2007</time>
         
       </p>
     
@@ -441,25 +420,25 @@ player2<span class="punctuation punctuation_separator punctuation_separator_meth
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/12/885924921_e498e8661b.jpg" alt="885924921_e498e8661b.jpg" /></p>
 
-<p>Para quem não conhece, o m&eacute;todo <strong>auto_link</strong> recebe um texto qualquer como par&acirc;metro e se o texto tiver algum endere&ccedil;o de email ou de um site ele retorna o mesmo texto com hyperlinks.</p>
+<p>Para quem não conhece, o método <strong>auto_link</strong> recebe um texto qualquer como par&acirc;metro e se o texto tiver algum endereço de email ou de um site ele retorna o mesmo texto com hyperlinks.</p>
 
 <p>Por exemplo:</p>
 
 <pre>
->> auto_link("Acesse este endere&ccedil;o: http://www.rubyonrails.com")
-=> Acesse este endere&ccedil;o: <a href="http://www.rubyonrails.com">http://www.rubyonrails.com</a>
+>> auto_link("Acesse este endereço: http://www.rubyonrails.com")
+=> Acesse este endereço: <a href="http://www.rubyonrails.com">http://www.rubyonrails.com</a>
 </pre>
 
 
-<p>Acontece que alguns sites como o <strong>Amazon</strong> estão usando tamb&eacute;m o sinal de &quot;=&quot; (igual) em urls, e isto gera um bug no m&eacute;todo. Veja s&oacute;:</p>
+<p>Acontece que alguns sites como o <strong>Amazon</strong> estão usando também o sinal de &quot;=&quot; (igual) em urls, e isto gera um bug no método. Veja só:</p>
 
 <pre>
->> auto_link("Acesse este endere&ccedil;o: http://www.amazon.com/Testing-Equal-Sign-In-Path/ref=pd_bbs_sr_1?ie=UTF8&s=books&qid=1198861734&sr=8-1")
->> Acesse este endere&ccedil;o: <a href="http://www.amazon.com/Testing-Equal-Sign-In-Path/ref">http://www.amazon.com/Testing-Equal-Sign-In-Path/ref</a>=pd_bbs_sr_1?ie=UTF8&s=books&qid=1198861734&sr=8-1
+>> auto_link("Acesse este endereço: http://www.amazon.com/Testing-Equal-Sign-In-Path/ref=pd_bbs_sr_1?ie=UTF8&s=books&qid=1198861734&sr=8-1")
+>> Acesse este endereço: <a href="http://www.amazon.com/Testing-Equal-Sign-In-Path/ref">http://www.amazon.com/Testing-Equal-Sign-In-Path/ref</a>=pd_bbs_sr_1?ie=UTF8&s=books&qid=1198861734&sr=8-1
 </pre>
 
 
-<p>Note que o m&eacute;todo terminou o hyperlink exatamente antes do &quot;=&quot;, pois ele não suporta este sinal. Quer dizer, não suportava. Na pr&oacute;xima versão do Rails já teremos este problema resolvido. Mas fica a dica no caso de algu&eacute;m querer usar o <strong>auto_link</strong> em uma url com o sinal de &quot;=&quot;.</p>
+<p>Note que o método terminou o hyperlink exatamente antes do &quot;=&quot;, pois ele não suporta este sinal. Quer dizer, não suportava. Na próxima versão do Rails já teremos este problema resolvido. Mas fica a dica no caso de alguém querer usar o <strong>auto_link</strong> em uma url com o sinal de &quot;=&quot;.</p>
 
 <p>Referência: <a href="http://dev.rubyonrails.org/ticket/10640">[PATCH] [TINY] auto_link should allow equal sign (=) in url path</a></p>
 </div>
@@ -483,12 +462,9 @@ player2<span class="punctuation punctuation_separator punctuation_separator_meth
 
 
 
-
   
 
-
-
-<time datetime="2007-12-29T00:00:00-02:00" pubdate  data-updated="true" >29 de Dezembro de 2007</time>
+<time datetime="2007-12-29T00:00:00-02:00" pubdate>29 de Dezembro de 2007</time>
         
       </p>
     
@@ -499,7 +475,7 @@ player2<span class="punctuation punctuation_separator punctuation_separator_meth
 
 <p>Um post rápido antes de ir dormir&#8230;</p>
 
-<p>Quer testar seus c&oacute;digos Java usando Ruby? Se liga no novo projeto do Ola Bini, o <a href="http://jtestr.codehaus.org/">JtestR</a>, que está na sua versão 0.1.</p>
+<p>Quer testar seus códigos Java usando Ruby? Se liga no novo projeto do Ola Bini, o <a href="http://jtestr.codehaus.org/">JtestR</a>, que está na sua versão 0.1.</p>
 
 <p>Quer testar a compatibilidade do seu software com o Ruby 1.8 e 1.9 ao mesmo tempo? Use o <a href="http://blog.zenspider.com/archives/2007/12/testing_for_ruby_18_and_19_using_multiruby.html">multiruby</a>.</p>
 </div>
@@ -523,12 +499,9 @@ player2<span class="punctuation punctuation_separator punctuation_separator_meth
 
 
 
-
   
 
-
-
-<time datetime="2007-12-26T00:00:00-02:00" pubdate  data-updated="true" >26 de Dezembro de 2007</time>
+<time datetime="2007-12-26T00:00:00-02:00" pubdate>26 de Dezembro de 2007</time>
         
       </p>
     
@@ -581,12 +554,9 @@ player2<span class="punctuation punctuation_separator punctuation_separator_meth
 
 
 
-
   
 
-
-
-<time datetime="2007-12-25T00:00:00-02:00" pubdate  data-updated="true" >25 de Dezembro de 2007</time>
+<time datetime="2007-12-25T00:00:00-02:00" pubdate>25 de Dezembro de 2007</time>
         
       </p>
     

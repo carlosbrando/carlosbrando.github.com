@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: traducoes | Nome do Jogo]]></title>
+  <link href="http://nomedojogo.com/categories/traducoes/atom.xml" rel="self"/>
+  <link href="http://nomedojogo.com/"/>
+  <updated>2011-10-18T20:54:12-02:00</updated>
+  <id>http://nomedojogo.com/</id>
+  <author>
+    <name><![CDATA[Carlos Brando]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[A Regra Direita-Esquerda do C]]></title>
+    <link href="http://nomedojogo.com/2011/06/13/a-regra-direita-esquerda-do-c/"/>
+    <updated>2011-06-13T00:00:00-03:00</updated>
+    <id>http://nomedojogo.com/2011/06/13/a-regra-direita-esquerda-do-c</id>
+    <content type="html"><![CDATA[<p>Atualmente estou envolvido em um projeto envolvendo módulos específicos em Ruby, Erlang e C. Ruby e Erlang são mais tranquilos, mas C tem a desagradável característica de deixar alguns códigos "meio" complicados de entender.</p>
+
+<p>Porém, um <a href="http://twitter.com/#!/marciogm">colega</a> da Plano Bê me enviou um artigo que me ajudou muito e quero compartilhá-lo com vocês. O <a href="http://ieng9.ucsd.edu/~cs30x/rt_lt.rule.html">artigo original</a> parece ter sido escrito por Rick Ord da Universidade da California, em San Diego. Segue a tradução:</p>
+
+<h2>A Regra Direita-Esquerda do C</h2>
+
+<p>A regra <strong>direta-esquerda</strong> é muito útil para decifrar declarações na linguagem C e também pode ser de grande ajuda ao escrever código. A regra é bem simples, toda vez que encontrar os seguintes símbolos no código, leia:</p>
+
+<pre><code>*   como "um ponteiro para"      - sempre do lado esquerdo
+[]  como "um array de"           - sempre do lado direito
+()  como "uma função retornando" - sempre do lado direito
+</code></pre>
+
+<h2>Passo 1</h2>
+
+<p>Encontre o identificador. Esse é o seu ponto de partida. Então, diga para si mesmo <em>"o identificador é"</em>. É nesse ponto que iniciamos a declaração.</p>
+
+<h2>Passo 2</h2>
+
+<p>Comece pelos símbolos a direita do identificador. Digamos que você encontrou um <code>()</code>, então você sabe que essa declaração é uma função. Então você deve dizer <em>"o identificador é uma função retornando"</em>. Caso você tenha encontrado um <code>[]</code>, então você deve dizer <em>"o identificador é um array de"</em>. Continue avançando pela direita enquanto houver símbolos OU até encontrar um fecha parênteses <code>)</code>. (continue seguindo caso você encontre um abre parênteses, falaremos sobre isso mais abaixo.)</p>
+
+<h2>Passo 3</h2>
+
+<p>Quando terminarem os símbolos a direita do identificador, então comece a procurar por símbolos a sua esquerda. Se você encontrar algo diferente dos símbolos mencionados acima (digamos, algo como <code>int</code>), simplesmente repita o seu nome. Caso contrário, traduza o símbolo para o português usando a tabela. Continue seguindo pela esquerda enquanto houver símbolos OU até encontrar um abre parênteses <code>(</code>.</p>
+
+<p>Então, repita os passos 2 e 3 até terminar toda a sua declaração. Veja abaixo alguns exemplos:</p>
+
+<p>``` c</p>
+
+<pre><code>int *p[];
+</code></pre>
+
+<p>```</p>
+
+<ol>
+<li>Encontre o identificador.</li>
+</ol>
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int *p[];&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code> ^
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>"p é"</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<ol>
+<li>Siga pela direita enquanto encontrar um símbolo ou abre parênteses.</li>
+</ol>
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int *p[];&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>  ^^
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>"p é um array de"</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<ol>
+<li>Quando não puder mais mover para a direita (os símbolo acabaram), então siga para a esquerda e encontre:</li>
+</ol>
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int *p[];&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>^
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>"p é um array de ponteiros para"</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<ol>
+<li>Continue seguinte pela esquerda e encontre:</li>
+</ol>
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int *p[];
+</span><span class='line'>^&lt;sup>^&lt;/sup>
+</span><span class='line'>"p é um array de ponteiros para int".
+</span><span class='line'>(ou "p é um array onde cada elemento é um ponteiro para um inteiro")</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Outro exemplo:</p>
+
+<p>``` c</p>
+
+<pre><code>int *(*func())();
+</code></pre>
+
+<p>```</p>
+
+<ol>
+<li>Encontre o identificador.</li>
+</ol>
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int &lt;em>(&lt;/em>func())();&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>   ^^^^
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>"func é"</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<ol>
+<li>Vá para a direita.</li>
+</ol>
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int &lt;em>(&lt;/em>func())();&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>       ^^
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>"func é uma função retornando"</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<ol>
+<li>Não dá para ir mais a direita devido ao fecha parênteses, então vá para a esquerda.</li>
+</ol>
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int &lt;em>(&lt;/em>func())();&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>  ^
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>"func é uma função retornando um ponteiro para"</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<ol>
+<li>Não pode mais ir para a esquerda devido ao abre parênteses, então continue indo pela direita.</li>
+</ol>
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int &lt;em>(&lt;/em>func())();&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>          ^^
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>"func é uma função retornando um ponteiro para uma função retornando"</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<ol>
+<li>Não dá mais para ir para a direita porque não há mais simbolos, então vá para a esquerda.</li>
+</ol>
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int &lt;em>(&lt;/em>func())();&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>^
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>"func é uma função retornando um ponteiro para uma função retornando um ponteiro para"</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<ol>
+<li>E finalmente, o último símbolo a esquerda.</li>
+</ol>
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int &lt;em>(&lt;/em>func())();
+</span><span class='line'>^&lt;sup>^&lt;/sup>
+</span><span class='line'>"func é uma função retornando um ponteiro para uma função retornando um ponteiro para um inteiro".</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Como você pode ver, essa regra pode ser muito útil. Ela também é ótima para manter a sua sanidade enquanto estiver criando declarações, além de ajudá-lo a identificar onde colocar o próximo símbolo ou parênteses.</p>
+
+<p>Algumas declarações podem parecer ainda mais complicadas quando definem o tamanho de um array ou informam uma lista de argumentos. Por exemplo, se você ver algo como <code>[3]</code>, deve ler <em>"um array (de tamanho 3) de..."</em>. Mas se você ver algo como <code>(char *,int)</code>, então deve ler <em>"uma função esperando (char </em>, int) e retornando..."*. Veja mais um exemplo:</p>
+
+<p>``` c</p>
+
+<pre><code>int (*(*fun_one)(char *,double))[9][20];
+</code></pre>
+
+<p>```</p>
+
+<p>Eu não vou seguir cada passo para decifrar essa declaração. Mas o resultado será: <em>"fun_one é um ponteiro para uma função esperando (char </em>, double) e retornando um ponteiro para um array (tamanho 9) de um array (tamanho 20) de inteiros"*.</p>
+
+<p>Fica mais fácil se você remover o tamanho dos arrays e as listas de argumentos:</p>
+
+<p>``` c</p>
+
+<pre><code>int (*(*fun_one)())[][];
+</code></pre>
+
+<p>```</p>
+
+<p>Uma boa opção é decifrar dessa maneira e só depois adicionar o tamanho dos arrays e a lista de argumentos.</p>
+
+<h2>Algumas considerações finais</h2>
+
+<p>É totalmente possível criar declarações ilegais usando essa regra, então algum conhecimento do que é aceitável e do que não é em C é necessário. Por exemplo, se você tiver algo assim:</p>
+
+<p>``` c</p>
+
+<pre><code>int *((*fun_one)())[][];
+</code></pre>
+
+<p>```</p>
+
+<p>A declaração acima seria traduzida para <em>"fun_one é um ponteiro para uma função retornando um array de arrays de ponteiros para inteiros"</em>.</p>
+
+<p>Uma vez que uma função não pode retornar um array, mas somente um ponteiro para um array, essa declaração é ilegal.</p>
+
+<p>Combinações ilegais incluem:</p>
+
+<pre><code>[]() - não pode haver um array de funções
+()() - não pode haver uma função que retorna uma função
+()[] - não pode haver uma função que retorna um array
+</code></pre>
+
+<p>Em todos os casos acima, você provavelmente precisaria de um conjunto de parênteses para colocar um símbolo <code>*</code> a esquerda entre cada <code>()</code> e <code>[]</code> para tornar uma declaração válida.</p>
+
+<p>Segue abaixo alguns exemplos válidos e inválidos para exercitar o que aprendemos:</p>
+
+<pre><code>int i;           "i um inteiro"
+int *p;          "p é um ponteiro para um inteiro"
+int a[];         "a é um array de inteiros"
+int f();         "f é uma função retornando um inteiro"
+int **pp;        "pp é um ponteiro para um ponteiro para um inteiro"
+int (*pa)[];     "pa é um ponteiro para um array de inteiros"
+int (*pf)();     "pf é um ponteiro para uma função retornando um inteiro"
+int *ap[];       "ap é um array de ponteiros para inteiros"
+int aa[][];      "aa é um array de arrays de inteiros"
+int af[]();      "af é um array de funções retornando um inteiro (ILEGAL)"
+int *fp();       "fp é uma função retornando um ponteiro para um inteiro"
+int fa()[];      "fa é uma função retornando um array de inteiros (ILEGAL)"
+int ff()();      "ff é uma função retornando uma função retornando um inteiro (ILEGAL)"
+int ***ppp;      "ppp é um ponteiro para um ponteiro para um ponteiro para um inteiro"
+int (**ppa)[];   "ppa é um ponteiro para um ponteiro para um array de inteiros"
+int (**ppf)();   "ppf é um ponteiro para um ponteiro para uma função retornando um inteiro"
+int *(*pap)[];   "pap é um ponteiro para um array de ponteiros para inteiros"
+int (*paa)[][];  "paa é um ponteiro para um array de arrays de inteiros"
+int (*paf)[]();  "paf é um ponteiro para um array de funções retornando um inteiro (ILEGAL)"
+int *(*pfp)();   "pfp é um ponteiro para uma função retornando um ponteiro para um inteiro"
+int (*pfa)()[];  "pfa é um ponteiro para uma função retornando um array de inteiros (ILEGAL)"
+int (*pff)()();  "pff é um ponteiro para uma função retornando uma função retornando um inteiro (ILEGAL)"
+int **app[];     "app é um array de ponteiros para ponteiros para um inteiro"
+int (*apa[])[];  "apa é um array de ponteiros para um array de inteiros"
+int (*apf[])();  "apf é um array de ponteiros para funções retornando um inteiro"
+int *aap[][];    "aap é um array de arrays de ponteiros para inteiros"
+int aaa[][][];   "aaa é um array de arrays de arrays de inteiros"
+int aaf[][]();   "aaf é um array de arrays de funções retornando um inteiro (ILEGAL)"
+int *afp[]();    "afp é um array de funções retornando um ponteiro para um inteiro (ILEGAL)"
+int afa[]()[];   "afa é um array de funções retornando um array de inteiros (ILEGAL)"
+int aff[]()();   "aff é um array de funções retornando funções retornando um inteiro (ILEGAL)"
+int **fpp();     "fpp é uma função retornando um ponteiro para um ponteiro para um inteiro"
+int (*fpa())[];  "fpa é uma função retornando um ponteiro para um array de inteiros"
+int (*fpf())();  "fpf é uma função retornando um ponteiro para uma função retornando um inteiro"
+int *fap()[];    "fap é uma função retornando um array de ponteiros para inteiros (ILEGAL)"
+int faa()[][];   "faa é uma função retornando um array de arrays de inteiros (ILEGAL)"
+int faf()[]();   "faf é uma função retornando um array de funções retornando inteiros (ILEGAL)"
+int *ffp()();    "ffp é uma função retornando uma função retornando um ponteiro para um inteiro (ILEGAL)"
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Nunca houve uma época melhor para ser um desenvolvedor Rails]]></title>
+    <link href="http://nomedojogo.com/2010/02/04/nunca-houve-uma-epoca-melhor-para-ser-um-desenvolvedor-rails/"/>
+    <updated>2010-02-04T00:00:00-02:00</updated>
+    <id>http://nomedojogo.com/2010/02/04/nunca-houve-uma-epoca-melhor-para-ser-um-desenvolvedor-rails</id>
+    <content type="html"><![CDATA[<p><img class="center" src="http://old.nomedojogo.com/wp-content/uploads/2010/02/2787052398_35da29ce72.jpg"></p>
+
+<p>Rails 3.0 é como pôneis e arco-íris! Ele irá fazer o seu jantar e dobrar a sua roupa. Vocês irão se perguntar como era possível viver antes disso. É a melhor versão do Rails que nós já fizemos!</p>
+
+<p>Agora é sério, isso é algo realmente bom. Todas as boas ideias que a equipe do Merb trouxeram desde que se juntaram ao projeto estão lá, isso inclui um foco mais agnóstico ao framework, um código mais magro e rápido e um monte de saborosas APIs. Se você está vindo para o Rails 3.0 a partir do Merb 1.x, você deve reconhecer várias dessas APIs. Se você está vindo do Rails 2.x, você vai adorar isso também.</p>
+
+<p>Mesmo se você não der a mínima para nenhuma das nossas limpezas internas, o Rails 3.0 também estará nas suas graças. Temos um monte de novos recursos e APIs melhoradas. Nunca houve uma época melhor para ser um desenvolvedor Rails.</p>
+
+<p><strong>Fonte: <a href="http://github.com/rails/rails/blob/36e6daac67b8ece9d05e425e331db8555046bb75/railties/guides/source/3_0_release_notes.textile">railties/guides/source/3_0_release_notes.textile</a></strong></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A Filosofia do Ruby]]></title>
+    <link href="http://nomedojogo.com/2010/01/20/a-filosofia-do-ruby/"/>
+    <updated>2010-01-20T00:00:00-02:00</updated>
+    <id>http://nomedojogo.com/2010/01/20/a-filosofia-do-ruby</id>
+    <content type="html"><![CDATA[<p>Já faz um tempo que eu tenho planejado traduzir essa excelente entrevista de <a href="http://www.artima.com/intv/ruby.html">Bill Venners com Yukihiro Matsumoto</a>. Finalmente conseguir finalizar a primeira parte.</p>
+
+<p><img class="center" src="http://old.nomedojogo.com/wp-content/uploads/2010/01/3012895964_5e2b0d6373.jpg"></p>
+
+<p>Yukihiro Matsumoto, ou "Matz" como ele é conhecido online, é o criador da linguagem de programação Ruby. Ruby é uma linguagem orientada a objetos adequada tanto para a escrita de scripts do dia a dia como de aplicativos de larga escala. Matz começou a trabalhar no Ruby em 1993, porque queria uma linguagem que o tornasse mais produtivo ao mesmo tempo que fosse divertida de usar. Embora inicialmente tenha se tornado mais popular no Japão, Ruby tem conquistado programadores no mundo todo.</p>
+
+<p>Em 24 de setembro de 2003, Bill Venners se encontrou com Yukihiro Matsumoto na conferência JAOO em Aarhus, na Dinamarca. Nesta entrevista, que foi publicada em várias partes no site <a href="http://www.artima.com/">Artima.com</a>, Yukihiro Matsumoto discute a filosofia por trás da arquitetura do Ruby, as características da linguagem e como tornar-se um programador melhor. Neste capítulo inicial, Matz filosofa sobre a imperfeição no design, o perigo da ortogonalidade, a concessão de liberdade com regras, o princípio da menor surpresa e a importância do ser humano no trabalho da máquina.</p>
+
+<h2>Não existe uma linguagem perfeita</h2>
+
+<p><strong>Bill Venners:</strong> Dave Thomas, co-autor do livro "Programming Ruby: A Pragmatic Programmer's Guide" me disse que você não acredita que uma linguagem de programação possa deve ser perfeita. Por que não?</p>
+
+<p><strong>Yukihiro Matsumoto:</strong> Desenvolvedores querem criar a linguagem de programação perfeita. Eles querem poder dizer: "Veja, a minha linguagem é perfeita. Com ela você pode fazer qualquer coisa". Mas é simplesmente impossível conceber uma linguagem perfeita, porque existem duas maneiras de se olhar para uma linguagem de programação. Uma maneira é olhar para o que pode ser feito com essa linguagem. A outra é observar como nos sentimos usando essa linguagem - como nos sentimos durante o tempo que estamos programando.</p>
+
+<p>De acordo com a teoria da completude de Turing, tudo que uma linguagem Turing-complete pode fazer teoricamente pode ser feito por qualquer outra linguagem Turing-complete, mas de um jeito diferente. Você pode fazer tudo em Assembler, mas ninguém quer programar em Assembler. Do ponto de vista do que você pode fazer, entretanto, as linguagens diferem entre si - mas as diferenças são limitadas. Por exemplo, Python e Ruby fornecem quase o mesmo poder para o programador.</p>
+
+<p>Em vez de enfatizar o "o que", eu quero enfatizar o "como": Como nos sentimos durante a programação. Essa é a principal diferença da arquitetura do Ruby em relação as outras linguagens. Enfatizo a sensação em "como" eu me sinto usando Ruby. Eu não trabalho para tornar o Ruby perfeito para todos, porque você tem sentimentos diferentes dos meus. Nenhuma linguagem pode ser perfeita para todos. Eu tentei fazer Ruby perfeito para mim, mas talvez ele não seja perfeito para você. A linguagem perfeita para Guido van Rossum é provavelmente o Python.</p>
+
+<h2>Ortogonal vs Harmonioso</h2>
+
+
+<p><strong>Bill Venners:</strong> Dave Thomas alegou também que se eu pedir para você adicionar ao Ruby um recurso que é ortogonal, você não vai fazê-lo. O que você quer é algo que seja harmonioso. O que isto significa?</p>
+
+<p><strong>Yukihiro Matsumoto:</strong> Eu acredito que a coerência e a ortogonalidade são ferramentas de design, não o objetivo principal do projeto.</p>
+
+<p><strong>Bill Venners:</strong> O que significa ortogonalidade neste contexto?</p>
+
+<p><strong>Yukihiro Matsumoto:</strong> Um exemplo de ortogonalidade é adicionar qualquer recursinho ou sintaxe à linguagem. Por exemplo, C++ suporta parâmetros com valores padrão e também sobrecarga de funções com base em parâmetros. Ambos os recursos são bons para se ter em uma linguagem, mas devido ao fato desses recursos serem ortogonais, você pode aplicar ambos ao mesmo tempo. O compilador sabe exatamente o que fazer nesse caso. Se houver ambigüidade, o compilador irá sinalizar um erro. Mas se eu olhar para o código, vou precisar aplicar a regra com o meu cérebro. Eu preciso adivinhar como funciona o compilador. Se eu estiver correto, e for inteligente o suficiente, isto não será nenhum problema. Mas se eu não for inteligente o suficiente, e eu realmente não sou, isto causará muita confusão. O resultado será inesperado para uma pessoa comum. Este é um exemplo de como ortogonalidade pode ser ruim.</p>
+
+<p><strong>Bill Venners:</strong> Em outras palavras, as características ortogonais irão funcionar, uma vez que o compilador as entende e executa o programa. Mas é difícil para um programador compreender o funcionamento quando está olhando para o código, porque ele precisa descobrir como essas duas coisas funcionam juntas.</p>
+
+<p><strong>Yukihiro Matsumoto:</strong> Características ortogonais, quando combinadas, podem explodir em complexidade.</p>
+
+<p><strong>Bill Venners:</strong> Qual é a alternativa? O que seria mais harmonioso?</p>
+
+<p><strong>Yukihiro Matsumoto:</strong> Basta escolher uma das duas funcionalidade para colocar na linguagem. Você não precisa fazer tudo o que vier a sua cabeça. Você deve escolher apenas um desses recursos, mesmo que ambos sejam bons.</p>
+
+<h2>Liberdade e conforto</h2>
+
+
+<p><strong>Bill Venners:</strong> Uma das filosofias da comunidade Python é fornecer uma e apenas uma maneira de fazer as coisas. Se você fornecer cinqüenta maneiras diferentes de fazer a mesma coisa, então você está fornecendo conveniências para quem está escrevendo o código. Cada programador terá a liberdade de escrever do jeito que preferir. Mas o problema não é com quem escreve, mas com a pessoa que está lendo o código. Você pode adotar uma forma de escrever o seu código e o programador do lado pode adotar uma outra forma. Assim, quem está lendo precisa estar familiarizado com todos as maneiras possíveis de se realizar aquela tarefa, não apenas a sua maneira favorita de codificar. Esse é o dilema do design. A comunidade Python parece preferir uma única abordagem, mas Ruby parece oferecer várias maneiras de se fazer a mesma coisa.</p>
+
+<p><strong>Yukihiro Matsumoto:</strong> Ruby herdou a filosofia do Perl de ter mais de uma maneira de fazer a mesma coisa. Eu herdei essa filosofia de Larry Wall, que é o meu herói atualmente. Eu quero que os programadores Ruby sejam livres. Eu quero dar-lhes a liberdade de escolher. As pessoas são diferentes. As pessoas tem diferentes critérios. Mas se há uma maneira melhor entre as várias alternativas, quero encoraja-la, tornando-a mais confortável. Então é isso que eu tentei fazer. Talvez um código Python seja um pouco mais legível. Qualquer um pode escrever utilizando o mesmo estilo em Python com a finalidade de deixar o código mais fácil de ler, talvez. Mas a diferença de uma pessoa para outra é tão grande, que prover apenas um caminho é de pouca ajuda mesmo se você estiver usando Python, eu acho. Eu prefiro dar tantas maneiras quanto for possível, mas incentivar ou orientar os usuários a escolher a melhor maneira, se ela existir.</p>
+
+<h2>Alegria</h2>
+
+
+<p><strong>Bill Venners:</strong> Em um artigo introdutório sobre Ruby,  você escreveu: "Para mim, o propósito da vida é, em parte, ter alegria. Programadores geralmente se sentem felizes quando podem concentrar-se na parte criativa da programação, assim Ruby foi projetado para fazer programadores felizes." Como pode o Ruby fazer programadores felizes?</p>
+
+<p><strong>Yukihiro Matsumoto:</strong> Você quer aproveitar a vida, não é? Se você pudesse terminar seu trabalho rapidamente e de uma forma divertida, seria muito bom, não é? Esse é o propósito da vida, em parte. Sua vida será melhor.</p>
+
+<p>Eu quero resolver os problemas que encontro no cotidiano usando computadores, então preciso escrever programas para eles. Usando Ruby, quero me concentrar nas coisas que faço, não nas regras mágicas da linguagem, como começar com um <code>public something something void something</code> para imprimir na tela: "Olá mundo". Eu só quero dizer <code>print "this!"</code>. Eu não quero todas estas palavras-chave envoltas em magia. Eu só quero me concentrar na tarefa. Essa é a idéia básica. Então, eu tenho tentado fazer um código Ruby conciso e sucinto.</p>
+
+<p><strong>Bill Venners:</strong> Permitir que os programadores escrevam código que é conciso e sucinto é uma maneira de fazê-los felizes.</p>
+
+<p><strong>Yukihiro Matsumoto:</strong> Sim, para que eles possam se concentrar no problema. As vezes as pessoas anotam pseudo-código em uma folha de papel. Se esse pseudo-código pudesse ser executado diretamente em seus computadores, seria muito bom, não seria? Ruby tenta ser assim, como esse pseudo-código sendo executado. O pessoal do Python também diz o mesmo.</p>
+
+<p><strong>Bill Venners:</strong> Sim, o pessoal do Python diz que o Python é um pseudo-código executável. O que mais tem no Ruby que faz os programadores felizes?</p>
+
+<p><strong>Yukihiro Matsumoto:</strong> No nosso cotidiano como programadores, processamos muito texto. Então, eu tentei trabalhar duro em processamento de textos, ou seja, na classe string e expressões regulares. As expressões regulares são incorporadas a linguagem e estão prontas para o uso. Também precisamos interagir muito com o sistema operacional. Ruby pode executar chamadas ao sistema Unix e para a maioria das funções da API do Windows. Isso aumenta o poder e a utilizade do sistema operacional no ambiente da linguagem interpretativa. Então você pode fazer a administração de sistemas e a programação diária de processamento de textos. É isso que faço na maior parte do tempo, então eu trabalhei duro em fazer isto funcionar bem.</p>
+
+<p><strong>Bill Venners:</strong> Então, basicamente, Ruby me permite aproveitar mais a minha vida, porque faz com que eu termine o meu trabalho mais rápido ao mesmo tempo que o torna mais divertido?</p>
+
+<p><strong>Yukihiro Matsumoto:</strong> Ele me ajuda a fazer isso. Não tenho certeza se Ruby funciona para você, mas eu espero que sim.</p>
+
+<h2>O Fator Humano</h2>
+
+
+<p><strong>Bill Venners:</strong> Em uma entrevista, você disse: "Não subestime o fator humano. Embora estejamos em  frente a um computador, eles são apenas máquinas. Estamos trabalhando para humanos, com humanos." O que você quer dizer com isso?</p>
+
+<p><strong>Yukihiro Matsumoto:</strong> Imagine que você está escrevendo um e-mail. Está na frente do computador. Está operando o computador, clicando em um mouse e digitando em um teclado, mas a mensagem será enviada a um outro ser humano através da internet. Então você está trabalhando com um computador, mas o objetivo é sempre um ser humano. A maioria das tarefas que fazemos são para seres humanos. Por exemplo, um cálculo de impostos é a contagem de números que indicam quanto o governo pode retirar de dinheiro da minha carteira, mas o governo é composto por seres humanos.</p>
+
+<p>A maioria de nossas tarefas estão relacionadas com seres humanos. Assim, quando programamos podemos tanto pedir ao computador para trabalhar para um ser humano, como podemos descrever nossos pensamentos de uma forma tão clara que até mesmo uma máquina possa executar. No primeiro caso, fazemos o computador trabalhar para o ser humano, o alvo é um ser humano atrás de um computador. No segundo caso, expressamos nossos pensamentos com clareza suficiente para ser compreendido e executado por computadores, a intenção é expressa por cérebros humanos e o resultado é calculado por um computador. Assim, em ambos os casos, o objetivo aqui é sempre o ser humano.</p>
+
+<p><strong>Bill Venners:</strong> O que é mais importante sobre este tipo de mentalidade? Você diz: "Não subestime o fator humano." Por quê?</p>
+
+<p><strong>Yukihiro Matsumoto:</strong> Computadores não se importam se eu estou fazendo algum esforço para me comunicar com eles ou se é fácil de se comunicar com eles. Eles não se importam se eu coloquei uma seqüência de instruções em um arquivo e mandei executá-las ou se eu estou utilizando uma linguagem de alto nível para gerar essas instruções. Computadores não se importam. Nós nos preocupamos com os seres humanos. Muitas vezes as pessoas, especialmente engenheiros de informática, focam nas máquinas. Eles pensam: "Ao fazer isso, a máquina irá trabalhar mais rápido. Ao fazer isso, a máquina irá funcionar mais eficazmente. Ao fazer isso, a máquina irá fazer alguma coisa qualquer". Eles estão se concentrando em máquinas. Mas, na verdade precisamos nos concentrar no ser humano, sobre como os seres humanos se preocupam com a programação ou como operam um aplicativo na máquina. Nós somos os mestres. As máquinas são nossos escravos.</p>
+
+<p><strong>Bill Venners:</strong> Pelo menos por enquanto.</p>
+
+<p><strong>Yukihiro Matsumoto:</strong> Pelo menos por enquanto, até chegarmos na era dos Exterminadores.</p>
+
+<h2>O princípio da menor surpresa</h2>
+
+
+<p><strong>Bill Venners:</strong> Em uma entrevista, você disse "eu projetei o Ruby para minimizar a minha surpresa. Fiquei muito espantado quando as pessoas ao redor do mundo me disseram que Ruby reduzia a sua surpresa e aumentava a sua alegria ao programar. Agora eu tenho certeza que programadores pensam da mesma maneira no mundo todo." Por que o principio da menor surpresa?</p>
+
+<p><strong>Yukihiro Matsumoto:</strong> Na verdade, eu não fiz a alegação de que Ruby segue o princípio da "menor surpresa". Alguém sentiu que o design do Ruby segue esta filosofia, então eles começaram a dizer isso. Não foi eu quem inventou isto, na verdade.</p>
+
+<p>Eu queria minimizar minha frustração durante a programação, assim como eu quero minimizar o meu esforço na programação. Esse era o meu principal objetivo na elaboração de Ruby. Eu queria me divertir enquanto programava. Depois de lançar o Ruby e muitas pessoas ao redor do mundo tomarem conhecimento da linguagem, eles começaram a dizer que se sentiam assim como eu me sinto. Eles começaram a citar esta frase sobre o princípio da menor surpresa. Mas, na verdade, isto é muitas vezes mal interpretado.</p>
+
+<p><strong>Bill Venners:</strong> Como isto é mal interpretado?</p>
+
+<p><strong>Yukihiro Matsumoto:</strong> Cada um possui um passado único. Alguns podem vir do Python, outros podem vir de Perl, e podem ser surpreendidos por diferentes aspectos da linguagem. Então, eles vêm até mim e dizem: "Fiquei surpreso com esta característica da linguagem, assim o Ruby viola o princípio da menor surpresa". Espere. Espere. Esse princípio não vale apenas para você. O princípio da menor surpresa, também é o principio da <strong>minha</strong> menor surpresa. Mesmo programadores experientes podem ser surpreendidos. Por exemplo, eu era um programador C++ antes de começar a projetar o Ruby. Eu programei em C++ exclusivamente por dois ou três anos. E após todo este tempo programando em C++, eu ainda me surpreendia.</p>
+
+<h3>Atualização (20/01/2010 13:05):</h3>
+
+
+<p>Depois de publicar esse artigo descobri que o Fábio Akita já havia traduzido essa entrevista a alguns anos atrás. Assim, seguem os links para a <a href="http://akitaonrails.com/2006/10/14/entrevista-com-yukihiro-matsumoto-parte-ii">parte 2</a>, <a href="http://akitaonrails.com/2006/11/07/entrevista-com-yukihiro-matsumoto-parte-iii">parte 3</a> e <a href="http://akitaonrails.com/2006/11/22/entrevista-com-yukihiro-matsumoto-parte-iv">parte 4</a> da entrevista. Divirta-se!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Os oito níveis do programador]]></title>
+    <link href="http://nomedojogo.com/2009/09/25/os-oito-niveis-do-programador/"/>
+    <updated>2009-09-25T00:00:00-03:00</updated>
+    <id>http://nomedojogo.com/2009/09/25/os-oito-niveis-do-programador</id>
+    <content type="html"><![CDATA[<p>Não tenho o habito de ler os artigos de <a href="http://www.codinghorror.com/blog/">Jeff Atwood</a>, talvez por já ter discordado de um grande número deles, mas este em particular achei muito interessante. Embora os oito níveis descritos abaixo representem a realidade de uma forma muito simplificada, acho que são interessantes para nos fazer pensar. Segue a <a href="http://www.codinghorror.com/blog/archives/001250.html">tradução</a>:</p>
+
+<p>Já ouviu a clássica pergunta “<strong>onde você se imagina daqui há 5 anos?</strong>” em uma entrevista de emprego?</p>
+
+<p>Você quer detonar, naturalmente! Ou pelo menos se tornar o equivalente a uma estrela do rock em desenvolvimento de software. Este não é o tipo de pergunta onde se espera receber uma resposta séria - outra pergunta desta mesma categoria seria “qual é o seu maior defeito?”</p>
+
+<p>Mas particularmente acho que este pergunta é um pouco diferente e merece ser seriamente considerada. Não para o benefício do entrevistador, mas para <em>seu próprio</em> benefício.</p>
+
+<p>A pergunta “onde você se vê em cinco anos” já é uma espécie de clichê e a maioria das pessoas tem uma resposta na ponta da língua preparada para eventuais entrevistas. Mas esta pergunta levanta algumas preocupações mais profundas: qual é o caminho potencial para uma carreira de desenvolvedor de software? Claro, somos apaixonados pela nossa profissão e estamos muito felizes com isso. Mas você ainda estará sentado em frente a um computador programando quando estiver com 50 anos? Com 60 anos? Qual é o melhor resultado possível na carreira de um programador que aspira ser... bem, um programador?</p>
+
+<p>E se eu lhe dissesse que há <strong>oito níveis de programadores</strong>?</p>
+
+<h2 style="padding-left: 30px;">8. Programador Imortal</h2>
+
+
+<p style="padding-left: 30px;">Este é o nível mais alto. Seu código sobreviveu e transcendeu a sua morte. Você é uma parte do registro histórico permanente da computação. Outros programadores estudam o seu trabalho e as coisas que você escreveu. Você pode ter ganhado um Prêmio Turing, redigido trabalhos influentes ou inventado uma ou mais coisas fundamentais para a área de tecnologia que afetaram o curso da programação como a conhecemos. Você não apenas tem uma entrada na Wikipédia - mas há sites inteiros dedicados a estudar a sua vida e obra.</p>
+
+
+<p style="padding-left: 30px;">Muito programadores, embora tenham tentado, nunca atingiram esse nível.</p>
+
+
+<p style="padding-left: 30px;">Exemplos: <a href="http://en.wikipedia.org/wiki/Edsger_W._Dijkstra">Dijkstra</a>, <a href="http://en.wikipedia.org/wiki/Donald_Knuth">Knuth,</a> <a href="http://en.wikipedia.org/wiki/Alan_Kay">Kay</a></p>
+
+
+
+
+<h2 style="padding-left: 30px;">7. Programador Bem-sucedido</h2>
+
+
+<p style="padding-left: 30px;">Neste nível encontram-se programadores que além de serem muito conhecidos também criaram uma empresa - talvez até mesmo algumas empresas - em torno de seu código. Estes programadores conseguiram a verdadeira liberdade: a liberdade de decidir por si próprio em que querem trabalhar. E podem compartilhar esta liberdade com seus colegas programadores.</p>
+
+
+<p style="padding-left: 30px;">Este é o nível que a maioria dos programadores aspiram chegar. Chegar a este nível muitas vezes depende mais das habilidades em negócios do que em programação.</p>
+
+
+<p style="padding-left: 30px;">Exemplos: <a href="http://en.wikipedia.org/wiki/Bill_Gates">Gates</a>, <a href="http://en.wikipedia.org/wiki/John_D._Carmack">Carmack</a>, <a href="http://en.wikipedia.org/wiki/David_Heinemeier_Hansson">DHH</a></p>
+
+
+
+
+<h2 style="padding-left: 30px;">6. Programador Famoso</h2>
+
+
+<p style="padding-left: 30px;">Este também é um bom lugar para se estar, desde que você tenha um emprego.</p>
+
+
+<p style="padding-left: 30px;">Você é famoso nos círculos de programação. Mas ser famoso não significa necessariamente que você pode transformar isto em lucro e sustentar-se. Ser famoso é bom, mas <em>bem-sucedido</em> é melhor. Você provavelmente trabalha para uma grande e conhecida empresa de tecnologia, uma influente empresa de pequeno porte ou é membro de uma equipe em uma startup. De qualquer maneira, outros programadores já ouviram falar de você, e você está tendo um impacto positivo na área.</p>
+
+
+
+
+<h2 style="padding-left: 30px;">5. Programador Profissional</h2>
+
+
+<p style="padding-left: 30px;">Você tem uma carreira bem sucedida como um desenvolvedor de software. Suas habilidades são valorizadas e você não tem muita dificuldade para encontrar um bom emprego. Seus colegas de trabalho o respeitam. Toda empresa na qual você já trabalhou se tornou melhor e foi enriquecida de alguma forma pela sua presença.</p>
+
+
+<p style="padding-left: 30px;">Mas onde você vai chegar?</p>
+
+
+
+
+<h2 style="padding-left: 30px;">4. Programador Mediano</h2>
+
+
+<p style="padding-left: 30px;">Neste nível, você já é um programador bom o suficiente para perceber que você não é um <em>grande</em> programador. E você nunca poderia ser.</p>
+
+
+<p style="padding-left: 30px;">Talento na maioria das vezes tem pouco a ver com fazer sucesso. Você pode ser muito bem sucedido se tiver habilidades nos negócios e souber lidar com pessoas. Se você é um programador mediano, e ainda assim consegue sobreviver nesta área, então você é talentoso, mesmo que não necessariamente no ato de codificar.</p>
+
+
+<p style="padding-left: 30px;">Não se sinta mal com isto. Taleto é mais raro do que você imagina. Não há nada de errado com a falta de talento. Seja ousado. Descubra em que você é bom, e persiga isto. Seja agressivo.</p>
+
+
+
+
+<h2 style="padding-left: 30px;">3. Programador Amador</h2>
+
+
+<p style="padding-left: 30px;">Um programador amador gosta de codificar e normalmente eles são estudantes promissores ou estagiários, talvez estejam contribuindo para projetos de código aberto, criando aplicativos "just for fun" ou desenhando web sites em seu tempo livre. Seu código e ideias demonstram entusiasmo e que eles tem um bom futuro pela frente.</p>
+
+
+<p style="padding-left: 30px;">Ser um amador é uma coisa boa; partindo deste nível pode-se subir rapidamente para se tornar um programador profissional.</p>
+
+
+
+
+<h2 style="padding-left: 30px;">2. Programador Desconhecido</h2>
+
+
+<p style="padding-left: 30px;">É o típico programador comum. Apenas um recurso. Competente (na maioria das vezes), mas normal. Provavelmente trabalha para uma grande e anônima megacorporação. É apenas um funcionário, programar não faz parte da sua vida. Também não há nada de errado com isso.</p>
+
+
+
+
+<h2 style="padding-left: 30px;">1. Programador Ruim</h2>
+
+
+<p style="padding-left: 30px;">Pessoas que de alguma maneira entraram na área de desenvolvimento de software sem um pingo de habilidade ou capacidade. Tudo o que tocam se transforma em dor e sofrimento para os seus colegas programadores - com a possível exceção de <em>outros</em> maus programadores, onde falta ainda a habilidade rudimentar obrigatória para perceberem que eles estão trabalhando com um outro programador ruim.</p>
+
+
+<p style="padding-left: 30px;">Esta é talvez, a marca registrada de todos os maus programadores. Essas pessoas simplesmente não possuem nenhuma habilidade para escreverem código, mas de alguma maneira é isto o que fazem.</p>
+
+
+<p>Estes níveis não são totalmente sérios. Nem todos os programadores aspiram continuar fazendo isto por toda a sua carreira. Mas é esclarecedor considerar o que um programador <em>poderia</em> realizar em dez, vinte ou trinta anos - talvez mesmo uma vida inteira. Quais são os programadores notáveis que você mais admira? O que eles fizeram para merecer a sua admiração?</p>
+
+<p>Em suma, <strong>o que você quer fazer com sua vida?</strong></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Sucesso do dia para a noite pode levar anos]]></title>
+    <link href="http://nomedojogo.com/2009/08/28/sucesso-do-dia-para-a-noite-pode-levar-anos/"/>
+    <updated>2009-08-28T00:00:00-03:00</updated>
+    <id>http://nomedojogo.com/2009/08/28/sucesso-do-dia-para-a-noite-pode-levar-anos</id>
+    <content type="html"><![CDATA[<address><em>Este artigo é uma tradução do post "<a href="http://37signals.com/svn/posts/1624-overnight-success-takes-years">Overnight success takes years</a>" de Matt Linderman.</em></address>
+
+
+<p>Olhando de fora, as vezes parece que certas empresas ou produtos simplesmente fazem muito sucesso de uma hora para outra, sem nenhum aviso prévio. Na realidade, raramente funciona desse jeito. Pelo menos não para nós.</p>
+
+<p>Cinco anos atrás, quando lançamos o Basecamp, acho que tinhamos menos de 2 mil pessoas assinando o nosso RSS Feed. Adicione a este valor mais algumas pessoas que acessam o site diariamente sem assinar o feed e teremos uma audiência de mais ou menos 5 mil leitores.</p>
+
+<p>Para os padrões atuais, isto é muito pouco! E esta audiência foi conseguida com muito suor no decorrer de alguns anos. Mas era o que tínhamos no momento e foi o suficiente para lançar uma série muito bem sucedida de produtos.</p>
+
+<p>No entanto, não foi o suficiente para nos levar ao topo do dia para noite. Para obter os níveis de hoje, temos contado com a juros compostos desta audiência. Todos os anos, um fluxo constante de novos leitores e clientes se juntam ao bando, enquanto conseguimos manter a maior parte dos leitores antigos.</p>
+
+<p>É por isso que fico extremamente irritado quando alguém diz: "isto só funciona para vocês porque vocês já tiveram um enorme sucesso com seus produtos anteriores". Esse "enorme sucesso" foi construído cliente a cliente, leitor a leitor. Ninguém nos deu isto de presente. O que estamos compartilhando com vocês é exatamente como chegamos lá e esperamos que nossas experiências e descobertas o ajude a chegar onde você quer estar também.</p>
+
+<p>Então, pare de pensar que você não pode chegar lá porque você não tem uma audiência enorme agora. Comece a criar esta audiência hoje. Comece a juntar pessoas que estão interessadas no que você tem a dizer. Então, em alguns anos, você estará rindo do seu sucesso do dia para noite.</p>
+]]></content>
+  </entry>
+  
+</feed>

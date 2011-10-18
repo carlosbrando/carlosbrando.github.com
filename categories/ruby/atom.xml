@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | Nome do Jogo]]></title>
   <link href="http://nomedojogo.com/categories/ruby/atom.xml" rel="self"/>
   <link href="http://nomedojogo.com/"/>
-  <updated>2011-10-18T16:04:42-02:00</updated>
+  <updated>2011-10-18T20:54:12-02:00</updated>
   <id>http://nomedojogo.com/</id>
   <author>
     <name><![CDATA[Carlos Brando]]></name>
@@ -14,54 +14,467 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Remarkable 2.0.1 e Atualização do (Comovente) Guia de Ruby do Why]]></title>
-    <link href="http://nomedojogo.com/2008/12/19/remarkable-201-e-atualizacao-do-comovente-guia-de-ruby-do-why/"/>
-    <updated>2008-12-19T00:00:00-02:00</updated>
-    <id>http://nomedojogo.com/2008/12/19/remarkable-201-e-atualizacao-do-comovente-guia-de-ruby-do-why</id>
-    <content type="html"><![CDATA[<p>Desde que lancei a primeira versão do <a href="http://www.nomedojogo.com/2008/11/13/shoulda-para-rspec-e-remarkable/">Remarkable</a> tenho visto cada vez mais pessoas aderindo ao projeto para criar seus testes com maior rapidez. E com uma quantidade maior de pessoas usando nas mais diversas aplicações é claro que os bugs começaram a aparecer.</p>
+    <title type="html"><![CDATA[Como funcionam os métodos puts e print no Ruby]]></title>
+    <link href="http://nomedojogo.com/2011/01/03/como-funcionam-os-metodos-puts-e-print-no-ruby/"/>
+    <updated>2011-01-03T00:00:00-02:00</updated>
+    <id>http://nomedojogo.com/2011/01/03/como-funcionam-os-metodos-puts-e-print-no-ruby</id>
+    <content type="html"><![CDATA[<p>Se você já experimentou Ruby com certeza já conheceu os famosos métodos <code>puts</code>, <code>print</code> e outros semelhantes a esses. Talvez você tenha notado que esses métodos, diferente de como aprendemos, podem ser executados sem que seja necessário informar um objeto.</p>
 
-<p>A maior parte dos problemas ocorriam por uma falha na arquitetura inicial do Remarkable, o que tornou necessário um refactoring no projeto inteiro para estruturá-lo melhor.  Na primeira versão, internamente havia uma separação muito clara entre as duas sintaxes que o projeto oferecia. Com a reestruturação não existe mais esta separação, não importa qual é o seu estilo, <a href="http://github.com/carlosbrando/remarkable/wikis/rspec-macros">RSpec</a> ou <a href="http://github.com/carlosbrando/remarkable/wikis/shoulda-macros">Shoulda</a>, internamente você sempre usará o mesmo código para realizar os testes.</p>
+<p>Se você vem de outra linguagem de programação talvez tenha logo especulado que eles sejam palavras reservadas do Ruby. Mas isso não é verdade. Ambos são métodos comuns, como qualquer outro. Veja por si mesmo:</p>
 
-<p>Desta forma, acabamos por ganhar muitas macros novas.</p>
+<p>``` ruby</p>
 
-<p>Enquanto na versão em RSpec isto já era algo comum:</p>
+<pre><code>Object.send :puts, "um texto qualquer"
+# =&gt; um texto qualquer
+</code></pre>
 
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rspec"><span class="meta meta_rspec meta_rspec_behaviour"><span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_behaviour">describe</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">Dog</span> <span class="keyword keyword_control keyword_control_ruby keyword_control_ruby_start-block">do</span></span>
-<span class="meta meta_rspec meta_rspec_pending">  <span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_pending">it</span> <span class="string string_ruby">{ should belong_to(:user) }</span></span>
-<span class="meta meta_rspec meta_rspec_pending">  <span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_pending">it</span> <span class="string string_ruby">{ should_not have_many(:fleas) }</span></span>
-<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+<p>```</p>
+
+<p>Como você pode ver no exemplo acima, esses métodos foram inteligentemente incluidos na classe <code>Object</code>, e como no Ruby tudo é um objeto...</p>
+
+<p>``` ruby</p>
+
+<pre><code>puts send(:class) # =&gt; Object
+</code></pre>
+
+<p>```</p>
+
+<h2>O módulo Kernel</h2>
+
+<p>Embora esses métodos sejam disponibilizados por meio de <code>Object</code>, eles estão implementados em um módulo chamado <code>Kernel</code>, que é então incluido na classe.</p>
+
+<p>O interessante é que você pode tirar proveito desse mecanismo. Se você adicionar um método ao módulo <code>Kernel</code> ele funcionará exatamente como os métodos citados acima. Veja:</p>
+
+<p>``` ruby</p>
+
+<pre><code>module Kernel
+    def print_line
+        puts '-' * 20
+    end
+end
+
+print_line # =&gt; --------------------
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A Filosofia do Ruby]]></title>
+    <link href="http://nomedojogo.com/2010/01/20/a-filosofia-do-ruby/"/>
+    <updated>2010-01-20T00:00:00-02:00</updated>
+    <id>http://nomedojogo.com/2010/01/20/a-filosofia-do-ruby</id>
+    <content type="html"><![CDATA[<p>Já faz um tempo que eu tenho planejado traduzir essa excelente entrevista de <a href="http://www.artima.com/intv/ruby.html">Bill Venners com Yukihiro Matsumoto</a>. Finalmente conseguir finalizar a primeira parte.</p>
+
+<p><img class="center" src="http://old.nomedojogo.com/wp-content/uploads/2010/01/3012895964_5e2b0d6373.jpg"></p>
+
+<p>Yukihiro Matsumoto, ou "Matz" como ele é conhecido online, é o criador da linguagem de programação Ruby. Ruby é uma linguagem orientada a objetos adequada tanto para a escrita de scripts do dia a dia como de aplicativos de larga escala. Matz começou a trabalhar no Ruby em 1993, porque queria uma linguagem que o tornasse mais produtivo ao mesmo tempo que fosse divertida de usar. Embora inicialmente tenha se tornado mais popular no Japão, Ruby tem conquistado programadores no mundo todo.</p>
+
+<p>Em 24 de setembro de 2003, Bill Venners se encontrou com Yukihiro Matsumoto na conferência JAOO em Aarhus, na Dinamarca. Nesta entrevista, que foi publicada em várias partes no site <a href="http://www.artima.com/">Artima.com</a>, Yukihiro Matsumoto discute a filosofia por trás da arquitetura do Ruby, as características da linguagem e como tornar-se um programador melhor. Neste capítulo inicial, Matz filosofa sobre a imperfeição no design, o perigo da ortogonalidade, a concessão de liberdade com regras, o princípio da menor surpresa e a importância do ser humano no trabalho da máquina.</p>
+
+<h2>Não existe uma linguagem perfeita</h2>
+
+<p><strong>Bill Venners:</strong> Dave Thomas, co-autor do livro "Programming Ruby: A Pragmatic Programmer's Guide" me disse que você não acredita que uma linguagem de programação possa deve ser perfeita. Por que não?</p>
+
+<p><strong>Yukihiro Matsumoto:</strong> Desenvolvedores querem criar a linguagem de programação perfeita. Eles querem poder dizer: "Veja, a minha linguagem é perfeita. Com ela você pode fazer qualquer coisa". Mas é simplesmente impossível conceber uma linguagem perfeita, porque existem duas maneiras de se olhar para uma linguagem de programação. Uma maneira é olhar para o que pode ser feito com essa linguagem. A outra é observar como nos sentimos usando essa linguagem - como nos sentimos durante o tempo que estamos programando.</p>
+
+<p>De acordo com a teoria da completude de Turing, tudo que uma linguagem Turing-complete pode fazer teoricamente pode ser feito por qualquer outra linguagem Turing-complete, mas de um jeito diferente. Você pode fazer tudo em Assembler, mas ninguém quer programar em Assembler. Do ponto de vista do que você pode fazer, entretanto, as linguagens diferem entre si - mas as diferenças são limitadas. Por exemplo, Python e Ruby fornecem quase o mesmo poder para o programador.</p>
+
+<p>Em vez de enfatizar o "o que", eu quero enfatizar o "como": Como nos sentimos durante a programação. Essa é a principal diferença da arquitetura do Ruby em relação as outras linguagens. Enfatizo a sensação em "como" eu me sinto usando Ruby. Eu não trabalho para tornar o Ruby perfeito para todos, porque você tem sentimentos diferentes dos meus. Nenhuma linguagem pode ser perfeita para todos. Eu tentei fazer Ruby perfeito para mim, mas talvez ele não seja perfeito para você. A linguagem perfeita para Guido van Rossum é provavelmente o Python.</p>
+
+<h2>Ortogonal vs Harmonioso</h2>
 
 
-<p>Na sintaxe do Shoulda apenas possuíamos macros <code>should<em>[alguma coisa]</code> e quase nenhuma <code>should_not</em>[alguma coisa]</code>. Mas agora todas as macros possuem as duas opções, assim:</p>
+<p><strong>Bill Venners:</strong> Dave Thomas alegou também que se eu pedir para você adicionar ao Ruby um recurso que é ortogonal, você não vai fazê-lo. O que você quer é algo que seja harmonioso. O que isto significa?</p>
 
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rspec"><span class="meta meta_rspec meta_rspec_behaviour"><span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_behaviour">describe</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">Dog</span> <span class="keyword keyword_control keyword_control_ruby keyword_control_ruby_start-block">do</span></span>
-  should_belong_to <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>user</span>
-  should_not_have_many <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>fleas</span>
-<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+<p><strong>Yukihiro Matsumoto:</strong> Eu acredito que a coerência e a ortogonalidade são ferramentas de design, não o objetivo principal do projeto.</p>
 
+<p><strong>Bill Venners:</strong> O que significa ortogonalidade neste contexto?</p>
 
-<p>Além disso mais testes foram adicionados para garantir que problemas antigos não voltem para nos assombrar.</p>
+<p><strong>Yukihiro Matsumoto:</strong> Um exemplo de ortogonalidade é adicionar qualquer recursinho ou sintaxe à linguagem. Por exemplo, C++ suporta parâmetros com valores padrão e também sobrecarga de funções com base em parâmetros. Ambos os recursos são bons para se ter em uma linguagem, mas devido ao fato desses recursos serem ortogonais, você pode aplicar ambos ao mesmo tempo. O compilador sabe exatamente o que fazer nesse caso. Se houver ambigüidade, o compilador irá sinalizar um erro. Mas se eu olhar para o código, vou precisar aplicar a regra com o meu cérebro. Eu preciso adivinhar como funciona o compilador. Se eu estiver correto, e for inteligente o suficiente, isto não será nenhum problema. Mas se eu não for inteligente o suficiente, e eu realmente não sou, isto causará muita confusão. O resultado será inesperado para uma pessoa comum. Este é um exemplo de como ortogonalidade pode ser ruim.</p>
 
-<p>Para atualizar o Remarkable, execute no terminal (lembrando que no Windows não precisa usar o <code>sudo</code>):</p>
+<p><strong>Bill Venners:</strong> Em outras palavras, as características ortogonais irão funcionar, uma vez que o compilador as entende e executa o programa. Mas é difícil para um programador compreender o funcionamento quando está olhando para o código, porque ele precisa descobrir como essas duas coisas funcionam juntas.</p>
 
-<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">gem sources -a <span class="markup markup_underline markup_underline_link markup_underline_link_text">http://gems.github.com</span>
-sudo gem install carlosbrando-remarkable</span></span></pre>
+<p><strong>Yukihiro Matsumoto:</strong> Características ortogonais, quando combinadas, podem explodir em complexidade.</p>
 
+<p><strong>Bill Venners:</strong> Qual é a alternativa? O que seria mais harmonioso?</p>
 
-<p>Ainda falta um logo e um site para o projeto. Alguém se habilita?</p>
+<p><strong>Yukihiro Matsumoto:</strong> Basta escolher uma das duas funcionalidade para colocar na linguagem. Você não precisa fazer tudo o que vier a sua cabeça. Você deve escolher apenas um desses recursos, mesmo que ambos sejam bons.</p>
 
-<h2>O (Comovente) Guia de Ruby do Why</h2>
+<h2>Liberdade e conforto</h2>
 
 
-<p>Acabei de atualizar o <a href="http://why.nomedojogo.com/">livro</a> com novas traduções e correções. Devido a minha falta de tempo, acabei demorando para aplicar alguns dos patches que me foram enviados.</p>
+<p><strong>Bill Venners:</strong> Uma das filosofias da comunidade Python é fornecer uma e apenas uma maneira de fazer as coisas. Se você fornecer cinqüenta maneiras diferentes de fazer a mesma coisa, então você está fornecendo conveniências para quem está escrevendo o código. Cada programador terá a liberdade de escrever do jeito que preferir. Mas o problema não é com quem escreve, mas com a pessoa que está lendo o código. Você pode adotar uma forma de escrever o seu código e o programador do lado pode adotar uma outra forma. Assim, quem está lendo precisa estar familiarizado com todos as maneiras possíveis de se realizar aquela tarefa, não apenas a sua maneira favorita de codificar. Esse é o dilema do design. A comunidade Python parece preferir uma única abordagem, mas Ruby parece oferecer várias maneiras de se fazer a mesma coisa.</p>
 
-<p>Na maioria das vezes, os colaboradores são rápidos demais e várias pessoas corrigem o mesmo texto de formas diferentes, e isto complica um pouco na hora de aceitar uma atualização. Eu tenho de olhar arquivo por arquivo antes de decidir qual será aplicado. Mas isto é bom, porque garante uma maior qualidade à tradução, embora torne o processo um pouco mais lento.</p>
+<p><strong>Yukihiro Matsumoto:</strong> Ruby herdou a filosofia do Perl de ter mais de uma maneira de fazer a mesma coisa. Eu herdei essa filosofia de Larry Wall, que é o meu herói atualmente. Eu quero que os programadores Ruby sejam livres. Eu quero dar-lhes a liberdade de escolher. As pessoas são diferentes. As pessoas tem diferentes critérios. Mas se há uma maneira melhor entre as várias alternativas, quero encoraja-la, tornando-a mais confortável. Então é isso que eu tentei fazer. Talvez um código Python seja um pouco mais legível. Qualquer um pode escrever utilizando o mesmo estilo em Python com a finalidade de deixar o código mais fácil de ler, talvez. Mas a diferença de uma pessoa para outra é tão grande, que prover apenas um caminho é de pouca ajuda mesmo se você estiver usando Python, eu acho. Eu prefiro dar tantas maneiras quanto for possível, mas incentivar ou orientar os usuários a escolher a melhor maneira, se ela existir.</p>
 
-<p>O livro pode ser encontrado na url: <a href="http://why.nomedojogo.com">http://why.nomedojogo.com</a>. Também existe uma versão para impressão em <a href="http://why.nomedojogo.com/print.html">http://why.nomedojogo.com/print.html</a>.</p>
+<h2>Alegria</h2>
 
-<p>A processo de tradução já foi finalizado, todo o livro já está em português. Ainda falta ajustar algumas imagens e formatações de texto, mas acredito que se conseguirmos mais colaboradores teremos o livro completo e finalizado até o fim do ano.</p>
 
-<p>Quer ajudar? Comece lendo o <a href="http://why.nomedojogo.com/">livro</a> e quando encontrar algo errado altere <a href="http://github.com/carlosbrando/poignant-br/tree/master">aqui</a>.</p>
+<p><strong>Bill Venners:</strong> Em um artigo introdutório sobre Ruby,  você escreveu: "Para mim, o propósito da vida é, em parte, ter alegria. Programadores geralmente se sentem felizes quando podem concentrar-se na parte criativa da programação, assim Ruby foi projetado para fazer programadores felizes." Como pode o Ruby fazer programadores felizes?</p>
+
+<p><strong>Yukihiro Matsumoto:</strong> Você quer aproveitar a vida, não é? Se você pudesse terminar seu trabalho rapidamente e de uma forma divertida, seria muito bom, não é? Esse é o propósito da vida, em parte. Sua vida será melhor.</p>
+
+<p>Eu quero resolver os problemas que encontro no cotidiano usando computadores, então preciso escrever programas para eles. Usando Ruby, quero me concentrar nas coisas que faço, não nas regras mágicas da linguagem, como começar com um <code>public something something void something</code> para imprimir na tela: "Olá mundo". Eu só quero dizer <code>print "this!"</code>. Eu não quero todas estas palavras-chave envoltas em magia. Eu só quero me concentrar na tarefa. Essa é a idéia básica. Então, eu tenho tentado fazer um código Ruby conciso e sucinto.</p>
+
+<p><strong>Bill Venners:</strong> Permitir que os programadores escrevam código que é conciso e sucinto é uma maneira de fazê-los felizes.</p>
+
+<p><strong>Yukihiro Matsumoto:</strong> Sim, para que eles possam se concentrar no problema. As vezes as pessoas anotam pseudo-código em uma folha de papel. Se esse pseudo-código pudesse ser executado diretamente em seus computadores, seria muito bom, não seria? Ruby tenta ser assim, como esse pseudo-código sendo executado. O pessoal do Python também diz o mesmo.</p>
+
+<p><strong>Bill Venners:</strong> Sim, o pessoal do Python diz que o Python é um pseudo-código executável. O que mais tem no Ruby que faz os programadores felizes?</p>
+
+<p><strong>Yukihiro Matsumoto:</strong> No nosso cotidiano como programadores, processamos muito texto. Então, eu tentei trabalhar duro em processamento de textos, ou seja, na classe string e expressões regulares. As expressões regulares são incorporadas a linguagem e estão prontas para o uso. Também precisamos interagir muito com o sistema operacional. Ruby pode executar chamadas ao sistema Unix e para a maioria das funções da API do Windows. Isso aumenta o poder e a utilizade do sistema operacional no ambiente da linguagem interpretativa. Então você pode fazer a administração de sistemas e a programação diária de processamento de textos. É isso que faço na maior parte do tempo, então eu trabalhei duro em fazer isto funcionar bem.</p>
+
+<p><strong>Bill Venners:</strong> Então, basicamente, Ruby me permite aproveitar mais a minha vida, porque faz com que eu termine o meu trabalho mais rápido ao mesmo tempo que o torna mais divertido?</p>
+
+<p><strong>Yukihiro Matsumoto:</strong> Ele me ajuda a fazer isso. Não tenho certeza se Ruby funciona para você, mas eu espero que sim.</p>
+
+<h2>O Fator Humano</h2>
+
+
+<p><strong>Bill Venners:</strong> Em uma entrevista, você disse: "Não subestime o fator humano. Embora estejamos em  frente a um computador, eles são apenas máquinas. Estamos trabalhando para humanos, com humanos." O que você quer dizer com isso?</p>
+
+<p><strong>Yukihiro Matsumoto:</strong> Imagine que você está escrevendo um e-mail. Está na frente do computador. Está operando o computador, clicando em um mouse e digitando em um teclado, mas a mensagem será enviada a um outro ser humano através da internet. Então você está trabalhando com um computador, mas o objetivo é sempre um ser humano. A maioria das tarefas que fazemos são para seres humanos. Por exemplo, um cálculo de impostos é a contagem de números que indicam quanto o governo pode retirar de dinheiro da minha carteira, mas o governo é composto por seres humanos.</p>
+
+<p>A maioria de nossas tarefas estão relacionadas com seres humanos. Assim, quando programamos podemos tanto pedir ao computador para trabalhar para um ser humano, como podemos descrever nossos pensamentos de uma forma tão clara que até mesmo uma máquina possa executar. No primeiro caso, fazemos o computador trabalhar para o ser humano, o alvo é um ser humano atrás de um computador. No segundo caso, expressamos nossos pensamentos com clareza suficiente para ser compreendido e executado por computadores, a intenção é expressa por cérebros humanos e o resultado é calculado por um computador. Assim, em ambos os casos, o objetivo aqui é sempre o ser humano.</p>
+
+<p><strong>Bill Venners:</strong> O que é mais importante sobre este tipo de mentalidade? Você diz: "Não subestime o fator humano." Por quê?</p>
+
+<p><strong>Yukihiro Matsumoto:</strong> Computadores não se importam se eu estou fazendo algum esforço para me comunicar com eles ou se é fácil de se comunicar com eles. Eles não se importam se eu coloquei uma seqüência de instruções em um arquivo e mandei executá-las ou se eu estou utilizando uma linguagem de alto nível para gerar essas instruções. Computadores não se importam. Nós nos preocupamos com os seres humanos. Muitas vezes as pessoas, especialmente engenheiros de informática, focam nas máquinas. Eles pensam: "Ao fazer isso, a máquina irá trabalhar mais rápido. Ao fazer isso, a máquina irá funcionar mais eficazmente. Ao fazer isso, a máquina irá fazer alguma coisa qualquer". Eles estão se concentrando em máquinas. Mas, na verdade precisamos nos concentrar no ser humano, sobre como os seres humanos se preocupam com a programação ou como operam um aplicativo na máquina. Nós somos os mestres. As máquinas são nossos escravos.</p>
+
+<p><strong>Bill Venners:</strong> Pelo menos por enquanto.</p>
+
+<p><strong>Yukihiro Matsumoto:</strong> Pelo menos por enquanto, até chegarmos na era dos Exterminadores.</p>
+
+<h2>O princípio da menor surpresa</h2>
+
+
+<p><strong>Bill Venners:</strong> Em uma entrevista, você disse "eu projetei o Ruby para minimizar a minha surpresa. Fiquei muito espantado quando as pessoas ao redor do mundo me disseram que Ruby reduzia a sua surpresa e aumentava a sua alegria ao programar. Agora eu tenho certeza que programadores pensam da mesma maneira no mundo todo." Por que o principio da menor surpresa?</p>
+
+<p><strong>Yukihiro Matsumoto:</strong> Na verdade, eu não fiz a alegação de que Ruby segue o princípio da "menor surpresa". Alguém sentiu que o design do Ruby segue esta filosofia, então eles começaram a dizer isso. Não foi eu quem inventou isto, na verdade.</p>
+
+<p>Eu queria minimizar minha frustração durante a programação, assim como eu quero minimizar o meu esforço na programação. Esse era o meu principal objetivo na elaboração de Ruby. Eu queria me divertir enquanto programava. Depois de lançar o Ruby e muitas pessoas ao redor do mundo tomarem conhecimento da linguagem, eles começaram a dizer que se sentiam assim como eu me sinto. Eles começaram a citar esta frase sobre o princípio da menor surpresa. Mas, na verdade, isto é muitas vezes mal interpretado.</p>
+
+<p><strong>Bill Venners:</strong> Como isto é mal interpretado?</p>
+
+<p><strong>Yukihiro Matsumoto:</strong> Cada um possui um passado único. Alguns podem vir do Python, outros podem vir de Perl, e podem ser surpreendidos por diferentes aspectos da linguagem. Então, eles vêm até mim e dizem: "Fiquei surpreso com esta característica da linguagem, assim o Ruby viola o princípio da menor surpresa". Espere. Espere. Esse princípio não vale apenas para você. O princípio da menor surpresa, também é o principio da <strong>minha</strong> menor surpresa. Mesmo programadores experientes podem ser surpreendidos. Por exemplo, eu era um programador C++ antes de começar a projetar o Ruby. Eu programei em C++ exclusivamente por dois ou três anos. E após todo este tempo programando em C++, eu ainda me surpreendia.</p>
+
+<h3>Atualização (20/01/2010 13:05):</h3>
+
+
+<p>Depois de publicar esse artigo descobri que o Fábio Akita já havia traduzido essa entrevista a alguns anos atrás. Assim, seguem os links para a <a href="http://akitaonrails.com/2006/10/14/entrevista-com-yukihiro-matsumoto-parte-ii">parte 2</a>, <a href="http://akitaonrails.com/2006/11/07/entrevista-com-yukihiro-matsumoto-parte-iii">parte 3</a> e <a href="http://akitaonrails.com/2006/11/22/entrevista-com-yukihiro-matsumoto-parte-iv">parte 4</a> da entrevista. Divirta-se!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Entendendo os métodos load e require por dentro]]></title>
+    <link href="http://nomedojogo.com/2010/01/07/entendendo-os-metodos-load-e-require-por-dentro/"/>
+    <updated>2010-01-07T00:00:00-02:00</updated>
+    <id>http://nomedojogo.com/2010/01/07/entendendo-os-metodos-load-e-require-por-dentro</id>
+    <content type="html"><![CDATA[<p>Você sabe explicar a diferença entre as duas linhas abaixo?</p>
+
+<p>``` ruby</p>
+
+<pre><code>require "my_library"
+
+load "my_library.rb"
+</code></pre>
+
+<p>```</p>
+
+<p>Se você já trabalhou ao menos um pouco com Ruby, então sabe que <code>load</code> é útil quando se deseja executar o código de um arquivo enquanto <code>require</code> é utilizado para importar uma biblioteca para dentro do código do seu programa.</p>
+
+<p>Esta definição está correta, mas eu gostaria de me aprofundar um pouco mais no assunto...</p>
+
+<h2>A Base</h2>
+
+
+<p>Para entender como esses métodos realmente funcionam por dentro, precisamos primeiro saber que ambos possuem a mesma base. No <strong>Ruby 1.8.7</strong> esta base é o método <code>rb_load</code> (internamente escrito em C e encontrado no arquivo <a href="http://gist.github.com/267618">eval.c</a>). A função do <code>rb_load</code> é determinar se o arquivo especificado na chamada dos métodos <code>require</code> e <code>load</code> se encontra no diretório atual do aplicativo ou em um dos diretórios listados no <code>$LOAD_PATH</code> (<code>$:</code>) e então carregar este arquivo seguindo a regra própria de cada um dos métodos.</p>
+
+<h2>O método require por dentro</h2>
+
+
+<p>``` ruby</p>
+
+<pre><code>require "my_library"
+</code></pre>
+
+<p>```</p>
+
+<p>Quanto <code>rb_load</code> é executado através do método <code>require</code>, fazendo com que ele carregue uma biblioteca no seu código, o nome do arquivo especificado é adicionado a uma lista. Esta lista pode ser vista através da variável global <code>$LOADED_FEATURES</code> (<code>$"</code>).</p>
+
+<p>Você pode verificar quais arquivos já foram carregados em seu código através do método <code>require</code> analisando o conteúdo desta variável.</p>
+
+<pre><code>[carlosbrando:~]$ irb
+&gt;&gt; puts $LOADED_FEATURES
+enumerator.so
+e2mmap.rb
+irb/init.rb
+...
+</code></pre>
+
+<p>Ao executar o método <code>require</code>, o Ruby primeiro verificará se o nome do arquivo que você especificou se encontra em <code>$LOADED_FEATURES</code>. Se ele <strong>não encontrar</strong> o nome na lista, então ele tentará carregar o arquivo e se for bem sucedido retornará <code>true</code>. Caso o nome já se encontre na lista de recursos carregados, então o método simplesmente retornará <code>false</code> e <strong>não carregará</strong> o arquivo novamente.</p>
+
+<p>O segundo passo é determinar em que diretório o arquivo se encontra. Para isto o Ruby consultará uma outra variável global chamada <code>$LOAD_PATH</code>. Esta variável armazena todos os diretórios onde <code>rb_load</code> deve procurar por bibliotecas. Se o arquivo não for encontrado no diretório raiz do seu aplicativo e nem na lista de diretórios do <code>$LOAD_PATH</code>, então o método <code>rb_load</code> disparará um erro do tipo <code>LoadError</code>.</p>
+
+<p>Caso você não informe uma extensão para o nome do arquivo, como no exemplo no inicio deste tópico, o método <code>require</code> procurará por arquivos com as seguintes extensões: <code>.rb</code>, <code>.o</code>, <code>.so</code>, <code>.dylib</code>, <code>.dll</code>, exatamente nesta ordem. Por último o Ruby procurará pelo nome do arquivo sem nenhuma extensão. Se o arquivo possuir a extensão <code>.rb</code> ele será carregado como um código Ruby puro. As demais extensões serão carregadas como extensões Ruby de acordo com o sistema operacional na qual você estiver executando o seu código.</p>
+
+<p><strong>Atenção:</strong> Se você informar a extensão do arquivo na chamada do método <code>require</code> (i.e. <code>require 'my_lib.rb'</code>) e o Ruby não conseguir encontrar o arquivo da forma como foi especificado, ele ignorará a extensão que você definiu e procurará por arquivos com o mesmo nome seguindo a regra mencionada no parágrafo anterior.</p>
+
+<p>O método também permite que você seja mais especifico, informando o diretório exato onde o arquivo se encontra.</p>
+
+<p>``` ruby</p>
+
+<pre><code>require '../my_library.rb'
+</code></pre>
+
+<p>```</p>
+
+<p>No exemplo acima o Ruby <strong>não tentará</strong> localizar o recurso em outros diretórios, caso não o encontre no local que você especificou. Porém, é importante estar atento a um problema comum ao utilizar este recurso. Veja o código abaixo:</p>
+
+<p>``` ruby</p>
+
+<pre><code>require 'my_library'
+require './my_library.rb'
+</code></pre>
+
+<p>```</p>
+
+<p>Neste exemplo, nas duas linhas de código eu estou carregando o mesmo recurso. Na primeira linha eu informo somente o nome do arquivo e na segunda eu informo também o diretório. O método <code>require</code> não armazena o caminho absoluto do recurso em <code>$LOADED_FEATURES</code>, ele armazena a <code>string</code> exata informada na chamada do método. Neste caso o arquivo <code>my_library.rb</code> será carregado duas vezes. Analisando a variável <code>$LOADED_FEATURES</code> encontraremos o seguinte:</p>
+
+<p>``` ruby</p>
+
+<pre><code>&gt;&gt; $".grep /my_library/
+=&gt; ["my_library.rb", "./my_library.rb"]
+</code></pre>
+
+<p>```</p>
+
+<h2>O método load por dentro</h2>
+
+
+<p>O método <code>load</code> funciona de uma forma muito parecida com o método <code>require</code>. A principal diferença é que ele não mantém uma lista de recursos, fazendo com que um arquivo seja carregado tantas vezes quanto for solicitado.</p>
+
+<p>Outra importante diferença é que a extensão do arquivo é obrigatória, embora ela não seja restrita apenas a <code>.rb</code> e aos outros formatos que vimos acima. Qualquer outra extensão é aceita, embora o conteúdo do arquivo seja sempre tratado como código Ruby puro.</p>
+
+<p>Você também pode especificar o caminho exato onde o arquivo se encontra. Desta vez, sem nenhum efeito colateral. Porém, se você informar somente o nome do arquivo, o Ruby tentará encontrá-lo primeiro no seu diretório atual e depois na lista de diretórios do <code>$LOAD_PATH</code>.</p>
+
+<p>O método <code>load</code> tem algumas opções extras. Muito provavelmente o arquivo que você estará carregando definirá algumas variáveis e classes. Variáveis locais em nenhuma circunstancia serão propagadas para o seu ambiente, porém o mesmo não acontece com constantes. O resultado é que ao carregar um recurso em seu projeto você pode ter um conflito se já houver uma constante com o mesmo nome no seu código. O mesmo vale para nomes de classes, que como<a href="http://www.nomedojogo.com/2009/05/25/curiosidades-do-ruby-o-screencast/"> já aprendemos</a> também são constantes.</p>
+
+<p>Você pode obrigar o método <code>load</code> a manter suas constantes para si mesmo, passando um segundo parametro na chamada do método:</p>
+
+<p>``` ruby</p>
+
+<pre><code>load 'my_library.rb', true
+</code></pre>
+
+<p>```</p>
+
+<p>Quando você carrega um recurso desta maneira, o Ruby criará um módulo anônimo e usará este módulo como um namespace, evitando conflitos entre o código do arquivo e o seu código. Ao terminar a execução este módulo é destruído. No exemplo acima, true é um atalho. Se desejar, você pode ser mais especifico fazendo também desta maneira:</p>
+
+<p>``` ruby</p>
+
+<pre><code>load "my_library.rb", :wrap =&gt; true
+</code></pre>
+
+<p>```</p>
+
+<p>O efeito é o mesmo.</p>
+
+<h2>Finalizando</h2>
+
+
+<p>O método <code>require</code> não tem opções extras. Se você está importando uma biblioteca então faz sentido que constantes e classes permaneçam em seu código. Por outro lado, se você deseja apenas executar o código que está em um arquivo, provavelmente você não vai querer poluir o seu programa com recursos desnecessários.</p>
+
+<p>Os dois métodos são muito parecidos, embora eles tenham sido construídos para finalidades diferentes. Entender como cada um funciona por dentro pode ajudá-lo a utilizar o recurso certo na hora certa.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Classes são Módulos no Ruby]]></title>
+    <link href="http://nomedojogo.com/2009/12/24/classes-sao-modulos-no-ruby/"/>
+    <updated>2009-12-24T00:00:00-02:00</updated>
+    <id>http://nomedojogo.com/2009/12/24/classes-sao-modulos-no-ruby</id>
+    <content type="html"><![CDATA[<p>Qual é a diferença entre uma classe e um módulo no Ruby? Nenhuma, uma classe é um módulo no Ruby. Não acredita em mim?</p>
+
+<p>``` ruby</p>
+
+<pre><code>Class.is_a?(Module) # =&gt; true
+</code></pre>
+
+<p>```</p>
+
+<p>Agora que você já confia em mim, posso explicar com um pouco mais de calma.</p>
+
+<h2>O que são módulos?</h2>
+
+
+<p>Um módulo pode ser definido de forma grosseira como uma coleção de métodos e constantes. Você encontrará dois tipos de métodos em um módulo: métodos de instância e métodos de módulo. Um método de módulo é aquele que pode ser executado sem a necessidade de que o módulo seja incluído em outro objeto:</p>
+
+<p>``` ruby</p>
+
+<pre><code>module MeuModulo
+  def self.meu_metodo_de_modulo
+    puts "Sou um método de módulo!"
+  end
+end
+
+MeuModulo.meu_metodo_de_modulo # =&gt; Sou um método de módulo!
+</code></pre>
+
+<p>```</p>
+
+<p>Por outro lado, métodos de instância, como o nome diz, precisam ser executados a partir de uma instância de um objeto. Módulos podem ser acoplados dentro de outros objetos, tornando assim estes métodos de instância acessíveis.</p>
+
+<p>``` ruby</p>
+
+<pre><code>module MeuModulo
+  def meu_metodo_de_intancia
+    puts "Método de instância!"
+  end
+end
+
+class MinhaClasse
+  # Acoplando o MeuModulo
+  include MeuModulo
+end
+
+# Criando uma instância de MinhaClasse
+minha_classe = MinhaClasse.new
+
+# Executando o método de instância que foi criado em MeuModulo
+puts minha_classe.meu_metodo_de_intancia # =&gt; Método de instância!
+</code></pre>
+
+<p>```</p>
+
+<h2>O que são classes?</h2>
+
+
+<p>Assim como os módulos, classes também são repositórios de métodos. Então qual é a diferença entre um e o outro?</p>
+
+<p>Podemos ver claramente a diferença entre classes e módulos examinando o objeto <code>Class</code> mais de perto:</p>
+
+<p>``` ruby</p>
+
+<pre><code>Class.superclass # =&gt; Module
+
+Class.instance_methods(false)
+# =&gt; ["superclass", "allocate", "new", "to_yaml"]
+</code></pre>
+
+<p>```</p>
+
+<p>Como você pode ver no código acima, <code>Class</code> é uma subclasse de <code>Module</code>, mas com quatro métodos a mais. E é exatamente nestes métodos que encontraremos a resposta para a questão levantada acima.</p>
+
+<p>Para esclarecer ainda mais, vamos imaginar como seria a classe <code>Class</code> implementada em Ruby:</p>
+
+<p>``` ruby</p>
+
+<pre><code>class Class &lt; Module
+  # Você já sabe como funciona o método new,
+  # já que o utilizamos o tempo todo
+  def initialize
+  end
+
+  # Devolve a superclasse da classe atual
+  def superclass
+  end
+
+  # Dá suporte ao método new
+  def allocate
+  end
+
+  def to_yaml
+  end
+end
+</code></pre>
+
+<p>```</p>
+
+<p>Os três primeiros métodos são responsáveis por permitir que você consiga criar uma instância de um objeto e trabalhar com o conceito de hierarquia de classes. O método <code>to_yaml</code> serve apenas como uma interface que dispara um erro do tipo <code>TypeError</code> caso ele não seja implementado por uma subclasse.</p>
+
+<p>O método <code>superclass</code> é fácil de entender, já que a sua única finalidade é informar qual é a superclasse de um objeto. Se uma superclasse não for definida ele retornará <code>nil</code>.</p>
+
+<p>``` ruby</p>
+
+<pre><code>Integer.superclass # =&gt; Numeric
+Object.superclass # =&gt; nil
+</code></pre>
+
+<p>```</p>
+
+<p>O método <code>allocate</code> é responsável por reservar um espaço na memória para a nova instância do objeto que estamos criando. O método devolve esta instância pronta.</p>
+
+<p>E por último, o método <code>initialize</code> (<code>new</code>) tem duas funções. Primeiro ele executa o método <code>allocate</code>, que constrói um novo objeto da classe <code>Class</code> (ou de qualquer outra classe, afinal todas elas são subclasses de <code>Class)</code>. Em seguida ele dispara o método <code>initialize</code> deste objeto, passando os argumentos para ele.</p>
+
+<h2>Finalizando</h2>
+
+
+<p>Se você chegou até aqui, então já entendeu as diferenças entre um módulo e uma classe em Ruby. Basta pensar que ambos são basicamente a mesma coisa (com estas significantes diferenças) e que quase tudo o que vale para um também vale para o outro.</p>
+
+<p>A principal razão de existir estes dois tipos de objetos tão parecidos e ao mesmo tempo tão diferentes é que desta forma podemos deixar nosso código muito mais expressivo.</p>
+
+<p>Normalmente você usará um módulo quando precisar incluí-lo em outro objeto ou usá-lo como um namespace. E você usará uma classe quando precisar de uma instância de um objeto ou utilizar o sistema de heranças. Cada um tem o seu propósito e você será melhor sucedido se utilizar o recurso certo na hora certa.</p>
+
+<hr />
+
+
+<p><em>Este artigo é o primeiro de muitos com a finalidade de explicar como o Ruby e Rails funcionam por dentro, conforme prometido durante a minha palestra no <a href="http://www.nomedojogo.com/palestras/">Rails Summit</a>.</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Como montar um servidor de gems privado]]></title>
+    <link href="http://nomedojogo.com/2009/12/09/como-montar-um-servidor-de-gems-privado/"/>
+    <updated>2009-12-09T00:00:00-02:00</updated>
+    <id>http://nomedojogo.com/2009/12/09/como-montar-um-servidor-de-gems-privado</id>
+    <content type="html"><![CDATA[<p><img class="center" src="http://old.nomedojogo.com/wp-content/uploads/2009/12/new_rubygems.png"></p>
+
+<p>Não é segredo para ninguém que eu estou exaustivamente trabalhando em um <a href="http://www.nomedojogo.com/2009/10/13/os-slides-da-minha-apresentacao-no-rails-summit-latin-america-2009/">novo framework</a> para o desenvolvimento de aplicativos sociais de forma ultra-rápida. Porém ainda não está na hora de liberar o projeto como open source, mas é certo que isto acontecerá em breve.</p>
+
+<p>O framework já está em sua versão 0.5.2 e em pleno uso e desenvolvimento. Como decidimos não liberar o projeto até que ele esteja finalizado, não podemos simplesmente disponibilizar as gems em serviços como o <a href="http://gemcutter.org/">Gemcutter</a>. Assim, toda vez que precisamos instalar ou atualizar as bibliotecas em nossos servidores temos de fazer isto manualmente, copiando os arquivos <code>.gem</code> para o servidor e instalando a partir deles. Este processo é realmente irritante, então surgiu a necessidade de montar o no nosso próprio servidor de gems privativo.</p>
+
+<p>A solução é ridiculamente simples. Mas como acredito que muita gente também pode se beneficiar disso, segue a receita de bolo.</p>
+
+<h2>A forma simples</h2>
+
+
+<p>A primeira alternativa é utilizar o seu próprio computador como um servidor de gems. Para fazer isto basta executar o seguinte comando no terminal:</p>
+
+<pre class="textmate-source"><span class="source source_shell">gem server</span></pre>
+
+
+<p>Pronto! Desta maneira você já estará compartilhando todas a gems que estão instaladas em sua máquina através do endereço <code>http://SEU_IP:8808</code>.</p>
+
+<h2>Uma alternativa melhor</h2>
+
+
+<p>Como em nosso caso era importante manter o serviço o tempo todo no ar, a solução foi hospedar as bibliotecas em um servidor web.</p>
+
+<p>O processo também é muito simples. Crie um diretório qualquer em uma área pública do seu servidor web (digamos que você criou um diretório com o nome de <code>meusgems</code>). Crie então um subdiretório chamado <code>gems</code> e copie todos os seus arquivos <code>.gem</code> para dentro dele.</p>
+
+<p>Antes de continuar certifique-se de ter o RubyGems instalado em seu servidor. Então execute o seguinte comando dentro do diretório <code>meusgems</code>:</p>
+
+<pre class="textmate-source"><span class="source source_shell">gem generate_index</span></pre>
+
+
+<p>Feito! Seu servidor privado de gems está no ar. Quando adicionar ou atualizar alguma biblioteca, basta executar o comando acima novamente.</p>
+
+<h2>Instalando gems a partir do seu servidor</h2>
+
+
+<p>Para fazer com que o comando <code>gem install</code> encontre as bibliotecas que estão no seu servidor, você deve adicionar o endereço na lista de fontes do RubyGems. Para isto execute o seguinte comando no computador onde os gems devem ser instalados:</p>
+
+<pre class="textmate-source"><span class="source source_shell">gem sources --add http://gems.meu_servidor.com</span></pre>
+
+
+<p>Claro que você deve alterar o endereço acima para a URL correta do seu servidor. Depois disso basta instalar as suas bibliotecas normalmente, através do comando <code>gem install nome_do_gem</code>.</p>
+
+<p>Caso seu repositório de gems comece a crescer muito, talvez seja interessante configurar o projeto <a href="http://github.com/qrush/gemcutter">Gemcutter</a> em seu servidor.</p>
+
+<p>Esta pode ser uma alternativa bem interessante para estimular a reutilização de código dentro de sua empresa, sem precisar liberar todas as suas bibliotecas como open source.</p>
 ]]></content>
   </entry>
   

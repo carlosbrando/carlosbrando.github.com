@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Shoulda | Nome do Jogo]]></title>
+  <link href="http://nomedojogo.com/categories/shoulda/atom.xml" rel="self"/>
+  <link href="http://nomedojogo.com/"/>
+  <updated>2011-10-18T20:54:12-02:00</updated>
+  <id>http://nomedojogo.com/</id>
+  <author>
+    <name><![CDATA[Carlos Brando]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Shoulda 2.0]]></title>
+    <link href="http://nomedojogo.com/2008/10/01/shoulda-20/"/>
+    <updated>2008-10-01T00:00:00-03:00</updated>
+    <id>http://nomedojogo.com/2008/10/01/shoulda-20</id>
+    <content type="html"><![CDATA[<p>Outro projeto open-source que também participo e gosto muito é o <strong>Shoulda</strong>. Já tentei <a href="http://www.nomedojogo.com/2008/08/05/porque-eu-defendo-o-shoulda/">explicar no passado</a> o motivo de gostar tanto deste projeto, mas acho que tem muito a ver com uma questão de puro gosto.</p>
+
+<p>Pois bem, acabou de ser liberada a versão 2.0.2 do <strong>Shoulda</strong> e a principal novidade é que agora ele funciona 100% como um gem. Além disso, novas macros foram acrescentadas, bugs foram corrigidos e algumas funcionalidades foram removidas.</p>
+
+<p>Para utilizar o Shoulda em seu projeto Rails 2.1+ a melhor forma é acrescentar o seguinte código no seu arquivo <strong>config/environment.rb</strong>:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails source_ruby_rails_shoulda"><span class="support support_class support_class_ruby">Rails</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">Initializer</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>run <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">config</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+  config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>gem <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>thoughtbot-shoulda<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>lib</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>shoulda/rails<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
+    <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>source</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>http://gems.github.com<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+<p>Depois basta executar no terminal:</p>
+
+<pre class="textmate-source"><span class="text text_html text_html_basic">rake gems:install
+rake gems:unpack
+</span></pre>
+
+
+<p>Entre as novidades, tivemos melhorias em macros existentes que prometem agilizar ainda mais a criação de testes, tais como o acréscimo das opções <strong>:equals</strong> e <strong>:class</strong> na macro <strong>should_assign_to</strong>. Com estas novas implementações fica fácil testar se o objeto devolvido é do tipo desejado ou mesmo igual a um objeto especifico.</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails source_ruby_rails_shoulda"><span class="support support_shoulda support_shoulda_macro">should_assign_to</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>user</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>equals</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>@user<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>class</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">User</span></span></pre>
+
+
+<p>A macro <strong>should_have_one</strong> também recebeu a opção <strong>:dependent</strong>:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails source_ruby_rails_shoulda"><span class="support support_shoulda support_shoulda_macro">should_have_one</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>address</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>dependent</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>destroy</span></span></pre>
+
+
+<p>Agora falando apenas de novidades, temos as novas macros <strong>should_change</strong>, <strong>should_not_change</strong>, <strong>should_filter_params</strong>, <strong>should_render_with_layout</strong>, <strong>should_render_without_layout</strong>, <strong>should_route</strong>, <strong>should_respond_with_content_type</strong>, <strong>should_return_from_session</strong> e o muito útil <strong>before_should</strong>.</p>
+
+<p>Mais detalhes sobre o funcionamento de todas estas macros podem ser encontrados na <a href="http://dev.thoughtbot.com/shoulda/">documentação</a> do projeto.</p>
+
+<p>Algo interessante que também foi acrescentado ao projeto é a carga automática de macros customizadas. Caso você deseje criar suas próprias macros, basta criar uma pasta <strong>RAILS_ROOT/test/shoulda_macros</strong> e jogar lá dentro os arquivos com estas macros.</p>
+
+<p>Gems e plugins também podem se beneficiar dessa vantagem. Se em qualquer um deles houver uma pasta <strong>shoulda_macros</strong> na raiz, todos os arquivos dentro da pasta também serão carregados automaticamente.</p>
+
+<p>A única controvérsia desta versão, foi a remoção do método <strong>should_be_restful</strong>. Na verdade ele chegou a ser removido por alguns dias, mas depois voltou com uma mensagem de alerta avisando que em breve ele será removido definitivamente. Isto se dá pelo fato de que este método faz muita coisa de forma automática e não permite uma fácil localização do ponto onde um erro ocorre.</p>
+
+<p>Um outro projeto também foi iniciado em paralelo ao desenvolvimento do <strong>Shoulda</strong>. O <a href="http://github.com/seanhussey/woulda">Woulda</a> promete ser um repositório de macros e recursos que não cabem ao Shoulda, como macros especificas para testar alguns gems/plugins famosos.</p>
+
+<p>Para quem está começando a brincar com o <strong>Shoulda</strong> segue uma lista de recursos interessantes:</p>
+
+<ul>
+    <li><a href="http://www.makemesimple.com/blog/2008/06/27/learncast1-bdd-leve-com-shoulda-testando-modelos-activerecord/">Screencast BDD leve com Shoulda - testando modelos ActiveRecord</a></li>
+    <li><a href="http://jonysk.net/blog/2008/08/17/shoulda-x-rspec-cuidado-nas-comparacoes/">Shoulda x RSpec: Cuidado nas comparações</a></li>
+    <li><a href="http://kylebanker.com/blog/2008/09/shoulda-testing-cheat-sheet/"><span id="repository_description">Shoulda Testing Cheat Sheet</span></a></li>
+    <li><a href="http://groups.google.com/group/shoulda/browse_thread/thread/5aef44642bbda277"> Running single shoulda tests from the command line</a></li>
+    <li><a href="http://www.thoughtbot.com/projects/shoulda">Making Tests Easy on the Fingers and Eyes</a></li>
+</ul>
+
+
+<p>O <a href="http://github.com/drnic/ruby-shoulda-tmbundle/tree/master">Bundle para o TextMate</a> que estou mantendo junto com o Dr. Nic no GitHub já está atualizado com todos os recursos da versão 2.0.2.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Porque eu defendo o Shoulda]]></title>
+    <link href="http://nomedojogo.com/2008/08/05/porque-eu-defendo-o-shoulda/"/>
+    <updated>2008-08-05T00:00:00-03:00</updated>
+    <id>http://nomedojogo.com/2008/08/05/porque-eu-defendo-o-shoulda</id>
+    <content type="html"><![CDATA[<p>Como alguns já viram no último <a href="http://www.nomedojogo.com/2008/07/29/rails-podcast-brasil-episodio-25/">podcast</a> eu costumo defender muito os projetos e sistemas que gosto. O <a href="http://github.com/">GitHub</a> pode não ter a importancia que o <a href="http://rubyforge.org/">RubyForge</a> "teve" para a comunidade Ruby no mundo, mas acredito seriamente no valor deste projeto e aposto minhas fichas nele.</p>
+
+<p>O fato dele ser um projeto comercial só aumenta ainda mais minha confiança, porque ele é um projeto opensource-like com a diferença de ser mantido não somente pela boa vontade dos desenvolvedores, mas sim por dinheiro, e isto é muito bom porque estimula a "boa vontade", se é que vocês me entendem.</p>
+
+<p>Além disso o GitHub evoluiu os projetos opensource além do que o RubyForge conseguiu, tornou muito mais fácil contribuir para um projeto, criar forks, entrar em contato com desenvolvedores, e tudo de uma forma que estimula o social.</p>
+
+<p>Outro projeto que muito me agrada é o <a href="http://www.thoughtbot.com/projects/shoulda">Shoulda</a>, e vou explicar o motivo disto. O Sholda diferente do <a href="http://rspec.info/">RSpec</a>, por exemplo, foi feito para o Rails (embora você possa usá-lo em outros tipos de projetos isto não faz muito sentido) e isto dá ao projeto uma liberdade que não pode ser aplicada ao RSPec que precisa ser mais genérico.</p>
+
+<p>Claro que existem iniciativas semelhantes aplicadas ao RSpec, mas nenhuma é tão madura.</p>
+
+<p>Outra vantagem é que o Shoulda não precisa alterar nada em seu projeto Rails, já que ele trabalha em cima do <a href="http://www.ruby-doc.org/stdlib/libdoc/test/unit/rdoc/classes/Test/Unit.html">Test::Unit</a> que é o framework padrão para testes no Rails. E se você já costuma criar testes neste framework, a curva de aprendizado é perto de zero.</p>
+
+<p>E agora a terceira grande vantagem é a possibilidade de criar macros para testes. Funciona mais ou menos assim: Você cria um plugin que adiciona uma certa funcionalidade a um objeto do <strong>ActiveRecord</strong>, então você cria uma macro de testes para isto e a coloca dentro de uma pasta <strong>shoulda_macros</strong> na raiz do seu gem ou plugin. Assim, os usuários do seu projeto só precisam incluir uma chamada de método nos testes dos modelos que implementarem estas novas funcionalidades e tudo estará seguro.</p>
+
+<p>Por exemplo, se você estiver usando o plugin <a href="http://www.thoughtbot.com/projects/paperclip">Paperclip</a>, basta adicionar a seguinte linha no arquivo de teste do modelo para garantir que tudo vai funcionar bem:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_unit_test"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">UserTest<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> Test::Unit::TestCase</span></span></span>
+  should_have_attached_file <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>avatar</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span>
+</span></pre>
+
+
+<p>Sou tão fõ do projeto que mantenho, junto com o Dr. Nic, os <a href="http://github.com/drnic/ruby-shoulda-tmbundle/tree/master">Bundles do TextMate</a> para o Shoulda e posso garantir que ele está completo. Já enviei alguns patchs para o projeto principal também.</p>
+
+<p>Se tem coisas que eu não sou é preciosista ou saudosita. Sou adépto ao novo, e quando considero que algo novo é melhor do que o antigo não tenho medo de mudar. Não é porque algo me serviu durante muitos anos que devo continuar usando-o o resto da vida, se fosse assim eu não teria comprado um travesseiro novo, nem um macbook, nem uma TV nova, nem um...</p>
+]]></content>
+  </entry>
+  
+</feed>

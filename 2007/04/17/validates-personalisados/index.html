@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Um problema que temos com os validates &eacute; que ele insiste em colocar o nome do campo na frente da mensagem, mesmo quando personalizamos ela u...">
+  <meta name="description" content="Um problema que temos com os validates é que ele insiste em colocar o nome do campo na frente da mensagem, mesmo quando personalizamos ela usando o...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,12 +86,9 @@
 
 
 
-
   
 
-
-
-<time datetime="2007-04-17T00:00:00-03:00" pubdate  data-updated="true" >17 de Abril de 2007</time>
+<time datetime="2007-04-17T00:00:00-03:00" pubdate>17 de Abril de 2007</time>
         
       </p>
     
@@ -101,13 +98,13 @@
 <div class="entry-content"><center><img src="http://old.nomedojogo.com/wp-content/uploads/2007/04/windowslivewritervalidatespersonalisados-971dcustom-springs131.jpg" height="150" width="160" /></center>
 
 
-<p>Um problema que temos com os validates &eacute; que ele insiste em colocar o nome do campo na frente da mensagem, mesmo quando personalizamos ela usando o :message.
+<p>Um problema que temos com os validates é que ele insiste em colocar o nome do campo na frente da mensagem, mesmo quando personalizamos ela usando o :message.
 [source:ruby]validates_presence_of :title,
-:message =&gt; &#8220;O campo &#8216;T&iacute;tulo&#8217; deve ser preenchido&#8221;[/source]
+:message =&gt; &#8220;O campo &#8216;Título&#8217; deve ser preenchido&#8221;[/source]
 Na nossa view ficaria assim:</p>
 
 <ul>
-    <li>Title O campo &#8216;T&iacute;tulo&#8217; deve ser preenchido</li>
+    <li>Title O campo &#8216;Título&#8217; deve ser preenchido</li>
 </ul>
 
 
@@ -141,7 +138,7 @@ Na nossa view ficaria assim:</p>
 
         if msg =~ /{?}/
             msg.gsub(/{?}/, attr.to_s.humanize)
-        elsif msg.starts_with?("!")              # se tiver ! no come&amp;ccedil;o, remove
+        elsif msg.starts_with?("!")              # se tiver ! no começo, remove
             msg.from(1)
         else
             msg
@@ -165,29 +162,29 @@ end
 </code></pre>
 
 <p>end[/source]
-Não vou entrar em detalhes sobre o que o c&oacute;digo faz (cabe a você analisar), mas basicamente eu verifico se o texto passado no :message possui:</p>
+Não vou entrar em detalhes sobre o que o código faz (cabe a você analisar), mas basicamente eu verifico se o texto passado no :message possui:</p>
 
 <ol>
     <li>{?} em algum lugar do texto.</li>
-    <li>Ou come&ccedil;a com ! (exclama&ccedil;ão)</li>
+    <li>Ou começa com ! (exclamação)</li>
 </ol>
 
 
 <p>No primeiro caso, simplesmente subistituimos a string &#8220;{?}&#8221; pelo nome da coluna. O que nos permite criar algo assim: &#8220;O campo &#8216;{?}&#8217; deve ser preenchido&#8221;.</p>
 
-<p>No segundo caso, o c&oacute;digo verifica se a mensagem come&ccedil;a com o s&iacute;mbolo de exclama&ccedil;ão (!). Se sim, deixa a mensagem exatamente como está, ignorando completamente o nome da coluna.</p>
+<p>No segundo caso, o código verifica se a mensagem começa com o símbolo de exclamação (!). Se sim, deixa a mensagem exatamente como está, ignorando completamente o nome da coluna.</p>
 
-<p>Sendo assim, o c&oacute;digo dado como exemplo acima poderia ficar assim:
+<p>Sendo assim, o código dado como exemplo acima poderia ficar assim:
 [source:ruby]validates_presence_of :title,
-:message =&gt; &#8221;<strong>!</strong>O campo &#8216;T&iacute;tulo&#8217; deve ser preenchido&#8221;[/source]
+:message =&gt; &#8221;<strong>!</strong>O campo &#8216;Título&#8217; deve ser preenchido&#8221;[/source]
 E o resultado na sua página seria:</p>
 
 <ul>
-    <li>O campo &#8216;T&iacute;tulo&#8217; deve ser preenchido</li>
+    <li>O campo &#8216;Título&#8217; deve ser preenchido</li>
 </ul>
 
 
-<p>Este &eacute; apenas um exemplo de como podemos alterar o Rails de forma simples para nossas necessidades.</p>
+<p>Este é apenas um exemplo de como podemos alterar o Rails de forma simples para nossas necessidades.</p>
 </div>
 
 
@@ -203,13 +200,16 @@ E o resultado na sua página seria:</p>
 
 
 
-
   
 
-
-
-<time datetime="2007-04-17T00:00:00-03:00" pubdate  data-updated="true" >17 de Abril de 2007</time>
+<time datetime="2007-04-17T00:00:00-03:00" pubdate>17 de Abril de 2007</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/categories/ruby-on-rails/'>Ruby on Rails</a>
+  
+</span>
 
 
     </p>
@@ -228,10 +228,10 @@ E o resultado na sua página seria:</p>
 
     
     <p class="meta">
-       
+      
         <a class="basic-alignment left" href="/2007/04/15/datas-amigveis-em-portugus/" title="Previous Post: Datas amigáveis em português">&laquo; Datas amigáveis em português</a>
       
-       
+      
         <a class="basic-alignment right" href="/2007/04/19/usando-bluecloth-no-dreamhost/" title="next Post: Usando BlueCloth no Dreamhost">Usando BlueCloth no Dreamhost &raquo;</a>
       
     </p>

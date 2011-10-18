@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Já criou algo no Rails 2.0? Mesmo que apenas para testar? Já viu o arquivo application.rb?class ApplicationController &lt; ActionController::Base  ...">
+  <meta name="description" content="Já reparou que quando um novo projeto Rails é criado o arquivo application_controller.rb fica dessa maneira?application_controller.rblink 123class ...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,68 +86,61 @@
 
 
 
-
   
 
-
-
-<time datetime="2008-01-14T00:00:00-02:00" pubdate  data-updated="true" >14 de Janeiro de 2008</time>
+<time datetime="2008-01-14T00:00:00-02:00" pubdate>14 de Janeiro de 2008</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/01/354217642_74da4a6073.jpg" alt="354217642_74da4a6073.jpg" /></p>
+<div class="entry-content"><p>Já reparou que quando um novo projeto Rails é criado o arquivo <code>application_controller.rb</code> fica dessa maneira?</p>
 
-<p>Já criou algo no Rails 2.0? Mesmo que apenas para testar? Já viu o arquivo application.rb?</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_controller"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">ApplicationController<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActionController::Base</span></span></span>
-  <span class="support support_function support_function_actionpack support_function_actionpack_rails">helper</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>all</span>
-
-  protect_from_forgery
-</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-
-
-<p>Hmm&#8230; <strong>protect_from_forgery</strong>? Para que diabos serve isto? Antes de explicar, me deixa contar uma hist&oacute;ria&#8230;</p>
-
-<h3>Calma &eacute; uma hist&oacute;ria chata, mas &eacute; curta, e depois fica legal</h3>
+<figure class='code'><figcaption><span>application_controller.rb</span><a href='https://github.com/rails/rails/blob/master/railties/lib/rails/generators/rails/app/templates/app/controllers/application_controller.rb'>link</a></figcaption> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&lt;</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="n">protect_from_forgery</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Já ouviu falar de <em>Cross Site Scripting</em>? Este &eacute; o nome de uma falha de seguran&ccedil;a encontrada facilmente em grande parte dos websites e aplica&ccedil;ões web que permite &agrave; pessoas maldosas (aqui estou me referindo &agrave; adolescentes sem nada para fazer e sem vida social) alterarem o conteúdo de páginas web, inclu&iacute;rem conteúdo hostil, executarem ataques de <a href="http://pt.wikipedia.org/wiki/Phishing">phishing</a>, obterem o controle do navegador atrav&eacute;s de c&oacute;digos JavaScript e na maioria dos casos for&ccedil;arem o usuário a executar algum comando que eles desejem. Este último tipo de ataque se chama crossÂ­site request forgeries.</p>
+<p>Hmm&#8230; <code>protect_from_forgery</code>? Para que diabos serve isto? Antes de explicar, me deixa contar uma história&#8230;</p>
 
-<p>O <em>Cross Site Request Forgeries</em> &eacute; um tipo de ataque que consiste em obrigar usuários leg&iacute;timos a executarem uma s&eacute;rie de comandos sem nem mesmo saberem disto. E agora com o aumento do uso de Ajax, a coisa tem ficado ainda pior. Já ouviu falar do Samy Worm?</p>
+<h2>Calma é uma história chata, mas é curta, e depois fica legal</h2>
 
-<h3>Samy &eacute; o meu her&oacute;i</h3>
+<p>Já ouviu falar de <em>Cross Site Scripting</em>? Este é o nome de uma falha de segurança encontrada facilmente em grande parte dos websites e aplicações web que permite à pessoas maldosas, aqui estou me referindo à adolescentes sem nada para fazer e sem vida social, alterarem o conteúdo de páginas web, incluírem conteúdo hostil, executarem ataques de <a href="http://pt.wikipedia.org/wiki/Phishing">phishing</a>, obterem o controle do navegador através de códigos JavaScript e na maioria dos casos forçarem o usuário a executar algum comando que eles desejem. Este último tipo de ataque se chama <em>Cross Site Request Forgeries</em>.</p>
 
+<p>O <strong>CSRF</strong> é um tipo de ataque que consiste em obrigar usuários legítimos a executarem uma série de comandos sem nem mesmo saberem disto. E com o aumento do uso de Ajax e JavaScript nos websites, a coisa tem ficado ainda pior. Já ouviu falar do <strong>Samy Worm</strong>?</p>
 
-<p>Talvez você não o conhe&ccedil;a, mas o MySpace.com conhece muito bem, na verdade conhece mais do que gostaria. Gra&ccedil;as a uma falha de seguran&ccedil;a em um c&oacute;digo JavaScript, o tal do &#8220;Samy&#8221;, um garoto solitário e sem amigos (e por isso, um cara muito mal), descobriu uma forma nova de fazer amizades na internet. Ele conseguiu atráves de t&eacute;cnicas de <em>Cross Site Scripting</em> injetar um bloco de c&oacute;digo (JavaScript) na sua página pessoal. Este c&oacute;digo fez nada mais, nada menos que adicionar automaticamente como &#8220;amigo&#8221; cada pessoa que entrasse na sua página. O mais interessante &eacute; que depois disso o c&oacute;digo tamb&eacute;m era passado para a página do novo &#8220;amigo&#8221; e ainda inclu&iacute;a a frase &#8220;O Samy &eacute; meu her&oacute;i&#8221; no perfil da pessoa. Em questão de poucas horas ele ser tornou o her&oacute;i de mais de um milhão de pessoas e o grande amigão do MySpace. E provavelmente deve ter levado uma bela surra dos seus pais quando a policia chegou na sua casa.</p>
+<h2>Samy é o meu herói</h2>
 
-<p>Gra&ccedil;as ao Samy, o MySpace caiu, os funcionários levaram uma boa ralada do chefe e sofreram durante alguns dias para se recuperarem dos danos.</p>
+<p>Talvez você não o conheça, mas o MySpace.com conhece muito bem, na verdade conhece mais do que gostaria. Graças a uma falha de segurança em um código JavaScript, o tal do &#8220;Samy&#8221;, um garoto solitário e sem amigos (e por isso, um cara muito mal), descobriu uma forma nova de fazer amizades na internet. Ele conseguiu através de técnicas de <em>Cross Site Scripting</em> injetar um bloco de código (JavaScript) na sua página pessoal. Este código fez nada mais, nada menos que adicionar automaticamente como &#8220;amigo&#8221; no MySpace cada pessoa que entrasse na sua página. O mais interessante é que depois disso o código também era passado para a página do novo &#8220;amigo&#8221; e ainda incluía a frase &#8220;O Samy é meu herói&#8221; no perfil da pessoa. Em questão de poucas horas ele ser tornou o herói de mais de um milhão de pessoas e o grande amigão do MySpace. E provavelmente deve ter levado uma bela surra dos seus pais quando a policia chegou na sua casa.</p>
 
-<h3>O que isso tem a ver com Rails?</h3>
+<p>Graças ao Samy, o MySpace caiu, os funcionários levaram uma boa ralada do chefe e sofreram durante alguns dias para se recuperarem dos danos.</p>
 
+<h2>O que isso tem a ver com Rails?</h2>
 
-<p>Tudo! O caso do MySpace foi algo bem simples, que se resolveu apagando o &#8220;Samy&#8221; do banco de dados. Mas com certeza você não gostaria de ter o Samy cadastrado em seu site, correto? O problema &eacute; que existem muitos Samys por a&iacute;&#8230;</p>
+<p>Tudo! O caso do MySpace foi algo bem simples, que se resolveu apagando o &#8220;Samy&#8221; do banco de dados. Mas com certeza você não gostaria de ter o Samy cadastrado em seu site, correto? O problema é que existem muitos Samys por aí&#8230;</p>
 
-<h3>E a droga do m&eacute;todo protect_from_forgery, para que serve???</h3>
+<h2>E a droga do método <code>protect_from_forgery</code>, para que serve???</h2>
 
+<p>Calma! O método <code>protect_from_forgery</code> serve para te proteger do Samy!</p>
 
-<p>Calma! O m&eacute;todo <strong>protect_from_forgery</strong> serve para te proteger do Samy!</p>
+<p>Na verdade, este método serve para nos assegurar de que todos os formulários que sua aplicação está recebendo estão vindo dela mesma, e não de um link perdido de algum outro site. Ele consegue isto incluindo um token (se você não sabe o que é um token, <a href="http://pt.wikipedia.org/wiki/Token">clique aqui</a>) baseado na sessão em todos os formulários e requisições Ajax geradas pelo Rails, e depois verifica a autenticidade deste token no controller.</p>
 
-<p>Na verdade, este m&eacute;todo serve para nos assegurar de que todos os formulários que sua aplica&ccedil;ão está recebendo estão vindo dela mesma, e não de um link perdido de algum outro site. Ele consegue isto incluindo um token (se você não sabe o que &eacute; um token, <a href="http://pt.wikipedia.org/wiki/Token">clique aqui</a>) baseado na sessão em todos os formulários e requisi&ccedil;ões Ajax geradas pelo Rails, e depois verifica a autenticidade deste token no controller.</p>
+<p>Há, eu já ia me esquecendo&#8230; requisições via GET não são protegidas. Mas isto não é um problema, afinal elas só devem ser usadas para nos trazer dados, e nós nunca as usamos para alterar ou gravar algo em nosso banco de dados, não é verdade? Não é verdade?</p>
 
-<p>Há, eu já ia me esquecendo&#8230; requisi&ccedil;ões via GET não são protegidas. Mas isto não &eacute; um problema, afinal elas s&oacute; devem ser usadas para nos trazer dados, e n&oacute;s nunca &agrave;s usamos para alterar ou gravar algo em nosso banco de dados, não &eacute; verdade? N&Atilde;O &Eacute; VERDADE?</p>
-
-<p>Se quiser aprender mais sobre CSRF(Cross-Site Request Forgery, u&eacute;) use os links abaixo:</p>
+<p>Se quiser aprender mais sobre CSRF use os links abaixo:</p>
 
 <ul>
-    <li><a href="isc.sans.org/diary.html?storyid=1750">isc.sans.org/diary.html?storyid=1750</a></li>
-    <li><a href="isc.sans.org/diary.html?storyid=1750">en.wikipedia.org/wiki/Cross-site_request_forgery</a></li>
+<li><a href="http://isc.sans.edu/diary.html?storyid=1750">http://isc.sans.edu/diary.html?storyid=1750</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Cross-site_request_forgery">http://en.wikipedia.org/wiki/Cross-site_request_forgery</a></li>
 </ul>
 
 
-<p>Mas lembre-se que isto N&Atilde;O &eacute; uma solu&ccedil;ão definitiva para nosso problema, ou como costumamos dizer, não &eacute; uma bala de prata. Continuem espertos, e por favor deixem este m&eacute;todo lá.</p>
+<p>Mas lembre-se que isto NÃO é uma solução definitiva para nosso problema. Continuem espertos, e por favor deixem este método lá.</p>
 </div>
 
 
@@ -163,13 +156,16 @@
 
 
 
-
   
 
-
-
-<time datetime="2008-01-14T00:00:00-02:00" pubdate  data-updated="true" >14 de Janeiro de 2008</time>
+<time datetime="2008-01-14T00:00:00-02:00" pubdate>14 de Janeiro de 2008</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/categories/ruby-on-rails/'>ruby on rails</a>
+  
+</span>
 
 
     </p>
@@ -188,10 +184,10 @@
 
     
     <p class="meta">
-       
+      
         <a class="basic-alignment left" href="/2008/01/09/edge-rails-ruby-debug-e-cache-store/" title="Previous Post: Edge Rails: Facilitando as coisas para o ruby-debug e cache store">&laquo; Edge Rails: Facilitando as coisas para o ruby-debug e cache store</a>
       
-       
+      
         <a class="basic-alignment right" href="/2008/01/14/rails-podcast-brasil-1/" title="next Post: Rails Podcast Brasil #1">Rails Podcast Brasil #1 &raquo;</a>
       
     </p>

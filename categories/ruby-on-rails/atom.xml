@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby on rails | Nome do Jogo]]></title>
   <link href="http://nomedojogo.com/categories/ruby-on-rails/atom.xml" rel="self"/>
   <link href="http://nomedojogo.com/"/>
-  <updated>2011-10-18T16:04:42-02:00</updated>
+  <updated>2011-10-18T20:54:12-02:00</updated>
   <id>http://nomedojogo.com/</id>
   <author>
     <name><![CDATA[Carlos Brando]]></name>
@@ -12,6 +12,59 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Como um garoto chamado Samy pode derrubar seu site]]></title>
+    <link href="http://nomedojogo.com/2008/01/14/como-um-garoto-chamado-samy-pode-derrubar-seu-site/"/>
+    <updated>2008-01-14T00:00:00-02:00</updated>
+    <id>http://nomedojogo.com/2008/01/14/como-um-garoto-chamado-samy-pode-derrubar-seu-site</id>
+    <content type="html"><![CDATA[<p>Já reparou que quando um novo projeto Rails é criado o arquivo <code>application_controller.rb</code> fica dessa maneira?</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>application_controller.rb</span><a href='https://github.com/rails/rails/blob/master/railties/lib/rails/generators/rails/app/templates/app/controllers/application_controller.rb'>link</a></figcaption> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="n">protect_from_forgery</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Hmm... <code>protect_from_forgery</code>? Para que diabos serve isto? Antes de explicar, me deixa contar uma história...</p>
+
+<h2>Calma é uma história chata, mas é curta, e depois fica legal</h2>
+
+<p>Já ouviu falar de <em>Cross Site Scripting</em>? Este é o nome de uma falha de segurança encontrada facilmente em grande parte dos websites e aplicações web que permite à pessoas maldosas, aqui estou me referindo à adolescentes sem nada para fazer e sem vida social, alterarem o conteúdo de páginas web, incluírem conteúdo hostil, executarem ataques de <a href="http://pt.wikipedia.org/wiki/Phishing">phishing</a>, obterem o controle do navegador através de códigos JavaScript e na maioria dos casos forçarem o usuário a executar algum comando que eles desejem. Este último tipo de ataque se chama <em>Cross Site Request Forgeries</em>.</p>
+
+<p>O <strong>CSRF</strong> é um tipo de ataque que consiste em obrigar usuários legítimos a executarem uma série de comandos sem nem mesmo saberem disto. E com o aumento do uso de Ajax e JavaScript nos websites, a coisa tem ficado ainda pior. Já ouviu falar do <strong>Samy Worm</strong>?</p>
+
+<h2>Samy é o meu herói</h2>
+
+<p>Talvez você não o conheça, mas o MySpace.com conhece muito bem, na verdade conhece mais do que gostaria. Graças a uma falha de segurança em um código JavaScript, o tal do "Samy", um garoto solitário e sem amigos (e por isso, um cara muito mal), descobriu uma forma nova de fazer amizades na internet. Ele conseguiu através de técnicas de <em>Cross Site Scripting</em> injetar um bloco de código (JavaScript) na sua página pessoal. Este código fez nada mais, nada menos que adicionar automaticamente como "amigo" no MySpace cada pessoa que entrasse na sua página. O mais interessante é que depois disso o código também era passado para a página do novo "amigo" e ainda incluía a frase "O Samy é meu herói" no perfil da pessoa. Em questão de poucas horas ele ser tornou o herói de mais de um milhão de pessoas e o grande amigão do MySpace. E provavelmente deve ter levado uma bela surra dos seus pais quando a policia chegou na sua casa.</p>
+
+<p>Graças ao Samy, o MySpace caiu, os funcionários levaram uma boa ralada do chefe e sofreram durante alguns dias para se recuperarem dos danos.</p>
+
+<h2>O que isso tem a ver com Rails?</h2>
+
+<p>Tudo! O caso do MySpace foi algo bem simples, que se resolveu apagando o "Samy" do banco de dados. Mas com certeza você não gostaria de ter o Samy cadastrado em seu site, correto? O problema é que existem muitos Samys por aí...</p>
+
+<h2>E a droga do método <code>protect_from_forgery</code>, para que serve???</h2>
+
+<p>Calma! O método <code>protect_from_forgery</code> serve para te proteger do Samy!</p>
+
+<p>Na verdade, este método serve para nos assegurar de que todos os formulários que sua aplicação está recebendo estão vindo dela mesma, e não de um link perdido de algum outro site. Ele consegue isto incluindo um token (se você não sabe o que é um token, <a href="http://pt.wikipedia.org/wiki/Token">clique aqui</a>) baseado na sessão em todos os formulários e requisições Ajax geradas pelo Rails, e depois verifica a autenticidade deste token no controller.</p>
+
+<p>Há, eu já ia me esquecendo... requisições via GET não são protegidas. Mas isto não é um problema, afinal elas só devem ser usadas para nos trazer dados, e nós nunca as usamos para alterar ou gravar algo em nosso banco de dados, não é verdade? Não é verdade?</p>
+
+<p>Se quiser aprender mais sobre CSRF use os links abaixo:</p>
+
+<ul>
+<li><a href="http://isc.sans.edu/diary.html?storyid=1750">http://isc.sans.edu/diary.html?storyid=1750</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Cross-site_request_forgery">http://en.wikipedia.org/wiki/Cross-site_request_forgery</a></li>
+</ul>
+
+
+<p>Mas lembre-se que isto NÃO é uma solução definitiva para nosso problema. Continuem espertos, e por favor deixem este método lá.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Carlos Brando e a Surgeworks]]></title>

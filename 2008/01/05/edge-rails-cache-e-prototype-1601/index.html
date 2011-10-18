@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="O time de desenvolvimento do Rails continua forte nas altera&ccedil;ões para torná-lo compat&iacute;vel com o Ruby 1.9, mas isto não significa que ...">
+  <meta name="description" content="O time de desenvolvimento do Rails continua forte nas alterações para torná-lo compatível com o Ruby 1.9, mas isto não significa que o resto será d...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,12 +86,9 @@
 
 
 
-
   
 
-
-
-<time datetime="2008-01-05T00:00:00-02:00" pubdate  data-updated="true" > 5 de Janeiro de 2008</time>
+<time datetime="2008-01-05T00:00:00-02:00" pubdate> 5 de Janeiro de 2008</time>
         
       </p>
     
@@ -100,25 +97,25 @@
 
 <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/01/375147944_49f541ad21.jpg" alt="375147944_49f541ad21.jpg" /></p>
 
-<p>O time de desenvolvimento do Rails continua forte nas altera&ccedil;ões para torná-lo compat&iacute;vel com o <strong>Ruby 1.9</strong>, mas isto não significa que o resto será deixado de lado. Como vocês verão nas altera&ccedil;ões relacionadas abaixo muita coisa está sendo feita para melhorar o sistema de cache e tamb&eacute;m o c&oacute;digo como um todo. Vamos as últimas altera&ccedil;ões:</p>
+<p>O time de desenvolvimento do Rails continua forte nas alterações para torná-lo compatível com o <strong>Ruby 1.9</strong>, mas isto não significa que o resto será deixado de lado. Como vocês verão nas alterações relacionadas abaixo muita coisa está sendo feita para melhorar o sistema de cache e também o código como um todo. Vamos as últimas alterações:</p>
 
 <h3>Code refactoring</h3>
 
 
-<p>Foi feito um refactoring no <a href="http://dev.rubyonrails.org/browser/trunk/actionpack/lib/action_controller/verification.rb?rev=8543">ActionController::Verification</a> e aproveitaram para melhorar a documenta&ccedil;ão.</p>
+<p>Foi feito um refactoring no <a href="http://dev.rubyonrails.org/browser/trunk/actionpack/lib/action_controller/verification.rb?rev=8543">ActionController::Verification</a> e aproveitaram para melhorar a documentação.</p>
 
 <h3>Cache</h3>
 
 
-<p>David tamb&eacute;m aproveitou para mudar algumas coisas nas classes de cache.</p>
+<p>David também aproveitou para mudar algumas coisas nas classes de cache.</p>
 
-<p>Todos os m&eacute;todos <strong>fragment_cache_key</strong> agora retornam por padrão o namespace &#39;view/&#39; na frente.</p>
+<p>Todos os métodos <strong>fragment_cache_key</strong> agora retornam por padrão o namespace &#39;view/&#39; na frente.</p>
 
 <p>Todos os <em>caching stores</em> foram retirados de <strong>ActionController::Caching::Fragments::<em></strong> e agora estão em <strong>ActiveSupport::Cache::</em></strong>. Neste caso se você faz referência a um <em>store</em>, como <strong>ActionController::Caching::Fragments::MemoryStore</strong>, por exemplo, será necessário alterar sua referência para <strong>ActiveSupport::Cache::MemoryStore</strong>.</p>
 
-<p><strong>ActionController::Base.fragment_cache_store</strong> deixa de existir e dá lugar &agrave; <strong>ActionController::Base.cache_store</strong>.</p>
+<p><strong>ActionController::Base.fragment_cache_store</strong> deixa de existir e dá lugar à <strong>ActionController::Base.cache_store</strong>.</p>
 
-<p>Foi inclu&iacute;do no <strong>ActiveRecord::Base</strong> o m&eacute;todo <strong>cache_key</strong> para facilitar o armazenamento em cache de Active Records pelas novas bibliotecas <strong>ActiveSupport::Cache::*</strong>. Este m&eacute;todo funciona assim:</p>
+<p>Foi incluído no <strong>ActiveRecord::Base</strong> o método <strong>cache_key</strong> para facilitar o armazenamento em cache de Active Records pelas novas bibliotecas <strong>ActiveSupport::Cache::*</strong>. Este método funciona assim:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> <span class="support support_class support_class_ruby">Product</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>cache_key
 <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>products/new<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
@@ -128,9 +125,9 @@
 <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>people/5-20071224150000<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span></span></pre>
 
 
-<p>Foi inclu&iacute;do o <strong>ActiveSupport::Gzip.decompress/compress</strong> para facilitar o <em>wrapper</em> para o <em>Zlib</em>.</p>
+<p>Foi incluído o <strong>ActiveSupport::Gzip.decompress/compress</strong> para facilitar o <em>wrapper</em> para o <em>Zlib</em>.</p>
 
-<p>Agora você pode usar entre as op&ccedil;ões de <em>environment</em> o <strong>config.cache_store</strong> para informar o local padrão de armazenamento do cache. Vale lembrar que se o diret&oacute;rio tmp/cache existir o padrão &eacute; o <strong>FileStore</strong>, caso contrário o <strong>MemoryStore</strong> &eacute; usado. Você pode configurar das seguintes formas:</p>
+<p>Agora você pode usar entre as opções de <em>environment</em> o <strong>config.cache_store</strong> para informar o local padrão de armazenamento do cache. Vale lembrar que se o diretório tmp/cache existir o padrão é o <strong>FileStore</strong>, caso contrário o <strong>MemoryStore</strong> é usado. Você pode configurar das seguintes formas:</p>
 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails">config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>cache_store <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>memory_store</span>
 config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>cache_store <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>file_store</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>/path/to/cache/directory<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
@@ -142,7 +139,7 @@ config<span class="punctuation punctuation_separator punctuation_separator_metho
 <h3>Prototype e script.aculo.us</h3>
 
 
-<p>O Rails passa a usar a partir de agora a versão <em>1.6.0.1 do Prototype</em>. Isto serve como um preparat&oacute;rio para a versão <em>1.8.1 do script.aculo.us</em>.</p>
+<p>O Rails passa a usar a partir de agora a versão <em>1.6.0.1 do Prototype</em>. Isto serve como um preparatório para a versão <em>1.8.1 do script.aculo.us</em>.</p>
 </div>
 
 
@@ -158,13 +155,16 @@ config<span class="punctuation punctuation_separator punctuation_separator_metho
 
 
 
-
   
 
-
-
-<time datetime="2008-01-05T00:00:00-02:00" pubdate  data-updated="true" > 5 de Janeiro de 2008</time>
+<time datetime="2008-01-05T00:00:00-02:00" pubdate> 5 de Janeiro de 2008</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/categories/rails-2-1/'>Rails 2.1</a>
+  
+</span>
 
 
     </p>
@@ -183,10 +183,10 @@ config<span class="punctuation punctuation_separator punctuation_separator_metho
 
     
     <p class="meta">
-       
+      
         <a class="basic-alignment left" href="/2008/01/04/rails-ou-django/" title="Previous Post: Rails ou Django?">&laquo; Rails ou Django?</a>
       
-       
+      
         <a class="basic-alignment right" href="/2008/01/06/episodio-4-group-by/" title="next Post: Episódio 4: Group By">Episódio 4: Group By &raquo;</a>
       
     </p>

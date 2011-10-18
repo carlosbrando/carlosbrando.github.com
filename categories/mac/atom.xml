@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Mac | Nome do Jogo]]></title>
+  <link href="http://nomedojogo.com/categories/mac/atom.xml" rel="self"/>
+  <link href="http://nomedojogo.com/"/>
+  <updated>2011-10-18T20:54:12-02:00</updated>
+  <id>http://nomedojogo.com/</id>
+  <author>
+    <name><![CDATA[Carlos Brando]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Autotest Notification Gem]]></title>
+    <link href="http://nomedojogo.com/2008/05/12/autotest-notification-gem/"/>
+    <updated>2008-05-12T00:00:00-03:00</updated>
+    <id>http://nomedojogo.com/2008/05/12/autotest-notification-gem</id>
+    <content type="html"><![CDATA[<p>Vocês já acompanharam aqui no blog a <a href="http://www.nomedojogo.com/2008/02/28/autotest-com-growl-no-leopard/">dificuldade</a> que tive para fazer o <strong>Autotest</strong> funcionar com o <strong>Growl</strong>. Acho que testei todos os scripts prontos que encontrei pela internet e até alguns gems como o <a href="http://simplesideias.com.br/test-notifier-gem-para-ruby./">test_notifier</a> do <a href="http://simplesideias.com.br/">Nando Vieira</a>, mas não sei porque nada funcionou aqui.</p>
+
+<p>Então resolvi botar a mõe na massa e criar o <a href="http://www.nomedojogo.com/2008/04/26/zentest-com-growl-mais-uma-vez/">meu</a> <a href="http://www.nomedojogo.com/2008/04/28/alteracao-no-script-do-autotest-com-growl/">próprio</a> <a href="http://www.nomedojogo.com/2008/05/09/autotest-growl-atualizacao/">script</a> para integrar o Growl com o autotest. Logo em seguida o <a href="http://alexandredasilva.wordpress.com/">Alexandre</a> adaptou o mesmo script para fazê-lo funcionar com o LibNotify no Linux. Resolvemos então criar um repositório para jogar o código e permitir uma atualização fácil do script.</p>
+
+<p>Foi quando comecei a escrever um tutorial explicando como colocar tudo aquilo para funcionar que percebi que não ia dar muito certo. Eu precisava de algo que fosse instalado com uma linha de comando ou algo parecido.</p>
+
+<p>Então criei o Autotest Notification. Um gem fácil e rápido de instalar, e que por enquanto só funciona no Mac (com <a href="http://growl.info/">Growl</a>) e no Linux (com o <a href="http://www.galago-project.org/news/index.php">LibNotify</a>).</p>
+
+<p>Antes de instalar, claro que você precisa ter o <a href="http://www.zenspider.com/ZSS/Products/ZenTest/">ZenTest</a> instalado e o <a href="http://www.nomedojogo.com/2008/02/28/autotest-com-growl-no-leopard/">Growl</a> ou LibNotify, dependendo do seu sistema operacional.</p>
+
+<p>Depois basta executar esta linha no terminal:</p>
+
+<pre class="textmate-source"><span class="source source_shell">sudo gem install carlosbrando-autotest-notification --source=http://gems.github.com</span></pre>
+
+
+<p>Eu queria tudo em uma linha só, mas não era possível... após a instalação você vai precisar rodar mais um comando, para deixar o gem no modo automático:</p>
+
+<pre class="textmate-source"><span class="source source_shell">an-install</span></pre>
+
+
+<p>Para desligar o notificador basta executar:</p>
+
+<pre class="textmate-source"><span class="source source_shell">an-uninstall</span></pre>
+
+
+<p>Não disse que era simples?</p>
+
+<p>O projeto está no <a href="http://github.com/carlosbrando/autotest-notification/">GitHub</a> e se alguém estiver afim de adaptá-lo para rodar no Windows ou melhorá-lo de alguma forma. Pode criar um fork e me enviar o código via request.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Analise do Windows Vista pela Apple]]></title>
+    <link href="http://nomedojogo.com/2008/03/26/analise-do-windows-vista-pela-apple/"/>
+    <updated>2008-03-26T00:00:00-03:00</updated>
+    <id>http://nomedojogo.com/2008/03/26/analise-do-windows-vista-pela-apple</id>
+    <content type="html"><![CDATA[<object width="425" height="355"><param name="movie" value="http://www.youtube.com/v/k3frcpxlMA8&hl=en"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/k3frcpxlMA8&hl=en" type="application/x-shockwave-flash" wmode="transparent" width="425" height="355"></embed></object>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Autotest com Growl no Leopard]]></title>
+    <link href="http://nomedojogo.com/2008/02/28/autotest-com-growl-no-leopard/"/>
+    <updated>2008-02-28T00:00:00-03:00</updated>
+    <id>http://nomedojogo.com/2008/02/28/autotest-com-growl-no-leopard</id>
+    <content type="html"><![CDATA[<p>Para quem não sabe o <a href="http://growl.info/">Growl</a> é um sistema de notificações via janelas flutuantes que se integra com os principais software para Mac, como o Skype, Transmission, Adium e até mesmo ao <a href="http://zentest.rubyforge.org/ZenTest/">ZenTest</a> (Autotest).</p>
+
+<p>Antes de migrar meu Mac para o Leopard eu gostava muito de usar o Autotest com o Growl, mas depois da migração ele não funcionou mais.</p>
+
+<p>Faz alguns dias que eu resolvi tentar novamente e descobri como colocar a integração entre o Autotest e o Growl para funcionar no Leopard. Vamos ao passo a passo:</p>
+
+<p>A primeira coisa a fazer é baixar o Growl e instalar. Depois entre no terminal e execute:</p>
+
+<pre class="textmate-source"><span class="source source_shell">/Volumes/Growl<span class="constant constant_character constant_character_escape constant_character_escape_shell">\ </span>1.1.2/Extras/growlnotify/install.sh</span></pre>
+
+
+<p>Esta linha de comando vai instalar o <code>growlnotify</code> na pasta <code>/usr/local/bin</code>.</p>
+
+<p>Agora crie o arquivo <code>~/.autotest</code> e abra-o no seu editor favorito (TextMate?), preencha o arquivo com o seguinte código:</p>
+
+<pre class="textmate-source"><span class="source source_ruby"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> ~.autotest
+</span>
+<span class="meta meta_require meta_require_ruby"><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">require</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>autotest/redgreen<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span>
+<span class="meta meta_require meta_require_ruby"><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">require</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>autotest/growl<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span>
+
+<span class="meta meta_module meta_module_ruby"><span class="keyword keyword_control keyword_control_module keyword_control_module_ruby">module</span> <span class="entity entity_name entity_name_type entity_name_type_module entity_name_type_module_ruby"><span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_module entity_other_inherited-class_module_first entity_other_inherited-class_module_first_ruby">Autotest<span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">::</span></span>Growl</span></span>
+
+  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">self.growl</span></span> title<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> msg<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> img<span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>/Applications/Mail.app/Contents/Resources/Caution.tiff<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> pri<span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="constant constant_numeric constant_numeric_ruby">0</span>
+    title <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_augmented keyword_operator_assignment_augmented_ruby">+=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span> in <span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span><span class="support support_class support_class_ruby">Dir</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>pwd<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+    msg <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_augmented keyword_operator_assignment_augmented_ruby">+=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span> at <span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span><span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>now<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>strftime<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>%I:%M %p<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+    system <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>growlnotify -n autotest --image <span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>img<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span> -p <span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>pri<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span> -m <span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>msg<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>inspect<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span> <span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>title<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+
+  <span class="support support_class support_class_ruby">Autotest</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>add_hook <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>run</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do  </span><span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">|</span>at<span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">|</span>
+     growl <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>autotest running<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Started<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+   <span class="keyword keyword_control keyword_control_ruby">end</span>
+
+   <span class="support support_class support_class_ruby">Autotest</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>add_hook <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>red</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">at</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+     img <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>/Users/carlosbrando/.autotest_images/fail.png<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+     growl <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Tests Failed<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span><span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>at<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>files_to_test<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>size<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span> tests failed<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> img<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">2</span>
+   <span class="keyword keyword_control keyword_control_ruby">end</span>
+
+   <span class="support support_class support_class_ruby">Autotest</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>add_hook <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>green</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">at</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+     img <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>/Users/carlosbrando/.autotest_images/pass.png<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+     growl <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Tests Passed<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Tests passed<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> img<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">-</span><span class="constant constant_numeric constant_numeric_ruby">2</span> <span class="keyword keyword_control keyword_control_ruby">if</span> at<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>tainted
+   <span class="keyword keyword_control keyword_control_ruby">end</span>
+
+   <span class="support support_class support_class_ruby">Autotest</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>add_hook <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>all_good</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">at</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+     img <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>/Users/carlosbrando/.autotest_images/fail.png<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+     growl <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Tests Passed<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>All tests passed<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> img<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">-</span><span class="constant constant_numeric constant_numeric_ruby">2</span> <span class="keyword keyword_control keyword_control_ruby">if</span> at<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>tainted
+   <span class="keyword keyword_control keyword_control_ruby">end</span>
+
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+<p>Lembre-se de alterar o nome do usuário para o seu nome, né...</p>
+
+<p>Agora crie uma pasta chamada <code>.autotest_images</code> e jogue as duas imagens abaixo dentro dela.</p>
+
+<p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/02/pass.png" alt="pass.png" /><img src="http://old.nomedojogo.com/wp-content/uploads/2008/02/fail.png" alt="fail.png" /></p>
+
+<p>Agora vamos instalar o ZenTest:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">sudo gem install <span class="variable variable_other variable_other_constant variable_other_constant_ruby">ZenTest</span></span></pre>
+
+
+<p>Pronto! Agora quando você rodar o autotest na sua aplicação Rails, será alertado de erros via Growl. Para rodar o Autotest, basta entrar na pasta onde está o seu projeto e executar o comando <code>autotest</code>.</p>
+
+<p>Muito bom!</p>
+
+<p>P.S.: Outra dica legal (talvez até melhor que a acima) é dar uma olhada <a href="http://simplesideias.com.br/test-notifier-gem-para-ruby.">neste gem</a> que o Nando Vieira criou.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Já Chegou O Disco Voador...]]></title>
+    <link href="http://nomedojogo.com/2007/12/06/ja-chegou-o-disco-voador/"/>
+    <updated>2007-12-06T00:00:00-02:00</updated>
+    <id>http://nomedojogo.com/2007/12/06/ja-chegou-o-disco-voador</id>
+    <content type="html"><![CDATA[<p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/12/1248186041_77ab49f69d.jpg" alt="1248186041_77ab49f69d.jpg" /></p>
+
+<p>Dois meses depois do prazo, chegou ontem à noite o meu DVD do Leopard. O mais engraçado é que ele deveria ter saído por apenas 19 reais, mas se contarmos os gastos com DDD e considerado que para recebê-lo tive de ligar praticamente todos os dias para a Cargraphics (muitas vezes mais de uma vez por dia), mais o nervoso que passei, deve ter me custado quase o mesmo que na loja.</p>
+
+<p>Instalei ontem mesmo, e vou confessar uma coisa, eu já tinha visto tanta gente usando o Leopard (claro que baixou pelo torrent) que nem teve muita graça. De qualquer forma acho que a novelinha acabou.</p>
+
+<p>Coitado dos que não estavam entre os 180 primeiros da lista...</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Leopard - A Grande Palhaçada]]></title>
+    <link href="http://nomedojogo.com/2007/12/05/leopard-a-grande-palhacada/"/>
+    <updated>2007-12-05T00:00:00-02:00</updated>
+    <id>http://nomedojogo.com/2007/12/05/leopard-a-grande-palhacada</id>
+    <content type="html"><![CDATA[<p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/12/290551756_fbc55b55ae.jpg" alt="290551756_fbc55b55ae.jpg" /></p>
+
+<p>Eu estava esperando esta história terminar para contá-la em apenas um post, mas resolvi contar agora mesmo.</p>
+
+<p>Este post é um desabafo, então se não te interessa, pule...</p>
+
+<p>Todo mundo sabe da <span style="font-weight: bold">palhaçada</span> que a Apple tem feito com aqueles que pediram o Leopard aqui no Brasil. De acordo com o formulário enviado, receberíamos nossos DVDs entre <span style="font-weight: bold">3 e 7 dias</span>, mas já estamos indo para o segundo mês desde que enviei e paguei e até agora nada de Leopard.</p>
+
+<p>No meu caso a situação foi ainda pior. Na última semana liguei <span style="font-weight: bold">inúmeras vezes</span> para a Cargraphics (empresa responsável pela distribuição do Leopard no Brasil) para me certificar de que eu estaria recebendo no máximo até sexta-feira passada, pois esta semana eu estaria em Minas Gerais. Depois de muitas ligações e muita dor de cabeça o envelope da DHL chegou em casa às 21:00 do dia 30 de novembro (bateu na trave). Ufa... acabou? Rapidamente abri o envelope e CAD&Ecirc;???</p>
+
+<p>Simplesmente não veio o DVD do Leopard, mas no lugar uma cópia do iLife'08 e uma <span style="font-weight: bold">versão de demonstração do iWork'08</span>.</p>
+
+<p>Nesta segunda-feira, liguei novamente para entender o que ocorreu. Depois de muito bate-boca, ameaças e tudo que eu tinha direito, estão me enviando novamente o Leopard, mas desta vez direto para meu endereço em Minas. Neste momento o pacote está na cidade de Franca.</p>
+
+<p>&Eacute; engraçado como certas coisas tiram o sabor de outras. Literalmente o Leopard até <span style="font-weight: bold">perdeu a graça</span>.</p>
+
+<p>Veja os capítulos anteriores desta novela: <a href="http://www.nomedojogo.com/2007/11/19/e-ate-agora-nada-de-leopard/">aqui</a>, <a href="http://www.nomedojogo.com/2007/11/26/cade-o-leopard/">aqui</a> e <a href="http://www.nomedojogo.com/2007/11/28/mais-um-capitulo-da-novela-leopard/">aqui</a>.</p>
+
+<p>Quando chegar, alias, se chegar eu aviso por aqui.</p>
+]]></content>
+  </entry>
+  
+</feed>

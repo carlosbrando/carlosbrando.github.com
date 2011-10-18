@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: rotas | Nome do Jogo]]></title>
+  <link href="http://nomedojogo.com/categories/rotas/atom.xml" rel="self"/>
+  <link href="http://nomedojogo.com/"/>
+  <updated>2011-10-18T20:54:12-02:00</updated>
+  <id>http://nomedojogo.com/</id>
+  <author>
+    <name><![CDATA[Carlos Brando]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Edge Rails: Executando múltiplas instâncias de um projeto em subdiretórios]]></title>
+    <link href="http://nomedojogo.com/2008/08/22/edge-rails-executando-multiplas-instancias-de-um-projeto-em-subdiretorios/"/>
+    <updated>2008-08-22T00:00:00-03:00</updated>
+    <id>http://nomedojogo.com/2008/08/22/edge-rails-executando-multiplas-instancias-de-um-projeto-em-subdiretorios</id>
+    <content type="html"><![CDATA[<p>Às vezes você tem de rodar múltiplas cópias do mesmo projeto. Talvez você tenha um produto que será usado por vários clientes, ou talvez você apenas deseje rodar uma versão de teste e produção do seu software ao mesmo tempo.</p>
+
+<p>A forma mais simples de se fazer isto é ter múltiplos (sub)domínios com uma instância do aplicativo em cada uma. Mas se isto não for possível você pode colocar seu aplicativo em um subdiretório e usar um prefixo na sua URL para distinguir as instâncias do seu software. Por exemplo, você poderia rodar vários blogs de usuários diferentes usando URLs como:</p>
+
+<pre class="textmate-source"><span class="text text_html text_html_basic">http://www.nomedojogo.com/fulano/blog
+http://www.nomedojogo.com/sicrano/blog
+http://www.nomedojogo.com/beltrano/blog
+</span></pre>
+
+
+<p>Nestes casos, os prefixos fulano, sicrano e beltrano identificarão as instâncias do aplicativo rodando em subdiretórios com os mesmos nomes. O roteamento do aplicativo começa depois disto. Você pode dizer ao Rails para ignorar esta parte das URLs quando uma requisição for feita, mas coloca-la nas URLs geradas por ele, configurando isto através da constante <strong>RAILS_RELATIVE_URL_ROOT</strong> ou do método <strong>AbstractRequest.relative_url_root</strong>.</p>
+
+<p>Porém se seu projeto Rails estiver rodando sob o Apache, esse recurso já é ativado automaticamente, por isto na maioria dos casos não temos de nos preocupar em configurar isto hoje. Isto se você estiver usando Apache.</p>
+
+<p>Porém, no Rails 2.2 o <strong>relative_url_root</strong> não será mais configurado automaticamente pelo HTTP header. Teremos de fazer isto manualmente, colocando uma linha mais ou menos assim no arquivo <strong>environment.rb</strong> de cada um dos aplicativos:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>action_controller<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>relative_url_root <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>/fulano<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span></span></pre>
+
+
+<p>Feito isto, seu aplicativo irá ignorar o prefixo "fulano" logo depois do domínio. Mas ao gerar URLs ele sempre colocará este prefixo para garantir que você estará acessando o projeto no subdiretório correto.</p>
+]]></content>
+  </entry>
+  
+</feed>

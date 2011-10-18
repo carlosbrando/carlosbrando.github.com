@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Javascript | Nome do Jogo]]></title>
+  <link href="http://nomedojogo.com/categories/javascript/atom.xml" rel="self"/>
+  <link href="http://nomedojogo.com/"/>
+  <updated>2011-10-18T20:54:12-02:00</updated>
+  <id>http://nomedojogo.com/</id>
+  <author>
+    <name><![CDATA[Carlos Brando]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Isto é um bug no Javascript?]]></title>
+    <link href="http://nomedojogo.com/2009/08/17/isto-e-um-bug-no-javascript/"/>
+    <updated>2009-08-17T00:00:00-03:00</updated>
+    <id>http://nomedojogo.com/2009/08/17/isto-e-um-bug-no-javascript</id>
+    <content type="html"><![CDATA[<p><img class="center" src="http://old.nomedojogo.com/wp-content/uploads/2009/08/2279116910_4d699d91cb.jpg"></p>
+
+<p>Javascript é uma linguagem controversa. Muitos programadores adoram trabalhar com ela, mas com certeza o número de programadores que a odeiam é maior ainda. Não importa se você está no primeiro ou no segundo grupo, se você é um desenvolvedor web simplesmente não pode evitá-la.</p>
+
+<p>Eu particularmente sempre estou em cima do muro quando o assunto é Javascript, já passei por momentos bem agradaveis criando coisas com esta linguagem, mas também já me irritei com algumas caracteristicas ruins da sua implementação em muitas outras ocasiões.</p>
+
+<p>O fato é que para se dar bem com Javascript é importante conhecer um pouco mais da linguagem do que o usual. Mas a maioria dos programadores só estão interessados em conhecer o suficiente da linguagem para realizar pequenas tarefas e criar alguns scripts simples (Ctrl+C e Ctrl+V). Assim, quando alguma coisa imprevista acontece na execução do código, logo jogamos a culpa no pobre Javascript.</p>
+
+<p>Em uma dessas madrugadas em claro, eu comecei a enumerar alguns trechos de código que parecem bugs, mas não são. Segue uma explicação sobre cada um deles e algumas dicas para evitar resultados inesperados. E antes que atirem pedras em mim, os subtítulos não devem ser levados a sério.</p>
+
+<h2>Javascript não sabe somar</h2>
+
+
+<p>``` javascript</p>
+
+<pre><code>&gt;&gt;&gt; 0.1 + 0.2
+0.30000000000000004
+</code></pre>
+
+<p>```</p>
+
+<p>Números em Javascript são representados internamente com 64 bits e cada número pode ter no máximo 17 dígitos significativos. Isto tem algumas consequências interessantes como demonstrado no exemplo acima. É preciso ser bem cuidadoso com certos cálculos, principalmente quando a precisão é algo muito importante para o aplicativo.</p>
+
+<h2>Javascript não sabe somar - parte 2</h2>
+
+
+<p>``` javascript</p>
+
+<pre><code>&gt;&gt; "3" + 4 + 5
+=&gt; 345
+
+&gt;&gt; 3 + 4 + "5"
+=&gt; 75
+</code></pre>
+
+<p>```</p>
+
+<p>No Javascript, o operador de soma (<code>+</code>) é usado tanto para somar valores numéricos como também para concatenar strings. Precisamos estar atentos a seguinte regra: durante uma operação de soma, quando um dos valores é do tipo string, então tudo é convertido para este mesmo tipo e uma concatenação é realizada.</p>
+
+<p>No primeiro exemplo, como iniciamos a soma com um string, todos os valores seguintes são imediatamente convertidos para este mesmo formato e depois são concatenados. Já no segundo exemplo, temos inicialmente uma soma numéria (<code>3 + 4 = 7</code>) que é realizada normalmente, mas como a próxima soma a ser realizada não será com outro valor número, mas sim com o string <code>"5"</code>, então o Javascript realiza a conversão do primeiro resultado e em seguida realiza uma concatenação com os valores, devolvendo no final o string <code>"75"</code>.</p>
+
+<h2>Javascript não sabe converter string para números</h2>
+
+
+<p>``` javascript</p>
+
+<pre><code>&gt;&gt;&gt; parseInt("010")
+8
+
+&gt;&gt;&gt; parseInt("010", 10)
+10
+</code></pre>
+
+<p>```</p>
+
+<p>O método <code>parseInt</code> é muito utilizado e tem por objetivo converter strings em números inteiros. Basicamente o método aceita dois parâmetros: o primeiro é um string contendo o valor a ser convertido e o segundo é um inteiro que representa a base (decimal, binário, hexadecimal, etc.) na qual o string em questão está sendo representado.</p>
+
+<p>O problema aqui é que alguns livros e sites costumam explicar que o valor padrão da base (para quando ele não é informado) é 10, o que não é necessariamente uma verdade. Quando não informamos a base (radix) ou a definimos com o valor 0, então o método utiliza a seguinte regra:</p>
+
+<ul>
+    <li>Se o string que estamos convertendo iniciar com <code>"0x"</code>, então o método assumirá a conversão com a base 16 (hexadecimal).</li>
+    <li>Se o string começar com <code>"0"</code> (como no primeiro exemplo) a base utilizada será 8 (octal).</li>
+    <li>Se o string iniciar com qualquer outro valor numérico, então a base padrão será 10 (decimal).</li>
+    <li>E se o primeiro caractere do string não puder ser convertido para um número, então <code>parseInt</code> retornará <code>NaN.</code> ("not a number").</li>
+</ul>
+
+
+<p>Desta forma, a regra é sempre informar a base na qual a conversão deve ser realizada, exatamente como foi feito no segundo exemplo.</p>
+
+<h2>Javascript não sabe fazer comparações</h2>
+
+
+<p>``` javascript</p>
+
+<pre><code>&gt;&gt; 1 == true
+=&gt; true
+</code></pre>
+
+<p>```</p>
+
+<p>Podemos realizar comparações em Javascript com os símbolos <code>&lt;, &gt;, &lt;= e &gt;=</code>. Eles funcionam tanto para numerais como para strings. Mas quando o assunto é a comparações de igualdade, precisamos prestar atenção a alguns fatores.</p>
+
+<p>O operador de igualdade duplo realiza uma coerção de tipos caso você esteja comparando dois valores de tipos diferentes, como acontece no exemplo acima. Embora aparentemente este seja um resultado normal, em outros casos podemos ter resultados inesperados, como na seguinte comparação:</p>
+
+<p>``` javascript</p>
+
+<pre><code>&gt;&gt; null == false
+=&gt; false
+</code></pre>
+
+<p>```</p>
+
+<p>A linguagem também conta com um operador de igualdade tripo, que ignora a coerção de tipos:</p>
+
+<p>``` javascript</p>
+
+<pre><code>&gt;&gt; 1 === true
+=&gt; false
+</code></pre>
+
+<p>```</p>
+
+<p>Eu particularmente tenho como regra sempre utilizar o operador triplo ao realizar comparações de valores, isto tem me ajudado a evitar alguns erros de interpretação ao analisar o código e eventuais bugs decorrentes desta característica da linguagem.</p>
+
+<h2>Javascript também não sabe contar</h2>
+
+
+<p>``` javascript</p>
+
+<pre><code>&gt;&gt; var a = ["dog", "cat", "hen"];
+&gt;&gt; a[100] = "fox";
+&gt;&gt; a.length
+=&gt; 101
+</code></pre>
+
+<p>```</p>
+
+<p>A propriedade <code>length</code> de objetos do tipo array em Javascript sempre retornará um número acima da maior posição do array e não necessariamente a quantidade de itens no objeto, conforme você pôde ver no exemplo acima.</p>
+
+<p>Se você tentar recuperar o valor em uma posição não existente no array ele devolverá <code>undefined</code>.</p>
+
+<h2>Eu amo Javascript</h2>
+
+
+<p>Javascript possui muitas características realmente boas, e da mesma forma também possui algumas implementações realmente ruins (pretendo falar sobre isto em outro artigo). Por isto é importante gastar um pouco mais de tempo estudando mais a fundo o comportamento da linguagem. Depois de entender como algumas coisas realmente funcionam, descobrimos que nem tudo é bug.</p>
+
+<p>Estas são apenas algumas poucas curiosidades que consegui coletar em alguns minutos brincando com a linguagem, você conhece mais alguma?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Utilizando valores de entrada como sugestões, a maneira fácil]]></title>
+    <link href="http://nomedojogo.com/2009/01/23/utilizando-valores-de-entrada-como-sugestoes-a-maneira-facil/"/>
+    <updated>2009-01-23T00:00:00-02:00</updated>
+    <id>http://nomedojogo.com/2009/01/23/utilizando-valores-de-entrada-como-sugestoes-a-maneira-facil</id>
+    <content type="html"><![CDATA[<p><a href="http://mir.aculo.us/">Thomas Fuchs</a>, o criador do <a href="http://script.aculo.us/">script.aculo.us</a> iniciou um novo projeto esta semana chamado <a href="http://github.com/madrobby/prototype_helpers/tree/master">Prototype helpers</a>. O projeto visa disponibilizar uma série de scripts do <a href="http://www.prototypejs.org/">Prototype</a> criados por ele.</p>
+
+<p>Eu particularmente gostei muito do <a href="http://mir.aculo.us/2009/1/7/using-input-values-as-hints-the-easy-way">defaultValueActsAsHint</a>, um script que facilita a inclusão de dicas sobre o preenchimento de um formulário dentro do próprio campo no formato de um texto mais claro. Ao se clicar no campo o texto some, mas caso o usuário não preencha o campo o texto volta a aparecer ao perder o foco.</p>
+
+<p><img class="center" src="http://old.nomedojogo.com/wp-content/uploads/2009/01/quickentry.png"></p>
+
+<p>Enfim, é melhor mostrar do que falar. <a href="http://old.nomedojogo.com/wp-content/uploads/2009/01/jquery_helpers/defaultValueActsAsHint/test.html">Clique aqui</a> para ver um exemplo funcionando.</p>
+
+<p>Como não sou um usuário de Prototype, fiz questão de portar este script para um plugin do <a href="http://jquery.com/">jQuery</a>, que faço questão de disponibilizar para vocês.</p>
+
+<p>Para usar é muito fácil, lembrando que você deve estar usando o jQuery, basta incluir o script abaixo em sua página:</p>
+
+<pre class="textmate-source"><span class="source source_js source_js_jquery"><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="storage storage_type storage_type_js">function</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="keyword keyword_operator keyword_operator_js">$</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span><span class="meta meta_brace meta_brace_curly meta_brace_curly_js">{</span>
+  <span class="meta meta_function meta_function_js"><span class="support support_class support_class_js">$.fn</span>.<span class="entity entity_name entity_name_function entity_name_function_js">defaultValueActsAsHint</span> = <span class="storage storage_type storage_type_function storage_type_function_js">function</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_begin punctuation_definition_parameters_begin_js">(</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_end punctuation_definition_parameters_end_js">)</span></span> <span class="meta meta_brace meta_brace_curly meta_brace_curly_js">{</span>
+    <span class="keyword keyword_control keyword_control_js">return</span> <span class="variable variable_language variable_language_js">this</span><span class="support support_function support_function_js support_function_js_jquery">.each</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="storage storage_type storage_type_js">function</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">()</span> <span class="meta meta_brace meta_brace_curly meta_brace_curly_js">{</span>
+      <span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.attr</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>_default<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_delimiter meta_delimiter_object meta_delimiter_object_comma meta_delimiter_object_comma_js">, </span><span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.attr</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>value<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">))</span>
+      <span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.addClass</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>hint<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span><span class="punctuation punctuation_terminator punctuation_terminator_statement punctuation_terminator_statement_js">;</span>
+
+      <span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.bind</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>focus<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_delimiter meta_delimiter_object meta_delimiter_object_comma meta_delimiter_object_comma_js">, </span><span class="storage storage_type storage_type_js">function</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="support support_class support_class_js">event</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span> <span class="meta meta_brace meta_brace_curly meta_brace_curly_js">{</span>
+        <span class="keyword keyword_control keyword_control_js">if</span> <span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.attr</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>_default<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span> <span class="keyword keyword_operator keyword_operator_js">==</span> <span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.attr</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>value<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">))</span>
+          <span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.removeClass</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>hint<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.attr</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>value<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_delimiter meta_delimiter_object meta_delimiter_object_comma meta_delimiter_object_comma_js">, </span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span><span class="punctuation punctuation_terminator punctuation_terminator_statement punctuation_terminator_statement_js">;</span>
+      <span class="meta meta_brace meta_brace_curly meta_brace_curly_js">}</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span><span class="punctuation punctuation_terminator punctuation_terminator_statement punctuation_terminator_statement_js">;</span>
+
+      <span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.blur</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="storage storage_type storage_type_js">function</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">()</span> <span class="meta meta_brace meta_brace_curly meta_brace_curly_js">{</span>
+        <span class="keyword keyword_control keyword_control_js">if</span> <span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="keyword keyword_operator keyword_operator_js">$</span><span class="meta meta_delimiter meta_delimiter_method meta_delimiter_method_period meta_delimiter_method_period_js">.</span>trim<span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.attr</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>value<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">))</span> <span class="keyword keyword_operator keyword_operator_js">==</span> <span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span>
+          <span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.addClass</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>hint<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.attr</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>value<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_delimiter meta_delimiter_object meta_delimiter_object_comma meta_delimiter_object_comma_js">, </span><span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.attr</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>_default<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">))</span><span class="punctuation punctuation_terminator punctuation_terminator_statement punctuation_terminator_statement_js">;</span>
+      <span class="meta meta_brace meta_brace_curly meta_brace_curly_js">}</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span><span class="punctuation punctuation_terminator punctuation_terminator_statement punctuation_terminator_statement_js">;</span>
+
+    <span class="meta meta_brace meta_brace_curly meta_brace_curly_js">}</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span><span class="punctuation punctuation_terminator punctuation_terminator_statement punctuation_terminator_statement_js">;</span>
+  <span class="meta meta_brace meta_brace_curly meta_brace_curly_js">}</span><span class="punctuation punctuation_terminator punctuation_terminator_statement punctuation_terminator_statement_js">;</span>
+<span class="meta meta_brace meta_brace_curly meta_brace_curly_js">}</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)(</span>jQuery<span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span><span class="punctuation punctuation_terminator punctuation_terminator_statement punctuation_terminator_statement_js">;</span>
+</span></pre>
+
+
+<h4>Download: <a href="http://old.nomedojogo.com/wp-content/uploads/2009/01/jquery_helpers/defaultValueActsAsHint/jquery.defaultvalueactsashint.js "><span>jquery.defaultvalueactsashint.js</span></a></h4>
+
+
+<p>E definir quais campos se beneficiarão deste script, assim:</p>
+
+<pre class="textmate-source"><span class="text text_html text_html_jquery"><span class="source source_js source_js_jquery source_js_jquery_embedded source_js_jquery_embedded_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_script entity_name_tag_script_html">script</span> type="text/javascript" charset="utf-8"<span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span>
+  <span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="punctuation punctuation_definition punctuation_definition_selector punctuation_definition_selector_begin punctuation_definition_selector_begin_js">'</span><span class="meta meta_selector meta_selector_css"><span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_id entity_other_attribute-name_id_css"><span class="punctuation punctuation_definition punctuation_definition_attribute-name punctuation_definition_attribute-name_css">#</span>foo</span></span><span class="punctuation punctuation_definition punctuation_definition_selector punctuation_definition_selector_end punctuation_definition_selector_end_js">'</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="meta meta_delimiter meta_delimiter_method meta_delimiter_method_period meta_delimiter_method_period_js">.</span>defaultValueActsAsHint<span class="meta meta_brace meta_brace_round meta_brace_round_js">()</span><span class="punctuation punctuation_terminator punctuation_terminator_statement punctuation_terminator_statement_js">;</span>
+<span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_script entity_name_tag_script_html">script</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span></span></pre>
+
+
+<p>Como sempre, tudo está em um projeto no <a href="http://github.com/carlosbrando/jquery_helpers/tree/master">GitHub</a>. Bom divertimento!</p>
+]]></content>
+  </entry>
+  
+</feed>

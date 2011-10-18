@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: singleton | Nome do Jogo]]></title>
+  <link href="http://nomedojogo.com/categories/singleton/atom.xml" rel="self"/>
+  <link href="http://nomedojogo.com/"/>
+  <updated>2011-10-18T20:54:12-02:00</updated>
+  <id>http://nomedojogo.com/</id>
+  <author>
+    <name><![CDATA[Carlos Brando]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[O que é uma Rota Singular?]]></title>
+    <link href="http://nomedojogo.com/2008/07/17/o-que-e-uma-rota-singular/"/>
+    <updated>2008-07-17T00:00:00-03:00</updated>
+    <id>http://nomedojogo.com/2008/07/17/o-que-e-uma-rota-singular</id>
+    <content type="html"><![CDATA[<p><img class="alignnone size-full wp-image-838" title="191042981_8daa4da429" src="http://old.nomedojogo.com/wp-content/uploads/2008/07/191042981_8daa4da429.jpg" alt="" /></p>
+
+<h6>Foto de <a href="http://flickr.com/photos/funfilledgeorgie/">GeorgieR</a></h6>
+
+
+<p>Além do <a href="http://rails-doc.org/docs/ActionController/Resources/resources">map.resources</a>, há também uma forma singular (ou "<a href="http://pt.wikipedia.org/wiki/Singleton">singleton</a>") de rotear recursos: <a href="http://rails-doc.org/docs/ActionController/Resources/resource"><strong>map.resource</strong></a>. Esta forma é usada para representar um recurso que só aparece uma vez no contexto.</p>
+
+<p>Faz muito sentido usar uma rota singular quando temos um recurso que será único dentro da aplicação ou da sessão do usuário corrente.</p>
+
+<p>Por exemplo, em um projeto de uma agenda cada usuário registrado tem seu próprio catálogo de endereços, então poderíamos cria nossa rota assim:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resource <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>address_book</span></span></pre>
+
+
+<p>Com isto podemos usar todo o conjunto de recursos disponibilizados pelo Rails, tais como:</p>
+
+<table border="0">
+<tbody>
+<tr>
+<td>GET/PUT</td>
+<td><strong>address_book_url</strong></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><strong>edit_address_book_url</strong></td>
+</tr>
+<tr>
+<td>PUT</td>
+<td><strong>update_address_book_url</strong></td>
+</tr>
+</tbody></table>
+
+
+<br/>
+
+
+<p>Note que tudo está no singular. Estamos assumindo que no contexto atual não precisamos especificar qual catálogo de endereços desejamos, ao invés disso podemos simplesmente dizer "o catálogo de endereços", já que o usuário atual só tem um.</p>
+
+<p>O relacionamento entre a tabela de catálogos e o usuário corrente não é automático, você deve autenticar o usuário e retornar o catálogo dele. Não existe mágica ou poderes psíquicos aqui, é apenas uma outra técnica de roteamento a nossa disposição, se precisarmos.</p>
+]]></content>
+  </entry>
+  
+</feed>

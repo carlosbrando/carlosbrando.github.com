@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: routes | Nome do Jogo]]></title>
+  <link href="http://nomedojogo.com/categories/routes/atom.xml" rel="self"/>
+  <link href="http://nomedojogo.com/"/>
+  <updated>2011-10-18T20:54:12-02:00</updated>
+  <id>http://nomedojogo.com/</id>
+  <author>
+    <name><![CDATA[Carlos Brando]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Edge Rails: Executando múltiplas instâncias de um projeto em subdiretórios]]></title>
+    <link href="http://nomedojogo.com/2008/08/22/edge-rails-executando-multiplas-instancias-de-um-projeto-em-subdiretorios/"/>
+    <updated>2008-08-22T00:00:00-03:00</updated>
+    <id>http://nomedojogo.com/2008/08/22/edge-rails-executando-multiplas-instancias-de-um-projeto-em-subdiretorios</id>
+    <content type="html"><![CDATA[<p>Às vezes você tem de rodar múltiplas cópias do mesmo projeto. Talvez você tenha um produto que será usado por vários clientes, ou talvez você apenas deseje rodar uma versão de teste e produção do seu software ao mesmo tempo.</p>
+
+<p>A forma mais simples de se fazer isto é ter múltiplos (sub)domínios com uma instância do aplicativo em cada uma. Mas se isto não for possível você pode colocar seu aplicativo em um subdiretório e usar um prefixo na sua URL para distinguir as instâncias do seu software. Por exemplo, você poderia rodar vários blogs de usuários diferentes usando URLs como:</p>
+
+<pre class="textmate-source"><span class="text text_html text_html_basic">http://www.nomedojogo.com/fulano/blog
+http://www.nomedojogo.com/sicrano/blog
+http://www.nomedojogo.com/beltrano/blog
+</span></pre>
+
+
+<p>Nestes casos, os prefixos fulano, sicrano e beltrano identificarão as instâncias do aplicativo rodando em subdiretórios com os mesmos nomes. O roteamento do aplicativo começa depois disto. Você pode dizer ao Rails para ignorar esta parte das URLs quando uma requisição for feita, mas coloca-la nas URLs geradas por ele, configurando isto através da constante <strong>RAILS_RELATIVE_URL_ROOT</strong> ou do método <strong>AbstractRequest.relative_url_root</strong>.</p>
+
+<p>Porém se seu projeto Rails estiver rodando sob o Apache, esse recurso já é ativado automaticamente, por isto na maioria dos casos não temos de nos preocupar em configurar isto hoje. Isto se você estiver usando Apache.</p>
+
+<p>Porém, no Rails 2.2 o <strong>relative_url_root</strong> não será mais configurado automaticamente pelo HTTP header. Teremos de fazer isto manualmente, colocando uma linha mais ou menos assim no arquivo <strong>environment.rb</strong> de cada um dos aplicativos:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>action_controller<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>relative_url_root <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>/fulano<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span></span></pre>
+
+
+<p>Feito isto, seu aplicativo irá ignorar o prefixo "fulano" logo depois do domínio. Mas ao gerar URLs ele sempre colocará este prefixo para garantir que você estará acessando o projeto no subdiretório correto.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[O que é uma Rota Singular?]]></title>
+    <link href="http://nomedojogo.com/2008/07/17/o-que-e-uma-rota-singular/"/>
+    <updated>2008-07-17T00:00:00-03:00</updated>
+    <id>http://nomedojogo.com/2008/07/17/o-que-e-uma-rota-singular</id>
+    <content type="html"><![CDATA[<p><img class="alignnone size-full wp-image-838" title="191042981_8daa4da429" src="http://old.nomedojogo.com/wp-content/uploads/2008/07/191042981_8daa4da429.jpg" alt="" /></p>
+
+<h6>Foto de <a href="http://flickr.com/photos/funfilledgeorgie/">GeorgieR</a></h6>
+
+
+<p>Além do <a href="http://rails-doc.org/docs/ActionController/Resources/resources">map.resources</a>, há também uma forma singular (ou "<a href="http://pt.wikipedia.org/wiki/Singleton">singleton</a>") de rotear recursos: <a href="http://rails-doc.org/docs/ActionController/Resources/resource"><strong>map.resource</strong></a>. Esta forma é usada para representar um recurso que só aparece uma vez no contexto.</p>
+
+<p>Faz muito sentido usar uma rota singular quando temos um recurso que será único dentro da aplicação ou da sessão do usuário corrente.</p>
+
+<p>Por exemplo, em um projeto de uma agenda cada usuário registrado tem seu próprio catálogo de endereços, então poderíamos cria nossa rota assim:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resource <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>address_book</span></span></pre>
+
+
+<p>Com isto podemos usar todo o conjunto de recursos disponibilizados pelo Rails, tais como:</p>
+
+<table border="0">
+<tbody>
+<tr>
+<td>GET/PUT</td>
+<td><strong>address_book_url</strong></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><strong>edit_address_book_url</strong></td>
+</tr>
+<tr>
+<td>PUT</td>
+<td><strong>update_address_book_url</strong></td>
+</tr>
+</tbody></table>
+
+
+<br/>
+
+
+<p>Note que tudo está no singular. Estamos assumindo que no contexto atual não precisamos especificar qual catálogo de endereços desejamos, ao invés disso podemos simplesmente dizer "o catálogo de endereços", já que o usuário atual só tem um.</p>
+
+<p>O relacionamento entre a tabela de catálogos e o usuário corrente não é automático, você deve autenticar o usuário e retornar o catálogo dele. Não existe mágica ou poderes psíquicos aqui, é apenas uma outra técnica de roteamento a nossa disposição, se precisarmos.</p>
+]]></content>
+  </entry>
+  
+</feed>

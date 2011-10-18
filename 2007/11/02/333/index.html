@@ -86,12 +86,9 @@
 
 
 
-
   
 
-
-
-<time datetime="2007-11-02T00:00:00-02:00" pubdate  data-updated="true" > 2 de Novembro de 2007</time>
+<time datetime="2007-11-02T00:00:00-02:00" pubdate> 2 de Novembro de 2007</time>
         
       </p>
     
@@ -117,7 +114,7 @@
 </pre>
 
 
-<p>Bem simples. Para cada item do array eu executo o m&eacute;todo upcase e armazeno o resultado na variável <strong>meu_array</strong>. Mas eu tamb&eacute;m poderia fazer assim:</p>
+<p>Bem simples. Para cada item do array eu executo o método upcase e armazeno o resultado na variável <strong>meu_array</strong>. Mas eu também poderia fazer assim:</p>
 
 <pre>
 >> meu_array = %w(ruby on rails)
@@ -128,11 +125,11 @@
 </pre>
 
 
-<p>Acho que ficou ainda mais bonito: aplique o m&eacute;todo upcase para cada elemento de <strong>meu_array</strong>. O que acha?</p>
+<p>Acho que ficou ainda mais bonito: aplique o método upcase para cada elemento de <strong>meu_array</strong>. O que acha?</p>
 
 <p>Como isto funciona?</p>
 
-<p>Quando usamos o operador <strong>&amp;</strong> na frente do nome de uma variável estamos dizendo que esta variável &eacute; um bloco. Mas no nosso caso <strong>:upcase</strong> não &eacute; um bloco e sim um s&iacute;mbolo. Neste caso o Ruby tenta converter nosso s&iacute;mbolo em um bloco chamando o m&eacute;todo <strong>to_proc</strong> da classe <strong>Symbol</strong>. Mas veja o c&oacute;digo do <a href="http://api.rubyonrails.org/classes/Symbol.html">m&eacute;todo</a> <strong>to_proc</strong>:</p>
+<p>Quando usamos o operador <strong>&amp;</strong> na frente do nome de uma variável estamos dizendo que esta variável é um bloco. Mas no nosso caso <strong>:upcase</strong> não é um bloco e sim um símbolo. Neste caso o Ruby tenta converter nosso símbolo em um bloco chamando o método <strong>to_proc</strong> da classe <strong>Symbol</strong>. Mas veja o código do <a href="http://api.rubyonrails.org/classes/Symbol.html">método</a> <strong>to_proc</strong>:</p>
 
 <pre>
 def to_proc
@@ -141,7 +138,7 @@ end
 </pre>
 
 
-<p>Já entendeu? Este m&eacute;todo transforma o s&iacute;mbolo <strong>:upcase</strong> em um bloco, fazendo com que o exemplo acima na verdade seja executado desta maneira:</p>
+<p>Já entendeu? Este método transforma o símbolo <strong>:upcase</strong> em um bloco, fazendo com que o exemplo acima na verdade seja executado desta maneira:</p>
 
 <pre>
 >> meu_array = meu_array.map {|*args| args.shift.__send__(:upcase, *args)}
@@ -182,13 +179,16 @@ user = User.find(:all)
 
 
 
-
   
 
-
-
-<time datetime="2007-11-02T00:00:00-02:00" pubdate  data-updated="true" > 2 de Novembro de 2007</time>
+<time datetime="2007-11-02T00:00:00-02:00" pubdate> 2 de Novembro de 2007</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/categories/ruby/'>Ruby</a>, <a class='category' href='/categories/ruby-on-rails/'>Ruby on Rails</a>
+  
+</span>
 
 
     </p>
@@ -207,10 +207,10 @@ user = User.find(:all)
 
     
     <p class="meta">
-       
+      
         <a class="basic-alignment left" href="/2007/11/01/o-que-e-melhor-and-ou/" title="Previous Post: and ou &&, qual devo usar?">&laquo; and ou &&, qual devo usar?</a>
       
-       
+      
         <a class="basic-alignment right" href="/2007/11/03/quem-usa-radrails-deve-ler-o-blog-do-dr-nick/" title="next Post: Quem usa RadRails deve ler o blog do Dr. Nic">Quem usa RadRails deve ler o blog do Dr. Nic &raquo;</a>
       
     </p>
