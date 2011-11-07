@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Foto de chrys Algumas pessoas estão comentando que o Ruby on Rails 2.2 deve ser lançado até setembro, a tempo do RailsConf Europe, e acredito que &hellip;">
+  <meta name="description" content="À partir da próxima versão do Rails quando usarmos a opção :limit para colunas com números inteiros, em nossas migrations, estaremos nos referindo ao &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +80,59 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2008/07/22/edge-rails-tratando-a-opcao-limit-como-bytes/">Edge Rails: Tratando a opção :limit como bytes (atualizado)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-07-22T00:00:00-03:00" pubdate data-updated="true">22 de Julho de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>À partir da próxima versão do Rails quando usarmos a opção <strong>:limit</strong> para colunas com números inteiros, em nossas migrations, estaremos nos referindo ao número de bytes, no MySQL e no PostgreSQL (no sqlite sempre foi assim).</p>
+
+<p>O tipo da coluna no banco de dados dependerá da quantidade de bytes espeficida. Veja o trecho de código que identifica o tipo da coluna para o MySQL:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="keyword keyword_control keyword_control_ruby">when</span> <span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_separator punctuation_separator_statement punctuation_separator_statement_ruby">;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>tinyint<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+<span class="keyword keyword_control keyword_control_ruby">when</span> <span class="constant constant_numeric constant_numeric_ruby">2</span><span class="punctuation punctuation_separator punctuation_separator_statement punctuation_separator_statement_ruby">;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>smallint<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+<span class="keyword keyword_control keyword_control_ruby">when</span> <span class="constant constant_numeric constant_numeric_ruby">3</span><span class="punctuation punctuation_separator punctuation_separator_statement punctuation_separator_statement_ruby">;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>mediumint<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+<span class="keyword keyword_control keyword_control_ruby">when</span> <span class="constant constant_language constant_language_ruby">nil</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">4</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">11</span><span class="punctuation punctuation_separator punctuation_separator_statement punctuation_separator_statement_ruby">;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>int(11)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> compatibility with MySQL default
+</span><span class="keyword keyword_control keyword_control_ruby">when</span> <span class="constant constant_numeric constant_numeric_ruby">5</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">..</span><span class="constant constant_numeric constant_numeric_ruby">8</span><span class="punctuation punctuation_separator punctuation_separator_statement punctuation_separator_statement_ruby">;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>bigint<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+<span class="keyword keyword_control keyword_control_ruby">else</span> <span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">raise</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_constant variable_other_constant_ruby">ActiveRecordError</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>No integer type has byte size <span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>limit<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
+
+
+<p>E para o PostgreSQL:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="keyword keyword_control keyword_control_ruby">when</span> <span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">..</span><span class="constant constant_numeric constant_numeric_ruby">2</span><span class="punctuation punctuation_separator punctuation_separator_statement punctuation_separator_statement_ruby">;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>smallint<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+<span class="keyword keyword_control keyword_control_ruby">when</span> <span class="constant constant_numeric constant_numeric_ruby">3</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">..</span><span class="constant constant_numeric constant_numeric_ruby">4</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_language constant_language_ruby">nil</span><span class="punctuation punctuation_separator punctuation_separator_statement punctuation_separator_statement_ruby">;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>integer<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+<span class="keyword keyword_control keyword_control_ruby">when</span> <span class="constant constant_numeric constant_numeric_ruby">5</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">..</span><span class="constant constant_numeric constant_numeric_ruby">8</span><span class="punctuation punctuation_separator punctuation_separator_statement punctuation_separator_statement_ruby">;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>bigint<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span></pre>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/07/22/edge-rails-seus-problemas-acabaram-o-rails-tambem-vai-falar-portugues/">Edge Rails: Seus problemas acabaram, o Rails também vai falar português!</a></h1>
     
     
@@ -89,9 +142,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-07-22T00:00:00-03:00" pubdate>22 de Julho de 2008</time>
+
+<time datetime="2008-07-22T00:00:00-03:00" pubdate data-updated="true">22 de Julho de 2008</time>
         
       </p>
     
@@ -175,9 +233,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-07-21T00:00:00-03:00" pubdate>21 de Julho de 2008</time>
+
+<time datetime="2008-07-21T00:00:00-03:00" pubdate data-updated="true">21 de Julho de 2008</time>
         
       </p>
     
@@ -221,9 +284,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-07-21T00:00:00-03:00" pubdate>21 de Julho de 2008</time>
+
+<time datetime="2008-07-21T00:00:00-03:00" pubdate data-updated="true">21 de Julho de 2008</time>
         
       </p>
     
@@ -267,9 +335,14 @@ Quando usávamos optimistic locking com partial updates, tinhamos queries extras
 
 
 
+
+
+
+
   
 
-<time datetime="2008-07-19T00:00:00-03:00" pubdate>19 de Julho de 2008</time>
+
+<time datetime="2008-07-19T00:00:00-03:00" pubdate data-updated="true">19 de Julho de 2008</time>
         
       </p>
     
@@ -311,9 +384,14 @@ Quando usávamos optimistic locking com partial updates, tinhamos queries extras
 
 
 
+
+
+
+
   
 
-<time datetime="2008-07-18T00:00:00-03:00" pubdate>18 de Julho de 2008</time>
+
+<time datetime="2008-07-18T00:00:00-03:00" pubdate data-updated="true">18 de Julho de 2008</time>
         
       </p>
     
@@ -366,9 +444,14 @@ Quando usávamos optimistic locking com partial updates, tinhamos queries extras
 
 
 
+
+
+
+
   
 
-<time datetime="2008-07-17T00:00:00-03:00" pubdate>17 de Julho de 2008</time>
+
+<time datetime="2008-07-17T00:00:00-03:00" pubdate data-updated="true">17 de Julho de 2008</time>
         
       </p>
     
@@ -435,9 +518,14 @@ Quando usávamos optimistic locking com partial updates, tinhamos queries extras
 
 
 
+
+
+
+
   
 
-<time datetime="2008-07-17T00:00:00-03:00" pubdate>17 de Julho de 2008</time>
+
+<time datetime="2008-07-17T00:00:00-03:00" pubdate data-updated="true">17 de Julho de 2008</time>
         
       </p>
     
@@ -477,9 +565,14 @@ Quando usávamos optimistic locking com partial updates, tinhamos queries extras
 
 
 
+
+
+
+
   
 
-<time datetime="2008-07-16T00:00:00-03:00" pubdate>16 de Julho de 2008</time>
+
+<time datetime="2008-07-16T00:00:00-03:00" pubdate data-updated="true">16 de Julho de 2008</time>
         
       </p>
     
@@ -539,9 +632,14 @@ Quando usávamos optimistic locking com partial updates, tinhamos queries extras
 
 
 
+
+
+
+
   
 
-<time datetime="2008-07-15T00:00:00-03:00" pubdate>15 de Julho de 2008</time>
+
+<time datetime="2008-07-15T00:00:00-03:00" pubdate data-updated="true">15 de Julho de 2008</time>
         
       </p>
     
@@ -581,39 +679,6 @@ Quando usávamos optimistic locking com partial updates, tinhamos queries extras
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/07/15/edge-rails-suporte-ao-thin-melhorado-no-rails/">Edge Rails: Suporte ao Thin melhorado no Rails</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-  
-
-<time datetime="2008-07-15T00:00:00-03:00" pubdate>15 de Julho de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Traduzido do post &#8221;<a href="http://weblog.rubyonrails.com/2008/7/6/living-on-the-edge-3">Living on the Edge (or what&#8217;s new in Edge Rails) #3</a>&#8221;, porque não percebi esta alteração e não quero deixar de documentar.</p>
-
-<p>O <strong>script/server</strong> agora verifica a disponibilidade do Thin e o usa. Muito conveniente se vocês estiver usando Thin no seu ambiente de produção (e quiser rodar o mesmo em desenvolvimento). Você deve acrescentar a linha <strong>config.gem &#8216;thin&#8217;</strong> no seu arquivo <strong>environment.rb</strong> para que isto funcione.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/33/">&larr; Antigos</a>
@@ -631,6 +696,10 @@ Quando usávamos optimistic locking com partial updates, tinhamos queries extras
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
       </li>
     
@@ -644,10 +713,6 @@ Quando usávamos optimistic locking com partial updates, tinhamos queries extras
     
       <li class="post">
         <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
       </li>
     
   </ul>

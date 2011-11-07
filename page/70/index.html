@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Estive em um congresso neste fim de semana e não tive acesso a internet. O grande problema disto é a quantidade de feeds para ler na segunda-feira. &hellip;">
+  <meta name="description" content="A coisa mais normal no Rails é criar variáveis de inst&acirc;ncia no controller com dados&nbsp;do banco&nbsp;e usá-las na view para exibir dados. [ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +80,80 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2007/08/28/usando-o-mtodo-debug-na-view/">Usando o método debug na view</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-08-28T00:00:00-03:00" pubdate data-updated="true">28 de Agosto de 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://farm1.static.flickr.com/195/518019752_96ecf04954.jpg?v=0"> </p>
+
+
+<p>A coisa mais normal no Rails é criar variáveis de inst&acirc;ncia no controller com dados&nbsp;do banco&nbsp;e usá-las na view para exibir dados.</p>
+
+
+<p>
+[source:ruby]
+class TesteController < ApplicationController
+  def meu_metodo
+    @user = User.find(:first)
+  end
+end
+[/source]
+</p>
+<p>Quando nossa aplicação está apresentando algum erro, e tudo indica que pode ser com esta variável, normalmente criamos um código simples para apresentar todos os atributos que esta inst&acirc;ncia tem.</p>
+<p>
+[source:html]
+<body>
+    Name: <%= @user.name %>
+    <br />
+    Senha: <%= @user.password %>
+</body>
+[/source]
+</p>
+<p>Agora imagine fazer isto para uma classe que contenhas muitos atributos&#8230; Um modo mais fácil de fazer isto é usar o método debug:</p>
+[source:html]
+<body>
+    <%= debug(@user) %>
+</body>
+[/source]
+<p>Com este código a página retornaria isto:</p>
+<pre>
+--- !ruby/object:User
+attributes:
+    name: Brando
+    city: "São Paulo"
+</pre>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2007/08/27/resumo-do-fim-de-semana/">Resumão do fim de semana</a></h1>
     
     
@@ -89,9 +163,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2007-08-27T00:00:00-03:00" pubdate>27 de Agosto de 2007</time>
+
+<time datetime="2007-08-27T00:00:00-03:00" pubdate data-updated="true">27 de Agosto de 2007</time>
         
       </p>
     
@@ -123,9 +202,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2007-08-23T00:00:00-03:00" pubdate>23 de Agosto de 2007</time>
+
+<time datetime="2007-08-23T00:00:00-03:00" pubdate data-updated="true">23 de Agosto de 2007</time>
         
       </p>
     
@@ -155,9 +239,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2007-08-23T00:00:00-03:00" pubdate>23 de Agosto de 2007</time>
+
+<time datetime="2007-08-23T00:00:00-03:00" pubdate data-updated="true">23 de Agosto de 2007</time>
         
       </p>
     
@@ -189,9 +278,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2007-08-22T00:00:00-03:00" pubdate>22 de Agosto de 2007</time>
+
+<time datetime="2007-08-22T00:00:00-03:00" pubdate data-updated="true">22 de Agosto de 2007</time>
         
       </p>
     
@@ -221,9 +315,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2007-08-21T00:00:00-03:00" pubdate>21 de Agosto de 2007</time>
+
+<time datetime="2007-08-21T00:00:00-03:00" pubdate data-updated="true">21 de Agosto de 2007</time>
         
       </p>
     
@@ -253,9 +352,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2007-08-19T00:00:00-03:00" pubdate>19 de Agosto de 2007</time>
+
+<time datetime="2007-08-19T00:00:00-03:00" pubdate data-updated="true">19 de Agosto de 2007</time>
         
       </p>
     
@@ -318,9 +422,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2007-08-19T00:00:00-03:00" pubdate>19 de Agosto de 2007</time>
+
+<time datetime="2007-08-19T00:00:00-03:00" pubdate data-updated="true">19 de Agosto de 2007</time>
         
       </p>
     
@@ -352,9 +461,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2007-08-18T00:00:00-03:00" pubdate>18 de Agosto de 2007</time>
+
+<time datetime="2007-08-18T00:00:00-03:00" pubdate data-updated="true">18 de Agosto de 2007</time>
         
       </p>
     
@@ -386,9 +500,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2007-08-16T00:00:00-03:00" pubdate>16 de Agosto de 2007</time>
+
+<time datetime="2007-08-16T00:00:00-03:00" pubdate data-updated="true">16 de Agosto de 2007</time>
         
       </p>
     
@@ -425,108 +544,6 @@ end
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/08/16/c-30-se-voc-gosta-do-rails-deve-ler-este-post/">C# 3.0 - Se você gosta do Rails, deve ler este post.</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-  
-
-<time datetime="2007-08-16T00:00:00-03:00" pubdate>16 de Agosto de 2007</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src='http://old.nomedojogo.com/wp-content/uploads/2007/08/mono-logo-thumb.png' alt='mono-logo-thumb.png' /> </p>
-
-
-<p>Nestes últimos dias temos falado muito de <strong>C#</strong> e <strong>Ruby</strong> aqui no blog. Alguns deram suas opiniões e mostraram paixão tanto pelo Ruby quanto pelo <strong>C#</strong>. Eu volto mais uma vez a frisar que você não deve ser fanático, deve ter a mente aberta para tudo. &Eacute; isto que torna você um excelente profissional.</p>
-
-
-<p>Pesquisando o que tem de novo no <strong>C# 3.0</strong> me deparei com um recurso muito legal: Extensões.</p>
-
-
-<p>Nós que programamos em <strong>Ruby</strong> estamos acostumados a fazer algo assim:</p>
-
-
-<p>
-[source:ruby]
-10.days.ago
-
-100.megabytes + 50.kbytes
-[/source]
-</p>
-
-
-<p>Mas em <strong>C#</strong> isto simplesmente não é possível, ou melhor não era&#8230; Na nova versão 3.0 você pode criar extensões para tipos primários:</p>
-
-
-<p>
-[source:csharp]
-    public static class Extensions
-    {
-        public static int Megabytes(this int value)
-        {
-            return value * 1024 * 1024;
-        }
-
-        public static int Kilobytes(this int value)
-        {
-            return value * 1024;
-        }
-
-        public static int Days(this int value)
-        {
-            return value * 24 * 60 * 60 * 1000;
-        }
-
-        public static DateTime Ago(this int value)
-        {
-            return DateTime.Now.AddMilliseconds(-value);
-        }
-    }
-[/source]
-</p>
-
-
-<p>E usar da seguinte maneira:</p>
-
-
-<p>
-[source:csharp]
-DateTime x = 10.Days().Ago();
-
-int bytes = 100.Megabytes() + 50.Kilobytes();
-[/source]
-</p>
-
-
-<p>E aí, o que achou? Legal né?</p>
-
-
-<p>Para finalizar o assunto, não aja como um fanático religioso com respeito a sua linguagem de programação favorita. Seja sempre aberto a novas descobertas. <strong>C#</strong> é uma linguagem e tanto, e com recursos como este que acabamos de ver, mais o lançamento do <strong>DLR</strong> que deve acontecer em breve, podemos portar todas as funcionalidades do Rails para ele, incluindo as mágicas do <strong>ActiveRecord</strong>.</p>
-
-
-<p>Minha opinião? Estude <strong>Ruby on Rails</strong>, estude <strong>C#</strong> e&nbsp;estude <strong>Java</strong>.</p>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/71/">&larr; Antigos</a>
@@ -544,6 +561,10 @@ int bytes = 100.Megabytes() + 50.Kilobytes();
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
       </li>
     
@@ -557,10 +578,6 @@ int bytes = 100.Megabytes() + 50.Kilobytes();
     
       <li class="post">
         <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
       </li>
     
   </ul>

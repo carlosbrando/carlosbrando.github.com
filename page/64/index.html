@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Em breve teremos novidades no WWR (Working With Rail). Eu tive a oportunidade de fazer um teste na nova versão, e já vi a novo fórum que o site terá &hellip;">
+  <meta name="description" content="Estou meio enrolado com o projeto em que estou trabalhando e some a isto que na semana que vem tem o RejectConf&#8217;07 aqui em sampa e eu estou &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +80,64 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2007/11/09/limpando-todos-os-campos-de-um-form-via-rjs/">Limpando todos os campos de um Form via RJS</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-11-09T00:00:00-02:00" pubdate data-updated="true"> 9 de Novembro de 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/11/101157537_5bc684bb44.jpg" alt="101157537_5bc684bb44.jpg" /></p>
+
+<p>Estou meio enrolado com o projeto em que estou trabalhando e some a isto que na semana que vem tem o <a href="http://www.akitaonrails.com/2007/11/9/aviso-importante-rejectconf-sp-07"><strong>RejectConf&#8217;07</strong></a> aqui em sampa e eu estou tentando preparar uma apresentação.</p>
+
+<p>Mas eu não posso deixar este blog de lado, então para ninguém dizer que eu não posto mais, vai uma dica util para quem usa <strong>RJS</strong>.</p>
+
+<p>Imagine aquela página cheia de campos, que você precisa limpar via <strong>RJS</strong>. Já vi muita gente limpando campo por campo dentro do código, isto é horrível, além de encher o saco.</p>
+
+<p>Acontece que o elemento <strong>Form</strong> (<strong>HTML</strong>) possui um método <strong>reset()</strong> que faz exatamente isto. Via <strong>JavaScript</strong> poderíamos limpar todos os campos de um formulário de uma só vez com o seguinte código:</p>
+
+<pre class="textmate-source"><span class="source source_js"><span class="support support_class support_class_js">document</span><span class="meta meta_delimiter meta_delimiter_method meta_delimiter_method_period meta_delimiter_method_period_js">.</span><span class="support support_constant support_constant_dom support_constant_dom_js">forms</span><span class="meta meta_brace meta_brace_square meta_brace_square_js">[</span><span class="string string_quoted string_quoted_double string_quoted_double_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">"</span>meu_form<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">"</span></span><span class="meta meta_brace meta_brace_square meta_brace_square_js">]</span><span class="meta meta_delimiter meta_delimiter_method meta_delimiter_method_period meta_delimiter_method_period_js">.</span><span class="support support_function support_function_dom support_function_dom_js">reset</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">()</span><span class="punctuation punctuation_terminator punctuation_terminator_statement punctuation_terminator_statement_js">;</span></span></pre>
+
+
+<p>Então, para fazer o mesmo via seu <strong>RJS</strong> bastaria fazer assim:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">page<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>call <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Form.reset<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>meu_form<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> ou
+</span>
+page<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>meu_form<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>reset</span></pre>
+
+
+<p>Eu sei que muitos já sabiam disto, mas como tem muita gente nova aprendendo <strong>Ruby on Rails</strong>, acho que vale a dica!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2007/11/08/novidades-no-wwr/">Novidades no WWR</a></h1>
     
     
@@ -89,9 +147,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2007-11-08T00:00:00-02:00" pubdate> 8 de Novembro de 2007</time>
+
+<time datetime="2007-11-08T00:00:00-02:00" pubdate data-updated="true"> 8 de Novembro de 2007</time>
         
       </p>
     
@@ -128,9 +191,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2007-11-07T00:00:00-02:00" pubdate> 7 de Novembro de 2007</time>
+
+<time datetime="2007-11-07T00:00:00-02:00" pubdate data-updated="true"> 7 de Novembro de 2007</time>
         
       </p>
     
@@ -200,9 +268,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2007-11-07T00:00:00-02:00" pubdate> 7 de Novembro de 2007</time>
+
+<time datetime="2007-11-07T00:00:00-02:00" pubdate data-updated="true"> 7 de Novembro de 2007</time>
         
       </p>
     
@@ -235,9 +308,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2007-11-06T00:00:00-02:00" pubdate> 6 de Novembro de 2007</time>
+
+<time datetime="2007-11-06T00:00:00-02:00" pubdate data-updated="true"> 6 de Novembro de 2007</time>
         
       </p>
     
@@ -272,9 +350,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2007-11-06T00:00:00-02:00" pubdate> 6 de Novembro de 2007</time>
+
+<time datetime="2007-11-06T00:00:00-02:00" pubdate data-updated="true"> 6 de Novembro de 2007</time>
         
       </p>
     
@@ -367,9 +450,14 @@ SELECT count(*) AS count_all FROM users WHERE (users."type" BETWEEN 1 AND 3)</pr
 
 
 
+
+
+
+
   
 
-<time datetime="2007-11-05T00:00:00-02:00" pubdate> 5 de Novembro de 2007</time>
+
+<time datetime="2007-11-05T00:00:00-02:00" pubdate data-updated="true"> 5 de Novembro de 2007</time>
         
       </p>
     
@@ -421,9 +509,14 @@ SELECT count(*) AS count_all FROM users WHERE (users."type" BETWEEN 1 AND 3)</pr
 
 
 
+
+
+
+
   
 
-<time datetime="2007-11-05T00:00:00-02:00" pubdate> 5 de Novembro de 2007</time>
+
+<time datetime="2007-11-05T00:00:00-02:00" pubdate data-updated="true"> 5 de Novembro de 2007</time>
         
       </p>
     
@@ -452,9 +545,14 @@ SELECT count(*) AS count_all FROM users WHERE (users."type" BETWEEN 1 AND 3)</pr
 
 
 
+
+
+
+
   
 
-<time datetime="2007-11-03T00:00:00-02:00" pubdate> 3 de Novembro de 2007</time>
+
+<time datetime="2007-11-03T00:00:00-02:00" pubdate data-updated="true"> 3 de Novembro de 2007</time>
         
       </p>
     
@@ -491,9 +589,14 @@ SELECT count(*) AS count_all FROM users WHERE (users."type" BETWEEN 1 AND 3)</pr
 
 
 
+
+
+
+
   
 
-<time datetime="2007-11-02T00:00:00-02:00" pubdate> 2 de Novembro de 2007</time>
+
+<time datetime="2007-11-02T00:00:00-02:00" pubdate data-updated="true"> 2 de Novembro de 2007</time>
         
       </p>
     
@@ -576,114 +679,6 @@ user = User.find(:all)
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/11/01/o-que-e-melhor-and-ou/">and ou &&, qual devo usar?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-  
-
-<time datetime="2007-11-01T00:00:00-02:00" pubdate> 1 de Novembro de 2007</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/11/217551252_423459c5c5.jpg" alt="217551252_423459c5c5.jpg" /></p>
-
-<p>Tanto no Ruby como no Rails você sempre vai encontrar muitas redund&acirc;ncias. Dois métodos que fazem a mesma coisa ou duas formas diferentes de escrever o mesmo código. E na maioria dos casos, você vai até analisar para ver se não existe uma pequena diferença, mas vai descobrir, que não, realmente não existe nenhuma diferença, são redund&acirc;ncias mesmo.</p>
-
-<p>Algumas vezes isto complica, em outras ajuda. Mas quando se tem duas opções para fazer a mesma coisa, qual usar?</p>
-
-<p>Há alguns dias atrás eu estava me perguntando, o que é melhor usar: a palavra chave <strong>and</strong> ou os símbolos <strong>&amp;&amp;</strong> e <strong>&amp;</strong>?</p>
-
-<p>Na verdade, depende de quem está programando, porque as duas opções tem o mesmo resultado. Claro que os símbolos <strong>&amp;&amp;</strong> e <strong>&amp;</strong>, embora apresentem o mesmo resultado, tem uma leve diferença. Basicamente o <strong>&amp;&amp;</strong> é mais inteligente que o <strong>&amp;</strong>, porque se a primeira afirmação falhar, ele nem verifica a segunda, mais ou menos assim:</p>
-
-<pre>
-def metodo_a
-  puts "metodo a"
-  false
-end
-
-def metodo_b
-  puts "metodo b"
-  true
-end
-
-irb(main):011:0&gt; metodo_a &amp;&amp; metodo_b
-metodo a
-=&gt; false</pre>
-
-
-<p>O <strong>&amp;</strong> já é diferente, pois ele sempre vai verificar as duas condições independente do resultado da primeira.</p>
-
-<pre>
-irb(main):012:0&gt; metodo_a &amp; metodo_b
-metodo a
-metodo b
-=&gt; false</pre>
-
-
-<p>OK, mas e aí? Uso o <strong>&amp;&amp;</strong> ou a palavra-chave <strong>and</strong> nos meus códigos? Tanto faz, é uma pura questão de estética. Mas para ajudar a tomar uma decisão, dê uma olhada na documentação do repositório do Rails (<a href="http://dev.rubyonrails.org/#Sourcestyle">clique aqui</a>).</p>
-
-<p>Como você pode ver existe algumas recomendações para quem vai criar ou corrigir algo no código do Rails, são:</p>
-
-<ul>
-    <li>Na tabulação use dois espaços, não tab</li>
-    <li> <font color="#008000">Não use <strong>and</strong> ou <strong>or</strong> para testar booleanos, sempre use <strong>&amp;&amp;</strong> ou <strong>||</strong></font></li>
-    <li><tt>MyClass.my_method(my_arg)</tt> &#8211; não <tt>my_method( my_arg )</tt> ou <tt>my_method my_arg</tt></li>
-    <li>Siga as convenções que você encontrar no código em volta.</li>
-</ul>
-
-
-<p>Eu optei por seguir as convenções do Rails.</p>
-
-<h3>[ATUALIZA&Ccedil;ÃO]</h3>
-
-
-<p>Conversando com o Akita, fizemos alguns testes e resolvi mostrar o porque da convensão de se usar <strong>&amp;&amp;</strong> no Rails e não <strong>and</strong>.</p>
-
-<p>Veja este exemplo:</p>
-
-<pre>
->> x = true and false
-=> false
-</pre>
-
-
-<p>Qual o valor da variável x? Tem certeza?</p>
-
-<pre>
->> x
-=> true
-</pre>
-
-
-<p>Acontece que o operador <strong>=</strong> tem prioridade quanto ao <strong>and</strong>, no fim é como se a expressão fosse assim:</p>
-
-<pre>
-(x = true) and false
-</pre>
-
-
-<p>Exatamente para evitar estes problemas é melhor usar o <strong>&amp;&amp;</strong>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/65/">&larr; Antigos</a>
@@ -701,6 +696,10 @@ metodo b
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
       </li>
     
@@ -714,10 +713,6 @@ metodo b
     
       <li class="post">
         <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
       </li>
     
   </ul>

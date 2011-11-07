@@ -9,9 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="No Ruby 1.9 teremos alguns métodos novos na classe Time, métodos como: Time.now
-# =&gt; Thu Nov 03 18:58:25 CET 2005 Time.now.sunday?
-# =&gt; false &hellip;">
+  <meta name="description" content="A classe DateTime ganhou um novo método o to_f que retorna a data como um ponto flutuante que representa a quantidade de segundos desde o Unix epoch &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,6 +80,51 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2008/03/27/edge-rails-dois-novos-metodos-timezoneat-e-datetimeto_f/">Edge Rails: Dois novos métodos TimeZone#at e DateTime#to_f</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-03-27T00:00:00-03:00" pubdate data-updated="true">27 de Março de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A classe <code>DateTime</code> ganhou um novo método o <code>to_f</code> que retorna a data como um ponto flutuante que representa a quantidade de segundos desde o Unix epoch (época Unix). Em outras palavras, se não me engano, é a quantidade de segundos desde 1 de janeiro de 1970 às zero hora.</p>
+
+<p>E a classe <code>TimeZone</code> também recebeu um novo método, o <code>at</code>, que serve para criar uma nova instância de <code>ActiveSupport::TimeWithZone</code> à partir do número de segundos desde o Unix epoch. Exemplo:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>zone <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Hawaii<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "Hawaii"
+</span><span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>utc<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">2000</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>to_f  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; 946684800.0
+</span>
+<span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>zone<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>at<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">946684800.0</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; Fri, 31 Dec 1999 14:00:00 HST -10:00</span></span></pre>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/03/26/edge-rails-timewithzone-se-preparando-para-o-ruby-19/">Edge Rails: TimeWithZone se preparando para o Ruby 1.9</a></h1>
     
     
@@ -91,9 +134,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-03-26T00:00:00-03:00" pubdate>26 de Março de 2008</time>
+
+<time datetime="2008-03-26T00:00:00-03:00" pubdate data-updated="true">26 de Março de 2008</time>
         
       </p>
     
@@ -145,9 +193,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-03-26T00:00:00-03:00" pubdate>26 de Março de 2008</time>
+
+<time datetime="2008-03-26T00:00:00-03:00" pubdate data-updated="true">26 de Março de 2008</time>
         
       </p>
     
@@ -188,9 +241,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-03-26T00:00:00-03:00" pubdate>26 de Março de 2008</time>
+
+<time datetime="2008-03-26T00:00:00-03:00" pubdate data-updated="true">26 de Março de 2008</time>
         
       </p>
     
@@ -220,9 +278,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-03-25T00:00:00-03:00" pubdate>25 de Março de 2008</time>
+
+<time datetime="2008-03-25T00:00:00-03:00" pubdate data-updated="true">25 de Março de 2008</time>
         
       </p>
     
@@ -261,9 +324,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-03-25T00:00:00-03:00" pubdate>25 de Março de 2008</time>
+
+<time datetime="2008-03-25T00:00:00-03:00" pubdate data-updated="true">25 de Março de 2008</time>
         
       </p>
     
@@ -296,9 +364,14 @@ authors<span class="punctuation punctuation_separator punctuation_separator_meth
 
 
 
+
+
+
+
   
 
-<time datetime="2008-03-24T00:00:00-03:00" pubdate>24 de Março de 2008</time>
+
+<time datetime="2008-03-24T00:00:00-03:00" pubdate data-updated="true">24 de Março de 2008</time>
         
       </p>
     
@@ -334,9 +407,14 @@ authors<span class="punctuation punctuation_separator punctuation_separator_meth
 
 
 
+
+
+
+
   
 
-<time datetime="2008-03-24T00:00:00-03:00" pubdate>24 de Março de 2008</time>
+
+<time datetime="2008-03-24T00:00:00-03:00" pubdate data-updated="true">24 de Março de 2008</time>
         
       </p>
     
@@ -372,9 +450,14 @@ authors<span class="punctuation punctuation_separator punctuation_separator_meth
 
 
 
+
+
+
+
   
 
-<time datetime="2008-03-22T00:00:00-03:00" pubdate>22 de Março de 2008</time>
+
+<time datetime="2008-03-22T00:00:00-03:00" pubdate data-updated="true">22 de Março de 2008</time>
         
       </p>
     
@@ -441,9 +524,14 @@ authors<span class="punctuation punctuation_separator punctuation_separator_meth
 
 
 
+
+
+
+
   
 
-<time datetime="2008-03-21T00:00:00-03:00" pubdate>21 de Março de 2008</time>
+
+<time datetime="2008-03-21T00:00:00-03:00" pubdate data-updated="true">21 de Março de 2008</time>
         
       </p>
     
@@ -477,71 +565,6 @@ authors<span class="punctuation punctuation_separator punctuation_separator_meth
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/03/20/rails-podcast-brasil-episodio-10/">Rails Podcast Brasil - Episódio 10</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-  
-
-<time datetime="2008-03-20T00:00:00-03:00" pubdate>20 de Março de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/03/270131575_c65396560f.jpg" alt="270131575_c65396560f.jpg" /></p>
-
-<p>Chegamos ao <strong>décimo episódio</strong> do <a href="http://www.rubyonrails.pro.br/podcasts">Rails Podcast Brasil</a>. Neste episódio falamos sobre a nova versão do meu plugin, Rubinius, GitHub, Cells e para finalizar respondemos a duas perguntas de nossos ouvintes: &#8220;Onde colocar suas classes de Exception para mantê-las dentro da estrutura do Rails&#8221; e &#8220;Como implementar recorrência de eventos em Ruby&#8221;.</p>
-
-<p>Além de revelarmos o vencedor da promoção do PeepCode!</p>
-
-<p>Se você tiver alguma dúvida que gostaria de ver respondida no próximo podcast, <a href="http://www.nomedojogo.com/contato/">clique aqui</a> e envie uma mensagem.</p>
-
-<h3>Neste episódio:</h3>
-
-
-<ul>
-    <li><a href="http://www.makemesimple.com/blog/2008/03/14/rapido-e-sujo-ou-lento-e-limpo-porque-nao-rapido-e-limpo/">&#8220;Rápido e Sujo&#8221; ou &#8220;Lento e Limpo&#8221;. Porque não &#8220;Rápido e Limpo&#8221;?</a></li>
-    <li><a href="http://faces.eti.br/2008/03/16/creating-jsf-applications-with-jruby-and-activerecord-jdbc-part-1/">Creating JSF applications with JRuby and ActiveRecord-JDBC (Part 1)</a></li>
-    <li><a href="http://peepcode.com/products/textmate-for-rails-2">TextMate for Rails 2</a></li>
-    <li><a href="http://docs.codehaus.org/display/JRUBY/2008/03/19/JRuby+1.1RC3+Released">JRuby 1.1RC3 Released</a></li>
-    <li><a href="http://www.juixe.com/techknow/index.php/2008/03/13/top-5-ruby-presentations-on-google-engedu-tech-talks/">Top 5 Ruby Presentations on Google engEDU Tech Talks</a></li>
-    <li><a href="http://www.simplisticcomplexity.com/2008/03/13/show-your-git-branch-name-in-your-prompt/">Show Your GIT Branch Name In Your Prompt</a></li>
-    <li><a href="http://blog.new-bamboo.co.uk/2008/3/12/github-with-capistrano">How to use git / github with capistrano</a></li>
-    <li><a href="https://github.com/">GitHub</a></li>
-    <li><a href="http://weblog.rubyonrails.com/2008/3/18/comparing-rails-2-0-to-1-2-for-speed">Comparing Rails 2.0 to 1.2 for speed and memory</a></li>
-    <li><a href="http://www.nomedojogo.com/2008/03/18/custom-resource-name-plugin-11/">Custom Resource Name Plugin 1.1</a></li>
-    <li><a href="http://opensynapse.net/post/24570619">Ruby memory leak: regular expressions in class methods</a></li>
-    <li><a href="http://www.rubyinside.com/help-fund-a-ruby-developer-to-work-on-open-source-for-6-months-798.html">Help Fund A Ruby Developer To Work On Open Source For 6 Months</a></li>
-    <li><a href="http://mikepence.wordpress.com/2008/03/16/cells-bring-clean-re-use-to-your-rails-views/">Cells bring clean re-use to your Rails views</a></li>
-    <li><a href="http://www.nomedojogo.com/2008/03/17/edge-rails-active-record-agora-aceita-findlast/">Edge Rails: Active Record agora aceita find(:last)</a></li>
-    <li><a href="http://betterruby.wordpress.com/2008/03/19/how-rubinius-sendsites-work-part-1/">How Rubinius SendSites Work Â Part 1</a></li>
-    <li><a href="http://lovdbyless.com/">LOVDbyLess</a></li>
-    <li><a href="http://rest-client.heroku.com/rdoc/">rest-client Heroku</a></li>
-</ul>
-
-
-<p>Mil desculpas ao <strike>Vinícius Ebersol</strike> <a href="http://www.bopia.com/">Bruno Miranda</a>, porque na hora do podcast esqueci teu nome&#8230;</p>
-
-<p>Para fazer o download, <a href="http://www.rubyonrails.pro.br/podcasts">clique aqui</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/50/">&larr; Antigos</a>
@@ -559,6 +582,10 @@ authors<span class="punctuation punctuation_separator punctuation_separator_meth
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
       </li>
     
@@ -572,10 +599,6 @@ authors<span class="punctuation punctuation_separator punctuation_separator_meth
     
       <li class="post">
         <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
       </li>
     
   </ul>

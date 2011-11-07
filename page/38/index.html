@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="A última sexta-feira e sábado foi a maior correria para deixar tudo redondinho no código do Rails para o lançamento da versão 2.1. E como não podia &hellip;">
+  <meta name="description" content="Nem bem saiu o Rails 2.1 e já foi encontrado um erro sério. Entre no irb e tente rodar isto: Date.new(2008, 5, 31).end_of_quarter ERRO! Por que? A &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +80,62 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2008/06/03/edge-rails-erro-ao-usar-o-metodo-end_of_quarter/">Edge Rails: Erro ao usar o método end_of_quarter</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-06-03T00:00:00-03:00" pubdate data-updated="true"> 3 de Junho de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Nem bem saiu o <a href="http://www.nomedojogo.com/2008/06/01/agora-e-oficial-ruby-on-rails-21/">Rails 2.1</a> e já foi encontrado um erro sério. Entre no <strong>irb</strong> e tente rodar isto:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Date</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">2008</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">5</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">31</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>end_of_quarter</span></pre>
+
+
+<p><strong>ERRO!</strong></p>
+
+<p>Por que? A implementação do método <strong>end_of_quarter</strong> foi feita da maneira errada, ele avança até o último mês do trimestre e depois pega último dia. O problema é que ele apenas avança o mês, e como estou partindo do dia 31 de maio, ele tentar criar uma nova instância do objeto <strong>Date</strong> para 31 de junho, que não existe. Com o objeto <strong>Time</strong> não é disparado uma exceção, mas ele retorna a data errada: 31 de <strong>julho</strong>.</p>
+
+<p>No Edge Rails isto já foi corrigido, mas quem estiver usando o Rails 2.1 vai ter este problema.</p>
+
+<p>Muito cuidado, porque este erro só ocorrerá se usarmos o método <strong>end_of_quarter</strong> nos dias 31 de maio, julho e agosto. Então&#8230; muito cuidado.</p>
+
+<p>Para quem não gosta de viver perigosamente usando o edge rails, e também não quer deixar sua aplicação com um erro que pode aparecer de uma hora para a outra, eu criei um plugin com o código que corrige o bug. Na verdade, toda vez que alguma correção sair vou tentar manter este plugin atualizado.</p>
+
+<p>Para instalar:</p>
+
+<pre class="textmate-source"><span class="source source_shell">./script/plugin install git://github.com/carlosbrando/rails21_fixes.git</span></pre>
+
+
+<p>Gostou? Que tal me <a href="http://www.workingwithrails.com/recommendation/new/person/8137-carlos-brando">recomendar no WWR</a>. É só <a href="http://www.workingwithrails.com/recommendation/new/person/8137-carlos-brando">clicar aqui</a> e pronto!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/06/02/edge-rails-fechando-as-atualizacoes-para-o-rails-21/">Edge Rails: Fechando as atualizações para o Rails 2.1</a></h1>
     
     
@@ -89,9 +145,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-06-02T00:00:00-03:00" pubdate> 2 de Junho de 2008</time>
+
+<time datetime="2008-06-02T00:00:00-03:00" pubdate data-updated="true"> 2 de Junho de 2008</time>
         
       </p>
     
@@ -148,9 +209,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-06-01T00:00:00-03:00" pubdate> 1 de Junho de 2008</time>
+
+<time datetime="2008-06-01T00:00:00-03:00" pubdate data-updated="true"> 1 de Junho de 2008</time>
         
       </p>
     
@@ -196,9 +262,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-05-31T00:00:00-03:00" pubdate>31 de Maio de 2008</time>
+
+<time datetime="2008-05-31T00:00:00-03:00" pubdate data-updated="true">31 de Maio de 2008</time>
         
       </p>
     
@@ -240,9 +311,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-05-31T00:00:00-03:00" pubdate>31 de Maio de 2008</time>
+
+<time datetime="2008-05-31T00:00:00-03:00" pubdate data-updated="true">31 de Maio de 2008</time>
         
       </p>
     
@@ -285,9 +361,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-05-31T00:00:00-03:00" pubdate>31 de Maio de 2008</time>
+
+<time datetime="2008-05-31T00:00:00-03:00" pubdate data-updated="true">31 de Maio de 2008</time>
         
       </p>
     
@@ -321,9 +402,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-05-31T00:00:00-03:00" pubdate>31 de Maio de 2008</time>
+
+<time datetime="2008-05-31T00:00:00-03:00" pubdate data-updated="true">31 de Maio de 2008</time>
         
       </p>
     
@@ -357,9 +443,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-05-30T00:00:00-03:00" pubdate>30 de Maio de 2008</time>
+
+<time datetime="2008-05-30T00:00:00-03:00" pubdate data-updated="true">30 de Maio de 2008</time>
         
       </p>
     
@@ -433,9 +524,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-05-30T00:00:00-03:00" pubdate>30 de Maio de 2008</time>
+
+<time datetime="2008-05-30T00:00:00-03:00" pubdate data-updated="true">30 de Maio de 2008</time>
         
       </p>
     
@@ -470,9 +566,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-05-30T00:00:00-03:00" pubdate>30 de Maio de 2008</time>
+
+<time datetime="2008-05-30T00:00:00-03:00" pubdate data-updated="true">30 de Maio de 2008</time>
         
       </p>
     
@@ -485,47 +586,6 @@
 
 
 <p>Para quem trabalha em vários projetos ao mesmo tempo como eu, isto é muito útil.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/05/29/edge-rails-railsversion/">Edge Rails: Rails.version</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-  
-
-<time datetime="2008-05-29T00:00:00-03:00" pubdate>29 de Maio de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Até agora se você desejasse descobrir durante a execução do seu código qual é a versão do <strong>Rails</strong> que está no ar, bastava usar:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Rails</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">VERSION</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="variable variable_other variable_other_constant variable_other_constant_ruby">STRING</span></span></pre>
-
-
-<p>Mas temos de concordar que isto não parece muito legal. Por isto no <strong>Rails 2.1</strong> não usaremos mais este código, mas sim:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Rails</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>version</span></pre>
-
-
-<p>Melhor!</p>
 </div>
   
   
@@ -550,6 +610,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
       </li>
     
@@ -563,10 +627,6 @@
     
       <li class="post">
         <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
       </li>
     
   </ul>

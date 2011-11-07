@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Meu projeto inteiro em Rails. Claro que ainda não está totalmente finalizado, mas é um começo. Trata-se de um site de empregos para a área de &hellip;">
+  <meta name="description" content="Um dos maiores problemas que encontro quando crio algo com o Ruby on Rails é a falta de uma internacionalização nos componentes existentes. Então, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +80,74 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2007/05/05/meses-em-portugus-no-rails/">Meses em português no Rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-05-05T00:00:00-03:00" pubdate data-updated="true"> 5 de Maio de 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/writer/MesesemportugusnoRails_E4B3/img_6596_1_1.jpg" style="border-width: 0px" align="right" border="0" height="180" width="240" /> Um dos maiores problemas que encontro quando crio algo com o Ruby on Rails é a falta de uma internacionalização nos componentes existentes.</p>
+
+<p>Então, vivo tendo de criar ou alterar algo para funcionar do jeito que preciso.</p>
+
+<p>No meu site (<a href="http://www.carreirati.com/">carreiraTI</a>) eu queria exibir a abreviação do mês em que a oferta de emprego foi publicada. Para isto bastaria usar o método <strong>strftime</strong> do próprio objeto <strong>Time</strong>.
+[source:ruby]t.strftime(&#8220;%b&#8221;)[/source]
+Isto funciona desde que seu site seja em inglês. O que não é o meu caso.</p>
+
+<p>Pesquisei as bibliotecas do próprio Ruby para ver como este método funcionava, e encontrei a seguinte constante:
+[source:ruby]ABBR_MONTHNAMES = [nil] + %w(Jan Fev Mar Abr Mai Jun Jul Ago Set Out Nov Dez)[/source]
+O problema aqui é não quero alterar as classes originais do Ruby e também não consigo alterar os valores da constante depois. Mesmo usando o método <strong>const_set</strong> do objeto <strong>Module</strong>.</p>
+
+<p>A solução que encontrei foi criar o meu próprio método para exibir a abreviação da data:
+[source:ruby]
+module ActionView</p>
+
+<pre><code>module Helpers
+    module DateHelper
+
+        BR_ABBR_MONTHNAMES = [nil] + %w(Jan Fev Mar Abr Mai Jun Jul Ago Set Out Nov Dez)
+
+        def abbr_month_name(month)
+            BR_ABBR_MONTHNAMES[month]
+        end
+    end
+end
+</code></pre>
+
+<p>end
+[/source]
+Se alguém tiver uma solução melhor que esta, por favor se pronuncie.</p>
+
+<p>Para ver como ficou <a href="http://www.carreirati.com/">clique aqui</a>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2007/05/04/carreirati-empregos-para-profissionais-de-ti/">carreiraTI: Empregos para profissionais de TI</a></h1>
     
     
@@ -89,9 +157,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2007-05-04T00:00:00-03:00" pubdate> 4 de Maio de 2007</time>
+
+<time datetime="2007-05-04T00:00:00-03:00" pubdate data-updated="true"> 4 de Maio de 2007</time>
         
       </p>
     
@@ -121,9 +194,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2007-04-26T00:00:00-03:00" pubdate>26 de Abril de 2007</time>
+
+<time datetime="2007-04-26T00:00:00-03:00" pubdate data-updated="true">26 de Abril de 2007</time>
         
       </p>
     
@@ -155,9 +233,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2007-04-25T00:00:00-03:00" pubdate>25 de Abril de 2007</time>
+
+<time datetime="2007-04-25T00:00:00-03:00" pubdate data-updated="true">25 de Abril de 2007</time>
         
       </p>
     
@@ -187,9 +270,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2007-04-23T00:00:00-03:00" pubdate>23 de Abril de 2007</time>
+
+<time datetime="2007-04-23T00:00:00-03:00" pubdate data-updated="true">23 de Abril de 2007</time>
         
       </p>
     
@@ -228,9 +316,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2007-04-19T00:00:00-03:00" pubdate>19 de Abril de 2007</time>
+
+<time datetime="2007-04-19T00:00:00-03:00" pubdate data-updated="true">19 de Abril de 2007</time>
         
       </p>
     
@@ -268,9 +361,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2007-04-17T00:00:00-03:00" pubdate>17 de Abril de 2007</time>
+
+<time datetime="2007-04-17T00:00:00-03:00" pubdate data-updated="true">17 de Abril de 2007</time>
         
       </p>
     
@@ -388,9 +486,14 @@ E o resultado na sua página seria:</p>
 
 
 
+
+
+
+
   
 
-<time datetime="2007-04-15T00:00:00-03:00" pubdate>15 de Abril de 2007</time>
+
+<time datetime="2007-04-15T00:00:00-03:00" pubdate data-updated="true">15 de Abril de 2007</time>
         
       </p>
     
@@ -470,9 +573,14 @@ Agora basta colocar a chamada para o método <strong>distance_of_time_in_words <
 
 
 
+
+
+
+
   
 
-<time datetime="2007-04-13T00:00:00-03:00" pubdate>13 de Abril de 2007</time>
+
+<time datetime="2007-04-13T00:00:00-03:00" pubdate data-updated="true">13 de Abril de 2007</time>
         
       </p>
     
@@ -546,9 +654,14 @@ Funciona!</p>
 
 
 
+
+
+
+
   
 
-<time datetime="2007-04-10T00:00:00-03:00" pubdate>10 de Abril de 2007</time>
+
+<time datetime="2007-04-10T00:00:00-03:00" pubdate data-updated="true">10 de Abril de 2007</time>
         
       </p>
     
@@ -573,50 +686,6 @@ Funciona!</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/03/29/problema-de-acentuao-no-radrails-2/">Problema de acentuação no RadRails</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-  
-
-<time datetime="2007-03-29T00:00:00-03:00" pubdate>29 de Março de 2007</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Â Instalei o <strong>RadRails</strong> para facilitar o desenvolvimento de aplicações usando RoR (Ruby on Rails), mas tive um problema com acentuação e demorei a descobrir uma forma de resolver.</p>
-
-<p>Encontrei a solução no fórum do <a href="http://forum.rubyonbr.org/forums/1/topics/1112" target="_blank">RubyOnBr</a>:</p>
-
-<p>O exemplo foi dado por Eduardo Baião:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_function support_function_activerecord support_function_activerecord_rails">validates_uniqueness_of</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>category</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>message</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>já existe<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
-
-
-<p>Este código retornava um &#8221;<strong>j? existe</strong>&#8221;</p>
-
-<p>A solução é muito simples, basta acessar o menu <strong>Project - Properties</strong> e alterar a propriedade <strong>Text file enconding</strong> para <strong>UTF-8</strong>.</p>
-
-<p>Problema resolvido!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/79/">&larr; Antigos</a>
@@ -634,6 +703,10 @@ Funciona!</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
       </li>
     
@@ -647,10 +720,6 @@ Funciona!</p>
     
       <li class="post">
         <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
       </li>
     
   </ul>

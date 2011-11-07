@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Precisei fazer isto agora pouco e como eu sei que pouca gente deve conhecer isto, resolvi postar. O software em que eu estou trabalhando no momento &hellip;">
+  <meta name="description" content="Tanto no Ruby como no Rails você sempre vai encontrar muitas redund&acirc;ncias. Dois métodos que fazem a mesma coisa ou duas formas diferentes de &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +80,119 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2007/11/01/o-que-e-melhor-and-ou/">and ou &&, qual devo usar?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-11-01T00:00:00-02:00" pubdate data-updated="true"> 1 de Novembro de 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/11/217551252_423459c5c5.jpg" alt="217551252_423459c5c5.jpg" /></p>
+
+<p>Tanto no Ruby como no Rails você sempre vai encontrar muitas redund&acirc;ncias. Dois métodos que fazem a mesma coisa ou duas formas diferentes de escrever o mesmo código. E na maioria dos casos, você vai até analisar para ver se não existe uma pequena diferença, mas vai descobrir, que não, realmente não existe nenhuma diferença, são redund&acirc;ncias mesmo.</p>
+
+<p>Algumas vezes isto complica, em outras ajuda. Mas quando se tem duas opções para fazer a mesma coisa, qual usar?</p>
+
+<p>Há alguns dias atrás eu estava me perguntando, o que é melhor usar: a palavra chave <strong>and</strong> ou os símbolos <strong>&amp;&amp;</strong> e <strong>&amp;</strong>?</p>
+
+<p>Na verdade, depende de quem está programando, porque as duas opções tem o mesmo resultado. Claro que os símbolos <strong>&amp;&amp;</strong> e <strong>&amp;</strong>, embora apresentem o mesmo resultado, tem uma leve diferença. Basicamente o <strong>&amp;&amp;</strong> é mais inteligente que o <strong>&amp;</strong>, porque se a primeira afirmação falhar, ele nem verifica a segunda, mais ou menos assim:</p>
+
+<pre>
+def metodo_a
+  puts "metodo a"
+  false
+end
+
+def metodo_b
+  puts "metodo b"
+  true
+end
+
+irb(main):011:0&gt; metodo_a &amp;&amp; metodo_b
+metodo a
+=&gt; false</pre>
+
+
+<p>O <strong>&amp;</strong> já é diferente, pois ele sempre vai verificar as duas condições independente do resultado da primeira.</p>
+
+<pre>
+irb(main):012:0&gt; metodo_a &amp; metodo_b
+metodo a
+metodo b
+=&gt; false</pre>
+
+
+<p>OK, mas e aí? Uso o <strong>&amp;&amp;</strong> ou a palavra-chave <strong>and</strong> nos meus códigos? Tanto faz, é uma pura questão de estética. Mas para ajudar a tomar uma decisão, dê uma olhada na documentação do repositório do Rails (<a href="http://dev.rubyonrails.org/#Sourcestyle">clique aqui</a>).</p>
+
+<p>Como você pode ver existe algumas recomendações para quem vai criar ou corrigir algo no código do Rails, são:</p>
+
+<ul>
+    <li>Na tabulação use dois espaços, não tab</li>
+    <li> <font color="#008000">Não use <strong>and</strong> ou <strong>or</strong> para testar booleanos, sempre use <strong>&amp;&amp;</strong> ou <strong>||</strong></font></li>
+    <li><tt>MyClass.my_method(my_arg)</tt> &#8211; não <tt>my_method( my_arg )</tt> ou <tt>my_method my_arg</tt></li>
+    <li>Siga as convenções que você encontrar no código em volta.</li>
+</ul>
+
+
+<p>Eu optei por seguir as convenções do Rails.</p>
+
+<h3>[ATUALIZA&Ccedil;ÃO]</h3>
+
+
+<p>Conversando com o Akita, fizemos alguns testes e resolvi mostrar o porque da convensão de se usar <strong>&amp;&amp;</strong> no Rails e não <strong>and</strong>.</p>
+
+<p>Veja este exemplo:</p>
+
+<pre>
+>> x = true and false
+=> false
+</pre>
+
+
+<p>Qual o valor da variável x? Tem certeza?</p>
+
+<pre>
+>> x
+=> true
+</pre>
+
+
+<p>Acontece que o operador <strong>=</strong> tem prioridade quanto ao <strong>and</strong>, no fim é como se a expressão fosse assim:</p>
+
+<pre>
+(x = true) and false
+</pre>
+
+
+<p>Exatamente para evitar estes problemas é melhor usar o <strong>&amp;&amp;</strong>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2007/10/30/pingado-com-ruby/">Pingado com Ruby</a></h1>
     
     
@@ -89,9 +202,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2007-10-30T00:00:00-02:00" pubdate>30 de Outubro de 2007</time>
+
+<time datetime="2007-10-30T00:00:00-02:00" pubdate data-updated="true">30 de Outubro de 2007</time>
         
       </p>
     
@@ -135,9 +253,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2007-10-29T00:00:00-02:00" pubdate>29 de Outubro de 2007</time>
+
+<time datetime="2007-10-29T00:00:00-02:00" pubdate data-updated="true">29 de Outubro de 2007</time>
         
       </p>
     
@@ -182,9 +305,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2007-10-27T00:00:00-02:00" pubdate>27 de Outubro de 2007</time>
+
+<time datetime="2007-10-27T00:00:00-02:00" pubdate data-updated="true">27 de Outubro de 2007</time>
         
       </p>
     
@@ -317,9 +445,14 @@ second:
 
 
 
+
+
+
+
   
 
-<time datetime="2007-10-26T00:00:00-02:00" pubdate>26 de Outubro de 2007</time>
+
+<time datetime="2007-10-26T00:00:00-02:00" pubdate data-updated="true">26 de Outubro de 2007</time>
         
       </p>
     
@@ -358,9 +491,14 @@ second:
 
 
 
+
+
+
+
   
 
-<time datetime="2007-10-26T00:00:00-02:00" pubdate>26 de Outubro de 2007</time>
+
+<time datetime="2007-10-26T00:00:00-02:00" pubdate data-updated="true">26 de Outubro de 2007</time>
         
       </p>
     
@@ -399,9 +537,14 @@ second:
 
 
 
+
+
+
+
   
 
-<time datetime="2007-10-24T00:00:00-02:00" pubdate>24 de Outubro de 2007</time>
+
+<time datetime="2007-10-24T00:00:00-02:00" pubdate data-updated="true">24 de Outubro de 2007</time>
         
       </p>
     
@@ -437,9 +580,14 @@ second:
 
 
 
+
+
+
+
   
 
-<time datetime="2007-10-23T00:00:00-02:00" pubdate>23 de Outubro de 2007</time>
+
+<time datetime="2007-10-23T00:00:00-02:00" pubdate data-updated="true">23 de Outubro de 2007</time>
         
       </p>
     
@@ -503,9 +651,14 @@ second:
 
 
 
+
+
+
+
   
 
-<time datetime="2007-10-19T00:00:00-02:00" pubdate>19 de Outubro de 2007</time>
+
+<time datetime="2007-10-19T00:00:00-02:00" pubdate data-updated="true">19 de Outubro de 2007</time>
         
       </p>
     
@@ -546,9 +699,14 @@ second:
 
 
 
+
+
+
+
   
 
-<time datetime="2007-10-18T00:00:00-02:00" pubdate>18 de Outubro de 2007</time>
+
+<time datetime="2007-10-18T00:00:00-02:00" pubdate data-updated="true">18 de Outubro de 2007</time>
         
       </p>
     
@@ -562,47 +720,6 @@ second:
 <p>Não sou um programador Java (apesar de já ter brincado com a linguagem à um bom tempo atrás) mas sempre ouvi falar bem do IntelliJ IDEA 7. O único porém aqui é que você precisa comprar o software, enquanto o RadRails e o NetBeans são na faixa.</p>
 
 <p>Tem até um vídeo para você ver como ficou, <a href="http://www.jetbrains.com/idea/training/demos/rails.html">clique aqui</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/10/17/por-que-o-netbeans-tinha-de-ser-tao-lento/">Por que o NetBeans tinha de ser tão lento?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-  
-
-<time datetime="2007-10-17T00:00:00-02:00" pubdate>17 de Outubro de 2007</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/10/543288358_e91457909a.jpg" alt="543288358_e91457909a.jpg" /></p>
-
-<p>Não sou um usuário assíduo do <strong>NetBeans</strong>, mas já usei algumas vezes e gostei do que vi, por isto sempre acompanho de perto o blog de <strong>Tor Norbye</strong>.</p>
-
-<p>Lendo seu blog, me deparei com <a href="http://blogs.sun.com/tor/entry/ruby_screenshot_of_the_week20">este artigo</a>, que me fez baixar novamente o NetBeans só para conferir.</p>
-
-<p><a href="http://blogs.sun.com/tor/entry/ruby_screenshot_of_the_week20">Aqui</a>, Tor nos mostra o excelente recurso de code completion do NetBeans em ação, ele usa o <strong>RDoc</strong> para exibir até as par&acirc;metros que na verdade são chaves de um <strong>Hash</strong> no <strong>Ruby</strong>.</p>
-
-<p>Pois é, o NetBeans tem tudo para se tornar a principal ferramenta para desenvolvimento em <strong>Rails</strong>.</p>
-
-<p>Pena que é tão lento&#8230;</p>
 </div>
   
   
@@ -627,6 +744,10 @@ second:
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
       </li>
     
@@ -640,10 +761,6 @@ second:
     
       <li class="post">
         <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
       </li>
     
   </ul>

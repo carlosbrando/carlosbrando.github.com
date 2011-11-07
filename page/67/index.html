@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="O SitePoint.com est&#xE1; oferecendo o download em pdf do livro Build Your Own Ruby on Rails Web Applications de Patrick Lenz gratuitamente. O livro &hellip;">
+  <meta name="description" content="Eu sempre me lembro daquele artigo do Akita onde ele provocava dizendo que aprender Ruby nos torna programadores piores. Estes dias conversando com &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +80,238 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2007/10/04/aprendi-ruby-e-me-tornei-um-programador-pior/">Aprendi Ruby e me tornei um programador pior&#8230;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-10-04T00:00:00-03:00" pubdate data-updated="true"> 4 de Outubro de 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img border="0" width="500" src="http://old.nomedojogo.com/wp-content/uploads/2007/10/425407884-32f0ffa696.jpg" alt="425407884_32f0ffa696" height="432" id="id" /></p>
+
+
+
+
+<p>Eu sempre me lembro daquele artigo do Akita onde ele provocava dizendo que <a href="http://rubyonbr.org/articles/2006/10/18/por-que-aprender-ruby-o-torna-um-programador-pior-por-akita" target="_blank">aprender Ruby nos torna programadores piores</a>. Estes dias conversando com o pr&#xF3;prio citei isto ao revelar minha insatisfa&#xE7;&#xE3;o quanto a ter de continuar desenvolvendo em <strong>C#</strong>. N&#xE3;o que eu n&#xE3;o goste da linguagem, muito pelo contr&#xE1;rio, gosto muito de C#, mas neste momento minha cabe&#xE7;a est&#xE1; pensando em Ruby on Rails.</p>
+
+
+
+
+<p>Mas infelizmente, aqui no Brasil, RoR <strong><em>ainda</em></strong> n&#xE3;o &#xE9; uma &quot;realidade&quot; na maioria das empresas.</p>
+
+
+
+
+<p>Apenas como exemplo, um dia destes precisei desenvolver um m&#xF3;dulo aqui onde seria necess&#xE1;rio usar pluraliza&#xE7;&#xE3;o. &#xC9; nessas horas que voc&#xEA; para e pensa: &quot;Poxa vida, se eu estivesse usando o Rails, j&#xE1; estava pronto&#8230;&quot;. Mas, nem tudo &#xE9; perfeito.</p>
+
+
+
+
+<p>Mas eu &#xE9; que n&#xE3;o ia ficar batendo cabe&#xE7;a para recriar a roda, fui atr&#xE1;s dos fontes do Rails e portei o c&#xF3;digo para C# exatamente da mesma maneira como &#xE9; no Rails.</p>
+
+
+
+
+<p>
+[source:csharp]
+  /// <summary>
+  /// Classe para inflexão de palavras em inglês.
+  /// </summary>
+  public class Inflections
+  {
+    /// <summary>
+    /// Relação de palavras sem plural.
+    /// </summary>
+    private static string[] uncountables = new string[] {&#8220;equipment&#8221;, &#8220;information&#8221;, &#8220;rice&#8221;, &#8220;money&#8221;, &#8220;species&#8221;, &#8220;series&#8221;, &#8220;fish&#8221;, &#8220;sheep&#8221;};
+
+    /// <summary>
+    /// Verifica se a palavra não tem plural.
+    /// </summary>
+    /// <param name="word">A palavra.</param>
+    /// <returns>Verdadeiro se a palavra não tem plural.</returns>
+    private static bool IsUncountable(string word)
+    {
+      word = word.ToLower();
+      foreach(string s in uncountables)
+      {
+        if (s.Equals(word))
+          return true;
+      }
+      return false;
+    }
+
+    /// <summary>
+    /// Regras de pluralização.
+    /// </summary>
+    private static Plural[] plurals =
+      new Plural[] {
+               new Plural(&#8220;$&#8221;, &#8220;s&#8221;),
+               new Plural(&#8221;s$&#8221;, &#8220;s&#8221;),
+               new Plural(&#8220;(ax|test)is$&#8221;, &#8220;$1es&#8221;),
+               new Plural(&#8220;(octop|vir)us$&#8221;, &#8220;$1i&#8221;),
+               new Plural(&#8220;(alias|status)$&#8221;, &#8220;$1es&#8221;),
+               new Plural(&#8220;(bu)s$&#8221;, &#8220;$1ses&#8221;),
+               new Plural(&#8220;(buffal|tomat)o$&#8221;, &#8220;$1oes&#8221;),
+               new Plural(&#8220;([ti])um$&#8221;, &#8220;$1a&#8221;),
+               new Plural(&#8220;sis$&#8221;, &#8220;ses&#8221;),
+               new Plural(&#8220;(?:([^f])fe|([lr])f)$&#8221;, &#8220;$1$2ves&#8221;),
+               new Plural(&#8220;(hive)$&#8221;, &#8220;$1s&#8221;),
+               new Plural(&#8220;([^aeiouy]|qu)y$&#8221;, &#8220;$1ies&#8221;),
+               new Plural(&#8220;(x|ch|ss|sh)$&#8221;, &#8220;$1es&#8221;),
+               new Plural(&#8220;(matr|vert|ind)ix|ex$&#8221;, &#8220;$1ices&#8221;),
+               new Plural(&#8220;([m|l])ouse$&#8221;, &#8220;$1ice&#8221;),
+               new Plural(&#8220;^(ox)$&#8221;, &#8220;$1en&#8221;),
+               new Plural(&#8220;(quiz)$&#8221;, &#8220;$1zes&#8221;)
+             };
+
+    /// <summary>
+    /// Retorna a lista de regras de pluralização.
+    /// </summary>
+    private static Plural[] Plurals
+    {
+      get
+      {
+        return plurals;
+      }
+    }
+
+    /// <summary>
+    /// Relação de palavras irregulares.
+    /// </summary>
+    private static string[][] irregular =
+      new string[][] {
+                 new string[] {&#8220;person&#8221;, &#8220;people&#8221;},
+                 new string[] {&#8220;man&#8221;, &#8220;men&#8221;},
+                 new string[] {&#8220;child&#8221;, &#8220;children&#8221;},
+                 new string[] {&#8220;sex&#8221;, &#8220;sexes&#8221;},
+                 new string[] {&#8220;move&#8221;, &#8220;moves&#8221;}
+               };
+
+    /// <summary>
+    /// Retorna o plural de uma palavra irregular.
+    /// </summary>
+    /// <param name="word">A palavra.</param>
+    /// <returns>O plural da palavra.</returns>
+    private static string Irregular(string word)
+    {
+      word = word.ToLower();
+      foreach(string[] s in irregular)
+      {
+        if (s[0].Equals(word))
+          return s[1];
+      }
+      return string.Empty;
+    }
+
+    /// <summary>
+    /// Verifica se uma palavra é irregular.
+    /// </summary>
+    /// <param name="word">A palavra.</param>
+    /// <returns>Verdadeiro se a palavra for irregular.</returns>
+    private static bool IsIrregular(string word)
+    {
+      word = word.ToLower();
+      foreach(string[] s in irregular)
+      {
+        if (s[0].Equals(word))
+          return true;
+      }
+      return false;
+    }
+
+    /// <summary>
+    /// Retorna o plural de uma palavra.
+    /// </summary>
+    /// <param name="word">A palavra.</param>
+    /// <returns>O plural da palavra.</returns>
+    public static string Pluralize(string word)
+    {
+      string result = word;
+
+      if (!Inflections.IsUncountable(word))
+      {
+        if (Inflections.IsIrregular(word))
+          return Inflections.Irregular(word);
+        else
+        {
+          foreach(Plural p in Inflections.Plurals)
+          {
+            if (p.Rule.Match(word).Success)
+            {
+              result = p.Rule.Replace(word, p.Replacement);
+            }
+          }
+        }
+      }
+      return result;
+    }
+  }
+
+  /// <summary>
+  /// Representa uma regra de pluralização.
+  /// </summary>
+  class Plural
+  {
+    /// <summary>
+    /// Construtor da classe.
+    /// </summary>
+    /// <param name="rule">Uma expressão regular com a regra de pluralização.</param>
+    /// <param name="replacement">A substituição necessária.</param>
+    public Plural(string rule, string replacement)
+    {
+      this.rule = new Regex(rule);
+      this.replacement = replacement;
+    }
+
+    Regex rule;
+    string replacement;
+
+    /// <summary>
+    /// A regra de pluralização.
+    /// </summary>
+    public Regex Rule{ get{ return rule; } }
+
+    /// <summary>
+    /// A substituição necessária.
+    /// </summary>
+    public string Replacement{ get{ return replacement; } }
+  }
+[/source]
+</p>
+
+
+
+
+<p>Pois &#xE9;, depois que aprendi Ruby, sou um programador muito pior&#8230;</p>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2007/10/03/de-graa-eu-quero/">De graça? Eu quero&#8230;</a></h1>
     
     
@@ -89,9 +321,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2007-10-03T00:00:00-03:00" pubdate> 3 de Outubro de 2007</time>
+
+<time datetime="2007-10-03T00:00:00-03:00" pubdate data-updated="true"> 3 de Outubro de 2007</time>
         
       </p>
     
@@ -123,9 +360,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2007-10-02T00:00:00-03:00" pubdate> 2 de Outubro de 2007</time>
+
+<time datetime="2007-10-02T00:00:00-03:00" pubdate data-updated="true"> 2 de Outubro de 2007</time>
         
       </p>
     
@@ -157,9 +399,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2007-10-01T00:00:00-03:00" pubdate> 1 de Outubro de 2007</time>
+
+<time datetime="2007-10-01T00:00:00-03:00" pubdate data-updated="true"> 1 de Outubro de 2007</time>
         
       </p>
     
@@ -191,9 +438,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2007-10-01T00:00:00-03:00" pubdate> 1 de Outubro de 2007</time>
+
+<time datetime="2007-10-01T00:00:00-03:00" pubdate data-updated="true"> 1 de Outubro de 2007</time>
         
       </p>
     
@@ -225,9 +477,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2007-09-28T00:00:00-03:00" pubdate>28 de Setembro de 2007</time>
+
+<time datetime="2007-09-28T00:00:00-03:00" pubdate data-updated="true">28 de Setembro de 2007</time>
         
       </p>
     
@@ -259,9 +516,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2007-09-27T00:00:00-03:00" pubdate>27 de Setembro de 2007</time>
+
+<time datetime="2007-09-27T00:00:00-03:00" pubdate data-updated="true">27 de Setembro de 2007</time>
         
       </p>
     
@@ -323,9 +585,14 @@ end
 
 
 
+
+
+
+
   
 
-<time datetime="2007-09-26T00:00:00-03:00" pubdate>26 de Setembro de 2007</time>
+
+<time datetime="2007-09-26T00:00:00-03:00" pubdate data-updated="true">26 de Setembro de 2007</time>
         
       </p>
     
@@ -424,9 +691,14 @@ end
 
 
 
+
+
+
+
   
 
-<time datetime="2007-09-25T00:00:00-03:00" pubdate>25 de Setembro de 2007</time>
+
+<time datetime="2007-09-25T00:00:00-03:00" pubdate data-updated="true">25 de Setembro de 2007</time>
         
       </p>
     
@@ -458,9 +730,14 @@ end
 
 
 
+
+
+
+
   
 
-<time datetime="2007-09-24T00:00:00-03:00" pubdate>24 de Setembro de 2007</time>
+
+<time datetime="2007-09-24T00:00:00-03:00" pubdate data-updated="true">24 de Setembro de 2007</time>
         
       </p>
     
@@ -530,40 +807,6 @@ end
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/09/21/um-guia-sobre-segurana-no-ror/">Um guia sobre segurança no RoR</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-  
-
-<time datetime="2007-09-21T00:00:00-03:00" pubdate>21 de Setembro de 2007</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img alt="7044429_fe23307373" src="http://old.nomedojogo.com/wp-content/uploads/2007/09/7044429-fe23307373.jpg" border="0"> </p>
-
-
-<p> <p>Hoje estou na maior correria e resolvi postar apenas um link para um artigo muito bem feito do blog <a href="http://www.quarkruby.com">QuarkRuby</a>. O blog pertence a <b>Nakul </b><b>Aggarwal</b> e <b>Ritesh Arora</b>.</p> <p>O assunto do artigo é segurança no Ruby on Rails. Eles criaram um verdadeiro manual sobre o assunto, abordando todos os módulos do Rails. Mas não se trata de um artigo explicando todos os pontos importantes (para isto seria necessário um livro inteiro), ao invés disto, eles criaram uma lista com os principais plugins e artigos publicados por membros da comunidade ruby que tratam de segurança.</p> <p>Vale a pena ler e guardar nos seus favoritos. Para apreciar o artigo (em inglês) <a href="http://www.quarkruby.com/2007/9/20/ruby-on-rails-security-guide">clique aqui</a>.</p></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/68/">&larr; Antigos</a>
@@ -581,6 +824,10 @@ end
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
       </li>
     
@@ -594,10 +841,6 @@ end
     
       <li class="post">
         <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
       </li>
     
   </ul>

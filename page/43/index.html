@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="foto de luisdrk Ok, até agora eu ainda não entendi qual é a do twitter&#8230; mas vamos tentar. Para quem quiser me seguir: http://twitter.com/ &hellip;">
+  <meta name="description" content="O adaptador de MySQL do ActiveRecord ficou um pouco mais esperto na hora de criar ou alterar colunas no banco de dados usando inteiros. De acordo com &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +80,77 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2008/05/05/edge-rails-smallint-int-ou-bigint-no-mysql/">Edge Rails: smallint, int ou bigint no MySQL?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-05-05T00:00:00-03:00" pubdate data-updated="true"> 5 de Maio de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>O adaptador de MySQL do <code>ActiveRecord</code> ficou um pouco <strong>mais esperto</strong> na hora de criar ou alterar colunas no banco de dados usando <strong>inteiros</strong>. De acordo com a opção <code>:limit</code>, ele define se a coluna será um <code>smallint</code>, <code>int</code> ou <code>bigint</code>. Veja um trecho do código que faz isto:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="keyword keyword_control keyword_control_ruby">case</span> limit
+<span class="keyword keyword_control keyword_control_ruby">when</span> <span class="constant constant_numeric constant_numeric_ruby">0</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">..</span><span class="constant constant_numeric constant_numeric_ruby">3</span>
+  <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>smallint(<span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>limit<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span>)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+<span class="keyword keyword_control keyword_control_ruby">when</span> <span class="constant constant_numeric constant_numeric_ruby">4</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">..</span><span class="constant constant_numeric constant_numeric_ruby">8</span>
+  <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>int(<span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>limit<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span>)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+<span class="keyword keyword_control keyword_control_ruby">when</span> <span class="constant constant_numeric constant_numeric_ruby">9</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">..</span><span class="constant constant_numeric constant_numeric_ruby">20</span>
+  <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>bigint(<span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>limit<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span>)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+<span class="keyword keyword_control keyword_control_ruby">else</span>
+  <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>int(11)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+</span></pre>
+
+
+<p>O trecho acima foi extraído do arquivo <a href="http://github.com/rails/rails/tree/a37546517dad9f6d9a7de6e1dba4d960909d71e8/activerecord/lib/active_record/connection_adapters/mysql_adapter.rb">activerecord/lib/active_record/connection_adapters/mysql_adapter.rb</a> à partir da linha 470.</p>
+
+<p>Para ficar mais claro, vamos mapear isto em um migration e ver que tipo de coluna será criado para <strong>cada caso</strong>:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">create_table <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>table_name</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>force</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">true</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">t</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> de 0 à 3: smallint
+</span>  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>integer <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>coluna1</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>limit</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">2</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> smallint(2)
+</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> de 4 à 8: int
+</span>  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>integer <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>coluna2</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>limit</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">6</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> int(6)
+</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> de 9 à 20: bigint
+</span>  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>integer <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>coluna3</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>limit</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">15</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> bigint(15)
+</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> se a opção :limit não for informada: int(11)
+</span>  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>integer <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>coluna4</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> int(11)
+</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+<p>O adaptador do PostgreSQL já fazia assim, o do MySQL apenas seguiu a tendência.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/05/03/tambem-me-rendi-ao-twitter/">Também me rendi ao twitter</a></h1>
     
     
@@ -89,9 +160,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-05-03T00:00:00-03:00" pubdate> 3 de Maio de 2008</time>
+
+<time datetime="2008-05-03T00:00:00-03:00" pubdate data-updated="true"> 3 de Maio de 2008</time>
         
       </p>
     
@@ -127,9 +203,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-05-03T00:00:00-03:00" pubdate> 3 de Maio de 2008</time>
+
+<time datetime="2008-05-03T00:00:00-03:00" pubdate data-updated="true"> 3 de Maio de 2008</time>
         
       </p>
     
@@ -171,9 +252,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-05-02T00:00:00-03:00" pubdate> 2 de Maio de 2008</time>
+
+<time datetime="2008-05-02T00:00:00-03:00" pubdate data-updated="true"> 2 de Maio de 2008</time>
         
       </p>
     
@@ -209,9 +295,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-05-02T00:00:00-03:00" pubdate> 2 de Maio de 2008</time>
+
+<time datetime="2008-05-02T00:00:00-03:00" pubdate data-updated="true"> 2 de Maio de 2008</time>
         
       </p>
     
@@ -245,9 +336,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-05-02T00:00:00-03:00" pubdate> 2 de Maio de 2008</time>
+
+<time datetime="2008-05-02T00:00:00-03:00" pubdate data-updated="true"> 2 de Maio de 2008</time>
         
       </p>
     
@@ -281,9 +377,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-05-01T00:00:00-03:00" pubdate> 1 de Maio de 2008</time>
+
+<time datetime="2008-05-01T00:00:00-03:00" pubdate data-updated="true"> 1 de Maio de 2008</time>
         
       </p>
     
@@ -340,9 +441,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-05-01T00:00:00-03:00" pubdate> 1 de Maio de 2008</time>
+
+<time datetime="2008-05-01T00:00:00-03:00" pubdate data-updated="true"> 1 de Maio de 2008</time>
         
       </p>
     
@@ -375,9 +481,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-05-01T00:00:00-03:00" pubdate> 1 de Maio de 2008</time>
+
+<time datetime="2008-05-01T00:00:00-03:00" pubdate data-updated="true"> 1 de Maio de 2008</time>
         
       </p>
     
@@ -417,9 +528,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-05-01T00:00:00-03:00" pubdate> 1 de Maio de 2008</time>
+
+<time datetime="2008-05-01T00:00:00-03:00" pubdate data-updated="true"> 1 de Maio de 2008</time>
         
       </p>
     
@@ -432,39 +548,6 @@
 
 <pre class="textmate-source"><span class="source source_shell">rake rails:freeze:edge RELEASE=1.2.0</span></pre>
 
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/04/30/os-filosofos-da-nossa-epoca-sao-os-programadores/">Os filósofos da nossa época são os programadores</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-  
-
-<time datetime="2008-04-30T00:00:00-03:00" pubdate>30 de Abril de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="alignnone size-full wp-image-692" title="Programadores" src="http://old.nomedojogo.com/wp-content/uploads/2008/04/2451278540_fc81e2d568.jpg" alt="" /></p>
-
-<p>Foto de <a href="http://flickr.com/people/faca/">fabricio caiazza</a></p>
 </div>
   
   
@@ -489,6 +572,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
       </li>
     
@@ -502,10 +589,6 @@
     
       <li class="post">
         <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
       </li>
     
   </ul>

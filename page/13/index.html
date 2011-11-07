@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Acabou de sair a versão 2.1.7 do Remarkable que conta com algumas novidades. As macros have_index e have_indices agora contam com a opção :unique que &hellip;">
+  <meta name="description" content="No Rails 2.3, ao acessar nossas rotas nomeadas não teremos mais métodos como formatted_post_path ou formatted_new_user_path. Estes métodos dinâmicos &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +80,64 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2009/02/03/rails-23-formatted-routes/">Rails 2.3: Formatted Routes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-02-03T00:00:00-02:00" pubdate data-updated="true"> 3 de Fevereiro de 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>No Rails 2.3, ao acessar nossas rotas nomeadas não teremos mais métodos como <code>formatted_post_path</code> ou <code>formatted_new_user_path</code>. Estes métodos dinâmicos foram removidos com o objetivo de melhorar o consumo de memória no Rails.</p>
+
+<p>Mas isto não significa que não teremos mais a funcionalidade de rotas formatadas. Elas continuam existindo, mas devem ser acessadas de outra maneira. Vejamos alguns exemplos comparando a forma atual e a nova forma:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> atual
+</span>formatted_post_path<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>post<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>xml</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> novo
+</span>post_path<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>post<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>format</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>xml</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> atual
+</span>formatted_new_user_path<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>json</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> novo
+</span>new_user_path<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>format</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>json</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
+
+
+<p>É uma mudança muito pequena, mas que internamente tem um impacto significativo no consumo de memória dos processos Rails, principalmente se você possui muitas rotas em seu projeto.</p>
+
+<p>Caso você esteja em um processo de migração deve atentar a esta alteração.</p>
+
+<p>O Rails 2.3 já está em sua versão RC1 e em poucos dias devemos ter sua versão final lançada, mas esta série continuará expondo algumas das novidades que encontraremos nesta versão.</p>
+
+<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.3/3.0 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades acompanhando a série <a href="../category/edge-rails/">Edge Rails</a>.</em>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2009/02/02/remarkable-217/">Remarkable 2.1.7</a></h1>
     
     
@@ -89,9 +147,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2009-02-02T00:00:00-02:00" pubdate> 2 de Fevereiro de 2009</time>
+
+<time datetime="2009-02-02T00:00:00-02:00" pubdate data-updated="true"> 2 de Fevereiro de 2009</time>
         
       </p>
     
@@ -146,9 +209,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2009-01-30T00:00:00-02:00" pubdate>30 de Janeiro de 2009</time>
+
+<time datetime="2009-01-30T00:00:00-02:00" pubdate data-updated="true">30 de Janeiro de 2009</time>
         
       </p>
     
@@ -221,9 +289,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2009-01-29T00:00:00-02:00" pubdate>29 de Janeiro de 2009</time>
+
+<time datetime="2009-01-29T00:00:00-02:00" pubdate data-updated="true">29 de Janeiro de 2009</time>
         
       </p>
     
@@ -288,9 +361,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2009-01-28T00:00:00-02:00" pubdate>28 de Janeiro de 2009</time>
+
+<time datetime="2009-01-28T00:00:00-02:00" pubdate data-updated="true">28 de Janeiro de 2009</time>
         
       </p>
     
@@ -368,9 +446,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2009-01-27T00:00:00-02:00" pubdate>27 de Janeiro de 2009</time>
+
+<time datetime="2009-01-27T00:00:00-02:00" pubdate data-updated="true">27 de Janeiro de 2009</time>
         
       </p>
     
@@ -438,9 +521,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2009-01-26T00:00:00-02:00" pubdate>26 de Janeiro de 2009</time>
+
+<time datetime="2009-01-26T00:00:00-02:00" pubdate data-updated="true">26 de Janeiro de 2009</time>
         
       </p>
     
@@ -477,9 +565,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2009-01-23T00:00:00-02:00" pubdate>23 de Janeiro de 2009</time>
+
+<time datetime="2009-01-23T00:00:00-02:00" pubdate data-updated="true">23 de Janeiro de 2009</time>
         
       </p>
     
@@ -552,9 +645,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2009-01-22T00:00:00-02:00" pubdate>22 de Janeiro de 2009</time>
+
+<time datetime="2009-01-22T00:00:00-02:00" pubdate data-updated="true">22 de Janeiro de 2009</time>
         
       </p>
     
@@ -620,9 +718,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2009-01-21T00:00:00-02:00" pubdate>21 de Janeiro de 2009</time>
+
+<time datetime="2009-01-21T00:00:00-02:00" pubdate data-updated="true">21 de Janeiro de 2009</time>
         
       </p>
     
@@ -665,50 +768,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/01/20/edge-rails-observe_field/">Edge Rails: observe_field</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-  
-
-<time datetime="2009-01-20T00:00:00-02:00" pubdate>20 de Janeiro de 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>O método <code>observe_field</code> tem a finalidade de observar um determinado campo de um formulário e executar uma chamada Ajax quando houver alguma alteração em seu valor.</p>
-
-<p>Até hoje, este método possuía também a opção <code>:on</code> que permitia identificar qual evento deveria ser observado. No exemplo abaixo ele deveria disparar uma chamada Ajax assim que o campo <code>book_title</code> perdesse o foco (blur):</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">observe_field <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>book_title<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
-  <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>url</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>http://example.com/books/edit/1<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
-  <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>on</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>blur<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
-</span></pre>
-
-
-<p>Mas a funcionalidade que define a opção <code>:on</code> foi <a href="http://github.com/rails/rails/commit/382741f289beb0c4630fc2848a145f8049379bb4">removida</a> do <a href="http://www.prototypejs.org/">Prototype</a> (o framework utilizado pelo Rails para manipulação de JavaScript) há mais ou menos dois anos atrás. Ou seja, já faz dois anos que esta opção não funciona e foi ignorada, por isto ela foi removida definitivamente do Rails.</p>
-
-<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.3/3.0 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades acompanhando a série <a href="../category/edge-rails/">Edge Rails</a>.</em>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/14/">&larr; Antigos</a>
@@ -726,6 +785,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
       </li>
     
@@ -739,10 +802,6 @@
     
       <li class="post">
         <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
       </li>
     
   </ul>

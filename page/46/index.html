@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Também falamos disto no podcast #12. No Rails 2.1 teremos outro problema que dá dor de cabeça nos desenvolvedores resolvido. Toda vez que você entra &hellip;">
+  <meta name="description" content="Na última sexta-feira eu falei sobre Dirty Objects, e disse que aquela novidade seria o gancho para uma outra ainda mais interessante. Já que agora &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +80,92 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2008/04/14/edge-rails-partial-updates/">Edge Rails: Partial Updates</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-04-14T00:00:00-03:00" pubdate data-updated="true">14 de Abril de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Na última sexta-feira eu falei sobre <a href="http://www.nomedojogo.com/2008/04/11/edge-rails-dirty-objects/">Dirty Objects</a>, e disse que aquela novidade seria o gancho para uma outra ainda mais interessante.</p>
+
+<p>Já que agora podemos rastrear quais atributos foram alterados na instancia do objeto, porque não usar isto para evitar atualizações desnecessários no banco de dados?</p>
+
+<p>Hoje quando executamos o método save em um <code>ActiveRecord</code> já existente, será executado no banco de dados um <code>UPDATE</code> em todas as colunas da tabela, mesmo para as que não sofreram alterações.</p>
+
+<p>Com o Dirty Objects isto poderia ser melhorado, e foi exatamente o que aconteceu. Veja o SQL gerado ao tentar salvar um registro que sofreu apenas uma leve alteração no <strong>Rails 2.1</strong>:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">article <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Article</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>first</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; "Title"
+</span>article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>subject  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; "Edge Rails"
+</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Vamos atualizar um atributo...
+</span>article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>New Title<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Veja o SQL criado ao persistir o objeto
+</span>article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>save
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt;  "UPDATE articles SET title = 'New Title' WHERE id = 1"</span></span></pre>
+
+
+<p>Note que apenas o atributo alterado será atualizado no banco de dados. Se nenhum atributo fosse alterado, o <code>ActiveRecord</code> não executaria nenhum update.</p>
+
+<p>Para habilitar/desabilitar esta nova funcionalidade você deve alterar a propriedade <code>partial_updates</code> dos seus models.</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Para habilitar a funcionalidade...
+</span><span class="support support_class support_class_ruby">MinhaClasse</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>partial_updates <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_language constant_language_ruby">true</span></span></pre>
+
+
+<p>Se deseja habilitar/desabilitar esta funcionalidade para todos os models do seu sistema acrescente esta linha no arquivo environment.rb ou em algum arquivo no diretório config/initializer:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Habilitando para todos os meus models
+</span><span class="support support_class support_class_ruby">ActiveRecord</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">Base</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>partial_updates <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_language constant_language_ruby">true</span></span></pre>
+
+
+<p>Atualmente o arquivo <a href="http://dev.rubyonrails.org/browser/trunk/railties/configs/initializers/new_rails_defaults.rb?rev=9239">config/initializers/new_rails_defaults.rb</a> já tem esta linha, mas ele deve ser removido mais para frente.</p>
+
+<p><strong>Atenção: Não se esqueça de informar o <code>ActiveRecord</code> quando for alterar um atributo sem usar o método <code>attr=</code>, assim:</strong></p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Se eu fizer assim, tudo bem...
+</span>person<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>name <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>bobby<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+person<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>name_change    <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; ['bob', 'bobby']
+</span>
+
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Mas se eu não alterar o atributo usando o sinal de '='
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> então preciso avisar que vou fazer uma alteração
+</span>person<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>name_will_change!
+person<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>name <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_augmented keyword_operator_assignment_augmented_ruby">&lt;&lt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>by<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+person<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>name_change    <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; ['bob', 'bobby']</span></span></pre>
+
+
+<p>Se não fizer isto este tipo de alteração não será rastreado, e sua tabela não será atualizada corretamente.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/04/14/edge-rails-configgem/">Edge Rails: config.gem</a></h1>
     
     
@@ -89,9 +175,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-04-14T00:00:00-03:00" pubdate>14 de Abril de 2008</time>
+
+<time datetime="2008-04-14T00:00:00-03:00" pubdate data-updated="true">14 de Abril de 2008</time>
         
       </p>
     
@@ -152,9 +243,14 @@ config<span class="punctuation punctuation_separator punctuation_separator_metho
 
 
 
+
+
+
+
   
 
-<time datetime="2008-04-11T00:00:00-03:00" pubdate>11 de Abril de 2008</time>
+
+<time datetime="2008-04-11T00:00:00-03:00" pubdate data-updated="true">11 de Abril de 2008</time>
         
       </p>
     
@@ -204,9 +300,14 @@ rake db<span class="constant constant_other constant_other_symbol constant_other
 
 
 
+
+
+
+
   
 
-<time datetime="2008-04-11T00:00:00-03:00" pubdate>11 de Abril de 2008</time>
+
+<time datetime="2008-04-11T00:00:00-03:00" pubdate data-updated="true">11 de Abril de 2008</time>
         
       </p>
     
@@ -241,9 +342,14 @@ rake db<span class="constant constant_other constant_other_symbol constant_other
 
 
 
+
+
+
+
   
 
-<time datetime="2008-04-11T00:00:00-03:00" pubdate>11 de Abril de 2008</time>
+
+<time datetime="2008-04-11T00:00:00-03:00" pubdate data-updated="true">11 de Abril de 2008</time>
         
       </p>
     
@@ -317,9 +423,14 @@ article<span class="punctuation punctuation_separator punctuation_separator_meth
 
 
 
+
+
+
+
   
 
-<time datetime="2008-04-11T00:00:00-03:00" pubdate>11 de Abril de 2008</time>
+
+<time datetime="2008-04-11T00:00:00-03:00" pubdate data-updated="true">11 de Abril de 2008</time>
         
       </p>
     
@@ -357,9 +468,14 @@ article<span class="punctuation punctuation_separator punctuation_separator_meth
 
 
 
+
+
+
+
   
 
-<time datetime="2008-04-10T00:00:00-03:00" pubdate>10 de Abril de 2008</time>
+
+<time datetime="2008-04-10T00:00:00-03:00" pubdate data-updated="true">10 de Abril de 2008</time>
         
       </p>
     
@@ -406,9 +522,14 @@ not_ryan<span class="punctuation punctuation_separator punctuation_separator_met
 
 
 
+
+
+
+
   
 
-<time datetime="2008-04-09T00:00:00-03:00" pubdate> 9 de Abril de 2008</time>
+
+<time datetime="2008-04-09T00:00:00-03:00" pubdate data-updated="true"> 9 de Abril de 2008</time>
         
       </p>
     
@@ -439,9 +560,14 @@ not_ryan<span class="punctuation punctuation_separator punctuation_separator_met
 
 
 
+
+
+
+
   
 
-<time datetime="2008-04-08T00:00:00-03:00" pubdate> 8 de Abril de 2008</time>
+
+<time datetime="2008-04-08T00:00:00-03:00" pubdate data-updated="true"> 8 de Abril de 2008</time>
         
       </p>
     
@@ -472,9 +598,14 @@ not_ryan<span class="punctuation punctuation_separator punctuation_separator_met
 
 
 
+
+
+
+
   
 
-<time datetime="2008-04-08T00:00:00-03:00" pubdate> 8 de Abril de 2008</time>
+
+<time datetime="2008-04-08T00:00:00-03:00" pubdate data-updated="true"> 8 de Abril de 2008</time>
         
       </p>
     
@@ -506,73 +637,6 @@ plugin<span class="punctuation punctuation_separator punctuation_separator_metho
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/04/07/rails-podcast-brasil-episodio-12/">Rails Podcast Brasil - Episódio 12</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-  
-
-<time datetime="2008-04-07T00:00:00-03:00" pubdate> 7 de Abril de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Caramba&#8230; já é segunda-feira! A semana passada foi correria total por conta do projeto em que estamos trabalhando, só fomos perceber que ainda não tínhamos gravado o podcast na sexta-feira à noite.</p>
-
-<p>Então finja que você tem um DeLorean e um capacitor de fluxo e volte no tempo para no mínimo sexta-feira passada e baixe, <a href="http://www.rubyonrails.pro.br/podcasts">clicando aqui</a> o nosso podcast!</p>
-
-<h3>Neste episódio:</h3>
-
-
-<ul>
-    <li><a href="http://weblog.rubyonrails.com/2008/4/2/rails-is-moving-from-svn-to-git">Rails is moving from SVN to Git</a></li>
-    <li><a href="http://blog.segment7.net/articles/2008/03/29/rubygems-1-1-0">RubyGems 1.1.0</a></li>
-    <li><a href="http://www.viget.com/extend/openid-authentication-plugin-for-rails-now-supports-openid-20/">OpenID Authentication Plugin for Rails Now Supports OpenID 2.0</a></li>
-    <li><a href="http://rorblog.techcfl.com/2008/04/02/custom-form-validations-without-activerecord/">Custom Form Validations Without ActiveRecord</a></li>
-    <li><a href="http://blog.codefront.net/2008/04/05/living-on-the-edge-of-rails-14-the-extreme-edition-extremely-late/">Living on the edge (of Rails) #14 Â the extreme edition. Extremely late.</a></li>
-    <li><a href="http://www.railsjedi.com/posts/15-Acts-as-ASP-NET-a-Ruby-on-Rails-Plugin-">Acts as ASP.NET (a Ruby on Rails Plugin)</a></li>
-    <li><a href="http://drnicwilliams.com/2008/04/01/writing-c-extensions-in-rubygems/">Writing C extensions in RubyGems using newgem generators (plus a free TextMate bundle)</a></li>
-    <li><a href="http://probablycorey.wordpress.com/2008/03/28/abusing-rubys-question-mark-methods/">Abusing RubyÂs question mark methods.</a></li>
-    <li><a href="http://feeds.feedburner.com/%3Csub%3Er/RubyInside/%3C/sub%3E3/264117181/easily-accessible-rails-documentation-on-os-x-833.html">Easily Accessible Rails Documentation on OS X</a></li>
-    <li><a href="http://www.alistapart.com/articles/signupforms">Sign Up Forms Must Die</a></li>
-    <li><a href="http://www.rorsecurity.info/2008/04/04/webappsec-the-idea-of-negative-captchas/">The idea of negative CAPTCHAs</a></li>
-    <li><a href="http://simplesideias.com.br/usando-jquery-na-pratica/">Usando jQuery na prática</a></li>
-    <li><a href="http://www.rubyinside.com/a-fresh-overview-of-rubinius-835.html">A Fresh Overview of Rubinius</a></li>
-    <li><a href="http://www.rubyinside.com/interesting-rails-tidbits-6-831.html">Interesting Rails Tidbits #6</a></li>
-    <li><a href="http://rubyglasses.blogspot.com/2007/08/actsasgoodstyle.html">acts_as_good_style</a></li>
-    <li><a href="http://code.google.com/p/scalr/">scalr</a></li>
-    <li><a href="http://mtnwestrubyconf2008.confreaks.com/">Confreaks</a></li>
-    <li><a href="http://www.roughlydrafted.com/2008/03/29/mac-shot-first-10-reasons-why-cansecwest-targets-apple/">Mac Shot First: 10 Reasons Why CanSecWest Targets Apple</a></li>
-    <li><a href="http://www.intridea.com/2008/4/1/ruby-github-simple-access-to-the-github-api">Ruby-GitHub: Simple Access to the GitHub API</a></li>
-    <li><strong>Github Â projetos</strong>
-<ul>
-    <li><a href="http://gitorious.org/projects/merb_mart">merb_mart</a></li>
-    <li><a href="http://gitorious.org/projects/merb_global">merb_global</a></li>
-    <li><a href="http://gitorious.org/projects/nbgit">nbgit</a></li>
-</ul>
-</li>
-    <li><a href="http://ozmm.org/posts/github_is_gits_killer_app.html">GitHub is GitÂs Killer App</a></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/47/">&larr; Antigos</a>
@@ -590,6 +654,10 @@ plugin<span class="punctuation punctuation_separator punctuation_separator_metho
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
       </li>
     
@@ -603,10 +671,6 @@ plugin<span class="punctuation punctuation_separator punctuation_separator_metho
     
       <li class="post">
         <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
       </li>
     
   </ul>

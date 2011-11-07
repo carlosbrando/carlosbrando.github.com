@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Os métodos dinâmicos de pesquisa do ActiveRecord receberam uma versão destrutiva, que dispara um erro do tipo RecordNotFound caso nenhum registro &hellip;">
+  <meta name="description" content="A classe Rails::SecretKeyGenerator, usada para gerar chaves secretas aleatórias como as usadas para armazenar a sessão do usuário em cookies, está &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +80,78 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2008/09/26/edge-rails-troca-de-biblioteca-geradora-de-chaves-secretas/">Edge Rails: Troca de biblioteca geradora de chaves secretas</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-09-26T00:00:00-03:00" pubdate data-updated="true">26 de Setembro de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A classe <strong>Rails::SecretKeyGenerator</strong>, usada para gerar chaves secretas aleatórias como as usadas para armazenar a sessão do usuário em cookies, está sendo marcada para ser removida do Rails (Deprecate).</p>
+
+<p>Em seu lugar o Rails passará a usar a classe <strong>ActiveSupport::SecureRandom</strong> que foi feita para o Ruby 1.9. A biblioteca <strong>SecureRandom</strong> faz a mesma coisa que a anterior, mas um pouco melhor.</p>
+
+<p>Esta nova biblioteca suporta os seguintes geradores de números aleatórios:</p>
+
+<ul>
+    <li><span class="c1">openssl</span></li>
+    <li><span class="c1">/dev/urandom</span></li>
+    <li><span class="c1">Win32</span></li>
+</ul>
+
+
+<p>Vejamos alguns exemplos de chaves geradas com esta nova biblioteca:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> random hexadecimal string.
+</span><span class="support support_class support_class_ruby">ActiveSupport</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">SecureRandom</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>hex<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">10</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; "52750b30ffbc7de3b362"
+</span><span class="support support_class support_class_ruby">ActiveSupport</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">SecureRandom</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>hex<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">10</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; "92b15d6c8dc4beb5f559"
+</span><span class="support support_class support_class_ruby">ActiveSupport</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">SecureRandom</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>hex<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">11</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; "6aca1b5c58e4863e6b81b8"
+</span><span class="support support_class support_class_ruby">ActiveSupport</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">SecureRandom</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>hex<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">12</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; "94b2fff3e7fd9b9c391a2306"
+</span><span class="support support_class support_class_ruby">ActiveSupport</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">SecureRandom</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>hex<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">13</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; "39b290146bea6ce975c37cfc23"
+</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> random base64 string.
+</span><span class="support support_class support_class_ruby">ActiveSupport</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">SecureRandom</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>base64<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">10</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; "EcmTPZwWRAozdA=="
+</span><span class="support support_class support_class_ruby">ActiveSupport</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">SecureRandom</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>base64<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">10</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; "9b0nsevdwNuM/w=="
+</span><span class="support support_class support_class_ruby">ActiveSupport</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">SecureRandom</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>base64<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">10</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; "KO1nIU+p9DKxGg=="
+</span><span class="support support_class support_class_ruby">ActiveSupport</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">SecureRandom</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>base64<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">11</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; "l7XEiFja+8EKEtY="
+</span><span class="support support_class support_class_ruby">ActiveSupport</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">SecureRandom</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>base64<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">12</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; "7kJSM/MzBJI+75j8"
+</span><span class="support support_class support_class_ruby">ActiveSupport</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">SecureRandom</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>base64<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">13</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; "vKLJ0tXBHqQOuIcSIg=="
+</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> random binary string.
+</span><span class="support support_class support_class_ruby">ActiveSupport</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">SecureRandom</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>random_bytes<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">10</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; "\016\t{\370g\310pbr\301"
+</span><span class="support support_class support_class_ruby">ActiveSupport</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">SecureRandom</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>random_bytes<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">10</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; "\323U\030TO\234\357\020\a\337"</span></span></pre>
+
+
+<hr /><em>Este artigo pertence a série “Edge Rails”. Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. A intenção desta série é preparar antecipadamente os programadores para as próximas versões do framework.</em>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/09/25/edge-rails-nova-versao-destrutiva-dos-metodos-de-pesquisa-do-activerecord/">Edge Rails: Nova versão destrutiva dos métodos de pesquisa do ActiveRecord</a></h1>
     
     
@@ -89,9 +161,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-09-25T00:00:00-03:00" pubdate>25 de Setembro de 2008</time>
+
+<time datetime="2008-09-25T00:00:00-03:00" pubdate data-updated="true">25 de Setembro de 2008</time>
         
       </p>
     
@@ -131,9 +208,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-09-24T00:00:00-03:00" pubdate>24 de Setembro de 2008</time>
+
+<time datetime="2008-09-24T00:00:00-03:00" pubdate data-updated="true">24 de Setembro de 2008</time>
         
       </p>
     
@@ -177,9 +259,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-09-23T00:00:00-03:00" pubdate>23 de Setembro de 2008</time>
+
+<time datetime="2008-09-23T00:00:00-03:00" pubdate data-updated="true">23 de Setembro de 2008</time>
         
       </p>
     
@@ -221,9 +308,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-09-23T00:00:00-03:00" pubdate>23 de Setembro de 2008</time>
+
+<time datetime="2008-09-23T00:00:00-03:00" pubdate data-updated="true">23 de Setembro de 2008</time>
         
       </p>
     
@@ -266,9 +358,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-09-22T00:00:00-03:00" pubdate>22 de Setembro de 2008</time>
+
+<time datetime="2008-09-22T00:00:00-03:00" pubdate data-updated="true">22 de Setembro de 2008</time>
         
       </p>
     
@@ -307,9 +404,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-09-21T00:00:00-03:00" pubdate>21 de Setembro de 2008</time>
+
+<time datetime="2008-09-21T00:00:00-03:00" pubdate data-updated="true">21 de Setembro de 2008</time>
         
       </p>
     
@@ -375,9 +477,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-09-20T00:00:00-03:00" pubdate>20 de Setembro de 2008</time>
+
+<time datetime="2008-09-20T00:00:00-03:00" pubdate data-updated="true">20 de Setembro de 2008</time>
         
       </p>
     
@@ -420,9 +527,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-09-19T00:00:00-03:00" pubdate>19 de Setembro de 2008</time>
+
+<time datetime="2008-09-19T00:00:00-03:00" pubdate data-updated="true">19 de Setembro de 2008</time>
         
       </p>
     
@@ -511,9 +623,14 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
 
 
+
+
+
+
   
 
-<time datetime="2008-09-18T00:00:00-03:00" pubdate>18 de Setembro de 2008</time>
+
+<time datetime="2008-09-18T00:00:00-03:00" pubdate data-updated="true">18 de Setembro de 2008</time>
         
       </p>
     
@@ -529,50 +646,6 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 <p>Neste caso o código do Rails foi atualizado para permitir o uso de transações em migrations quando você estiver usando estes bancos de dados. Embora o Rails permita este recurso, o adapter do banco deve estar preparado para isto. Até o momento somente o do <strong>PostgreSQL</strong> parece estar.</p>
 
 <p>Quase ia esquecendo de mencionar que este patch tem participação do meu amigo e companheiro da <a href="http://surgeworks.com/">Surgeworks</a>: <a href="http://blog.divoxx.com/">Rodrigo Kochenburger</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/17/edge-rails-relacionamentos-belongs_to-automatizados/">Edge Rails: Relacionamentos belongs_to automatizados</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-  
-
-<time datetime="2008-09-17T00:00:00-03:00" pubdate>17 de Setembro de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Se você estiver usando o Edge Rails em seu projeto, tente executar o seguinte comando para criar um novo modelo:</p>
-
-<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">./script/generate scaffold comment author:string body:text post:references</span></span></pre>
-
-
-<p>Note que estou informando que meus comentários terão uma referência a tabela posts. Ou em outras palavras que meus comentários pertencem (<strong>belongs_to</strong>) a um post. Agora veja o arquivo <strong>app/models/comment.rb</strong> gerado pelo script:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails source_ruby_rails_shoulda"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Comment<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
-  <span class="support support_function support_function_activerecord support_function_activerecord_rails">belongs_to</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>post</span>
-</span><span class="keyword keyword_control keyword_control_ruby">end</span>
-</span></pre>
-
-
-<p>O relacionamento com a tabela posts já foi incluído automaticamente no modelo. Este é um novo recurso que encontraremos no Rails 2.2.</p>
 </div>
   
   
@@ -597,6 +670,10 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
       </li>
     
@@ -610,10 +687,6 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
     
       <li class="post">
         <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
       </li>
     
   </ul>

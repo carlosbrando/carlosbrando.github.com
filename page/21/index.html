@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Resolvi liberar uma versão &#8220;alpha&#8221; do livro Why’s (Poignant) Guide to Ruby em português. A tradução total do livro ainda não foi &hellip;">
+  <meta name="description" content="Não sei dizer se isto é um bug ou não, mas na minha opinião isto representa um problema. Veja o código abaixo, onde tento alterar a conta de um &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +80,87 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2008/10/29/rails-22-atualizando-uma-associacao-atraves-de-sua-foreign-key/">Rails 2.2: Atualizando uma associação através de sua foreign key</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-10-29T00:00:00-02:00" pubdate data-updated="true">29 de Outubro de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Não sei dizer se isto é um bug ou não, mas na minha opinião isto representa um problema. Veja o código abaixo, onde tento alterar a conta de um usuário usando sua <strong>foreign key</strong> em um projeto Rails 2.1 ou anterior:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">User<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
+  <span class="support support_function support_function_activerecord support_function_activerecord_rails">belongs_to</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>account</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span>
+
+user <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>first
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; #&lt;User id: 1, login: "admin", account_id: 1&gt;
+</span>
+user<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>account
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; #&lt;Account id: 1, name: "My Account"&gt;
+</span>
+user<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>account_id <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_numeric constant_numeric_ruby">2</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; 2
+</span>
+user<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>account
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; #&lt;Account id: 1, name: "My Account"&gt;
+</span></span></pre>
+
+
+<p>Note que estou alterando a conta do usuário, mas a associação não foi atualizada. Mesmo depois de salvar o objeto <strong>user</strong>, se ele não for recarregado, a associação continuará mostrando a conta errada.</p>
+
+<p>No Rails 2.2 este problema foi corrigido, veja:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Comment<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
+  <span class="support support_function support_function_activerecord support_function_activerecord_rails">belongs_to</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>post</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span>
+
+comment <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Comment</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>first
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; #&lt;Comment id: 1&gt;
+</span>
+<span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> comment<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>post
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; #&lt;Post id: 1&gt;
+</span>
+<span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> comment<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>post_id <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_numeric constant_numeric_ruby">2</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; 2
+</span>
+<span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> comment<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>post
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; #&lt;Post id: 2&gt;
+</span></span></pre>
+
+
+<p>Veja que ao alterar o <strong>post</strong> por meio de sua foreign key, automaticamente a associação foi atualizada.</p>
+
+<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades do Rails 2.2 no e-book “<a href="../2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">Ruby on Rails - O que há de novo?</a>“.</em>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/10/28/why%25e2%2580%2599s-poignant-guide-to-ruby-em-portugues/">Why&#8217;s (Poignant) Guide to Ruby em português</a></h1>
     
     
@@ -89,9 +170,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-10-28T00:00:00-02:00" pubdate>28 de Outubro de 2008</time>
+
+<time datetime="2008-10-28T00:00:00-02:00" pubdate data-updated="true">28 de Outubro de 2008</time>
         
       </p>
     
@@ -172,9 +258,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-10-27T00:00:00-02:00" pubdate>27 de Outubro de 2008</time>
+
+<time datetime="2008-10-27T00:00:00-02:00" pubdate data-updated="true">27 de Outubro de 2008</time>
         
       </p>
     
@@ -208,9 +299,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-10-26T00:00:00-02:00" pubdate>26 de Outubro de 2008</time>
+
+<time datetime="2008-10-26T00:00:00-02:00" pubdate data-updated="true">26 de Outubro de 2008</time>
         
       </p>
     
@@ -267,9 +363,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-10-26T00:00:00-02:00" pubdate>26 de Outubro de 2008</time>
+
+<time datetime="2008-10-26T00:00:00-02:00" pubdate data-updated="true">26 de Outubro de 2008</time>
         
       </p>
     
@@ -318,9 +419,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-10-24T00:00:00-02:00" pubdate>24 de Outubro de 2008</time>
+
+<time datetime="2008-10-24T00:00:00-02:00" pubdate data-updated="true">24 de Outubro de 2008</time>
         
       </p>
     
@@ -356,9 +462,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-10-24T00:00:00-02:00" pubdate>24 de Outubro de 2008</time>
+
+<time datetime="2008-10-24T00:00:00-02:00" pubdate data-updated="true">24 de Outubro de 2008</time>
         
       </p>
     
@@ -399,9 +510,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-10-23T00:00:00-02:00" pubdate>23 de Outubro de 2008</time>
+
+<time datetime="2008-10-23T00:00:00-02:00" pubdate data-updated="true">23 de Outubro de 2008</time>
         
       </p>
     
@@ -441,9 +557,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-10-23T00:00:00-02:00" pubdate>23 de Outubro de 2008</time>
+
+<time datetime="2008-10-23T00:00:00-02:00" pubdate data-updated="true">23 de Outubro de 2008</time>
         
       </p>
     
@@ -480,9 +601,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-10-23T00:00:00-02:00" pubdate>23 de Outubro de 2008</time>
+
+<time datetime="2008-10-23T00:00:00-02:00" pubdate data-updated="true">23 de Outubro de 2008</time>
         
       </p>
     
@@ -496,46 +622,6 @@
 <p>Um exemplo desta vulnerabilidade é quando seu aplicativo recebe uma URL via query string e redireciona seu usuário através do método <strong>redirect_to</strong> para esta URL. Através desta brecha de segurança pessoas mal intencionadas podem gravar cookies na máquina e forjar falsos responses para seus usuários se o seu projeto usar estes parâmetros para construir cabeçalhos HTTP.</p>
 
 <p>Para evitar este tipo de problema o Rails foi atualizado para limpar (sanitize) todas as URLs passadas para o método <strong>redirect_to</strong>. Mas isto não significa que não precisamos nos preocupar mais com este problema, é sempre bom ficar atento.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/10/23/edge-rails-opcao-confirm-no-metodo-image_submit_tag/">Edge Rails: Opção :confirm no método image_submit_tag</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-  
-
-<time datetime="2008-10-23T00:00:00-02:00" pubdate>23 de Outubro de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>A opção <strong>:confirm</strong>, muito utilizada em helpers como o <strong>link_to</strong>, agora também está disponível para o método <strong>image_submit_tag</strong>.</p>
-
-<p>Esta opção faz com que uma caixa de confirmação, com uma pergunta personalizada, seja exibida ao se clicar na imagem. Se o usuário aceitar, o formulário é enviado normalmente, caso contrário nada acontece.</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_function support_function_viewhelpers support_function_viewhelpers_rails">image_submit_tag</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>delete.gif<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>confirm</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Are you sure?<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; &lt;input type="image" src="/images/delete.gif" onclick="return confirm('Are you sure?');"/&gt;</span></span></pre>
-
-
-<hr /><em>Este artigo pertence a série “Edge Rails”. Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. A intenção desta série é preparar antecipadamente os programadores para as próximas versões do framework.</em>
-
 </div>
   
   
@@ -560,6 +646,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
       </li>
     
@@ -573,10 +663,6 @@
     
       <li class="post">
         <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
       </li>
     
   </ul>

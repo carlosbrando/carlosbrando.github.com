@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Por padrão o método camelize do Rails é usado para converter string para o formato UpperCamelCase. Mas também podemos converter para o formato &hellip;">
+  <meta name="description" content="Se você estiver usando o Edge Rails em seu projeto, tente executar o seguinte comando para criar um novo modelo: ./script/generate scaffold comment &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +80,55 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2008/09/17/edge-rails-relacionamentos-belongs_to-automatizados/">Edge Rails: Relacionamentos belongs_to automatizados</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-09-17T00:00:00-03:00" pubdate data-updated="true">17 de Setembro de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Se você estiver usando o Edge Rails em seu projeto, tente executar o seguinte comando para criar um novo modelo:</p>
+
+<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">./script/generate scaffold comment author:string body:text post:references</span></span></pre>
+
+
+<p>Note que estou informando que meus comentários terão uma referência a tabela posts. Ou em outras palavras que meus comentários pertencem (<strong>belongs_to</strong>) a um post. Agora veja o arquivo <strong>app/models/comment.rb</strong> gerado pelo script:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails source_ruby_rails_shoulda"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Comment<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
+  <span class="support support_function support_function_activerecord support_function_activerecord_rails">belongs_to</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>post</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span>
+</span></pre>
+
+
+<p>O relacionamento com a tabela posts já foi incluído automaticamente no modelo. Este é um novo recurso que encontraremos no Rails 2.2.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/09/16/edge-rails-camelizelower/">Edge Rails: camelize(:lower)</a></h1>
     
     
@@ -89,9 +138,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-09-16T00:00:00-03:00" pubdate>16 de Setembro de 2008</time>
+
+<time datetime="2008-09-16T00:00:00-03:00" pubdate data-updated="true">16 de Setembro de 2008</time>
         
       </p>
     
@@ -131,9 +185,14 @@
 
 
 
+
+
+
+
   
 
-<time datetime="2008-09-15T00:00:00-03:00" pubdate>15 de Setembro de 2008</time>
+
+<time datetime="2008-09-15T00:00:00-03:00" pubdate data-updated="true">15 de Setembro de 2008</time>
         
       </p>
     
@@ -176,9 +235,14 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
 
 
 
+
+
+
+
   
 
-<time datetime="2008-09-14T00:00:00-03:00" pubdate>14 de Setembro de 2008</time>
+
+<time datetime="2008-09-14T00:00:00-03:00" pubdate data-updated="true">14 de Setembro de 2008</time>
         
       </p>
     
@@ -228,9 +292,14 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
 
 
 
+
+
+
+
   
 
-<time datetime="2008-09-13T00:00:00-03:00" pubdate>13 de Setembro de 2008</time>
+
+<time datetime="2008-09-13T00:00:00-03:00" pubdate data-updated="true">13 de Setembro de 2008</time>
         
       </p>
     
@@ -265,9 +334,14 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
 
 
 
+
+
+
+
   
 
-<time datetime="2008-09-12T00:00:00-03:00" pubdate>12 de Setembro de 2008</time>
+
+<time datetime="2008-09-12T00:00:00-03:00" pubdate data-updated="true">12 de Setembro de 2008</time>
         
       </p>
     
@@ -329,9 +403,14 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
 
 
 
+
+
+
+
   
 
-<time datetime="2008-09-12T00:00:00-03:00" pubdate>12 de Setembro de 2008</time>
+
+<time datetime="2008-09-12T00:00:00-03:00" pubdate data-updated="true">12 de Setembro de 2008</time>
         
       </p>
     
@@ -370,9 +449,14 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
 
 
 
+
+
+
+
   
 
-<time datetime="2008-09-11T00:00:00-03:00" pubdate>11 de Setembro de 2008</time>
+
+<time datetime="2008-09-11T00:00:00-03:00" pubdate data-updated="true">11 de Setembro de 2008</time>
         
       </p>
     
@@ -428,9 +512,14 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
 
 
 
+
+
+
+
   
 
-<time datetime="2008-09-10T00:00:00-03:00" pubdate>10 de Setembro de 2008</time>
+
+<time datetime="2008-09-10T00:00:00-03:00" pubdate data-updated="true">10 de Setembro de 2008</time>
         
       </p>
     
@@ -473,9 +562,14 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
 
 
 
+
+
+
+
   
 
-<time datetime="2008-09-09T00:00:00-03:00" pubdate> 9 de Setembro de 2008</time>
+
+<time datetime="2008-09-09T00:00:00-03:00" pubdate data-updated="true"> 9 de Setembro de 2008</time>
         
       </p>
     
@@ -531,41 +625,6 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/08/enquanto-isto-no-railsconf-europe/">Enquanto isto no RailsConf Europe&#8230;</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-  
-
-<time datetime="2008-09-08T00:00:00-03:00" pubdate> 8 de Setembro de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/09/Picture2.png" alt="" /></p>
-
-<p>A imagem acima foi retirada do último slide da apresentação de <a href="http://en.oreilly.com/railseurope2008/public/schedule/speaker/13029">Sven Fuchs</a>, um dos líderes do projeto de <strong>internacionalização</strong> do Rails 2.2, durante o <strong>RailsConf Europe</strong>.</p>
-
-<p>Parabéns <a href="http://akitaonrails.com/">Akita</a> e <a href="http://www.mouseoverstudio.com/blog/">Diego Carrion</a>!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/26/">&larr; Antigos</a>
@@ -583,6 +642,10 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
       </li>
     
@@ -596,10 +659,6 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
     
       <li class="post">
         <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
       </li>
     
   </ul>
