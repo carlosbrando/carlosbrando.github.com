@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Um problema comum e uma solu&#xE7;&#xE3;o trivial. &#xC9; assim que posso descrever o uso de heran&#xE7;as em modelos no Rails. Imagine a seguinte &hellip;">
+  <meta name="description" content="Um problema comum e uma solução trivial. É assim que posso descrever o uso de heranças em modelos no Rails. Imagine a seguinte situação: No meu &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,12 +107,12 @@
 
 
 
-<p>Um problema comum e uma solu&#xE7;&#xE3;o trivial. &#xC9; assim que posso descrever o uso de heran&#xE7;as em modelos no Rails.</p>
+<p>Um problema comum e uma solução trivial. É assim que posso descrever o uso de heranças em modelos no Rails.</p>
 
 
 
 
-<p>Imagine a seguinte situa&#xE7;&#xE3;o: No meu diagrama de classes tenho uma classe Person com duas subclasses, Manager e Employee. De inicio a primeira coisa que far&#xED;amos seria criar tr&#xEA;s modelos no Rails:</p>
+<p>Imagine a seguinte situação: No meu diagrama de classes tenho uma classe Person com duas subclasses, Manager e Employee. De inicio a primeira coisa que faríamos seria criar três modelos no Rails:</p>
 
 
 
@@ -130,7 +130,7 @@ end
 [/source]
 </p>
 
-<p>Mas como modelar as tabelas neste caso? Podemos usar o recurso de heran&#xE7;as do ActiveRecord e fazer tudo em cima de apenas uma tabela.</p>
+<p>Mas como modelar as tabelas neste caso? Podemos usar o recurso de heranças do ActiveRecord e fazer tudo em cima de apenas uma tabela.</p>
 
 <p>
 [source:sql]
@@ -152,7 +152,7 @@ create table people (
 [/source]
 </p>
 
-<p>Note que criamos uma coluna chamada <strong>type</strong> na tabela people, &#xE9; aqui que est&#xE1; o segredo.</p>
+<p>Note que criamos uma coluna chamada <strong>type</strong> na tabela people, é aqui que está o segredo.</p>
 
 <p>Agora alteramos os modelos para que as classes Manager e Employee sejam subclasses de Person:</p>
 
@@ -169,9 +169,9 @@ end
 [/source]
 </p>
 
-<p>Pronto. Agora todos os modelos acessam a mesma tabela. Se voc&#xEA; utilizar a classe Person, o ActiveRecord vai sempre retornar todas as linhas desta tabela, mas se usar Manager ou Employee ele somente tratar&#xE1; os registros com o tipo especificado.</p>
+<p>Pronto. Agora todos os modelos acessam a mesma tabela. Se você utilizar a classe Person, o ActiveRecord vai sempre retornar todas as linhas desta tabela, mas se usar Manager ou Employee ele somente tratará os registros com o tipo especificado.</p>
 
-<p>Mas temos um problema a&#xED;, voc&#xEA; vai verificar que todas as classes possuem os mesmos atributos. Mas na pr&#xE1;tica isto nem &#xE9; um problema assim t&#xE3;o s&#xE9;rio. Voc&#xEA; pode simplesmente ignorar os atributos que n&#xE3;o pertencem &#xE0;quela classe. &#xC9; um pre&#xE7;o baixo a pagar por tamanha facilidade. Sem contar que isto vai lhe poupar a cria&#xE7;&#xE3;o de pelo menos tr&#xEA;s tabelas, e melhorar o desempenho de sua aplica&#xE7;&#xE3;o, j&#xE1; que menos tabelas s&#xE3;o menos associa&#xE7;&#xF5;es.</p>
+<p>Mas temos um problema aí, você vai verificar que todas as classes possuem os mesmos atributos. Mas na prática isto nem é um problema assim tão sério. Você pode simplesmente ignorar os atributos que não pertencem àquela classe. É um preço baixo a pagar por tamanha facilidade. Sem contar que isto vai lhe poupar a criação de pelo menos três tabelas, e melhorar o desempenho de sua aplicação, já que menos tabelas são menos associações.</p>
 
 </div>
 
