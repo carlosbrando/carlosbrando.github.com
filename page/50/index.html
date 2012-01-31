@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Chegamos ao décimo episódio do Rails Podcast Brasil. Neste episódio falamos sobre a nova versão do meu plugin, Rubinius, GitHub, Cells e para &hellip;">
+  <meta name="description" content="Com o Rails 2 fomos brindados com as Sexy Migrations. E entre uma de suas novas características temos o método timestamps que cria as colunas &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,61 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/03/21/edge-rails-migrations-ainda-mais-sexy/">Edge Rails: Migrations ainda mais sexy</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-03-21T00:00:00-03:00" pubdate data-updated="true">21 de Março de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/03/400507166_00d6d2a75a.jpg" alt="400507166_00d6d2a75a.jpg" /></p>
+
+<p>Com o Rails 2 fomos brindados com as Sexy Migrations. E entre uma de suas novas características temos o método <code>timestamps</code> que cria as colunas <code>created_at</code> e <code>updated_at</code> na tabela em questão.</p>
+
+<p>Mas atualmente não temos nenhum método que permita de forma sexy, adicionar ou remover os timestamps depois da tabela ser criada. Ops&#8230; não tínhamos!</p>
+
+<p>Para a próxima versão do Rails temos dois novos métodos: <code>add_timestamps</code> e <code>remove_timestamps</code>, que cria e remove (respectivamente) as colunas de timestamps. Veja um exemplo:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">self.up</span></span>
+  add_timestamps <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>feeds</span>
+  add_timestamps <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>urls</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+
+<span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">self.down</span></span>
+  remove_timestamps <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>urls</span>
+  remove_timestamps <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>feeds</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+<p>E temos migrations um pouco mais sexy&#8230; Uhh Baby&#8230;</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -564,65 +619,6 @@ Resposta: Crie softwares que ajude as pessoas a fazer (ou ganhar) dinheiro.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/03/13/rails-podcast-brasil-episodio-9/">Rails Podcast Brasil - Episódio 9</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-03-13T00:00:00-03:00" pubdate data-updated="true">13 de Março de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/03/362701373_df378dc7f3.jpg" alt="362701373_df378dc7f3.jpg" /></p>
-
-<p>O nono episódio do Rails Podcast Brasil está no ar. Para pegar acesse: <a href="http://www.rubyonrails.pro.br/podcasts">http://www.rubyonrails.pro.br/podcasts</a></p>
-
-<h3>Neste episódio:</h3>
-
-
-<ul>
-    <li><a href="http://blog.improveit.com.br/articles/2008/03/08/brazilian-rails-demorou-mas-agora-foi">Brazilian Rails Â Demorou mas agora foi !</a></li>
-    <li><a href="http://www.nomedojogo.com/2008/03/12/radrails-10/">RadRails 1.0</a></li>
-    <li><a href="http://headius.blogspot.com/2008/03/rubyinline-for-jruby-easy.html">RubyInline for JRuby? Easy!</a></li>
-    <li><a href="http://fortytwo.gr/blog/18/9-Essential-Rails-Tips">9 Essential Rails Tips</a></li>
-    <li><a href="http://headius.blogspot.com/2008/03/duby-type-inferred-ruby-like-jvm.html">Duby: A Type-Inferred Ruby-Like JVM Language</a></li>
-    <li><a href="http://code.google.com/apis/contacts/">Contacts Data API</a></li>
-    <li><a href="http://googlediscovery.com/2008/03/12/youtube-ganha-ferramentas-para-desenvolvedores/">YouTube ganha ferramentas para desenvolvedores</a></li>
-    <li><a href="http://blogs.sun.com/arungupta/entry/bitnami_s_jrubystack_jruby_rails">BitNamiÂs JRubyStack = JRuby + Rails + GlassFish Gem + MySQL all bundled together</a></li>
-    <li><a href="http://www.robbyonrails.com/articles/2008/03/05/campfire-messages-in-growl">Campfire messages in Growl</a></li>
-    <li><a href="http://www.mackframework.com/">Mack Framework</a></li>
-    <li><a href="http://giantrobots.thoughtbot.com/2008/3/6/fluid-campfire-scripts">Fluid Scripts for Campfire</a></li>
-    <li><a href="http://simpleconsole.rubyforge.org/tutorial.html">SimpleConsole Â Building Console Apps</a></li>
-    <li><a href="http://www.nomedojogo.com/2008/03/11/demita-os-workaholics-ou-nao/">Demita os workaholics, ou nãoÂ</a></li>
-    <li><a href="http://www.akitaonrails.com/2008/3/12/rails-serve-para-grandes-aplica-es">Rails serve para grandes aplicações?</a></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/51/">&larr; Antigos</a>
@@ -640,6 +636,10 @@ Resposta: Crie softwares que ajude as pessoas a fazer (ou ganhar) dinheiro.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
@@ -653,10 +653,6 @@ Resposta: Crie softwares que ajude as pessoas a fazer (ou ganhar) dinheiro.</p>
     
       <li class="post">
         <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
       </li>
     
   </ul>
@@ -734,7 +730,7 @@ Resposta: Crie softwares que ajude as pessoas a fazer (ou ganhar) dinheiro.</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2011 - Carlos Brando -
+  Copyright &copy; 2012 - Carlos Brando -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

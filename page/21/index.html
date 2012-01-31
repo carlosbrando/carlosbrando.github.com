@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Não sei dizer se isto é um bug ou não, mas na minha opinião isto representa um problema. Veja o código abaixo, onde tento alterar a conta de um &hellip;">
+  <meta name="description" content="Para entender esta alteração, vamos precisar analisar o mesmo código sendo executado em uma versão anterior do Rails e depois no Rails 2.2. Vamos &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,96 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/10/30/rails-22-alias_attribute-funcionando-com-dirty-objects/">Rails 2.2: alias_attribute funcionando com Dirty Objects</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-10-30T00:00:00-02:00" pubdate data-updated="true">30 de Outubro de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Para entender esta alteração, vamos precisar analisar o mesmo código sendo executado em uma versão anterior do Rails e depois no Rails 2.2. Vamos pegar um modelo como exemplo:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Comment<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
+  <span class="support support_function support_function_activesupport support_function_activesupport_rails">alias_attribute</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>text</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>body</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span>
+</span></pre>
+
+
+<p>Note que estou usando o método <strong>alias_attribute</strong> para criar um alias para o atributo <strong>body</strong> com o nome de <strong>text</strong>. Na teoria este método deveria replicar todos os métodos de leitura, escrita, pesquisa e qualquer outro que envolva o atributo <strong>body</strong>. Mas vejamos um exemplo sendo executado no Rails 2.1 ou anterior:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">c <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Comment</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>first
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; #&lt;Comment id: 1, body: "my comment"&gt;
+</span>
+c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>body
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "my comment"
+</span>
+c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>text
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "my comment"
+</span>
+c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>body <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>a new message<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "a new message"
+</span>
+c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>body_changed?
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; true
+</span>
+c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>text_changed?
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; NoMethodError: undefined method `text_changed?' ...</span></span></pre>
+
+
+<p>Ao executar o método <strong>text_changed?</strong> temos um erro, porque o <strong>alias_attribute</strong> não estava replicando os métodos de rastreamento, mas isto já foi corrigido. Veja o mesmo código executado agora em um projeto Rails 2.2:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">c <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Comment</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>first
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; #&lt;Comment id: 1, body: "my comment"&gt;
+</span>
+c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>body
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "my comment"
+</span>
+c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>text
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "my comment"
+</span>
+c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>body <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>a new message<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "a new message"
+</span>
+c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>body_changed?
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; true
+</span>
+c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>text_changed?
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; true
+</span>
+c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>text_change
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; ["my comment", "a new message"]</span></span></pre>
+
+
+<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades do Rails 2.2 no e-book “<a href="../2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">Ruby on Rails - O que há de novo?</a>“.</em>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -589,48 +679,6 @@ comment <span class="keyword keyword_operator keyword_operator_assignment keywor
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/10/23/evitando-ataques-response-splitting/">Evitando ataques Response Splitting</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-10-23T00:00:00-02:00" pubdate data-updated="true">23 de Outubro de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Além da correção do <a href="http://www.nomedojogo.com/2008/09/28/edge-rails-correcao-de-bug-no-metodo-count-do-activerecord/">bug no método count do ActiveRecord</a>, conforme mencionei no <a href="http://www.nomedojogo.com/2008/10/23/ruby-on-rails-212/">post anterior</a>. Outra correção de segurança vem com com a nova versão <strong>2.1.2</strong> do Rails.</p>
-
-<p>Até agora no Rails as URLs passadas para o método <strong>redirect_to</strong> não passavam por um processo de santization. Isto era perigoso, pois abria brechas para que pessoas mal intencionadas pudessem realizar ataques do tipo <a href="http://en.wikipedia.org/wiki/HTTP_response_splitting">response splitting</a> e <a href="http://en.wikipedia.org/wiki/HTTP_header_injection">header injection</a> em sua aplicação.</p>
-
-<p>Um exemplo desta vulnerabilidade é quando seu aplicativo recebe uma URL via query string e redireciona seu usuário através do método <strong>redirect_to</strong> para esta URL. Através desta brecha de segurança pessoas mal intencionadas podem gravar cookies na máquina e forjar falsos responses para seus usuários se o seu projeto usar estes parâmetros para construir cabeçalhos HTTP.</p>
-
-<p>Para evitar este tipo de problema o Rails foi atualizado para limpar (sanitize) todas as URLs passadas para o método <strong>redirect_to</strong>. Mas isto não significa que não precisamos nos preocupar mais com este problema, é sempre bom ficar atento.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/22/">&larr; Antigos</a>
@@ -648,6 +696,10 @@ comment <span class="keyword keyword_operator keyword_operator_assignment keywor
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
@@ -661,10 +713,6 @@ comment <span class="keyword keyword_operator keyword_operator_assignment keywor
     
       <li class="post">
         <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
       </li>
     
   </ul>
@@ -742,7 +790,7 @@ comment <span class="keyword keyword_operator keyword_operator_assignment keywor
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2011 - Carlos Brando -
+  Copyright &copy; 2012 - Carlos Brando -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

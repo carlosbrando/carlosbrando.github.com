@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Aumentando o número de finders dinâmicos do ActiveRecord, agora temos o find_last_by. Já tinhamos os famosos find_by e o find_all_by. Além de &hellip;">
+  <meta name="description" content="Gaston Ramos, o responsável pela tradução do meu livro para espanhol acabou de me avisar que hoje foi feito o milésimo download da versão em espanhol &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,46 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/10/07/rails-21-que-hay-de-nuevo-1000-downloads/">&#8220;Rails 2.1 - Que hay de nuevo?&#8221; - 1000 downloads</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-10-07T00:00:00-03:00" pubdate data-updated="true"> 7 de Outubro de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://gastonramos.wordpress.com/">Gaston Ramos,</a> o responsável pela tradução do meu livro para <a href="http://www.nomedojogo.com/2008/08/29/el-libro-%E2%80%9Crails-21-%C2%BFque-hay-de-nuevo%E2%80%9D-traducido-al-espanol/">espanhol</a> acabou de me avisar que hoje foi feito o milésimo download da versão em espanhol do livro. Fico muito feliz de ver que o trabalho de criar o livro valeu a pena.</p>
+
+<p>A versão em <a href="http://www.nomedojogo.com/2008/06/15/ruby-on-rails-21-whats-new-second-edition/">inglês</a>, teve à partir do meu site mais de 30.000 downloads e a versão em <a href="http://www.nomedojogo.com/2008/06/06/o-primeiro-livro-sobre-rails-21-e-brasileiro/">português</a> tem neste momento 3.568 downloads registrados.</p>
+
+<p>Parabéns Gaston e todos os envolvidos no projeto de tradução! E obrigado a todos os que colaboraram com a tradução do livro para inglês e especialmente ao <a href="http://www.improveit.com.br/empresa/tapajos">Marcos Tapajós</a> e ao <a href="http://brunomiranda.com/blog">Bruno Miranda</a> que ajudaram na montagem e revisão do livro.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -599,71 +639,6 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/27/edge-rails-metodo-count-do-activerecord-nao-inclui-um-alias-para-associacoes/">Edge Rails: Método count do ActiveRecord não inclui um alias para associações</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-09-27T00:00:00-03:00" pubdate data-updated="true">27 de Setembro de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Digamos que temos a seguinte associação <strong>has_many :through</strong>:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Author<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
-  <span class="support support_function support_function_activerecord support_function_activerecord_rails">has_many</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>authorships</span>
-  <span class="support support_function support_function_activerecord support_function_activerecord_rails">has_many</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>books</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>through</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>authorships</span>
-</span><span class="keyword keyword_control keyword_control_ruby">end</span>
-</span></pre>
-
-
-<p>Ao procurar por um livro você pode incluir a autoria em sua busca:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">author<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>books<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>all</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>include</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>authorships</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
-                  <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>conditions</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>authorships.primary = ?<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_language constant_language_ruby">true</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-</span></pre>
-
-
-<p>Isto funciona muito bem, sem erros. Mas tente fazer o mesmo com o método <strong>count</strong>:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">author<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>books<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>count<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>include</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>authorships</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
-                   <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>conditions</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>authorships.primary = ?<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_language constant_language_ruby">true</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
-
-
-<p>Temos um erro. Isto acontece porque a tabela <strong>authorships</strong> foi incluída duas vezes na mesma query.</p>
-
-<p>O método <strong>find</strong> é mais esperto, porque ele cria um apelido para a tabela, coisa que o método <strong>count</strong> não faz. Eu sei que o exemplo dado não é muito bom, mas é apenas para tentar mostrar o problema com o método <strong>count</strong>.</p>
-
-<p>Esta falha foi corrigida. Agora o método count se comporta exatamente como o método find em relação ao <strong>:include</strong>.</p>
-
-<hr /><em>Este artigo pertence a série “Edge Rails”. Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. A intenção desta série é preparar antecipadamente os programadores para as próximas versões do framework.</em>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/24/">&larr; Antigos</a>
@@ -681,6 +656,10 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
@@ -694,10 +673,6 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
     
       <li class="post">
         <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
       </li>
     
   </ul>
@@ -775,7 +750,7 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2011 - Carlos Brando -
+  Copyright &copy; 2012 - Carlos Brando -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

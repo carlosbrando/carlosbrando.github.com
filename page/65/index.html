@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Tanto no Ruby como no Rails você sempre vai encontrar muitas redund&acirc;ncias. Dois métodos que fazem a mesma coisa ou duas formas diferentes de &hellip;">
+  <meta name="description" content="Sem dúvida nenhuma o Ruby tem algumas mágicas que impressionam. Imagine por exemplo que eu queira pegar um array de strings e converter todas as &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,110 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2007/11/02/333/">Magica no Ruby com blocos e símbolos</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-11-02T00:00:00-02:00" pubdate data-updated="true"> 2 de Novembro de 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><center><img src="http://old.nomedojogo.com/wp-content/uploads/2007/11/392125498_7752990e1e.jpg" alt="392125498_7752990e1e.jpg" /></center></p>
+
+
+
+
+<p>Sem dúvida nenhuma o Ruby tem algumas mágicas que impressionam. Imagine por exemplo que eu queira pegar um <strong>array</strong> de <strong>strings</strong> e converter todas as palavras para maiúsculo, eu poderia fazer assim:</p>
+
+
+
+
+<pre>
+>> meu_array = %w(ruby on rails)
+=> ["ruby", "on", "rails"]
+
+>> meu_array = meu_array.map {|name| name.upcase}
+=> ["RUBY", "ON", "RAILS"]
+</pre>
+
+
+<p>Bem simples. Para cada item do array eu executo o método upcase e armazeno o resultado na variável <strong>meu_array</strong>. Mas eu também poderia fazer assim:</p>
+
+<pre>
+>> meu_array = %w(ruby on rails)
+=> ["ruby", "on", "rails"]
+
+>> meu_array = meu_array.map(&:upcase)
+=> ["RUBY", "ON", "RAILS"]
+</pre>
+
+
+<p>Acho que ficou ainda mais bonito: aplique o método upcase para cada elemento de <strong>meu_array</strong>. O que acha?</p>
+
+<p>Como isto funciona?</p>
+
+<p>Quando usamos o operador <strong>&amp;</strong> na frente do nome de uma variável estamos dizendo que esta variável é um bloco. Mas no nosso caso <strong>:upcase</strong> não é um bloco e sim um símbolo. Neste caso o Ruby tenta converter nosso símbolo em um bloco chamando o método <strong>to_proc</strong> da classe <strong>Symbol</strong>. Mas veja o código do <a href="http://api.rubyonrails.org/classes/Symbol.html">método</a> <strong>to_proc</strong>:</p>
+
+<pre>
+def to_proc
+  Proc.new { |*args| args.shift.__send__(self, *args) }
+end
+</pre>
+
+
+<p>Já entendeu? Este método transforma o símbolo <strong>:upcase</strong> em um bloco, fazendo com que o exemplo acima na verdade seja executado desta maneira:</p>
+
+<pre>
+>> meu_array = meu_array.map {|*args| args.shift.__send__(:upcase, *args)}
+=> ["RUBY", "ON", "RAILS"]
+</pre>
+
+
+<p>Mágica? Você ainda não viu nada.</p>
+
+<p>Agora imagine que eu tenha um classe <strong>User</strong> no Rails. Usando este recurso eu poderia fazer algo assim:</p>
+
+<pre>
+user = User.find(:all)
+
+>> user.all?(&:valid?)
+=> true
+
+>> user.any?(&:valid?)
+=> true
+
+>> user.each(&:save!)
+</pre>
+
+
+<p>O <strong>Ruby</strong> tem as suas mágicas e o <strong>Rails</strong> sabe usa-las muito bem.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -687,48 +791,6 @@ second:
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/10/18/intellij-idea-7-agora-suporta-ruby-on-rails/">IntelliJ IDEA 7 agora suporta Ruby on Rails</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-10-18T00:00:00-02:00" pubdate data-updated="true">18 de Outubro de 2007</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/10/508135442_77b3ff3185.jpg" alt="508135442_77b3ff3185.jpg" /></p>
-
-<p>Primeiro foi o Eclipse, depois o NetBeans e agora é a vez do <a href="http://www.jetbrains.com/idea/features/ruby_rails.html">IntelliJ</a> dar suporte ao desenvolvimento de aplicações Rails.</p>
-
-<p>Não sou um programador Java (apesar de já ter brincado com a linguagem à um bom tempo atrás) mas sempre ouvi falar bem do IntelliJ IDEA 7. O único porém aqui é que você precisa comprar o software, enquanto o RadRails e o NetBeans são na faixa.</p>
-
-<p>Tem até um vídeo para você ver como ficou, <a href="http://www.jetbrains.com/idea/training/demos/rails.html">clique aqui</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/66/">&larr; Antigos</a>
@@ -746,6 +808,10 @@ second:
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
@@ -759,10 +825,6 @@ second:
     
       <li class="post">
         <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
       </li>
     
   </ul>
@@ -840,7 +902,7 @@ second:
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2011 - Carlos Brando -
+  Copyright &copy; 2012 - Carlos Brando -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

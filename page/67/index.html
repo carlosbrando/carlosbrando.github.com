@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Eu sempre me lembro daquele artigo do Akita onde ele provocava dizendo que aprender Ruby nos torna programadores piores. Estes dias conversando com &hellip;">
+  <meta name="description" content="O Rails usa o Test::Unit como framework de testes. Nosso framework de testes é muito parecido com o SUnit do Smalltalk, que mais tarde se tornou o &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,45 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2007/10/05/vamos-falar-sobre-testes/">Vamos falar sobre testes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-10-05T00:00:00-03:00" pubdate data-updated="true"> 5 de Outubro de 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img id="id" height="333" alt="343865357_60fa3ffa81" src="http://old.nomedojogo.com/wp-content/uploads/2007/10/343865357-60fa3ffa81.jpg" width="444" border="0" /> </p>
+
+
+<p>  <p>O Rails usa o <a href="http://www.ruby-doc.org/stdlib/libdoc/test/unit/rdoc/classes/Test/Unit.html" target="_blank">Test::Unit</a> como framework de testes.</p>  <p>Nosso framework de testes é muito parecido com o <a href="http://sunit.sourceforge.net/" target="_blank">SUnit</a> do Smalltalk, que mais tarde se tornou o xUnit, que você vai encontrar para algumas linguagens de programação. Se quiser ver uma lista dos frameworks de testes que cada linguagem possui, <a href="http://en.wikipedia.org/wiki/List_of_unit_testing_frameworks" target="_blank">clique aqui</a>.</p>  <p>O Test::Unit (e a idéia do xUnit) se utiliza de quatro conceitos básicos:</p>  <h3>Um Teste é uma Afirmação</h3>  <p>Ao se realizar um teste qualquer, é necessário afirmar algo. Por exemplo, você pode afirmar que o CEP de um endereço tem 8 dígitos, se falhar nesta condição significa falhar no teste. Para isto o Rails possui os famosos métodos <strong>assert</strong>. Uma lista com estes métodos pode ser vista <a href="http://manuals.rubyonrails.com/read/chapter/24" target="_blank">aqui</a>.</p>  <h3>Um método para cada Teste</h3>  <p>Todo teste é um método cujo nome sempre se inicia com <em>test_</em>. Estes métodos contêm diversas <strong>afirmações</strong> relacionadas, que testam uma funcionalidade de sua aplicação. Seguindo o exemplo, nosso método de teste para o CEP poderia ser algo como <em>test_cep</em> ou <em>test_cep_size</em>.</p>  <h3>Classes de Teste</h3>  <p>Para facilitar nossa vida o Rails já tem tudo preparado para nossos testes. Toda classe de teste no Rails precisa herdar de <strong>Test::Unit::TestCase</strong>, que já contém tudo que você precisa para executar seus testes unitários.</p>  <h3>Suíte de Testes</h3>  <p>Uma suíte de testes é um conjunto de casos de teste (as classes de teste p&#xF4;!). Quando você roda uma suíte de testes todos os seus métodos de testes serão executados, no Rails isto é trivial.</p>  <p>&#xA0;</p>  <p>É simplesmente imprescindível que você teste seus c&#xF3;digos. No Rails chega a ser vergonhoso não fazer isto, visto que ele mesmo cria tudo que se precisa, deixando apenas o trabalho de &quot;completar&quot; os testes para você.</p>  <p>Para aprender mais sobre como funcionam os teste no Rails você pode <a href="http://rubyonbr.org/articles/2007/02/10/testes-em-rails/" target="_blank">clicar aqui</a> e <a href="http://simplesideias.com.br/tdd-no-rails-unit-tests/" target="_blank">aqui</a>. E lembrem-se: &quot;Quem não testar é mulher do padre&#8230;&quot;.</p>  <p>&#xA0;</p>  <p>PS: E não se esqueçam de <a href="http://www.akitaonrails.com/2007/10/5/rails-1-2-4-maintenance-release" target="_blank">atualizar</a> a sua versão do Rails (<strong>1.2.4</strong>): gem update rails -y.</p></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -731,97 +770,6 @@ end
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/09/24/edge-rails-o-que-vem-por-a/">Edge Rails: O que vem por aí?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-09-24T00:00:00-03:00" pubdate data-updated="true">24 de Setembro de 2007</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/09/289142843-b04124fd3b.jpg" alt="289142843_b04124fd3b" border="0" height="375" width="500" /> </p>
-
-
-<p>Saiu no <a href="http://ryandaigle.com/articles/2007/9/24/what-s-new-in-edge-rails-specify-plugin-load-order">Ryan&#8217;s</a> <a href="http://ryandaigle.com/articles/2007/9/24/what-s-new-in-edge-rails-better-exception-handling">Scraps</a>.</p>
-
-
-<h3>Especificando a ordem de carga de plugins</h3>
-
-
-<p>Hoje o máximo que podemos fazer com plugins é informar ao Rails quais devem ser carregados. No environment.rb:</p>
-
-
-<p>
-[source:ruby]
-config.plugins = %W( exception_notification ssl_requirement )
-[/source]
-</p>
-
-
-<p>A partir da próxima versão do Rails esta este trecho de código também será usado para definir a ordem em que os plugins devem ser carregados.
-<p>Para isto, o método passou a aceitar o símbolo <strong>:all</strong>, facilitando o preenchimento do método e evitando o trabalho de listar todos os plugins. Veja alguns exemplos de uso:
-<p>
-[source:ruby]
-config.plugins = [ :exception_notification, :ssl_requirement, :all ]
-[/source]
-</p>
-<p>Neste caso só importa para mim que os dois primeiros plugins carreguem nesta ordem, os demais não interessam.
-<p>
-[source:ruby]
-config.plugins = [ :exception_notification, :all, :ssl_requirement ]
-[/source]
-</p>
-<p>Agora, fiz diferente. Quero que sempre o Rails carregue primeiro o plugin <strong>exception_notification</strong> e por último o <strong>plugin ssl_requirement</strong>.
-<p>Para ver a referencia no Rails Trac, <a href="http://dev.rubyonrails.org/changeset/7531">clique aqui</a>.
-<h3>Uma maneira melhor de interceptar erros</h3>
-<p>A pior coisa que pode acontecer em nosso produto é uma horrível página com uma mensagem de erro. Por isto é sempre bom se preparar para estes casos. Na nova versão do Rails teremos uma nova forma de tratar exceções geradas em uma action:
-<p>
-[source:ruby]
-class ApplicationController < ActionController::Base
-  rescue_from User::NotAuthorized, :with => :deny_access
-  rescue_from ActiveRecord::RecordInvalid, :with => :show_errors
-
-  protected
-  def deny_access
-    &#8230;
-  end
-
-  def show_errors(exception)
-    exception.record.new_record? ? &#8230;
-  end
-end
-[/source]
-</p>
-<p>Muito simples, não é?
-<p>Para ver a referencia no Rails Trac, <a href="http://dev.rubyonrails.org/changeset/7597">clique aqui</a>.</p>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/68/">&larr; Antigos</a>
@@ -839,6 +787,10 @@ end
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
@@ -852,10 +804,6 @@ end
     
       <li class="post">
         <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
       </li>
     
   </ul>
@@ -933,7 +881,7 @@ end
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2011 - Carlos Brando -
+  Copyright &copy; 2012 - Carlos Brando -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

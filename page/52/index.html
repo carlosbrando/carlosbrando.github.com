@@ -9,8 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Quatro novos métodos foram criados na classe Time do Rails: end_of_day, end_of_week, end_of_quarter e end_of_year. end_of_day
-Este método basicamente &hellip;">
+  <meta name="description" content="Ontem eu dei a dica do método try(). Porém só hoje fui perceber que existe uma exceção para o uso do método. Ele não vai funcionar se você estiver &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +76,67 @@ Este método basicamente &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/03/03/o-metodo-try-e-um-objeto-nulo/">O método try() e um objeto nulo</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-03-03T00:00:00-03:00" pubdate data-updated="true"> 3 de Março de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ontem eu dei a dica do <a href="http://www.nomedojogo.com/2008/03/02/o-metodo-try/">método <code>try()</code></a>. Porém só hoje fui perceber que existe uma exceção para o uso do método. Ele não vai funcionar se você estiver precisando recuperar a propriedade <code>id</code> do que deveria ser um registro do <code>ActiveRecord</code> se a variável for nula:</p>
+
+<pre class="textmate-source"><span class="source source_ruby"><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>person</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_language constant_language_ruby">nil</span>
+<span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>person</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>try<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>id</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
+
+
+<p>Isto retornaria o seguinte:</p>
+
+<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">(irb):7: warning: Object#id will be deprecated; use Object#object_id
+=&gt; 4</span></span></pre>
+
+
+<p>Hmm&#8230; Isto não funciona porque a classe <code>Object</code> também tem uma propriedade <code>id</code> (que deve deixar de existir na próxima versão do ruby), e como a classe <code>NilClass</code> herda dela&#8230;</p>
+
+<p>A melhor solução para resolver este problema na minha opinião seria usar algo assim:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Object</span></span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>#
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>   @person.name unless @person.nil?
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> vs
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>   @person.try(:name)
+</span>  <span class="meta meta_function meta_function_method meta_function_method_with-arguments meta_function_method_with-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">try</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">(</span><span class="variable variable_parameter variable_parameter_function variable_parameter_function_ruby">method</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">)</span></span>
+    <span class="variable variable_language variable_language_ruby">self</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>send<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>method<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_ruby">unless</span> <span class="variable variable_language variable_language_ruby">self</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>nil?
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -559,44 +619,6 @@ Retorna dia 31 de dezembro às 23:59:59</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/02/27/edge-rails-scriptplugin-install-export/">Edge Rails: script/plugin install &#8211;export</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-02-27T00:00:00-03:00" pubdate data-updated="true">27 de Fevereiro de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>O comando <code>script/plugin install</code> agora permite o uso da opção <code>Âe/--export</code>, para que ele use um <code>svn export</code>.</p>
-
-<p>Referência: <a href="http://dev.rubyonrails.org/ticket/10847">http://dev.rubyonrails.org/ticket/10847</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/53/">&larr; Antigos</a>
@@ -614,6 +636,10 @@ Retorna dia 31 de dezembro às 23:59:59</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
@@ -627,10 +653,6 @@ Retorna dia 31 de dezembro às 23:59:59</p>
     
       <li class="post">
         <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
       </li>
     
   </ul>
@@ -708,7 +730,7 @@ Retorna dia 31 de dezembro às 23:59:59</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2011 - Carlos Brando -
+  Copyright &copy; 2012 - Carlos Brando -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

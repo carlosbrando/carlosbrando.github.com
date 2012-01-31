@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Hoje a equipe do Ruby Inside Brasil se reuniu para tomar algumas decisões administrativas e para o bem da comunidade rubista brasileira decidimos &hellip;">
+  <meta name="description" content="Quando você estiver contratando, procure por pessoas que gerenciem a si mesmas. O que isto significa? Um gerente de si mesmo é alguém que tem as suas &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/04/02/contrate-gerentes-de-si-mesmo/">Contrate gerentes de si mesmo</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-02T00:00:00-03:00" pubdate data-updated="true"> 2 de Abril de 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Quando você estiver contratando, procure por pessoas que gerenciem a si mesmas.</p>
+
+<p>O que isto significa? Um gerente de si mesmo é alguém que tem  as suas próprias metas e às executa. Eles não precisam ser direcionados o tempo todo. Eles não precisam de check-ins diários. Eles fazem o que um gerente faria - definem o tom, atribuem tarefas, determinam o que precisa ser feito, etc - mas fazem isto por si e para si.</p>
+
+<p>Essas pessoas te livram do trabalho de supervisão. Elas definem sua própria direção. Quando você os deixá sozinho, eles o surpreendem com o quanto fizeram. Elas não precisam de muitas instruções ou supervisão.</p>
+
+<p>Como você pode detectar essas pessoas? Olhe para a sua história. Eram auto-suficientes em empregos anteriores? Já definiram seu papel antes? Já iniciaram seu próprio site ou empresa antes? Ou inventaram sua própria maneira de fazer as coisas? Encontre alguém com iniciativa e com um espírito empreendedor florescendo. E então, alimente este espirito.</p>
+
+<p>Você quer alguém que é capaz de construir algo à partir do nada. Quando você encontrar essas pessoas, elas liberarão o resto de sua equipe para trabalhar mais e gerenciar menos.</p>
+
+<hr /><em>Este texto é uma tradução de um artigo do blog <a href="http://www.37signals.com/svn/posts/1430-hire-managers-of-one">Signal vs. Noise</a>.</em>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -566,65 +613,6 @@ puts i
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/02/27/rails-way-4-metodos-destrutivos-ou-somente-perigosos/">Rails Way #4: Métodos destrutivos ou somente perigosos?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-02-27T00:00:00-03:00" pubdate data-updated="true">27 de Fevereiro de 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>O <a href="http://www.nomedojogo.com/2009/02/13/rails-way-3-nomes-de-metodos-e-variaveis-devem-ser-obvios/">último artigo</a> desta série levantou uma certa polêmica em alguns pontos. Quero deixar claro que entendo muito bem que existem situações em que não é possível ou mesmo prático utilizar as sugestões descritas aqui. Você não deve encarar esta série de artigos como um livro de leis, mas somente como boas práticas adotadas pela maior parte da comunidade de desenvolvedores Rails.</p>
-
-<p>O que quero é exatamente isto, levantar discussões sobre o que é bom ou ruim e o que é realmente prático ou simplesmente moda.</p>
-
-<p>Ao comentar sobre algumas boas práticas ao nomear métodos, mencionei sobre o uso dos sinais de exclamação (!) e interrogação (?) como uma forma de deixar os métodos mais descritivos. Meu erro talvez tenha ocorrido ao usar o nome ‘métodos destrutivos’ quando me referi aos métodos terminados com o sinal de exclamação.</p>
-
-<p>Concordo em dizer que na verdade &#8216;!&#8217; no fim de um método não necessariamente significa &#8220;destrutivo&#8221;, mas sim que o método em questão é uma versão mais <strong>perigosa</strong> de um outro método com o mesmo nome, mas sem o sinal.</p>
-
-<h2>Deixe-me explicar isto melhor</h2>
-
-
-<p><img class="center" src="http://old.nomedojogo.com/wp-content/uploads/2009/02/2990809708_b26fb9ef8c.jpg"></p>
-
-<p>O uso da expressão &#8216;método perigoso&#8217; é relativo. Dizer que um método terminado com ! é perigoso, não diz nada se você não possuir um outro método similar menos perigoso e sem o sinal de exclamação.</p>
-
-<p>Assim, a regra número um é que todo método terminado com ! deve vir acompanhado de um outro método com o mesmo nome, mas sem o sinal.</p>
-
-<p>No Ruby e também no Rails encontramos muitos casos assim. Por exemplo, temos o método <code>gsub!</code> que é <em>mais perigoso</em> que o seu companheiro <code>gsub</code>. Assim como também temos o método <code>exit!</code> que é a versão <em>mais perigosa</em> do método <code>exit</code>, e assim por diante.</p>
-
-<p>Alguns acreditam que devem usar o sinal ! apenas quando o método alterar a sua própria instância. Embora muitos método perigosos façam isto, esta não a finalidade do sinal de exclamação. No próprio Ruby encontramos métodos que tem esta característica mas que não são considerados perigosos, como os métodos <code>Array#pop</code> e <code>Array#push</code>, apenas para citar alguns exemplos.</p>
-
-<p>Devemos apenas fazer uso do sinal ! quando criarmos um método que represente mais perigo que outro já criado. Tome como exemplo os métodos <code>save</code> e <code>save!</code> do <code>ActiveRecord</code>. O primeiro método simplesmente grava o registro no banco de dados e retorna verdadeiro ou falso de acordo com o resultado do procedimento. Utilizando o segundo método, caso algo dê errado não teremos de volta apenas um booleano falso, teremos o disparo de uma exceção, o que pode representar um certo risco se o seu aplicativo não estiver preparado para isto. Desta forma podemos considerar este método <em>mais perigoso</em> que o primeiro, merecendo assim a adição do sinal ! no final de seu nome.</p>
-
-<p>A conclusão é que o uso de &#8220;!&#8221; no nome de um método não dirá a você exatamente o que ele fará ou de que forma ele representa perigo. Mas o sinal de exclamação (!) é  importante como um alerta de que o método em questão pode representar algum risco se usado de forma impensada.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/12/">&larr; Antigos</a>
@@ -642,6 +630,10 @@ puts i
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
@@ -655,10 +647,6 @@ puts i
     
       <li class="post">
         <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
       </li>
     
   </ul>
@@ -736,7 +724,7 @@ puts i
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2011 - Carlos Brando -
+  Copyright &copy; 2012 - Carlos Brando -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Acredite, nem sempre houve interfaces gráficas. Meu primeiro contato com um computador foi feito através de uma tela preta com letras verdes. Não me &hellip;">
+  <meta name="description" content="Eu costumo trabalhar muito com o terminal, assim é natural usar o comando mate . para carregar um projeto Rails no meu Textmate. Em projetos grandes &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,58 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/04/17/acelerando-um-pouco-as-buscas-no-textmate/">Acelerando um pouco as buscas no Textmate</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-04-17T00:00:00-03:00" pubdate data-updated="true">17 de Abril de 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Eu costumo trabalhar muito com o terminal, assim é natural usar o comando <code>mate .</code> para carregar um projeto Rails no meu Textmate.</p>
+
+<p>Em projetos grandes é normal utilizar o sistema de buscas da ferramenta para localizar um arquivo ou encontrar alguma declaração, por exemplo. Embora existam plugin como o excelente <a href="http://github.com/protocool/AckMate">AckMate</a> que melhorem perceptivelmente a performance dessas buscas, elas ainda costumam ser lentas. Um dos vilões nessa história são os arquivos temporários e logs que são inclusos no processo de busca, e normalmente esses arquivos costumam ser bem grandes. Além de deixarem a busca mais lenta, eles também acabam poluindo o resultado já que na maioria das vezes não estamos procurando por algo nos logs.</p>
+
+<p><img class="center" src="http://old.nomedojogo.com/wp-content/uploads/2010/04/Screen-shot-2010-04-17-at-3.27.28-PM.png"></p>
+
+<p>Inicialmente eu costumava remover os diretórios <code>tmp</code> e <code>log</code> depois de carregar o projeto no Textmate. Porém realizar essa operação todas as vezes não era nada prático.</p>
+
+<p>A solução mais simples e definitiva é alterar as configurações do Textmate para que ele ignore esses diretórios. Para isso abra as preferencias do editor de textos (<code>⌘,</code>) e na opção <strong>Advanced</strong> vá até a aba <strong>Folder References</strong>.</p>
+
+<p><img class="center" src="http://old.nomedojogo.com/wp-content/uploads/2010/04/Screen-shot-2010-04-17-at-11.16.19-PM.png"></p>
+
+<p>Os dois campos acima são expressões regulares que determinam quais arquivos e diretórios devem ser carregados em um projeto. Isso é útil para impedir que o diretório do CVS apareça no Textmate, por exemplo.</p>
+
+<p>Para adicionar os diretórios log e tmp nessa lista negra precisamos alterar o campo <strong>Folder Pattern</strong>. Adicione <code>|tmp|log</code> exatamente antes do <code>|CVS</code>. Pronto, de agora em diante toda vez que um projeto for carregado à partir de um diretório, essas pastas também serão ignoradas.</p>
+
+<p>Além disso você também pode adicionar outros diretórios ou arquivos, como por exemplo a pasta <code>vendor</code> se você não pretende alterar ou visualizar o código de plugins e gems.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -561,66 +613,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/02/03/o-efeito-do-codigo-na-mente-do-programador/">O Efeito do Código na Mente do Programador</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-02-03T00:00:00-02:00" pubdate data-updated="true"> 3 de Fevereiro de 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="center" src="http://old.nomedojogo.com/wp-content/uploads/2010/02/194431937_886fc1b378.jpg"></p>
-
-<p>É interessante analisar o efeito que uma linguagem de programação tem sobre a mente do programador, principalmente a sua capacidade de influenciar a maneira como enxergamos um problema. A diferença na sintaxe e os recursos disponíveis afetam a forma como pensamos e nos comunicamos, inclusive no mundo real.</p>
-
-<p>O mesmo problema pode ser solucionado de várias formas diferentes, dependendo da linguagem de programação adotada. Certamente a abordagem escolhida para resolver um problema utilizando Ruby não será a mesma se você usar Java.</p>
-
-<p>Outro fator que exerce uma grande influencia sobre a forma como resolvemos os problemas e pensamos é o domínio do aplicativo. Somos tentados a utilizar o mesmo vocabulário do cliente no código. O meu conselho é tirar o máximo de vantagem desse efeito. Pode ser realmente produtivo &#8220;falar&#8221; a mesma língua que o cliente também dentro do código. Por exemplo, se o cliente explicar uma funcionalidade dessa maneira:</p>
-
-<blockquote>Quando todas as unidade de um produto se esgotarem em uma das lojas, então o sistema deve solicitar mais 10 unidades do mesmo produto para a fábrica.</blockquote>
-
-
-<p>Seria muito bom se o código produzido fosse algo parecido com isso:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">if</span> <span class="n">product</span><span class="o">.</span><span class="n">sold_out?</span>
-</span><span class='line'>  <span class="no">Factory</span><span class="o">.</span><span class="n">order</span> <span class="mi">10</span><span class="p">,</span> <span class="n">product</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="n">store</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>É óbvio que não esperamos que o cliente entenda o código e muito menos que ele altere algo por conta própria, mas nós programadores podemos nos beneficiar muito disso.</p>
-
-<p>Não importa se você está escrevendo um código simples como o exemplo acima ou se construiu uma DSL para se aproximar ainda mais da linguagem do cliente. O importante é estreitar a comunicação entre os envolvidos. Assim o seu cérebro estará livre para se concentrar no que realmente interessa: a solução de problemas.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/5/">&larr; Antigos</a>
@@ -638,6 +630,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
@@ -651,10 +647,6 @@
     
       <li class="post">
         <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
       </li>
     
   </ul>
@@ -732,7 +724,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2011 - Carlos Brando -
+  Copyright &copy; 2012 - Carlos Brando -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Já faz um certo tempo que Pratik Naik está tentando colocar este patch no Rails e parece que finalmente conseguiu. No arquivo config/initializers/ &hellip;">
+  <meta name="description" content="Esta alteração trata-se na verdade de uma correção de um bug no método rename_column. Para entender qual era o problema precisamos de um cenário como &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,57 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/07/04/edge-rails-solucao-de-bug-no-metodo-rename_column/">Edge Rails: Solução de bug no método rename_column</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-07-04T00:00:00-03:00" pubdate data-updated="true"> 4 de Julho de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Esta alteração trata-se na verdade de uma correção de um <strong>bug</strong> no método <a href="http://rails-doc.org/docs/ActiveRecord/ConnectionAdapters/SchemaStatements/rename_column">rename_column</a>. Para entender qual era o problema precisamos de um cenário como exemplo. Primeiro criamos um <strong>migration</strong>:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">create_table <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>users<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>force</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">true</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">t</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+  t<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>column <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>name</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>string</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>default</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+</span></pre>
+
+
+<p>Ok, agora criamos um segundo <strong>migration</strong> onde vamos renomear a coluna <strong>name</strong> da tabela:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">rename_column <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>users</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>name</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>first_name</span></span></pre>
+
+
+<p>Se você fizer o teste em sua máquina, notará que ao usar o método <strong>rename_column</strong> a &#8220;nova&#8221; coluna <strong>first_name</strong> não terá mais o valor <strong>default</strong> definido no primeiro <strong>migration</strong>.</p>
+
+<p>Eu não tinha percebido este bug ainda, mas fiz o teste aqui e realmente aconteceu. Mas já está resolvido para a próxima versão do Rails.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -555,76 +606,6 @@ Link do blog de Carlo Pecchia (em inglês): <a href="http://carlopecchia.eu/blog
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/06/25/rails-podcast-brasil-episodio-22/">Rails Podcast Brasil - Episódio 22</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-06-25T00:00:00-03:00" pubdate data-updated="true">25 de Junho de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="alignnone size-full wp-image-812" title="362248821_956389b3e5" src="http://old.nomedojogo.com/wp-content/uploads/2008/06/362248821_956389b3e5.jpg" alt="" /><h6>Foto de <strong><a title="Link para a galeria de Wishingline" href="http://flickr.com/photos/wishingline/"><strong>Wishingline</strong></a></strong></h6>
-Rails-doc, Factory Girl, Phusion, RubyGems, Rubinius, RubyStack, Brazilian Rails, JRuby e SproutCore são alguns dos assuntos abordados neste episódio.</p>
-
-<p>E para fechar o podcast Fábio Akita fala do lançamento do livro <strong>Agile Web Development with Rails</strong> em português e comentamos um pouco sobre o processo de tradução do livro <strong>WhyÂs (Poignant) Guide to Ruby</strong>.</p>
-
-<p>Para ouvir: <a href="http://podcast.rubyonrails.pro.br/">http://podcast.rubyonrails.pro.br/</a></p>
-
-<h3>Neste episódio:</h3>
-
-
-<ul>
-    <li><a href="http://blog.nodeta.fi/2008/06/24/rails-doc-11-finetuning/">Rails-doc 1.1: finetuning</a></li>
-    <li><a href="http://giantrobots.thoughtbot.com/2008/6/6/waiting-for-a-factory-girl">Waiting For a Factory Girl</a></li>
-    <li><a href="http://blog.phusion.nl/2008/06/16/phusion-passenger-20-rc-2-released/">Phusion News</a></li>
-    <li><a href="http://stephencelis.com/archive/2008/6/bashfully-yours-gem-shortcuts">Bashfully Yours, Gem Shortcuts</a></li>
-    <li><a href="http://github.com/blog/97-github-loves-rubygems-1-2">RubyGems 1.2.0</a></li>
-    <li><a href="http://blog.jayfields.com/2007/08/ruby-calling-methods-of-specific.html">Ruby: Calling methods of a specific ancestor</a></li>
-    <li><a href="http://blog.fallingsnow.net/2008/06/20/rubinius-version-090-released/">Rubinius version 0.9.0 released!</a></li>
-    <li><a href="http://github.com/blog/99-popular-languages">Popular Languages</a></li>
-    <li><a href="http://bitnami.org/article/new-rubystack-released">Bitnami New RubyStack released</a></li>
-    <li><a href="http://matthewcarriere.com/2008/6/23/using-select-reject-collect-inject-and-detect">Using select, reject, collect, inject and detect</a></li>
-    <li><a href="http://blogs.zdnet.com/enterprisealley/?p=188">Ruby on Rails: scaling to 1 billion page views per month</a></li>
-    <li><a href="http://blog.improveit.com.br/articles/2008/06/21/o-futuro-do-brazilian-rails">O futuro do Brazilian Rails</a></li>
-    <li><a href="http://www.hanselman.com/blog/TheWeeklySourceCode29RubyAndShoesAndTheFirstRubyVirus.aspx">The Weekly Source Code 29 Â Ruby and Shoes and the First Ruby Virus</a></li>
-    <li><a href="http://hackety.org/2008/06/19/stampingExesAndDmgs.html">Stamping EXEs And DMGs</a></li>
-    <li><a href="http://technicalpickles.com/posts/a-walk-through-of-test-driven-development-with-shoulda">A walk through of test-driven development with shoulda</a></li>
-    <li><a href="http://blogs.sun.com/arungupta/entry/jruby_on_rails_and_mysql">JRuby-on-Rails and MySQL on GlassFish on OpenSolaris in Virtual Box VM</a></li>
-    <li><a href="http://github.com/pivotal/desert/tree/master">pivotal / desert</a></li>
-    <li><a href="http://giantrobots.thoughtbot.com/2008/6/19/gotchas-when-upgrading-to-rails-2-1">Gotchas When Upgrading to Rails 2.1</a></li>
-    <li><a href="http://github.com/sproutit/sproutcore/wikis">Welcome to the SproutCore Community Wiki</a></li>
-    <li><a href="http://akitaonrails.com/2008/6/25/livro-desenvolvimento-gil-com-rails">Livro: Desenvolvimento Ágil com Rails</a></li>
-    <li><a href="http://www.nomedojogo.com/2008/06/21/ruby-on-rails-21-2/">Ruby on Rails 2.1 Â &#12398;&#22793;&#26356;&#28857;</a></li>
-    <li><a href="http://www.nomedojogo.com/2008/06/24/precisamos-de-tradutores/">Precisamos de tradutores</a></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/35/">&larr; Antigos</a>
@@ -642,6 +623,10 @@ Rails-doc, Factory Girl, Phusion, RubyGems, Rubinius, RubyStack, Brazilian Rails
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
@@ -655,10 +640,6 @@ Rails-doc, Factory Girl, Phusion, RubyGems, Rubinius, RubyStack, Brazilian Rails
     
       <li class="post">
         <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
       </li>
     
   </ul>
@@ -736,7 +717,7 @@ Rails-doc, Factory Girl, Phusion, RubyGems, Rubinius, RubyStack, Brazilian Rails
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2011 - Carlos Brando -
+  Copyright &copy; 2012 - Carlos Brando -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

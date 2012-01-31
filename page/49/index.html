@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="A classe DateTime ganhou um novo método o to_f que retorna a data como um ponto flutuante que representa a quantidade de segundos desde o Unix epoch &hellip;">
+  <meta name="description" content="Agora podemos usar expressões em método de cálculo do ActiveRecord, como o método sum, por exemplo. Vejo o que é possível: Person.sum("2 * age") ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,45 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/03/28/edge-rails-expressoes-em-metodos-de-calculo-do-activerecord/">Edge Rails: Expressões em métodos de cálculo do ActiveRecord</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-03-28T00:00:00-03:00" pubdate data-updated="true">28 de Março de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Agora podemos usar expressões em método de cálculo do <code>ActiveRecord</code>, como o método <code>sum</code>, por exemplo. Vejo o que é possível:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Person</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>sum<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>2 * age<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -512,61 +551,6 @@ authors<span class="punctuation punctuation_separator punctuation_separator_meth
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/03/21/edge-rails-migrations-ainda-mais-sexy/">Edge Rails: Migrations ainda mais sexy</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-03-21T00:00:00-03:00" pubdate data-updated="true">21 de Março de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/03/400507166_00d6d2a75a.jpg" alt="400507166_00d6d2a75a.jpg" /></p>
-
-<p>Com o Rails 2 fomos brindados com as Sexy Migrations. E entre uma de suas novas características temos o método <code>timestamps</code> que cria as colunas <code>created_at</code> e <code>updated_at</code> na tabela em questão.</p>
-
-<p>Mas atualmente não temos nenhum método que permita de forma sexy, adicionar ou remover os timestamps depois da tabela ser criada. Ops&#8230; não tínhamos!</p>
-
-<p>Para a próxima versão do Rails temos dois novos métodos: <code>add_timestamps</code> e <code>remove_timestamps</code>, que cria e remove (respectivamente) as colunas de timestamps. Veja um exemplo:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">self.up</span></span>
-  add_timestamps <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>feeds</span>
-  add_timestamps <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>urls</span>
-<span class="keyword keyword_control keyword_control_ruby">end</span>
-
-<span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">self.down</span></span>
-  remove_timestamps <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>urls</span>
-  remove_timestamps <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>feeds</span>
-<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-
-
-<p>E temos migrations um pouco mais sexy&#8230; Uhh Baby&#8230;</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/50/">&larr; Antigos</a>
@@ -584,6 +568,10 @@ authors<span class="punctuation punctuation_separator punctuation_separator_meth
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
@@ -597,10 +585,6 @@ authors<span class="punctuation punctuation_separator punctuation_separator_meth
     
       <li class="post">
         <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
       </li>
     
   </ul>
@@ -678,7 +662,7 @@ authors<span class="punctuation punctuation_separator punctuation_separator_meth
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2011 - Carlos Brando -
+  Copyright &copy; 2012 - Carlos Brando -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

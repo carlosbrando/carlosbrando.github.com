@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="O core team do Rails tem trabalhando bastante ultimamente, está ficando até meio difícil de acompanhar o que está sendo feito. Desta vez vou fazer um &hellip;">
+  <meta name="description" content="Como de costume tivemos mais um fim de semana muito animado no desenvolvimento do Rails. O que aconteceu no sábado você já leu aqui, agora vamos a um &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,72 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2007/12/17/edge-rails-cache-sqlite3-rails-202-e-mais/">Edge Rails - Cache, SQLITE3, Rails 2.0.2 e mais</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-12-17T00:00:00-02:00" pubdate data-updated="true">17 de Dezembro de 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Como de costume tivemos mais um fim de semana muito animado no desenvolvimento do Rails. O que aconteceu no sábado você já leu <a href="http://www.nomedojogo.com/2007/12/16/edge-rails-%e2%80%93-ruby-19-seguranca-e-muito-zelo/">aqui</a>, agora vamos a um resumo do domingo.</p>
+
+<h3>Cache de templates em produção</h3>
+
+
+<p>A partir de agora no arquivo <strong>config/environments/production.rb</strong>, <strong>ActionView::Base.cache_template_loading</strong> estará sempre ligado como padrão. Em outras palavras, qualquer alteração em um template no ambiente de produção para ter efeito deve-se reinicializar a aplicação.</p>
+
+<h3>Chave criptográfica</h3>
+
+
+<p>No último post eu mencionei sobre esta chave, mas parece que DHH não gostou do nome usado no rake e mudou, agora para se obte-la use &#8221;<strong>rake secret</strong>&#8221;.</p>
+
+<h3>Banco de dados padrão</h3>
+
+
+<p>O <strong>mysql</strong> deixa de ser o banco de dados padrão e dá lugar ao <strong>sqlite3</strong>. Então se você executar &#8221;<strong>rails myapp</strong>&#8221; o arquivo <strong>config/database.yml</strong> virá com as configurações do sqlite3 e não mais do mysql. Se quiser que o arquivo seja pré-configurado como antes use &#8221;<strong>rails -d mysql myapp</strong>&#8221;.</p>
+
+<h3>Rails 2.0.2</h3>
+
+
+<p>David já começou os preparativos para a versão 2.0.2 do Rails. Ainda não saiu, mas deve ser anunciado em breve.</p>
+
+<h3>Novo método HTTP - OPTIONS</h3>
+
+
+<p>A requisição OPTIONS foi novamente incluída na lista de requisições HTTP. Quando se está construindo um serviço RESTful, um OPTIONS deve retornar quais requisições o recurso responderá. Também é útil quando se está usando o Rails sob um Mongrel através de um proxy como o Perlbal, neste caso é comum requisitar um OPTIONS para ter certeza de que o Rails já está no ar e pronto para receber uma nova requisição.</p>
+
+<h3>Novos métodos nos testes integrados</h3>
+
+
+<p>Foi incluído dois novos métodos nos testes integrados, o <strong>delete_via_redirect</strong> e o <strong>put_via_redirect</strong>. Os dois métodos realizam um DELETE ou PUT seguido de um redirecionamento. Um pouco de cuidado aqui, porque se a requisição solicitada já fizer um redirecionamento, você pode cair em um loop infinito.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -640,50 +706,6 @@ Vocês simplesmente dizem &quot;Não!&quot;?</blockquote>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/12/07/ruby-on-rails-20-sai-hoje/">Ruby on Rails 2.0 - sai hoje?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-12-07T00:00:00-02:00" pubdate data-updated="true"> 7 de Dezembro de 2007</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/12/503822030_1d619013b1.jpg" alt="503822030_1d619013b1.jpg" /></p>
-
-<p>Tem muita gente falando do lançamento do Rails 2.0, e tem bastante gente lá fora dizendo que deve sair hoje.</p>
-
-<p>Agora apenas uma curiosidade, hoje mesmo o <strong>DHH</strong> corrigiu um bug sério no arquivo <strong>activerecord/lib/active_record/query_cache.rb</strong>, onde um <strong>rescue</strong> poderia fazer com que o código fosse executado duas vezes. Até aí tudo bem, mas notem a <strong>tag</strong> que ele colocou na correção: <strong>2.0.1</strong></p>
-
-<p>Veja aqui: <a href="http://dev.rubyonrails.org/changeset/8329">http://dev.rubyonrails.org/changeset/8329</a></p>
-
-<p>E agora? Será que sai a 2.0.0 assim mesmo? Será que vão lançar hoje mesmo? Ou será que lançarão como 2.0.1?</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/61/">&larr; Antigos</a>
@@ -701,6 +723,10 @@ Vocês simplesmente dizem &quot;Não!&quot;?</blockquote>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
@@ -714,10 +740,6 @@ Vocês simplesmente dizem &quot;Não!&quot;?</blockquote>
     
       <li class="post">
         <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
       </li>
     
   </ul>
@@ -795,7 +817,7 @@ Vocês simplesmente dizem &quot;Não!&quot;?</blockquote>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2011 - Carlos Brando -
+  Copyright &copy; 2012 - Carlos Brando -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

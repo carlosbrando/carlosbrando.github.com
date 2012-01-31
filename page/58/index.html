@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Durante muito tempo (eu nem tenho idéia de quanto) Zed foi o primeiro nome na lista de recomendações do Working With Rails, na frente até mesmo de &hellip;">
+  <meta name="description" content="Duas simples alterações para a próxima versão do Rails. Uma no arquivo environments/production.rb e outra no lib/test_help.rb. Vamos a elas: Debugger &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,57 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/01/09/edge-rails-ruby-debug-e-cache-store/">Edge Rails: Facilitando as coisas para o ruby-debug e cache store</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-01-09T00:00:00-02:00" pubdate data-updated="true"> 9 de Janeiro de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Duas simples alterações para a próxima versão do Rails. Uma no arquivo <a href="http://dev.rubyonrails.org/browser/trunk/railties/environments/production.rb?rev=8612">environments/production.rb</a> e outra no <a href="http://dev.rubyonrails.org/browser/trunk/railties/lib/test_help.rb?rev=8613">lib/test_help.rb</a>. Vamos a elas:</p>
+
+<h3>Debugger nos testes</h3>
+
+
+<p>David habilitou novamente a opção de usar o <a href="https://rubyforge.org/projects/ruby-debug/">ruby-debug</a> nos testes do Rails.
+Se antes você desejasse usá-lo nos testes seria necessário incluir um <span style="font-weight: bold;">require &#8216;ruby-debug&#8217;</span> na classe e logo em seguida usar o método <span style="font-weight: bold;">debugger</span> no local desejado. Agora só se preocupe com o método <span style="font-weight: bold;">debugger</span>, o resto é nativo, desde que você já tenha o <span style="font-style: italic;">gem</span> instalado.</p>
+
+<h3>Usando diferentes locais para armazenar cache</h3>
+
+
+<p>No <a href="http://www.nomedojogo.com/2008/01/05/edge-rails-cache-e-prototype-1601/">último post</a> desta série eu mencionei sobre a adição do <span style="font-weight: bold;">config.cache_store</span> para informar o local padrão de armazenamento do cache. Agora para facilitar as coisas, foi incluído o comentário abaixo no arquivo <a href="http://dev.rubyonrails.org/browser/trunk/railties/environments/production.rb?rev=8612">environments/production.rb</a>, afim de lembrá-lo desta opção.</p>
+
+<pre># Use a different cache store in production
+# config.cache_store = :mem_cache_store</pre>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -573,66 +624,6 @@ player2<span class="punctuation punctuation_separator punctuation_separator_meth
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/12/26/minha-palestra-no-rejectconf07/">Minha palestra no RejectConf&#8217;07</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-12-26T00:00:00-02:00" pubdate data-updated="true">26 de Dezembro de 2007</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/12/2137768311_f8c6101e74.jpg" alt="2137768311_f8c6101e74.jpg" /></p>
-
-<p>Já faz mais de um mês que aconteceu o <strong>RejectConf &#8216;07</strong> aqui em São Paulo mas finalmente consegui o vídeo da minha palestra. O início da palestra está faltando, mas é basicamente assim:</p>
-
-<p>Era uma vez um fazendeiro que tinha uma única vaquinha, que era o que lhe provia o sustento, o pão de cada dia. Todo dia de manhã o fazendeiro acordava e tirava o leite da vaca, depois vendia o leite e com isso ele conseguia dinheiro suficiente para passar o dia. Mas ele vivia reclamando que sua vida não melhorava, mas graças a Deus que ele tinha aquela vaquinha, senão ele não saberia como poderia conseguir seu sustento.</p>
-
-<p>Um belo dia um primo da cidade vem visitá-lo e vê o fazendeiro se queixando da vida, e da falta de oportunidades. Então o primo encontra um meio de ajudar o fazendeiro, matando a sua vaca&#8230;</p>
-
-<p>O restante você pode acompanhar no vídeo. Outra coisa que está faltando é o slide apresentado na palestra que você também pode pegar aqui:</p>
-
-<ul>
-    <li><a href="http://old.nomedojogo.com/wp-content/uploads/2007/12/Est%c3%a1%20fazendo%20a%20sua%20parte%3f.zip">Apresentação no formato Keynote</a>.</li>
-    <li><a href="http://old.nomedojogo.com/wp-content/uploads/2007/12/Est%c3%a1%20fazendo%20a%20sua%20parte%3f.pdf">Apresentação no formato PDF</a>.</li>
-</ul>
-
-
-<p>E o vídeo você pode assitir aqui:</p>
-
-<object width="500" height="377">   <param name="allowfullscreen" value="true" />   <param name="allowscriptaccess" value="always" />   <param name="movie" value="http://www.vimeo.com/moogaloop.swf?clip_id=1195355&amp;server=www.vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=00ADEF&amp;fullscreen=1" /> <embed src="http://www.vimeo.com/moogaloop.swf?clip_id=1195355&amp;server=www.vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=00ADEF&amp;fullscreen=1" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="500" height="377"></embed></object>
-
-
-<br /><a href="http://www.vimeo.com/1195355?pg=embed&sec=1195355">Untitled</a> from <a href="http://www.vimeo.com/user417502?pg=embed&sec=1195355">Carlos Brando</a> on <a href="http://vimeo.com?pg=embed&sec=1195355">Vimeo</a>.
-
-
-<p>Quero agradecer ao <a href="http://www.akitaonrails.com/">Fábio Akita</a> pelo vídeo.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/59/">&larr; Antigos</a>
@@ -650,6 +641,10 @@ player2<span class="punctuation punctuation_separator punctuation_separator_meth
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
@@ -663,10 +658,6 @@ player2<span class="punctuation punctuation_separator punctuation_separator_meth
     
       <li class="post">
         <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
       </li>
     
   </ul>
@@ -744,7 +735,7 @@ player2<span class="punctuation punctuation_separator punctuation_separator_meth
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2011 - Carlos Brando -
+  Copyright &copy; 2012 - Carlos Brando -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

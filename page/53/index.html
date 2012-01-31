@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Dois novos métodos foram acrescentados ao objeto String, o squish e o squish!. Estes métodos fazem o mesmo que o método strip, removendo espaços em &hellip;">
+  <meta name="description" content="O comando script/plugin install agora permite o uso da opção Âe/--export, para que ele use um svn export. Referência: http://dev.rubyonrails.org/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,44 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/02/27/edge-rails-scriptplugin-install-export/">Edge Rails: script/plugin install &#8211;export</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-02-27T00:00:00-03:00" pubdate data-updated="true">27 de Fevereiro de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>O comando <code>script/plugin install</code> agora permite o uso da opção <code>Âe/--export</code>, para que ele use um <code>svn export</code>.</p>
+
+<p>Referência: <a href="http://dev.rubyonrails.org/ticket/10847">http://dev.rubyonrails.org/ticket/10847</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -586,59 +624,6 @@ map<span class="punctuation punctuation_separator punctuation_separator_method p
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/02/21/edge-rails-protegendo-associacoes-com-readonly/">Edge Rails: Protegendo associações com readonly</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-02-21T00:00:00-03:00" pubdate data-updated="true">21 de Fevereiro de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Uma nova opção está presente nos relacionamentos entre modelos. Afim de impedir que seus registros possam ser alterados, podemos usar a opção <strong>:readonly</strong> ao associar modelos. Veja alguns exemplos:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_function support_function_activerecord support_function_activerecord_rails">has_many</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>reports</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>readonly</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">true</span>
-
-<span class="support support_function support_function_activerecord support_function_activerecord_rails">has_one</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>boss</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>readonly</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>true</span>
-
-<span class="support support_function support_function_activerecord support_function_activerecord_rails">belongs_to</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>project</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>readonly</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">true</span>
-
-<span class="support support_function support_function_activerecord support_function_activerecord_rails">has_and_belongs_to_many</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>categories</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>readonly</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">true</span>
-</span></pre>
-
-
-<p>Feito isto, os registros protegidos não poderão ser alterados. Se você tentar, terá uma excessão do tipo <strong>ActiveRecord::ReadOnlyRecord</strong> disparada.</p>
-
-<h3>Timezone</h3>
-
-
-<p>Ainda falando de TimeZones, os métodos <strong>to_a</strong>, <strong>to_f</strong>, <strong>to_i</strong>, <strong>httpdate</strong>, <strong>rfc2822</strong>, <strong>to_yaml</strong>, <strong>to_datetime</strong> e <strong>eql?</strong> foram adicionados na classe <strong>TimeWithZone</strong>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/54/">&larr; Antigos</a>
@@ -656,6 +641,10 @@ map<span class="punctuation punctuation_separator punctuation_separator_method p
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
@@ -669,10 +658,6 @@ map<span class="punctuation punctuation_separator punctuation_separator_method p
     
       <li class="post">
         <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
       </li>
     
   </ul>
@@ -750,7 +735,7 @@ map<span class="punctuation punctuation_separator punctuation_separator_method p
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2011 - Carlos Brando -
+  Copyright &copy; 2012 - Carlos Brando -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

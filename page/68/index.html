@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Hoje estou na maior correria e resolvi postar apenas um link para um artigo muito bem feito do blog QuarkRuby. O blog pertence a Nakul Aggarwal e &hellip;">
+  <meta name="description" content="Saiu no Ryan&#8217;s Scraps. Especificando a ordem de carga de plugins Hoje o máximo que podemos fazer com plugins é informar ao Rails quais devem &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,97 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2007/09/24/edge-rails-o-que-vem-por-a/">Edge Rails: O que vem por aí?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-09-24T00:00:00-03:00" pubdate data-updated="true">24 de Setembro de 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/09/289142843-b04124fd3b.jpg" alt="289142843_b04124fd3b" border="0" height="375" width="500" /> </p>
+
+
+<p>Saiu no <a href="http://ryandaigle.com/articles/2007/9/24/what-s-new-in-edge-rails-specify-plugin-load-order">Ryan&#8217;s</a> <a href="http://ryandaigle.com/articles/2007/9/24/what-s-new-in-edge-rails-better-exception-handling">Scraps</a>.</p>
+
+
+<h3>Especificando a ordem de carga de plugins</h3>
+
+
+<p>Hoje o máximo que podemos fazer com plugins é informar ao Rails quais devem ser carregados. No environment.rb:</p>
+
+
+<p>
+[source:ruby]
+config.plugins = %W( exception_notification ssl_requirement )
+[/source]
+</p>
+
+
+<p>A partir da próxima versão do Rails esta este trecho de código também será usado para definir a ordem em que os plugins devem ser carregados.
+<p>Para isto, o método passou a aceitar o símbolo <strong>:all</strong>, facilitando o preenchimento do método e evitando o trabalho de listar todos os plugins. Veja alguns exemplos de uso:
+<p>
+[source:ruby]
+config.plugins = [ :exception_notification, :ssl_requirement, :all ]
+[/source]
+</p>
+<p>Neste caso só importa para mim que os dois primeiros plugins carreguem nesta ordem, os demais não interessam.
+<p>
+[source:ruby]
+config.plugins = [ :exception_notification, :all, :ssl_requirement ]
+[/source]
+</p>
+<p>Agora, fiz diferente. Quero que sempre o Rails carregue primeiro o plugin <strong>exception_notification</strong> e por último o <strong>plugin ssl_requirement</strong>.
+<p>Para ver a referencia no Rails Trac, <a href="http://dev.rubyonrails.org/changeset/7531">clique aqui</a>.
+<h3>Uma maneira melhor de interceptar erros</h3>
+<p>A pior coisa que pode acontecer em nosso produto é uma horrível página com uma mensagem de erro. Por isto é sempre bom se preparar para estes casos. Na nova versão do Rails teremos uma nova forma de tratar exceções geradas em uma action:
+<p>
+[source:ruby]
+class ApplicationController < ActionController::Base
+  rescue_from User::NotAuthorized, :with => :deny_access
+  rescue_from ActiveRecord::RecordInvalid, :with => :show_errors
+
+  protected
+  def deny_access
+    &#8230;
+  end
+
+  def show_errors(exception)
+    exception.record.new_record? ? &#8230;
+  end
+end
+[/source]
+</p>
+<p>Muito simples, não é?
+<p>Para ver a referencia no Rails Trac, <a href="http://dev.rubyonrails.org/changeset/7597">clique aqui</a>.</p>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -548,132 +639,6 @@ end
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/09/11/ruby-on-rails-no-tem-futuro-corra-atrs-da-sua-certificao-enquanto-tempo/">Ruby on Rails não tem futuro - corra atrás da sua certificação enquanto é tempo</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-09-11T00:00:00-03:00" pubdate data-updated="true">11 de Setembro de 2007</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><center><img src="http://farm1.static.flickr.com/249/535776046_f1f2458a24.jpg?v=1181313689" /></center>
-
-
-<blockquote>Ruby On Rails não tem interface visual que torne o desenvolvimento
-realmente produtivo como o ASP.NET
-
-Ruby On Rails não tem um framework por traz dele, o que o torna
-limitado e por isso não o levo a sério e não recomendo que levem. ASP.NET tem um framework, JSF também, esses dois devem ser levados a sério. Ruby não.
-
-A questão MVC x CodeBehind que você colocou nos comentários não fez sentido. MVC no ASP.NET = aspx + .vb + classe.
-
-&Eacute; uma pena que tantos desenvolvedores estejam seguindo um caminho sem muito futuro&#8230;
-
-Dennes Torres
-MCAD,MCSD,MCSE,MCDBA,MCT</blockquote>
-
-
-<p>Se você não entendeu nada, eu explico.</p>
-
-<p>Tudo começou aqui neste blog: <a href="http://www.nomedojogo.com/2007/08/11/por-que-net-melhor-do-que-rails/">Nome do Jogo</a></p>
-
-<p>Continuou no blog do Samir: <a href="http://samirmamude.com/2007/8/12/porque-rails-e-melhor-que-asp-net-">Simple Code</a></p>
-
-<p>E foi parar até no blog do Eduardo Miranda: <a href="http://www.eduardomiranda.net/blogs/dotnet/archive/2007/08/13/rails-versus-asp.net.aspx">Console.write(this.Opinion)</a></p>
-
-<p>E terminou com este comentário do Dennes Torres (acima) no blog do meu amigo Samir.</p>
-
-<p>Antes de comentar a respeito, gostaria de explicar quem é <strong><a href="http://www.devaspnet.com.br/colunas2/coluna0123.aspx" rel="nofollow">Dennes Torres</a></strong>. Ele é uma figura muito conhecida pela comunidade .Net. Possui as certificações <strong>MCAD</strong>, <strong>MCSD</strong>, <strong>MCSE</strong>, <strong>MCDBA </strong>e <strong>MCT</strong>, é diretor da <strong>Búfalo Informática</strong>, líder do grupo de usuários <strong>devASPNet</strong> e Representante
-nacional de Marketing da <strong>INETA</strong> (International .NET Association).</p>
-
-<p>Diante deste comentário feito por uma pessoa com tal currículo, chego às seguintes conclusões:</p>
-
-<p><strong>1. Certificações não valem nada.</strong></p>
-
-<p>Não sei se você sabia, mas já cogitaram criar uma <a href="http://on-ruby.blogspot.com/2006/11/ruby-certification-is-it-worth-it.html">certificação para Ruby</a>.</p>
-
-<p>Diante disto gostei muito de um <a href="http://weblog.jamisbuck.org/2006/11/10/just-say-no-to-certification">post</a> publicado por Jamis Buck, que trabalha na <a href="http://37signals.com/">37signals</a>. Neste post Jamis lança uma pergunta: &#8220;Pode uma certificação produzir programadores competentes?&#8221;, ele mesmo dá a resposta: &#8220;Não. Se você é certificado e é competente, então você já era competente antes de ser certificado.&#8221;</p>
-
-<p>Ainda neste mesmo post, Jamis comenta que &#8220;certificações são usadas primariamente por &#8216;tomadores de decisão&#8217; ignorantes como uma forma de discriminação&#8221;.</p>
-
-<p>Uma certificação nunca vai conseguir provar se uma pessoa é um bom ou ruim programador. A única forma de se comprovar isto é vê-lo programando. E para provar que não estou mentindo, está aí o comentário no começo deste post.</p>
-
-<p><strong>2. Não existe programador vidente.</strong></p>
-
-<p>&Eacute; simplesmente impossível determinar se uma tecnologia tem ou não tem futuro.</p>
-
-<p>Veja um <a href="http://thespoke.net/blogs/dennes/archive/2007/09/05/991555.aspx" rel="nofollow">post</a> do próprio Dennes no seu blog, onde ele narra a sua descoberta da web 2.0 (detalhe que ele só descobriu isto em setembro deste ano). Neste post nosso amigo diz:</p>
-
-<blockquote>A Microsoft ficou muito conhecida por ter perdido a onda da web quando esta surgiu, posteriormente conseguindo se recuperar. Agora, mais uma vez, ela perdeu outra onda, a onda da Web 2.0</blockquote>
-
-
-<p>Meditando sobre este assunto, ele conclui:</p>
-
-<blockquote>Nós, que trabalhamos com tecnologia e mais especificamente com tecnologia Microsoft, criamos uma panela tão fechada em torno de nosso trabalho que tal panela acabou por nos prender e não vimos uma evolução tão grande passando ao nosso lado.
-
-Que isso nos sirva como um grande aprendizado.</blockquote>
-
-
-<p>O que ele fala aqui é uma tremenda de uma verdade. A própria Microsoft com seus milhares de excelentes funcionários e com líderes que são considerados algumas das maiores mentes da nossa área, já deixou grandes oportunidades passarem simplesmente porque não conseguiu prever o futuro.</p>
-
-<p>Na verdade nenhum de nós pode. &Eacute; exatamente por isto que você nunca, eu disse NUNCA, deve dizer que uma determinada tecnologia tem ou não tem futuro.</p>
-
-<p>Nós que vivemos de tecnologia precisamos de muito mais do que predições feitas por pessoas apaixonadas por uma determinada empresa. Precisamos de evidencias.</p>
-
-<p>Para decidir se você deve investir no Ruby ou não, é melhor se basear em dados como estes:</p>
-
-<p><a href="http://www.oreillynet.com/ruby/blog/2007/01/ruby_declared_tiobes_programmi.html">Ruby declared TIOBE&#8217;s Programming Language of the Year 2006!</a></p>
-
-<p><a href="http://www.tiobe.com/tpci.htm">Ruby já é a décima liguagem mais popular do mundo, e continua subindo.</a></p>
-
-<p><a href="http://computerworld.uol.com.br/mercado/2007/09/03/idgnoticia.2007-09-03.7801004785/">Linguagem Ruby em alta no Brasil, aponta estudo Evans Data</a></p>
-
-<p><strong>3. Nunca fale sobre algo que você não conhece.</strong></p>
-
-<p>Se você fizer isto corre o risco de falar besteira.</p>
-
-<p>Se quiser defender sua linguagem ou plataforma favorita, faça como o <a href="http://www.eduardomiranda.net/blogs/dotnet/archive/2007/08/13/rails-versus-asp.net.aspx">Eduardo Miranda</a>. Respeite a opinião das outras pessoas e somente fale sobre o que você domina.</p>
-
-<p>Melhor do que isto, antes de lutar pela sua linguagem de programação como um soldado fiel, estude outras linguagens, veja como funcionam. Nem que seja para ver como seu inimigo trabalha.</p>
-
-<p>Eu trabalho com C# há muitos anos. Decidi aprender Ruby por curiosidade, e gostei. Agora posso citar dezenas de razões para você considerar Ruby on Rails melhor do que .Net e também posso citar outra dezena de razões para lhe mostrar que .Net é melhor do que Ruby on Rails.</p>
-
-<p>Siga o conselho do <a href="http://logbr.reflectivesurface.com/2007/08/14/syx/">Ronaldo Ferraz</a>: &#8220;Aprenda uma linguagem por ano&#8221;.</p>
-
-<p><strong>Finalizando</strong></p>
-
-<p>Apenas para finalizar gostaria de dizer que não tenho nada contra o Dennes Torres, pelo contrário, quando programador Visual Basic (já faz tempo, hein), recorri diversas vezes aos seus artigos em busca de ajuda que com certeza foram de imenso valor.</p>
-
-<p>Este post é apenas uma forma de dizer aos meus leitores: Evoluam. Não parem no tempo. Estudem Ruby, estudem C#, estudem Rails e estudem ASP.Net. Quanto mais você sabe melhor você é.</p>
-
-<p>E só falem quando tiverem certeza&#8230;</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/69/">&larr; Antigos</a>
@@ -691,6 +656,10 @@ Que isso nos sirva como um grande aprendizado.</blockquote>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
@@ -704,10 +673,6 @@ Que isso nos sirva como um grande aprendizado.</blockquote>
     
       <li class="post">
         <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
       </li>
     
   </ul>
@@ -785,7 +750,7 @@ Que isso nos sirva como um grande aprendizado.</blockquote>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2011 - Carlos Brando -
+  Copyright &copy; 2012 - Carlos Brando -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

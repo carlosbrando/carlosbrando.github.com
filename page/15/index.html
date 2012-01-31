@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Eu já comentei aqui no blog sobre o novo sistema de templates do Rails 2.3. Com este novo recurso podemos criar um modelo para novos projetos, &hellip;">
+  <meta name="description" content="Atualmente o método Array#to_sentence possui as opções :connector que permite configurar a palavra usada para ligar os dois últimos elementos da &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,74 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/01/07/edge-rails-arrayto_sentence/">Edge Rails: Array#to_sentence</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-01-07T00:00:00-02:00" pubdate data-updated="true"> 7 de Janeiro de 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Atualmente o método <code>Array#to_sentence</code> possui as opções <code>:connector</code> que permite configurar a palavra usada para ligar os dois últimos elementos da lista, normalmente a palavra “and” ou a letra “e” em português e <code>:skip_last_comma</code> que como diz o nome remove a última virgula da frase.</p>
+
+<p>À partir do Rails 2.3 este método não terá mais as opções acima, que serão substituídas pelas seguintes:</p>
+
+<p><strong>:words_connector</strong>
+O símbolo ou palavra que será usado para ligar os elementos na frase, somente quando o <code>Array</code> tem mais de dois elementos. O valor padrão é &#8220;, &#8220;.</p>
+
+<p><strong>:two_words_connector</strong>
+Esta opção funciona como a de cima, mas somente quando o <code>Array</code> possuir apenas dois elementos. O valor padrão é &#8221; and &#8220;.</p>
+
+<p><strong>:last_word_connector</strong>
+Esta opção define o símbolo ou palavra que ligará os dois últimos elementos do <code>Array</code> na frase. O valor padrão é &#8220;, and &#8220;.</p>
+
+<p>A opção <code>:locale</code> que já existe hoje continuará existindo normalmente. Um exemplo de uso do novo método para conseguir uma frase em português seria:</p>
+
+<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">&gt;&gt; ['Cachorro', 'Gato', 'Camelo'].to_sentence :last_word_connector =&gt; " e "
+=&gt; "Cachorro, Gato e Camelo"</span></span></pre>
+
+
+<p>Você também deve configurar o seu arquivo de internacionalização para o novo formato:</p>
+
+<pre class="textmate-source"><span class="source source_yaml"><span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">pt-BR</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
+</span>  <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">support</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
+</span>    <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">array</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
+</span>      <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">words_connector</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span> </span><span class="string string_quoted string_quoted_double string_quoted_double_yaml"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_yaml">"</span>, <span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_yaml">"</span></span>
+      <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">two_words_connector</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span> </span><span class="string string_quoted string_quoted_double string_quoted_double_yaml"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_yaml">"</span> e <span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_yaml">"</span></span>
+      <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">last_word_connector</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span> </span><span class="string string_quoted string_quoted_double string_quoted_double_yaml"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_yaml">"</span> e <span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_yaml">"</span></span></span></pre>
+
+
+<p>Esta decisão foi tomada para facilitar o processo de internacionalização do Rails em algumas línguas.</p>
+
+<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.3/3.0 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades acompanhando a série <a href="../category/edge-rails/">Edge Rails</a>.</em>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -572,50 +640,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/12/23/o-dia-em-que-o-merb-se-juntou-ao-rails/">O dia em que o Merb se juntou ao Rails</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-12-23T00:00:00-02:00" pubdate data-updated="true">23 de Dezembro de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Guarde este dia: 23 de dezembro de 2008 – o <strong>Fim da Guerra Rails x Merb</strong>!</p>
-
-<p>Neste dia o Core Team do Rails e do Merb decidiram parar de brigar e resolveram <a href="http://weblog.rubyonrails.org/2008/12/23/merb-gets-merged-into-rails-3">trabalhar</a> <a href="http://yehudakatz.com/2008/12/23/rails-and-merb-merge/">juntos</a> para construir o melhor framework possível. Recebemos de braços abertos toda a comunidade Merb e esperamos que eles também estejam tão empolgados quanto nós!</p>
-
-<p><img class="center" src="http://farm4.static.flickr.com/3291/3130980721_0879620455.jpg?v=0"></p>
-
-<p>Em janeiro de 2009, provavelmente teremos o lançamento do <a href="http://www.nomedojogo.com/category/edge-rails/">Rails 2.3</a>, e depois disso aguardaremos ansiosos o <strong>Rails 3</strong>, que será o resultado desta união!</p>
-
-<p>Chega de gastar energias com brigas sem sentido e duplicação de código.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/16/">&larr; Antigos</a>
@@ -633,6 +657,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
@@ -646,10 +674,6 @@
     
       <li class="post">
         <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
       </li>
     
   </ul>
@@ -727,7 +751,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2011 - Carlos Brando -
+  Copyright &copy; 2012 - Carlos Brando -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

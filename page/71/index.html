@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Nestes últimos dias temos falado muito de C# e Ruby aqui no blog. Alguns deram suas opiniões e mostraram paixão tanto pelo Ruby quanto pelo C#. Eu &hellip;">
+  <meta name="description" content="Um recurso muito útil no Rails são os arquivos de log. Por meio deles nós podemos acompanhar exatamente o que está acontecendo com nosso software, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,64 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2007/08/16/todo-mundo-pode-ver-minha-senha-nos-arquivos-de-log-do-rails/">Todo mundo pode ver minha senha nos arquivos de log do Rails&#8230;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-08-16T00:00:00-03:00" pubdate data-updated="true">16 de Agosto de 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p></p>
+
+
+<p><img src="http://farm2.static.flickr.com/1039/1101698626_d15d566a94.jpg?v=0"> </p>
+
+
+<p>Um recurso muito útil no <strong>Rails</strong> são os arquivos de log. Por meio deles nós podemos acompanhar exatamente o que está acontecendo com nosso software, vendo inclusive os comandos <strong>SQL</strong> enviados para o banco de dados.</p>
+
+
+<p>Mas este recurso tem um sério problema de segurança. Uma simples página de login ou cadastro de usuários, pode fazer com que o <strong>Rails</strong> grave a senha do usuário nos arquivos de log. Quando enviamos dados via post (usado nestes casos) o <strong>Rails</strong> grava todos os parametros enviados no arquivo de log, inclusive sua senha. Faça o teste e comprove.</p>
+
+
+<p>Para evitar este tipo de problema, você pode utilizar um filtro no seu arquivo de controller:</p>
+
+
+<p>[source:ruby]
+class WelcomeController < ApplicationController
+    filter_parameter_logging "password"
+end
+[/source]</p>
+<p>Onde <strong>&#8220;password&#8221;</strong> é o nome do campo que você está usando para armazenar sua senha.</p>
+<p>Agora faça o teste novamente. Ao invés de o <strong>Rails</strong> registrar a senha do usuário no log, ele trocará por <strong>[FILTERED]</strong>.</p>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -545,68 +603,6 @@ int bytes = 100.Megabytes() + 50.Kilobytes();
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/08/05/ruby-on-google/">Ruby on Google</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-08-05T00:00:00-03:00" pubdate data-updated="true"> 5 de Agosto de 2007</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><center><img src="http://farm2.static.flickr.com/1417/962179188_d87ecb0f54.jpg?v=0" alt="" /></center></p>
-
-
-<p></br><p>&Eacute; sempre bom saber que grandes empresas estão usando Ruby on Rails em seus projetos. Melhor ainda é saber que o Google está usando em um dos seus principais projetos.</p></p>
-
-<p>Acredito que vocês já tenham ouvido falar do Socialstream. Sabe-se que o Orkut só faz sucesso aqui no Brasil e na Índia, enquanto o mercado americano é dominado por MySpace e Facebook. A idéia do Google é criar uma rede social que integre todas estas outras redes dentro dela. Uma idéia muito boa para dizer a verdade e como é feito pelo Google, tem tudo para dar certo.</p>
-
-
-
-
-<p>Acontece que pesquisando sobre isto me deparei com a seguinte imagem.</p>
-
-
-
-
-<p><center><img src='http://old.nomedojogo.com/wp-content/uploads/2007/08/iterations.png' alt='iterations.png' /></center></p>
-
-
-
-
-<p>Pesquisei para descobrir se o Socialstream seria desenvolvido em Ruby mesmo, ou se isto seria apenas para um protótipo. Mas infelizmente não descobri (se você souber me avise, por favor). De qualquer forma, é interessante saber que o Google tem apoiado o uso de Ruby em seus projetos. Isto ajuda muito a popularizar a linguagem e o framework.</p>
-
-
-
-
-<p>Usei isto como argumento para convencer meu cliente em usar Ruby on Rails, e funcionou.</p>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/72/">&larr; Antigos</a>
@@ -624,6 +620,10 @@ int bytes = 100.Megabytes() + 50.Kilobytes();
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
@@ -637,10 +637,6 @@ int bytes = 100.Megabytes() + 50.Kilobytes();
     
       <li class="post">
         <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
       </li>
     
   </ul>
@@ -718,7 +714,7 @@ int bytes = 100.Megabytes() + 50.Kilobytes();
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2011 - Carlos Brando -
+  Copyright &copy; 2012 - Carlos Brando -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

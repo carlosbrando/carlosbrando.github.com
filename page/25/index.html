@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Se você estiver usando o Edge Rails em seu projeto, tente executar o seguinte comando para criar um novo modelo: ./script/generate scaffold comment &hellip;">
+  <meta name="description" content="Quando uma migration está em execução e um erro ocorre, tudo que já foi executado será aplicado ao banco de dados, mas tudo que estiver após o erro, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,50 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/09/18/edge-rails-migrations-transacionais-no-postgresql/">Edge Rails: Migrations transacionais no PostgreSQL</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-09-18T00:00:00-03:00" pubdate data-updated="true">18 de Setembro de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Quando uma migration está em execução e um erro ocorre, tudo que já foi executado será aplicado ao banco de dados, mas tudo que estiver após o erro, não será aplicado. Além disso a migration será marcada como concluída. Isto pode dar uma certa dor de cabeça para corrigir.</p>
+
+<p>Mas, se o banco de dados que você estiver usando tiver suporte a <strong>DDL rollbacks</strong> em transações, então ele pode fazer uso deste recurso para desfazer tudo que foi feito antes do erro. O problema é que nem todos os bancos de dados possuem este recurso. O MySQL, por exemplo não possui.</p>
+
+<p>Mas o PostgreSQL, SQL Server e outros bancos possuem.</p>
+
+<p>Neste caso o código do Rails foi atualizado para permitir o uso de transações em migrations quando você estiver usando estes bancos de dados. Embora o Rails permita este recurso, o adapter do banco deve estar preparado para isto. Até o momento somente o do <strong>PostgreSQL</strong> parece estar.</p>
+
+<p>Quase ia esquecendo de mencionar que este patch tem participação do meu amigo e companheiro da <a href="http://surgeworks.com/">Surgeworks</a>: <a href="http://blog.divoxx.com/">Rodrigo Kochenburger</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -550,83 +594,6 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/09/edge-rails-pool-de-conexoes-no-rails/">Edge Rails: Pool de Conexões no Rails</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-09-09T00:00:00-03:00" pubdate data-updated="true"> 9 de Setembro de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Algo que muita gente reclama sobre o Rails é que ele é lento. Sabemos que isto não é totalmente verdade, mas também sabemos que muita coisa pode ser feita para melhorar a performance dele.</p>
-
-<p>Uma destas coisas acabou de se feita. Foi incluído ao Rails um Pool de Conexões com o banco de dados.</p>
-
-<p>Toda vez que uma requisição ao banco de dados é feita, perde-se algum tempo criando uma nova conexão e só depois é que a pesquisa ou gravação é realizada. Olhando superficialmente pode parecer algo muito rápido e simples, mas abrir uma conexão com o banco de dados não é tão simples assim. É necessário estabelecer uma conexão física com o servidor do banco, autenticar a conexão e realizar mais uma série de validações. Tudo isto consome recursos e tempo. Isto explica muito bem o porque de o banco de dados se tornar o vilão de alguns grandes projetos criados em Rails.</p>
-
-<p>A solução para este tipo de problema é reaproveitar conexões já criadas para realizar mais tarefas dentro do banco de dados antes de fecha-las. Ou em termos mais técnicos, precisamos de um Pool de Conexões.</p>
-
-<p>O processo é o seguinte: Uma conexão com o banco de dados é aberta e utilizada para realizar uma pesquisa. Depois disso, ao invés de fecha-la, ela é armazena no pool de conexões. Quando uma outra requisição é feita, ao invés de abrir uma nova conexão, o sistema reaproveita uma que já foi aberta, diminuindo o tempo e os recursos necessários para realizar a tarefa. Várias conexões podem ser armazenadas no pool ao mesmo tempo.</p>
-
-<p>No Rails será criado um novo pool para cada execução do método <strong>establish_connection</strong>. Em outras palavras, cada banco de dados cadastrado no arquivo <strong>database.yml</strong> terá seu próprio pool de conexões.</p>
-
-<p>O pool começa vazio e vai crescendo até o limite de 5 conexões (padrão), mas você pode aumentar este limite acrescentando a opção &#8217;<strong>pool</strong>&#8217; na configuração do banco de dados.</p>
-
-<pre class="textmate-source"><span class="source source_yaml"><span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">development</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
-</span>  <span class="string string_unquoted string_unquoted_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">adapter<span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span></span> <span class="string string_unquoted string_unquoted_yaml">mysql</span></span>
-  <span class="string string_unquoted string_unquoted_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">host<span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span></span> <span class="string string_unquoted string_unquoted_yaml">localhost</span></span>
-  <span class="string string_unquoted string_unquoted_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">username<span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span></span> <span class="string string_unquoted string_unquoted_yaml">myuser</span></span>
-  <span class="string string_unquoted string_unquoted_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">password<span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span></span> <span class="string string_unquoted string_unquoted_yaml">mypass</span></span>
-  <span class="string string_unquoted string_unquoted_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">database<span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span></span> <span class="string string_unquoted string_unquoted_yaml">somedatabase</span></span>
-  <span class="constant constant_numeric constant_numeric_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">pool<span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span></span> 10</span>
-  <span class="constant constant_numeric constant_numeric_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">wait_timeout<span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span></span> 15</span>
-</span></pre>
-
-
-<p>Se nenhuma das conexões estiver disponível, uma thread irá esperar durante 5 segundos (padrão) e tentar novamente. Este tempo também pode ser configurado adicionando a chave &#8217;<strong>wait_timeout</strong>&#8217; na configuração do banco de dados.</p>
-
-<p>Se você desejar usar o pool de conexões fora do <strong>ActionPack</strong>, existe o método <strong>ActiveRecord::Base.connection_pool</strong> que permite que você manualmente faça o checkout/checkin das conexões. Não esqueça de fazer o checkin quando terminar de usar a conexão.</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">connection <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">ActiveRecord</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">Base</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>connection_pool<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>checkout
-
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> faz alguma coisa no banco de dados
-</span>
-<span class="support support_class support_class_ruby">ActiveRecord</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">Base</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>connection_pool<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>checkin<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>connection<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
-
-
-<p>Você também pode usar o método <strong>ActiveRecord::Base.connection_pool.with_connection</strong> que já faz o checkout/checkin automaticamente para você, tornando-se uma opção mais segura.</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">ActiveRecord</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">Base</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>connection_pool<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>with_connection <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">connection</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> faz alguma coisa no banco de dados
-</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/26/">&larr; Antigos</a>
@@ -644,6 +611,10 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
@@ -657,10 +628,6 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
     
       <li class="post">
         <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/19/blogando-como-um-hacker/">Blogando como um hacker</a>
       </li>
     
   </ul>
@@ -738,7 +705,7 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2011 - Carlos Brando -
+  Copyright &copy; 2012 - Carlos Brando -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
