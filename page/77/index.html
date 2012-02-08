@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="O site E Logo Design montou uma lista com 50 tutoriais ensinando a desenhar logotipos. Eu particularmente demoro muito tempo bolando os logos dos &hellip;">
+  <meta name="description" content="Quando se cria um software como o carreiraTI, é difícil saber que erros as pessoas podem encontrar durante a navegação. &Eacute; necessário ficar &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,73 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2007/05/22/receba-erros-do-seu-software-por-email/">Receba erros do seu software por email</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-05-22T00:00:00-03:00" pubdate data-updated="true">22 de Maio de 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><center><img src="http://old.nomedojogo.com/wp-content/uploads/writer/Recebaerrosdoseusoftwareporemail_13317/bruce_on_rails3.jpg" height="304" width="411" /></center>Quando se cria um software como o <a href="http://www.carreirati.com">carreiraTI</a>, é difícil saber que erros as pessoas podem encontrar durante a navegação. &Eacute; necessário ficar sempre analisando os arquivos de log para ver se tudo está indo bem.Mas, o <strong>Ruby on Rails</strong> tem um plugin excelente que pode me ajudar nisto. &Eacute; o ExceptionNotification. Basicamente ele me envia um email toda vez que um erro ocorre em meu software.</p>
+
+
+<p>Para usá-lo é muito fácil (como diria DHH é tedioso).</p>
+
+
+<p>Primeiro instale o plugin:</p>
+
+
+<pre name="code" class="ruby">ruby script/plugin install exception_notification</pre>
+
+
+<p>Depois, configure no arquivo environment.rb para onde o Rails deve enviar o email:</p>
+
+
+<pre name="code" class="ruby">ExceptionNotifier.exception_recipients = %w(<a href="mailto:meuemail@dominio.com">meuemail@dominio.com</a>)</pre>
+
+
+<p>Agora, basta colocar a seguinte declaração nos controller que você deseja monitorar, ou se forem todos, coloque no ApplicationController.</p>
+
+
+<pre name="code" class="ruby">
+class ApplicationController &lt; ActionController::Base
+    include ExceptionNotifiable
+end</pre>
+
+
+<p>Para que o <strong>Rails</strong> possa enviar os emails, é necessário que isto já tenha sido configurado antes, para saber como fazer isto veja o tutorial no <a href="http://wiki.rubyonrails.org/rails/pages/HowToSendEmailsWithActionMailer">site oficial</a>.</p>
+
+
+<p>Pronto, a partir de agora, todos os erros que sua aplicação gerar, você receberá por email.</p>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -534,64 +601,6 @@ Pronto! A variável retorno já contém somente o texto que me interessa.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/05/08/meses-em-portugus-no-rails-parte-2/">Meses em português no Rails - parte 2</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-05-08T00:00:00-03:00" pubdate data-updated="true"> 8 de Maio de 2007</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Dois amigos se pronunciaram e compartilharam suas idéias sobre qual a melhor forma de se ajustar o método strftime para trabalhar com datas em português.</p>
-
-<p>O primeiro foi o <a href="http://leonardofaria.net/2007/05/06/manipulando-datas-no-rails/">Leonardo Faria</a> que publicou no seu blog (<a href="http://leonardofaria.net/2007/05/06/manipulando-datas-no-rails/">clique aqui</a>) uma solução melhor que a minha.</p>
-
-<p>Mas, a melhor opção em minha opinião foi a sugestão dada pelo <a href="http://www.arthurgeek.net/">Arthur</a>:
-[source:ruby]silence_warnings do</p>
-
-<pre><code>Date::MONTHNAMES = [nil] + %w(Janeiro Fevereiro Março Abril Maio Junho Julho Agosto Setembro Outubro Novembro Dezembro)
-Date::DAYNAMES = %w(Domingo Segunda-Feira Terça-Feira Quarta-Feira Quinta-Feira Sexta-Feira Sábado)
-Date::ABBR_MONTHNAMES = [nil] + %w(Jan Fev Mar Abr Mai Jun Jul Aug Set Out Nov Dez)
-Date::ABBR_DAYNAMES = %w(Dom Seg Ter Qua Qui Sex Sab)
-
-Time::MONTHNAMES = Date::MONTHNAMES
-Time::DAYNAMES = Date::DAYNAMES
-Time::ABBR_MONTHNAMES = Date::ABBR_MONTHNAMES
-Time::ABBR_DAYNAMES = Date::ABBR_DAYNAMES
-</code></pre>
-
-<p>end[/source]</p>
-
-<p>Este código funcionou e considerei o menos intrusivo. Por isto a melhor opção!</p>
-
-<p>Obrigado pela ajuda amigos!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/78/">&larr; Antigos</a>
@@ -609,6 +618,10 @@ Time::ABBR_DAYNAMES = Date::ABBR_DAYNAMES
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
@@ -622,10 +635,6 @@ Time::ABBR_DAYNAMES = Date::ABBR_DAYNAMES
     
       <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
   </ul>

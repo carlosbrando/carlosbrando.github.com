@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Atualmente o método Array#to_sentence possui as opções :connector que permite configurar a palavra usada para ligar os dois últimos elementos da &hellip;">
+  <meta name="description" content="Este novo recurso acrescentado ao Rails dificilmente será usado por nós, mas vale a pela curiosidade. Foi acrescentado ao ActiveRecord um novo &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,85 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/01/08/edge-rails-definindo-o-separador-de-palavras-em-mensagens-de-erro/">Edge Rails: Definindo o separador de palavras em mensagens de erro</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-01-08T00:00:00-02:00" pubdate data-updated="true"> 8 de Janeiro de 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Este novo recurso acrescentado ao Rails dificilmente será usado por nós, mas vale a pela curiosidade. Foi acrescentado ao ActiveRecord um novo parâmetro de configuração para internacionalização que permite definir o separador de palavras em mensagens de erro.</p>
+
+<p>Como?</p>
+
+<p>No inglês e no português não faz o menor sentido, mas pegue o seguinte arquivo de internacionalização criado para um projeto em japonês:</p>
+
+<pre class="textmate-source"><span class="source source_yaml"><span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">ja-JP</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
+</span>  <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">activerecord</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
+</span>    <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">models</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
+</span>      <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">user</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span> </span>ユーザー
+    <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">attributes</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
+</span>      <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">user</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
+</span>        <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">name</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span> </span>名前
+    <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">errors</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
+</span>      <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">messages</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
+</span>        <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">blank</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span> </span>を入力してください。
+</span></pre>
+
+
+<p>Quando o atributo <code>name</code> do objeto <code>User</code> estiver em branco a seguinte mensagem será devolvida pelo AR:</p>
+
+<p>名前 を入力してください。</p>
+
+<p>Talvez você não tenha percebido mas existe um espaço em branco entre o nome do atributo e a mensagem de erro, o que não está certo no japonês, onde as palavras normalmente não são separadas por espaços.</p>
+
+<p>Com este novo recurso um Railer japonês pode configurar em seu arquivo:</p>
+
+<pre class="textmate-source"><span class="source source_yaml"><span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">ja-JP</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
+</span>  <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">activerecord</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
+</span>    <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">errors</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
+</span>      <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">format</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
+</span>        <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> Sets the separator between the words
+</span>        <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">separator</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span> </span><span class="string string_quoted string_quoted_double string_quoted_double_yaml"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_yaml">"</span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_yaml">"</span></span>
+</span></pre>
+
+
+<p>E ter seguinte mensagem de erro sem espaços separando as palavras:</p>
+
+<p>名前を入力してください。</p>
+
+<p>Curioso ou não?</p>
+
+<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.3/3.0 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades acompanhando a série <a href="../category/edge-rails/">Edge Rails</a>.</em>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -590,56 +669,6 @@ Esta opção define o símbolo ou palavra que ligará os dois últimos elementos
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/12/24/como-anda-a-traducao-dos-rails-guides/">Como anda a tradução dos Rails Guides?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-12-24T00:00:00-02:00" pubdate data-updated="true">24 de Dezembro de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Não é segredo para ninguém que membros da comunidade brasileira de Ruby on Rails estão traduzindo os famosos <a href="http://guides.rails.info/">Rails Guides</a> para o nosso idioma. Liderados por <a href="http://cassiomarques.wordpress.com/2008/11/14/convocacao-vamos-traduzir-os-rails-guides-para-portugues/">Cássio Marques</a>, o grupo é formado por Daniel Lopes, Carlos Antonio da Silva, Adolfo Sousa, Cairo Noleto e Warlley Rezende.</p>
-
-<p>Os Rails Guides apareceram recentemente como uma importante ferramenta de aprendizado para os iniciantes e aqueles que querem se aprofundar mais nos conceitos por traz do Rails. São guias completos sobre os mais diversos assuntos, como ActiveRecord, criação de rotas, cache, segurança, criação de plugins, internacionalização e outros.</p>
-
-<p>&nbsp;</p>
-
-
-<p><img class="center" src="http://old.nomedojogo.com/wp-content/uploads/2008/12/rails_guides.png"></p>
-
-<p>&nbsp;</p>
-
-
-<p>Nossa comunidade felizmente já está acostumado com este tipo de trabalho, e estamos cada vez nos aperfeiçoando mais. Neste projeto, todos os arquivos que precisam ser traduzidos estão armazenados no <a href="http://github.com/cassiomarques/railsguides-pt_br/tree/master">GitHub</a>.</p>
-
-<p>Para colaborar é muito simples. Existe um projeto aberto no <a href="http://railsguides-pt_br.lighthouseapp.com/dashboard">Lighthouse</a> com tickets abertos para cada trecho que necessita de tradução. Crie uma conta, escolha um dos tickets e solicite acesso ao projeto para iniciar a tradução. Os responsáveis pelo projeto lhe darão permissão de escrita no repositório do GitHub.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/16/">&larr; Antigos</a>
@@ -657,6 +686,10 @@ Esta opção define o símbolo ou palavra que ligará os dois últimos elementos
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
@@ -670,10 +703,6 @@ Esta opção define o símbolo ou palavra que ligará os dois últimos elementos
     
       <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
   </ul>

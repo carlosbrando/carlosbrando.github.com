@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="render :file =&gt; "some/template", :use_full_path =&gt; true A opção :use_full_path do método render não existirá mais na próxima versão do Rails. &hellip;">
+  <meta name="description" content="Uma nova opção foi acrescentado ao método has_many: a opção :primary_key. Fazendo uso desta opção podemos definir qual método do modelo associado &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,66 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/08/04/edge-rails-informando-o-primary_key-em-associacoes-has_many/">Edge Rails: Informando outro primary_key em associações</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-08-04T00:00:00-03:00" pubdate data-updated="true"> 4 de Agosto de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Uma nova opção foi acrescentado ao método <strong>has_many</strong>: a opção <strong>:primary_key</strong>.</p>
+
+<p>Fazendo uso desta opção podemos definir qual método do modelo associado retornará a chave primária que será usada na associação. Obviamente o método padrão é o <strong>id</strong>.</p>
+
+<p>Veja um exemplo de uso:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_function support_function_activerecord support_function_activerecord_rails">has_many</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>clients_using_primary_key</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>class_name</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Client<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
+  <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>primary_key</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>name<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>foreign_key</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>firm_name<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span></pre>
+
+
+<h4>Atualização</h4>
+
+
+<p>4 de agosto de 2008 às 12:45</p>
+
+<p>Nosso amigo Ozéias Sant&#8217;ana (de blog novo) preparou um gem que adiciona esta mesma funcionalidade nas versões anteriores do Rails.</p>
+
+<p>Assim, quem precisa desta funcionalidade para já, deve ler o <a href="http://railsbox.org/2008/8/2/gem-has_many_select">artigo</a> que ele escreveu explicando como instalar e usar este gem.</p>
+
+<h4>has_one</h4>
+
+
+<p>5 de agosto de 2008 às 11:44</p>
+
+<p>O método <strong>has_one</strong> também recebeu esta implementação, funcionando exatamente como no exemplo acima.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -553,76 +613,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/07/24/como-funcionara-o-novo-suporte-a-internacionalizacao-no-rails-22/">Como funcionará o novo suporte a internacionalização no Rails 2.2</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-07-24T00:00:00-03:00" pubdate data-updated="true">24 de Julho de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Conforme expliquei no <a href="http://www.nomedojogo.com/2008/07/22/edge-rails-seus-problemas-acabaram-o-rails-tambem-vai-falar-portugues/">artigo anterior</a>, teremos suporte a <strong>I18n</strong> no Ruby on Rails a partir da próxima versão. E eu prometi escrever um artigo mostrando como funcionaria esta nova implementação, o problema é que demorei e já teve gente se adiantando&#8230;</p>
-
-<p>Então só vou mostrar o caminho das pedras.</p>
-
-<h3>Antes de começar</h3>
-
-
-<p>Preciso deixar claro uma coisa. Quando estamos falando de internacionalização, ao usar as palavras &#8220;localização&#8221; e &#8220;localizar&#8221;, não quero que vocês as entendam como sinônimos de encontrar, achar, etc&#8230;</p>
-
-<p>Quando nos referimos a &#8220;localização&#8221; ou &#8220;localizar&#8221; estamos falando de <strong>L10n</strong>. Eu já falei sobre isto no último artigo.</p>
-
-<h3>Como funcionará</h3>
-
-
-<p>O alicerce desta implementação é um módulo chamado <strong>I18n</strong> que vem através de um gem incorporado ao <strong>ActiveSupport</strong>. Este módulo acrescenta as seguintes funcionalidades ao Rails:</p>
-
-<p style="padding-left: 30px;">O método <strong>translate</strong>, que será usado para retornar traduções.</p>
-
-
-<p style="padding-left: 30px;">O método <strong>localize</strong>, que usaremos para &#8220;traduzir&#8221; objetos Date, DateTime e Time para a localização atual.</p>
-
-
-<p style="padding-left: 30px;">Além destes métodos este módulo traz todo o código necessário para armazenar e carregar os <strong>backends</strong> de &#8220;localização&#8221;. E já vem com um manipulador de exceções padrão que captura exceções levantadas no backend.</p>
-
-
-<p>Tanto o backend como o manipulador de exceções podem (devem) ser substituídos. Além disso para facilitar, os métodos <strong>#translate</strong> e <strong>#localize</strong> também poderão ser executados usando os métodos <strong>#t</strong> e <strong>#l</strong> respectivamente.</p>
-
-<p>Nem tudo está pronto ainda, na verdade muito coisa ainda precisa ser feita e definida por isto é um pouco cedo para dizer com precisão como tudo vai se encaixar no Rails.</p>
-
-<h3>Exemplos práticos</h3>
-
-
-<p>Eu encontrei <a href="http://www.mouseoverstudio.com/blog/?p=105">este artigo</a> escrito pelo <strong>Diego Carrion</strong> que explica um pouco sobre como colocar o <strong>translate</strong> para funcionar, e para quem quer ver isto na prática <strong>Trevor Turk</strong> (do El Dorado) criou no GitHub um <a href="http://github.com/trevorturk/rails-2.2-i18n-example/tree/master">projeto Rails</a> do zero com este código que o Diego menciona no seu blog.</p>
-
-<p>Assim que as coisas estiverem mais concretas, eu volto a falar mais sobre isto.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/32/">&larr; Antigos</a>
@@ -640,6 +630,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
@@ -653,10 +647,6 @@
     
       <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
   </ul>

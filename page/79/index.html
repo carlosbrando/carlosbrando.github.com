@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Faz um tempo que trabalhar perdeu a graça para mim. Todo dia levanto no mesmo horário, sigo o mesmo ritual em casa e no trabalho e não sinto o menor &hellip;">
+  <meta name="description" content="Recentemente tive de encontrar uma solução para um problema simples: eu tinha uma lista de estados e cidades em dropdowns. A intenção é que a lista &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,87 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2007/04/13/simple-on-rails-carregando-dropdowns-dinamicamente/">Simple on Rails - Carregando dropdowns dinamicamente</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-04-13T00:00:00-03:00" pubdate data-updated="true">13 de Abril de 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/writer/Carregandodropdownsdinamicamentecomduasl_9CBA/michelin_tweel_curb7.jpg" style="border-width: 0px" align="right" border="0" height="160" width="240" /> Recentemente tive de encontrar uma solução para um problema simples: eu tinha uma lista de estados e cidades em dropdowns. A intenção é que a lista de cidades fosse carregada de acordo com o estado selecionado. Simples.</p>
+
+<p>Como estou começando com o Rails, procurei na internet por alguma dica para fazer isto. Encontrei diversos sites descrevendo o passo-a-passo para a solução. Entre alguns deles os blogs do <a href="http://eustaquiorangel.com/blog/show/367" target="_blank">Eustáquio</a> e do <a href="http://blog.boaideia.inf.br/articles/2007/01/20/rjs-at%C3%A9-que-um-dia" target="_blank">André Ribeiro</a>.</p>
+
+<p>Achei a solução apresentada por eles muito confusa e com muito código.</p>
+
+<p>Mas uma coisa que me chamou atenção foi o seguinte comentário:</p>
+
+<blockquote>Vamos utilizar alguma técnica mais atual, que tal um pouco de AJAX&#8230; é relativamente fácil implementar isso com Rails, normalmente carregaríamos um fragmento de HTML que implementa o campo através de uma requisição AJAX enganchada no método onchange do drop-down.
+
+Mas esta técnica é tão&#8230; antiga.</blockquote>
+
+
+<p>Antiga? Não entendi. Para mim antiga é a roda, e eu não pretendo inventá-la de novo.</p>
+
+<p>Sempre existe mais de uma solução para o mesmo problema, e a melhor é sempre a mais simples.</p>
+
+<p>Depois de ler isto, resolvi tentar fazer do meu jeito:</p>
+
+<p>Inclui um observe_field na minha view:
+[source:ruby]&lt;span id=&#8221;select_cidades&#8221;&gt;&lt;/span&gt;
+&lt;%= observe_field :job_state,</p>
+
+<pre><code>:url =&amp;gt; { :action =&amp;gt; 'carrega_cidades' },
+:update =&amp;gt; 'form_cidade',
+:with =&amp;gt; 'form_estado',
+:complete =&amp;gt; "visual_effect(:highlight, 'td_cidades')" %&amp;gt;[/source]
+</code></pre>
+
+<p>E no meu controller:
+[source:ruby]def carrega_cidades
+@cities = City.find(:all,</p>
+
+<pre><code>    :conditions =&amp;gt; "state_id = #{params[:job_state]}",
+    :order =&amp;gt; 'nome')
+</code></pre>
+
+<p>render :inline =&gt;</p>
+
+<pre><code>"&amp;lt;%= collection_select('job', 'city_id' , @cities, 'id', 'nome') %&amp;gt;"
+</code></pre>
+
+<p>end[/source]
+Funciona!</p>
+
+<p>Não se esqueça porque você decidiu aprender rails.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -517,48 +598,6 @@ Porque só consigo pensar no que serei, e tudo que ficou para trás de algum mod
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/03/19/pesquisas-do-google-sero-annimas/">Pesquisas do Google serão anônimas</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-03-19T00:00:00-03:00" pubdate data-updated="true">19 de Março de 2007</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Quando você faz uma pesquisa no site do Google eles armazenam informações sobre a pesquisa realizada, seu endereço IP e cookies. Acontece <a href="http://old.nomedojogo.com/wp-content/uploads/writer/AspesquisasnoGoogleseroannimas_9566/Untitled12.jpg" atomicselection="true"><img src="http://old.nomedojogo.com/wp-content/uploads/writer/AspesquisasnoGoogleseroannimas_9566/Untitled1_thumb.jpg" style="border-width: 0px" align="left" border="0" height="240" width="162" /></a>que muita gente discorda disto e diz ser uma invasão de privacidade.</p>
-
-<p>Saiu no <a href="http://googleblog.blogspot.com/2007/03/taking-steps-to-further-improve-our.html" title="Google" target="_blank">blog oficial</a> do Google, que no prazo de até um ano isto será alterado. Depois de um período de 18 a 24 meses nossos dados continuarão a ser armazenados, mas de uma forma an&ocirc;nima.</p>
-
-<p>A partir daí, nossos dados somente serão coletados se desejarmos, com a finalidade de deixar as buscas mais personalizadas usando o <a href="http://www.google.com/searchhistory" title="Search History" target="_blank">Histórico de pesquisas</a>.</p>
-
-<p>Claro que mesmo hoje já podemos fazer pesquisas e navegar na internet anonimamente usando ferramentas como o <a href="http://tor.eff.org/" title="Tor" target="_blank">Tor</a>, ou <a href="http://www.samair.ru/proxy/" title="Proxys An&ocirc;nimos" target="_blank">proxys an&ocirc;nimos</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/80/">&larr; Antigos</a>
@@ -576,6 +615,10 @@ Porque só consigo pensar no que serei, e tudo que ficou para trás de algum mod
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
@@ -589,10 +632,6 @@ Porque só consigo pensar no que serei, e tudo que ficou para trás de algum mod
     
       <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
   </ul>

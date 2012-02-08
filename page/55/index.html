@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="&#8220;When, a Rails plugin&#8221;, é um daqueles plugins que devem acabar sendo incorporados ao código do Rails. Assim como o das &#8220;Sexys &hellip;">
+  <meta name="description" content="Eu tinha me esquecido de comentar sobre isto, mas na próxima versão do Rails poderemos realizar testes com fusos-horários diferentes de um uma forma &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/02/16/testando-fusos-horarios-no-edge-rails/">Testando fusos-horários no Edge Rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-02-16T00:00:00-02:00" pubdate data-updated="true">16 de Fevereiro de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Eu tinha me esquecido de comentar sobre isto, mas na próxima versão do Rails poderemos realizar testes com fusos-horários diferentes de um uma forma bem simples:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">test_local_offset</span></span>
+  with_env_tz <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>US/Eastern<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
+</span>    assert_equal <span class="variable variable_other variable_other_constant variable_other_constant_ruby">Rational</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">-</span><span class="constant constant_numeric constant_numeric_ruby">5</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">24</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="support support_class support_class_ruby">DateTime</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>local_offset
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+  with_env_tz <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>US/Central<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
+</span>    assert_equal <span class="variable variable_other variable_other_constant variable_other_constant_ruby">Rational</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">-</span><span class="constant constant_numeric constant_numeric_ruby">6</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">24</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="support support_class support_class_ruby">DateTime</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>local_offset
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+<p>Este helper era para se chamar <strong>with_timezone</strong>, mas foi renomeado para <strong>with_env_tz</strong> para evitar uma confusão com o fuso-horário informado via <strong>ENV[&#8216;TZ&#8217;]</strong> e <strong>Time.zone</strong>.</p>
+
+<p>Além disso também removeram o método <strong>Time.zone_reset!</strong> que não estava mais sendo usado.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -611,44 +661,6 @@ assert_equal <span class="constant constant_other constant_other_symbol constant
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/02/07/reconhecimento-de-rotas-ate-6-vezes-mais-rapido/">Reconhecimento de rotas até 6 vezes mais rápido</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-02-07T00:00:00-02:00" pubdate data-updated="true"> 7 de Fevereiro de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>A implementação atual do reconhecimento de rotas percorre todas as rotas, uma-a-uma, e isto consome muito tempo. Uma nova implementação foi incluída no trunk do Rails (Edge Rails) e é mais inteligente, ela monta uma árvore de rotas e reconhece as rotas pelo prefixo, pulando rotas semelhantes. Só isto já diminui em aproximadamente 2.7 vezes o tempo de reconhecimento das rotas.</p>
-
-<p>Toda a nova implementação está no arquivo <em><a href="http://dev.rubyonrails.org/browser/trunk/actionpack/lib/action_controller/routing/recognition_optimisation.rb?rev=8674">recognition_optimisation.rb</a></em>, os detalhes de seu funcionamento estão bem explicados nos comentários. Para mais informações sobre isto veja a documentação no próprio código fonte.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/56/">&larr; Antigos</a>
@@ -666,6 +678,10 @@ assert_equal <span class="constant constant_other constant_other_symbol constant
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
@@ -679,10 +695,6 @@ assert_equal <span class="constant constant_other constant_other_symbol constant
     
       <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
   </ul>

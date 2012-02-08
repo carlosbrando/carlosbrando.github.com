@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="O Google acabou de anunciar o lançamento de uma nova linguagem de programação chamada Go. A linguagem foi desenvolvida por um time formado por cinco &hellip;">
+  <meta name="description" content="Infelizmente a maioria dos programadores que conheço nunca ouviram falar sobre ortogonalidade no desenvolvimento de software, embora este seja um &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,65 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/12/01/ortogonalidade/">Ortogonalidade</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-01T00:00:00-02:00" pubdate data-updated="true"> 1 de Dezembro de 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Infelizmente a maioria dos programadores que conheço nunca ouviram falar sobre ortogonalidade no desenvolvimento de software, embora este seja um principio fundamental para se escrever código de qualidade.</p>
+
+<p>Em desenvolvimento de software, o termo &#8216;ortogonalidade&#8217; passou a significar uma espécie de independência ou dissociação. A ideia é que componentes que conceitualmente não estão relacionados devem ser construídos de forma a não possuírem nenhuma dependência entre si. Adicionar um novo atributo a um objeto do ActiveRecord (na maioria das vezes) não deveria exigir uma alteração na interface com o usuário, por exemplo.</p>
+
+<p><img class="center" src="http://old.nomedojogo.com/wp-content/uploads/2009/11/2208835201_1a4e5230e71.jpg"></p>
+
+<p>Em linguagens orientadas a objetos é muito fácil acrescentar dependências ao código. Em Ruby basta um simples &#8217;<code>require</code>&#8217; e seu projeto passa a depender de uma ou várias bibliotecas. Talvez devido a essa simplicidade este tende a se tornar um problema viral, já que nos estimula a estarmos sempre adicionando mais e mais dependências em nossos sistemas.</p>
+
+<p>Queremos projetar componentes auto-suficientes e com um único propósito bem definido. Sistemas não ortogonais são difíceis de alterar. Em projetos onde seus componentes dependem uns dos outros não existem correções pontuais. Uma correção pode levar a um ou mais problemas em outra parte. E isto pode se tornar um ciclo sem fim.</p>
+
+<p>Por outro lado, em sistemas onde os componentes são isolados uns dos outros, desde que você não mude a sua interface pública, você sabe que pode alterar um deles sem se preocupar com os outros.</p>
+
+<p>Os ganhos em produtividade ao colocar em prática este principio são imensos. Uma abordagem ortogonal promove a reutilização. Como seus componentes serão bem específicos e com responsabilidades bem definidas é fácil reaproveitá-los em outros sistemas. Outro fator importante é que por possuírem apenas o código necessário para cumprir uma única tarefa, obviamente estas bibliotecas serão menores e mais simples de serem projetadas, implementadas, testadas e dificilmente precisaremos revisita-las para adicionar novas funcionalidades ou fazer correções.</p>
+
+<p>O fato de serem componentes menores e com menos código também simplifica a criação de testes. E mesmo que um bug passe despercebido ele não será tão critico, pois o tempo de resolução será menor e a chance de o problema se espalhar por todo o sistema são mínimas, o que diminui os riscos.</p>
+
+<p>Vamos considerar como exemplo o desenvolvimento de um e-commerce. O requisito original previa apenas uma interface web simples, mas as exigências foram alteradas para também contemplar uma interface web para telefones celulares e para compras através de uma central telefônica. Em um sistema projetado ortogonalmente, você precisaria alterar apenas os módulos associados com a interface do usuário para lidar com isso. Se o seu sistema foi bem estruturado, você deveria ser capaz de suportar todas essas interfaces com o mesmo código criado inicialmente para realizar as vendas. O paradigma MVC utilizado no Ruby on Rails funciona bem nestas situações.</p>
+
+<p>Testes unitários são uma ótima forma de verificar a  ortogonalidade de um componente. Se para realizar o teste é necessário carregar ou acessar uma grande quantidade de outras bibliotecas, então você encontrou um módulo que não está bem dissociado do resto do sistema. Outra forma menos interessante de realizar esta avaliação é ao corrigir bugs. Quando você faz uma alteração, outros problemas surgem misteriosamente? Esta é uma evidência de que seu código não é ortogonal.</p>
+
+<p>Ortogonalidade está intimamente relacionado com o princípio DRY (veja mais <a href="http://www.nomedojogo.com/2009/03/06/rails-way-5-dont-repeat-yourself/">aqui</a> e <a href="http://www.nomedojogo.com/2009/03/12/um-pouco-mais-sobre-%E2%80%9Cdon%E2%80%99t-repeat-yourself%E2%80%9D/">aqui</a>). Enquanto DRY visa minimizar a duplicação dentro de um sistema, com a ortogonalidade você reduz a interdependência entre os componentes do sistema. Utilizar estes dois princípios combinados tornará nossos projetos muito mais flexíveis e fáceis de manter.</p>
+
+<hr /><em>Este artigo é descaradamente &#8216;baseado&#8217; no capítulo de mesmo nome do livro <a href="http://www.amazon.com/Pragmatic-Programmer-Journeyman-Master/dp/020161622X">The Pragmatic Programmer</a>.</em>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -745,58 +804,6 @@ Hello, world</span></span></pre>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/09/18/como-apagar-incendios-em-seu-software-aprenda-com-os-profissionais/">Como apagar incêndios em seu software - aprenda com os profissionais!</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-09-18T00:00:00-03:00" pubdate data-updated="true">18 de Setembro de 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="center" src="http://old.nomedojogo.com/wp-content/uploads/2009/09/3071655212_dbb7d7097b.jpg"></p>
-
-<p>Metodologias ágeis, desenvolvimento orientado a testes, integração contínua, programação em par ou qualquer outra prática que você utilize não irão evitar que vez ou outra você seja obrigado a parar tudo o que estiver fazendo e correr desesperadamente para “apagar um incêndio”.</p>
-
-<p>Imprevistos, urgências e prazos apertados surgem o tempo todo e requerem nossa atenção imediata. Com o tempo acabamos nos tornando peritos em resolver este tipo de problema. Certa vez eu trabalhei com um DBA que era chamado de herói por todos os nossos colegas de trabalho, dado a sua grande capacidade em resolver problemas desta ordem tão rapidamente.</p>
-
-<p>Durante muito tempo eu acreditei que todo programador deveria receber pelo correio um diploma de bombeiro honorário. E já que somos obrigados a conviver com esta realidade, por que não aprender com os bombeiros profissionais qual é o melhor procedimento a ser adotado durante um incêndio de verdade?</p>
-
-<p>Hoje, graças a um constante trabalho de prevenção, equipamentos de última geração e homens bem treinados, os bombeiros profissionais conseguem vencer as chamas com cada vez mais velocidade e com o mínimo de danos. Muito diferente da nossa forma de atuação, ao se deparar com um incêndio esses homens conseguem manter a calma e seguir a risca cada um dos procedimentos necessários. No caso de uma emergência, ao chegarem no local, a primeira missão de um bombeiro é resgatar as pessoas que estão em perigo. A segunda coisa a se fazer é evitar a propagação das chamas para prédios ou casas vizinhas e então lutar para extinguir o fogo.</p>
-
-<p>Após o incêndio ser controlado, ainda é necessário fazer uma busca por focos de fogo que podem estar escondidos em escombros e possíveis vitimas que ainda possam estar vivas. O trabalho não termina até que uma equipe especializada identifique as causas do incêndio.</p>
-
-<p>Analisando estes procedimentos adotados pelos verdadeiros bombeiros, fica muito claro o motivo de não recebermos a nossa carteirinha de bombeiro honorário. Nós não somos profissionais. Quando surge uma emergência no trabalho costumamos ignorar todas as regras e procedimentos afim de resolver o problema o mais rápido possível. Não nos importando com vítimas ou com a estrutura do prédio (software).</p>
-
-<p>Não importa a gravidade do problema ou o quão apertado é o prazo. Uma <a href="http://www.nomedojogo.com/2009/09/08/seu-codigo-esta-apodrecendo/">janela quebrada</a>, um pedaço de código mal concebido ou uma decisão estratégica errada pode ser o começo do declínio para o seu software. Quando se está trabalhando em um software cheio de janelas quebradas é fácil desenvolver pensamentos como “este código é uma porcaria mesmo”. Simplesmente não importa se tudo estava indo bem até aquele momento.</p>
-
-<p>Por outro lado, quando uma equipe zela pelo seu código e o mantém limpo, bem escrito e elegante, mesmo durante um incêndio (prazo apertado, um bug sério descoberto em produção ou uma data fixa de lançamento) nenhum desenvolvedor desejará ser o primeiro a estragar tudo. Manter a cabeça fria e seguir o procedimento é a diferença entre amadores e profissionais.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/7/">&larr; Antigos</a>
@@ -814,6 +821,10 @@ Hello, world</span></span></pre>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
@@ -827,10 +838,6 @@ Hello, world</span></span></pre>
     
       <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
   </ul>

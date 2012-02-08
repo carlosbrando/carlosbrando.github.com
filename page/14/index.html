@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Uma nova opção foi adicionada aos date helpers do Rails. Métodos como o date_select, time_select, datetime_select, select_minute e outros receberam a &hellip;">
+  <meta name="description" content="O método delegate é util para expor métodos de terceiros em uma classe como se fossem dela. Para aqueles que não conhecem este método, vamos pegar um &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,79 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/01/22/edge-rails-delegate-allow_nil/">Edge Rails: delegate :allow_nil</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-01-22T00:00:00-02:00" pubdate data-updated="true">22 de Janeiro de 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>O método <code>delegate</code> é util para expor métodos de terceiros em uma classe como se fossem dela. Para aqueles que não conhecem este método, vamos pegar um exemplo:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Greeter<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
+  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">hello</span></span>
+    <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>hello<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span>
+
+<span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Foo<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
+  <span class="support support_function support_function_activerecord support_function_activerecord_rails">belongs_to</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>greeter</span>
+  <span class="support support_function support_function_activesupport support_function_activesupport_rails">delegate</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>hello</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>to</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>greeter</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span>
+
+<span class="support support_class support_class_ruby">Foo</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>hello   <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "hello"
+</span></span></pre>
+
+
+<p>Como você pode ver no exemplo acima estou executando o método <code>hello</code> como se ele pertencesse a classe <code>Foo</code>, embora ele realmente pertença a classe <code>Greeter</code>.</p>
+
+<p>Mas o que aconteceria se a associação não existisse e o objeto <code>greeter</code> fosse nulo? Teríamos um erro do tipo <code>NoMethodError</code> ao executar o método <code>hello</code> já que por debaixo dos panos estaríamos executando <code>nil.hello</code>.</p>
+
+<p>Para contornar este tipo de problema foi adicionado ao método <code>delegate</code> a opção <code>:allow_nil</code> que impede o retorno de uma exceção nesses casos.</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Foo</span></span>
+  <span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">attr_accessor</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>bar</span>
+  <span class="meta meta_function meta_function_method meta_function_method_with-arguments meta_function_method_with-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">initialize</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">(</span><span class="variable variable_parameter variable_parameter_function variable_parameter_function_ruby">bar <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_language constant_language_ruby">nil</span></span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">)</span></span>
+    <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>bar</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> bar
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+  <span class="support support_function support_function_activesupport support_function_activesupport_rails">delegate</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>zoo</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>to</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>bar</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>allow_nil</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">true</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+
+<span class="support support_class support_class_ruby">Foo</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>zoo <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> returns nil</span></span></pre>
+
+
+<p>No exemplo acima mesmo que o objeto <code>bar</code> seja nulo, o método <code>zoo</code> não disparará uma exceção, ele retornará <code>nil</code>.</p>
+
+<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.3/3.0 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades acompanhando a série <a href="../category/edge-rails/">Edge Rails</a>.</em>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -587,85 +660,6 @@ get <span class="string string_quoted string_quoted_single string_quoted_single_
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/01/08/edge-rails-definindo-o-separador-de-palavras-em-mensagens-de-erro/">Edge Rails: Definindo o separador de palavras em mensagens de erro</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-01-08T00:00:00-02:00" pubdate data-updated="true"> 8 de Janeiro de 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Este novo recurso acrescentado ao Rails dificilmente será usado por nós, mas vale a pela curiosidade. Foi acrescentado ao ActiveRecord um novo parâmetro de configuração para internacionalização que permite definir o separador de palavras em mensagens de erro.</p>
-
-<p>Como?</p>
-
-<p>No inglês e no português não faz o menor sentido, mas pegue o seguinte arquivo de internacionalização criado para um projeto em japonês:</p>
-
-<pre class="textmate-source"><span class="source source_yaml"><span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">ja-JP</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
-</span>  <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">activerecord</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
-</span>    <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">models</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
-</span>      <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">user</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span> </span>ユーザー
-    <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">attributes</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
-</span>      <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">user</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
-</span>        <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">name</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span> </span>名前
-    <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">errors</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
-</span>      <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">messages</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
-</span>        <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">blank</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span> </span>を入力してください。
-</span></pre>
-
-
-<p>Quando o atributo <code>name</code> do objeto <code>User</code> estiver em branco a seguinte mensagem será devolvida pelo AR:</p>
-
-<p>名前 を入力してください。</p>
-
-<p>Talvez você não tenha percebido mas existe um espaço em branco entre o nome do atributo e a mensagem de erro, o que não está certo no japonês, onde as palavras normalmente não são separadas por espaços.</p>
-
-<p>Com este novo recurso um Railer japonês pode configurar em seu arquivo:</p>
-
-<pre class="textmate-source"><span class="source source_yaml"><span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">ja-JP</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
-</span>  <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">activerecord</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
-</span>    <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">errors</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
-</span>      <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">format</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
-</span>        <span class="comment comment_line comment_line_number-sign comment_line_number-sign_yaml"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_yaml">#</span> Sets the separator between the words
-</span>        <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">separator</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span> </span><span class="string string_quoted string_quoted_double string_quoted_double_yaml"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_yaml">"</span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_yaml">"</span></span>
-</span></pre>
-
-
-<p>E ter seguinte mensagem de erro sem espaços separando as palavras:</p>
-
-<p>名前を入力してください。</p>
-
-<p>Curioso ou não?</p>
-
-<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.3/3.0 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades acompanhando a série <a href="../category/edge-rails/">Edge Rails</a>.</em>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/15/">&larr; Antigos</a>
@@ -683,6 +677,10 @@ get <span class="string string_quoted string_quoted_single string_quoted_single_
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
@@ -696,10 +694,6 @@ get <span class="string string_quoted string_quoted_single string_quoted_single_
     
       <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
   </ul>

@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Ouve uma pequena alteração na mensagem de inicio do Rails, agora ela mostra também qual é a versão do Rails que está sendo carregada: Rails 2.0.991 &hellip;">
+  <meta name="description" content="Os famosos has_one e belongs_to acabam de receber mais uma opção, o já conhecido :select. Por padrão esta opção é o &#8221;*&#8221; do SELECT * FROM &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,48 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/05/30/edge-rails-opcional-select-no-has_one-e-belongs_to/">Edge Rails: opcional :select no has_one e belongs_to</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-05-30T00:00:00-03:00" pubdate data-updated="true">30 de Maio de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Os famosos <strong>has_one</strong> e <strong>belongs_to</strong> acabam de receber mais uma opção, o já conhecido <strong>:select</strong>.</p>
+
+<p>Por padrão esta opção é o <strong>&#8221;*&#8221;</strong> do <strong>SELECT * FROM</strong>, mas você pode mudar isto e recuperar somente as colunas que serão usadas, ou sei lá&#8230; use sua imaginação.</p>
+
+<p>Só um detalhe, não esqueça de colocar a <em>primary</em> e as <em>foreign keys</em>, senão você terá um lindo erro.</p>
+
+<p>Outra alteração é que a opção <strong>:order</strong> do <strong>belongs_to</strong> foi removida. Eu nem sabia que ela existia&#8230; aliás ela nem servia para nada mesmo.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -530,66 +572,6 @@ item2 <span class="keyword keyword_operator keyword_operator_assignment keyword_
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/05/22/edge-rails-testando-named_scope-com-proxy_options/">Edge Rails: Testando named_scope com proxy_options</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-05-22T00:00:00-03:00" pubdate data-updated="true">22 de Maio de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Uma novidade legal no Rails 2.1, que inclusive já foi assunto desta série é o <a href="http://www.nomedojogo.com/2008/04/06/edge-rails-named_scope/"><strong>named_scope</strong></a>. Depois de &#8220;brincar&#8221; um pouco com este recurso, fomos descobrindo que era muito difícil testar se o escopo estava sendo gerado corretamente, principalmente quando usávamos estruturas mais complexas.</p>
-
-<p>Veja um exemplo:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Shirt<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
-  named_scope <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>colored</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> lambda <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">color</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
-    <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>conditions</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>color</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> color <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
-  <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
-</span><span class="keyword keyword_control keyword_control_ruby">end</span>
-</span></pre>
-
-
-<p>Como criar um teste que valide a geração correta do escopo?</p>
-
-<p>Para facilitar isto foi criado o método <strong>proxy_options</strong>, que permite examinar as opções que estão sendo usadas no <strong>named_scope</strong>. Para testar o exemplo acima, poderíamos fazer assim:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_unit_test"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">ShirtTest<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> Test::Unit</span></span></span>
-  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">test_colored_scope</span></span>
-    red_scope <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>conditions</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>colored</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>red<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
-    blue_scope <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>conditions</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>colored</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>blue<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
-    assert_equal red_scope<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="support support_class support_class_ruby">Shirt</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>colored<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>red<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>scope_options
-    assert_equal blue_scope<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="support support_class support_class_ruby">Shirt</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>colored<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>blue<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>scope_options
-  <span class="keyword keyword_control keyword_control_ruby">end</span>
-</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/40/">&larr; Antigos</a>
@@ -607,6 +589,10 @@ item2 <span class="keyword keyword_operator keyword_operator_assignment keyword_
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
@@ -620,10 +606,6 @@ item2 <span class="keyword keyword_operator keyword_operator_assignment keyword_
     
       <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
   </ul>

@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Depois do RailsConf, agora um podcast que tenta cobrir o que aconteceu nas duas últimas semanas no mundo do Ruby on Rails. Este podcast conta com a &hellip;">
+  <meta name="description" content="Tradução do artigo: How do you handle disagreements? Como vocês lidam com discordâncias? O que acontece quando David e Jamis discordam sobre a melhor &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,57 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/06/11/como-lidar-com-discordancias/">Como lidar com discordâncias?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-06-11T00:00:00-03:00" pubdate data-updated="true">11 de Junho de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>Tradução do artigo:</strong> <a href="http://www.37signals.com/svn/posts/1046-ask-37signals-how-do-you-handle-disagreements">How do you handle disagreements?</a></p>
+
+<p>Como vocês lidam com discordâncias? O que acontece quando David e Jamis discordam sobre a melhor forma de implementar algo? O que acontece quando Ryan e Jason discordam sobre a melhor maneira de interagir com um novo recurso? Como é que se evita demoradas discussões sobre (aparentemente) minúsculos pormenores?</p>
+
+<h4>Resposta</h4>
+
+
+<p>Felizmente, não levamos adiante todas as discussões por divergências que aparecem. Discordâncias podem ser boas de vez em quando, mas quando acontece muitas vezes têm um impacto negativo na moral da equipe. Nós tentamos tratar a moral do time como o mais importante dos recursos de que dispomos.</p>
+
+<p>Mas quando estamos sem saída (geralmente depois de 10-15 minutos de discussão) eventualmente alguém acaba propondo uma solução. A solução geralmente envolve o mais forte defensor tendo total responsabilidade pela decisão.</p>
+
+<p>Por exemplo, se Jamis defende mais ferrenhamente alguma coisa do que David, Jamis irá &#8220;ganhar&#8221;, mas ele também vai ser o responsável por qualquer erro ou suporte devido à questões relacionadas com esta decisão. Isto obriga o vencedor a pensar seriamente se ele realmente acredita em sua posição, pelo menos o suficiente para lidar com as eventuais exigências que cairão sobre ele depois do lançamento. Caso ele ache que sim, geralmente aceita o acordo. Caso contrário, o &#8220;perdedor&#8221; segue com sua idéia sem empecilhos.</p>
+
+<p>Isto é apenas um exemplo. Nem sempre funciona desta maneira, mas já tivemos sucesso agindo assim no passado.</p>
+
+<p>Um aspecto a ter em mente é o seguinte: Certifique-se de qual é o ponto de desacordo. É realmente fácil que argumentos e desacordos incendeiem a discussão rapidamente. Este tipo de desacordo muitas vezes leva duas pessoas à falarem diretamente uma para a outra, esquecendo dos outros. Param de argumentar uns com os outros e passam a argumentar somente entre eles. Nesse ponto a discussão acaba e alguém precisa pegar as rédeas de volta.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -643,62 +694,6 @@ para usar. Para quem quiser acompanhar, tá no <strong>GitHub</strong> (para var
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/06/03/rails-21-bug-in-method-end_of_quarter/">Rails 2.1: Bug in method end_of_quarter</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-06-03T00:00:00-03:00" pubdate data-updated="true"> 3 de Junho de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Neither came out the <strong>Rails 2.1</strong> and was already found a serious error. Access the <strong>irb</strong> and try to run this:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Date</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">2008</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">5</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">31</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>end_of_quarter</span></pre>
-
-
-<p><span style="color: #ff0000;"><strong>ERROR!</strong></span></p>
-
-<p>Why? The implementation of the method <strong>end_of_quarter</strong> was made of the wrong way, it moves until the last month of the quarter and then picks last day. The problem is that it only moves the month, but as the date is starting on May 31, it&#8217;s trying to create a new instance of the Date to June 31, which does not exist. The class Time not raise an exception, but returns the wrong date: July 31.</p>
-
-<p>In Edge Rails this has already been corrected, but who are using Rails 2.1 will have this problem.</p>
-
-<p>Very careful, because this error only occurs if you use the method <strong>end_of_quarter</strong> in day 31 of May, July, and August. So, very careful.</p>
-
-<p>For those who do not like to live dangerously by using the edge rails, I created a plugin with the code that fixes the bug. I will try to keep out this plugin updated whenever any corrections is released.</p>
-
-<p>To install:</p>
-
-<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">./script/plugin install git://github.com/carlosbrando/rails21_fixes.git</span></span></pre>
-
-
-<p>Do you like it? <a href="http://www.workingwithrails.com/recommendation/new/person/8137-carlos-brando">Recommend me on Working With Rails</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/38/">&larr; Antigos</a>
@@ -716,6 +711,10 @@ para usar. Para quem quiser acompanhar, tá no <strong>GitHub</strong> (para var
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
@@ -729,10 +728,6 @@ para usar. Para quem quiser acompanhar, tá no <strong>GitHub</strong> (para var
     
       <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
   </ul>

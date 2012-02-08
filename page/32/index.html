@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Railties Corrigido bug ao usar script/about em produção. ActionPack No Rails 2.2 o método ActionView::Base#render_file passa a ser privado. O método &hellip;">
+  <meta name="description" content="Conforme expliquei no artigo anterior, teremos suporte a I18n no Ruby on Rails a partir da próxima versão. E eu prometi escrever um artigo mostrando &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,76 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/07/24/como-funcionara-o-novo-suporte-a-internacionalizacao-no-rails-22/">Como funcionará o novo suporte a internacionalização no Rails 2.2</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-07-24T00:00:00-03:00" pubdate data-updated="true">24 de Julho de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Conforme expliquei no <a href="http://www.nomedojogo.com/2008/07/22/edge-rails-seus-problemas-acabaram-o-rails-tambem-vai-falar-portugues/">artigo anterior</a>, teremos suporte a <strong>I18n</strong> no Ruby on Rails a partir da próxima versão. E eu prometi escrever um artigo mostrando como funcionaria esta nova implementação, o problema é que demorei e já teve gente se adiantando&#8230;</p>
+
+<p>Então só vou mostrar o caminho das pedras.</p>
+
+<h3>Antes de começar</h3>
+
+
+<p>Preciso deixar claro uma coisa. Quando estamos falando de internacionalização, ao usar as palavras &#8220;localização&#8221; e &#8220;localizar&#8221;, não quero que vocês as entendam como sinônimos de encontrar, achar, etc&#8230;</p>
+
+<p>Quando nos referimos a &#8220;localização&#8221; ou &#8220;localizar&#8221; estamos falando de <strong>L10n</strong>. Eu já falei sobre isto no último artigo.</p>
+
+<h3>Como funcionará</h3>
+
+
+<p>O alicerce desta implementação é um módulo chamado <strong>I18n</strong> que vem através de um gem incorporado ao <strong>ActiveSupport</strong>. Este módulo acrescenta as seguintes funcionalidades ao Rails:</p>
+
+<p style="padding-left: 30px;">O método <strong>translate</strong>, que será usado para retornar traduções.</p>
+
+
+<p style="padding-left: 30px;">O método <strong>localize</strong>, que usaremos para &#8220;traduzir&#8221; objetos Date, DateTime e Time para a localização atual.</p>
+
+
+<p style="padding-left: 30px;">Além destes métodos este módulo traz todo o código necessário para armazenar e carregar os <strong>backends</strong> de &#8220;localização&#8221;. E já vem com um manipulador de exceções padrão que captura exceções levantadas no backend.</p>
+
+
+<p>Tanto o backend como o manipulador de exceções podem (devem) ser substituídos. Além disso para facilitar, os métodos <strong>#translate</strong> e <strong>#localize</strong> também poderão ser executados usando os métodos <strong>#t</strong> e <strong>#l</strong> respectivamente.</p>
+
+<p>Nem tudo está pronto ainda, na verdade muito coisa ainda precisa ser feita e definida por isto é um pouco cedo para dizer com precisão como tudo vai se encaixar no Rails.</p>
+
+<h3>Exemplos práticos</h3>
+
+
+<p>Eu encontrei <a href="http://www.mouseoverstudio.com/blog/?p=105">este artigo</a> escrito pelo <strong>Diego Carrion</strong> que explica um pouco sobre como colocar o <strong>translate</strong> para funcionar, e para quem quer ver isto na prática <strong>Trevor Turk</strong> (do El Dorado) criou no GitHub um <a href="http://github.com/trevorturk/rails-2.2-i18n-example/tree/master">projeto Rails</a> do zero com este código que o Diego menciona no seu blog.</p>
+
+<p>Assim que as coisas estiverem mais concretas, eu volto a falar mais sobre isto.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -604,73 +674,6 @@ Quando usávamos optimistic locking com partial updates, tinhamos queries extras
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/07/16/rails-podcast-brasil-episodio-24/">Rails Podcast Brasil - Episódio 24</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-07-16T00:00:00-03:00" pubdate data-updated="true">16 de Julho de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p style="text-align: center;"><img class="size-full wp-image-851 aligncenter" src="http://old.nomedojogo.com/wp-content/uploads/2008/07/2543685177_df2de368dc.jpg" alt="" width="500" height="333" /></p>
-
-
-<p>Com vocês mais um Rails Podcast Brasil!</p>
-
-<p>Este episódio é curto, tem pouco mais de 30 minutos, afinal a vida está meio corrida ultimamente. Projetos&#8230; projetos&#8230;</p>
-
-<p>Neste episódio comentamos sobre os 15 milhões que a Engine Yard recebeu e como eles pretendem gastar esta grana, mostramos um meio alternativo de usar o logo do Rails (?), explicamos o que é o DataFabric e fechamos com uma propaganda gratuita do Rails Summit Latin America (Locaweb, depois eu passo o número da minha conta).</p>
-
-<p>Para baixar este novo episódio, <a href="http://podcast.rubyonrails.pro.br/podcast/podcast-24-rails_podcast_brasil">clique aqui</a>.<a href="http://podcast.rubyonrails.pro.br/"></a></p>
-
-<h3>Neste episódio</h3>
-
-
-<ul>
-    <li><a href="http://www.rubyinside.com/engine-yard-takes-15-mill-951.html">Engine Yard Gets $15m Cash Injection; Buys Enough Red Bull To Keep The Lead For 37 Years?</a></li>
-    <li><a href="http://railslogo.com/">Rails Logo</a></li>
-    <li><a href="http://biodegradablegeek.com/2008/07/the-secret-to-making-money-online-by-dhh-video/">The Secret to Making Money Online by DHH (video)</a></li>
-    <li><a href="http://spreehq.org/">Online Commerce for Ruby on Rails</a></li>
-    <li><a href="http://www.railsinside.com/deployment/40-datafabric-rails-sharding-library.html">DataFabric: Easy Multiple DB Sharding Support for ActiveRecord</a></li>
-    <li><a href="http://37signals.blogs.com/products/2008/07/basecamp-phasin.html">Phasing out support for IE 6 across all 37signals products on August 15, 2008</a></li>
-    <li><a href="http://blog.phusion.nl/2008/07/14/phusion-passenger-202-released/">Phusion Passenger 2.0.2 released</a></li>
-    <li><a href="http://blog.phusion.nl/2008/07/09/ruby-enterprise-edition-186-20080709-released/">Ruby Enterprise Edition 1.8.6-20080709 released</a></li>
-    <li><a href="http://google-code-updates.blogspot.com/2008/07/take-your-rails-application-offline.html">Take your Rails application offline with the Gears on Rails</a></li>
-    <li><a href="http://www.sapphiresteel.com/Ruby-Debugging-with-Cylon-Tutorial">Ruby Debugging with ÂCylonÂ Â Tutorial Screencast</a></li>
-    <li><a href="http://www.makemesimple.com/blog/2008/07/13/ruby-quick-tip-blocos-para-fallback-em-hash-lookups/">Ruby quick tip: Blocos para fallback em hash lookups</a></li>
-    <li><a href="http://oldmoe.blogspot.com/2008/07/faster-io-for-ruby-with-postgres.html">Faster IO for Ruby with Postgres</a></li>
-    <li><a href="http://excess.org/article/2008/07/ogre-git-tutorial/">OGRE Git Tutorial</a></li>
-    <li><a href="http://github.com/blog/107-supercharged-ruby-git">Supercharged Ruby-Git</a></li>
-    <li><a href="http://www.akitaonrails.com/2008/7/13/rails-summit-latin-america-2008">RAILS SUMMIT LATIN AMERICA 2008</a></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/33/">&larr; Antigos</a>
@@ -688,6 +691,10 @@ Quando usávamos optimistic locking com partial updates, tinhamos queries extras
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
@@ -701,10 +708,6 @@ Quando usávamos optimistic locking com partial updates, tinhamos queries extras
     
       <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
   </ul>

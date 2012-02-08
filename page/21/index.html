@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Para entender esta alteração, vamos precisar analisar o mesmo código sendo executado em uma versão anterior do Rails e depois no Rails 2.2. Vamos &hellip;">
+  <meta name="description" content="As classes Time, Date, DateTime e TimeWithZone receberam três novos métodos muito convenientes. Os métodos today?, past? e future? foram introduzidos &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,66 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/10/31/rails-22-tres-novos-metodos-para-classes-que-trabalham-com-datas-e-horas/">Rails 2.2: Três novos métodos para classes que trabalham com datas e horas</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-10-31T00:00:00-02:00" pubdate data-updated="true">31 de Outubro de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>As classes <strong>Time</strong>, <strong>Date</strong>, <strong>DateTime</strong> e <strong>TimeWithZone</strong> receberam três novos métodos muito convenientes. Os métodos <strong>today?</strong>, <strong>past?</strong> e <strong>future?</strong> foram introduzidos em todas as classes que trabalham com datas e horas para facilitar nossa vida em algumas situações.</p>
+
+<p>Acredito que não seja necessário explicar o funcionamento de cada um. Então vejamos os métodos em ação:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">date <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Date</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>current
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; Sat, 04 Oct 2008
+</span>
+date<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>today?
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; true
+</span>
+date<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>past?
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; false
+</span>
+date<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>future?
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; false
+</span>
+time <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>now
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; Sat Oct 04 18:36:43 -0300 2008
+</span>
+time<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>today?
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; true</span></span></pre>
+
+
+<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades no e-book “<a href="../2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">Ruby on Rails 2.2 - O que há de novo?</a>“.</em>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -635,50 +695,6 @@ comment <span class="keyword keyword_operator keyword_operator_assignment keywor
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/10/23/rails-podcast-brasil-episodio-35-especial-rails-summit-2/">Rails Podcast Brasil - Episódio 35 (Especial Rails Summit #2)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-10-23T00:00:00-02:00" pubdate data-updated="true">23 de Outubro de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="alignnone size-full wp-image-1628" title="2964388308_a7622aab9d" src="http://old.nomedojogo.com/wp-content/uploads/2008/10/2964388308_a7622aab9d.jpg" alt="" /></p>
-
-<p>Se você ainda não ouviu a primeira parte deste podcast, <a href="http://www.nomedojogo.com/2008/10/22/rails-podcast-brasil-episodio-34-especial-rails-summit/">clique aqui</a>.</p>
-
-<p>Conforme prometido a segunda parte do especial <strong>Rails Summit</strong> no <strong>Rails Podcast Brasil</strong>. Este episódio já começa com a leitura da palestra de <strong>Chris Wanstrath</strong>, que fechou o primeiro dia do evento e comentários sobre a desconferência que rolou no mesmo dia.</p>
-
-<p>Na sequencia comentamos sobre o segundo dia de palestras e o que rolou depois do fim do evento!</p>
-
-<p>Não sei porque mas o site oficial do podcast está fora do ar, por isto coloquei o episódio no meu servidor, então se você costuma usar o iTunes para ouvir o <strong>Rails Podcast Brasil</strong> e não quiser esperar até que o site volte, terá de fazer o download por aqui mesmo usando os links abaixo.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/22/">&larr; Antigos</a>
@@ -696,6 +712,10 @@ comment <span class="keyword keyword_operator keyword_operator_assignment keywor
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
@@ -709,10 +729,6 @@ comment <span class="keyword keyword_operator keyword_operator_assignment keywor
     
       <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
   </ul>

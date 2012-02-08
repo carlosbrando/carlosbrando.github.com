@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Se me perguntarem quais são os melhores livros sobre Ruby, o livro Why&#8217;s (Poignant) Guide to Ruby com certeza estará na minha lista. Este post &hellip;">
+  <meta name="description" content="Agora para saber qual action foi chamada durante a execução de sua view ficou mais fácil, basta usar o método action_name: &lt;%= action_name %&gt; O &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,47 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/05/15/edge-rails-action_name/">Edge Rails: action_name</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-05-15T00:00:00-03:00" pubdate data-updated="true">15 de Maio de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Agora para saber qual action foi chamada durante a execução de sua view ficou mais fácil, basta usar o método <strong>action_name</strong>:</p>
+
+<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> action_name <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span></span></pre>
+
+
+<p>O retorno será o mesmo que pegar o <strong>params[:action]</strong>, mas de uma forma mais elegante.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -580,58 +621,6 @@ To turn off the notifier:
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/05/12/edge-rails-activerecordbasecreate-aceita-blocos/">Edge Rails: ActiveRecord::Base.create aceita blocos</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-05-12T00:00:00-03:00" pubdate data-updated="true">12 de Maio de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Já estamos acostumados com o método <em>ActiveRecord::Base.new</em> que aceita o uso de blocos na criação de um novo registro. Agora podemos fazer o mesmo com o método <strong>create</strong>:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Criando um objeto, usando um bloco para informar seus atributos.
-</span><span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>create<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>first_name</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Jamie<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">u</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
-  u<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>is_admin <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_language constant_language_ruby">false</span>
-<span class="keyword keyword_control keyword_control_ruby">end</span>
-</span></pre>
-
-
-<p>Também podemos usar o mesmo método para criar vários objetos de uma vez:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Criando um Array de novos objetos usando um bloco,
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> onde o bloco é executado uma vez para cada objeto:
-</span><span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>create<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>first_name</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Jamie<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>first_name</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Jeremy<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">u</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
-  u<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>is_admin <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_language constant_language_ruby">false</span>
-<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/42/">&larr; Antigos</a>
@@ -649,6 +638,10 @@ To turn off the notifier:
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
@@ -662,10 +655,6 @@ To turn off the notifier:
     
       <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
   </ul>

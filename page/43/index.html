@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Eu sempre tenho falado por aqui e no podcast sobre o GitHub, é não por menos que este projeto tem me chamado tanto à atenção. Um dos recursos mais &hellip;">
+  <meta name="description" content="O Active Resource usa HTTP para acessar APIs RESTful e por isto está suscetível a problemas de lentidão ou servidores fora do ar. Em alguns casos, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,54 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/05/06/edge-rails-timeouts/">Edge Rails: Timeouts</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-05-06T00:00:00-03:00" pubdate data-updated="true"> 6 de Maio de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>O <strong>Active Resource</strong> usa HTTP para acessar <strong>APIs RESTful</strong> e por isto está suscetível a problemas de lentidão ou servidores fora do ar. Em alguns casos, suas chamadas ao Active Resource podem expirar (timeout). Agora você pode controlar o tempo de expiração com a propriedade <strong><em>timeout</em></strong>.</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Person<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveResource::Base</span></span></span>
+  <span class="variable variable_language variable_language_ruby">self</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>site <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>http://api.people.com:3000/<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+  <span class="variable variable_language variable_language_ruby">self</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>timeout <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_numeric constant_numeric_ruby">5</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> espera 5 segundos antes de expirar
+</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+<p>Neste exemplo estou configurando o tempo de timeout para 5 segundos. Você pode configurar à seu gosto, dependendo da API RESTful que estiver acessando. É recomendado que este valor seja baixo, para permitir que seu sistema falhe rápido (ou <strong>fail-fast</strong>, para mais informações aconselho <a href="http://www.martinfowler.com/ieeeSoftware/failFast.pdf">ler este pdf</a>), impedindo falhas em cascata que poderiam incapacitar o seu servidor.</p>
+
+<p>Internamente o Active Resource se baseia na biblioteca <a href="http://www.ruby-doc.org/stdlib/libdoc/net/http/rdoc/index.html">Net::HTTP</a> para fazer requests HTTP. Quando você define um valor para a propriedade <strong><em>timeout</em></strong>, o mesmo valor é definido para o <em>read_timeout</em> da instância do objeto Net::HTTP que está sendo usado.</p>
+
+<p>O valor <strong>padrão</strong> é de <strong>60 segundos</strong>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -515,53 +563,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/05/01/muito-atrasado-com-o-edge-rails-mas-estamos-ai/">Muito atrasado com o Edge Rails&#8230; mas estamos aí</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-05-01T00:00:00-03:00" pubdate data-updated="true"> 1 de Maio de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Ufa&#8230; finalmente terminei de analisar todas as alterações quer foram realizadas no Rails através do <strong>Trac</strong>. Agora estou indo para as que estão no <strong>GitHub</strong> e <strong>LightHouse</strong>, e já estou beeemm atrasado, já que tem quase 100 alterações que preciso conferir.</p>
-
-<p>Talvez a alteração que precisava sair mais rápido é a do <code>rails:freeze:edge</code>, que precisava agora pegar um arquivo zip gerado automaticamente à partir do código no GitHub. E realmente isto saiu rápido, mas gerou uma certa <a href="http://github.com/rails/rails/commit/4b17082107aced980fc4b511028ee763247bc5ab">polêmica</a>, já que no meio do código havia este trecho:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">unzip rails_edge<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>zip</span></pre>
-
-
-<p>Mas, o <strong>unzip</strong> existe no <strong>Windows</strong>? Parece que até existe, mas no Windows XP Professional SP2, não é possível chamá-lo através do prompt. Como não sou mais um usuário do Windows a um bom tempo, fiz questão de esquecer estas coisas, então se alguém souber algo&#8230;</p>
-
-<p>A melhor sugestão até agora é usar o gem <a href="http://rubyzip.sourceforge.net/">rubyzip</a>, e ele acabaria sendo um <strong>requisito</strong> para aqueles que querem instalar a versão edge do Rails.</p>
-
-<p>Como estou muito atrasado, tenho certeza que este impasse já se resolveu, mais tarde eu volto então com a solução deste problema.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/44/">&larr; Antigos</a>
@@ -579,6 +580,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
@@ -592,10 +597,6 @@
     
       <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
   </ul>

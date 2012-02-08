@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="For a long time I was evangelizing Shoulda at Surgeworks and used it in my personal projects. The fact is, I didn&#8217;t have much success in &hellip;">
+  <meta name="description" content="Normalmente no Rails funciona assim: Programadores do mundo todo desenvolvem novas funcionalidades e corrigem bugs, criam patchs e o core team aceita &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,55 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/11/19/new-rails-22-i18n-defaults/">New Rails 2.2 i18n defaults</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-11-19T00:00:00-02:00" pubdate data-updated="true">19 de Novembro de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Normalmente no Rails funciona assim: Programadores do mundo todo desenvolvem novas funcionalidades e corrigem bugs, criam patchs e o core team aceita ou não estes patches. Mas quando DHH resolve colocar a mão no código ele muda tudo. O bom é que na maioria das vezes é para melhor!</p>
+
+<p>No último <a href="http://www.nomedojogo.com/2008/11/18/rails-podcast-brasil-episodio-38-especial-rails-22/">Rails Podcast Brasil</a> eu disse que deveríamos ficar atentos a algumas mudanças dele na parte de internacionalização. Ele mudou mais do que isto internamente, mas uma alteração importante foi a criação de um diretório <strong>config/locales</strong> para colocarmos nossos arquivos de internacionalização.</p>
+
+<p>Também foi adicionado ao arquivo <strong>environment.rb</strong> o seguinte comentário:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> The internationalization framework can be changed
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> to have another default locale (standard is :en) or more load paths.
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> All files from config/locales/*.rb,yml are added automatically.
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> config.i18n.load_path &lt;&lt; Dir[File.join(RAILS_ROOT, 'my', 'locales', '*.{rb,yml}')]
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> config.i18n.default_locale = :de</span></span></pre>
+
+
+<p>O que já era fácil, ficou mais fácil! Na teoria é só colocar o seu arquivo br.yml ou br.rb nesta pasta e alterar a última linha comentada e pronto!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -829,77 +878,6 @@ Para o estilo RSpec, <a href="http://remarkable.nomedojogo.com/classes/Remarkabl
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/11/11/rails-podcast-brasil-episodio-37/">Rails Podcast Brasil - Episódio 37</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-11-11T00:00:00-02:00" pubdate data-updated="true">11 de Novembro de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="alignnone size-full wp-image-1779" title="83051034_718981dd39" src="http://old.nomedojogo.com/wp-content/uploads/2008/11/83051034_718981dd39.jpg" alt="" /></p>
-
-<p>Mais uma semana cheia de novidades! Tivemos o lançamento da versão 1.0 (finalmente) do Merb e também do JRuby 1.1.5. Além disso o RubyMine, uma nova IDE para desenvolvimento Rails foi liberada. Veja nossa opinião sobre estes lançamentos.</p>
-
-<p>Também comentamos sobre alguns projetos importantes como Redshift, Shoes, Rails Guides e Roxy. Saiba porque você deve dar sua atenção para cada um deles.</p>
-
-<h2>Neste episódio</h2>
-
-
-<ul>
-    <li><a href="http://ajaxian.com/archives/redshift-what-ruby-and-a-nice-api-can-do-in-the-browser">Redshift: What Ruby and a nice API can do in the browser</a></li>
-    <li><a href="http://merbist.com/2008/11/09/merb-1-0-released/">Merb 1.0 released</a></li>
-    <li><a href="http://db2onrails.com/2008/11/08/a-major-milestone-for-db2-on-rails/">A major milestone for DB2 on Rails</a></li>
-    <li><a href="http://workswithruby.com/2008/10/session_lifetime-plugin">session_lifetime plugin</a></li>
-    <li><a href="http://www.akitaonrails.com/2008/11/10/micro-tutorial-de-ruby">Micro-Tutorial de Ruby</a></li>
-    <li><a href="http://rubylearning.com/blog/2008/10/31/ruby-and-shoes-programming-a-new-course/">Ruby and Shoes Programming: A New Course</a></li>
-    <li><a href="http://www.rubyinside.com/rubymine-a-new-intelligent-ruby-ide-built-on-intellj-1302.html">RubyMine: A New “Intelligent” Ruby IDE Built on IntellJ</a></li>
-    <li><a href="http://github.com/37signals/cached_externals/tree/master">cached_externals</a></li>
-    <li><a href="http://www.hashcode.eti.br/?p=90">RailsTree 0.8</a></li>
-    <li><a href="http://weblog.rubyonrails.org/2008/11/3/rails-guides-wants-you">Rails Guides Wants You</a></li>
-    <li><a href="http://www.rubyinside.com/3-tools-for-drying-your-ruby-code-1305.html">3 Tools for DRYing Your Ruby Code</a></li>
-    <li><a href="http://evil.che.lu/2008/10/29/braid-0-5-vendor-your-git-and-svn-repositories">ANN: braid 0.5 – vendor your git and svn repositories</a></li>
-    <li><a href="http://www.slideshare.net/adamwiggins/lightweight-webservices-with-sinatra-and-restclient-presentation?type=powerpoint">Lightweight Webservices with Sinatra and RestClient</a></li>
-    <li><a href="http://envycasts.com/products/scaling-ruby">Scaling Ruby</a></li>
-    <li><a href="http://ryandaigle.com/articles/2008/11/10/implement-ruby-proxy-objects-with-roxy">Roxy: A Ruby Proxy-Object Library</a></li>
-    <li><a href="http://www.infoq.com/br/news/2008/11/jruby-115">Liberado o JRuby 1.1.5</a></li>
-    <li><a href="http://apocryph.org/more_indepth_analysis_ruby_http_client_performance">A more in-depth analysis of Ruby HTTP client performance</a></li>
-    <li><a href="http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/318771">Ruby 1.9.1 preview1 is out</a></li>
-    <li><a href="http://blog.hungrymachine.com/2008/11/8/how-to-save-100m-of-ram-per-mongrel">How to save 100m of RAM per mongrel</a></li>
-    <li><a href="http://madstop.com/2008/11/06/a-short-puppet-history-pt-2-cfengine/">A Short Puppet History, pt. 2: Cfengine</a></li>
-</ul>
-
-
-<p><strong>Download</strong>: <a href="http://download.podcast.rubyonrails.pro.br/RailsPodcastBrasil_037.mp3">Episódio #37</a>
-iTunes: <a href="http://podcast.rubyonrails.pro.br/rss">http://podcast.rubyonrails.pro.br/rss</a>
-Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podcast.rubyonrails.pro.br/</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/20/">&larr; Antigos</a>
@@ -917,6 +895,10 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
@@ -930,10 +912,6 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
     
       <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
   </ul>

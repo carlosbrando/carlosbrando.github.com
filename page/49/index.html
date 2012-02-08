@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Agora podemos usar expressões em método de cálculo do ActiveRecord, como o método sum, por exemplo. Vejo o que é possível: Person.sum("2 * age") ">
+  <meta name="description" content="Agora é exatamente 1:02 da manhõ, eu e o Fábio acabamos de gravar o podcast desta semana que em breve deve sair no site oficial do Rails daqui do &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,47 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/03/28/edge-rails-instalando-plugins-a-partir-do-git/">Edge Rails: Instalando plugins à partir do Git</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-03-28T00:00:00-03:00" pubdate data-updated="true">28 de Março de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Agora é exatamente 1:02 da manhõ, eu e o Fábio acabamos de gravar o podcast desta semana que em breve deve sair no site oficial do Rails daqui do Brasil e no podcast falamos sobre uma novidade no Edge Rails: agora podemos instalar plugins que estão em repositórios GIT com o <code>script/plugin install</code>, exatamente como fazemos para plugins que estão no SVN. Basicamente este script irá criar um clone do repositório no seu projeto.</p>
+
+<pre class="textmate-source"><span class="source source_shell">./script/plugin install git://github.com/SomeGuy/my_awesome_plugin.git</span></pre>
+
+
+<p>Mais um ponto para a galera do Git e para a galera do Rails.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -477,80 +518,6 @@ authors<span class="punctuation punctuation_separator punctuation_separator_meth
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/03/22/edge-rails-dois-novos-helpers-para-criadores-de-plugins/">Edge Rails: Dois novos helpers para criadores de plugins</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-03-22T00:00:00-03:00" pubdate data-updated="true">22 de Março de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Dois novos helpers foram criados para facilitar nossa vida na hora de criar um plugin. Os métodos <code>register_javascript_expansion</code> e <code>register_stylesheet_expansion</code>.</p>
-
-<h3>register_javascript_expansion</h3>
-
-
-<p>Este método registra um ou mais arquivos javascript para serem incluídos quando um símbolo, determinado por você, for passado como parâmetro para o método <code>javascript_include_tag</code>, que você já conhece. A idéia é que este método seja chamado no arquivo <code>init.rb</code> do seu plugin para registrar os arquivos javascript que seu plugin instalou na pasta <code>public/javascripts</code>. Veja como funciona:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> No arquivo init.rb
-</span><span class="support support_class support_class_ruby">ActionView</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">Helpers</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">AssetTagHelper</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>register_javascript_expansion <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>monkey</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>head<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>body<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>tail<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span>
-
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Depois, fazendo assim:
-</span>javascript_include_tag <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>monkey</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt;
-</span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Terei isto:
-</span><span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span>script type<span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>text/javascript<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> src<span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>/javascripts/head.js<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>&gt;<span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span><span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">/</span>script<span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span>
-<span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span>script type<span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>text/javascript<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> src<span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>/javascripts/body.js<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>&gt;<span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span><span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">/</span>script<span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span>
-<span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span>script type<span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>text/javascript<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> src<span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>/javascripts/tail.js<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>&gt;<span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span><span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">/</span>script<span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span></span></pre>
-
-
-
-
-<h3>register_stylesheet_expansion</h3>
-
-
-<p>Este método faz exatamente a mesma coisa que o método acima, mas criando um símbolo para ser usado nas chamadas ao método <code>stylesheet_link_tag</code>. Veja um exemplo:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> No arquivo init.rb
-</span><span class="support support_class support_class_ruby">ActionView</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">Helpers</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">AssetTagHelper</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>register_stylesheet_expansion <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>monkey</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>head<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>body<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>tail<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span>
-
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Depois, fazendo assim:
-</span>stylesheet_link_tag <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>monkey</span>
-
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Terei isto:
-</span><span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span>link href<span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>/stylesheets/head.css<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>  media<span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>screen<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> rel<span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>stylesheet<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> type<span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>text/css<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">/</span><span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span>
-<span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span>link href<span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>/stylesheets/body.css<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>  media<span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>screen<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> rel<span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>stylesheet<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> type<span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>text/css<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">/</span><span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span>
-<span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span>link href<span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>/stylesheets/tail.css<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>  media<span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>screen<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> rel<span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>stylesheet<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> type<span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>text/css<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">/</span><span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span></span></pre>
-
-
-<p>Referência: <a href="http://dev.rubyonrails.org/ticket/10350">Allow custom javascript/stylesheet expansion symbols</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/50/">&larr; Antigos</a>
@@ -568,6 +535,10 @@ authors<span class="punctuation punctuation_separator punctuation_separator_meth
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
@@ -581,10 +552,6 @@ authors<span class="punctuation punctuation_separator punctuation_separator_meth
     
       <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
   </ul>

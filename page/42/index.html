@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Vocês já acompanharam aqui no blog a dificuldade que tive para fazer o Autotest funcionar com o Growl. Acho que testei todos os scripts prontos que &hellip;">
+  <meta name="description" content="Já estamos acostumados com o método ActiveRecord::Base.new que aceita o uso de blocos na criação de um novo registro. Agora podemos fazer o mesmo com &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,58 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/05/12/edge-rails-activerecordbasecreate-aceita-blocos/">Edge Rails: ActiveRecord::Base.create aceita blocos</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-05-12T00:00:00-03:00" pubdate data-updated="true">12 de Maio de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Já estamos acostumados com o método <em>ActiveRecord::Base.new</em> que aceita o uso de blocos na criação de um novo registro. Agora podemos fazer o mesmo com o método <strong>create</strong>:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Criando um objeto, usando um bloco para informar seus atributos.
+</span><span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>create<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>first_name</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Jamie<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">u</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+  u<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>is_admin <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_language constant_language_ruby">false</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+</span></pre>
+
+
+<p>Também podemos usar o mesmo método para criar vários objetos de uma vez:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Criando um Array de novos objetos usando um bloco,
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> onde o bloco é executado uma vez para cada objeto:
+</span><span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>create<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>first_name</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Jamie<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>first_name</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Jeremy<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">u</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+  u<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>is_admin <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_language constant_language_ruby">false</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -549,54 +601,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/05/06/edge-rails-timeouts/">Edge Rails: Timeouts</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-05-06T00:00:00-03:00" pubdate data-updated="true"> 6 de Maio de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>O <strong>Active Resource</strong> usa HTTP para acessar <strong>APIs RESTful</strong> e por isto está suscetível a problemas de lentidão ou servidores fora do ar. Em alguns casos, suas chamadas ao Active Resource podem expirar (timeout). Agora você pode controlar o tempo de expiração com a propriedade <strong><em>timeout</em></strong>.</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Person<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveResource::Base</span></span></span>
-  <span class="variable variable_language variable_language_ruby">self</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>site <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>http://api.people.com:3000/<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
-  <span class="variable variable_language variable_language_ruby">self</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>timeout <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_numeric constant_numeric_ruby">5</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> espera 5 segundos antes de expirar
-</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-
-
-<p>Neste exemplo estou configurando o tempo de timeout para 5 segundos. Você pode configurar à seu gosto, dependendo da API RESTful que estiver acessando. É recomendado que este valor seja baixo, para permitir que seu sistema falhe rápido (ou <strong>fail-fast</strong>, para mais informações aconselho <a href="http://www.martinfowler.com/ieeeSoftware/failFast.pdf">ler este pdf</a>), impedindo falhas em cascata que poderiam incapacitar o seu servidor.</p>
-
-<p>Internamente o Active Resource se baseia na biblioteca <a href="http://www.ruby-doc.org/stdlib/libdoc/net/http/rdoc/index.html">Net::HTTP</a> para fazer requests HTTP. Quando você define um valor para a propriedade <strong><em>timeout</em></strong>, o mesmo valor é definido para o <em>read_timeout</em> da instância do objeto Net::HTTP que está sendo usado.</p>
-
-<p>O valor <strong>padrão</strong> é de <strong>60 segundos</strong>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/43/">&larr; Antigos</a>
@@ -614,6 +618,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
@@ -627,10 +635,6 @@
     
       <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
   </ul>

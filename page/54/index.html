@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Uma nova opção está presente nos relacionamentos entre modelos. Afim de impedir que seus registros possam ser alterados, podemos usar a opção : &hellip;">
+  <meta name="description" content="Já faz um tempo que estou ensaiando um plugin, mas como quase tudo no Rails, um plugin só vale a pena quando é extraído de uma necessidade real. Foi &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,73 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/02/21/plugin-para-renomear-rotas-em-portugues/">Plugin para renomear rotas em português</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-02-21T00:00:00-03:00" pubdate data-updated="true">21 de Fevereiro de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Já faz um tempo que estou ensaiando um plugin, mas como quase tudo no Rails, um plugin só vale a pena quando é extraído de uma necessidade real. Foi isto que aconteceu ontem. Há alguns dias atrás eu mencionei aqui na série edge rails sobre uma <a href="http://www.nomedojogo.com/2008/02/18/edge-rails-customizando-url-no-mapresources/">alteração no sistema de rotas</a> do Rails permitindo que incluíssemos uma opção <strong>:as</strong> no <strong>map.resources</strong> para dar um apelido ao modelo. Isto nos permitiria fazer algo assim:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>products</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>as</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>produtos<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">product</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+  product<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>product_reviews</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>as</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>comentarios<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+</span></pre>
+
+
+<p>E depois acessar usando a URL:</p>
+
+<pre class="textmate-source"><span class="source source_shell">http://www.meusite.com/produtos/123/comentarios</span></pre>
+
+
+<p>Em nosso bom e velho português. O que é uma necessidade no caso de sistemas 100% brasileiros e com público alvo nacional. Seria meio estranho um sistema inteiro em português com URLs em inglês, além de dificultar para alguns usuários, e atrapalhar um pouco o SEO.</p>
+
+<p>Eu estou envolvido em um projeto pessoal nas horas vagas (que aliás está demorando muitoÂ. porque minhas horas vagas são poucas) onde eu precisava exatamente disto. Eu sei que na próxima versão do Rails teremos isto, mas eu não posso esperar, por isto acabei criando um plugin, que faz a mesma coisa, mas que pode ser usado nas versões atuais do Rails. Eu testei nas versãos 2.0.2 e 1.2.6 e tudo funciona tranquilamente.</p>
+
+<p>Uma das vantagens de se usar este plugin é que ele contém exatamente o mesmo código do edge rails, então se no futuro você migrar para a versão 2.x.x do Rails, você poderá remover o plugin e suas rotas continuarão funcionando normalmente.</p>
+
+<p>Se você tem um software nas versões mais antigas do Rails, como a 1.2.6, por exemplo, você também pode usar o plugin, sem precisar migrar para o Rails 2.0.</p>
+
+<p>O plugin contém uma boa suíte de testes. Ao todo são 49 testes com 3068 assertions, que cobrem todo tipo de teste envolvendo rotas. Se você estiver usando uma versão diferente da 2.0.2 e 1.2.6 eu peço que rode os teste executando o comando abaixo para se certificar de que tudo irá funcionar na sua versão também:</p>
+
+<pre class="textmate-source"><span class="source source_shell">rake test:plugins</span></pre>
+
+
+<p>E finalmente, para instalar o plugin basta executar o seguinte comando de dentro da sua aplicação Rails:</p>
+
+<pre class="textmate-source"><span class="source source_shell">./script/plugin install http://plugins.nomedojogo.com/custom_resource_name</span></pre>
+
+
+<p>O comando acima é tudo em uma linha só do terminal. Qualquer dúvida ou problema podem entrar em contato comigo pelo formulário de contato ou deixar o seu comentário neste post.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -541,56 +608,6 @@ formatted_polymorphic_path<span class="punctuation punctuation_section punctuati
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/02/16/testando-fusos-horarios-no-edge-rails/">Testando fusos-horários no Edge Rails</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-02-16T00:00:00-02:00" pubdate data-updated="true">16 de Fevereiro de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Eu tinha me esquecido de comentar sobre isto, mas na próxima versão do Rails poderemos realizar testes com fusos-horários diferentes de um uma forma bem simples:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">test_local_offset</span></span>
-  with_env_tz <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>US/Eastern<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
-</span>    assert_equal <span class="variable variable_other variable_other_constant variable_other_constant_ruby">Rational</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">-</span><span class="constant constant_numeric constant_numeric_ruby">5</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">24</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="support support_class support_class_ruby">DateTime</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>local_offset
-  <span class="keyword keyword_control keyword_control_ruby">end</span>
-  with_env_tz <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>US/Central<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
-</span>    assert_equal <span class="variable variable_other variable_other_constant variable_other_constant_ruby">Rational</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">-</span><span class="constant constant_numeric constant_numeric_ruby">6</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">24</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="support support_class support_class_ruby">DateTime</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>local_offset
-  <span class="keyword keyword_control keyword_control_ruby">end</span>
-<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-
-
-<p>Este helper era para se chamar <strong>with_timezone</strong>, mas foi renomeado para <strong>with_env_tz</strong> para evitar uma confusão com o fuso-horário informado via <strong>ENV[&#8216;TZ&#8217;]</strong> e <strong>Time.zone</strong>.</p>
-
-<p>Além disso também removeram o método <strong>Time.zone_reset!</strong> que não estava mais sendo usado.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/55/">&larr; Antigos</a>
@@ -608,6 +625,10 @@ formatted_polymorphic_path<span class="punctuation punctuation_section punctuati
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
@@ -621,10 +642,6 @@ formatted_polymorphic_path<span class="punctuation punctuation_section punctuati
     
       <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
   </ul>

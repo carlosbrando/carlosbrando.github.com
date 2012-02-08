@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Sei que muita gente ainda não conhece o carreiraTI. Basicamente é um site de empregos para a área de tecnologia em geral (programadores, técnicos, &hellip;">
+  <meta name="description" content="Dois amigos se pronunciaram e compartilharam suas idéias sobre qual a melhor forma de se ajustar o método strftime para trabalhar com datas em &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,64 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2007/05/08/meses-em-portugus-no-rails-parte-2/">Meses em português no Rails - parte 2</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-05-08T00:00:00-03:00" pubdate data-updated="true"> 8 de Maio de 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Dois amigos se pronunciaram e compartilharam suas idéias sobre qual a melhor forma de se ajustar o método strftime para trabalhar com datas em português.</p>
+
+<p>O primeiro foi o <a href="http://leonardofaria.net/2007/05/06/manipulando-datas-no-rails/">Leonardo Faria</a> que publicou no seu blog (<a href="http://leonardofaria.net/2007/05/06/manipulando-datas-no-rails/">clique aqui</a>) uma solução melhor que a minha.</p>
+
+<p>Mas, a melhor opção em minha opinião foi a sugestão dada pelo <a href="http://www.arthurgeek.net/">Arthur</a>:
+[source:ruby]silence_warnings do</p>
+
+<pre><code>Date::MONTHNAMES = [nil] + %w(Janeiro Fevereiro Março Abril Maio Junho Julho Agosto Setembro Outubro Novembro Dezembro)
+Date::DAYNAMES = %w(Domingo Segunda-Feira Terça-Feira Quarta-Feira Quinta-Feira Sexta-Feira Sábado)
+Date::ABBR_MONTHNAMES = [nil] + %w(Jan Fev Mar Abr Mai Jun Jul Aug Set Out Nov Dez)
+Date::ABBR_DAYNAMES = %w(Dom Seg Ter Qua Qui Sex Sab)
+
+Time::MONTHNAMES = Date::MONTHNAMES
+Time::DAYNAMES = Date::DAYNAMES
+Time::ABBR_MONTHNAMES = Date::ABBR_MONTHNAMES
+Time::ABBR_DAYNAMES = Date::ABBR_DAYNAMES
+</code></pre>
+
+<p>end[/source]</p>
+
+<p>Este código funcionou e considerei o menos intrusivo. Por isto a melhor opção!</p>
+
+<p>Obrigado pela ajuda amigos!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -600,87 +658,6 @@ Agora basta colocar a chamada para o método <strong>distance_of_time_in_words <
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/04/13/simple-on-rails-carregando-dropdowns-dinamicamente/">Simple on Rails - Carregando dropdowns dinamicamente</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-04-13T00:00:00-03:00" pubdate data-updated="true">13 de Abril de 2007</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/writer/Carregandodropdownsdinamicamentecomduasl_9CBA/michelin_tweel_curb7.jpg" style="border-width: 0px" align="right" border="0" height="160" width="240" /> Recentemente tive de encontrar uma solução para um problema simples: eu tinha uma lista de estados e cidades em dropdowns. A intenção é que a lista de cidades fosse carregada de acordo com o estado selecionado. Simples.</p>
-
-<p>Como estou começando com o Rails, procurei na internet por alguma dica para fazer isto. Encontrei diversos sites descrevendo o passo-a-passo para a solução. Entre alguns deles os blogs do <a href="http://eustaquiorangel.com/blog/show/367" target="_blank">Eustáquio</a> e do <a href="http://blog.boaideia.inf.br/articles/2007/01/20/rjs-at%C3%A9-que-um-dia" target="_blank">André Ribeiro</a>.</p>
-
-<p>Achei a solução apresentada por eles muito confusa e com muito código.</p>
-
-<p>Mas uma coisa que me chamou atenção foi o seguinte comentário:</p>
-
-<blockquote>Vamos utilizar alguma técnica mais atual, que tal um pouco de AJAX&#8230; é relativamente fácil implementar isso com Rails, normalmente carregaríamos um fragmento de HTML que implementa o campo através de uma requisição AJAX enganchada no método onchange do drop-down.
-
-Mas esta técnica é tão&#8230; antiga.</blockquote>
-
-
-<p>Antiga? Não entendi. Para mim antiga é a roda, e eu não pretendo inventá-la de novo.</p>
-
-<p>Sempre existe mais de uma solução para o mesmo problema, e a melhor é sempre a mais simples.</p>
-
-<p>Depois de ler isto, resolvi tentar fazer do meu jeito:</p>
-
-<p>Inclui um observe_field na minha view:
-[source:ruby]&lt;span id=&#8221;select_cidades&#8221;&gt;&lt;/span&gt;
-&lt;%= observe_field :job_state,</p>
-
-<pre><code>:url =&amp;gt; { :action =&amp;gt; 'carrega_cidades' },
-:update =&amp;gt; 'form_cidade',
-:with =&amp;gt; 'form_estado',
-:complete =&amp;gt; "visual_effect(:highlight, 'td_cidades')" %&amp;gt;[/source]
-</code></pre>
-
-<p>E no meu controller:
-[source:ruby]def carrega_cidades
-@cities = City.find(:all,</p>
-
-<pre><code>    :conditions =&amp;gt; "state_id = #{params[:job_state]}",
-    :order =&amp;gt; 'nome')
-</code></pre>
-
-<p>render :inline =&gt;</p>
-
-<pre><code>"&amp;lt;%= collection_select('job', 'city_id' , @cities, 'id', 'nome') %&amp;gt;"
-</code></pre>
-
-<p>end[/source]
-Funciona!</p>
-
-<p>Não se esqueça porque você decidiu aprender rails.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/79/">&larr; Antigos</a>
@@ -698,6 +675,10 @@ Funciona!</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
@@ -711,10 +692,6 @@ Funciona!</p>
     
       <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
   </ul>

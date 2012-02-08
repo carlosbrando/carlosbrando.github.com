@@ -9,7 +9,8 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Após o lançamento do Rails 2.1 o método Time#advance parou de funcionar corretamente com frações de tempo como: &gt;&gt; Time.stubs(:now).returns &hellip;">
+  <meta name="description" content="No Rails 2.1 em alguns casos ao se criar dois controllers com o mesmo nome, mas em namespaces diferentes um erro acontece, veja: $ rails -v
+Rails 2.1 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +77,65 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/12/11/rails-22-erro-ao-criar-dois-controllers-com-o-mesmo-nome/">Rails 2.2: Erro ao criar dois controllers com o mesmo nome</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-12-11T00:00:00-02:00" pubdate data-updated="true">11 de Dezembro de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>No Rails 2.1 em alguns casos ao se criar dois controllers com o mesmo nome, mas em namespaces diferentes um erro acontece, veja:</p>
+
+<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">$ rails -v
+Rails 2.1.0
+</span>
+<span class="meta meta_paragraph meta_paragraph_text">$ ruby -v
+ruby 1.8.6 (2008-03-03 patchlevel 114) [universal-darwin9.0]
+</span>
+<span class="meta meta_paragraph meta_paragraph_text">$ rails test
+</span>
+<span class="meta meta_paragraph meta_paragraph_text">$ cd test/
+</span>
+<span class="meta meta_paragraph meta_paragraph_text">$ script/generate scaffold Posts title:string body:text
+</span>
+<span class="meta meta_paragraph meta_paragraph_text">$ script/generate controller -t Admin::Posts
+The name 'Admin::PostsHelper' is either already used in your application or reserved by Ruby on Rails.
+</span>  <span class="meta meta_paragraph meta_paragraph_text">Please choose an alternative and run this generator again.
+  ...</span></span></pre>
+
+
+<p>Mais um bug corrigido na versão 2.2.</p>
+
+<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades do Rails 2.2 no e-book “<a href="../2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">Ruby on Rails - O que há de novo?</a>“.</em>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -609,42 +669,6 @@ PUT /posts/1/comments/1 (falha)
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/11/27/twitter-images/">Twitter Images</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-11-27T00:00:00-02:00" pubdate data-updated="true">27 de Novembro de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="alignnone size-full wp-image-1856" title="gregg" src="http://old.nomedojogo.com/wp-content/uploads/2008/11/gregg.png" alt="" width="648" height="291" /></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/18/">&larr; Antigos</a>
@@ -662,6 +686,10 @@ PUT /posts/1/comments/1 (falha)
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
@@ -675,10 +703,6 @@ PUT /posts/1/comments/1 (falha)
     
       <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
   </ul>

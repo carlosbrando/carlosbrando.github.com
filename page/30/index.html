@@ -9,8 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content=" via Melhores do Mundo
-">
+  <meta name="description" content="Muitas vezes a opção :index do método select pode ser útil, como por exemplo quando se precisa criar diversos dropdowns dinamicamente em uma página. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +76,60 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/08/12/edge-rails-opcao-index-funcionando-no-fields_for/">Edge Rails: Opção :index funcionando no fields_for</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-08-12T00:00:00-03:00" pubdate data-updated="true">12 de Agosto de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Muitas vezes a opção <strong>:index</strong> do método <strong>select</strong> pode ser útil, como por exemplo quando se precisa criar diversos <strong>dropdowns</strong> dinamicamente em uma página.</p>
+
+<p>Até hoje o método <strong>fields_for</strong> não repassava esta opção para métodos como <strong>select</strong>, <strong>collection_select</strong>, <strong>country_select</strong> e <strong>time_zone_select</strong>, o que limitava o seu uso em determinados casos.</p>
+
+<p>Isto já foi corrigido para a próxima versão do Rails. Por exemplo, apenas para efeito de teste veja o código abaixo e o seu retorno:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_function support_function_viewhelpers support_function_viewhelpers_rails">fields_for</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>post</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>post</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>index</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">108</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">f</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+  concat f<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>select<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>category</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_other string_quoted_other_literal string_quoted_other_literal_lower string_quoted_other_literal_lower_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">%w(</span> abe &lt;mus&gt; hest<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">)</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+
+
+<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">select</span> <span class="meta meta_attribute-with-value meta_attribute-with-value_id meta_attribute-with-value_id_html"><span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_id entity_other_attribute-name_id_html">id</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_html">=</span>\<span class="string string_quoted string_quoted_double string_quoted_double_html"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_html">"</span><span class="meta meta_toc-list meta_toc-list_id meta_toc-list_id_html">post_108_category\</span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_html">"</span></span></span> <span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_html">name</span>=\<span class="string string_quoted string_quoted_double string_quoted_double_html"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_html">"</span>post[108][category]\<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_html">"</span></span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+  <span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">option</span> <span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_html">value</span>=\<span class="string string_quoted string_quoted_double string_quoted_double_html"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_html">"</span>abe\<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_html">"</span></span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>abe<span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">option</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+  <span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">option</span> <span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_html">value</span>=\<span class="string string_quoted string_quoted_double string_quoted_double_html"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_html">"</span><span class="constant constant_character constant_character_entity constant_character_entity_html"><span class="punctuation punctuation_definition punctuation_definition_entity punctuation_definition_entity_html">&amp;</span>lt<span class="punctuation punctuation_definition punctuation_definition_entity punctuation_definition_entity_html">;</span></span>mus<span class="constant constant_character constant_character_entity constant_character_entity_html"><span class="punctuation punctuation_definition punctuation_definition_entity punctuation_definition_entity_html">&amp;</span>gt<span class="punctuation punctuation_definition punctuation_definition_entity punctuation_definition_entity_html">;</span></span>\<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_html">"</span></span> <span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_html">selected</span>=\<span class="string string_quoted string_quoted_double string_quoted_double_html"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_html">"</span>selected\<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_html">"</span></span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span><span class="constant constant_character constant_character_entity constant_character_entity_html"><span class="punctuation punctuation_definition punctuation_definition_entity punctuation_definition_entity_html">&amp;</span>lt<span class="punctuation punctuation_definition punctuation_definition_entity punctuation_definition_entity_html">;</span></span>mus<span class="constant constant_character constant_character_entity constant_character_entity_html"><span class="punctuation punctuation_definition punctuation_definition_entity punctuation_definition_entity_html">&amp;</span>gt<span class="punctuation punctuation_definition punctuation_definition_entity punctuation_definition_entity_html">;</span></span><span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">option</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+  <span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">option</span> <span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_html">value</span>=\<span class="string string_quoted string_quoted_double string_quoted_double_html"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_html">"</span>hest\<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_html">"</span></span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>hest<span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">option</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+<span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">select</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span></span></pre>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -556,66 +609,6 @@ Accept: text/x-dvi; q=.8; mxb=100000; mxt=5.0, text/x-c</code></p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/08/04/edge-rails-informando-o-primary_key-em-associacoes-has_many/">Edge Rails: Informando outro primary_key em associações</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-08-04T00:00:00-03:00" pubdate data-updated="true"> 4 de Agosto de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Uma nova opção foi acrescentado ao método <strong>has_many</strong>: a opção <strong>:primary_key</strong>.</p>
-
-<p>Fazendo uso desta opção podemos definir qual método do modelo associado retornará a chave primária que será usada na associação. Obviamente o método padrão é o <strong>id</strong>.</p>
-
-<p>Veja um exemplo de uso:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_function support_function_activerecord support_function_activerecord_rails">has_many</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>clients_using_primary_key</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>class_name</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Client<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
-  <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>primary_key</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>name<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>foreign_key</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>firm_name<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span></pre>
-
-
-<h4>Atualização</h4>
-
-
-<p>4 de agosto de 2008 às 12:45</p>
-
-<p>Nosso amigo Ozéias Sant&#8217;ana (de blog novo) preparou um gem que adiciona esta mesma funcionalidade nas versões anteriores do Rails.</p>
-
-<p>Assim, quem precisa desta funcionalidade para já, deve ler o <a href="http://railsbox.org/2008/8/2/gem-has_many_select">artigo</a> que ele escreveu explicando como instalar e usar este gem.</p>
-
-<h4>has_one</h4>
-
-
-<p>5 de agosto de 2008 às 11:44</p>
-
-<p>O método <strong>has_one</strong> também recebeu esta implementação, funcionando exatamente como no exemplo acima.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/31/">&larr; Antigos</a>
@@ -633,6 +626,10 @@ Accept: text/x-dvi; q=.8; mxb=100000; mxt=5.0, text/x-c</code></p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
@@ -646,10 +643,6 @@ Accept: text/x-dvi; q=.8; mxb=100000; mxt=5.0, text/x-c</code></p>
     
       <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
   </ul>

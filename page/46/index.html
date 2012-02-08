@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Added one more feature to plugin. Imagine the following case: ActionController::Routing::Routes.draw do |map| map.aliases :resources, :houses =&gt; ' &hellip;">
+  <meta name="description" content="Hoje de manhõ eu falei do config.gem. Agora vai uma dica para os construtores de plugins. Principalmente se o seu plugin depende de algum gem. Até &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,63 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/04/15/edge-rails-configgem-em-plugins/">Edge Rails: config.gem em plugins</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-04-15T00:00:00-03:00" pubdate data-updated="true">15 de Abril de 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Hoje de manhõ eu falei do <a href="http://www.nomedojogo.com/2008/04/15/edge-rails-configgem/">config.gem</a>. Agora vai uma dica para os construtores de plugins. Principalmente se o seu plugin depende de algum gem.</p>
+
+<p>Até agora o arquivo <code>init.rb</code> de um plugin se parece com isto:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> init.rb do plugin open_id_authentication
+</span><span class="meta meta_require meta_require_ruby"><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">require</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>yadis<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> </span>
+<span class="meta meta_require meta_require_ruby"><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">require</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>openid<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> </span>
+<span class="support support_class support_class_ruby">ActionController</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">Base</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>send <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>include</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">OpenIdAuthentication</span> </span></pre>
+
+
+<p>Mas no <strong>Rails 2.1</strong> um arquivo <code>init.rb</code> como este deve ser criado assim:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Novo formato
+</span>config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>gem <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>ruby-openid<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>lib</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>openid<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>version</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>1.1.4<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>gem <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>ruby-yadis<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>  <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>lib</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>yadis<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>  <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>version</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>0.3.4<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+
+config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>after_initialize <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
+</span>  <span class="support support_class support_class_ruby">ActionController</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">Base</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>send <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>include</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">OpenIdAuthentication</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+<p>Assim, quando você rodar a tarefa para instalar todos os gems necessários, estes gems estarão entre eles.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -608,44 +665,6 @@ not_ryan<span class="punctuation punctuation_separator punctuation_separator_met
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/04/08/rubyforge-se-rende-ao-git/">Rubyforge se rende ao Git</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-04-08T00:00:00-03:00" pubdate data-updated="true"> 8 de Abril de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Eu vi primeiro no <a href="http://drnicwilliams.com/2008/04/08/git-for-rubyforge-accounts/">blog do Dr Nic</a>, e resolvi conferir. Pois é, o Rubyforge agora também aceita projetos em Git. É&#8230; não tem jeito, ou aprende a usar o Git, ou aprende o usar o Git!</p>
-
-<p><img class="alignnone size-full wp-image-659" title="picture-1" src="http://old.nomedojogo.com/wp-content/uploads/2008/04/picture-1.png" alt="" /></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/47/">&larr; Antigos</a>
@@ -663,6 +682,10 @@ not_ryan<span class="punctuation punctuation_separator punctuation_separator_met
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
@@ -676,10 +699,6 @@ not_ryan<span class="punctuation punctuation_separator punctuation_separator_met
     
       <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
   </ul>

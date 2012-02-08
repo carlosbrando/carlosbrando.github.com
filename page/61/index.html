@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Tem muita gente falando do lançamento do Rails 2.0, e tem bastante gente lá fora dizendo que deve sair hoje. Agora apenas uma curiosidade, hoje &hellip;">
+  <meta name="description" content="Este é um assunto bem controverso. Durante muitos anos eu trabalhei sem criar um único teste, mas quando trabalhei pela primeira vez em um projeto em &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,76 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2007/12/10/como-voces-testam-seus-softwares/">Como vocês testam seus softwares?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-12-10T00:00:00-02:00" pubdate data-updated="true">10 de Dezembro de 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Este é um assunto bem controverso. Durante muitos anos eu trabalhei sem criar um único teste, mas quando trabalhei pela primeira vez em um projeto em que todos criavam testes unitários, percebi o quão importante era aquilo.</p>
+
+<p>Os benefícios dos testes são imensuráveis, mas é uma questão cultural. Muita gente considera perda de tempo, porque normalmente se gasta mais tempo criando o teste do que codificando o software. Isto é verdade, mas os testes não são criados para beneficio imediato, você só vai agradecer por ter criado os testes no futuro, quando alguém tiver de alterar algo e um teste falhar informando que um erro apareceu no meio do processo.</p>
+
+<p>Seguindo a série de traduções dos artigos &#8220;Ask 37signals&#8221;, desta vez a <a href="http://www.37signals.com/svn/posts/701-ask-37signals-how-do-you-test-your-software">pergunta foi</a>:</p>
+
+<blockquote>Estou curioso para saber que metodologia de testes e ferramentas  vocês usam em seus softwares. Você são fanáticos por Test Driven Development (TDD)? Vocês usam o Test::Unit do Rails, ou preferem ferramentas alternativas como o Behavior Driven Development com rspec? Uma lista com os plugins de teste que vocês usam seria bem interessante de ver.</blockquote>
+
+
+<p>Quem vai responder desta vez é o David Heinemeier Hansson ou DHH. Quero adiantar que a resposta dele é um pouco polêmica, como não poderia deixar de ser já que parece que ele gosta disso. Vamos à resposta:</p>
+
+<p>Nós acreditamos seriamente nos benefícios dos testes, mas eu não chamaria isto de fanatismo. Raramente eu escrevo meus testes primeiro. Eu acho que escrever testes primeiro não se entra direito na minha cabeça na hora de escrever uma boa API. Sei, porém, que isto funciona perfeitamente para outros e eu respeito profundamente esta abordagem. Em nossa equipe, isto parece funcionar especialmente bem para o Jamis de vez em quando.</p>
+
+<p>Também fico em cima do muro, em relação à quantidade de testes que faço. Eu não acredito que obter 100% de cobertura vale a pena na maioria dos casos. Especialmente quando se trata de testar o código de um view. Para nosso aplicativos, na maioria das vezes simplesmente mudamos o que é necessário e as chances de aparecer um erro é muito baixa e raramente isto acontece.</p>
+
+<p>As áreas em que eu pessoalmente acredito que temos o máximo de beneficio com testes é na interação de objetos. Como um formulário de inscrição que cria um punhado de registros de uma só vez e que precisa propagar um erro de validação por todos os métodos.</p>
+
+<p>Para quem está começando a usar testes, no entanto, eu recomendo que parta do início. A única maneira de obter uma boa compreensão sobre quando pode-se fazer menos testes é criando testes para tudo por um tempo e identificando as áreas em que pode pegar mais leve sem ferir a sua produtividade agora e no futuro. Por isto, diminuir a sua quantidade de testes deve ser feito com muito cuidado. Se você está sempre em dúvida se deve ou não gastar seu tempo testando, teste.</p>
+
+<p>Em termos de ferramentas, estamos usando o Test::Unit que vem com o Rails. Pessoalmente eu não estou convencido de que o rspec seja tão bom assim, e eu sou levado a pensar que o estilo DSL foi levado um pouco a sério demais. Mas eu gosto do estilo do BDD que foca em nomear os seus testes em termos como &#8220;deve fazer&#8221; e acabo usando isto do meu jeito. De qualquer forma, para mim realmente não importa se você vai fazer de uma maneira ou de outra. O importante é que você teste, e se rspec e BDD vão fazer seus testes melhores para você, mande ver.</p>
+
+<p>Além disso, enquanto eu penso que lutar para ter 100% de cobertura de teste não vale a pena na maioria dos casos, é bom saber o quanto de cobertura você tem, pelo menos. O pacote <a href="http://eigenclass.org/hiki.rb?rcov">rcov</a> proporciona uma ótima maneira de ver o quão seguro estão os seus testes e onde você não está testando.</p>
+
+<h2>O que eu acho?</h2>
+
+
+<p>Concordo com algumas coisas e discordo de outras, sei que é muito difícil conseguir 100% de cobertura de testes, principalmente nas Views. Mas não acho que testar menos seja o ponto. Acredito que devemos nos esforçar para testar o máximo que pudermos, talvez não vamos conseguir 100%, é verdade, mas quanto mais testes, mais seguros estamos.</p>
+
+<p>Pessoalmente eu confesso que mesmo hoje, depois de entender todos os benefícios que os testes me proporcionam, ainda assim acho que faço pouco teste, deveria fazer mais, mas sempre estou me policiando para melhorar nisto. Assim como David, também não consigo criar os testes primeiro, não faz muito sentido para mim, mas acho interessante quando encontro alguém que desenvolve assim.</p>
+
+<p>Na Surgeworks, todos criamos testes, mas deixamos a desejar quanto a testes na interface do usuário, principalmente quando envolve Javascript. Focamos muito mais em funcionalidades críticas ou regras de negócio complexas, onde uma pequena alteração poderia levar tudo a perder. Nestes pontos tentamos cobrir 100% do código com testes.</p>
+
+<p>No projeto que estou trabalhando atualmente estamos usando além do Test::Unit, um plugin chamado <a href="http://www.openqa.org/selenium-on-rails/">Selenium on Rails</a>.</p>
+
+<p>E vocês como testam seus softwares?</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -620,46 +690,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/11/29/rails-20-release-candidate-2/">Rails 2.0: Release Candidate 2</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-11-29T00:00:00-02:00" pubdate data-updated="true">29 de Novembro de 2007</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/11/430104095_f5552a14ea.jpg" alt="430104095_f5552a14ea.jpg" /></p>
-
-<p>David <a href="http://weblog.rubyonrails.com/2007/11/29/rails-2-0-release-candidate-2">acabou de avisar</a> sobre o lançamento do segundo <strong>Release Candidate</strong> do <strong>Rails 2.0</strong>. Mas a melhor noticia mesmo é que DHH confirmou que a <strong>versão oficial</strong> pode sair em <strong>uma ou duas semanas</strong> dependendo do feedback recebido.</p>
-
-<p>Para não chover no molhado, veja o <a href="http://www.akitaonrails.com/2007/11/29/rails-2-0-release-candidate-2">post do Akita</a> que falou primeiro do assunto.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/62/">&larr; Antigos</a>
@@ -677,6 +707,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
@@ -690,10 +724,6 @@
     
       <li class="post">
         <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/08/25/como-convencer-sua-equipe-a-usar-um-sistema-de-controle-de-vers-o/">Como convencer sua equipe a usar um sistema de controle de versão</a>
       </li>
     
   </ul>
