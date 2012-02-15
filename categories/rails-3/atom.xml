@@ -4,7 +4,7 @@
   <title><![CDATA[Categoria: Rails 3 | Nome do Jogo]]></title>
   <link href="http://nomedojogo.com/categories/rails-3/atom.xml" rel="self"/>
   <link href="http://nomedojogo.com/"/>
-  <updated>2012-02-15T00:52:14-02:00</updated>
+  <updated>2012-02-15T01:06:29-02:00</updated>
   <id>http://nomedojogo.com/</id>
   <author>
     <name><![CDATA[Carlos Brando]]></name>
@@ -18,7 +18,7 @@
     <link href="http://nomedojogo.com/2010/09/29/os-bastidores-do-rails-3/"/>
     <updated>2010-09-29T00:00:00-03:00</updated>
     <id>http://nomedojogo.com/2010/09/29/os-bastidores-do-rails-3</id>
-    <content type="html"><![CDATA[<p>{% img center http://old.nomedojogo.com/wp-content/uploads/2010/09/why.jpg A proposta do GrokPodcast é explicar e não somente noticiar %}</p>
+    <content type="html"><![CDATA[<p><img class="center" src="http://old.nomedojogo.com/wp-content/uploads/2010/09/why.jpg" title="A proposta do GrokPodcast é explicar e não somente noticiar" ></p>
 
 <p>Faz exatamente um mês que o Rails 3 foi liberado na sua versão final. É o trabalho de mais de 1600 programadores em um período de quase dois anos.</p>
 
@@ -137,93 +137,178 @@ redirect_to { :action=&gt;'atom' }, :alert =&gt; "Something serious happened"
 
 <p>O Rails 3 ainda está em desenvolvimento, isto significa que o código da DSL pode sofrer alterações até o lançamento oficial. De qualquer forma você pode ir matando a curiosidade analisando o novo arquivo <code>config/routes.rb</code> que está sendo gerado pelo <code>Rails 3.0.pre</code> neste momento. Eu tomei a liberdade de traduzir os comentários para facilitar o entendimento.</p>
 
-<p>{% codeblock routes.rb %}
-ActionController::Routing::Routes.draw do |map|
-  # A prioridade é baseada na ordem da criação:
-  # criado primeiro -> maior prioridade.</p>
-
-<p>  # Exemplo de uma rota comum:
-  match 'products/:id', :to => 'catalog#view'
-  # Tenha em mente que você pode atribuir outros valores
-  # além de :controller e :action</p>
-
-<p>  # Exemplo de uma rota nomeada:
-  match 'products/:id/purchase',</p>
-
-<pre><code>:to =&gt; 'catalog#purchase', :as =&gt; :purchase
-</code></pre>
-
-<p>  # Esta rota pode ser invocada utilizando
-  # purchase_url(:id => product.id)</p>
-
-<p>  # Exemplo utilizando resources (mapeia verbos HTTP
-  # para ações do controller automaticamente)
-  resources :products</p>
-
-<p>  # Exemplo utilizando resources com opções:
-  resources :products do</p>
-
-<pre><code>member do
-  get :short
-  post :toggle
-end
-
-collection do
-  get :sold
-end
-</code></pre>
-
-<p>  end</p>
-
-<p>  # Exemplo utilizando resource com sub-resources:
-  resources :products do</p>
-
-<pre><code>resources :comments, :sales
-resource :seller
-</code></pre>
-
-<p>  end</p>
-
-<p>  # Exemplo mais complexo de uso de resources com
-  # sub-resources:
-  resources :products do</p>
-
-<pre><code>resources :comments
-resources :sales do
-  get :recent, :on =&gt; :collection
-end
-</code></pre>
-
-<p>  end</p>
-
-<p>  # Exeplo utilizando resource com um namespace:
-  namespace :admin do</p>
-
-<pre><code># Direciona /admin/products/* para 
-# Admin::ProductsController
-# (app/controllers/admin/products_controller.rb)
-resources :products
-</code></pre>
-
-<p>  end</p>
-
-<p>  # Você pode definir a home do seu site utilizando
-  # "root".
-  # Lembre-se de apagar o arquivo public/index.html.
-  root :to => "welcome"</p>
-
-<p>  # Você pode listar todas as rotas disponíveis com
-  # "rake routes"</p>
-
-<p>  # Deixe a rota padrão com a prioridade mais baixa
-  # possível.
-  # Nota: A rota padrão torna todas as actions em
-  # qualquer controller acessíveis via solicitações GET.
-  # Você deve considerar a remoção ou comentar esta
-  # linha se estiver usando rotas nomeadas e recursos.
-  match ':controller(/:action(/:id(.:format)))'
-end
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>routes.rb </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="no">ActionController</span><span class="o">::</span><span class="no">Routing</span><span class="o">::</span><span class="no">Routes</span><span class="o">.</span><span class="n">draw</span> <span class="k">do</span> <span class="o">|</span><span class="n">map</span><span class="o">|</span>
+</span><span class='line'>  <span class="c1"># A prioridade é baseada na ordem da criação:</span>
+</span><span class='line'>  <span class="c1"># criado primeiro -&gt; maior prioridade.&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="c1"># Exemplo de uma rota comum:</span>
+</span><span class='line'>  <span class="n">match</span> <span class="s1">&#39;products/:id&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;catalog#view&#39;</span>
+</span><span class='line'>  <span class="c1"># Tenha em mente que você pode atribuir outros valores</span>
+</span><span class='line'>  <span class="c1"># além de :controller e :action&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="c1"># Exemplo de uma rota nomeada:</span>
+</span><span class='line'>  <span class="n">match</span> <span class="s1">&#39;products/:id/purchase&#39;</span><span class="p">,</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;:to =&amp;gt; &#39;catalog#purchase&#39;, :as =&amp;gt; :purchase</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  # Esta rota pode ser invocada utilizando</span>
+</span><span class='line'><span class="sr">  # purchase_url(:id =&gt; product.id)&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="c1"># Exemplo utilizando resources (mapeia verbos HTTP</span>
+</span><span class='line'>  <span class="c1"># para ações do controller automaticamente)</span>
+</span><span class='line'>  <span class="n">resources</span> <span class="ss">:products</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  # Exemplo utilizando resources com opções:</span>
+</span><span class='line'><span class="sr">  resources :products do&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">member</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">get</span> <span class="ss">:short</span>
+</span><span class='line'>  <span class="n">post</span> <span class="ss">:toggle</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">collection</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">get</span> <span class="ss">:sold</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="o">&lt;</span><span class="sr">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="k">end</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  # Exemplo utilizando resource com sub-resources:</span>
+</span><span class='line'><span class="sr">  resources :products do&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">resources</span> <span class="ss">:comments</span><span class="p">,</span> <span class="ss">:sales</span>
+</span><span class='line'><span class="n">resource</span> <span class="ss">:seller</span>
+</span><span class='line'><span class="o">&lt;</span><span class="sr">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="k">end</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  # Exemplo mais complexo de uso de resources com</span>
+</span><span class='line'><span class="sr">  # sub-resources:</span>
+</span><span class='line'><span class="sr">  resources :products do&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">resources</span> <span class="ss">:comments</span>
+</span><span class='line'><span class="n">resources</span> <span class="ss">:sales</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">get</span> <span class="ss">:recent</span><span class="p">,</span> <span class="ss">:on</span> <span class="o">=&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="ss">:collection</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="o">&lt;</span><span class="sr">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="k">end</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  # Exeplo utilizando resource com um namespace:</span>
+</span><span class='line'><span class="sr">  namespace :admin do&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="c1"># Direciona /admin/products/* para </span>
+</span><span class='line'><span class="c1"># Admin::ProductsController</span>
+</span><span class='line'><span class="c1"># (app/controllers/admin/products_controller.rb)</span>
+</span><span class='line'><span class="n">resources</span> <span class="ss">:products</span>
+</span><span class='line'><span class="o">&lt;</span><span class="sr">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="k">end</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  # Você pode definir a home do seu site utilizando</span>
+</span><span class='line'><span class="sr">  # &quot;root&quot;.</span>
+</span><span class='line'><span class="sr">  # Lembre-se de apagar o arquivo public/in</span><span class="n">dex</span><span class="o">.</span><span class="n">html</span><span class="o">.</span>
+</span><span class='line'>  <span class="n">root</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s2">&quot;welcome&quot;</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  # Você pode listar todas as rotas disponíveis com</span>
+</span><span class='line'><span class="sr">  # &quot;rake routes&quot;&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="c1"># Deixe a rota padrão com a prioridade mais baixa</span>
+</span><span class='line'>  <span class="c1"># possível.</span>
+</span><span class='line'>  <span class="c1"># Nota: A rota padrão torna todas as actions em</span>
+</span><span class='line'>  <span class="c1"># qualquer controller acessíveis via solicitações GET.</span>
+</span><span class='line'>  <span class="c1"># Você deve considerar a remoção ou comentar esta</span>
+</span><span class='line'>  <span class="c1"># linha se estiver usando rotas nomeadas e recursos.</span>
+</span><span class='line'>  <span class="n">match</span> <span class="s1">&#39;:controller(/:action(/:id(.:format)))&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h4>[ATUALIZAÇÃO 21/12/2009 3:00]</h4>
 
