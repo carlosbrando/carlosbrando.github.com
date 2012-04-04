@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Recentemente tive de encontrar uma solução para um problema simples: eu tinha uma lista de estados e cidades em dropdowns. A intenção é que a lista &hellip;">
+  <meta name="description" content="O Rails é genial, pena que tudo é em inglês. Mas eu queria o que? Tudo na minha língua, de forma perfeita? &Eacute; claro que sim. Isto é possível. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,14 +100,126 @@
       <div id="content">
         <div class="blog-index">
   
-  
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
+    <h1 class="entry-title">
+
+<a href="/2007/04/15/datas-amigveis-em-portugus/">Datas amigáveis em português</a>
+
+</h1>
+
     
-      <h1 class="entry-title"><a href="/2007/04/13/simple-on-rails-carregando-dropdowns-dinamicamente/">Simple on Rails - Carregando dropdowns dinamicamente</a></h1>
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-04-15T00:00:00-03:00" pubdate data-updated="true">15 de Abril de 2007</time>
+        
+        <a rel="bookmark" href="/2007/04/15/datas-amigveis-em-portugus/"></a>
+      </p>
     
+  </header>
+
+
+
+  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/writer/Datasamigveisemportugus_C8CE/calendario6.jpg" style="border-width: 0px" align="right" border="0" height="126" width="102" /></p>
+
+<p>O Rails é genial, pena que tudo é em inglês. Mas eu queria o que? Tudo na minha língua, de forma perfeita? &Eacute; claro que sim.</p>
+
+<p>Isto é possível. Existe um projeto open source para deixar todos os retornos padrões do rails em português, e mais alguns b&ocirc;nus&#8230;</p>
+
+<p>Falo sobre isto outro dia. Hoje vou apenas postar um trechinho de código para ajudar quem tem o trabalho de traduzir tudo no Rails.</p>
+
+<p>Crie um arquivo .rb na pasta lib e cole o código abaixo:
+[source:ruby]module ActionView
+  module Helpers</p>
+
+<pre><code>module DateHelper
+
+  def distance_of_time_in_words(from_time, to_time = 0, include_seconds = false)
+    from_time = from_time.to_time if from_time.respond_to?(:to_time)
+    to_time = to_time.to_time if to_time.respond_to?(:to_time)
+    distance_in_minutes = (((to_time - from_time).abs)/60).round
+    distance_in_seconds = ((to_time - from_time).abs).round
+
+    case distance_in_minutes
+      when 0..1
+        return (distance_in_minutes == 0) ? 'menos de um minuto' : '1 minuto' unless include_seconds
+        case distance_in_seconds
+          when 0..4   then 'menos de 5 segundos'
+          when 5..9   then 'menos de 10 segundos'
+          when 10..19 then 'menos de 20 segundos'
+          when 20..39 then 'meio minuto'
+          when 40..59 then 'menos de um minuto'
+          else             '1 minuto'
+        end
+
+      when 2..44           then "#{distance_in_minutes} minutos"
+      when 45..89          then '1 hora'
+      when 90..1439        then "#{(distance_in_minutes.to_f / 60.0).round} horas"
+      when 1440..2879      then '1 dia'
+      when 2880..43199     then "#{(distance_in_minutes / 1440).round} dias"
+      when 43200..86399    then '1 mês'
+      when 86400..525959   then "#{(distance_in_minutes / 43200).round} meses"
+      when 525960..1051919 then '1 ano'
+      else                      "mais de #{(distance_in_minutes / 525960).round} anos"
+    end
+  end
+
+end
+</code></pre>
+
+<p>  end
+end[/source]
+Acrecente a seguinte linha no fim do arquivo environment.rb:
+[source:ruby]require &#8220;nome_do_arquivo_criado_acima&#8221;[/source]
+Agora basta colocar a chamada para o método <strong>distance_of_time_in_words </strong>passando a data desejada. Pronto agora você já tem datas amigáveis em português, usando o Rails e sem precisar alterar nada no seu código pronto.</p>
+</div>
+
+
+    </article>
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2007/04/13/simple-on-rails-carregando-dropdowns-dinamicamente/">Simple on Rails - Carregando dropdowns dinamicamente</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -124,9 +236,11 @@
 
 <time datetime="2007-04-13T00:00:00-03:00" pubdate data-updated="true">13 de Abril de 2007</time>
         
+        <a rel="bookmark" href="/2007/04/13/simple-on-rails-carregando-dropdowns-dinamicamente/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/writer/Carregandodropdownsdinamicamentecomduasl_9CBA/michelin_tweel_curb7.jpg" style="border-width: 0px" align="right" border="0" height="160" width="240" /> Recentemente tive de encontrar uma solução para um problema simples: eu tinha uma lista de estados e cidades em dropdowns. A intenção é que a lista de cidades fosse carregada de acordo com o estado selecionado. Simples.</p>
@@ -176,19 +290,30 @@ Funciona!</p>
 
 <p>Não se esqueça porque você decidiu aprender rails.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/04/10/mundanas-so-sempre-bem-vindas/">Mundanças são sempre bem-vindas</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/04/10/mundanas-so-sempre-bem-vindas/">Mundanças são sempre bem-vindas</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -205,9 +330,11 @@ Funciona!</p>
 
 <time datetime="2007-04-10T00:00:00-03:00" pubdate data-updated="true">10 de Abril de 2007</time>
         
+        <a rel="bookmark" href="/2007/04/10/mundanas-so-sempre-bem-vindas/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img height="119" src="http://old.nomedojogo.com/wp-content/uploads/2007/04/windowslivewritermundanassosemprebemvindas-759clogo19.gif" width="331" align="right"> Faz um tempo que trabalhar perdeu a graça para mim. Todo dia levanto no mesmo horário, sigo o mesmo ritual em casa e no trabalho e não sinto o menor prazer em passar o dia no escritório.</p>
@@ -222,19 +349,30 @@ Funciona!</p>
 <p>Após quase um mês de estudos decidi que é hora de iniciar meu próprio projeto. Tenho mil idéias na cabeça. Vou relatar neste blog como está o andamento de cada um destes projetos.</p>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/03/29/problema-de-acentuao-no-radrails-2/">Problema de acentuação no RadRails</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/03/29/problema-de-acentuao-no-radrails-2/">Problema de acentuação no RadRails</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -251,9 +389,11 @@ Funciona!</p>
 
 <time datetime="2007-03-29T00:00:00-03:00" pubdate data-updated="true">29 de Março de 2007</time>
         
+        <a rel="bookmark" href="/2007/03/29/problema-de-acentuao-no-radrails-2/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Â Instalei o <strong>RadRails</strong> para facilitar o desenvolvimento de aplicações usando RoR (Ruby on Rails), mas tive um problema com acentuação e demorei a descobrir uma forma de resolver.</p>
@@ -271,19 +411,30 @@ Funciona!</p>
 
 <p>Problema resolvido!</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/03/29/pluralizao-no-rails/">Pluralização no Rails</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/03/29/pluralizao-no-rails/">Pluralização no Rails</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -300,9 +451,11 @@ Funciona!</p>
 
 <time datetime="2007-03-29T00:00:00-03:00" pubdate data-updated="true">29 de Março de 2007</time>
         
+        <a rel="bookmark" href="/2007/03/29/pluralizao-no-rails/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/03/windowslivewriterpluralizaonorails-7cc1untitled13.jpg" style="border: 0px none " align="right" border="0" />O Rails trabalha com um sistema de pluralização em inglês que pode nos deixar um pouco confusos. Se este é o seu caso, seus problemas acabaram-se&#8230;</p>
@@ -315,19 +468,30 @@ Funciona!</p>
 
 <p>Rails prega &#8220;convenção no lugar de configuração&#8221;, é um paradigma e não podemos lutar contra isto, não faz sentido. O mais correto, é usar o &#8220;padrão&#8221; Rails de desenvolvimento e ser feliz.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/03/27/ruby-on-rails-no-dreamhost/">Ruby on Rails no DreamHost</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/03/27/ruby-on-rails-no-dreamhost/">Ruby on Rails no DreamHost</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -344,9 +508,11 @@ Funciona!</p>
 
 <time datetime="2007-03-27T00:00:00-03:00" pubdate data-updated="true">27 de Março de 2007</time>
         
+        <a rel="bookmark" href="/2007/03/27/ruby-on-rails-no-dreamhost/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Ontem instalei meu primeiro projeto &#8216;ruby on rails&#8217; no <a href="http://www.dreamhost.com/" target="_blank">DreamHost</a>. Para realizar a façanha, segui o excelente tutorial do <a href="http://blog.klaus.pro.br/" target="_blank">Klaus Paiva</a>.</p>
@@ -376,19 +542,30 @@ errors in crontab file, can&#8217;t install.</strong></p>
 
 <p>Agradeço ao <a href="http://blog.klaus.pro.br/" target="_blank">Klaus Paiva</a> pelo excelente tutorial.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/03/24/so-tenho-uma-coisa-a-dizer-ruby-on-rails/">Só tenho uma coisa a dizer: &#8220;Ruby on Rails&#8221;</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/03/24/so-tenho-uma-coisa-a-dizer-ruby-on-rails/">Só tenho uma coisa a dizer: &#8220;Ruby on Rails&#8221;</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -405,28 +582,41 @@ errors in crontab file, can&#8217;t install.</strong></p>
 
 <time datetime="2007-03-24T00:00:00-03:00" pubdate data-updated="true">24 de Março de 2007</time>
         
+        <a rel="bookmark" href="/2007/03/24/so-tenho-uma-coisa-a-dizer-ruby-on-rails/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/03/stacks.jpg" alt="Ruby on Rails" title="Ruby on Rails" align="middle" /></p>
 
 <p>vi no blog do <a href="http://rafael.adm.br/p/justificando-minha-escolha/" target="_blank" title="Rafael Lima">Rafael Lima</a></p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/03/23/temos-todo-tempo-do-mundo/">Temos todo tempo do mundo&#8230;</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/03/23/temos-todo-tempo-do-mundo/">Temos todo tempo do mundo&#8230;</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -443,9 +633,11 @@ errors in crontab file, can&#8217;t install.</strong></p>
 
 <time datetime="2007-03-23T00:00:00-03:00" pubdate data-updated="true">23 de Março de 2007</time>
         
+        <a rel="bookmark" href="/2007/03/23/temos-todo-tempo-do-mundo/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><blockquote>O tempo é Mercúrio-Cromo
@@ -476,19 +668,30 @@ Porque só consigo pensar no que serei, e tudo que ficou para trás de algum mod
 <blockquote>Se temos todo tempo do mundo então porque não temos tempo a perder?</blockquote>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/03/21/seu-blog-no-te-pertence/">Seu blog não te pertence</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/03/21/seu-blog-no-te-pertence/">Seu blog não te pertence</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -505,9 +708,11 @@ Porque só consigo pensar no que serei, e tudo que ficou para trás de algum mod
 
 <time datetime="2007-03-21T00:00:00-03:00" pubdate data-updated="true">21 de Março de 2007</time>
         
+        <a rel="bookmark" href="/2007/03/21/seu-blog-no-te-pertence/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/03/windowslivewriterseublognotepertence-782auntitled4.jpg" style="border-width: 0px" align="right" border="0" height="169" width="240" />As pessoas resolvem montar um blog por dois motivos:</p>
@@ -528,19 +733,30 @@ Porque só consigo pensar no que serei, e tudo que ficou para trás de algum mod
 
 <p>Esqueça o dinheiro, pense na realização pessoal. Escreva muito, escreva com o coração, mas não esqueça para quem você está escrevendo, o blog pertence a quem o lê.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/03/20/o-fim-do-mundo-mad-max-sem-mel-gibson/">É o fim do mundo! Mad Max sem Mel Gibson</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/03/20/o-fim-do-mundo-mad-max-sem-mel-gibson/">É o fim do mundo! Mad Max sem Mel Gibson</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -557,9 +773,11 @@ Porque só consigo pensar no que serei, e tudo que ficou para trás de algum mod
 
 <time datetime="2007-03-20T00:00:00-03:00" pubdate data-updated="true">20 de Março de 2007</time>
         
+        <a rel="bookmark" href="/2007/03/20/o-fim-do-mundo-mad-max-sem-mel-gibson/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p></p></p>
@@ -577,47 +795,6 @@ Porque só consigo pensar no que serei, e tudo que ficou para trás de algum mod
 <p>Mas o Mad Max sem Mel Gibson? Aonde tudo isso vai parar?</p>
 
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/03/20/curriculum-vitae-mostre-o-seu-blog/">Curriculum vitae? Mostre o seu blog</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-03-20T00:00:00-03:00" pubdate data-updated="true">20 de Março de 2007</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p></p>
-
-
-<p> <p><img style="border-right: 0px; border-top: 0px; border-left: 0px; border-bottom: 0px" height="240" src="http://old.nomedojogo.com/wp-content/uploads/writer/CurriculumvitaeAcesseomeublog_14716/Untitled13.jpg" width="166" align="left" border="0"> Li um post no <a title="Memória Virtual" href="http://memoriavirtual.net/" target="_blank">memória virtual</a> (um blog português) que lançava a seguinte pergunta: &#8220;Blogs são os novos currículos?&#8221;. <p>Os argumentos lançados são que um blog dá uma imagem mais din&acirc;mica das capacidades do autor. Em contrapartida alguns empregadores podem não desejar ter em sua equipe uma pessoa &#8220;pública&#8221; e exposta à polêmica. <p>Particularmente acredito que isto depende muito do seu blog e da forma como você o encara, além do trabalho que está procurando. Se seu blog é profissional (não estou me referindo aos ProBloggers) no sentido de ter textos bem produzidos, pode ser uma porta de entrada desde que os assuntos abordados no blog sejam relevantes para a vaga desejada e mostrem seu profundo conhecimento no assunto. <p>De nada adianta exibir um blog de&nbsp;culinária ao ser entrevistado para uma vaga de gerente numa empresa de tecnologia. <p>Acredito que um blog está mais para um cartão de visitas do que um currículo. Leonel Vicente (outro blogger português) disse que quando escrevemos para nossos blogs, tentamos passar a melhor impressão possível, mas é impossível esconder nossa verdadeira personalidade, e isto pode contar na hora de uma entrevista.</p> <p>Não podemos negar que ter um blog conhecido o torna uma referencia no assunto (tema) principal do seu blog. Se você não é um blogger famoso, escreva o que lhe der na telha. Mas se você já adquiriu visibilidade, muito cuidado, você está escrevendo o seu cartão de visitas.</p></p>
-</div>
-  
-  
 
 
     </article>
@@ -639,6 +816,10 @@ Porque só consigo pensar no que serei, e tudo que ficou para trás de algum mod
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
@@ -652,10 +833,6 @@ Porque só consigo pensar no que serei, e tudo que ficou para trás de algum mod
     
       <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
   </ul>

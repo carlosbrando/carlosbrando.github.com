@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Muitas vezes a opção :index do método select pode ser útil, como por exemplo quando se precisa criar diversos dropdowns dinamicamente em uma página. &hellip;">
+  <meta name="description" content="Alguns de vocês já devem conhecer o método assert_queries que ajuda a validar nos testes a quantidade de queries executadas. Por exemplo: &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,14 +100,100 @@
       <div id="content">
         <div class="blog-index">
   
-  
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
+    <h1 class="entry-title">
+
+<a href="/2008/08/13/edge-rails-novo-helper-para-testes-assert_sql/">Edge Rails: Novo helper para testes (assert_sql)</a>
+
+</h1>
+
     
-      <h1 class="entry-title"><a href="/2008/08/12/edge-rails-opcao-index-funcionando-no-fields_for/">Edge Rails: Opção :index funcionando no fields_for</a></h1>
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-08-13T00:00:00-03:00" pubdate data-updated="true">13 de Agosto de 2008</time>
+        
+        <a rel="bookmark" href="/2008/08/13/edge-rails-novo-helper-para-testes-assert_sql/"></a>
+      </p>
     
+  </header>
+
+
+
+  <div class="entry-content"><p>Alguns de vocês já devem conhecer o método <strong>assert_queries</strong> que ajuda a validar nos testes a quantidade de queries executadas. Por exemplo:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">assert_queries<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="support support_class support_class_ruby">Firm</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>partial_updates? <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">?</span> <span class="constant constant_numeric constant_numeric_ruby">0</span> <span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">:</span> <span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span>firm<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>save! <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span></span></pre>
+
+
+<p>No teste acima estou afirmando que se houver <a href="http://www.nomedojogo.com/2008/04/14/edge-rails-partial-updates/">partial_updates</a> uma query deve ser executada no banco de dados, caso contrário nenhuma deve ser executada.</p>
+
+<p>Agora ganhamos mais um helper para ajudar a testar o tipo de query executada, o método <strong>assert_sql</strong>. Um exemplo:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">test_empty_with_counter_sql</span></span>
+  company <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Firm</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>first</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+  assert_sql <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">/</span><span class="variable variable_other variable_other_constant variable_other_constant_ruby">COUNT</span><span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">/</span>i <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
+</span>    assert_equal <span class="constant constant_language constant_language_ruby">false</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> company<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>clients<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>empty?
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+</span></pre>
+
+
+<p>No exemplo acima estou afirmando que no bloco informado ao método pelo menos uma query deve conter a palavra <strong>COUNT</strong>. Obviamente você pode ser mais especifico na expressão regular que estiver usando. Vamos pegar um outro exemplo:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">assert_sql<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_regexp string_regexp_classic string_regexp_classic_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span><span class="constant constant_character constant_character_escape constant_character_escape_ruby">\(\"</span>companies<span class="constant constant_character constant_character_escape constant_character_escape_ruby">\"</span>.<span class="constant constant_character constant_character_escape constant_character_escape_ruby">\"</span>id<span class="constant constant_character constant_character_escape constant_character_escape_ruby">\"</span> IN <span class="constant constant_character constant_character_escape constant_character_escape_ruby">\(</span>1<span class="constant constant_character constant_character_escape constant_character_escape_ruby">\)\)</span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
+</span>  <span class="support support_class support_class_ruby">Account</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>include</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>firm</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+<p>Use com parcimônia!</p>
+</div>
+
+
+    </article>
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/08/12/edge-rails-opcao-index-funcionando-no-fields_for/">Edge Rails: Opção :index funcionando no fields_for</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -124,9 +210,11 @@
 
 <time datetime="2008-08-12T00:00:00-03:00" pubdate data-updated="true">12 de Agosto de 2008</time>
         
+        <a rel="bookmark" href="/2008/08/12/edge-rails-opcao-index-funcionando-no-fields_for/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Muitas vezes a opção <strong>:index</strong> do método <strong>select</strong> pode ser útil, como por exemplo quando se precisa criar diversos <strong>dropdowns</strong> dinamicamente em uma página.</p>
@@ -149,19 +237,30 @@
 <span class="meta meta_tag meta_tag_inline meta_tag_inline_any meta_tag_inline_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_inline entity_name_tag_inline_any entity_name_tag_inline_any_html">select</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span></span></pre>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/08/12/alguem-entende-alguma-coisa-do-que-o-batman-diz/">Alguém entende alguma coisa do que o Batman diz?</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/08/12/alguem-entende-alguma-coisa-do-que-o-batman-diz/">Alguém entende alguma coisa do que o Batman diz?</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -178,9 +277,11 @@
 
 <time datetime="2008-08-12T00:00:00-03:00" pubdate data-updated="true">12 de Agosto de 2008</time>
         
+        <a rel="bookmark" href="/2008/08/12/alguem-entende-alguma-coisa-do-que-o-batman-diz/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/kyMMQJ9tzWY&hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><embed src="http://www.youtube.com/v/kyMMQJ9tzWY&hl=en&fs=1" type="application/x-shockwave-flash" allowfullscreen="true" width="425" height="344"></embed></object>
@@ -188,19 +289,30 @@
 
 <p>via <a href="http://www.interney.net/blogs/melhoresdomundo/2008/08/12/acuma/">Melhores do Mundo</a></p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/08/11/edge-rails-recebendo-alertas-para-melhoria-de-desempenho/">Edge Rails: Recebendo alertas para melhoria de desempenho</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/08/11/edge-rails-recebendo-alertas-para-melhoria-de-desempenho/">Edge Rails: Recebendo alertas para melhoria de desempenho</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -217,9 +329,11 @@
 
 <time datetime="2008-08-11T00:00:00-03:00" pubdate data-updated="true">11 de Agosto de 2008</time>
         
+        <a rel="bookmark" href="/2008/08/11/edge-rails-recebendo-alertas-para-melhoria-de-desempenho/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>O Rails recebeu mais um parâmetro de configuração que faz com que ele emita um alerta caso esteja renderizando um template fora do diretório especificado para views. Isto é muito bom já que arquivos fora dos diretórios especificados para views não são armazenados em cache o que resulta em mais operações no disco.</p>
@@ -240,19 +354,30 @@ view path list</span></span></pre>
 
 <p>Até o momento esta configuração está desligada como padrão.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/08/09/edge-rails-button_to_remote/">Edge Rails: button_to_remote</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/08/09/edge-rails-button_to_remote/">Edge Rails: button_to_remote</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -269,9 +394,11 @@ view path list</span></span></pre>
 
 <time datetime="2008-08-09T00:00:00-03:00" pubdate data-updated="true"> 9 de Agosto de 2008</time>
         
+        <a rel="bookmark" href="/2008/08/09/edge-rails-button_to_remote/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img class="aligncenter size-full wp-image-1049" title="106960641_1473a4f0a7" src="http://old.nomedojogo.com/wp-content/uploads/2008/08/106960641_1473a4f0a7.jpg" alt="" /></p>
@@ -282,19 +409,30 @@ view path list</span></span></pre>
 
 <p>Aqueles que irão migrar seus projetos não precisam se preocupar já que o nome antigo (<strong>submit_to_remote</strong>) será um alias para novo.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/08/08/pesquisa-quantos-anos-voce-tem/">Pesquisa: Quantos anos você tem?</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/08/08/pesquisa-quantos-anos-voce-tem/">Pesquisa: Quantos anos você tem?</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -311,9 +449,11 @@ view path list</span></span></pre>
 
 <time datetime="2008-08-08T00:00:00-03:00" pubdate data-updated="true"> 8 de Agosto de 2008</time>
         
+        <a rel="bookmark" href="/2008/08/08/pesquisa-quantos-anos-voce-tem/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img class="alignnone size-full wp-image-1063" title="417034018_7107e8e5d8" src="http://old.nomedojogo.com/wp-content/uploads/2008/08/417034018_7107e8e5d8.jpg" alt="" /></p>
@@ -326,19 +466,30 @@ view path list</span></span></pre>
 
 <p>Vamos ver se dá certo isto&#8230; respondam nos comentários, por favor!</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/08/08/edge-rails-desabilitando-o-cabecalho-accept-em-requisicoes-http/">Edge Rails: Desabilitando o cabeçalho Accept em requisições HTTP</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/08/08/edge-rails-desabilitando-o-cabecalho-accept-em-requisicoes-http/">Edge Rails: Desabilitando o cabeçalho Accept em requisições HTTP</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -355,9 +506,11 @@ view path list</span></span></pre>
 
 <time datetime="2008-08-08T00:00:00-03:00" pubdate data-updated="true"> 8 de Agosto de 2008</time>
         
+        <a rel="bookmark" href="/2008/08/08/edge-rails-desabilitando-o-cabecalho-accept-em-requisicoes-http/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Quando usamos o método <strong>respond_to</strong> para fazer algo assim:</p>
@@ -397,19 +550,30 @@ Accept: text/x-dvi; q=.8; mxb=100000; mxt=5.0, text/x-c</code></p>
 
 <p>Existe um caso especial quando fazemos requisições usando ajax se o cabeçalho <strong>X-Requested-With</strong> estiver presente. Neste caso o formato <strong>format.js</strong> ainda será usado mesmo que o formato não tenha sido especificado (/people/1, por exemplo).</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/08/06/the-big-bang-theory/">The Big Bang Theory</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/08/06/the-big-bang-theory/">The Big Bang Theory</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -426,9 +590,11 @@ Accept: text/x-dvi; q=.8; mxb=100000; mxt=5.0, text/x-c</code></p>
 
 <time datetime="2008-08-06T00:00:00-03:00" pubdate data-updated="true"> 6 de Agosto de 2008</time>
         
+        <a rel="bookmark" href="/2008/08/06/the-big-bang-theory/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img class="alignnone size-full wp-image-1034" title="2271998567_72f1f35306" src="http://old.nomedojogo.com/wp-content/uploads/2008/08/2271998567_72f1f35306.jpg" alt="" /></p>
@@ -446,19 +612,30 @@ Accept: text/x-dvi; q=.8; mxb=100000; mxt=5.0, text/x-c</code></p>
 <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="425" height="344" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowFullScreen" value="true" /><param name="src" value="http://www.youtube.com/v/9eTUz61LNjo&amp;hl=en&amp;fs=1" /><embed type="application/x-shockwave-flash" width="425" height="344" src="http://www.youtube.com/v/9eTUz61LNjo&amp;hl=en&amp;fs=1" allowfullscreen="true"></embed></object>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/08/06/rails-podcast-brasil-episodio-26/">Rails Podcast Brasil - Episódio 26</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/08/06/rails-podcast-brasil-episodio-26/">Rails Podcast Brasil - Episódio 26</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -475,9 +652,11 @@ Accept: text/x-dvi; q=.8; mxb=100000; mxt=5.0, text/x-c</code></p>
 
 <time datetime="2008-08-06T00:00:00-03:00" pubdate data-updated="true"> 6 de Agosto de 2008</time>
         
+        <a rel="bookmark" href="/2008/08/06/rails-podcast-brasil-episodio-26/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img class="alignnone size-full wp-image-1043" title="552926523_9fb50d67e2" src="http://old.nomedojogo.com/wp-content/uploads/2008/08/552926523_9fb50d67e2.jpg" alt="" /></p>
@@ -529,19 +708,30 @@ Accept: text/x-dvi; q=.8; mxb=100000; mxt=5.0, text/x-c</code></p>
 </ul>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/08/05/porque-eu-defendo-o-shoulda/">Porque eu defendo o Shoulda</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/08/05/porque-eu-defendo-o-shoulda/">Porque eu defendo o Shoulda</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -558,9 +748,11 @@ Accept: text/x-dvi; q=.8; mxb=100000; mxt=5.0, text/x-c</code></p>
 
 <time datetime="2008-08-05T00:00:00-03:00" pubdate data-updated="true"> 5 de Agosto de 2008</time>
         
+        <a rel="bookmark" href="/2008/08/05/porque-eu-defendo-o-shoulda/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Como alguns já viram no último <a href="http://www.nomedojogo.com/2008/07/29/rails-podcast-brasil-episodio-25/">podcast</a> eu costumo defender muito os projetos e sistemas que gosto. O <a href="http://github.com/">GitHub</a> pode não ter a importancia que o <a href="http://rubyforge.org/">RubyForge</a> &#8220;teve&#8221; para a comunidade Ruby no mundo, mas acredito seriamente no valor deste projeto e aposto minhas fichas nele.</p>
@@ -589,46 +781,6 @@ Accept: text/x-dvi; q=.8; mxb=100000; mxt=5.0, text/x-c</code></p>
 
 <p>Se tem coisas que eu não sou é preciosista ou saudosita. Sou adépto ao novo, e quando considero que algo novo é melhor do que o antigo não tenho medo de mudar. Não é porque algo me serviu durante muitos anos que devo continuar usando-o o resto da vida, se fosse assim eu não teria comprado um travesseiro novo, nem um macbook, nem uma TV nova, nem um&#8230;</p>
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/08/04/edge-rails-templates-em-cache/">Edge Rails: Templates em cache</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-08-04T00:00:00-03:00" pubdate data-updated="true"> 4 de Agosto de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Para melhorar a performance do Rails as páginas de template serão armazenadas em cache automaticamente em ambiente de produção.</p>
-
-<p>Em outras palavras, se você alterar algum template em produção terá de reiniciar o servidor para que isto tenha efeito.</p>
-</div>
-  
-  
 
 
     </article>
@@ -650,6 +802,10 @@ Accept: text/x-dvi; q=.8; mxb=100000; mxt=5.0, text/x-c</code></p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
@@ -663,10 +819,6 @@ Accept: text/x-dvi; q=.8; mxb=100000; mxt=5.0, text/x-c</code></p>
     
       <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
   </ul>

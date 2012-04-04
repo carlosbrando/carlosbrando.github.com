@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Dois amigos se pronunciaram e compartilharam suas idéias sobre qual a melhor forma de se ajustar o método strftime para trabalhar com datas em &hellip;">
+  <meta name="description" content="O problema era o seguinte: Tenho um arquivo de texto com um monte de informações inúteis e precisava ler este arquivo e retirar o texto que me &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,14 +100,115 @@
       <div id="content">
         <div class="blog-index">
   
-  
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
+    <h1 class="entry-title">
+
+<a href="/2007/05/09/extraindo-trechos-de-texto-de-um-arquivo/">Extraindo trechos de texto de um arquivo</a>
+
+</h1>
+
     
-      <h1 class="entry-title"><a href="/2007/05/08/meses-em-portugus-no-rails-parte-2/">Meses em português no Rails - parte 2</a></h1>
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-05-09T00:00:00-03:00" pubdate data-updated="true"> 9 de Maio de 2007</time>
+        
+        <a rel="bookmark" href="/2007/05/09/extraindo-trechos-de-texto-de-um-arquivo/"></a>
+      </p>
     
+  </header>
+
+
+
+  <div class="entry-content"><p>O problema era o seguinte: Tenho um arquivo de texto com um monte de  informações inúteis e precisava ler este arquivo e retirar o texto que me  interessa, gravando em outro arquivo.</p>
+
+<p>Para ler um arquivo de texto é fácil:
+[source:ruby]
+f = File.open(&#8220;arquivo.txt&#8221;)
+begin
+  linhas = f.readlines
+  todas_linhas = linhas.join
+end
+f.close
+[/source]</p>
+
+<p>Pronto agora tenhos o arquivo inteiro na string <strong>todas_linhas</strong>. O próximo passo é localizar o texto que preciso extrair.</p>
+
+<p>Dentro do bloco begin..end:
+[source:ruby]
+  retorno = &#8220;&#8221;
+  todas_linhas.scan /regular_expression/ do |texto|</p>
+
+<pre><code>retorno = "#{retorno}#{texto}\n"
+</code></pre>
+
+<p>  end
+[/source]
+Pronto! A variável retorno já contém somente o texto que me interessa.</p>
+
+<p>O método <strong>scan</strong> varre toda a string procurando por valores que combinem com a regular expression passada. Eu simplesmente pego este valor e separo.</p>
+
+<p>No fim para gravar um novo arquivo&#8230;
+[source:ruby]
+  x = File.new(&#8220;retorno.txt&#8221;, File::CREAT|File::TRUNC|File::RDWR, 0644)
+  begin</p>
+
+<pre><code>x.puts retorno
+</code></pre>
+
+<p>  end
+  x.close
+[/source]</p>
+
+<p>Conhece um jeito mais fácil? Comenta aí!</p>
+</div>
+
+
+    </article>
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2007/05/08/meses-em-portugus-no-rails-parte-2/">Meses em português no Rails - parte 2</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -124,9 +225,11 @@
 
 <time datetime="2007-05-08T00:00:00-03:00" pubdate data-updated="true"> 8 de Maio de 2007</time>
         
+        <a rel="bookmark" href="/2007/05/08/meses-em-portugus-no-rails-parte-2/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Dois amigos se pronunciaram e compartilharam suas idéias sobre qual a melhor forma de se ajustar o método strftime para trabalhar com datas em português.</p>
@@ -153,19 +256,30 @@ Time::ABBR_DAYNAMES = Date::ABBR_DAYNAMES
 
 <p>Obrigado pela ajuda amigos!</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/05/07/carreirati-veja-ofertas-de-emprego-da-mesma-cidade/">carreiraTI: veja ofertas de emprego da mesma cidade</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/05/07/carreirati-veja-ofertas-de-emprego-da-mesma-cidade/">carreiraTI: veja ofertas de emprego da mesma cidade</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -182,9 +296,11 @@ Time::ABBR_DAYNAMES = Date::ABBR_DAYNAMES
 
 <time datetime="2007-05-07T00:00:00-03:00" pubdate data-updated="true"> 7 de Maio de 2007</time>
         
+        <a rel="bookmark" href="/2007/05/07/carreirati-veja-ofertas-de-emprego-da-mesma-cidade/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Sei que muita gente ainda não conhece o <a href="http://www.carreirati.com/">carreiraTI</a>. Basicamente é um site <a href="http://www.carreirati.com/">de empregos</a> para a área de tecnologia em geral (programadores, técnicos, designers, analistas, gerentes, administradores de banco de dados, etc..).</p>
@@ -192,19 +308,30 @@ Time::ABBR_DAYNAMES = Date::ABBR_DAYNAMES
 
 <p> <p>Incluí hoje uma nova funcionalidade hoje: ao ver uma vaga de emprego, você pode clicar no link da cidade e ver apenas as ofertas da mesma cidade.  <p> <center><a href="http://old.nomedojogo.com/wp-content/uploads/2007/05/windowslivewritercarreirativejaofertasdeempregodamesmacid-7aaduntitled15.jpg" atomicselection="true"><img style="border-right: 0px; border-top: 0px; border-left: 0px; border-bottom: 0px" height="128" src="http://old.nomedojogo.com/wp-content/uploads/2007/05/windowslivewritercarreirativejaofertasdeempregodamesmacid-7aaduntitled-thumb13.jpg" width="432" border="0"></a></center> <p></p> <p>Uma funcionalidade simples, mas que agiliza o processo de busca.  <p>Muita coisa ainda precisa ser feita. Mas tudo no seu tempo.  <p>Começamos&nbsp;a funcionar na quinta-feira passada e já temos pelo menos uma dúzia de vagas.  <p>Quem ainda não conhece <a href="http://www.carreirati.com/">clique aqui</a> e quem sabe não tem alguma vaga que te interesse.</p></p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/05/05/meses-em-portugus-no-rails/">Meses em português no Rails</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/05/05/meses-em-portugus-no-rails/">Meses em português no Rails</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -221,9 +348,11 @@ Time::ABBR_DAYNAMES = Date::ABBR_DAYNAMES
 
 <time datetime="2007-05-05T00:00:00-03:00" pubdate data-updated="true"> 5 de Maio de 2007</time>
         
+        <a rel="bookmark" href="/2007/05/05/meses-em-portugus-no-rails/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/writer/MesesemportugusnoRails_E4B3/img_6596_1_1.jpg" style="border-width: 0px" align="right" border="0" height="180" width="240" /> Um dos maiores problemas que encontro quando crio algo com o Ruby on Rails é a falta de uma internacionalização nos componentes existentes.</p>
@@ -260,19 +389,30 @@ Se alguém tiver uma solução melhor que esta, por favor se pronuncie.</p>
 
 <p>Para ver como ficou <a href="http://www.carreirati.com/">clique aqui</a>.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/05/04/carreirati-empregos-para-profissionais-de-ti/">carreiraTI: Empregos para profissionais de TI</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/05/04/carreirati-empregos-para-profissionais-de-ti/">carreiraTI: Empregos para profissionais de TI</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -289,27 +429,40 @@ Se alguém tiver uma solução melhor que esta, por favor se pronuncie.</p>
 
 <time datetime="2007-05-04T00:00:00-03:00" pubdate data-updated="true"> 4 de Maio de 2007</time>
         
+        <a rel="bookmark" href="/2007/05/04/carreirati-empregos-para-profissionais-de-ti/"></a>
       </p>
     
   </header>
 
 
+
   <div class="entry-content"><p> <center><a href="http://www.carreirati.com/" atomicselection="true"><img height="30" src="http://old.nomedojogo.com/wp-content/uploads/writer/carreiraTIEmpregosparaprofissionaisdeTI_297B/logo_principal12.png" width="184"></a></center> <p></p> <p>Meu projeto inteiro em Rails.</p> <p>Claro que ainda não está totalmente finalizado, mas é um começo. Trata-se de um site de empregos para a área de tecnologia da informação. Muita coisa ainda há de vir, mas por enquanto este é o básico.</p> <p>Segui a linha de que é melhor lançar meio produto do que um produto meia boca.</p> <p>Aguardem novidades para a próxima semana.</p> <p>Há&#8230; bem que os amigos podiam me ajudar a divulgar&#8230; Também aceito sugestões!</p> <p><a href="http://www.carreirati.com/">Clique aqui</a> para acessar.</p>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/04/26/papel-de-parede-ruby-on-rails/">Papel de Parede: Ruby on Rails</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/04/26/papel-de-parede-ruby-on-rails/">Papel de Parede: Ruby on Rails</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -326,9 +479,11 @@ Se alguém tiver uma solução melhor que esta, por favor se pronuncie.</p>
 
 <time datetime="2007-04-26T00:00:00-03:00" pubdate data-updated="true">26 de Abril de 2007</time>
         
+        <a rel="bookmark" href="/2007/04/26/papel-de-parede-ruby-on-rails/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Sempre estou mudando o papel de parede do meu notebook, e costumo colocar&nbsp;imagens que reflitam meus momentos. Procurando por um papel de parede novo, vejam o que encontrei:</p>
@@ -336,19 +491,30 @@ Se alguém tiver uma solução melhor que esta, por favor se pronuncie.</p>
 
 <p> <p> <center><img style="border-top-width: 0px; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="150" src="http://old.nomedojogo.com/wp-content/uploads/writer/PapeldeParedeRubyonRails_9F3F/56883622_18f242e1141.jpg" width="240" border="0"></center> <p></p> <p>Lindo não?</p> <p>Para baixar a versão em alta resolução, <a href="http://wiki.huihoo.com/images/f/fa/Ruby-on-rails.jpg" target="_blank">clique aqui</a>.</p></p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/04/25/desenvolvendo-para-mim-mesmo/">Desenvolvendo para mim mesmo</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/04/25/desenvolvendo-para-mim-mesmo/">Desenvolvendo para mim mesmo</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -365,27 +531,40 @@ Se alguém tiver uma solução melhor que esta, por favor se pronuncie.</p>
 
 <time datetime="2007-04-25T00:00:00-03:00" pubdate data-updated="true">25 de Abril de 2007</time>
         
+        <a rel="bookmark" href="/2007/04/25/desenvolvendo-para-mim-mesmo/"></a>
       </p>
     
   </header>
 
 
+
   <div class="entry-content"><p> <center><img height="240" src="http://old.nomedojogo.com/wp-content/uploads/writer/Desenvolvendoparamimmesmo_D148/beeyourself10.gif" width="240"></center> <p></p> <p>Meu projeto deve entrar no ar logo depois do feriado. Enquanto isto pedi para alguns amigos analisarem e comentarem o que acharam, do que gostaram e não gostaram. </p> <p>&Eacute; claro que cada um voltou com uma opinião e palpite diferente. Se eu fosse implementar a idéia de cada um deles no projeto, teria no mínimo mais um mês de desenvolvimento e ainda assim não sei se ficaria legal.  <p>Então, mais uma vez decidi &quot;Cair na Real&quot; e fazer o software para mim mesmo. Eu fiz a especificação inicial com base no que eu acho mais importante, e porque mudaria isto agora?  <p>O livro prega que se eu tenho um problema, milhares de outras pessoas devem ter o mesmo problema. Assim, a solução que melhor me serve, vai servir para eles também.  <p>Outra vantagem em usar esta estratégia é que eu realmente pretendo usar meu produto desta maneira, e por isto vou zelar por ele, vou cuidar dele.  <p>&Eacute; meu primeiro projeto pessoal usando RoR. &Eacute; uma ferramenta simples, que em minha opinião resolve um problema que tenho. Espero que você também se apaixone por ela.</p>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/04/23/para-fazer-mais-fiz-menos/">Para fazer mais, fiz menos&#8230;</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/04/23/para-fazer-mais-fiz-menos/">Para fazer mais, fiz menos&#8230;</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -402,9 +581,11 @@ Se alguém tiver uma solução melhor que esta, por favor se pronuncie.</p>
 
 <time datetime="2007-04-23T00:00:00-03:00" pubdate data-updated="true">23 de Abril de 2007</time>
         
+        <a rel="bookmark" href="/2007/04/23/para-fazer-mais-fiz-menos/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/writer/Parafazermaisfizmenos_1047A/images3.jpg" style="border: 0px none " align="right" border="0" height="159" width="240" />Sempre tive problemas com meus projetos. Começo e nunca termino&#8230;</p>
@@ -419,19 +600,30 @@ Se alguém tiver uma solução melhor que esta, por favor se pronuncie.</p>
 
 <p>Não vou entrar no mérito de se o conceito do livro é bom ou não. A única coisa que vale para mim neste momento é que funciona comigo. Trabalho como todo mundo e também não tenho tempo livre para meus projetos pessoais. A solução foi &#8220;Cair na Real&#8221;.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/04/19/usando-bluecloth-no-dreamhost/">Usando BlueCloth no Dreamhost</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/04/19/usando-bluecloth-no-dreamhost/">Usando BlueCloth no Dreamhost</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -448,9 +640,11 @@ Se alguém tiver uma solução melhor que esta, por favor se pronuncie.</p>
 
 <time datetime="2007-04-19T00:00:00-03:00" pubdate data-updated="true">19 de Abril de 2007</time>
         
+        <a rel="bookmark" href="/2007/04/19/usando-bluecloth-no-dreamhost/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><center><img src="http://old.nomedojogo.com/wp-content/uploads/writer/UsandoBlueClothnoDreamhost_6FC8/dhmonkey2.jpg" style="border-width: 0px" border="0" height="180" width="240" /></center>
@@ -464,19 +658,30 @@ Se alguém tiver uma solução melhor que esta, por favor se pronuncie.</p>
 [source:ruby]require &#8220;bluecloth&#8221;[/source]
 &Eacute; uma solução paliativa, mas funciona.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/04/17/validates-personalisados/">Mensagens personalizadas com validates</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/04/17/validates-personalisados/">Mensagens personalizadas com validates</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -493,9 +698,11 @@ Se alguém tiver uma solução melhor que esta, por favor se pronuncie.</p>
 
 <time datetime="2007-04-17T00:00:00-03:00" pubdate data-updated="true">17 de Abril de 2007</time>
         
+        <a rel="bookmark" href="/2007/04/17/validates-personalisados/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><center><img src="http://old.nomedojogo.com/wp-content/uploads/2007/04/windowslivewritervalidatespersonalisados-971dcustom-springs131.jpg" height="150" width="160" /></center>
@@ -589,95 +796,6 @@ E o resultado na sua página seria:</p>
 
 <p>Este é apenas um exemplo de como podemos alterar o Rails de forma simples para nossas necessidades.</p>
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/04/15/datas-amigveis-em-portugus/">Datas amigáveis em português</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-04-15T00:00:00-03:00" pubdate data-updated="true">15 de Abril de 2007</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/writer/Datasamigveisemportugus_C8CE/calendario6.jpg" style="border-width: 0px" align="right" border="0" height="126" width="102" /></p>
-
-<p>O Rails é genial, pena que tudo é em inglês. Mas eu queria o que? Tudo na minha língua, de forma perfeita? &Eacute; claro que sim.</p>
-
-<p>Isto é possível. Existe um projeto open source para deixar todos os retornos padrões do rails em português, e mais alguns b&ocirc;nus&#8230;</p>
-
-<p>Falo sobre isto outro dia. Hoje vou apenas postar um trechinho de código para ajudar quem tem o trabalho de traduzir tudo no Rails.</p>
-
-<p>Crie um arquivo .rb na pasta lib e cole o código abaixo:
-[source:ruby]module ActionView
-  module Helpers</p>
-
-<pre><code>module DateHelper
-
-  def distance_of_time_in_words(from_time, to_time = 0, include_seconds = false)
-    from_time = from_time.to_time if from_time.respond_to?(:to_time)
-    to_time = to_time.to_time if to_time.respond_to?(:to_time)
-    distance_in_minutes = (((to_time - from_time).abs)/60).round
-    distance_in_seconds = ((to_time - from_time).abs).round
-
-    case distance_in_minutes
-      when 0..1
-        return (distance_in_minutes == 0) ? 'menos de um minuto' : '1 minuto' unless include_seconds
-        case distance_in_seconds
-          when 0..4   then 'menos de 5 segundos'
-          when 5..9   then 'menos de 10 segundos'
-          when 10..19 then 'menos de 20 segundos'
-          when 20..39 then 'meio minuto'
-          when 40..59 then 'menos de um minuto'
-          else             '1 minuto'
-        end
-
-      when 2..44           then "#{distance_in_minutes} minutos"
-      when 45..89          then '1 hora'
-      when 90..1439        then "#{(distance_in_minutes.to_f / 60.0).round} horas"
-      when 1440..2879      then '1 dia'
-      when 2880..43199     then "#{(distance_in_minutes / 1440).round} dias"
-      when 43200..86399    then '1 mês'
-      when 86400..525959   then "#{(distance_in_minutes / 43200).round} meses"
-      when 525960..1051919 then '1 ano'
-      else                      "mais de #{(distance_in_minutes / 525960).round} anos"
-    end
-  end
-
-end
-</code></pre>
-
-<p>  end
-end[/source]
-Acrecente a seguinte linha no fim do arquivo environment.rb:
-[source:ruby]require &#8220;nome_do_arquivo_criado_acima&#8221;[/source]
-Agora basta colocar a chamada para o método <strong>distance_of_time_in_words </strong>passando a data desejada. Pronto agora você já tem datas amigáveis em português, usando o Rails e sem precisar alterar nada no seu código pronto.</p>
-</div>
-  
-  
 
 
     </article>
@@ -699,6 +817,10 @@ Agora basta colocar a chamada para o método <strong>distance_of_time_in_words <
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
@@ -712,10 +834,6 @@ Agora basta colocar a chamada para o método <strong>distance_of_time_in_words <
     
       <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
   </ul>

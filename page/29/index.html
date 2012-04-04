@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Este post é uma tradução deste artigo escrito por David Hansson. Eu nunca gostei da idéia de livros com títulos como “for Dummies” ou “complete idiot &hellip;">
+  <meta name="description" content="Às vezes você tem de rodar múltiplas cópias do mesmo projeto. Talvez você tenha um produto que será usado por vários clientes, ou talvez você apenas &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,14 +100,94 @@
       <div id="content">
         <div class="blog-index">
   
-  
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
+    <h1 class="entry-title">
+
+<a href="/2008/08/22/edge-rails-executando-multiplas-instancias-de-um-projeto-em-subdiretorios/">Edge Rails: Executando múltiplas instâncias de um projeto em subdiretórios</a>
+
+</h1>
+
     
-      <h1 class="entry-title"><a href="/2008/08/21/nao-abrace-a-sua-ignorancia/">Não abrace a sua ignorância</a></h1>
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-08-22T00:00:00-03:00" pubdate data-updated="true">22 de Agosto de 2008</time>
+        
+        <a rel="bookmark" href="/2008/08/22/edge-rails-executando-multiplas-instancias-de-um-projeto-em-subdiretorios/"></a>
+      </p>
     
+  </header>
+
+
+
+  <div class="entry-content"><p>Às vezes você tem de rodar múltiplas cópias do mesmo projeto. Talvez você tenha um produto que será usado por vários clientes, ou talvez você apenas deseje rodar uma versão de teste e produção do seu software ao mesmo tempo.</p>
+
+<p>A forma mais simples de se fazer isto é ter múltiplos (sub)domínios com uma instância do aplicativo em cada uma. Mas se isto não for possível você pode colocar seu aplicativo em um subdiretório e usar um prefixo na sua URL para distinguir as instâncias do seu software. Por exemplo, você poderia rodar vários blogs de usuários diferentes usando URLs como:</p>
+
+<pre class="textmate-source"><span class="text text_html text_html_basic">http://www.nomedojogo.com/fulano/blog
+http://www.nomedojogo.com/sicrano/blog
+http://www.nomedojogo.com/beltrano/blog
+</span></pre>
+
+
+<p>Nestes casos, os prefixos fulano, sicrano e beltrano identificarão as instâncias do aplicativo rodando em subdiretórios com os mesmos nomes. O roteamento do aplicativo começa depois disto. Você pode dizer ao Rails para ignorar esta parte das URLs quando uma requisição for feita, mas coloca-la nas URLs geradas por ele, configurando isto através da constante <strong>RAILS_RELATIVE_URL_ROOT</strong> ou do método <strong>AbstractRequest.relative_url_root</strong>.</p>
+
+<p>Porém se seu projeto Rails estiver rodando sob o Apache, esse recurso já é ativado automaticamente, por isto na maioria dos casos não temos de nos preocupar em configurar isto hoje. Isto se você estiver usando Apache.</p>
+
+<p>Porém, no Rails 2.2 o <strong>relative_url_root</strong> não será mais configurado automaticamente pelo HTTP header. Teremos de fazer isto manualmente, colocando uma linha mais ou menos assim no arquivo <strong>environment.rb</strong> de cada um dos aplicativos:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>action_controller<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>relative_url_root <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>/fulano<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span></span></pre>
+
+
+<p>Feito isto, seu aplicativo irá ignorar o prefixo &#8220;fulano&#8221; logo depois do domínio. Mas ao gerar URLs ele sempre colocará este prefixo para garantir que você estará acessando o projeto no subdiretório correto.</p>
+</div>
+
+
+    </article>
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/08/21/nao-abrace-a-sua-ignorancia/">Não abrace a sua ignorância</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -124,9 +204,11 @@
 
 <time datetime="2008-08-21T00:00:00-03:00" pubdate data-updated="true">21 de Agosto de 2008</time>
         
+        <a rel="bookmark" href="/2008/08/21/nao-abrace-a-sua-ignorancia/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Este post é uma tradução <a href="http://www.37signals.com/svn/posts/1187-dont-be-so-quick-to-embrace-your-own-ignorance">deste artigo</a> escrito por David Hansson.</p>
@@ -141,19 +223,30 @@
 
 <p>Se há algo que você não sabe como fazer neste momento, por favor, decida não ser um idiota. Você é tão inteligente quanto sempre foi, você só está tentando aprender algo novo. Defina a sua ambição de igualdade que: Não há qualquer razão para eu não ser tão bom quanto este cara ou garota que fazem o que eu quero fazer.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/08/20/edge-rails-alteracao-na-assinatura-do-metodo-number_with_delimiter/">Edge Rails: Alteração na assinatura do método number_with_delimiter</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/08/20/edge-rails-alteracao-na-assinatura-do-metodo-number_with_delimiter/">Edge Rails: Alteração na assinatura do método number_with_delimiter</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -170,9 +263,11 @@
 
 <time datetime="2008-08-20T00:00:00-03:00" pubdate data-updated="true">20 de Agosto de 2008</time>
         
+        <a rel="bookmark" href="/2008/08/20/edge-rails-alteracao-na-assinatura-do-metodo-number_with_delimiter/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>O método <a href="http://apidock.com/rails/v2.1.0/ActionView/Helpers/NumberHelper/number_with_delimiter">number_with_delimiter</a> recebeu uma nova implementação. Além de uma melhora no código para que fique mais limpo a assinatura do método também mudou. Veja a antiga:</p>
@@ -201,19 +296,30 @@
 
 <p>Então atenção, agora ao usarmos o método <strong>number_with_delimiter</strong> devemos informar as opções na chamada do método.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/08/20/cade-o-podcast-especial/">Cadê o podcast especial?</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/08/20/cade-o-podcast-especial/">Cadê o podcast especial?</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -230,9 +336,11 @@
 
 <time datetime="2008-08-20T00:00:00-03:00" pubdate data-updated="true">20 de Agosto de 2008</time>
         
+        <a rel="bookmark" href="/2008/08/20/cade-o-podcast-especial/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Na semana passada gravei um episódio especial do podcast junto com três figuras da nossa comunidade: Luca Bastos, Tino Gomes e Luiz Carlos Metzger. Foi um bate-papo muito legal onde falamos sobre o desafio de sobreviver em um mercado onde a maioria dos profissionais são jovens de 20 a 24 anos.</p>
@@ -243,19 +351,30 @@
 
 <p>Eu agradeço muito a este trio que colaborou com a gravação. Vamos tentar novamente qualquer dia destes!</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/08/19/rails-podcast-brasil-episodio-28/">Rails Podcast Brasil - Episódio 28</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/08/19/rails-podcast-brasil-episodio-28/">Rails Podcast Brasil - Episódio 28</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -272,9 +391,11 @@
 
 <time datetime="2008-08-19T00:00:00-03:00" pubdate data-updated="true">19 de Agosto de 2008</time>
         
+        <a rel="bookmark" href="/2008/08/19/rails-podcast-brasil-episodio-28/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img class="size-full wp-image-795 alignnone" title="481563298_4c9b2a488f1" src="http://old.nomedojogo.com/wp-content/uploads/2008/08/481563298_4c9b2a488f.jpg" alt="" width="500" height="334" /></p>
@@ -316,19 +437,30 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
 <p>Até o próximo podcast!</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/08/19/novo-layout/">Novo Layout</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/08/19/novo-layout/">Novo Layout</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -345,28 +477,41 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
 <time datetime="2008-08-19T00:00:00-03:00" pubdate data-updated="true">19 de Agosto de 2008</time>
         
+        <a rel="bookmark" href="/2008/08/19/novo-layout/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Não, não foi inveja do Akita. Eu já estou arrumando este layout há mais de uma semana e terminei o básico nesta madrugada. Ainda faltam coisas para ajustar mas vou fazendo isto com o tempo.</p>
 
 <p>E aí o que achou?</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/08/18/premio-podcast-2008/">Prêmio Podcast 2008</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/08/18/premio-podcast-2008/">Prêmio Podcast 2008</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -383,9 +528,11 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
 <time datetime="2008-08-18T00:00:00-03:00" pubdate data-updated="true">18 de Agosto de 2008</time>
         
+        <a rel="bookmark" href="/2008/08/18/premio-podcast-2008/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><a href="http://www.premiopodcast.com.br/index.php?a=in&amp;u=carlosbrando"><img class="alignleft" style="border: 0pt none;" src="http://www.premiopodcast.com.br/button.php?u=carlosbrando" border="0" alt="Prêmio Podcast 2008" width="100" height="100" /></a></p>
@@ -403,19 +550,30 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
 <p>Ajude a divulgar o Rails Podcast Brasil!</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/08/17/edge-rails-uma-forma-mais-simples-de-usar-etags/">Edge Rails: Uma forma mais simples de usar ETags</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/08/17/edge-rails-uma-forma-mais-simples-de-usar-etags/">Edge Rails: Uma forma mais simples de usar ETags</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -432,9 +590,11 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
 <time datetime="2008-08-17T00:00:00-03:00" pubdate data-updated="true">17 de Agosto de 2008</time>
         
+        <a rel="bookmark" href="/2008/08/17/edge-rails-uma-forma-mais-simples-de-usar-etags/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Se você ainda não sabe o que são ETags, leia o <a href="http://www.nomedojogo.com/2008/08/15/edge-rails-melhorando-a-performance-usando-etags/">último post desta série</a>.</p>
@@ -471,19 +631,30 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
 <p>Bem mais simples!</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/08/15/edge-rails-melhorando-a-performance-usando-etags/">Edge Rails: Melhorando a performance usando ETags</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/08/15/edge-rails-melhorando-a-performance-usando-etags/">Edge Rails: Melhorando a performance usando ETags</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -500,9 +671,11 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
 <time datetime="2008-08-15T00:00:00-03:00" pubdate data-updated="true">15 de Agosto de 2008</time>
         
+        <a rel="bookmark" href="/2008/08/15/edge-rails-melhorando-a-performance-usando-etags/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>O Carlos Júnior já escreveu sobre isto no blog da <a href="http://tas.milk-it.net/carlos/novo-no-rails-edge-suporte-simples-a-conditional-get-etags/">milk-it</a>. Provavelmente teremos suporte a <strong>ETags</strong> no Rails 2.2. Eu disse provavelmente porque isto ainda não foi incluído no branch oficial do Rails, mas como é algo importante e está sendo feito pelo core team, é quase certo de que será.</p>
@@ -547,19 +720,30 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
 <p>Veja algumas sugestões dadas: <a href="http://pastie.org/252869">in_modified_scope</a> e <a href="http://pastie.org/253302">with_etag_cache</a>.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/08/14/rails-podcast-brasil-episodio-27/">Rails Podcast Brasil - Episódio 27</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/08/14/rails-podcast-brasil-episodio-27/">Rails Podcast Brasil - Episódio 27</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -576,9 +760,11 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
 <time datetime="2008-08-14T00:00:00-03:00" pubdate data-updated="true">14 de Agosto de 2008</time>
         
+        <a rel="bookmark" href="/2008/08/14/rails-podcast-brasil-episodio-27/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img class="alignnone size-full wp-image-1090" title="379338632_e091628727" src="http://old.nomedojogo.com/wp-content/uploads/2008/08/379338632_e091628727.jpg" alt="" width="500" height="375" /></p>
@@ -623,69 +809,6 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 </ul>
 
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/08/13/edge-rails-novo-helper-para-testes-assert_sql/">Edge Rails: Novo helper para testes (assert_sql)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-08-13T00:00:00-03:00" pubdate data-updated="true">13 de Agosto de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Alguns de vocês já devem conhecer o método <strong>assert_queries</strong> que ajuda a validar nos testes a quantidade de queries executadas. Por exemplo:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">assert_queries<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="support support_class support_class_ruby">Firm</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>partial_updates? <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">?</span> <span class="constant constant_numeric constant_numeric_ruby">0</span> <span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">:</span> <span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span>firm<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>save! <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span></span></pre>
-
-
-<p>No teste acima estou afirmando que se houver <a href="http://www.nomedojogo.com/2008/04/14/edge-rails-partial-updates/">partial_updates</a> uma query deve ser executada no banco de dados, caso contrário nenhuma deve ser executada.</p>
-
-<p>Agora ganhamos mais um helper para ajudar a testar o tipo de query executada, o método <strong>assert_sql</strong>. Um exemplo:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">test_empty_with_counter_sql</span></span>
-  company <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Firm</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>first</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-  assert_sql <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">/</span><span class="variable variable_other variable_other_constant variable_other_constant_ruby">COUNT</span><span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">/</span>i <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
-</span>    assert_equal <span class="constant constant_language constant_language_ruby">false</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> company<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>clients<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>empty?
-  <span class="keyword keyword_control keyword_control_ruby">end</span>
-<span class="keyword keyword_control keyword_control_ruby">end</span>
-</span></pre>
-
-
-<p>No exemplo acima estou afirmando que no bloco informado ao método pelo menos uma query deve conter a palavra <strong>COUNT</strong>. Obviamente você pode ser mais especifico na expressão regular que estiver usando. Vamos pegar um outro exemplo:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">assert_sql<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_regexp string_regexp_classic string_regexp_classic_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span><span class="constant constant_character constant_character_escape constant_character_escape_ruby">\(\"</span>companies<span class="constant constant_character constant_character_escape constant_character_escape_ruby">\"</span>.<span class="constant constant_character constant_character_escape constant_character_escape_ruby">\"</span>id<span class="constant constant_character constant_character_escape constant_character_escape_ruby">\"</span> IN <span class="constant constant_character constant_character_escape constant_character_escape_ruby">\(</span>1<span class="constant constant_character constant_character_escape constant_character_escape_ruby">\)\)</span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
-</span>  <span class="support support_class support_class_ruby">Account</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>include</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>firm</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-
-
-<p>Use com parcimônia!</p>
-</div>
-  
-  
 
 
     </article>
@@ -707,6 +830,10 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
@@ -720,10 +847,6 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
     
       <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
   </ul>

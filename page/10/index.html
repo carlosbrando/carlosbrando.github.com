@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="O termo &#8220;coçar a sua própria coceira&#8221; já é usado a muito tempo pela comunidade de desenvolvedores de projetos open source. Isto &hellip;">
+  <meta name="description" content="A próxima versão do Rails contará com um novo método chamado touch em todos os objetos do ActiveRecord, o método basicamente serve para atualizar os &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,14 +100,107 @@
       <div id="content">
         <div class="blog-index">
   
-  
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
+    <h1 class="entry-title">
+
+<a href="/2009/04/23/edge-rails-activerecordbasetouch/">Edge Rails: ActiveRecord::Base#touch</a>
+
+</h1>
+
     
-      <h1 class="entry-title"><a href="/2009/04/22/cocando-a-sua-propria-coceira/">Coçando a sua própria coceira</a></h1>
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-23T00:00:00-03:00" pubdate data-updated="true">23 de Abril de 2009</time>
+        
+        <a rel="bookmark" href="/2009/04/23/edge-rails-activerecordbasetouch/"></a>
+      </p>
     
+  </header>
+
+
+
+  <div class="entry-content"><p>A próxima versão do Rails contará com um novo método chamado <code>touch</code> em todos os objetos do ActiveRecord, o método basicamente serve para atualizar os campos <code>updated_at</code> e <code>updated_on</code> do registro atual com a data e hora corrente. Veja abaixo a implementação do método:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_function meta_function_method meta_function_method_with-arguments meta_function_method_with-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">touch</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">(</span><span class="variable variable_parameter variable_parameter_function variable_parameter_function_ruby">attribute <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_language constant_language_ruby">nil</span></span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">)</span></span>
+  current_time <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> current_time_from_proper_timezone
+
+  <span class="keyword keyword_control keyword_control_ruby">if</span> attribute
+    write_attribute<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>attribute<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> current_time<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+  <span class="keyword keyword_control keyword_control_ruby">else</span>
+    write_attribute<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>updated_at<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> current_time<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_ruby">if</span> <span class="support support_function support_function_actionpack support_function_actionpack_rails">respond_to</span>?<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>updated_at</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+    write_attribute<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>updated_on<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> current_time<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_ruby">if</span> <span class="support support_function support_function_actionpack support_function_actionpack_rails">respond_to</span>?<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>updated_on</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+
+  save!
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+</span></pre>
+
+
+<p>Como você pode ver na implementação acima ele aceita um parâmetro <code>attribute</code>. Utilizaremos este parâmetro para informar um campo diferente dos mencionados acima quando for necessário.</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">product<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>touch <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> atualiza o campo updated_at
+</span>product<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>touch<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>designed_at</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> atualiza o campo designed_at</span></span></pre>
+
+
+<p>Esta atualização vale tanto para o Rails 3 como para uma futura provável versão do Rails 2.3.</p>
+
+<p>Graças a este novo método também ganhamos um novo atributo para associações <code>belongs_to</code>, fazendo com que ao criar, atualizar ou apagar um registro filho o método <code>touch</code> do registro pai seja executado. Por exemplo, veja o código abaixo:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Pet<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
+  <span class="support support_function support_function_activerecord support_function_activerecord_rails">belongs_to</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>owner</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>touch</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">true</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+<p>A partir do exemplo, quando cadastrarmos ou atualizarmos um animalzinho de estimação (<code>pet</code>), os campos <code>updated_at/on</code> do dono (<code>owner</code>) correspondente serão automaticamente atualizado com a data atual.</p>
+</div>
+
+
+    </article>
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2009/04/22/cocando-a-sua-propria-coceira/">Coçando a sua própria coceira</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -124,9 +217,11 @@
 
 <time datetime="2009-04-22T00:00:00-03:00" pubdate data-updated="true">22 de Abril de 2009</time>
         
+        <a rel="bookmark" href="/2009/04/22/cocando-a-sua-propria-coceira/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p style="text-align: center;"><img class="aligncenter size-full wp-image-2465" style="border: 2px solid black;" title="tiny-town-funny-girl-scratching-head" src="http://old.nomedojogo.com/wp-content/uploads/2009/04/tiny-town-funny-girl-scratching-head.jpg" alt="tiny-town-funny-girl-scratching-head" width="448" height="310" /></p>
@@ -146,19 +241,30 @@
 
 <p>Não importa se você está programando em Ruby, C# ou Java. Se está usando Rails ou Django. O que importa é se você realmente entende o trabalho que está realizando e se está contente com o que está fazendo.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/04/20/adicione-algo-de-valor-ao-universo/">Adicione algo de valor ao universo</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/04/20/adicione-algo-de-valor-ao-universo/">Adicione algo de valor ao universo</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -175,9 +281,11 @@
 
 <time datetime="2009-04-20T00:00:00-03:00" pubdate data-updated="true">20 de Abril de 2009</time>
         
+        <a rel="bookmark" href="/2009/04/20/adicione-algo-de-valor-ao-universo/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img class="center" src="http://old.nomedojogo.com/wp-content/uploads/2009/04/522695099_026b8d7ffe.jpg"></p>
@@ -199,19 +307,30 @@
 <hr /><em>Este texto é uma tradução de um artigo do blog <a href="http://www.37signals.com/svn/posts/1437-put-a-dent-in-the-universe">Signal vs. Noise</a>.</em>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/04/17/edge-rails-requisicoes-ajax-nao-terao-mais-validacao-de-tokens/">Edge Rails: Requisições AJAX não terão mais validação de tokens</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/04/17/edge-rails-requisicoes-ajax-nao-terao-mais-validacao-de-tokens/">Edge Rails: Requisições AJAX não terão mais validação de tokens</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -228,9 +347,11 @@
 
 <time datetime="2009-04-17T00:00:00-03:00" pubdate data-updated="true">17 de Abril de 2009</time>
         
+        <a rel="bookmark" href="/2009/04/17/edge-rails-requisicoes-ajax-nao-terao-mais-validacao-de-tokens/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Faz tempo que não escrevo sobre as novidades para a próxima versão do Rails, mas esta em particular me chamou a atenção. No Rails 3.0 não teremos mais a validação de tokens em requisições AJAX.</p>
@@ -241,19 +362,30 @@
 
 <p>Mas requisições AJAX maliciosas não podem produzir ataques do tipo CSRF, então todo este trabalho manual era desnecessário, e por isto será retirado do Rails na próxima versão. Particularmente eu gostei disso.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/04/16/a-melhor-linguagem-de-programacao-e-o-programador/">A melhor linguagem de programação é o programador</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/04/16/a-melhor-linguagem-de-programacao-e-o-programador/">A melhor linguagem de programação é o programador</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -270,9 +402,11 @@
 
 <time datetime="2009-04-16T00:00:00-03:00" pubdate data-updated="true">16 de Abril de 2009</time>
         
+        <a rel="bookmark" href="/2009/04/16/a-melhor-linguagem-de-programacao-e-o-programador/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img class="center" src="http://old.nomedojogo.com/wp-content/uploads/2009/04/252307864_054f2aa280.jpg"></p>
@@ -304,19 +438,30 @@
 <p style="text-align: left;">O melhor programador não costuma ser o que sabe mais, mas sim o mais criativo.</p>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/04/15/programar-e-dificil/">Programar é difícil</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/04/15/programar-e-dificil/">Programar é difícil</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -333,9 +478,11 @@
 
 <time datetime="2009-04-15T00:00:00-03:00" pubdate data-updated="true">15 de Abril de 2009</time>
         
+        <a rel="bookmark" href="/2009/04/15/programar-e-dificil/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Programar é uma arte. Resume-se a ensinar um computador a fazer o que tem de ser feito. Não basta apenas sentar em uma cadeira e começar a escrever código, você não é apenas um mero codificador. Esta arte exige que você seja um bom ouvinte, aprenda com facilidade e acima de tudo seja um excelente interpretador.</p>
@@ -344,19 +491,30 @@
 
 <p>Sim, você realiza pequenos milagres todos os dias. Programar é difícil!</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/04/14/remarkable-30-is-out-and-its-well-remarkable/">Remarkable 3.0 is out and it&#8217;s&#8230; well&#8230; remarkable!</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/04/14/remarkable-30-is-out-and-its-well-remarkable/">Remarkable 3.0 is out and it&#8217;s&#8230; well&#8230; remarkable!</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -373,9 +531,11 @@
 
 <time datetime="2009-04-14T00:00:00-03:00" pubdate data-updated="true">14 de Abril de 2009</time>
         
+        <a rel="bookmark" href="/2009/04/14/remarkable-30-is-out-and-its-well-remarkable/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Wow, a major release? Yes, a major release and we have plenty reasons for that. Since me and <a id="f0t3" title="José Valim" href="http://josevalim.blogspot.com/">José Valim</a> were working on it for a couple months, we have quite a list :). So follow up:</p>
@@ -579,19 +739,30 @@ params_from<span class="punctuation punctuation_section punctuation_section_func
 
 <p>And all the others can equally help us by <a id="p4fn" title="joining the group" href="http://groups.google.com/group/remarkable-core">joining the group</a> and posting bugs, matchers, enhancements in <a id="f4k0" title="bug tracking system" href="http://carlosbrando.lighthouseapp.com/projects/19775-remarkable/">bug tracking system</a>.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/04/10/o-twitter-esta-abandonado-o-ruby-eu-faria-o-mesmo/">O Twitter está abandonando o Ruby. Eu faria o mesmo.</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/04/10/o-twitter-esta-abandonado-o-ruby-eu-faria-o-mesmo/">O Twitter está abandonando o Ruby. Eu faria o mesmo.</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -608,9 +779,11 @@ params_from<span class="punctuation punctuation_section punctuation_section_func
 
 <time datetime="2009-04-10T00:00:00-03:00" pubdate data-updated="true">10 de Abril de 2009</time>
         
+        <a rel="bookmark" href="/2009/04/10/o-twitter-esta-abandonado-o-ruby-eu-faria-o-mesmo/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img class="aligncenter size-full wp-image-2418" title="twitter" src="http://old.nomedojogo.com/wp-content/uploads/2009/04/twitter.jpg" alt="twitter" /></p>
@@ -629,19 +802,30 @@ params_from<span class="punctuation punctuation_section punctuation_section_func
 
 <p>Analisando por este angulo, concordo com a escolha e faria o mesmo se estivesse no lugar deles. Só espero que Alex treine muito bem sua equipe para que depois ninguém diga que Scala não escala, pois isto soaria ridículo.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/04/09/o-comovente-guia-de-ruby-do-why/">O (comovente) guia de Ruby do Why</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/04/09/o-comovente-guia-de-ruby-do-why/">O (comovente) guia de Ruby do Why</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -658,9 +842,11 @@ params_from<span class="punctuation punctuation_section punctuation_section_func
 
 <time datetime="2009-04-09T00:00:00-03:00" pubdate data-updated="true"> 9 de Abril de 2009</time>
         
+        <a rel="bookmark" href="/2009/04/09/o-comovente-guia-de-ruby-do-why/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p style="text-align: center;"><img class="aligncenter size-full wp-image-2409" title="drcham-4" src="http://old.nomedojogo.com/wp-content/uploads/2009/04/drcham-4.gif" alt="drcham-4" width="480" height="142" /></p>
@@ -678,19 +864,30 @@ params_from<span class="punctuation punctuation_section punctuation_section_func
 
 <p>Espero que todos tirem muito proveito deste livro e por favor espalhem a noticia.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/04/08/so-os-imaturos-nao-testam-o-video/">Só imaturos não testam - o vídeo</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/04/08/so-os-imaturos-nao-testam-o-video/">Só imaturos não testam - o vídeo</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -707,9 +904,11 @@ params_from<span class="punctuation punctuation_section punctuation_section_func
 
 <time datetime="2009-04-08T00:00:00-03:00" pubdate data-updated="true"> 8 de Abril de 2009</time>
         
+        <a rel="bookmark" href="/2009/04/08/so-os-imaturos-nao-testam-o-video/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Meu amigo <a href="http://www.agaelebe.com.br/">Hugo Borges</a> (ou <a href="http://github.com/agaelebe">agaelebe</a>) acabou de liberar o vídeo da minha palestra no Ruby + Rails no Mundo Real. A gravação ficou de altíssima qualidade.</p>
@@ -719,90 +918,6 @@ params_from<span class="punctuation punctuation_section punctuation_section_func
 
 <p>E falando em palestra, estarei presente também no <a href="http://www.edted.com.br/ewd-14/index.php/palestras">14º Encontro de Design e Tecnologia Digital</a> em São Paulo no dia 25 de abril. O tema desta vez será &#8220;The Rails Way - Como Ruby on Rails pode o tornar um programador pior&#8221;. Fiquem de olho no <a href="http://www.rubyinside.com.br/">Ruby Inside Brasil</a> que vai rolar uma promoção relacionada a este evento em breve&#8230;</p>
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/04/07/rails-way-7-geradores-de-codigo/">Rails Way #7: Geradores de Código</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-04-07T00:00:00-03:00" pubdate data-updated="true"> 7 de Abril de 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p style="text-align: center;"><img class="size-full wp-image-2396 aligncenter" title="2084287794_ecbee303db" src="http://old.nomedojogo.com/wp-content/uploads/2009/04/2084287794_ecbee303db.jpg" alt="2084287794_ecbee303db" /></p>
-
-
-<p>O Ruby on Rails possui algumas dezenas de geradores de código que visam automatizar tarefas repetitivas, economizando o tempo de desenvolvimento e evitando que o programador tenha que se repetir. Geradores de código tem tudo a ver com a filosofia “Don’t Repeat Yourself”.</p>
-
-<h2>Aplicativos que geram código</h2>
-
-
-<p>Se expandirmos nossos horizontes para outras linguagens de programação menos dinâmicas, talvez geradores de código possam ser muito úteis na criação de arquivos XML de configuração, justificando de maneira óbvia o seu custo. Ao usar ferramentas como o Microsoft Visual Studio eu simplesmente informava ao editor que desejava criar uma aplicativo MFC (Microsoft Foundation Classes) e ele gerava para mim um esqueleto com mais de 2000 linhas de código, uma economia de tempo incalculável.</p>
-
-<p>Algumas pessoas são totalmente contra este tipo de gerador de código porque na maioria dos casos o programador que o utiliza não entende exatamente o que o código gerado está fazendo. Embora isto seja uma realidade, isso não deve ser uma justificativa para evitar ferramentas como essa, já que na maior parte do tempo o problema está no programador e não na ferramenta. No exemplo que dei acima, embora eu nunca tenha parado para analisar cuidadosamente o que cada uma das 2000 linhas de código gerados pelo Visual Studio faça, eu entendo no contexto o porque delas, e para mim isto sempre foi o suficiente para tocar um projeto à partir deste esqueleto.</p>
-
-<p>No Rails também encontramos alguns geradores deste tipo na forma de scripts (<code>./script/generate scaffold</code>, por exemplo). Os scripts geradores de código do Rails nos ajudam a manter as convenções propostas pelo framework com mais facilidade, e normalmente incluem apenas algumas poucas linhas de código em cada arquivo gerado.</p>
-
-<p>Raramente você achará útil criar um script ou aplicativo gerador de código para um projeto Rails. Mas ao criar um plugin ou mesmo o seu próprio framework em Ruby, talvez seja prático investir na criação deste tipo de gerador. Mas não se engane, construir um gerador de código deste tipo é uma tarefa que consome tempo e um grande esforço. Além do tempo gasto na codificação do gerador, também deve-se levar em consideração o esforço necessário para manter o projeto (atualizações, correções de bugs e inclusão de novas funcionalidades) e para treinar a sua equipe (e re-treinar após modificações).</p>
-
-<p>A escolha do seu editor preferido também depende muito da capacidade que ele possui de gerar código. O TextMate, por exemplo, durante muito tempo foi (no meu caso ainda é) considerado o melhor editor para se trabalhar com código Ruby, e isto se deu graças aos seus famosos Bundles, que não são mais do que scripts geradores de código.</p>
-
-<p>Muitos editores também permitem que você crie seus próprios “bundles”. Na maior parte do tempo é mais fácil e barato criar um script utilizando as ferramentas que seu editor lhe fornece do que criar um aplicativo do zero afim de automatizar a criação de códigos mais simples.</p>
-
-<h2>Metaprogramação</h2>
-
-
-<p>Usamos metaprogramação para criar softwares que tenham a capacidade de escrever código por si mesmo. Um bom exemplo disso é o ActiveRecord do Rails, que cria em tempo de execução todo o código necessário para a manipulação de informações de um banco de dados. Ao adicionar uma nova coluna no banco de dados, não precisamos alterar nenhuma linha no código do modelo, o ActiveRecord usando metaprogramação consegue identificar a nova coluna e automaticamente criará todos os métodos e atributos necessários para permitir o acesso a esta nova coluna.</p>
-
-<p>Linguagens dinâmicas como o Ruby favorecem muito o uso de metaprogramação. Programadores mais avançados fazem muito uso destes recursos para diminuir repetições em seus códigos.</p>
-
-<p>A ferramenta mais comum de metaprogramação é um compilador, já que ele permite que você escreva pequenos programas em uma linguagem de alto nível afim de gerar programas em linguagem de máquina. Uma brincadeira comum que envolve o exercício de metaprogramação é montar um <a href="http://pt.wikipedia.org/wiki/Quine_(inform%C3%A1tica)">quine</a>, que é um programa que deve produzir uma única saída que é o seu próprio código fonte. Veja um exemplo em Javascript:</p>
-
-<pre class="textmate-source"><span class="source source_js"><span class="support support_function support_function_js">unescape</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span>q<span class="keyword keyword_operator keyword_operator_js">=</span><span class="string string_quoted string_quoted_double string_quoted_double_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">"</span>unescape(q=%22*%22).replace('*',q)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">"</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span><span class="meta meta_delimiter meta_delimiter_method meta_delimiter_method_period meta_delimiter_method_period_js">.</span><span class="support support_function support_function_js">replace</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>*<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_delimiter meta_delimiter_object meta_delimiter_object_comma meta_delimiter_object_comma_js">,</span>q<span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span></span></pre>
-
-
-<p>Execute o código acima e você terá como saída um texto com exatamente o mesmo código gerador. Tente fazer o mesmo em Ruby, é um bom exercício!</p>
-
-<h2>Helpers</h2>
-
-
-<p>O diretório helpers não foi adicionado ao Rails à toa, ele está lá para ser utilizado. Helpers são fáceis de criar e podem ajudar a diminuir uma quantidade razoável de repetições em suas views. Quando criados utilizando-se de recursos de metaprogramação podem fazer uma grande diferença.</p>
-
-<p>Linguagens de marcação como o <a href="http://haml.hamptoncatlin.com/">Haml</a>, servem de grande incentivo para estimular a criação de helpers em projetos Rails.</p>
-
-<h2>Finalizando</h2>
-
-
-<p>Geradores de código são ferramentas essenciais no dia-a-dia dos programadores e são extremamente importantes para aumentar nossa produtividade e evitar que tenhamos de escrever códigos desnecessários.</p>
-
-<p>Faça uso dos geradores que você tem a disposição, e também crie seus próprios geradores quando forem realmente necessários. Mas mantenha-se longe de geradores que criem código que você não sabe para que serve ou que não entende.</p>
-</div>
-  
-  
 
 
     </article>
@@ -824,6 +939,10 @@ params_from<span class="punctuation punctuation_section punctuation_section_func
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
@@ -837,10 +956,6 @@ params_from<span class="punctuation punctuation_section punctuation_section_func
     
       <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
   </ul>

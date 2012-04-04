@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="O Active Resource usa HTTP para acessar APIs RESTful e por isto está suscetível a problemas de lentidão ou servidores fora do ar. Em alguns casos, &hellip;">
+  <meta name="description" content="Uma coisa muito chata de se fazer hoje no Rails é testar helpers. Eu mesmo já sofri um bocado para garantir 100% de cobertura, criando testes para &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,14 +100,111 @@
       <div id="content">
         <div class="blog-index">
   
-  
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
+    <h1 class="entry-title">
+
+<a href="/2008/05/07/edge-rails-testando-helpers-de-forma-simples/">Edge Rails: Testando Helpers de forma simples</a>
+
+</h1>
+
     
-      <h1 class="entry-title"><a href="/2008/05/06/edge-rails-timeouts/">Edge Rails: Timeouts</a></h1>
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-05-07T00:00:00-03:00" pubdate data-updated="true"> 7 de Maio de 2008</time>
+        
+        <a rel="bookmark" href="/2008/05/07/edge-rails-testando-helpers-de-forma-simples/"></a>
+      </p>
     
+  </header>
+
+
+
+  <div class="entry-content"><p>Uma coisa muito chata de se fazer hoje no Rails é <strong>testar helpers</strong>. Eu mesmo já sofri um bocado para garantir 100% de cobertura, criando testes para alguns helpers.</p>
+
+<p>Isto deve ficar <strong>mais simples</strong> no Rails 2.1 com a nova classe <em><strong>ActionView::TestCase</strong></em>. Vamos pegar o código abaixo como exemplo:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_helper"><span class="meta meta_module meta_module_ruby"><span class="keyword keyword_control keyword_control_module keyword_control_module_ruby">module</span> <span class="entity entity_name entity_name_type entity_name_type_module entity_name_type_module_ruby">PeopleHelper</span></span>
+  <span class="meta meta_function meta_function_method meta_function_method_with-arguments meta_function_method_with-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">title</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">(</span><span class="variable variable_parameter variable_parameter_function variable_parameter_function_ruby">text</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">)</span></span>
+    content_tag<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>h1</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> text<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+
+  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">homepage_path</span></span>
+    people_path
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span>
+</span></pre>
+
+
+<p>Veja como faremos para testar isto no Rails 2.1:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_unit_test"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">PeopleHelperTest<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActionView::TestCase</span></span></span>
+  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">setup</span></span>
+<span class="meta meta_rails meta_rails_routes">    ActionController::Routing::Routes<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>draw <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">map</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+      map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>people <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>people<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>controller</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>people<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>action</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>index<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+      map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>connect <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>:controller/:action/:id<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+    </span><span class="keyword keyword_control keyword_control_ruby">end</span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+
+  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">test_title</span></span>
+    assert_equal <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>&lt;h1&gt;Ruby on Rails&lt;/h1&gt;<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> title<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Ruby on Rails<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+
+  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">test_homepage_path</span></span>
+    assert_equal <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>/people<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> homepage_path
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+<p>Muito simples. Ainda bem que o projeto em que estou trabalhando agora está usando o edge rails, assim não preciso esperar o lançamento do 2.1.</p>
+</div>
+
+
+    </article>
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/05/06/edge-rails-timeouts/">Edge Rails: Timeouts</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -124,9 +221,11 @@
 
 <time datetime="2008-05-06T00:00:00-03:00" pubdate data-updated="true"> 6 de Maio de 2008</time>
         
+        <a rel="bookmark" href="/2008/05/06/edge-rails-timeouts/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>O <strong>Active Resource</strong> usa HTTP para acessar <strong>APIs RESTful</strong> e por isto está suscetível a problemas de lentidão ou servidores fora do ar. Em alguns casos, suas chamadas ao Active Resource podem expirar (timeout). Agora você pode controlar o tempo de expiração com a propriedade <strong><em>timeout</em></strong>.</p>
@@ -143,19 +242,30 @@
 
 <p>O valor <strong>padrão</strong> é de <strong>60 segundos</strong>.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/05/06/a-forca-dos-comentarios-no-github/">A força dos comentários no GitHub</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/05/06/a-forca-dos-comentarios-no-github/">A força dos comentários no GitHub</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -172,9 +282,11 @@
 
 <time datetime="2008-05-06T00:00:00-03:00" pubdate data-updated="true"> 6 de Maio de 2008</time>
         
+        <a rel="bookmark" href="/2008/05/06/a-forca-dos-comentarios-no-github/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Eu sempre tenho falado por aqui e no podcast sobre o <a href="https://github.com/">GitHub</a>, é não por menos que este projeto tem me chamado tanto à  atenção. Um dos recursos mais legais que vi é a possibilidade de incluir <strong>comentários</strong> sobre o código de terceiros.</p>
@@ -189,19 +301,30 @@
 
 <p>É ou não é um recurso interessante?</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/05/05/edge-rails-smallint-int-ou-bigint-no-mysql/">Edge Rails: smallint, int ou bigint no MySQL?</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/05/05/edge-rails-smallint-int-ou-bigint-no-mysql/">Edge Rails: smallint, int ou bigint no MySQL?</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -218,9 +341,11 @@
 
 <time datetime="2008-05-05T00:00:00-03:00" pubdate data-updated="true"> 5 de Maio de 2008</time>
         
+        <a rel="bookmark" href="/2008/05/05/edge-rails-smallint-int-ou-bigint-no-mysql/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>O adaptador de MySQL do <code>ActiveRecord</code> ficou um pouco <strong>mais esperto</strong> na hora de criar ou alterar colunas no banco de dados usando <strong>inteiros</strong>. De acordo com a opção <code>:limit</code>, ele define se a coluna será um <code>smallint</code>, <code>int</code> ou <code>bigint</code>. Veja um trecho do código que faz isto:</p>
@@ -260,19 +385,30 @@
 
 <p>O adaptador do PostgreSQL já fazia assim, o do MySQL apenas seguiu a tendência.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/05/03/tambem-me-rendi-ao-twitter/">Também me rendi ao twitter</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/05/03/tambem-me-rendi-ao-twitter/">Também me rendi ao twitter</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -289,9 +425,11 @@
 
 <time datetime="2008-05-03T00:00:00-03:00" pubdate data-updated="true"> 3 de Maio de 2008</time>
         
+        <a rel="bookmark" href="/2008/05/03/tambem-me-rendi-ao-twitter/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img class="alignnone size-medium wp-image-702" title="2188650694_74c3c094db" src="http://old.nomedojogo.com/wp-content/uploads/2008/05/2188650694_74c3c094db.jpg" alt="" /></p>
@@ -303,19 +441,30 @@
 
 <p>Para quem quiser me seguir: <a href="http://twitter.com/carlosbrando">http://twitter.com/carlosbrando</a></p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/05/03/edge-rails-timecurrent/">Edge Rails: Time.current</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/05/03/edge-rails-timecurrent/">Edge Rails: Time.current</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -332,9 +481,11 @@
 
 <time datetime="2008-05-03T00:00:00-03:00" pubdate data-updated="true"> 3 de Maio de 2008</time>
         
+        <a rel="bookmark" href="/2008/05/03/edge-rails-timecurrent/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Novo método para a classe <code>Time</code>. O retorno do método <code>current</code> depende do <code>config.time_zone</code>, se ele foi especificado antes, o método retornará um <code>Time.zone.now</code>, caso contrário será um <code>Time.now</code>.</p>
@@ -352,19 +503,30 @@
 
 <p>Os métodos <code>datetime_select</code>, <code>select_datetime</code> e <code>select_time</code> também foram atualizados para terem seus valores default como <code>Time.current</code>.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/05/02/edge-rails-condicional-no-metodo-caches_page/">Edge Rails: Condicional no método caches_page</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/05/02/edge-rails-condicional-no-metodo-caches_page/">Edge Rails: Condicional no método caches_page</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -381,9 +543,11 @@
 
 <time datetime="2008-05-02T00:00:00-03:00" pubdate data-updated="true"> 2 de Maio de 2008</time>
         
+        <a rel="bookmark" href="/2008/05/02/edge-rails-condicional-no-metodo-caches_page/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>No Rails 2.1 o método <code>caches_page</code> aceitará uma opção para condicionar seu uso (<code>:if</code>). Veja um exemplo:</p>
@@ -395,19 +559,30 @@
 </span>caches_page <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>index</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>if</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="support support_class support_class_ruby">Proc</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">c</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> <span class="keyword keyword_operator keyword_operator_logical keyword_operator_logical_ruby">!</span>c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>request<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>format<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>json? <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span></span></pre>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/05/02/curso-on-line-de-ruby-on-rails-20/">Curso on-line de Ruby on Rails 2.0</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/05/02/curso-on-line-de-ruby-on-rails-20/">Curso on-line de Ruby on Rails 2.0</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -424,9 +599,11 @@
 
 <time datetime="2008-05-02T00:00:00-03:00" pubdate data-updated="true"> 2 de Maio de 2008</time>
         
+        <a rel="bookmark" href="/2008/05/02/curso-on-line-de-ruby-on-rails-20/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><center><img class="alignnone size-full wp-image-700" title="curso_ruby" src="http://old.nomedojogo.com/wp-content/uploads/2008/05/curso_ruby.jpg" alt="" /></center>
@@ -436,19 +613,30 @@
 
 <p>Para mais informações acesse: <a href="http://www.egenial.com.br/cursorails/">http://www.egenial.com.br/cursorails/</a></p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/05/02/capistrano-230/">Capistrano 2.3.0</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/05/02/capistrano-230/">Capistrano 2.3.0</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -465,9 +653,11 @@
 
 <time datetime="2008-05-02T00:00:00-03:00" pubdate data-updated="true"> 2 de Maio de 2008</time>
         
+        <a rel="bookmark" href="/2008/05/02/capistrano-230/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><a href="http://rubyforge.org/frs/?group_id=1420">http://rubyforge.org/frs/?group_id=1420</a></p>
@@ -477,19 +667,30 @@
 
 <p>Acho que anúnciei antes mesmo do <strong>Jamis Buck</strong>&#8230; aqui vai o link do post dele: <a href="http://weblog.jamisbuck.org/2008/5/2/capistrano-2-3-0">http://weblog.jamisbuck.org/2008/5/2/capistrano-2-3-0</a>.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/05/01/rails-podcast-brasil-episodio-15/">Rails Podcast Brasil - Episódio 15</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/05/01/rails-podcast-brasil-episodio-15/">Rails Podcast Brasil - Episódio 15</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -506,9 +707,11 @@
 
 <time datetime="2008-05-01T00:00:00-03:00" pubdate data-updated="true"> 1 de Maio de 2008</time>
         
+        <a rel="bookmark" href="/2008/05/01/rails-podcast-brasil-episodio-15/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Aeee&#8230;. mais um episódio do seu podcast preferido (?). Esta semana no Rails Podcast Brasil falamos de mod_rails, Donald Knuth, JQuery, Ruby 1.9 e mais um monte de coisinhas&#8230;</p>
@@ -541,48 +744,6 @@
 </ul>
 
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/05/01/rails-21/">Rails 2.1</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-05-01T00:00:00-03:00" pubdate data-updated="true"> 1 de Maio de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>DHH <a href="http://weblog.rubyonrails.com/2008/4/30/rails-2-1-release-candidate-is-imminent">acabou de confirmar</a> que do Rails 2.1 está saindo&#8230; falta muito pouco para isto.</p>
-
-<p>É muito provável que saia no fim desta semana ou na próxima&#8230; vamos esperar para ver.</p>
-
-<p>Quer saber o que tem de novo nesta versão? Você está no <a href="http://www.nomedojogo.com/category/edge-rails/">lugar certo</a>!</p>
-</div>
-  
-  
 
 
     </article>
@@ -604,6 +765,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
@@ -617,10 +782,6 @@
     
       <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
   </ul>

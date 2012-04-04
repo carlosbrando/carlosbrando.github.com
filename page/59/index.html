@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Um post rápido antes de ir dormir&#8230; Quer testar seus códigos Java usando Ruby? Se liga no novo projeto do Ola Bini, o JtestR, que está na sua &hellip;">
+  <meta name="description" content="Para quem não conhece, o método auto_link recebe um texto qualquer como par&acirc;metro e se o texto tiver algum endereço de email ou de um site ele &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,14 +100,26 @@
       <div id="content">
         <div class="blog-index">
   
-  
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/12/29/dicas-de-sexta-feira-a-noite/">Dicas de sexta-feira à noite</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/12/29/edge-rails-alteracao-no-metodo-auto_link/">Edge Rails: Alteração no método auto_link</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -124,9 +136,82 @@
 
 <time datetime="2007-12-29T00:00:00-02:00" pubdate data-updated="true">29 de Dezembro de 2007</time>
         
+        <a rel="bookmark" href="/2007/12/29/edge-rails-alteracao-no-metodo-auto_link/"></a>
       </p>
     
   </header>
+
+
+
+  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/12/885924921_e498e8661b.jpg" alt="885924921_e498e8661b.jpg" /></p>
+
+<p>Para quem não conhece, o método <strong>auto_link</strong> recebe um texto qualquer como par&acirc;metro e se o texto tiver algum endereço de email ou de um site ele retorna o mesmo texto com hyperlinks.</p>
+
+<p>Por exemplo:</p>
+
+<pre>
+>> auto_link("Acesse este endereço: http://www.rubyonrails.com")
+=> Acesse este endereço: <a href="http://www.rubyonrails.com">http://www.rubyonrails.com</a>
+</pre>
+
+
+<p>Acontece que alguns sites como o <strong>Amazon</strong> estão usando também o sinal de &quot;=&quot; (igual) em urls, e isto gera um bug no método. Veja só:</p>
+
+<pre>
+>> auto_link("Acesse este endereço: http://www.amazon.com/Testing-Equal-Sign-In-Path/ref=pd_bbs_sr_1?ie=UTF8&s=books&qid=1198861734&sr=8-1")
+>> Acesse este endereço: <a href="http://www.amazon.com/Testing-Equal-Sign-In-Path/ref">http://www.amazon.com/Testing-Equal-Sign-In-Path/ref</a>=pd_bbs_sr_1?ie=UTF8&s=books&qid=1198861734&sr=8-1
+</pre>
+
+
+<p>Note que o método terminou o hyperlink exatamente antes do &quot;=&quot;, pois ele não suporta este sinal. Quer dizer, não suportava. Na próxima versão do Rails já teremos este problema resolvido. Mas fica a dica no caso de alguém querer usar o <strong>auto_link</strong> em uma url com o sinal de &quot;=&quot;.</p>
+
+<p>Referência: <a href="http://dev.rubyonrails.org/ticket/10640">[PATCH] [TINY] auto_link should allow equal sign (=) in url path</a></p>
+</div>
+
+
+    </article>
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2007/12/29/dicas-de-sexta-feira-a-noite/">Dicas de sexta-feira à noite</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-12-29T00:00:00-02:00" pubdate data-updated="true">29 de Dezembro de 2007</time>
+        
+        <a rel="bookmark" href="/2007/12/29/dicas-de-sexta-feira-a-noite/"></a>
+      </p>
+    
+  </header>
+
 
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/12/542835952_653f0eb052.jpg" alt="542835952_653f0eb052.jpg" /></p>
@@ -137,19 +222,30 @@
 
 <p>Quer testar a compatibilidade do seu software com o Ruby 1.8 e 1.9 ao mesmo tempo? Use o <a href="http://blog.zenspider.com/archives/2007/12/testing_for_ruby_18_and_19_using_multiruby.html">multiruby</a>.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/12/26/minha-palestra-no-rejectconf07/">Minha palestra no RejectConf&#8217;07</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/12/26/minha-palestra-no-rejectconf07/">Minha palestra no RejectConf&#8217;07</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -166,9 +262,11 @@
 
 <time datetime="2007-12-26T00:00:00-02:00" pubdate data-updated="true">26 de Dezembro de 2007</time>
         
+        <a rel="bookmark" href="/2007/12/26/minha-palestra-no-rejectconf07/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/12/2137768311_f8c6101e74.jpg" alt="2137768311_f8c6101e74.jpg" /></p>
@@ -197,19 +295,30 @@
 
 <p>Quero agradecer ao <a href="http://www.akitaonrails.com/">Fábio Akita</a> pelo vídeo.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/12/25/screencast-2-ruby-way-migrations-2/">Screencast 2: Ruby Way - Migrations</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/12/25/screencast-2-ruby-way-migrations-2/">Screencast 2: Ruby Way - Migrations</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -226,9 +335,11 @@
 
 <time datetime="2007-12-25T00:00:00-02:00" pubdate data-updated="true">25 de Dezembro de 2007</time>
         
+        <a rel="bookmark" href="/2007/12/25/screencast-2-ruby-way-migrations-2/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/12/889006824_c6a7714aa0.jpg" alt="889006824_c6a7714aa0.jpg" /></p>
@@ -244,19 +355,30 @@
 
 <p>Para assistir ou baixar o vídeo use os links logo abaixo.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/12/25/o-papai-noel-chegou-com-o-ruby-190/">O Papai Noel chegou com o Ruby 1.9.0</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/12/25/o-papai-noel-chegou-com-o-ruby-190/">O Papai Noel chegou com o Ruby 1.9.0</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -273,9 +395,11 @@
 
 <time datetime="2007-12-25T00:00:00-02:00" pubdate data-updated="true">25 de Dezembro de 2007</time>
         
+        <a rel="bookmark" href="/2007/12/25/o-papai-noel-chegou-com-o-ruby-190/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/12/74812661_48888498e6.jpg" alt="74812661_48888498e6.jpg" /></p>
@@ -296,19 +420,30 @@
 
 <p>78b2a5f9a81c5f6775002c4fb24d2d75</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/12/22/edge-rails-nova-opcao-para-o-metodo-time_zone_select/">Edge Rails - Nova opção para o método time_zone_select</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/12/22/edge-rails-nova-opcao-para-o-metodo-time_zone_select/">Edge Rails - Nova opção para o método time_zone_select</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -325,9 +460,11 @@
 
 <time datetime="2007-12-22T00:00:00-02:00" pubdate data-updated="true">22 de Dezembro de 2007</time>
         
+        <a rel="bookmark" href="/2007/12/22/edge-rails-nova-opcao-para-o-metodo-time_zone_select/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/12/1164608259_7a1ad35f5e.jpg" alt="1164608259_7a1ad35f5e.jpg" /></p>
@@ -343,19 +480,30 @@ time_zone_select<span class="punctuation punctuation_section punctuation_section
 
 <p>Onde estamos informando a opção <strong>:default</strong> deve aparecer com o time zone escolhido já selecionado.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/12/21/um-dia-depois-e-ja-temos-o-rubygems-101/">Um dia depois e já temos o RubyGems 1.0.1&#8230;</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/12/21/um-dia-depois-e-ja-temos-o-rubygems-101/">Um dia depois e já temos o RubyGems 1.0.1&#8230;</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -372,9 +520,11 @@ time_zone_select<span class="punctuation punctuation_section punctuation_section
 
 <time datetime="2007-12-21T00:00:00-02:00" pubdate data-updated="true">21 de Dezembro de 2007</time>
         
+        <a rel="bookmark" href="/2007/12/21/um-dia-depois-e-ja-temos-o-rubygems-101/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/12/246976992_03b12ac7b6.jpg" alt="246976992_03b12ac7b6.jpg" /></p>
@@ -386,19 +536,30 @@ time_zone_select<span class="punctuation punctuation_section punctuation_section
 <pre>sudo gem update --system</pre>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/12/21/edge-rails-rails-203-deve-sair-logo/">Edge Rails: Rails 2.0.3 deve sair logo</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/12/21/edge-rails-rails-203-deve-sair-logo/">Edge Rails: Rails 2.0.3 deve sair logo</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -415,9 +576,11 @@ time_zone_select<span class="punctuation punctuation_section punctuation_section
 
 <time datetime="2007-12-21T00:00:00-02:00" pubdate data-updated="true">21 de Dezembro de 2007</time>
         
+        <a rel="bookmark" href="/2007/12/21/edge-rails-rails-203-deve-sair-logo/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/12/316006969_5a84badf05.jpg" alt="316006969_5a84badf05.jpg" /></p>
@@ -431,19 +594,30 @@ time_zone_select<span class="punctuation punctuation_section punctuation_section
 
 <p>E o foco do desenvolvimento ainda é ajustar o Rails para a versão 1.9 do Ruby, muita coisa está sendo feita referente a isto.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/12/20/screencast-rails-20-anotacoes/">Screencast: Rails 2.0 - Anotações</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/12/20/screencast-rails-20-anotacoes/">Screencast: Rails 2.0 - Anotações</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -460,9 +634,11 @@ time_zone_select<span class="punctuation punctuation_section punctuation_section
 
 <time datetime="2007-12-20T00:00:00-02:00" pubdate data-updated="true">20 de Dezembro de 2007</time>
         
+        <a rel="bookmark" href="/2007/12/20/screencast-rails-20-anotacoes/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/12/169867791_dc71bc6b6b.jpg" alt="169867791_dc71bc6b6b.jpg" /></p>
@@ -475,19 +651,30 @@ time_zone_select<span class="punctuation punctuation_section punctuation_section
 
 <p>Para assistir o vídeo ou fazer o download basta clicar nos links abaixo.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/12/20/rubygems-100/">RubyGems 1.0.0</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/12/20/rubygems-100/">RubyGems 1.0.0</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -504,9 +691,11 @@ time_zone_select<span class="punctuation punctuation_section punctuation_section
 
 <time datetime="2007-12-20T00:00:00-02:00" pubdate data-updated="true">20 de Dezembro de 2007</time>
         
+        <a rel="bookmark" href="/2007/12/20/rubygems-100/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/12/110624842_2548bb4ce8.jpg" alt="110624842_2548bb4ce8.jpg" /></p>
@@ -528,48 +717,6 @@ sudo gem install rubygems-update
 update_rubygems</pre>
 
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/12/19/rails-edge-%25e2%2580%2593-mais-ruby-19/">Edge Rails - Mais Ruby 1.9</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-12-19T00:00:00-02:00" pubdate data-updated="true">19 de Dezembro de 2007</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/12/419259470_24e6d4ac1a.jpg" alt="419259470_24e6d4ac1a.jpg" /></p>
-
-<p>O foco das alterações do Rails ainda é o Ruby 1.9, mesmo os menores detalhes estão sendo analisados para deixar o Rails o mais compatível possível. Detalhes como alterar de &#8221;<strong>File.exists?</strong>&#8221; para &#8221;<strong>File.exist?</strong>&#8221; não estão sendo deixados de fora.</p>
-
-<p>Também, no Ruby 1.9, o módulo <strong>Base64</strong> (<em>base64.rb</em>) foi removido, por isto todas as referencias a ele foram substituídas por <a href="http://dev.rubyonrails.org/browser/trunk/activesupport/lib/active_support/base64.rb?rev=8434">ActiveSupport::Base64</a>.</p>
-</div>
-  
-  
 
 
     </article>
@@ -591,6 +738,10 @@ update_rubygems</pre>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
@@ -604,10 +755,6 @@ update_rubygems</pre>
     
       <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
   </ul>

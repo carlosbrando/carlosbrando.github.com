@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Pode parecer estranho, mas este é primeiro post que escrevo esta semana. Se você é um leitor assiduo deste blog deve estar achando um pouco estranho &hellip;">
+  <meta name="description" content="Já falei anteriormente sobre o novo recurso de internacionalização que teremos no Rails 2.2. Muita coisa está sendo feita para deixar esta &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,14 +100,89 @@
       <div id="content">
         <div class="blog-index">
   
-  
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
+    <h1 class="entry-title">
+
+<a href="/2008/09/20/edge-rails-pluralizacao-na-internacionalizacao/">Edge Rails: Pluralização na Internacionalização</a>
+
+</h1>
+
     
-      <h1 class="entry-title"><a href="/2008/09/19/rails-podcast-brasil-episodio-31/">Rails Podcast Brasil - Episódio 31</a></h1>
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-09-20T00:00:00-03:00" pubdate data-updated="true">20 de Setembro de 2008</time>
+        
+        <a rel="bookmark" href="/2008/09/20/edge-rails-pluralizacao-na-internacionalizacao/"></a>
+      </p>
     
+  </header>
+
+
+
+  <div class="entry-content"><p>Já falei anteriormente sobre o novo recurso de <a href="http://www.nomedojogo.com/2008/07/24/como-funcionara-o-novo-suporte-a-internacionalizacao-no-rails-22/">internacionalização</a> que teremos no Rails 2.2. Muita coisa está sendo feita para deixar esta implementação o melhor possível, já que ela é de interesse de muita gente que usa o framework para desenvolver software para países que não usam o inglês como língua nativa.</p>
+
+<p>No arquivo de localização, podemos internacionalizar frases do nosso aplicativo que dependem de um número ou quantidade, por exemplo:</p>
+
+<pre class="textmate-source"><span class="source source_yaml"><span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">datetime</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
+</span>  <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">distance_in_words</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
+</span>    <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">x_seconds</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
+</span>      <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">one</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span> </span><span class="string string_quoted string_quoted_double string_quoted_double_yaml"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_yaml">"</span>1 segundo<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_yaml">"</span></span>
+      <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">other</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span> </span><span class="string string_quoted string_quoted_double string_quoted_double_yaml"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_yaml">"</span> segundos<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_yaml">"</span></span></span></pre>
+
+
+<p>Quando estiver usando o método <strong>distance_in_words</strong> do Rails, quero que ele use o plural de forma correta quando o tempo for maior que um segundo. A alteração aqui é que anteriormente usaríamos a chave <strong>many</strong> para definir valores maiores que 1. Mas agora usaremos a chave <strong>other</strong>.</p>
+
+<hr /><em>Este artigo pertence a série &#8220;Edge Rails&#8221;. Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. A intenção desta série é preparar antecipadamente os programadores para as próximas versões do framework.</em>
+
+</div>
+
+
+    </article>
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/09/19/rails-podcast-brasil-episodio-31/">Rails Podcast Brasil - Episódio 31</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -124,9 +199,11 @@
 
 <time datetime="2008-09-19T00:00:00-03:00" pubdate data-updated="true">19 de Setembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/09/19/rails-podcast-brasil-episodio-31/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Pode parecer estranho, mas este é primeiro post que escrevo esta semana. Se você é um leitor assiduo deste blog deve estar achando um pouco estranho isto, mas tudo que você leu durante a semana por aqui já havia sido escrito por mim na semana passada. Estou envolvido em um projeto na Surgeworks que esta ocupando todo o meu tempo, por isto já deixei tudo preparado. ;)</p>
@@ -191,19 +268,30 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 </ul>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/18/edge-rails-migrations-transacionais-no-postgresql/">Edge Rails: Migrations transacionais no PostgreSQL</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/09/18/edge-rails-migrations-transacionais-no-postgresql/">Edge Rails: Migrations transacionais no PostgreSQL</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -220,9 +308,11 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
 <time datetime="2008-09-18T00:00:00-03:00" pubdate data-updated="true">18 de Setembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/09/18/edge-rails-migrations-transacionais-no-postgresql/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Quando uma migration está em execução e um erro ocorre, tudo que já foi executado será aplicado ao banco de dados, mas tudo que estiver após o erro, não será aplicado. Além disso a migration será marcada como concluída. Isto pode dar uma certa dor de cabeça para corrigir.</p>
@@ -235,19 +325,30 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
 <p>Quase ia esquecendo de mencionar que este patch tem participação do meu amigo e companheiro da <a href="http://surgeworks.com/">Surgeworks</a>: <a href="http://blog.divoxx.com/">Rodrigo Kochenburger</a>.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/17/edge-rails-relacionamentos-belongs_to-automatizados/">Edge Rails: Relacionamentos belongs_to automatizados</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/09/17/edge-rails-relacionamentos-belongs_to-automatizados/">Edge Rails: Relacionamentos belongs_to automatizados</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -264,9 +365,11 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
 <time datetime="2008-09-17T00:00:00-03:00" pubdate data-updated="true">17 de Setembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/09/17/edge-rails-relacionamentos-belongs_to-automatizados/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Se você estiver usando o Edge Rails em seu projeto, tente executar o seguinte comando para criar um novo modelo:</p>
@@ -284,19 +387,30 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
 <p>O relacionamento com a tabela posts já foi incluído automaticamente no modelo. Este é um novo recurso que encontraremos no Rails 2.2.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/16/edge-rails-camelizelower/">Edge Rails: camelize(:lower)</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/09/16/edge-rails-camelizelower/">Edge Rails: camelize(:lower)</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -313,9 +427,11 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
 <time datetime="2008-09-16T00:00:00-03:00" pubdate data-updated="true">16 de Setembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/09/16/edge-rails-camelizelower/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Por padrão o método <strong>camelize</strong> do Rails é usado para converter string para o formato UpperCamelCase. Mas também podemos converter para o formato lowerCamelCase se usarmos o argumento <strong>:lower</strong>. Porém, tente executar o código abaixo no terminal de um projeto Rails (menor ou igual ao 2.1.1):</p>
@@ -331,19 +447,30 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "capital"</span></span></pre>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/15/edge-rails-polymorphic-routes/">Edge Rails: Polymorphic Routes</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/09/15/edge-rails-polymorphic-routes/">Edge Rails: Polymorphic Routes</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -360,9 +487,11 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
 <time datetime="2008-09-15T00:00:00-03:00" pubdate data-updated="true">15 de Setembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/09/15/edge-rails-polymorphic-routes/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Os métodos <strong><em>_polymorphic_url</strong> e <strong></em>_polymorphic_path</strong>, muito usados para gerar URLs a partir de registros do banco de dados, receberam um novo parâmetro opcional. Agora, além dos parâmetros normais eles também aceitam um hash de opções, tornando possível gerar rotas com parâmetros adicionais na url.</p>
@@ -381,19 +510,30 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
 
 <p>Eu escrevi sobres este métodos quando eles foram lançados. Para relembrar <a href="http://www.nomedojogo.com/2008/02/18/edge-rails-usando-urls-polimorficas/">clique aqui</a>.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/14/edge-rails-recuperando-a-string-atual-do-metodo-cycle/">Edge Rails: Recuperando a string atual do método cycle</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/09/14/edge-rails-recuperando-a-string-atual-do-metodo-cycle/">Edge Rails: Recuperando a string atual do método cycle</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -410,9 +550,11 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
 
 <time datetime="2008-09-14T00:00:00-03:00" pubdate data-updated="true">14 de Setembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/09/14/edge-rails-recuperando-a-string-atual-do-metodo-cycle/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Muito provavelmente você já conhece o método <strong>cycle</strong>. Ele é muito usado para alternar as cores de linhas em um tabela, alterando a propriedade <em>class</em> de cada <em>row</em>.</p>
@@ -438,19 +580,30 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
 <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> <span class="keyword keyword_control keyword_control_ruby">end</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span></span></pre>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/13/edge-rails-recuperando-o-ultimo-registro-do-activeresource/">Edge Rails: Recuperando o último registro do ActiveResource</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/09/13/edge-rails-recuperando-o-ultimo-registro-do-activeresource/">Edge Rails: Recuperando o último registro do ActiveResource</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -467,9 +620,11 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
 
 <time datetime="2008-09-13T00:00:00-03:00" pubdate data-updated="true">13 de Setembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/09/13/edge-rails-recuperando-o-ultimo-registro-do-activeresource/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Seguindo o padrão do <strong>ActiveRecord</strong>, também foi adicionado ao método <strong>find</strong> do <strong>ActiveResource</strong> a opção <strong>:last</strong>.</p>
@@ -480,19 +635,30 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
 
 <p>Desta forma podemos recuperar o último recurso encontrado.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/12/edge-rails-simplificando-o-acesso-aos-resources/">Edge Rails: Simplificando o acesso aos resources</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/09/12/edge-rails-simplificando-o-acesso-aos-resources/">Edge Rails: Simplificando o acesso aos resources</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -509,9 +675,11 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
 
 <time datetime="2008-09-12T00:00:00-03:00" pubdate data-updated="true">12 de Setembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/09/12/edge-rails-simplificando-o-acesso-aos-resources/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Rotas aninhadas já não é mais novidade. Ao configurar nossas rotas é comum codificarmos algo mais ou menos assim:</p>
@@ -549,19 +717,30 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
 </span>post_comments_path<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>post</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; /posts/5/comments</span></span></pre>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/12/edge-rails-fileatomic_write-copia-as-permissoes-do-arquivo-original/">Edge Rails: File.atomic_write copia as permissões do arquivo original</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/09/12/edge-rails-fileatomic_write-copia-as-permissoes-do-arquivo-original/">Edge Rails: File.atomic_write copia as permissões do arquivo original</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -578,9 +757,11 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
 
 <time datetime="2008-09-12T00:00:00-03:00" pubdate data-updated="true">12 de Setembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/09/12/edge-rails-fileatomic_write-copia-as-permissoes-do-arquivo-original/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Talvez alguns não conheçam o método <strong>File.atomic_write</strong>. Ele serve para escrever arquivos de forma atômica. Isto pode ser muito útil em situações onde você não quer que outros processos ou threads vejam um arquivo escrito pela metade.</p>
@@ -595,71 +776,6 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
 
 <p>A novidade no Rails 2.2 é que agora este método copia todas as permissões do arquivo original antes de substitui-lo.</p>
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/11/edge-rails-evitando-feeds-duplicados/">Edge Rails: Evitando feeds duplicados</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-09-11T00:00:00-03:00" pubdate data-updated="true">11 de Setembro de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Algumas vezes você assina o feed de um blog e de repente se depara com uma série de posts que já foram lidos aparecendo como se fossem novos no seu <strong>Google Reader</strong>. Já aconteceu com você?</p>
-
-<p>Isto pode acontecer por vários motivos, mas não seria legal deixar isto acontecer com os assinantes do seu feed, correto?</p>
-
-<p>Para ajudar-nos a evitar este tipo de constrangimento, cada entrada e o próprio feed criado pelo builder <a href="http://www.nomedojogo.com/2008/01/17/edge-rails-atom-feed-turbinado/">atom_feed</a> receberam uma nova opção chamada <strong>:id</strong>.</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">atom_feed<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>id</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>tag:nomedojogo.com,2008:test/<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">feed</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
-  feed<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>My great blog!<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-  feed<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>updated<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">((</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>posts</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>first<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>created_at<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">))</span>
-
-  <span class="keyword keyword_control keyword_control_ruby">for</span> post <span class="keyword keyword_control keyword_control_ruby">in</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>posts</span>
-    feed<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>entry<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>post<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>id</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>tag:nomedojogo.com,2008:<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">+</span> post<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>id<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>to_s<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">entry</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
-      entry<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>post<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-      entry<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>content<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>post<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>body<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>type</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>html<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-
-      entry<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>author <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">author</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
-        author<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>name<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Carlos Brando<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-      <span class="keyword keyword_control keyword_control_ruby">end</span>
-    <span class="keyword keyword_control keyword_control_ruby">end</span>
-  <span class="keyword keyword_control keyword_control_ruby">end</span>
-<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-
-
-<p>Fazendo desta forma, mesmo que você tenha de reescrever algum trecho do código que gera os feeds, ou fazer alguma grande alteração no conteúdo do seu site, o <strong>id</strong> criado para aquela entrada será sempre o mesmo fazendo com que o leitor de feeds não duplique as entradas antigas.</p>
-
-<p>Seus leitores agradecem.</p>
-
-<p>Aproveitando a ocasião, você pode assinar o feed do Nome do Jogo, <a href="http://www.nomedojogo.com/feed/rss/">clicando aqui</a>.</p>
-</div>
-  
-  
 
 
     </article>
@@ -681,6 +797,10 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
@@ -694,10 +814,6 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
     
       <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
   </ul>

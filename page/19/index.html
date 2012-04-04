@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Normalmente no Rails funciona assim: Programadores do mundo todo desenvolvem novas funcionalidades e corrigem bugs, criam patchs e o core team aceita &hellip;">
+  <meta name="description" content="Foi adicionado ao método field_set_tag um parâmetro opcional para facilitar a formatação do HTML. Este parâmetro aceita todas as opções que o método &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,14 +100,26 @@
       <div id="content">
         <div class="blog-index">
   
-  
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/11/19/new-rails-22-i18n-defaults/">New Rails 2.2 i18n defaults</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/11/19/rails-22-opcoes-no-metodo-field_set_tag/">Rails 2.2: Opções no método field_set_tag</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -124,9 +136,77 @@
 
 <time datetime="2008-11-19T00:00:00-02:00" pubdate data-updated="true">19 de Novembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/11/19/rails-22-opcoes-no-metodo-field_set_tag/"></a>
       </p>
     
   </header>
+
+
+
+  <div class="entry-content"><p>Foi adicionado ao método <strong>field_set_tag</strong> um parâmetro opcional para facilitar a formatação do HTML. Este parâmetro aceita todas as opções que o método <strong>tag</strong> já aceita. Exemplo:</p>
+
+<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> field_set_tag <span class="constant constant_language constant_language_ruby">nil</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>class</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>format<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+  <span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>Some text<span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+<span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> <span class="keyword keyword_control keyword_control_ruby">end</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+</span></pre>
+
+
+<p>O código acima retornará o seguinte:</p>
+
+<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">fieldset</span> <span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_html">class</span>=<span class="string string_quoted string_quoted_double string_quoted_double_html"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_html">"</span>format<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_html">"</span></span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+  <span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>Some text<span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+<span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">fieldset</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
+</span></pre>
+
+
+<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades do Rails 2.2 no e-book “<a href="../2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">Ruby on Rails - O que há de novo?</a>“.</em>
+
+</div>
+
+
+    </article>
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/11/19/new-rails-22-i18n-defaults/">New Rails 2.2 i18n defaults</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-11-19T00:00:00-02:00" pubdate data-updated="true">19 de Novembro de 2008</time>
+        
+        <a rel="bookmark" href="/2008/11/19/new-rails-22-i18n-defaults/"></a>
+      </p>
+    
+  </header>
+
 
 
   <div class="entry-content"><p>Normalmente no Rails funciona assim: Programadores do mundo todo desenvolvem novas funcionalidades e corrigem bugs, criam patchs e o core team aceita ou não estes patches. Mas quando DHH resolve colocar a mão no código ele muda tudo. O bom é que na maioria das vezes é para melhor!</p>
@@ -144,19 +224,30 @@
 
 <p>O que já era fácil, ficou mais fácil! Na teoria é só colocar o seu arquivo br.yml ou br.rb nesta pasta e alterar a última linha comentada e pronto!</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/11/18/shoulda-for-rspec-is-remarkable/">Shoulda for RSpec is Remarkable!</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/11/18/shoulda-for-rspec-is-remarkable/">Shoulda for RSpec is Remarkable!</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -173,9 +264,11 @@
 
 <time datetime="2008-11-18T00:00:00-02:00" pubdate data-updated="true">18 de Novembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/11/18/shoulda-for-rspec-is-remarkable/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>For a long time I was evangelizing <a href="http://www.thoughtbot.com/projects/shoulda/">Shoulda</a> at <a href="http://surgeworks.com/">Surgeworks</a> and used it in my personal projects. The fact is, I didn&#8217;t have much success in convincing my co-workers to adopt Shoulda. On the other hand, they managed to convince me to learn and use <a href="http://rspec.info/">RSpec</a>.</p>
@@ -271,19 +364,30 @@ For RSpec style, <a href="http://github.com/carlosbrando/remarkable/wikis/rspec-
 
 <p>Please use <a href="http://github.com/carlosbrando/remarkable/tree/master">Remarkable</a> and help me to make it even better!</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/11/18/rails-podcast-brasil-episodio-38-especial-rails-22/">Rails Podcast Brasil - Episódio 38: Especial Rails 2.2</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/11/18/rails-podcast-brasil-episodio-38-especial-rails-22/">Rails Podcast Brasil - Episódio 38: Especial Rails 2.2</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -300,9 +404,11 @@ For RSpec style, <a href="http://github.com/carlosbrando/remarkable/wikis/rspec-
 
 <time datetime="2008-11-18T00:00:00-02:00" pubdate data-updated="true">18 de Novembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/11/18/rails-podcast-brasil-episodio-38-especial-rails-22/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Um episódio inteiro comentando as principais alterações no Rails 2.2, explicando alguns conceitos e tirando algumas dúvidas.</p>
@@ -319,19 +425,30 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
 <p><strong>Nota:</strong> Este episódio foi gravado na semana passada, antes do anúncio do Rails 2.2 RC2.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/11/17/the-rspec-book-behaviour-driven-development-with-ruby/">The RSpec Book: Behaviour Driven Development with Ruby</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/11/17/the-rspec-book-behaviour-driven-development-with-ruby/">The RSpec Book: Behaviour Driven Development with Ruby</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -348,9 +465,11 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
 <time datetime="2008-11-17T00:00:00-02:00" pubdate data-updated="true">17 de Novembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/11/17/the-rspec-book-behaviour-driven-development-with-ruby/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Um novo livro está sendo preparado pela <strong>Pragmatic Programmers</strong>: <a href="http://www.pragprog.com/titles/achbd/the-rspec-book">The RSpec Book: Behaviour Driven Development with Ruby</a>.</p>
@@ -411,19 +530,30 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
 <p>Durante um tempo adotei o Shoulda com Test::Unit como meu principal framework de testes, mas depois que comecei a brincar com o <strong>Cucumber</strong> estou migrando para o RSpec. Mais detalhes <a href="http://www.nomedojogo.com/2008/11/13/shoulda-para-rspec-e-remarkable/">aqui</a>.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/11/17/mito-1-rails-e-dificil-de-implantar/">Mito #1: Rails é difícil de implantar</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/11/17/mito-1-rails-e-dificil-de-implantar/">Mito #1: Rails é difícil de implantar</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -440,9 +570,11 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
 <time datetime="2008-11-17T00:00:00-02:00" pubdate data-updated="true">17 de Novembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/11/17/mito-1-rails-e-dificil-de-implantar/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>David Heinemeier Hansson iniciou uma série de artigos em seu <a href="http://www.loudthinking.com/posts/29-the-rails-myths">blog pessoal</a> <span style="color: #000000;"><span style="font-family: &quot;Lucida Grande&quot;,&quot;Lucida Sans Unicode&quot;,Tahoma,Verdana,sans-serif;">desmistificando</span></span> algumas crenças sobre o Ruby on Rails. Este texto não é uma tradução literal e sim uma explanação do <a href="http://www.loudthinking.com/posts/30-myth-1-rails-is-hard-to-deploy#mod_rails">primeiro artigo</a> de David.</p>
@@ -476,19 +608,30 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
 <p><strong>Resumindo, Rails é difícil de implantar? Não! Phusion Passenger tornou o processo de implantação de projetos Rails ridiculamente simples.</strong></p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/11/17/darkcast-edicao-especial-railssummit/">DarkCast - Edição Especial RailsSummit</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/11/17/darkcast-edicao-especial-railssummit/">DarkCast - Edição Especial RailsSummit</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -505,9 +648,11 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
 <time datetime="2008-11-17T00:00:00-02:00" pubdate data-updated="true">17 de Novembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/11/17/darkcast-edicao-especial-railssummit/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Coloque um bando de nerds em uma Van, apague a luz e prenda-os no trânsito de São Paulo por algumas horas. Qual seria o resultado?</p>
@@ -519,19 +664,30 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
 <p>Parabéns pelo trabalho, vocês deviam se juntar e fazer isto mais vezes, mas não precisa ser sempre no escurinho&#8230;</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/11/14/rails-22-tornando-atributos-do-activerecord-privados/">Rails 2.2: Tornando atributos do ActiveRecord privados</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/11/14/rails-22-tornando-atributos-do-activerecord-privados/">Rails 2.2: Tornando atributos do ActiveRecord privados</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -548,9 +704,11 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
 <time datetime="2008-11-14T00:00:00-02:00" pubdate data-updated="true">14 de Novembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/11/14/rails-22-tornando-atributos-do-activerecord-privados/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>No Rails 2.2 você poderá definir atributos do <strong>ActiveRecord</strong> como <strong>private</strong>. Como estes atributos são criados via metaprogramação, até agora isto era impossível.</p>
@@ -589,19 +747,30 @@ user<span class="punctuation punctuation_separator punctuation_separator_method 
 <hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades do Rails 2.2 no e-book “<a href="../2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">Ruby on Rails - O que há de novo?</a>“.</em>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/11/14/rails-22-rc2/">Rails 2.2 RC2</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/11/14/rails-22-rc2/">Rails 2.2 RC2</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -618,9 +787,11 @@ user<span class="punctuation punctuation_separator punctuation_separator_method 
 
 <time datetime="2008-11-14T00:00:00-02:00" pubdate data-updated="true">14 de Novembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/11/14/rails-22-rc2/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Conforme previ no último <a href="http://www.nomedojogo.com/2008/11/11/rails-podcast-brasil-episodio-37/">podcast</a>, saiu o segundo release candidate do Rails 2.2. Esta versão ficou classificada como 2.2.1 e deve ser a última antes do lançamento oficial do Rails 2.2, que deve aparecer como 2.2.3.</p>
@@ -639,19 +810,30 @@ user<span class="punctuation punctuation_separator punctuation_separator_method 
 
 <p>Enjoy!</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/11/13/shoulda-para-rspec-e-remarkable/">Shoulda para RSpec é Remarkable!</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/11/13/shoulda-para-rspec-e-remarkable/">Shoulda para RSpec é Remarkable!</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -668,9 +850,11 @@ user<span class="punctuation punctuation_separator punctuation_separator_method 
 
 <time datetime="2008-11-13T00:00:00-02:00" pubdate data-updated="true">13 de Novembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/11/13/shoulda-para-rspec-e-remarkable/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Durante um bom tempo andei evangelizando o uso do <a href="http://www.thoughtbot.com/projects/shoulda">Shoulda</a> na <a href="http://surgeworks.com/">Surgeworks</a> e fiz muito uso dele em meus projetos pessoais. O fato é que não obtive muito sucesso em evangelizar meus colegas de trabalho a adotarem o Shoulda, por outro lado eles conseguiram me convencer a aprender e usar <a href="http://rspec.info/">RSpec</a>.</p>
@@ -788,116 +972,6 @@ Para o estilo RSpec, <a href="http://remarkable.nomedojogo.com/classes/Remarkabl
 
 <p>Enfim, usem o <strong>Remarkable</strong>, e ajudem a torná-lo ainda melhor!</p>
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/11/12/por-que-paperclip/">Por que Paperclip?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-11-12T00:00:00-02:00" pubdate data-updated="true">12 de Novembro de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="alignright size-full wp-image-1767" title="Paperclip" src="http://old.nomedojogo.com/wp-content/uploads/2008/11/395376506_9f9213734f_m.jpg" alt="" />No último <a href="http://www.nomedojogo.com/2008/11/05/rails-podcast-brasil-episodio-36/">podcast</a> mencionei minha escolha pelo <a href="http://www.thoughtbot.com/projects/paperclip/">Paperclip</a> como meu plugin preferido para upload de arquivos. Depois disso algumas pessoas tem me perguntado porque usá-lo, já que o attachment_fu seria a opção mais conhecida.</p>
-
-<p>Durante muito tempo usei o <a href="http://github.com/technoweenie/attachment_fu/wikis">attachment_fu</a> para esta função, mas em um projeto recente da Surgeworks optei por testar o Paperclip e depois disso acabei adotando-o como meu plugin padrão para uploads. Confesso que de inicio o grande motivo para experimentar o novo plugin foi por ele ter sido criado pela <a href="http://www.thoughtbot.com/">thoughtbot</a>, o mesmo time que criou o <a href="http://www.thoughtbot.com/projects/shoulda">Shoulda</a> (que não estou usando mais, mas é uma outra história que vou explicar em um outro post), e como os caras são bons e tem criado inúmeros projetos interessantes, resolvi dar uma chance.</p>
-
-<p>Mas foram alguns detalhes que me chamaram a atenção, como o fato de você não precisar de uma tabela extra no banco de dados para armazenar o caminho dos arquivos, a forma simplificada que ele oferece para se acessar e configurar o tamanho das fotos enviadas para o servidor, a macro de teste preparada para o Shoulda, a facilidade para configurar o acesso ao Amazon S3, entre outros detalhes que valorizam o plugin.</p>
-
-<p>Enfim, não existe um grande motivo que chegue a desvalorizar o famoso attachment_fu ou torná-lo obsoleto. São apenas alguns pequenos detalhes que me conquistaram, só isso. É puramente uma questão de preferência  pessoal.</p>
-
-<p>Não importa qual plugin de upload você use, só não esqueça do <code>:multipart =&gt; true</code> na construção do formulário!</p>
-
-<h2>Usando o Paperclip em 3 passos</h2>
-
-
-<ol>
-<li>Instale o plugin em seu projeto Rails:</li>
-</ol>
-
-
-<pre class="textmate-source"><span class="source source_sql source_sql_ruby">./script/plugin install git://github.com/thoughtbot/paperclip.git</span></pre>
-
-
-<ol>
-<li>Adicione três colunas na tabela que armazenará os dados dos arquivos:</li>
-</ol>
-
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_migration"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">AddAvatarColumnsToUser<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Migration</span></span></span>
-  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">self.up</span></span>
-    add_column <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>users</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>avatar_file_name</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>    <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>string</span>
-    add_column <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>users</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>avatar_content_type</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>string</span>
-    add_column <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>users</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>avatar_file_size</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>    <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>integer</span>
-    add_column <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>users</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>avatar_updated_at</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>   <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>datetime</span>
-  <span class="keyword keyword_control keyword_control_ruby">end</span>
-
-  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">self.down</span></span>
-    remove_column <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>users</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>avatar_file_name</span>
-    remove_column <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>users</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>avatar_content_type</span>
-    remove_column <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>users</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>avatar_file_size</span>
-    remove_column <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>users</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>avatar_updated_at</span>
-  <span class="keyword keyword_control keyword_control_ruby">end</span>
-</span><span class="keyword keyword_control keyword_control_ruby">end</span>
-</span></pre>
-
-
-<ol>
-<li>Adicione uma linha no modelo com as configurações desejadas (tive de dividir em mais linhas para caber no blog):</li>
-</ol>
-
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">User<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
-  has_attached_file <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>avatar</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
-                    <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>styles</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>medium</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>300x300&gt;<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
-                                 <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>thumb</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>100x100&gt;<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
-</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-
-
-<p>Leve ao forno e sirva à vontade!</p>
-
-<p>No exemplo acima acabamos de adicionar um avatar (a famosa fotinha) para os usuários. Para recuperar a foto enviada pelo usuário, use:</p>
-
-<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> image_tag <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>user</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>avatar<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>url <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
-<span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> image_tag <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>user</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>avatar<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>url<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>medium</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
-<span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> image_tag <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>user</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>avatar<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>url<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>thumb</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span></span></pre>
-
-
-<p>O attachment_fu também não é tão diferente disso, mas gosto mais do Papeclip. Apenas para fechar o artigo, um bônus! Para testar se o Paperclip está funcionando você pode pegar a <a href="http://giantrobots.thoughtbot.com/2008/6/3/testing-paperclip-with-shoulda">macro para Shoulda</a>, e depois adicionar uma linha ao teste do modelo:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_unit_test"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">UserTest<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> Test::Unit::TestCase</span></span></span>
-  should_have_attached_file <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>avatar</span>
-</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-
-
-<p>Excelsior!</p>
-</div>
-  
-  
 
 
     </article>
@@ -919,6 +993,10 @@ Para o estilo RSpec, <a href="http://remarkable.nomedojogo.com/classes/Remarkabl
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
@@ -932,10 +1010,6 @@ Para o estilo RSpec, <a href="http://remarkable.nomedojogo.com/classes/Remarkabl
     
       <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
   </ul>

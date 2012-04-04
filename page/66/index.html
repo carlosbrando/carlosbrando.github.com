@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Já cansei de falar por aqui sobre o mercado brasileiro para profissionais Ruby on Rails. Infelizmente poucas empresas conseguem enxergar o potencial &hellip;">
+  <meta name="description" content="Eu tenho um Array com nomes de pessoas e quero exibi-lo em minha view em uma sentença, mais ou menos assim: &quot;Carlos, Thiago e Tatiane&quot;. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,14 +100,110 @@
       <div id="content">
         <div class="blog-index">
   
-  
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
+    <h1 class="entry-title">
+
+<a href="/2007/10/23/dica-rapida/">Dica rápida: Pra que complicar?</a>
+
+</h1>
+
     
-      <h1 class="entry-title"><a href="/2007/10/19/carlos-brando-e-a-surgeworks/">Carlos Brando e a Surgeworks</a></h1>
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-10-23T00:00:00-02:00" pubdate data-updated="true">23 de Outubro de 2007</time>
+        
+        <a rel="bookmark" href="/2007/10/23/dica-rapida/"></a>
+      </p>
     
+  </header>
+
+
+
+  <div class="entry-content"><p><center><img src="http://old.nomedojogo.com/wp-content/uploads/2007/10/214723509_3758c2c179.jpg" alt="214723509_3758c2c179.jpg" /></center></p>
+
+
+
+
+<p>Eu tenho um Array com nomes de pessoas e quero exibi-lo em minha view em uma sentença, mais ou menos assim: &quot;Carlos, Thiago e Tatiane&quot;.</p>
+
+
+
+
+<p>Pensando rápido a solução mais prática seria verificar quantos itens eu tenho no array e depois fazer um loop por todos os itens, escrevendo o nome na página e separando por vírgulas, com exceção do último item que receberia a letra &quot;e&quot; no lugar da vírgula. Muito simples, mas eu nem quis escrever o código aqui por pura preguiça. Mas se você já programa em qualquer linguagem a um tempinho, com certeza já fez algo parecido, então sabe do que estou falando.</p>
+
+
+
+
+<p>Porém quando o assunto é Rails, exatamente pelo fato de um código assim ser rotineiro, basta procurar que com certeza encontraremos algo pronto.</p>
+
+
+<p>Veja por exemplo o que o método to_sentence faz:</p>
+
+<pre>
+&gt;&gt; a = %w(Carlos Thiago Tatiane)
+=&gt; ["Carlos", "Thiago", "Tatiane"]
+
+&gt;&gt; a.to_sentence(:skip_last_comma =&gt; true)
+=&gt; "Carlos, Thiago and Tatiane"</pre>
+
+
+<p>&Oacute;timo, é quase o que queremos, mas a palavra &quot;and&quot; não vai ficar legal no meu sistema que é em português&#8230; Mas podemos alterar:</p>
+
+<pre>
+&gt;&gt; a.to_sentence(:skip_last_comma =&gt; true, :connector =&gt; 'e')
+=&gt; "Carlos, Thiago e Tatiane"</pre>
+
+
+<p>Gostou? Já conhecia este método?</p>
+</div>
+
+
+    </article>
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2007/10/19/carlos-brando-e-a-surgeworks/">Carlos Brando e a Surgeworks</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -124,9 +220,11 @@
 
 <time datetime="2007-10-19T00:00:00-02:00" pubdate data-updated="true">19 de Outubro de 2007</time>
         
+        <a rel="bookmark" href="/2007/10/19/carlos-brando-e-a-surgeworks/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Já cansei de falar por aqui sobre o mercado brasileiro para profissionais Ruby on Rails. Infelizmente poucas empresas conseguem enxergar o potencial desta ferramenta no desenvolvimento de projetos voltados para a Web.Mas bem diferente das empresas brasileiras, em outras partes do mundo tem muita gente apostando no Ruby e no Rails como a melhor forma de se construir software de forma rápida e produtiva, sem perder qualidade e robustez.</p>
@@ -143,19 +241,30 @@
 
 <p>Minha vez chegou, mas uma coisa eu posso garantir, eu ainda não parei por aqui!</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/10/18/intellij-idea-7-agora-suporta-ruby-on-rails/">IntelliJ IDEA 7 agora suporta Ruby on Rails</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/10/18/intellij-idea-7-agora-suporta-ruby-on-rails/">IntelliJ IDEA 7 agora suporta Ruby on Rails</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -172,9 +281,11 @@
 
 <time datetime="2007-10-18T00:00:00-02:00" pubdate data-updated="true">18 de Outubro de 2007</time>
         
+        <a rel="bookmark" href="/2007/10/18/intellij-idea-7-agora-suporta-ruby-on-rails/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/10/508135442_77b3ff3185.jpg" alt="508135442_77b3ff3185.jpg" /></p>
@@ -185,19 +296,30 @@
 
 <p>Tem até um vídeo para você ver como ficou, <a href="http://www.jetbrains.com/idea/training/demos/rails.html">clique aqui</a>.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/10/17/por-que-o-netbeans-tinha-de-ser-tao-lento/">Por que o NetBeans tinha de ser tão lento?</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/10/17/por-que-o-netbeans-tinha-de-ser-tao-lento/">Por que o NetBeans tinha de ser tão lento?</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -214,9 +336,11 @@
 
 <time datetime="2007-10-17T00:00:00-02:00" pubdate data-updated="true">17 de Outubro de 2007</time>
         
+        <a rel="bookmark" href="/2007/10/17/por-que-o-netbeans-tinha-de-ser-tao-lento/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/10/543288358_e91457909a.jpg" alt="543288358_e91457909a.jpg" /></p>
@@ -231,19 +355,30 @@
 
 <p>Pena que é tão lento&#8230;</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/10/17/confirmado-evento-de-rails-em-sao-paulo/">Confirmado evento de Rails em São Paulo</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/10/17/confirmado-evento-de-rails-em-sao-paulo/">Confirmado evento de Rails em São Paulo</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -260,9 +395,11 @@
 
 <time datetime="2007-10-17T00:00:00-02:00" pubdate data-updated="true">17 de Outubro de 2007</time>
         
+        <a rel="bookmark" href="/2007/10/17/confirmado-evento-de-rails-em-sao-paulo/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/10/187353256_8b6f5b1b6e.jpg" alt="187353256_8b6f5b1b6e.jpg" /></p>
@@ -275,19 +412,30 @@
 
 <p>Para mais detalhes sobre o evento, acesse o <a href="http://www.akitaonrails.com/2007/10/16/confirmado-rejectconf-sp-07-para-17-de-novembro">blog do Akita</a>.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/10/16/a-volta-do-netscape-navigator/">A volta do Netscape Navigator</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/10/16/a-volta-do-netscape-navigator/">A volta do Netscape Navigator</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -304,9 +452,11 @@
 
 <time datetime="2007-10-16T00:00:00-02:00" pubdate data-updated="true">16 de Outubro de 2007</time>
         
+        <a rel="bookmark" href="/2007/10/16/a-volta-do-netscape-navigator/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/10/36337289_ff946ab984.jpg" alt="36337289_ff946ab984.jpg" /></p>
@@ -317,19 +467,30 @@
 
 <p>Independente de ser bom ou ruim, agora temos mais um navegador para colocar na lista de testes de nossos softwares.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/10/15/subversion-no-mac-os-x/">Subversion no Mac OS X</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/10/15/subversion-no-mac-os-x/">Subversion no Mac OS X</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -346,9 +507,11 @@
 
 <time datetime="2007-10-15T00:00:00-02:00" pubdate data-updated="true">15 de Outubro de 2007</time>
         
+        <a rel="bookmark" href="/2007/10/15/subversion-no-mac-os-x/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Â <img src="http://old.nomedojogo.com/wp-content/uploads/2007/10/896909842_5709747bea.jpg" alt="896909842_5709747bea.jpg" /></p>
@@ -381,19 +544,30 @@ tcsh
 
 <p>Se você também estiver indo para o Mac, tenho certeza que este post será útil.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/10/14/capistrano-21/">Capistrano 2.1</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/10/14/capistrano-21/">Capistrano 2.1</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -410,9 +584,11 @@ tcsh
 
 <time datetime="2007-10-14T01:00:00-02:00" pubdate data-updated="true">14 de Outubro de 2007</time>
         
+        <a rel="bookmark" href="/2007/10/14/capistrano-21/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/10/8507301_51b08fdb11.jpg" alt="8507301_51b08fdb11.jpg" /></p>
@@ -428,19 +604,30 @@ gem install capistrano
 
 <p>Para ver quais foram as modificações realizadas nesta versão <a href="http://weblog.rubyonrails.com/2007/10/14/capistrano-2-1">clique aqui</a>.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/10/14/adeus-ubuntu/">Adeus Ubuntu</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/10/14/adeus-ubuntu/">Adeus Ubuntu</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -457,9 +644,11 @@ gem install capistrano
 
 <time datetime="2007-10-14T01:00:00-02:00" pubdate data-updated="true">14 de Outubro de 2007</time>
         
+        <a rel="bookmark" href="/2007/10/14/adeus-ubuntu/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/10/737954295_d64aec8f01.jpg" alt="737954295_d64aec8f01.jpg" /></p>
@@ -484,19 +673,30 @@ gem install capistrano
 
 <p>Foram apenas quatro dias de experiência até agora, mas uma coisa eu posso lhes garantir, para o Windows eu não volto mais.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/10/13/rails-125-mais-uma-atualizacao/">Rails 1.2.5 - Mais uma atualização</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/10/13/rails-125-mais-uma-atualizacao/">Rails 1.2.5 - Mais uma atualização</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -513,9 +713,11 @@ gem install capistrano
 
 <time datetime="2007-10-13T00:00:00-03:00" pubdate data-updated="true">13 de Outubro de 2007</time>
         
+        <a rel="bookmark" href="/2007/10/13/rails-125-mais-uma-atualizacao/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Â <img src="http://old.nomedojogo.com/wp-content/uploads/2007/10/1480717850_394cfce8d8.jpg" alt="1480717850_394cfce8d8.jpg" /></p>
@@ -528,63 +730,6 @@ gem install capistrano
 gem install rails</pre>
 
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/10/13/incluia-tooltips-em-seus-projetos-rails/">Incluia Tooltips em seus projetos Rails</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-10-13T00:00:00-03:00" pubdate data-updated="true">13 de Outubro de 2007</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><center><img src="http://old.nomedojogo.com/wp-content/uploads/2007/10/tooltip.jpg" alt="tooltip.jpg" /></center>
-
-
-<p>Gostou da imagem acima? Para colocar um tooltip assim em sua aplicação Rails é muito simples, basta rodar o seguinte comando:</p>
-
-<pre>ruby script/plugin install svn://svn.seesaw.it/widgets/trunk</pre>
-
-
-<p>Em sua página coloque algo assim:</p>
-
-<p>[source:ruby]
-Meu tooltip:</p>
-
-<p>&lt;% tooltip do %>
-  <b>Nome do Jogo</b><br/>
-  Eu aprendi a usar este plugin no NomeDoJogo.com!<br/>
-&lt;% end %>
-[/source]</p>
-
-<p>Simples não? Do jeito que todo programador Rails gosta!</p>
-</div>
-  
-  
 
 
     </article>
@@ -606,6 +751,10 @@ Meu tooltip:</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
@@ -619,10 +768,6 @@ Meu tooltip:</p>
     
       <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
   </ul>

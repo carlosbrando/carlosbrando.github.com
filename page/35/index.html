@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Graças ao formato open-source do livro &#8220;Ruby on Rails 2.1 - O que há de novo?&#8221; e ao fato de ele ser codificado ao invés de escrito em um &hellip;">
+  <meta name="description" content="No último podcast falamos que o DHH agora só quer saber de novidades, e realmente, toda vez que vejo um commit dele no Rails já vou correndo saber do &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,14 +100,99 @@
       <div id="content">
         <div class="blog-index">
   
-  
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
+    <h1 class="entry-title">
+
+<a href="/2008/06/26/edge-rails-nova-sintax-para-testes/">Edge Rails: Nova sintax para testes</a>
+
+</h1>
+
     
-      <h1 class="entry-title"><a href="/2008/06/25/ruby-on-rails-21-whats-new-chinese-version/">&#8220;Ruby on Rails 2.1 - What&#8217;s New?&#8221; - Chinese Version</a></h1>
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-06-26T00:00:00-03:00" pubdate data-updated="true">26 de Junho de 2008</time>
+        
+        <a rel="bookmark" href="/2008/06/26/edge-rails-nova-sintax-para-testes/"></a>
+      </p>
     
+  </header>
+
+
+
+  <div class="entry-content"><p>No <a href="http://www.nomedojogo.com/2008/06/19/rails-podcast-brasil-episodio-21/">último podcast</a> falamos que o DHH agora só quer saber de novidades, e realmente, toda vez que vejo um commit dele no Rails já vou correndo saber do que se trata, porque na maioria das vezes é algo novo.</p>
+
+<p>Desta vez ele adicionou uma nova forma de se declarar testes, usando declarações test/do. Veja:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">test <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>verify something<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> ...
+</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+<p>Eu particularmente gosto mais deste jeito!</p>
+
+<p>Esta é uma novidade importante porque à partir da próxima versão do Rails este será o padrão, veja como ficou um arquivo de teste unitário recém criado no edge rails:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_require meta_require_ruby"><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">require</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>test_helper<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span>
+
+<span class="meta meta_rails meta_rails_unit_test"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">PostTest<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveSupport::TestCase</span></span></span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Replace this with your real tests.
+</span>  test <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>the truth<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
+</span>    assert <span class="constant constant_language constant_language_ruby">true</span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span>
+</span></pre>
+
+
+<p>A forma atual, usando métodos, também continuará funcionando, então nossos testes atuais não quebrarão.</p>
+</div>
+
+
+    </article>
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/06/25/ruby-on-rails-21-whats-new-chinese-version/">&#8220;Ruby on Rails 2.1 - What&#8217;s New?&#8221; - Chinese Version</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -124,9 +209,11 @@
 
 <time datetime="2008-06-25T00:00:00-03:00" pubdate data-updated="true">25 de Junho de 2008</time>
         
+        <a rel="bookmark" href="/2008/06/25/ruby-on-rails-21-whats-new-chinese-version/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img class="alignnone size-full wp-image-809" title="20080625-qpfc4uprsj3jky9e8xha5yaxcj" src="http://old.nomedojogo.com/wp-content/uploads/2008/06/20080625-qpfc4uprsj3jky9e8xha5yaxcj.png" alt="" /></p>
@@ -150,19 +237,30 @@
 
 <p>Congratulations to all our Chinese friends!</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/06/25/rails-podcast-brasil-episodio-22/">Rails Podcast Brasil - Episódio 22</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/06/25/rails-podcast-brasil-episodio-22/">Rails Podcast Brasil - Episódio 22</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -179,9 +277,11 @@
 
 <time datetime="2008-06-25T00:00:00-03:00" pubdate data-updated="true">25 de Junho de 2008</time>
         
+        <a rel="bookmark" href="/2008/06/25/rails-podcast-brasil-episodio-22/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img class="alignnone size-full wp-image-812" title="362248821_956389b3e5" src="http://old.nomedojogo.com/wp-content/uploads/2008/06/362248821_956389b3e5.jpg" alt="" /><h6>Foto de <strong><a title="Link para a galeria de Wishingline" href="http://flickr.com/photos/wishingline/"><strong>Wishingline</strong></a></strong></h6>
@@ -220,19 +320,30 @@ Rails-doc, Factory Girl, Phusion, RubyGems, Rubinius, RubyStack, Brazilian Rails
 </ul>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/06/25/ajuda-para-os-iniciantes-em-ruby/">Ajuda para os iniciantes em Ruby</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/06/25/ajuda-para-os-iniciantes-em-ruby/">Ajuda para os iniciantes em Ruby</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -249,9 +360,11 @@ Rails-doc, Factory Girl, Phusion, RubyGems, Rubinius, RubyStack, Brazilian Rails
 
 <time datetime="2008-06-25T00:00:00-03:00" pubdate data-updated="true">25 de Junho de 2008</time>
         
+        <a rel="bookmark" href="/2008/06/25/ajuda-para-os-iniciantes-em-ruby/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Resolvi abrir aqui no blog um espaço para que o <strong>Rafael Barbosa</strong> dê uma noticia para a comunidade:</p>
@@ -279,19 +392,30 @@ Rails-doc, Factory Girl, Phusion, RubyGems, Rubinius, RubyStack, Brazilian Rails
 </ul>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/06/24/precisamos-de-tradutores/">Precisamos de tradutores</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/06/24/precisamos-de-tradutores/">Precisamos de tradutores</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -308,9 +432,11 @@ Rails-doc, Factory Girl, Phusion, RubyGems, Rubinius, RubyStack, Brazilian Rails
 
 <time datetime="2008-06-24T00:00:00-03:00" pubdate data-updated="true">24 de Junho de 2008</time>
         
+        <a rel="bookmark" href="/2008/06/24/precisamos-de-tradutores/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>A tradução do livro <strong>Why&#8217;s (Poignant) Guide to Ruby</strong> para português está muito próxima do seu fim. Mas precisamos de um gás para terminarmos o quanto antes.</p>
@@ -339,19 +465,30 @@ Rails-doc, Factory Girl, Phusion, RubyGems, Rubinius, RubyStack, Brazilian Rails
 
 <p>Você ganha um dos melhores livros de Ruby já escritos, em <strong>português</strong>. Sem contar as mulheres, o dinheiro, mulheres, carros e mulheres&#8230; mas só vão nos pagar quanto estiver terminado. Estou falando você tem de apertar os caras&#8230;</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/06/24/edge-rails-metodo-merge_conditions-do-activerecord-agora-e-publico/">Edge Rails: Método merge_conditions do ActiveRecord agora é público</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/06/24/edge-rails-metodo-merge_conditions-do-activerecord-agora-e-publico/">Edge Rails: Método merge_conditions do ActiveRecord agora é público</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -368,9 +505,11 @@ Rails-doc, Factory Girl, Phusion, RubyGems, Rubinius, RubyStack, Brazilian Rails
 
 <time datetime="2008-06-24T00:00:00-03:00" pubdate data-updated="true">24 de Junho de 2008</time>
         
+        <a rel="bookmark" href="/2008/06/24/edge-rails-metodo-merge_conditions-do-activerecord-agora-e-publico/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>O método <strong>merge_conditions</strong> do <strong>ActiveRecord</strong> agora é um método público. O que significa que ele estará presente em todas os seus <strong>Models</strong>.</p>
@@ -390,19 +529,30 @@ b <span class="keyword keyword_operator keyword_operator_assignment keyword_oper
 
 <p>Note que ele une as conditions com um <strong>AND</strong>, sempre.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/06/23/edge-rails-validacoes-para-associacoes-belongs_to-desativadas-por-padrao/">Edge Rails: Validações para associações belongs_to desativadas por padrão</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/06/23/edge-rails-validacoes-para-associacoes-belongs_to-desativadas-por-padrao/">Edge Rails: Validações para associações belongs_to desativadas por padrão</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -419,9 +569,11 @@ b <span class="keyword keyword_operator keyword_operator_assignment keyword_oper
 
 <time datetime="2008-06-23T00:00:00-03:00" pubdate data-updated="true">23 de Junho de 2008</time>
         
+        <a rel="bookmark" href="/2008/06/23/edge-rails-validacoes-para-associacoes-belongs_to-desativadas-por-padrao/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Lembra-se de <a href="http://www.nomedojogo.com/2008/06/20/edge-rails-nova-opcao-para-associacoes-validate/">quando falei da nova opção</a> <strong>:validate</strong> para associações <strong>belongs_to</strong>?</p>
@@ -430,19 +582,30 @@ b <span class="keyword keyword_operator keyword_operator_assignment keyword_oper
 
 <p>Agora o padrão é <strong>false</strong>, ou seja, todas as validações em associações belongs_to estarão desligadas como padrão e para ligarmos devemos usar a expressão <strong>:validate =&gt; true</strong>.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/06/23/edge-rails-link_to-com-blocos/">Edge Rails: link_to com blocos</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/06/23/edge-rails-link_to-com-blocos/">Edge Rails: link_to com blocos</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -459,9 +622,11 @@ b <span class="keyword keyword_operator keyword_operator_assignment keyword_oper
 
 <time datetime="2008-06-23T00:00:00-03:00" pubdate data-updated="true">23 de Junho de 2008</time>
         
+        <a rel="bookmark" href="/2008/06/23/edge-rails-link_to-com-blocos/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>O método <strong>link_to</strong> recebeu uma atualização que permite seu uso com blocos. Isto é interessante para os casos onde temos textos muito longos no <strong>hyperlink</strong>. Por exemplo, se hoje fazemos assim:</p>
@@ -478,19 +643,30 @@ b <span class="keyword keyword_operator keyword_operator_assignment keyword_oper
 
 <p>Não é uma mudança significativa em funcionalidade, mas permite deixar o código mais legivel, e isto também é importante.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/06/21/ruby-on-rails-21-2/">Ruby on Rails 2.1 - の変更</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/06/21/ruby-on-rails-21-2/">Ruby on Rails 2.1 - の変更</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -507,9 +683,11 @@ b <span class="keyword keyword_operator keyword_operator_assignment keyword_oper
 
 <time datetime="2008-06-21T00:00:00-03:00" pubdate data-updated="true">21 de Junho de 2008</time>
         
+        <a rel="bookmark" href="/2008/06/21/ruby-on-rails-21-2/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img class="aligncenter size-full wp-image-800" title="2287901139_d4f8a4d212" src="http://old.nomedojogo.com/wp-content/uploads/2008/06/2287901139_d4f8a4d212.jpg" alt="" /></p>
@@ -539,19 +717,30 @@ b <span class="keyword keyword_operator keyword_operator_assignment keyword_oper
 
 <p>To download the Japanese version <a href="http://www.box.net/shared/s90wjdickk">click here</a>.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/06/20/edge-rails-nova-opcao-para-associacoes-validate/">Edge Rails: Nova opção para associações, :validate</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/06/20/edge-rails-nova-opcao-para-associacoes-validate/">Edge Rails: Nova opção para associações, :validate</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -568,9 +757,11 @@ b <span class="keyword keyword_operator keyword_operator_assignment keyword_oper
 
 <time datetime="2008-06-20T00:00:00-03:00" pubdate data-updated="true">20 de Junho de 2008</time>
         
+        <a rel="bookmark" href="/2008/06/20/edge-rails-nova-opcao-para-associacoes-validate/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Foi adicionado ao Edge Rails uma nova opção para associações. Se incluirmos a opção <strong>:validate =&gt; false</strong> na associação o <strong>ActiveRecord</strong> salvará os dados do objeto pai, sem validar os objetos associados. Exemplo:</p>
@@ -597,65 +788,6 @@ puts log<span class="punctuation punctuation_separator punctuation_separator_met
 
 <p>O valor padrão é <strong>true</strong>, então só faz sentido usar esta nova opção quando precisamos desligar a validação das associações.</p>
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/06/20/edge-rails-enumerablemany-agora-aceita-blocos/">Edge Rails: Enumerable#many? agora aceita blocos</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-06-20T00:00:00-03:00" pubdate data-updated="true">20 de Junho de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Eu <a href="http://www.nomedojogo.com/2008/06/14/edge-rails-novo-metodo-enumberableseveral/">já falei sobre este método</a> <strong>many?</strong> há alguns dias atrás. Este método recebeu uma nova implementação permitindo que ele aceite blocos também, que funciona exatamente como o método <strong>any?</strong>.</p>
-
-<p>Vamos aos exemplos:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> x <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_other string_quoted_other_literal string_quoted_other_literal_lower string_quoted_other_literal_lower_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">%w{</span> a b c b c <span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">}</span></span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; ["a", "b", "c", "b", "c"]
-</span>
-<span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> x<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>many?
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; true
-</span>
-<span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> x<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>many? <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">y</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> y <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">==</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>a<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; false
-</span>
-<span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> x<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>many? <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">y</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> y <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">==</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>b<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; true
-</span>
-
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> um outro exemplo...
-</span>people<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>many? <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">p</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> p<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>age <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">26</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span></span></pre>
-
-
-<p>Apenas para relembrar e reforçar, este método só retornará <strong>true</strong> se <strong>mais de 1</strong> objeto passar nas condições quando usado o bloco, e quando a coleção tiver <strong>mais de 1</strong> objeto quando usado sem condicionais.</p>
-</div>
-  
-  
 
 
     </article>
@@ -677,6 +809,10 @@ puts log<span class="punctuation punctuation_separator punctuation_separator_met
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
@@ -690,10 +826,6 @@ puts log<span class="punctuation punctuation_separator punctuation_separator_met
     
       <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
   </ul>

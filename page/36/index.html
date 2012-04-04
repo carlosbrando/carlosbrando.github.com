@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Foto de JackBaty DHH está abandonando o Rails? O que é este tal de SproutCore? Como usar o GitHub debaixo do firewall da minha empresa? Ficou curioso &hellip;">
+  <meta name="description" content="Eu já falei sobre este método many? há alguns dias atrás. Este método recebeu uma nova implementação permitindo que ele aceite blocos também, que &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,14 +100,96 @@
       <div id="content">
         <div class="blog-index">
   
-  
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
+    <h1 class="entry-title">
+
+<a href="/2008/06/20/edge-rails-enumerablemany-agora-aceita-blocos/">Edge Rails: Enumerable#many? agora aceita blocos</a>
+
+</h1>
+
     
-      <h1 class="entry-title"><a href="/2008/06/19/rails-podcast-brasil-episodio-21/">Rails Podcast Brasil - Episódio 21</a></h1>
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-06-20T00:00:00-03:00" pubdate data-updated="true">20 de Junho de 2008</time>
+        
+        <a rel="bookmark" href="/2008/06/20/edge-rails-enumerablemany-agora-aceita-blocos/"></a>
+      </p>
     
+  </header>
+
+
+
+  <div class="entry-content"><p>Eu <a href="http://www.nomedojogo.com/2008/06/14/edge-rails-novo-metodo-enumberableseveral/">já falei sobre este método</a> <strong>many?</strong> há alguns dias atrás. Este método recebeu uma nova implementação permitindo que ele aceite blocos também, que funciona exatamente como o método <strong>any?</strong>.</p>
+
+<p>Vamos aos exemplos:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> x <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_other string_quoted_other_literal string_quoted_other_literal_lower string_quoted_other_literal_lower_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">%w{</span> a b c b c <span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">}</span></span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; ["a", "b", "c", "b", "c"]
+</span>
+<span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> x<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>many?
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; true
+</span>
+<span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> x<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>many? <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">y</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> y <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">==</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>a<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; false
+</span>
+<span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> x<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>many? <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">y</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> y <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">==</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>b<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; true
+</span>
+
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> um outro exemplo...
+</span>people<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>many? <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">p</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> p<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>age <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">26</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span></span></pre>
+
+
+<p>Apenas para relembrar e reforçar, este método só retornará <strong>true</strong> se <strong>mais de 1</strong> objeto passar nas condições quando usado o bloco, e quando a coleção tiver <strong>mais de 1</strong> objeto quando usado sem condicionais.</p>
+</div>
+
+
+    </article>
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/06/19/rails-podcast-brasil-episodio-21/">Rails Podcast Brasil - Episódio 21</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -124,9 +206,11 @@
 
 <time datetime="2008-06-19T00:00:00-03:00" pubdate data-updated="true">19 de Junho de 2008</time>
         
+        <a rel="bookmark" href="/2008/06/19/rails-podcast-brasil-episodio-21/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><h6>Foto de <strong><a title="Link to JackBaty's photostream" href="http://flickr.com/photos/jbaty/"><strong>JackBaty</strong></a></strong></h6>
@@ -176,19 +260,30 @@
 </ul>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/06/18/nao-sabote-as-suas-proprias-boas-noticias/">Não sabote as suas próprias boas notícias</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/06/18/nao-sabote-as-suas-proprias-boas-noticias/">Não sabote as suas próprias boas notícias</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -205,9 +300,11 @@
 
 <time datetime="2008-06-18T00:00:00-03:00" pubdate data-updated="true">18 de Junho de 2008</time>
         
+        <a rel="bookmark" href="/2008/06/18/nao-sabote-as-suas-proprias-boas-noticias/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Tradução do artigo: &#8221;<a href="http://www.37signals.com/svn/posts/1070-dont-tackle-your-own-good-news">Don&#8217;t tackle your own good news</a>&#8221;.</p>
@@ -222,19 +319,30 @@
 
 <p>Lição aprendida: não enfrentar as suas próprias boas notícias. A blogosfera pode ser imperdoável. Tome o cuidado de eliminar eventuais aspectos negativos que possam ofuscar o lançamento de uma ou outra boa notícia.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/06/17/autotest-notification-doom-edition/">Autotest Notification - Doom Edition</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/06/17/autotest-notification-doom-edition/">Autotest Notification - Doom Edition</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -251,9 +359,11 @@
 
 <time datetime="2008-06-17T00:00:00-03:00" pubdate data-updated="true">17 de Junho de 2008</time>
         
+        <a rel="bookmark" href="/2008/06/17/autotest-notification-doom-edition/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img class="alignnone size-full wp-image-792" title="thumb-doom2" src="http://old.nomedojogo.com/wp-content/uploads/2008/06/thumb-doom2.jpg" alt="" /></p>
@@ -297,19 +407,30 @@
 
 <p>I hope you have fun&#8230;</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/06/16/edge-rails-alteracao-no-metodo-concat/">Edge Rails: Alteração no método concat</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/06/16/edge-rails-alteracao-no-metodo-concat/">Edge Rails: Alteração no método concat</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -326,9 +447,11 @@
 
 <time datetime="2008-06-16T00:00:00-03:00" pubdate data-updated="true">16 de Junho de 2008</time>
         
+        <a rel="bookmark" href="/2008/06/16/edge-rails-alteracao-no-metodo-concat/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Se você tem o costume de evitar repetições em suas views criando helpers, com certeza já usou o método <strong>concat</strong>. Se você nunca usou este método, saiba que ele é como o <strong>puts</strong> para uma view.</p>
@@ -341,19 +464,30 @@
 
 <p>Em uma futura versão do Rails, este segundo parâmetro será removido.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/06/15/ruby-on-rails-21-whats-new-second-edition/">Ruby on Rails 2.1 What&#8217;s New - Second Edition</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/06/15/ruby-on-rails-21-whats-new-second-edition/">Ruby on Rails 2.1 What&#8217;s New - Second Edition</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -370,9 +504,11 @@
 
 <time datetime="2008-06-15T00:00:00-03:00" pubdate data-updated="true">15 de Junho de 2008</time>
         
+        <a rel="bookmark" href="/2008/06/15/ruby-on-rails-21-whats-new-second-edition/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><h4>In English</h4>
@@ -393,19 +529,30 @@
 
 <p>Para fazer o download da versão atualizada, <a href="http://www.nomedojogo.com/livro/carlosbrando-rubyonrails21_en.pdf">clique aqui</a>.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/06/14/edge-rails-novo-metodo-enumberableseveral/">Edge Rails: Novo método Enumerable#many?</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/06/14/edge-rails-novo-metodo-enumberableseveral/">Edge Rails: Novo método Enumerable#many?</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -422,9 +569,11 @@
 
 <time datetime="2008-06-14T00:00:00-03:00" pubdate data-updated="true">14 de Junho de 2008</time>
         
+        <a rel="bookmark" href="/2008/06/14/edge-rails-novo-metodo-enumberableseveral/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Um novo método foi adicionado ao módulo <strong>Enumerable</strong>: <strong>many?</strong>. E como o nome mesmo diz, ele verifica se a coleção possui mais de um objeto, ou em outras palavras se tem <strong>muitos</strong> objetos associados.</p>
@@ -445,19 +594,30 @@
 
 <p>P.S.: Só uma curiosidade, o método deveria se chamar <strong>several?</strong>, mas foi alterado depois para <strong>many?</strong>.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/06/13/em-breve/">Em breve&#8230;</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/06/13/em-breve/">Em breve&#8230;</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -474,9 +634,11 @@
 
 <time datetime="2008-06-13T00:00:00-03:00" pubdate data-updated="true">13 de Junho de 2008</time>
         
+        <a rel="bookmark" href="/2008/06/13/em-breve/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img class="aligncenter size-full wp-image-789" title="espanhol1" src="http://old.nomedojogo.com/wp-content/uploads/2008/06/espanhol1.jpg" alt="" /></p>
@@ -489,19 +651,30 @@
 
 <p>E para quem acha que acabou&#8230; espere que este livro ainda vai dar mais o que falar.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/06/13/edge-rails-novo-metodo-objectpresent/">Edge Rails: Novo método Object#present?</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/06/13/edge-rails-novo-metodo-objectpresent/">Edge Rails: Novo método Object#present?</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -518,9 +691,11 @@
 
 <time datetime="2008-06-13T00:00:00-03:00" pubdate data-updated="true">13 de Junho de 2008</time>
         
+        <a rel="bookmark" href="/2008/06/13/edge-rails-novo-metodo-objectpresent/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Um novo método foi acrescentado à classe <strong>Object</strong>. O método <strong>present?</strong> é o equivalente a <strong>!Object#blank?</strong>.</p>
@@ -579,19 +754,30 @@ a<span class="punctuation punctuation_separator punctuation_separator_method pun
 
 <p>Qualquer objeto que contenha um valor, está presente, isto vale até mesmo para um <strong>Array</strong> preenchido com um <strong>nil</strong>, porque o <strong>Array</strong> não está vazio.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/06/12/enquanto-isto-na-wwdc/">Enquanto isto na WWDC&#8230;</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/06/12/enquanto-isto-na-wwdc/">Enquanto isto na WWDC&#8230;</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -608,66 +794,17 @@ a<span class="punctuation punctuation_separator punctuation_separator_method pun
 
 <time datetime="2008-06-12T00:00:00-03:00" pubdate data-updated="true">12 de Junho de 2008</time>
         
+        <a rel="bookmark" href="/2008/06/12/enquanto-isto-na-wwdc/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img class="alignnone size-full wp-image-784" title="wwdc_rails21" src="http://old.nomedojogo.com/wp-content/uploads/2008/06/wwdc_rails21.jpg" alt="" /></p>
 
 <p>Obrigado <a href="http://gc.blog.br/">Guilherme Chapiewski</a> e <a href="http://blog.improveit.com.br/">Vinicius Teles</a>! Nossos correspondentes na <strong>WWDC 2008</strong>. :)</p>
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/06/12/edge-rails-esta-chegando-o-fim-dos-plugins/">Edge Rails: Está chegando o fim dos plugins?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-06-12T00:00:00-03:00" pubdate data-updated="true">12 de Junho de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>No Rails 2.1, <strong>gems passaram a poder ser <a href="http://www.nomedojogo.com/2008/04/09/edge-rails-gems-podem-ser-plugins/">usadas como plugins</a></strong> em nossos projetos. Para isto bastava criar uma pasta chamada <em>rails</em> dentro do projeto do gem e incluir um arquivo <em>init.rb</em>.</p>
-
-<p>Isto acrescentou um leque de <a href="http://www.nomedojogo.com/2008/04/14/edge-rails-configgem/">novidades</a> como <strong>config.gem</strong> e <strong>rake:gems</strong>. Mas isto nos faz pensar, já que agora eu posso carregar gems dentro da minha aplicação Rails, seria apenas uma questão de tempo até que plugins deixassem de existir.</p>
-
-<p>E parece que isto realmente pode acontecer. No edge rails, por exemplo, foi incluída uma alteração que permite inicializar <strong>plugins</strong> tanto pelo arquivo <em>init.rb</em> na raiz do plugin, como em um arquivo em um diretório <em>rails/init.rb</em> (da mesma forma como fazemos com os gems), sendo esta segunda opção a prioritária.</p>
-
-<p>Assim, eu poderia por exemplo criar um <strong>gem</strong> (que funcionaria como um plugin) e instalar de duas maneiras:</p>
-
-<pre class="textmate-source"><span class="source source_shell">./script/plugin install git://github.com/user/plugin.git
-
-sudo gem install user-plugin --source=http://gems.github.com</span></pre>
-
-
-<p>Isto sem precisar manter dois arquivos <em>init.rb</em> (um na raiz e outro no diretório rails).</p>
-</div>
-  
-  
 
 
     </article>
@@ -689,6 +826,10 @@ sudo gem install user-plugin --source=http://gems.github.com</span></pre>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
@@ -702,10 +843,6 @@ sudo gem install user-plugin --source=http://gems.github.com</span></pre>
     
       <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
   </ul>

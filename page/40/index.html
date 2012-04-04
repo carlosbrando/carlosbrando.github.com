@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Uma novidade legal no Rails 2.1, que inclusive já foi assunto desta série é o named_scope. Depois de &#8220;brincar&#8221; um pouco com este recurso &hellip;">
+  <meta name="description" content="Patch de brasileiro e não é de qualquer brasileiro, é do meu colega de trabalho na Surgeworks, Rodrigo Kochenburger. Neste patch o Rodrigo resolveu &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,14 +100,98 @@
       <div id="content">
         <div class="blog-index">
   
-  
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
+    <h1 class="entry-title">
+
+<a href="/2008/05/23/edge-rails-armazenando-o-nome-completo-da-classe-ao-usar-sti/">Edge Rails: Armazenando o nome completo da classe ao usar STI</a>
+
+</h1>
+
     
-      <h1 class="entry-title"><a href="/2008/05/22/edge-rails-testando-named_scope-com-proxy_options/">Edge Rails: Testando named_scope com proxy_options</a></h1>
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-05-23T00:00:00-03:00" pubdate data-updated="true">23 de Maio de 2008</time>
+        
+        <a rel="bookmark" href="/2008/05/23/edge-rails-armazenando-o-nome-completo-da-classe-ao-usar-sti/"></a>
+      </p>
     
+  </header>
+
+
+
+  <div class="entry-content"><p>Patch de brasileiro e não é de qualquer brasileiro, é do meu colega de trabalho na <a href="http://www.surgeworks.com/">Surgeworks</a>, <a href="http://blog.divoxx.com/">Rodrigo Kochenburger</a>.</p>
+
+<p>Neste patch o Rodrigo resolveu um problema que tínhamos ao usar <strong>models com namespace</strong> e <strong>STI</strong>. Nas suas próprias palavras:</p>
+
+<p>Quando usamos models com namespace e STI, o <em>ActiveRecord</em> armazena apenas o nome da classe, sem o namespace (<em>demodulized</em>). Isto vai funcionar se todas as classes no STI estiverem no mesmo namespace, mas irá falhar em outros casos. Exemplo:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">CollectionItem<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span><span class="punctuation punctuation_separator punctuation_separator_statement punctuation_separator_statement_ruby">;</span> <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">ComicCollection::Item<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> CollectionItem</span></span></span><span class="punctuation punctuation_separator punctuation_separator_statement punctuation_separator_statement_ruby">;</span> <span class="keyword keyword_control keyword_control_ruby">end</span>
+
+item <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">ComicCollection</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">Item</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span>
+item<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>type <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; 'Item'
+</span>
+item2 <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">CollectionItem</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>item<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>id<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> retorna um erro, porque não encontrou a classe Item
+</span></span></span></pre>
+
+
+<p>Este patch do Rodrigo adiciona uma nova opção de configuração que faz com que o <em>ActiveRecord</em> armazene o nome completo da classe.</p>
+
+<p>Para ligar ou desligar esta funcionalidade você deve incluir ou alterar a seguinte linha no seu arquivo <em>environment.rb</em>:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="support support_class support_class_ruby">ActiveRecord</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">Base</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>store_full_sti_class <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_language constant_language_ruby">true</span></span></span></pre>
+
+
+<p>Por padrão esta funcionalidade estará ligada.</p>
+</div>
+
+
+    </article>
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/05/22/edge-rails-testando-named_scope-com-proxy_options/">Edge Rails: Testando named_scope com proxy_options</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -124,9 +208,11 @@
 
 <time datetime="2008-05-22T00:00:00-03:00" pubdate data-updated="true">22 de Maio de 2008</time>
         
+        <a rel="bookmark" href="/2008/05/22/edge-rails-testando-named_scope-com-proxy_options/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Uma novidade legal no Rails 2.1, que inclusive já foi assunto desta série é o <a href="http://www.nomedojogo.com/2008/04/06/edge-rails-named_scope/"><strong>named_scope</strong></a>. Depois de &#8220;brincar&#8221; um pouco com este recurso, fomos descobrindo que era muito difícil testar se o escopo estava sendo gerado corretamente, principalmente quando usávamos estruturas mais complexas.</p>
@@ -155,19 +241,30 @@
 </span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/05/21/voce-nao-cria-uma-cultura/">Você não cria uma cultura</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/05/21/voce-nao-cria-uma-cultura/">Você não cria uma cultura</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -184,9 +281,11 @@
 
 <time datetime="2008-05-21T00:00:00-03:00" pubdate data-updated="true">21 de Maio de 2008</time>
         
+        <a rel="bookmark" href="/2008/05/21/voce-nao-cria-uma-cultura/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Tradução livre: <a href="http://www.37signals.com/svn/posts/1022-you-dont-create-a-culture">http://www.37signals.com/svn/posts/1022-you-dont-create-a-culture</a></p>
@@ -207,19 +306,30 @@
 
 <p>Não perca tempo pensando em como criar uma cultura, basta fazer as coisas certas para você, seus clientes e para sua equipe e ela vai acontecer.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/05/21/edge-rails-sessionon/">Edge Rails: session(:on)</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/05/21/edge-rails-sessionon/">Edge Rails: session(:on)</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -236,9 +346,11 @@
 
 <time datetime="2008-05-21T00:00:00-03:00" pubdate data-updated="true">21 de Maio de 2008</time>
         
+        <a rel="bookmark" href="/2008/05/21/edge-rails-sessionon/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Talvez você não conheça mas no Rails é possível desligar o uso de sessões assim:</p>
@@ -258,19 +370,30 @@
 </span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/05/20/rails-podcast-brasil-episodio-17/">Rails Podcast Brasil - Episódio 17</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/05/20/rails-podcast-brasil-episodio-17/">Rails Podcast Brasil - Episódio 17</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -287,9 +410,11 @@
 
 <time datetime="2008-05-20T00:00:00-03:00" pubdate data-updated="true">20 de Maio de 2008</time>
         
+        <a rel="bookmark" href="/2008/05/20/rails-podcast-brasil-episodio-17/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Extra! Extra! O Rails Podcast Brasil #17 está no ar&#8230; Extra! Extra! Fábio Akita tem novidade bombástica!</p>
@@ -338,19 +463,30 @@
 </ul>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/05/20/edge-rails-datecurrent/">Edge Rails: Date.current</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/05/20/edge-rails-datecurrent/">Edge Rails: Date.current</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -367,9 +503,11 @@
 
 <time datetime="2008-05-20T00:00:00-03:00" pubdate data-updated="true">20 de Maio de 2008</time>
         
+        <a rel="bookmark" href="/2008/05/20/edge-rails-datecurrent/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Lembra quando eu falei do <em><a href="http://www.nomedojogo.com/2008/05/03/edge-rails-timecurrent/">Time.current</a></em>? Pois é, a classe <strong>Date</strong> também ganhou um método <strong>current</strong>.</p>
@@ -378,19 +516,30 @@
 
 <p>O <strong>ActionView</strong> <strong>date_helper</strong> também foi alterado para usar o <strong>Date.current</strong> para determinar o seu valor padrão.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/05/19/workaholics-se-fixam-inconsequentemente-em-detalhes/">Workaholics se fixam inconsequentemente em detalhes</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/05/19/workaholics-se-fixam-inconsequentemente-em-detalhes/">Workaholics se fixam inconsequentemente em detalhes</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -407,9 +556,11 @@
 
 <time datetime="2008-05-19T00:00:00-03:00" pubdate data-updated="true">19 de Maio de 2008</time>
         
+        <a rel="bookmark" href="/2008/05/19/workaholics-se-fixam-inconsequentemente-em-detalhes/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img class="aligncenter size-full wp-image-738" title="2358787490_82d90e2041" src="http://old.nomedojogo.com/wp-content/uploads/2008/05/2358787490_82d90e2041.jpg" alt="" /></p>
@@ -432,19 +583,30 @@
 
 <p>Na maioria das vezes, o verdadeiro herói está já a casa, porque ele/ela conseguiu encontrar uma forma mais rápida de terminar o trabalho.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/05/19/edge-rails-caches_action-aceita-condicionais/">Edge Rails: caches_action aceita condicionais</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/05/19/edge-rails-caches_action-aceita-condicionais/">Edge Rails: caches_action aceita condicionais</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -461,9 +623,11 @@
 
 <time datetime="2008-05-19T00:00:00-03:00" pubdate data-updated="true">19 de Maio de 2008</time>
         
+        <a rel="bookmark" href="/2008/05/19/edge-rails-caches_action-aceita-condicionais/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>O método <strong>caches_action</strong> agora também aceita a opção <strong>:if</strong>, permitindo o uso de condicionais para especificar quando uma <em>action</em> pode ir para o <em>cache</em>. Por exemplo:</p>
@@ -473,19 +637,30 @@
 
 <p>No exemplo acima, a <em>action</em> <strong>index</strong> só irá para o <em>cache</em> se não foi acessada via um <em>request</em> <em>JSON</em>.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/05/16/edge-rails-table_exists/">Edge Rails: table_exists?</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/05/16/edge-rails-table_exists/">Edge Rails: table_exists?</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -502,9 +677,11 @@
 
 <time datetime="2008-05-16T00:00:00-03:00" pubdate data-updated="true">16 de Maio de 2008</time>
         
+        <a rel="bookmark" href="/2008/05/16/edge-rails-table_exists/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Novo método para a classe <strong>AbstractAdapter</strong>: <strong>table_exists?</strong>. Seu uso é muito simples:</p>
@@ -513,19 +690,30 @@
 <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">true</span></span></pre>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/05/16/como-anda-a-traducao-do-whys-poignant-guide-to-ruby/">Como anda a tradução do Why&#8217;s (Poignant) Guide to Ruby?</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/05/16/como-anda-a-traducao-do-whys-poignant-guide-to-ruby/">Como anda a tradução do Why&#8217;s (Poignant) Guide to Ruby?</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -542,9 +730,11 @@
 
 <time datetime="2008-05-16T00:00:00-03:00" pubdate data-updated="true">16 de Maio de 2008</time>
         
+        <a rel="bookmark" href="/2008/05/16/como-anda-a-traducao-do-whys-poignant-guide-to-ruby/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Considerando que <a href="http://www.nomedojogo.com/2008/05/14/whys-poignant-guide-to-ruby-em-portugues-quem-vai-querer/">começamos</a> a traduzir o livro faz menos de dois dias, estamos indo muito bem. Se pegarmos o que já foi traduzido e o que está sendo traduzido neste momento, temos quase <strong>40% dos textos</strong> do livro pronto.</p>
@@ -553,55 +743,6 @@
 
 <p>Estou adotando o seguinte padrão para os tradutores, quem enviar um request com traduções e ele for aprovado sem precisar de alterações, vira automaticamente um <strong>commiter</strong>. Além do Fábio e eu (claro), já temos dois novos commiter para o projeto: <a href="http://github.com/nofxx">nofxx</a> e <a href="http://github.com/escobera">escobera</a>, que estão fazendo um excelente trabalho.</p>
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/05/16/autotest-notification-gem-10-e-falante/">Autotest Notification Gem 1.0 e falante&#8230;</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-05-16T00:00:00-03:00" pubdate data-updated="true">16 de Maio de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Acho que já está na hora de nomear o gem <strong><a href="http://github.com/carlosbrando/autotest-notification/tree">autotest-notification</a></strong> com uma versão <strong>1.0</strong>. Nem posso falar que este gem é meu, muita gente colocou a mão nele (no bom sentido) e ele ficou ótimo! Só falta falar&#8230;</p>
-
-<p>Hmm&#8230; falar? Peraí.</p>
-
-<p>Pronto! Agora nem falar falta! Se você for o feliz proprietário de um <strong>Mac</strong>, ao ligar o modo automático do gem, acrescente a opção <strong>-s</strong>, assim:</p>
-
-<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">an-install --s</span></span></pre>
-
-
-<p>Toda vez que um teste falhar seu Mac irá &#8220;falar&#8221;. E quando enjoar é só executar o comando de novo sem a opção.</p>
-
-<p>Obrigado à todos que contribuíram com seus códigos. E vamos continuar evoluindo&#8230;</p>
-</div>
-  
-  
 
 
     </article>
@@ -623,6 +764,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
@@ -636,10 +781,6 @@
     
       <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
   </ul>

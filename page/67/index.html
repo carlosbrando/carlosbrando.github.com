@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="A idéia é do Akita, e eu estou apoiando. O que acham de um encontro para falarmos de Rails aqui em São Paulo? A idéia não é fazer um evento como um &hellip;">
+  <meta name="description" content="Gostou da imagem acima? Para colocar um tooltip assim em sua aplicação Rails é muito simples, basta rodar o seguinte comando: ruby script/plugin &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,14 +100,94 @@
       <div id="content">
         <div class="blog-index">
   
-  
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
+    <h1 class="entry-title">
+
+<a href="/2007/10/13/incluia-tooltips-em-seus-projetos-rails/">Incluia Tooltips em seus projetos Rails</a>
+
+</h1>
+
     
-      <h1 class="entry-title"><a href="/2007/10/09/encontrao-de-rails-em-sampa/">Encontro de Rails em Sampa</a></h1>
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-10-13T00:00:00-03:00" pubdate data-updated="true">13 de Outubro de 2007</time>
+        
+        <a rel="bookmark" href="/2007/10/13/incluia-tooltips-em-seus-projetos-rails/"></a>
+      </p>
     
+  </header>
+
+
+
+  <div class="entry-content"><center><img src="http://old.nomedojogo.com/wp-content/uploads/2007/10/tooltip.jpg" alt="tooltip.jpg" /></center>
+
+
+<p>Gostou da imagem acima? Para colocar um tooltip assim em sua aplicação Rails é muito simples, basta rodar o seguinte comando:</p>
+
+<pre>ruby script/plugin install svn://svn.seesaw.it/widgets/trunk</pre>
+
+
+<p>Em sua página coloque algo assim:</p>
+
+<p>[source:ruby]
+Meu tooltip:</p>
+
+<p>&lt;% tooltip do %>
+  <b>Nome do Jogo</b><br/>
+  Eu aprendi a usar este plugin no NomeDoJogo.com!<br/>
+&lt;% end %>
+[/source]</p>
+
+<p>Simples não? Do jeito que todo programador Rails gosta!</p>
+</div>
+
+
+    </article>
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2007/10/09/encontrao-de-rails-em-sampa/">Encontro de Rails em Sampa</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -124,9 +204,11 @@
 
 <time datetime="2007-10-09T00:00:00-03:00" pubdate data-updated="true"> 9 de Outubro de 2007</time>
         
+        <a rel="bookmark" href="/2007/10/09/encontrao-de-rails-em-sampa/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/10/142124453_561ff61311.jpg" alt="142124453_561ff61311.jpg" /></p>
@@ -141,19 +223,30 @@
 
 <p>Há&#8230; sexta-feira eu não posso, mas nos outros dias tudo bem. rs</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/10/05/vamos-falar-sobre-testes/">Vamos falar sobre testes</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/10/05/vamos-falar-sobre-testes/">Vamos falar sobre testes</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -170,9 +263,11 @@
 
 <time datetime="2007-10-05T00:00:00-03:00" pubdate data-updated="true"> 5 de Outubro de 2007</time>
         
+        <a rel="bookmark" href="/2007/10/05/vamos-falar-sobre-testes/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img id="id" height="333" alt="343865357_60fa3ffa81" src="http://old.nomedojogo.com/wp-content/uploads/2007/10/343865357-60fa3ffa81.jpg" width="444" border="0" /> </p>
@@ -180,19 +275,30 @@
 
 <p>  <p>O Rails usa o <a href="http://www.ruby-doc.org/stdlib/libdoc/test/unit/rdoc/classes/Test/Unit.html" target="_blank">Test::Unit</a> como framework de testes.</p>  <p>Nosso framework de testes é muito parecido com o <a href="http://sunit.sourceforge.net/" target="_blank">SUnit</a> do Smalltalk, que mais tarde se tornou o xUnit, que você vai encontrar para algumas linguagens de programação. Se quiser ver uma lista dos frameworks de testes que cada linguagem possui, <a href="http://en.wikipedia.org/wiki/List_of_unit_testing_frameworks" target="_blank">clique aqui</a>.</p>  <p>O Test::Unit (e a idéia do xUnit) se utiliza de quatro conceitos básicos:</p>  <h3>Um Teste é uma Afirmação</h3>  <p>Ao se realizar um teste qualquer, é necessário afirmar algo. Por exemplo, você pode afirmar que o CEP de um endereço tem 8 dígitos, se falhar nesta condição significa falhar no teste. Para isto o Rails possui os famosos métodos <strong>assert</strong>. Uma lista com estes métodos pode ser vista <a href="http://manuals.rubyonrails.com/read/chapter/24" target="_blank">aqui</a>.</p>  <h3>Um método para cada Teste</h3>  <p>Todo teste é um método cujo nome sempre se inicia com <em>test_</em>. Estes métodos contêm diversas <strong>afirmações</strong> relacionadas, que testam uma funcionalidade de sua aplicação. Seguindo o exemplo, nosso método de teste para o CEP poderia ser algo como <em>test_cep</em> ou <em>test_cep_size</em>.</p>  <h3>Classes de Teste</h3>  <p>Para facilitar nossa vida o Rails já tem tudo preparado para nossos testes. Toda classe de teste no Rails precisa herdar de <strong>Test::Unit::TestCase</strong>, que já contém tudo que você precisa para executar seus testes unitários.</p>  <h3>Suíte de Testes</h3>  <p>Uma suíte de testes é um conjunto de casos de teste (as classes de teste p&#xF4;!). Quando você roda uma suíte de testes todos os seus métodos de testes serão executados, no Rails isto é trivial.</p>  <p>&#xA0;</p>  <p>É simplesmente imprescindível que você teste seus c&#xF3;digos. No Rails chega a ser vergonhoso não fazer isto, visto que ele mesmo cria tudo que se precisa, deixando apenas o trabalho de &quot;completar&quot; os testes para você.</p>  <p>Para aprender mais sobre como funcionam os teste no Rails você pode <a href="http://rubyonbr.org/articles/2007/02/10/testes-em-rails/" target="_blank">clicar aqui</a> e <a href="http://simplesideias.com.br/tdd-no-rails-unit-tests/" target="_blank">aqui</a>. E lembrem-se: &quot;Quem não testar é mulher do padre&#8230;&quot;.</p>  <p>&#xA0;</p>  <p>PS: E não se esqueçam de <a href="http://www.akitaonrails.com/2007/10/5/rails-1-2-4-maintenance-release" target="_blank">atualizar</a> a sua versão do Rails (<strong>1.2.4</strong>): gem update rails -y.</p></p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/10/04/aprendi-ruby-e-me-tornei-um-programador-pior/">Aprendi Ruby e me tornei um programador pior&#8230;</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/10/04/aprendi-ruby-e-me-tornei-um-programador-pior/">Aprendi Ruby e me tornei um programador pior&#8230;</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -209,9 +315,11 @@
 
 <time datetime="2007-10-04T00:00:00-03:00" pubdate data-updated="true"> 4 de Outubro de 2007</time>
         
+        <a rel="bookmark" href="/2007/10/04/aprendi-ruby-e-me-tornei-um-programador-pior/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img border="0" width="500" src="http://old.nomedojogo.com/wp-content/uploads/2007/10/425407884-32f0ffa696.jpg" alt="425407884_32f0ffa696" height="432" id="id" /></p>
@@ -412,19 +520,30 @@
 <p>Pois é, depois que aprendi Ruby, sou um programador muito pior&#8230;</p>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/10/03/de-graa-eu-quero/">De graça? Eu quero&#8230;</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/10/03/de-graa-eu-quero/">De graça? Eu quero&#8230;</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -441,9 +560,11 @@
 
 <time datetime="2007-10-03T00:00:00-03:00" pubdate data-updated="true"> 3 de Outubro de 2007</time>
         
+        <a rel="bookmark" href="/2007/10/03/de-graa-eu-quero/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img id="id" height="333" alt="388088646_d7af6ff322" src="http://old.nomedojogo.com/wp-content/uploads/2007/10/388088646-d7af6ff322.jpg" width="444" border="0" /> </p>
@@ -451,19 +572,30 @@
 
 <p>  <p>O <a href="http://www.sitepoint.com" target="_blank">SitePoint.com</a> está oferecendo o download em pdf do livro <strong>Build Your Own Ruby on Rails Web Applications</strong> de <strong>Patrick Lenz</strong> gratuitamente.</p>  <p>O livro é bem legal, tem algumas dicas bem interessantes para iniciantes e gostei principalmente da parte de Ajax e Web 2.0.</p>  <p>O link para download s&#xF3; ficará no ar por 60 dias. Clique <a href="http://www.sitepoint.com/books/rails1/freebook.php">aqui</a> para pegar a sua c&#xF3;pia.</p></p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/10/02/agora-no-precisava-mais/">Agora não precisava mais&#8230;</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/10/02/agora-no-precisava-mais/">Agora não precisava mais&#8230;</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -480,9 +612,11 @@
 
 <time datetime="2007-10-02T00:00:00-03:00" pubdate data-updated="true"> 2 de Outubro de 2007</time>
         
+        <a rel="bookmark" href="/2007/10/02/agora-no-precisava-mais/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img id="id" style="border-right: 0px; border-top: 0px; border-left: 0px; border-bottom: 0px" height="333" alt="119330053_37643b5eaa" src="http://old.nomedojogo.com/wp-content/uploads/2007/10/119330053-37643b5eaa.jpg" width="500" border="0" /> </p>
@@ -490,19 +624,30 @@
 
 <p>  <p>Já falei do <a href="http://scrubyt.org">scRUBYt!</a> por <a href="http://www.nomedojogo.com/2007/09/04/scrubyt-no-windows-no-tem-hash/">aqui</a> <a href="http://www.nomedojogo.com/2007/08/19/links-de-domingo/">antes</a>, mas para que está chegando agora, trata-se de um gem para realizar scraps de&#xA0; websites.</p>  <p>Imagine que você tenha de fazer um aplicativo que precise recuperar a cotação do d&#xF3;lar. Talvez você queira recuperar esta informação de algum outro site que não forneça APIs, neste caso é muito simples criar um scrap pelo scRUBYt! que vai até o site e recupera o dado direto do HTML usando expressões regulares, mas (eu disse: mas) sem que você precise escrever as expressões.</p>  <p>O projeto é excelente e está bem ativo. Vale a pena experimentar. Um grande problema que eu enfrentava (atenção para o &quot;enfrentava&quot;) era que as últimas versões não funcionavam no Windows. E eu sofri bastante por conta disto, como você pode ver <a href="http://www.nomedojogo.com/2007/09/04/scrubyt-no-windows-no-tem-hash/">aqui</a>.</p>  <p>Dois dias depois de eu sair do Windows, o time de desenvolvimento <a href="http://scrubyt.org/announcing-jscrubyt-no-more-win32-problems/">anuncia</a> que um cara chamado <strong>Paul Nikitochkin</strong>, criou uma versão em JRuby do scRUBYt!, chamada <a href="http://rubyforge.org/frs/download.php/26165/scrubyt-jruby-0.3.4.rar">JscRUBYt!</a> que funciona perfeitamente no Windows.</p>  <p>Há três dias atrás eu comemoraria, mas agora, tanto faz&#8230;</p></p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/10/01/e-o-vencedor/">E o vencedor é&#8230;</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/10/01/e-o-vencedor/">E o vencedor é&#8230;</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -519,9 +664,11 @@
 
 <time datetime="2007-10-01T00:00:00-03:00" pubdate data-updated="true"> 1 de Outubro de 2007</time>
         
+        <a rel="bookmark" href="/2007/10/01/e-o-vencedor/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p></p>
@@ -529,19 +676,30 @@
 
 <p> <center><img id="id" height="375" alt="173864893_3e19041b96" src="http://old.nomedojogo.com/wp-content/uploads/2007/10/windowslivewritereovencedor-8eee173864893-3e19041b96-378facba-1ee5-45b2-92b7-2b8355824f2f.jpg" width="428" border="0" /></center>  <p></p>  <p>Infelizmente não foi um brazuca que levou o troféu do Rumble Rails, mas com certeza foi uma experiência muito boa ver um projeto como este. Foram quase cem novos sites construídos com RoR em um único fim de semana.</p>  <p>Quem venceu no final foi a comunidade que viu o poder da ferramenta que gosta, e ainda ganhou um monte de projetos novos para alavancar a tecnologia.</p>  <p>Parabéns aos vencedores e a todos os que participaram.</p>  <h3>Vencedores</h3>  <ol>   <li><a href="http://tastyplanner.com/">Tasty Planner</a> </li>    <li><a href="http://electriccheckbook.com/">Eletric CheckBook</a> </li>    <li><a href="http://admiteer.com/">Admiteer</a> </li> </ol></p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/10/01/adeus-windows/">Adeus Windows</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/10/01/adeus-windows/">Adeus Windows</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -558,9 +716,11 @@
 
 <time datetime="2007-10-01T00:00:00-03:00" pubdate data-updated="true"> 1 de Outubro de 2007</time>
         
+        <a rel="bookmark" href="/2007/10/01/adeus-windows/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Sempre fui um &#8220;cliente&#8221; do Bill Gates. Comecei minha carreira profissional com o <strong>Visual Basic 4</strong> e meu primeiro contato com um computador foi usando o <strong>DOS</strong>. Depois fui pulando de versão para versão do <strong>Windows</strong>, até o dia que descobri o Rails.</p>
@@ -581,19 +741,30 @@
 
 <p>Ainda tenho muita coisa à aprender, mas pelo visto será muito mais fácil do que imaginei. A única coisa que não consegui fazer foi colocar o <strong>Beryl</strong> para rodar, quando eu o executo meu monitor vira uma tela em branco. Minha placa de vídeo é <strong>ATI</strong>, tem gente falando que funciona, mas nem os tutoriais da internet me ajudaram. Se alguém tiver alguma dica&#8230; rs</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/09/28/refatorando-cdigo-e-final-do-rails-rumble/">Refatorando código e final do Rails Rumble</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/09/28/refatorando-cdigo-e-final-do-rails-rumble/">Refatorando código e final do Rails Rumble</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -610,9 +781,11 @@
 
 <time datetime="2007-09-28T00:00:00-03:00" pubdate data-updated="true">28 de Setembro de 2007</time>
         
+        <a rel="bookmark" href="/2007/09/28/refatorando-cdigo-e-final-do-rails-rumble/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img id="id" height="375" alt="129822585_4bf4aa11cb" src="http://old.nomedojogo.com/wp-content/uploads/2007/09/windowslivewriterrefatorandocdigoefinaldorailsrumble-a009129822585-4bf4aa11cb-08ba07c7-e9b4-4882-bc6d-5f8e76d4b22c.jpg" width="500" border="0" /> </p>
@@ -620,19 +793,30 @@
 
 <p>  <p>Estava vendo hoje um projeto legal chamado &quot;<a href="http://refactormycode.com/">Refactor :my =&gt; &#8216;code&#8217;</a>&quot;, é um site onde você posta um trecho de c&#xF3;digo para que outras pessoas lhe ajudem a melhorá-lo.</p>  <p>Quando vi este projeto, fiquei com uma sensação de déjà vu , já tinha visto isto em algum lugar&#8230; Foi quando me lembrei do projeto do <strong>Eduardo Fiorezi</strong> para o Rails Rumble, o <a href="http://refactoringgame.railsrumble.com/">Refactoring Game</a>.</p>  <p>Falando em <a href="http://railsrumble.com/">Rails Rumble</a>, hoje é o grande dia. Finalmente saberemos quem foi o vencedor, e tem brasileiros na parada. Aguardem&#8230;</p></p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/09/27/o-rails-t-lento-reveja-seu-cdigo/">O Rails tá lento? Reveja seu código&#8230;</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/09/27/o-rails-t-lento-reveja-seu-cdigo/">O Rails tá lento? Reveja seu código&#8230;</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -649,9 +833,11 @@
 
 <time datetime="2007-09-27T00:00:00-03:00" pubdate data-updated="true">27 de Setembro de 2007</time>
         
+        <a rel="bookmark" href="/2007/09/27/o-rails-t-lento-reveja-seu-cdigo/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img border="0" width="500" src="http://old.nomedojogo.com/wp-content/uploads/2007/09/windowslivewriterorailstlentorevejaseucdigo-c34d1339929731-4087ea7a65-831b8191-eb8d-42d4-8cbe-eba646477440.jpg" alt="1339929731_4087ea7a65" height="374" id="id" /></p>
@@ -689,114 +875,6 @@ end
 <p>Fiquem atentos aos recursos do Rails, os maiores problemas de desempenho que encontro é em detalhes como esse.</p>
 
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/09/26/herana-de-tabela-simples-no-activerecord/">Herança de tabela simples no ActiveRecord</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-09-26T00:00:00-03:00" pubdate data-updated="true">26 de Setembro de 2007</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img id="id" height="370" alt="458624987_1c4a9ee690" src="http://old.nomedojogo.com/wp-content/uploads/2007/09/windowslivewriterheranasnoactiverecord-da92458624987-1c4a9ee690-b3790d1e-a1fa-4663-ad16-1bd389df8d40.jpg" width="500" border="0" /> </p>
-
-
-
-
-<p>Um problema comum e uma solução trivial. É assim que posso descrever o uso de heranças em modelos no Rails.</p>
-
-
-
-
-<p>Imagine a seguinte situação: No meu diagrama de classes tenho uma classe Person com duas subclasses, Manager e Employee. De inicio a primeira coisa que faríamos seria criar três modelos no Rails:</p>
-
-
-
-
-<p>
-[source:ruby]
-class Person < ActiveRecord::Base
-end
-
-class Manager < ActiveRecord::Base
-end
-
-class Employee < ActiveRecord::Base
-end
-[/source]
-</p>
-
-<p>Mas como modelar as tabelas neste caso? Podemos usar o recurso de heranças do ActiveRecord e fazer tudo em cima de apenas uma tabela.</p>
-
-<p>
-[source:sql]
-create table people (
-  id INT AUTO_INCREMENT NOT NULL,
-  type VARCHAR(20),
-
-  /* atributos comuns */
-  name VARCHAR(100) NOT NULL,
-  email VARCHAR(100) NOT NULL,
-
-  /* atributos do gerente */
-  dept INT,
-
-  /* atributos do funcionario */
-  reports_to INT,
-  PRIMARY KEY (id)
-);
-[/source]
-</p>
-
-<p>Note que criamos uma coluna chamada <strong>type</strong> na tabela people, é aqui que está o segredo.</p>
-
-<p>Agora alteramos os modelos para que as classes Manager e Employee sejam subclasses de Person:</p>
-
-<p>
-[source:ruby]
-class Person < ActiveRecord::Base
-end
-
-class Manager < Person
-end
-
-class Employee < Person
-end
-[/source]
-</p>
-
-<p>Pronto. Agora todos os modelos acessam a mesma tabela. Se você utilizar a classe Person, o ActiveRecord vai sempre retornar todas as linhas desta tabela, mas se usar Manager ou Employee ele somente tratará os registros com o tipo especificado.</p>
-
-<p>Mas temos um problema aí, você vai verificar que todas as classes possuem os mesmos atributos. Mas na prática isto nem é um problema assim tão sério. Você pode simplesmente ignorar os atributos que não pertencem àquela classe. É um preço baixo a pagar por tamanha facilidade. Sem contar que isto vai lhe poupar a criação de pelo menos três tabelas, e melhorar o desempenho de sua aplicação, já que menos tabelas são menos associações.</p>
-
-</div>
-  
-  
 
 
     </article>
@@ -818,6 +896,10 @@ end
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
@@ -831,10 +913,6 @@ end
     
       <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
   </ul>

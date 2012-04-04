@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Neither came out the Rails 2.1 and was already found a serious error. Access the irb and try to run this: Date.new(2008, 5, 31).end_of_quarter ERROR &hellip;">
+  <meta name="description" content="Antes de qualquer coisa, me deixe explicar como ficaram organizadas as coisas aqui no blog. A série Edge Rails, como sempre, continua tratando das &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,14 +100,90 @@
       <div id="content">
         <div class="blog-index">
   
-  
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
+    <h1 class="entry-title">
+
+<a href="/2008/06/04/edge-rails-nova-funcionalidade-rjspagereload/">Edge Rails - Nova funcionalidade: RJS#page.reload</a>
+
+</h1>
+
     
-      <h1 class="entry-title"><a href="/2008/06/03/rails-21-bug-in-method-end_of_quarter/">Rails 2.1: Bug in method end_of_quarter</a></h1>
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-06-04T00:00:00-03:00" pubdate data-updated="true"> 4 de Junho de 2008</time>
+        
+        <a rel="bookmark" href="/2008/06/04/edge-rails-nova-funcionalidade-rjspagereload/"></a>
+      </p>
     
+  </header>
+
+
+
+  <div class="entry-content"><p>Antes de qualquer coisa, me deixe explicar como ficaram organizadas as coisas aqui no blog. A série Edge Rails, como sempre, continua tratando das versões futuras do Rails. Para ver todos os posts da série, você pode usar a categoria <a href="http://www.nomedojogo.com/category/edge-rails/">Edge Rails</a>. Mas, para relembrar tudo que foi escrito antes do lançamento do Rails 2.1, criei uma <a href="http://www.nomedojogo.com/category/rails-21/">categoria com o mesmo nome</a> para facilitar, e movi todos os posts antigos para ela.</p>
+
+<p>Outra coisa importante é que já está saindo do forno o livro sobre <strong>Ruby on Rails 2.1</strong> e será disponibilizado em PDF (de grátis!!!) em breve. Aliás, se alguém bom com Photoshop estiver lendo este post e estiver a fim de ajudar com uma capa bem bonita para o livro, entre em contato comigo, por favor!</p>
+
+<p>Ok, agora vamos ao que interessa:</p>
+
+<p>O método <strong>reload</strong> foi incluído ao <strong>ActionView::Helpers::PrototypeHelper</strong> para ser usado em templates <strong>.rjs</strong> ou blocos <strong>render(:update)</strong>. Este método força a recarga da página atual no browser usando javascript. Em outras palavras é um atalho para o já muito usado <strong>window.location.reload();</strong>.</p>
+
+<p>Veja como usar:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_function support_function_actionpack support_function_actionpack_rails">respond_to</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">format</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+  format<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>js <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
+</span>    <span class="support support_function support_function_actionpack support_function_actionpack_rails">render</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>update</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">page</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> page<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>reload <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+</div>
+
+
+    </article>
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/06/03/rails-21-bug-in-method-end_of_quarter/">Rails 2.1: Bug in method end_of_quarter</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -124,9 +200,11 @@
 
 <time datetime="2008-06-03T00:00:00-03:00" pubdate data-updated="true"> 3 de Junho de 2008</time>
         
+        <a rel="bookmark" href="/2008/06/03/rails-21-bug-in-method-end_of_quarter/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Neither came out the <strong>Rails 2.1</strong> and was already found a serious error. Access the <strong>irb</strong> and try to run this:</p>
@@ -151,19 +229,30 @@
 
 <p>Do you like it? <a href="http://www.workingwithrails.com/recommendation/new/person/8137-carlos-brando">Recommend me on Working With Rails</a>.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/06/03/politica-de-comunicacao-publica/">Política de comunicação pública</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/06/03/politica-de-comunicacao-publica/">Política de comunicação pública</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -180,9 +269,11 @@
 
 <time datetime="2008-06-03T00:00:00-03:00" pubdate data-updated="true"> 3 de Junho de 2008</time>
         
+        <a rel="bookmark" href="/2008/06/03/politica-de-comunicacao-publica/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Tradução do artigo &#8221;<a href="http://www.37signals.com/svn/posts/1021-ask-37signals-public-communications-policy">Ask 37signals: Public communications policy?</a>&#8221;.</p>
@@ -203,19 +294,30 @@
 
 <p>Quando você confia às pessoas tomarem uma decisão razoável, normalmente elas farão. Quando tudo que uma pessoa escreve deve passar por um processo de aprovação, ela provavelmente escreverá menos e será menos interessante. Não queremos que as pessoas tenham medo de escrever ou medo de pensar.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/06/03/edge-rails-erro-ao-usar-o-metodo-end_of_quarter/">Edge Rails: Erro ao usar o método end_of_quarter</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/06/03/edge-rails-erro-ao-usar-o-metodo-end_of_quarter/">Edge Rails: Erro ao usar o método end_of_quarter</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -232,9 +334,11 @@
 
 <time datetime="2008-06-03T00:00:00-03:00" pubdate data-updated="true"> 3 de Junho de 2008</time>
         
+        <a rel="bookmark" href="/2008/06/03/edge-rails-erro-ao-usar-o-metodo-end_of_quarter/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Nem bem saiu o <a href="http://www.nomedojogo.com/2008/06/01/agora-e-oficial-ruby-on-rails-21/">Rails 2.1</a> e já foi encontrado um erro sério. Entre no <strong>irb</strong> e tente rodar isto:</p>
@@ -259,19 +363,30 @@
 
 <p>Gostou? Que tal me <a href="http://www.workingwithrails.com/recommendation/new/person/8137-carlos-brando">recomendar no WWR</a>. É só <a href="http://www.workingwithrails.com/recommendation/new/person/8137-carlos-brando">clicar aqui</a> e pronto!</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/06/02/edge-rails-fechando-as-atualizacoes-para-o-rails-21/">Edge Rails: Fechando as atualizações para o Rails 2.1</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/06/02/edge-rails-fechando-as-atualizacoes-para-o-rails-21/">Edge Rails: Fechando as atualizações para o Rails 2.1</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -288,9 +403,11 @@
 
 <time datetime="2008-06-02T00:00:00-03:00" pubdate data-updated="true"> 2 de Junho de 2008</time>
         
+        <a rel="bookmark" href="/2008/06/02/edge-rails-fechando-as-atualizacoes-para-o-rails-21/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>A última sexta-feira e sábado foi a maior correria para deixar tudo redondinho no código do Rails para o lançamento da versão 2.1. E como não podia deixar de ser, algumas coisas foram alteradas e outras novas apareceram de última hora. Vamos as mais importantes delas:</p>
@@ -323,19 +440,30 @@
 
 <p>Com isso acredito que fechamos a série Edge Rails para a versão 2.1. Eu e o <a href="http://www.improveit.com.br/empresa/tapajos">Marcos Tapajós</a> estamos preparando um PDF com todas as novidades desta versão. Aguardem&#8230;</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/06/01/agora-e-oficial-ruby-on-rails-21/">Agora é oficial - Ruby on Rails 2.1</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/06/01/agora-e-oficial-ruby-on-rails-21/">Agora é oficial - Ruby on Rails 2.1</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -352,9 +480,11 @@
 
 <time datetime="2008-06-01T00:00:00-03:00" pubdate data-updated="true"> 1 de Junho de 2008</time>
         
+        <a rel="bookmark" href="/2008/06/01/agora-e-oficial-ruby-on-rails-21/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>David acabou de anunciar no <a href="http://weblog.rubyonrails.com/2008/6/1/rails-2-1-time-zones-dirty-caching-gem-dependencies-caching-etc">blog oficial</a> do <strong>Rails</strong> o lançamento da versão <strong>2.1</strong>. Foram <strong>seis meses</strong> de desenvolvimento e mais de <strong>1600 patches</strong> criados por aproximadamente <strong>1400 desenvolvedores</strong> do mundo todo.</p>
@@ -376,19 +506,30 @@
 <pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">gem install rails</span></span></pre>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/05/31/ruby-on-rails-21-lancado/">Ruby on Rails 2.1 - Sai hoje?</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/05/31/ruby-on-rails-21-lancado/">Ruby on Rails 2.1 - Sai hoje?</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -405,9 +546,11 @@
 
 <time datetime="2008-05-31T00:00:00-03:00" pubdate data-updated="true">31 de Maio de 2008</time>
         
+        <a rel="bookmark" href="/2008/05/31/ruby-on-rails-21-lancado/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Ainda não foi anúnciado no blog oficial do Rails, mas tudo indica que o Ruby on Rails 2.1 será lançado hoje.</p>
@@ -425,19 +568,30 @@
 
 <p>Em breve atualizarei este post com mais notícias&#8230;</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/05/31/railsconf-2008-session-on-git-atualizado/">RailsConf 2008 Session on Git [atualizado]</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/05/31/railsconf-2008-session-on-git-atualizado/">RailsConf 2008 Session on Git [atualizado]</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -454,9 +608,11 @@
 
 <time datetime="2008-05-31T00:00:00-03:00" pubdate data-updated="true">31 de Maio de 2008</time>
         
+        <a rel="bookmark" href="/2008/05/31/railsconf-2008-session-on-git-atualizado/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><a href="http://www.gitcasts.com/git-talk"><img class="alignnone size-full wp-image-760" title="gitcover" src="http://old.nomedojogo.com/wp-content/uploads/2008/05/gitcover.png" alt="" /></a></p>
@@ -475,19 +631,30 @@
 
 <p><a href="http://www.vimeo.com/1099027?pg=embed&amp;sec=1099027">RailsConf 2008 Git Talk by Scot Chacon Video</a> from <a href="http://www.vimeo.com/user507500?pg=embed&amp;sec=1099027">daniel wanja</a> on <a href="http://vimeo.com?pg=embed&amp;sec=1099027">Vimeo</a>.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/05/31/keynote-de-david-heinemeier-hansson-no-railsconf-2008/">Keynote de David Heinemeier Hansson no RailsConf 2008</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/05/31/keynote-de-david-heinemeier-hansson-no-railsconf-2008/">Keynote de David Heinemeier Hansson no RailsConf 2008</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -504,9 +671,11 @@
 
 <time datetime="2008-05-31T00:00:00-03:00" pubdate data-updated="true">31 de Maio de 2008</time>
         
+        <a rel="bookmark" href="/2008/05/31/keynote-de-david-heinemeier-hansson-no-railsconf-2008/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="400" height="300" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="src" value="http://www.vimeo.com/moogaloop.swf?clip_id=1096456&amp;server=www.vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=&amp;fullscreen=1" /><embed type="application/x-shockwave-flash" width="400" height="300" src="http://www.vimeo.com/moogaloop.swf?clip_id=1096456&amp;server=www.vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=&amp;fullscreen=1" allowscriptaccess="always" allowfullscreen="true"></embed></object>
@@ -516,19 +685,30 @@
 
 <p>Para os que não foram até a RailsConf e ficaram apenas na vontade, este é o primeiro vídeo da palestra de DHH no RailsConf. A qualidade não está das melhores mas serve para quem não quer esperar a O&#8217;Reilly publicar as gravações oficiais.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/05/31/edge-rails-utc-ou-gmt/">Edge Rails: UTC ou GMT?</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/05/31/edge-rails-utc-ou-gmt/">Edge Rails: UTC ou GMT?</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -545,9 +725,11 @@
 
 <time datetime="2008-05-31T00:00:00-03:00" pubdate data-updated="true">31 de Maio de 2008</time>
         
+        <a rel="bookmark" href="/2008/05/31/edge-rails-utc-ou-gmt/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Uma alteração simples, mas interessante. Até agora o Rails tem usado muito a sigla UTC, mas quando se executa o método <strong>to_s</strong> do objeto <strong>TimeZone</strong> ele mostrará GMT e não UTC. Isto se dá porque a sigla GMT é mais familiar para o usuário final.</p>
@@ -557,89 +739,6 @@
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">TimeZone</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Moscow<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>to_s <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; "(GMT+03:00) Moscow"</span></span></pre>
 
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/05/30/ruby-shoulda-bundle-para-textmate/">Ruby Shoulda Bundle para Textmate</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-05-30T00:00:00-03:00" pubdate data-updated="true">30 de Maio de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Começamos a usar faz pouco tempo o <strong>Rspec</strong> em um projeto aqui na <a href="http://www.surgeworks.com/">Surgeworks</a>. Como eu nunca tinha trabalhado com ele até então, tive de passar por um período de aprendizado/adaptação.</p>
-
-<p>Gostei, mas confesso que não consegui me sentir totalmente à vontade com ele, não pelo menos, da mesma forma que me sinto quando estou usando o <strong>Unit::Test</strong>.</p>
-
-<p>Depois de um tempos começamos um novo projeto e resolvi testar o <a href="http://www.thoughtbot.com/projects/shoulda">Shoulda</a> criado pela <a href="http://thoughtbot.com/">Thoughtbot</a>, que prometia adicionar a sintaxe do <strong>Rspec</strong> ao <strong>Test::Unit</strong>. Agora sim!</p>
-
-<p>O <strong>Shoulda</strong> vêm em forma de plugin ou gem e acrescenta diversos helpers ao <strong>Test::Unit</strong> deixando ele turbinado. Veja como o <strong>Shoulda</strong> pode ser útil e fácil:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails source_ruby_rails_shoulda"><span class="meta meta_rails meta_rails_unit_test"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">UserTest<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> Test::Unit::TestCase</span></span></span>
-  load_all_fixtures
-
-  should_have_many <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>posts</span>
-
-  should_not_allow_values_for <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>email</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>blah<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>b lah<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
-  should_allow_values_for <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>email</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>a@b.com<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>asdf@asdf.com<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
-  should_ensure_length_in_range <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>email</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">..</span><span class="constant constant_numeric constant_numeric_ruby">100</span>
-  should_ensure_value_in_range <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>age</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">..</span><span class="constant constant_numeric constant_numeric_ruby">100</span>
-  should_protect_attributes <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>password</span>
-
-  context <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>A User instance<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
-</span>    setup <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
-</span>      <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>user</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>first</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-    <span class="keyword keyword_control keyword_control_ruby">end</span>
-
-    should <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>return its full name<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
-</span>      assert_equal <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>John Doe<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>user</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>full_name
-    <span class="keyword keyword_control keyword_control_ruby">end</span>
-
-    context <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>with a profile<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
-</span>      setup <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
-</span>        <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>user</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>profile <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Profile</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>first</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-      <span class="keyword keyword_control keyword_control_ruby">end</span>
-
-      should <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>return true when sent #has_profile?<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
-</span>        assert <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>user</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>has_profile?
-      <span class="keyword keyword_control keyword_control_ruby">end</span>
-    <span class="keyword keyword_control keyword_control_ruby">end</span>
-  <span class="keyword keyword_control keyword_control_ruby">end</span>
-</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-
-
-<p>Muito bom!</p>
-
-<p>Para facilitar meu desenvolvimento peguei o <em>bundle</em> para o <strong>Textmate</strong> que estava sendo mantido pelo <a href="http://drnicwilliams.com/">Dr. Nic</a>, e fiz uma série de correções e alterações para contemplar todos os helpers disponíveis no plugin. Neste momento o bundle está completo.</p>
-
-<p>O projeto como sempre está no GitHub e pode ser pego <a href="http://github.com/drnic/ruby-shoulda-tmbundle/tree/master">aqui</a>.</p>
-</div>
-  
-  
 
 
     </article>
@@ -661,6 +760,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
@@ -674,10 +777,6 @@
     
       <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
   </ul>

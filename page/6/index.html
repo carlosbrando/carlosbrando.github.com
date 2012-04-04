@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Infelizmente a maioria dos programadores que conheço nunca ouviram falar sobre ortogonalidade no desenvolvimento de software, embora este seja um &hellip;">
+  <meta name="description" content="Não é segredo para ninguém que eu estou exaustivamente trabalhando em um novo framework para o desenvolvimento de aplicativos sociais de forma ultra &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,14 +100,119 @@
       <div id="content">
         <div class="blog-index">
   
-  
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
+    <h1 class="entry-title">
+
+<a href="/2009/12/09/como-montar-um-servidor-de-gems-privado/">Como montar um servidor de gems privado</a>
+
+</h1>
+
     
-      <h1 class="entry-title"><a href="/2009/12/01/ortogonalidade/">Ortogonalidade</a></h1>
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-09T00:00:00-02:00" pubdate data-updated="true"> 9 de Dezembro de 2009</time>
+        
+        <a rel="bookmark" href="/2009/12/09/como-montar-um-servidor-de-gems-privado/"></a>
+      </p>
     
+  </header>
+
+
+
+  <div class="entry-content"><p><img class="center" src="http://old.nomedojogo.com/wp-content/uploads/2009/12/new_rubygems.png"></p>
+
+<p>Não é segredo para ninguém que eu estou exaustivamente trabalhando em um <a href="http://www.nomedojogo.com/2009/10/13/os-slides-da-minha-apresentacao-no-rails-summit-latin-america-2009/">novo framework</a> para o desenvolvimento de aplicativos sociais de forma ultra-rápida. Porém ainda não está na hora de liberar o projeto como open source, mas é certo que isto acontecerá em breve.</p>
+
+<p>O framework já está em sua versão 0.5.2 e em pleno uso e desenvolvimento. Como decidimos não liberar o projeto até que ele esteja finalizado, não podemos simplesmente disponibilizar as gems em serviços como o <a href="http://gemcutter.org/">Gemcutter</a>. Assim, toda vez que precisamos instalar ou atualizar as bibliotecas em nossos servidores temos de fazer isto manualmente, copiando os arquivos <code>.gem</code> para o servidor e instalando a partir deles. Este processo é realmente irritante, então surgiu a necessidade de montar o no nosso próprio servidor de gems privativo.</p>
+
+<p>A solução é ridiculamente simples. Mas como acredito que muita gente também pode se beneficiar disso, segue a receita de bolo.</p>
+
+<h2>A forma simples</h2>
+
+
+<p>A primeira alternativa é utilizar o seu próprio computador como um servidor de gems. Para fazer isto basta executar o seguinte comando no terminal:</p>
+
+<pre class="textmate-source"><span class="source source_shell">gem server</span></pre>
+
+
+<p>Pronto! Desta maneira você já estará compartilhando todas a gems que estão instaladas em sua máquina através do endereço <code>http://SEU_IP:8808</code>.</p>
+
+<h2>Uma alternativa melhor</h2>
+
+
+<p>Como em nosso caso era importante manter o serviço o tempo todo no ar, a solução foi hospedar as bibliotecas em um servidor web.</p>
+
+<p>O processo também é muito simples. Crie um diretório qualquer em uma área pública do seu servidor web (digamos que você criou um diretório com o nome de <code>meusgems</code>). Crie então um subdiretório chamado <code>gems</code> e copie todos os seus arquivos <code>.gem</code> para dentro dele.</p>
+
+<p>Antes de continuar certifique-se de ter o RubyGems instalado em seu servidor. Então execute o seguinte comando dentro do diretório <code>meusgems</code>:</p>
+
+<pre class="textmate-source"><span class="source source_shell">gem generate_index</span></pre>
+
+
+<p>Feito! Seu servidor privado de gems está no ar. Quando adicionar ou atualizar alguma biblioteca, basta executar o comando acima novamente.</p>
+
+<h2>Instalando gems a partir do seu servidor</h2>
+
+
+<p>Para fazer com que o comando <code>gem install</code> encontre as bibliotecas que estão no seu servidor, você deve adicionar o endereço na lista de fontes do RubyGems. Para isto execute o seguinte comando no computador onde os gems devem ser instalados:</p>
+
+<pre class="textmate-source"><span class="source source_shell">gem sources --add http://gems.meu_servidor.com</span></pre>
+
+
+<p>Claro que você deve alterar o endereço acima para a URL correta do seu servidor. Depois disso basta instalar as suas bibliotecas normalmente, através do comando <code>gem install nome_do_gem</code>.</p>
+
+<p>Caso seu repositório de gems comece a crescer muito, talvez seja interessante configurar o projeto <a href="http://github.com/qrush/gemcutter">Gemcutter</a> em seu servidor.</p>
+
+<p>Esta pode ser uma alternativa bem interessante para estimular a reutilização de código dentro de sua empresa, sem precisar liberar todas as suas bibliotecas como open source.</p>
+</div>
+
+
+    </article>
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2009/12/01/ortogonalidade/">Ortogonalidade</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -124,9 +229,11 @@
 
 <time datetime="2009-12-01T00:00:00-02:00" pubdate data-updated="true"> 1 de Dezembro de 2009</time>
         
+        <a rel="bookmark" href="/2009/12/01/ortogonalidade/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Infelizmente a maioria dos programadores que conheço nunca ouviram falar sobre ortogonalidade no desenvolvimento de software, embora este seja um principio fundamental para se escrever código de qualidade.</p>
@@ -154,19 +261,30 @@
 <hr /><em>Este artigo é descaradamente &#8216;baseado&#8217; no capítulo de mesmo nome do livro <a href="http://www.amazon.com/Pragmatic-Programmer-Journeyman-Master/dp/020161622X">The Pragmatic Programmer</a>.</em>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/11/13/instalando-a-linguagem-go-no-mac/">Instalando a linguagem Go no Mac</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/11/13/instalando-a-linguagem-go-no-mac/">Instalando a linguagem Go no Mac</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -183,9 +301,11 @@
 
 <time datetime="2009-11-13T00:00:00-02:00" pubdate data-updated="true">13 de Novembro de 2009</time>
         
+        <a rel="bookmark" href="/2009/11/13/instalando-a-linguagem-go-no-mac/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2009/11/logo-153x55.png" alt="logo-153x55" title="logo-153x55" class="alignright size-full wp-image-2880" />O Google acabou de anunciar o lançamento de uma nova linguagem de programação chamada <a href="http://golang.org/">Go</a>. A linguagem foi desenvolvida por um time formado por cinco engenheiros do Google, incluindo <a href="http://pt.wikipedia.org/wiki/Ken_Thompson">Ken Thompson</a> e <a href="http://pt.wikipedia.org/wiki/Rob_Pike">Rob Pike</a>, que são famosos por terem trabalhado no UNIX.</p>
@@ -305,19 +425,30 @@ Hello, world</span></span></pre>
 
 <p>Agora é só continuar no <a href="http://golang.org/doc/go_tutorial.html">tutorial</a> criado pelo próprio time de desenvolvimento. E não deixe de compartilhar suas experiências com a linguagem deixando um comentário.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/11/11/por-que-reunioes-sao-toxicas-ou-por-que-programadores-odeiam-reunioes/">Por que reuniões são tóxicas?</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/11/11/por-que-reunioes-sao-toxicas-ou-por-que-programadores-odeiam-reunioes/">Por que reuniões são tóxicas?</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -334,9 +465,11 @@ Hello, world</span></span></pre>
 
 <time datetime="2009-11-11T00:00:00-02:00" pubdate data-updated="true">11 de Novembro de 2009</time>
         
+        <a rel="bookmark" href="/2009/11/11/por-que-reunioes-sao-toxicas-ou-por-que-programadores-odeiam-reunioes/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img class="center" src="http://old.nomedojogo.com/wp-content/uploads/2009/11/546730647_ff1ea802171.jpg"></p>
@@ -355,19 +488,30 @@ Hello, world</span></span></pre>
 
 <p>Nós entendemos a importância das reuniões. Tudo o que estamos pedindo aos gerentes é que eles entendam os custos.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/11/06/a-principal-habilidade-do-programador-nao-e-codificar/">A principal habilidade do programador não é codificar</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/11/06/a-principal-habilidade-do-programador-nao-e-codificar/">A principal habilidade do programador não é codificar</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -384,9 +528,11 @@ Hello, world</span></span></pre>
 
 <time datetime="2009-11-06T00:00:00-02:00" pubdate data-updated="true"> 6 de Novembro de 2009</time>
         
+        <a rel="bookmark" href="/2009/11/06/a-principal-habilidade-do-programador-nao-e-codificar/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img class="aligncenter size-full wp-image-2856" title="PDHeadInSand" src="http://old.nomedojogo.com/wp-content/uploads/2009/11/PDHeadInSand.gif" alt="PDHeadInSand" /></p>
@@ -415,19 +561,30 @@ Hello, world</span></span></pre>
 
 <p>Lembre-se disso: Não é somente o que você diz, mas também como você diz. A menos que você esteja trabalhando sozinho dentro de uma bolha, você deve ser capaz de se comunicar. E quanto mais eficaz for a sua habilidade de comunicação, mais influente você se tornará.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/10/27/seu-conhecimento-tem-um-prazo-de-validade/">Seu conhecimento tem um prazo de validade</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/10/27/seu-conhecimento-tem-um-prazo-de-validade/">Seu conhecimento tem um prazo de validade</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -444,9 +601,11 @@ Hello, world</span></span></pre>
 
 <time datetime="2009-10-27T00:00:00-02:00" pubdate data-updated="true">27 de Outubro de 2009</time>
         
+        <a rel="bookmark" href="/2009/10/27/seu-conhecimento-tem-um-prazo-de-validade/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img class="center" src="http://old.nomedojogo.com/wp-content/uploads/2009/10/3289805507_4b5a5e6c06.jpg"></p>
@@ -467,19 +626,30 @@ Hello, world</span></span></pre>
 
 <p>Qual é a sua estratégia para se manter atualizado?</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/10/18/qualidade-demais-pode-arruinar-seu-software/">Qualidade demais pode arruinar seu software</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/10/18/qualidade-demais-pode-arruinar-seu-software/">Qualidade demais pode arruinar seu software</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -496,9 +666,11 @@ Hello, world</span></span></pre>
 
 <time datetime="2009-10-18T01:00:00-02:00" pubdate data-updated="true">18 de Outubro de 2009</time>
         
+        <a rel="bookmark" href="/2009/10/18/qualidade-demais-pode-arruinar-seu-software/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img class="center" src="http://old.nomedojogo.com/wp-content/uploads/2009/10/3280667337_34ccf55864.jpg"></p>
@@ -523,19 +695,30 @@ Hello, world</span></span></pre>
 
 <p>Programar é como pintar. Tudo começa com um quadro branco, seguido por um esboço, uma pintura maior e então com o preenchimento dos detalhes. Se seu olhar for critico demais, você não saberá quando parar até que tenha estragado a sua pintura.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/10/13/os-slides-da-minha-apresentacao-no-rails-summit-latin-america-2009/">Os slides da minha apresentação no Rails Summit Latin America 2009</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/10/13/os-slides-da-minha-apresentacao-no-rails-summit-latin-america-2009/">Os slides da minha apresentação no Rails Summit Latin America 2009</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -552,27 +735,40 @@ Hello, world</span></span></pre>
 
 <time datetime="2009-10-13T00:00:00-03:00" pubdate data-updated="true">13 de Outubro de 2009</time>
         
+        <a rel="bookmark" href="/2009/10/13/os-slides-da-minha-apresentacao-no-rails-summit-latin-america-2009/"></a>
       </p>
     
   </header>
 
 
+
   <div class="entry-content"><div style="width:425px;text-align:left" id="__ss_2210448"><a style="font:14px Helvetica,Arial,Sans-serif;display:block;margin:12px 0 3px 0;text-decoration:underline;" href="http://www.slideshare.net/eduardobrando/yet-another-ruby-framework-como-o-rails-funciona-por-dentro" title="Yet Another Ruby Framework - Como o Rails funciona por dentro">Yet Another Ruby Framework - Como o Rails funciona por dentro</a><object style="margin:0px" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=slides-091013123657-phpapp02&rel=0&stripped_title=yet-another-ruby-framework-como-o-rails-funciona-por-dentro" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=slides-091013123657-phpapp02&rel=0&stripped_title=yet-another-ruby-framework-como-o-rails-funciona-por-dentro" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></embed></object><div style="font-size:11px;font-family:tahoma,arial;height:26px;padding-top:2px;">View more <a style="text-decoration:underline;" href="http://www.slideshare.net/">presentations</a> from <a style="text-decoration:underline;" href="http://www.slideshare.net/eduardobrando">eduardobrando</a>.</div></div>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/10/06/nos-vemos-no-rails-summit/">Nos vemos no Rails Summit?</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/10/06/nos-vemos-no-rails-summit/">Nos vemos no Rails Summit?</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -589,9 +785,11 @@ Hello, world</span></span></pre>
 
 <time datetime="2009-10-06T00:00:00-03:00" pubdate data-updated="true"> 6 de Outubro de 2009</time>
         
+        <a rel="bookmark" href="/2009/10/06/nos-vemos-no-rails-summit/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Parece que foi ontem quando o <a href="http://akitaonrails.com/">Fábio Akita</a> apareceu com a ideia do <a href="http://railssummit.com.br/">Rails Summit Latin America</a> e agora já estamos indo para a segunda edição do evento que já se consagrou como o mais importante da sua categoria no país.</p>
@@ -613,19 +811,30 @@ Hello, world</span></span></pre>
 
 <p>E você, também vai estar lá?</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/09/25/os-oito-niveis-do-programador/">Os oito níveis do programador</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/09/25/os-oito-niveis-do-programador/">Os oito níveis do programador</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -642,9 +851,11 @@ Hello, world</span></span></pre>
 
 <time datetime="2009-09-25T00:00:00-03:00" pubdate data-updated="true">25 de Setembro de 2009</time>
         
+        <a rel="bookmark" href="/2009/09/25/os-oito-niveis-do-programador/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Não tenho o habito de ler os artigos de <a href="http://www.codinghorror.com/blog/">Jeff Atwood</a>, talvez por já ter discordado de um grande número deles, mas este em particular achei muito interessante. Embora os oito níveis descritos abaixo representem a realidade de uma forma muito simplificada, acho que são interessantes para nos fazer pensar. Segue a <a href="http://www.codinghorror.com/blog/archives/001250.html">tradução</a>:</p>
@@ -757,75 +968,6 @@ Hello, world</span></span></pre>
 
 <p>Em suma, <strong>o que você quer fazer com sua vida?</strong></p>
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/09/21/dica-de-ruby-quem-disparou-este-metodo/">Dica de Ruby: Quem disparou este método?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-09-21T00:00:00-03:00" pubdate data-updated="true">21 de Setembro de 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Recentemente eu precisei desenvolver um módulo de log para o framework no qual estou trabalhando e não sabia como recuperar quem havia disparado o método atual no momento do registro do log.</p>
-
-<p>Depois de pesquisar um pouco encontrei a resposta, um método muito simples no <code>Kernel</code> do Ruby chamado <code>caller</code> que devolve um <code>array</code> com o call stack. O primeiro item do array é quem disparou o método atual. E cada elemento consecutivamente é aquele que disparou o método anterior na fila, e assim se segue até o final da pilha.</p>
-
-<p>Este método pode ser muito útil quando se deseja descobrir a causa de uma exceção em um aplicativo. Veja um exemplo:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">metodo_a</span>
-</span><span class='line'>    <span class="nb">puts</span> <span class="nb">caller</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">def</span> <span class="nf">metodo_b</span>
-</span><span class='line'>    <span class="n">metodo_a</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">metodo_b</span>
-</span><span class='line'><span class="c1"># =&gt; [&quot;untitled:6:in `metodo_b&#39;&quot;, &quot;untitled:9&quot;]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Conforme você pôde ver no exemplo acima, o primeiro item no <code>array</code> informa que o <code>metodo_a</code> foi disparado pelo <code>metodo_b</code> na linha <code>6</code> e que o <code>metodo_b</code> foi disparado na linha <code>9</code>.</p>
-
-<p>O <code>string</code> de retorno sempre seguirá o formato [arquivo]:[linha] ou [arquivo]:[linha]: in [método].</p>
-</div>
-  
-  
 
 
     </article>
@@ -847,6 +989,10 @@ Hello, world</span></span></pre>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
@@ -860,10 +1006,6 @@ Hello, world</span></span></pre>
     
       <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
   </ul>

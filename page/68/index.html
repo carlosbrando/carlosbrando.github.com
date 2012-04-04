@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Diante de tantas opções, não é fácil para um desenvolvedor RoR escolher o melhor servidor web para o seu software. Resolvi criar este post para &hellip;">
+  <meta name="description" content="Um problema comum e uma solução trivial. É assim que posso descrever o uso de heranças em modelos no Rails. Imagine a seguinte situação: No meu &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,14 +100,145 @@
       <div id="content">
         <div class="blog-index">
   
-  
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
+    <h1 class="entry-title">
+
+<a href="/2007/09/26/herana-de-tabela-simples-no-activerecord/">Herança de tabela simples no ActiveRecord</a>
+
+</h1>
+
     
-      <h1 class="entry-title"><a href="/2007/09/25/webrick-apache-lighttpd-ou-mongrel/">WEBrick, Apache, lighttpd ou Mongrel?</a></h1>
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-09-26T00:00:00-03:00" pubdate data-updated="true">26 de Setembro de 2007</time>
+        
+        <a rel="bookmark" href="/2007/09/26/herana-de-tabela-simples-no-activerecord/"></a>
+      </p>
     
+  </header>
+
+
+
+  <div class="entry-content"><p><img id="id" height="370" alt="458624987_1c4a9ee690" src="http://old.nomedojogo.com/wp-content/uploads/2007/09/windowslivewriterheranasnoactiverecord-da92458624987-1c4a9ee690-b3790d1e-a1fa-4663-ad16-1bd389df8d40.jpg" width="500" border="0" /> </p>
+
+
+
+
+<p>Um problema comum e uma solução trivial. É assim que posso descrever o uso de heranças em modelos no Rails.</p>
+
+
+
+
+<p>Imagine a seguinte situação: No meu diagrama de classes tenho uma classe Person com duas subclasses, Manager e Employee. De inicio a primeira coisa que faríamos seria criar três modelos no Rails:</p>
+
+
+
+
+<p>
+[source:ruby]
+class Person < ActiveRecord::Base
+end
+
+class Manager < ActiveRecord::Base
+end
+
+class Employee < ActiveRecord::Base
+end
+[/source]
+</p>
+
+<p>Mas como modelar as tabelas neste caso? Podemos usar o recurso de heranças do ActiveRecord e fazer tudo em cima de apenas uma tabela.</p>
+
+<p>
+[source:sql]
+create table people (
+  id INT AUTO_INCREMENT NOT NULL,
+  type VARCHAR(20),
+
+  /* atributos comuns */
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL,
+
+  /* atributos do gerente */
+  dept INT,
+
+  /* atributos do funcionario */
+  reports_to INT,
+  PRIMARY KEY (id)
+);
+[/source]
+</p>
+
+<p>Note que criamos uma coluna chamada <strong>type</strong> na tabela people, é aqui que está o segredo.</p>
+
+<p>Agora alteramos os modelos para que as classes Manager e Employee sejam subclasses de Person:</p>
+
+<p>
+[source:ruby]
+class Person < ActiveRecord::Base
+end
+
+class Manager < Person
+end
+
+class Employee < Person
+end
+[/source]
+</p>
+
+<p>Pronto. Agora todos os modelos acessam a mesma tabela. Se você utilizar a classe Person, o ActiveRecord vai sempre retornar todas as linhas desta tabela, mas se usar Manager ou Employee ele somente tratará os registros com o tipo especificado.</p>
+
+<p>Mas temos um problema aí, você vai verificar que todas as classes possuem os mesmos atributos. Mas na prática isto nem é um problema assim tão sério. Você pode simplesmente ignorar os atributos que não pertencem àquela classe. É um preço baixo a pagar por tamanha facilidade. Sem contar que isto vai lhe poupar a criação de pelo menos três tabelas, e melhorar o desempenho de sua aplicação, já que menos tabelas são menos associações.</p>
+
+</div>
+
+
+    </article>
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2007/09/25/webrick-apache-lighttpd-ou-mongrel/">WEBrick, Apache, lighttpd ou Mongrel?</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -124,9 +255,11 @@
 
 <time datetime="2007-09-25T00:00:00-03:00" pubdate data-updated="true">25 de Setembro de 2007</time>
         
+        <a rel="bookmark" href="/2007/09/25/webrick-apache-lighttpd-ou-mongrel/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img id="id" style="border-right: 0px; border-top: 0px; border-left: 0px; border-bottom: 0px" height="375" alt="412760002_c3aeabc671" src="http://old.nomedojogo.com/wp-content/uploads/2007/09/windowslivewriterwebrickapachelighttpdoumongrel-c633412760002-c3aeabc671-3.jpg" width="500" border="0" /> </p>
@@ -134,19 +267,30 @@
 
 <p>  <p>Diante de tantas opções, não é fácil para um desenvolvedor RoR escolher o melhor servidor web para o seu software. Resolvi criar este post para tentar explicar de uma forma simples e rápida as diferenças entre os principais servidores web que suportam Rails.</p>  <h3>WEBrick</h3>  <p>Padrão. Se tivesse de resumir este servidor em apenas uma palavra, a palavra seria: padrão. É o servidor que &quot;vem&quot; com o Rails. Ele é escrito em Ruby e por isto é fácil integra-lo com o Rails, pois ele pode fazer chamadas diretas ás suas aplicações.</p>  <p>Em minha opinião é a opção mais simples e rápida de se usar.</p>  <h3>Apache</h3>  <p>O Apache é o servidor web mais usado no mundo. É a opção mais escalável e flexível para projetos Rails. Possui plugins que permitem que o servidor funcione com dezenas de linguagens de programação diferentes. Também suporta balanceamento de carga e sprayes de uma forma bem robusta.</p>  <p>Em outras palavras é a opção mais segura.</p>  <h3>lighttpd</h3>  <p>Velocidade é a palavra que estava na mente dos criadores do lighttpd. Ele foi criado com este objetivo em mente. Não chega perto da flexibilidade oferecida pelo Apache, mas faz o serviço direitinho e muito mais rápido. Pode rodar softwares produzidos em RoR por meio de uma interface FastCGI.</p>  <p>lighttpd é o papa-léguas dos servidores web para Rails.</p>  <h3>Mongrel</h3>  <p>O Apache é mais escalável e o lighttpd é o mais rápido, mas fazê-los funcionar com o Rails com certeza não uma tarefa das mais triviais. Mas fazer uma aplicação Rails rodar no Mongrel é extremamente simples e trivial.</p>  <p>O Mongrel é tão simples de usar quanto o WEBrick, pois também é escrito em Ruby e foi construído com o mesmo conceito do lighttpd em mente: velocidade. Talvez por este motivo ele seja o queridinho da comunidade RoR.</p>  <h3>Outras opções</h3>  <p>É claro que existem outros servidores web que podem ser utilizados para suportar uma aplicação em Ruby on Rails, na verdade qualquer servidor que suporte CGI pode fazer isto. Mas esses quatro são os mais usados hoje em dia.</p></p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/09/24/edge-rails-o-que-vem-por-a/">Edge Rails: O que vem por aí?</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/09/24/edge-rails-o-que-vem-por-a/">Edge Rails: O que vem por aí?</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -163,9 +307,11 @@
 
 <time datetime="2007-09-24T00:00:00-03:00" pubdate data-updated="true">24 de Setembro de 2007</time>
         
+        <a rel="bookmark" href="/2007/09/24/edge-rails-o-que-vem-por-a/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/09/289142843-b04124fd3b.jpg" alt="289142843_b04124fd3b" border="0" height="375" width="500" /> </p>
@@ -225,19 +371,30 @@ end
 <p>Para ver a referencia no Rails Trac, <a href="http://dev.rubyonrails.org/changeset/7597">clique aqui</a>.</p>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/09/21/um-guia-sobre-segurana-no-ror/">Um guia sobre segurança no RoR</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/09/21/um-guia-sobre-segurana-no-ror/">Um guia sobre segurança no RoR</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -254,9 +411,11 @@ end
 
 <time datetime="2007-09-21T00:00:00-03:00" pubdate data-updated="true">21 de Setembro de 2007</time>
         
+        <a rel="bookmark" href="/2007/09/21/um-guia-sobre-segurana-no-ror/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img alt="7044429_fe23307373" src="http://old.nomedojogo.com/wp-content/uploads/2007/09/7044429-fe23307373.jpg" border="0"> </p>
@@ -264,19 +423,30 @@ end
 
 <p> <p>Hoje estou na maior correria e resolvi postar apenas um link para um artigo muito bem feito do blog <a href="http://www.quarkruby.com">QuarkRuby</a>. O blog pertence a <b>Nakul </b><b>Aggarwal</b> e <b>Ritesh Arora</b>.</p> <p>O assunto do artigo é segurança no Ruby on Rails. Eles criaram um verdadeiro manual sobre o assunto, abordando todos os módulos do Rails. Mas não se trata de um artigo explicando todos os pontos importantes (para isto seria necessário um livro inteiro), ao invés disto, eles criaram uma lista com os principais plugins e artigos publicados por membros da comunidade ruby que tratam de segurança.</p> <p>Vale a pena ler e guardar nos seus favoritos. Para apreciar o artigo (em inglês) <a href="http://www.quarkruby.com/2007/9/20/ruby-on-rails-security-guide">clique aqui</a>.</p></p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/09/21/discusses-no-levam-a-nada-mas-que-so-muito-engraadas-so/">Discussões não levam a nada, mas que são muito engraçadas são&#8230;</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/09/21/discusses-no-levam-a-nada-mas-que-so-muito-engraadas-so/">Discussões não levam a nada, mas que são muito engraçadas são&#8230;</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -293,9 +463,11 @@ end
 
 <time datetime="2007-09-21T00:00:00-03:00" pubdate data-updated="true">21 de Setembro de 2007</time>
         
+        <a rel="bookmark" href="/2007/09/21/discusses-no-levam-a-nada-mas-que-so-muito-engraadas-so/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Recentemente este blog foi &#8220;vitima&#8221; de uma acirrada <a href="http://www.nomedojogo.com/2007/09/11/ruby-on-rails-no-tem-futuro-corra-atrs-da-sua-certificao-enquanto-tempo/">discussão</a> entre programadores RoR e um fanático por .Net. Mas isto são mágoas passadas.</p>
@@ -308,19 +480,30 @@ end
 
 <p>É muito engraçado acompanhar estas discussões. Podíamos ter um post assim toda sexta-feira para rir um pouquinho. O que acham?</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/09/19/railsconf-europa-2007-incluindo-um-menu-em-seu-software-rails-em-5-minutos/">RailsConf Europa 2007: Incluindo um menu em seu software Rails em 5 minutos</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/09/19/railsconf-europa-2007-incluindo-um-menu-em-seu-software-rails-em-5-minutos/">RailsConf Europa 2007: Incluindo um menu em seu software Rails em 5 minutos</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -337,9 +520,11 @@ end
 
 <time datetime="2007-09-19T00:00:00-03:00" pubdate data-updated="true">19 de Setembro de 2007</time>
         
+        <a rel="bookmark" href="/2007/09/19/railsconf-europa-2007-incluindo-um-menu-em-seu-software-rails-em-5-minutos/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://farm2.static.flickr.com/1043/1402333650_456ffe9191.jpg?v=0">
@@ -377,19 +562,30 @@ end
 <p>Dica: para ver&nbsp;a apresentação&nbsp;abra o arquivo slideshow.xul no Firefox.</p>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/09/18/rails-est-ficando-cada-vez-mais-sexy/">Rails está ficando cada vez mais sexy</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/09/18/rails-est-ficando-cada-vez-mais-sexy/">Rails está ficando cada vez mais sexy</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -406,9 +602,11 @@ end
 
 <time datetime="2007-09-18T00:00:00-03:00" pubdate data-updated="true">18 de Setembro de 2007</time>
         
+        <a rel="bookmark" href="/2007/09/18/rails-est-ficando-cada-vez-mais-sexy/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://farm2.static.flickr.com/1399/1403254025_0c2bb04474.jpg?v=0"> </p>
@@ -454,19 +652,30 @@ end
 <p>Os dois códigos fazem exatamente a mesma coisa.</p>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/09/17/netbeans-ide-60-beta-1-est-no-ar/">NetBeans IDE 6.0 Beta 1 está no ar</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/09/17/netbeans-ide-60-beta-1-est-no-ar/">NetBeans IDE 6.0 Beta 1 está no ar</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -483,9 +692,11 @@ end
 
 <time datetime="2007-09-17T00:00:00-03:00" pubdate data-updated="true">17 de Setembro de 2007</time>
         
+        <a rel="bookmark" href="/2007/09/17/netbeans-ide-60-beta-1-est-no-ar/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://farm2.static.flickr.com/1134/1372799087_09e54a4921.jpg?v=0"> </p>
@@ -493,19 +704,30 @@ end
 
 <p> <p>O site oficial acabou de <a href="http://www.netbeans.org/servlets/NewsItemView?newsItemID=1109">anunciar</a> o lançamento do primeiro beta da versão 6.0 do Netbeans. Entre as principais novidades&nbsp;está o suporte&nbsp;a Ruby on Rails e JRuby.</p> <p>Fiz o teste e posso dizer que o NetBeans tem o melhor <a href="http://en.wikipedia.org/wiki/Code_completion">code completion</a> que já usei em uma <a href="http://pt.wikipedia.org/wiki/Ambiente_de_Desenvolvimento_Integrado">IDE</a> para Ruby. Mas ainda acho o NetBeans muito lento. Pelo menos é bem mais lento que o <a href="http://www.aptana.com/">RadRails</a> (baseado no <a href="http://www.eclipse.org/">eclipse</a>).</p> <p>A lançamento da versão final está planejado para o final deste ano.</p> <p>O download pode ser feito <a href="http://dlc.sun.com/netbeans/download/6_0/beta1/">aqui</a>.</p></p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/09/16/dica-de-domingo-onde-mora-cada-programador-ruby-on-rails-no-brasil/">Dica de domingo: Onde mora cada programador Ruby on Rails no Brasil</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/09/16/dica-de-domingo-onde-mora-cada-programador-ruby-on-rails-no-brasil/">Dica de domingo: Onde mora cada programador Ruby on Rails no Brasil</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -522,9 +744,11 @@ end
 
 <time datetime="2007-09-16T00:00:00-03:00" pubdate data-updated="true">16 de Setembro de 2007</time>
         
+        <a rel="bookmark" href="/2007/09/16/dica-de-domingo-onde-mora-cada-programador-ruby-on-rails-no-brasil/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://farm1.static.flickr.com/41/122476158_36c4644a63.jpg?v=0"> </p>
@@ -532,19 +756,30 @@ end
 
 <p> <p>Antes de ir para o almoço na casa da sogra só uma dica rápida de um <a href="http://www.mapservices.org/myguestmap/map/railsbr">serviço</a> legal que vi no grupo de discussão <a href="http://groups.google.com/group/rails-br/browse_thread/thread/3d1147a6d899cd9f?hl=pt-BR">Rails-Br</a>. O <a href="http://groups.google.com/groups/profile?enc_user=HSwQkhYAAAAfxS-l0LFiEPklxSLooDOao4cocwWvDVg2RHsu8f1bCg&amp;hl=pt-BR">Herval Freire</a> criou uma pagina com um google map onde todos os programadores Rails podem indicar onde moram. Para ver <a href="http://www.mapservices.org/myguestmap/map/railsbr">clique aqui</a>.</p> <p>Isto é bem legal. Podemos ter uma idéia da quantidade de programadores e onde a maioria se concentra.</p> <p>Seguindo uma dica do próprio desenvolvedor: </p> <blockquote> <p>Assim cada um coloca um marcador na cidade que mora (nao precisa ser em cima da casa, pra quem tem medo de sequestro ;-)), um link pro seu blog&#8230; e todos ficam sabendo quem sao todos os outros&#8230; </p></blockquote> <p>Um bom domingo para todos.</p></p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/09/15/atributos-virtuais-no-rails/">Atributos virtuais no Rails</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/09/15/atributos-virtuais-no-rails/">Atributos virtuais no Rails</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -561,9 +796,11 @@ end
 
 <time datetime="2007-09-15T00:00:00-03:00" pubdate data-updated="true">15 de Setembro de 2007</time>
         
+        <a rel="bookmark" href="/2007/09/15/atributos-virtuais-no-rails/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://farm1.static.flickr.com/141/350347433_8466d8aa7e.jpg?v=0"> </p>
@@ -618,47 +855,6 @@ end
 </p>
 
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/09/15/acesse-web-services-facilmente-com-o-soap4r/">Acesse Web-Services facilmente com o SOAP4R</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-09-15T00:00:00-03:00" pubdate data-updated="true">15 de Setembro de 2007</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://farm1.static.flickr.com/50/154077332_c3ffa6fb28.jpg?v=0"> </p>
-
-
-<p> <p>SOAP4R é uma biblioteca Ruby que facilita o acesso a web-services via SOAP.</p> <p>Para entender como funciona, <a href="http://markthomas.org/2007/09/12/getting-started-with-soap4r/">clique aqui</a>.</p></p>
-</div>
-  
-  
 
 
     </article>
@@ -680,6 +876,10 @@ end
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
@@ -693,10 +893,6 @@ end
     
       <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
   </ul>

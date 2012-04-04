@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Não estou trabalhando diretamente nisto, mas quero demonstrar o meu apoio ao projeto de tradução dos Rails Guides. O Rails Guides é com certeza o &hellip;">
+  <meta name="description" content="O Ruby 1.9 está ai e já passou da hora de começarmos a ver quais são algumas das novidades mais importantes desta nova versão da nossa linguagem de &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,14 +100,101 @@
       <div id="content">
         <div class="blog-index">
   
-  
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
+    <h1 class="entry-title">
+
+<a href="/2009/03/04/ruby-19-1-argumentos-em-blocos/">Ruby 1.9 #1: Argumentos em blocos</a>
+
+</h1>
+
     
-      <h1 class="entry-title"><a href="/2009/03/02/como-ajudar-na-traducao-dos-rails-guides/">Como ajudar na tradução dos Rails Guides</a></h1>
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-04T00:00:00-03:00" pubdate data-updated="true"> 4 de Março de 2009</time>
+        
+        <a rel="bookmark" href="/2009/03/04/ruby-19-1-argumentos-em-blocos/"></a>
+      </p>
     
+  </header>
+
+
+
+  <div class="entry-content"><p>O Ruby 1.9 está ai e já passou da hora de começarmos a ver quais são algumas das novidades mais importantes desta nova versão da nossa linguagem de programação preferida.</p>
+
+<p>À partir da versão 1.9 argumentos criados dentro de blocos terão seu escopo limitado ao mesmo. Para entender melhor, vejamos um exemplo de código executado na versão 1.8.6 e logo em seguida na versão 1.9:</p>
+
+<pre class="textmate-source"><span class="source source_ruby">i <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Olá<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+<span class="constant constant_numeric constant_numeric_ruby">3</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>times <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">i</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> puts i <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
+puts i
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> 0
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> 1
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> 2
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> 2</span></span></pre>
+
+
+<p>Note que no código acima ao alterar a variável <code>i</code> dentro do bloco (o método <code>times</code> atribui  um novo valor a cada execução) acabamos também alterando a variável com o mesmo nome que foi declarada fora do bloco. Embora isto não seja um bug, mas sim uma característica do Ruby nesta versão, raramente (talvez nunca) vamos desejar este comportamento.</p>
+
+<p>Agora o mesmo código sendo executado na versão 1.9:</p>
+
+<pre class="textmate-source"><span class="source source_ruby">i <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Olá<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+<span class="constant constant_numeric constant_numeric_ruby">3</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>times <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">i</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> puts i <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
+puts i
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> 0
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> 1
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> 2
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> "Olá"</span></span></pre>
+
+
+<p>Desta vez a execução do bloco não alterou a variável externa <code>i</code>. Toda variável criada dentro de um bloco no Ruby 1.9 só existirá dentro do escopo do bloco, por isto cuidado com seus códigos malucos ao migrar para esta nova versão!</p>
+</div>
+
+
+    </article>
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2009/03/02/como-ajudar-na-traducao-dos-rails-guides/">Como ajudar na tradução dos Rails Guides</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -124,9 +211,11 @@
 
 <time datetime="2009-03-02T00:00:00-03:00" pubdate data-updated="true"> 2 de Março de 2009</time>
         
+        <a rel="bookmark" href="/2009/03/02/como-ajudar-na-traducao-dos-rails-guides/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img class="center" src="http://old.nomedojogo.com/wp-content/uploads/2009/03/docrails.png"></p>
@@ -143,19 +232,30 @@
 
 <p>PS.: A imagem acima foi descaradamente compiada do blog do <a href="http://blog.areacriacoes.com.br/2009/2/28/railsguides-brasil"></a><span class="postedby"><a href="http://blog.areacriacoes.com.br/2009/2/28/railsguides-brasil">Daniel Lopes</a>.</span></p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/02/27/rails-way-4-metodos-destrutivos-ou-somente-perigosos/">Rails Way #4: Métodos destrutivos ou somente perigosos?</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/02/27/rails-way-4-metodos-destrutivos-ou-somente-perigosos/">Rails Way #4: Métodos destrutivos ou somente perigosos?</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -172,9 +272,11 @@
 
 <time datetime="2009-02-27T00:00:00-03:00" pubdate data-updated="true">27 de Fevereiro de 2009</time>
         
+        <a rel="bookmark" href="/2009/02/27/rails-way-4-metodos-destrutivos-ou-somente-perigosos/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>O <a href="http://www.nomedojogo.com/2009/02/13/rails-way-3-nomes-de-metodos-e-variaveis-devem-ser-obvios/">último artigo</a> desta série levantou uma certa polêmica em alguns pontos. Quero deixar claro que entendo muito bem que existem situações em que não é possível ou mesmo prático utilizar as sugestões descritas aqui. Você não deve encarar esta série de artigos como um livro de leis, mas somente como boas práticas adotadas pela maior parte da comunidade de desenvolvedores Rails.</p>
@@ -202,19 +304,30 @@
 
 <p>A conclusão é que o uso de &#8220;!&#8221; no nome de um método não dirá a você exatamente o que ele fará ou de que forma ele representa perigo. Mas o sinal de exclamação (!) é  importante como um alerta de que o método em questão pode representar algum risco se usado de forma impensada.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/02/17/um-modelo-de-maturidade-para-projetos-rails-e-pratico/">Um modelo de maturidade para projetos Rails é prático?</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/02/17/um-modelo-de-maturidade-para-projetos-rails-e-pratico/">Um modelo de maturidade para projetos Rails é prático?</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -231,9 +344,11 @@
 
 <time datetime="2009-02-17T00:00:00-03:00" pubdate data-updated="true">17 de Fevereiro de 2009</time>
         
+        <a rel="bookmark" href="/2009/02/17/um-modelo-de-maturidade-para-projetos-rails-e-pratico/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Acredito que este seja o assunto da semana nas rodas de desenvolvedores Rails, e como tal eu não poderia deixar de dar minha opinião sobre o assunto.</p>
@@ -286,19 +401,30 @@
 
 <p>Ao contratar uma empresa para desenvolver um software, seja em Rails ou em qualquer outra tecnologia, entre em contato com outros clientes que já foram atendidos pela empresa. Procure saber quais projetos criados pela empresa foram concluídos com sucesso. Tente descobrir mais sobre os profissionais que compõem o seu time de desenvolvimento. Esta é a melhor garantia de que você estará contratando a empresa certa para o sucesso do seu projeto.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/02/16/um-presente-para-a-comunidade-de-desenvolvedores-brasileiros-de-ruby-e-rails/">Um presente para a comunidade de desenvolvedores brasileiros de Ruby e Rails</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/02/16/um-presente-para-a-comunidade-de-desenvolvedores-brasileiros-de-ruby-e-rails/">Um presente para a comunidade de desenvolvedores brasileiros de Ruby e Rails</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -315,9 +441,11 @@
 
 <time datetime="2009-02-16T00:00:00-03:00" pubdate data-updated="true">16 de Fevereiro de 2009</time>
         
+        <a rel="bookmark" href="/2009/02/16/um-presente-para-a-comunidade-de-desenvolvedores-brasileiros-de-ruby-e-rails/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Temos ótimos blogueiros em nossa comunidade de programadores brasileiros e muitos artigos são escritos sobre os mais diversos assuntos relacionados ao Ruby e ao Rails. Mas eu sempre senti falta de uma fonte única de noticias sobre o que acontece no mundo Ruby on Rails aqui no Brasil.</p>
@@ -342,19 +470,30 @@
 
 <p>Depois do Rails Podcast Brasil, do Rails Summit Latin America e tantos outros projetos de evangelização de Rails no Brasil, espero que este site possa ser o próximo passo em direção ao sucesso do Rails em nosso país.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/02/13/rails-way-3-nomes-de-metodos-e-variaveis-devem-ser-obvios/">Rails Way #3: Nomes de métodos e variáveis devem ser óbvios</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/02/13/rails-way-3-nomes-de-metodos-e-variaveis-devem-ser-obvios/">Rails Way #3: Nomes de métodos e variáveis devem ser óbvios</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -371,9 +510,11 @@
 
 <time datetime="2009-02-13T00:00:00-02:00" pubdate data-updated="true">13 de Fevereiro de 2009</time>
         
+        <a rel="bookmark" href="/2009/02/13/rails-way-3-nomes-de-metodos-e-variaveis-devem-ser-obvios/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Não sou uma pessoa supersticiosa, mas hoje é sexta-feira (13) e é melhor não abusar, então vamos manter a tradição e comentar sobre mais um <em>rubismo</em>, ou se preferir, mais uma boa prática de programação que todos os desenvolvedores deveriam adotar independente da linguagem que usem.</p>
@@ -437,19 +578,30 @@ puts <span class="string string_quoted string_quoted_double string_quoted_double
 
 <p>Uma das grandes vantagens que encontramos no Ruby e no Rails é que em ambos é extremamente normal encontrar nomes descritivos e tão curtos quanto possível em classe, módulo, métodos e variáveis. POR FAVOR, NÃO ESTRAGUE ISTO.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/02/12/rails-23-active-record/">Rails 2.3: Active Record</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/02/12/rails-23-active-record/">Rails 2.3: Active Record</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -466,9 +618,11 @@ puts <span class="string string_quoted string_quoted_double string_quoted_double
 
 <time datetime="2009-02-12T00:00:00-02:00" pubdate data-updated="true">12 de Fevereiro de 2009</time>
         
+        <a rel="bookmark" href="/2009/02/12/rails-23-active-record/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>O lançamento do Ruby on Rails 2.3 está muito próximo e eu ainda não comentei sobre algumas novidades por aqui. A idéia desta <a href="http://www.nomedojogo.com/category/rails-23/">série</a> não é apenas mostrar as novas funcionalidades, mas explicar e dar exemplos de como elas funcionam na prática, mas alguns dos novos recursos são muito simples e não exigem muitos detalhes. Vejamos alguns relacionados ao Active Record.</p>
@@ -498,19 +652,30 @@ puts <span class="string string_quoted string_quoted_double string_quoted_double
 <hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.3 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades acompanhando a série <a href="../category/rails-23/">Rails 2.3</a>.</em>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/02/11/faca-voce-mesmo-primeiro/">Faça você mesmo primeiro</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/02/11/faca-voce-mesmo-primeiro/">Faça você mesmo primeiro</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -527,9 +692,11 @@ puts <span class="string string_quoted string_quoted_double string_quoted_double
 
 <time datetime="2009-02-11T00:00:00-02:00" pubdate data-updated="true">11 de Fevereiro de 2009</time>
         
+        <a rel="bookmark" href="/2009/02/11/faca-voce-mesmo-primeiro/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Você nunca deve contratar alguém para fazer alguma coisa sem se esforçar em fazê-la primeiro. Isto vai ensinar-lhe mais do que o necessário para que você possa entrevistar os candidatos, vai permitir que você entenda melhor a natureza do trabalho (preciso mesmo contratar ou podemos terceirizar?) e você saberá exatamente como um trabalho bem feito deve parecer. Isto também vai lhe permitir saber se o trabalho é grande o suficiente para contratar alguém por tempo integral ou se você mesmo poderia fazê-lo.</p>
@@ -545,19 +712,30 @@ puts <span class="string string_quoted string_quoted_double string_quoted_double
 <hr /><em>Este texto é uma tradução do artigo escrito por <strong>David Heinemeier Hansson</strong> para o blog <a href="http://blogcabin.37signals.com/svn/">Signal vs. Noise</a>, originalmente em <a href="http://www.37signals.com/svn/posts/1296-do-it-yourself-first">inglês</a>.</em>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/02/10/remarkable-now-supports-all-activerecord-validations/">Remarkable now supports all ActiveRecord validations</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/02/10/remarkable-now-supports-all-activerecord-validations/">Remarkable now supports all ActiveRecord validations</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -574,9 +752,11 @@ puts <span class="string string_quoted string_quoted_double string_quoted_double
 
 <time datetime="2009-02-10T00:00:00-02:00" pubdate data-updated="true">10 de Fevereiro de 2009</time>
         
+        <a rel="bookmark" href="/2009/02/10/remarkable-now-supports-all-activerecord-validations/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Good times! It has been just one week since I announced <a href="http://www.diegocarrion.com/">Diego Carrion</a> and <a href="http://josevalim.blogspot.com/">José Valim</a> as members of the <a href="http://github.com/carlosbrando/remarkable/tree/master">Remarkable</a> core team and we already put some effort into making a new shiny release! We are going to cover what&#8217;s new on this <a href="http://github.com/carlosbrando/remarkable/tree/master">Remarkable</a> version, step by step.</p>
@@ -686,19 +866,30 @@ sudo gem install <span class="string string_quoted string_quoted_double string_q
 
 <p>See you there!</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/02/09/evento-ruby-e-rails-no-mundo-real/">Evento: Ruby e Rails no Mundo Real</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/02/09/evento-ruby-e-rails-no-mundo-real/">Evento: Ruby e Rails no Mundo Real</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -715,9 +906,11 @@ sudo gem install <span class="string string_quoted string_quoted_double string_q
 
 <time datetime="2009-02-09T00:00:00-02:00" pubdate data-updated="true"> 9 de Fevereiro de 2009</time>
         
+        <a rel="bookmark" href="/2009/02/09/evento-ruby-e-rails-no-mundo-real/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Mais um evento sobre Ruby on Rails em São Paulo, desta vez promovido pelo grupo <a href="http://www.guru-sp.com/index.php/P%C3%A1gina_principal">Guru-SP</a> (Grupo de Usuários Ruby de São Paulo).</p>
@@ -759,127 +952,6 @@ sudo gem install <span class="string string_quoted string_quoted_double string_q
 
 <p>Para mais informações acesse a <a href="http://www.temporealeventos.com.br/?area=130">página oficial</a> do evento.</p>
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/02/06/rails-way-variaveis-de-instancia-controllers-e-views/">Rails Way: Variáveis de Instância, Controllers e Views</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-02-06T00:00:00-02:00" pubdate data-updated="true"> 6 de Fevereiro de 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Mais uma sexta-feira e mais um artigo da série <a href="http://www.nomedojogo.com/category/rails-way/">Rails Way</a>, onde vou pouco a pouco mostrando a forma como os Rubistas mais experientes costumam programar no Ruby on Rails.</p>
-
-<p>Programadores iniciantes rapidamente ficam fascinados com o Ruby e principalmente com o Rails, e por serem uma linguagem e framework com uma curva de aprendizado muito curta é comum que ao terminarem seu primeiro projeto em Rails, percam um pouco o interesse em entender como determinadas coisas funcionam, assimilando tudo que o Rails faz como pura mágica.</p>
-
-<p>Isto é extremamente prejudicial ao programador iniciante e pode levá-lo a se tornar um programador “experiente” com pouco ou nenhum conhecimento real sobre o funcionamento interno da sua ferramenta de trabalho.</p>
-
-<p>A ideia desta série de artigos é expor algumas boas práticas de desenvolvimento ao mesmo tempo em que tento explicar de uma forma simples como as engrenagens funcionam. Por exemplo, já se perguntou como um controller e uma view compartilham as mesmas variáveis de instância?</p>
-
-<p>Por definição uma variável de instância só existe dentro de uma única instância de um objeto. Mas quando estamos falando de controllers e view, estamos falando de dois objetos diferentes que compartilham as mesmas variáveis.</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> books_controller.rb
-</span><span class="meta meta_rails meta_rails_controller"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">BooksController<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ApplicationController</span></span></span>
-  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">index</span></span>
-    <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>books</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Book</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>all</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-  <span class="keyword keyword_control keyword_control_ruby">end</span>
-</span><span class="keyword keyword_control keyword_control_ruby">end</span>
-</span></pre>
-
-
-
-
-<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="comment comment_block comment_block_html"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_html">&lt;!--</span> index.html.erb <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_html">--&gt;</span></span>
-<span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> <span class="keyword keyword_control keyword_control_ruby">for</span> book <span class="keyword keyword_control keyword_control_ruby">in</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>books</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
-   <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> book<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
-<span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> <span class="keyword keyword_control keyword_control_ruby">end</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
-</span></pre>
-
-
-<p>Nos exemplos acima estou definindo uma variável de instância <code>@books</code> dentro do controller, e eu simplesmente assumo que a variável também estará disponível na view.</p>
-
-<p>Note que meu controller é uma extensão da classe <code>ApplicationController</code> que por sua vez é uma extensão da classe <code>ActionController::Base</code> e por isto é uma instância desta classe. Por outro lado a minha view é uma instância da classe <code>ActionView::Base</code>. Ou seja, meu controller é uma instância de um objeto enquanto minha view é uma instância de um outro objeto totalmente diferente.</p>
-
-<p>Então como é possível compartilhar uma variável de instância quando temos duas instância de objetos diferentes? Será mágica? Não, a resposta é mais simples do que você imagina.</p>
-
-<p>O Rails acrescenta à classe <code>Object</code> um método chamado <code>copy_instance_variables_from</code> que faz exatamente o que o nome diz, copia variáveis de instância de uma classe para outro. Você pode até mesmo brincar um pouco com este método no console. Abra o terminal e após digitar o comando <code>irb</code>, copie e cole o código abaixo e veja o resultado:</p>
-
-<pre class="textmate-source"><span class="source source_ruby"><span class="meta meta_require meta_require_ruby"><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">require</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>rubygems<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span>
-<span class="meta meta_require meta_require_ruby"><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">require</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>active_support<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span>
-
-
-<span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">A</span></span>
-  <span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">attr_reader</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>x</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>y</span>
-<span class="keyword keyword_control keyword_control_ruby">end</span>
-
-<span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">B</span></span>
-  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">initialize</span></span>
-    <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>x</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>valor copiado da classe B<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
-    <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>y</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_numeric constant_numeric_ruby">11</span>
-  <span class="keyword keyword_control keyword_control_ruby">end</span>
-<span class="keyword keyword_control keyword_control_ruby">end</span>
-
-
-a <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">A</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span>
-b <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">B</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span>
-
-puts a<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>x <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; nil
-</span>puts a<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>y <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; nil
-</span>
-a<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>copy_instance_variables_from<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>b<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-
-puts a<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>x <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "valor copiado da classe B"
-</span>puts a<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>y <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; 11</span></span></pre>
-
-
-<p>Acabamos de copiar todas as variáveis de instância de um objeto para outro. É exatamente assim que acontece com controllers e views.</p>
-
-<p>O que acontece por debaixo dos panos é que quando o método <code>render</code> do controller é executado, primeiro ele copia todas as variáveis de instância que você criou para dentro de apenas uma variável chamada <code>@assigns</code>, que funciona como um <code>Hash</code>. E ao criar uma uma nova view, ele faz uma copia desta variável (<code>@assigns</code> com todas as suas variáveis dentro) para o novo objeto. Simples não?</p>
-
-<h2>O inferno das variáveis</h2>
-
-
-<p>O que tenho visto muitas vezes é que alguns programadores tem abusado desta facilidade que o Rails oferece, criando inúmeras variáveis de instância no controller para recuperar todo tipo de informação na view.</p>
-
-<p>Manter muitas variáveis complica o gerenciamento do código, e em alguns casos acabamos até mesmo fazendo chamadas repetidas à associações de um modelo sem se dar conta disso, causando um problema de performance em nosso projeto.</p>
-
-<p>O ideal é que você compartilhe apenas uma variável de instância entre seu controller e sua view. Desta forma todas as chamadas para associações serão realizadas &#8220;on demand&#8221; evitando o consumo indevido de recursos e tornando a manutenção do código mais simples.</p>
-
-<p><img class="center" src="http://old.nomedojogo.com/wp-content/uploads/2009/02/97493713_c72ee9a7bd.jpg"></p>
-
-<p>Isto não quer dizer que você não possa compartilhar outras variáveis quando necessário. Mas é importante que você analise a real necessidade de se fazer isto. Por exemplo, é mais prático criar um helper <code>current_user</code> para recuperar o usuário atual do que sempre armazená-lo em uma variável <code>@current_user</code>.</p>
-
-<p>Se no primeiro exemplo você precisasse recuperar também todos os livros relacionados ao livro atual, talvez parecesse razoável criar uma segunda variável <code>@related_books</code> contendo estes livros. Mas se você colocar em prática a <a href="http://www.nomedojogo.com/2009/01/30/rails-way-1-modelos-gordos-e-controladores-magros/">primeira dica</a> desta série e acrescentar o método <code>related_books</code> ao modelo <code>Book</code>, você poderá usar <code>@book.related_books</code> na sua view. Evitando a criação desnecessária de mais uma variável e deixando seu código mais limpo e organizado.</p>
-
-<p>Usem de bom senso.</p>
-</div>
-  
-  
 
 
     </article>
@@ -901,6 +973,10 @@ puts a<span class="punctuation punctuation_separator punctuation_separator_metho
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
@@ -914,10 +990,6 @@ puts a<span class="punctuation punctuation_separator punctuation_separator_metho
     
       <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
   </ul>

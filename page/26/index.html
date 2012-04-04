@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Quando você executa o método find_all em um named_scope o método não está sendo direcionado para o proxy_found conforme o esperado. Isto faz com que &hellip;">
+  <meta name="description" content="Algumas vezes você assina o feed de um blog e de repente se depara com uma série de posts que já foram lidos aparecendo como se fossem novos no seu &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,14 +100,102 @@
       <div id="content">
         <div class="blog-index">
   
-  
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
+    <h1 class="entry-title">
+
+<a href="/2008/09/11/edge-rails-evitando-feeds-duplicados/">Edge Rails: Evitando feeds duplicados</a>
+
+</h1>
+
     
-      <h1 class="entry-title"><a href="/2008/09/10/edge-rails-metodo-find_all-falhando-no-named_scope/">Edge Rails: Método find_all falhando no named_scope</a></h1>
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-09-11T00:00:00-03:00" pubdate data-updated="true">11 de Setembro de 2008</time>
+        
+        <a rel="bookmark" href="/2008/09/11/edge-rails-evitando-feeds-duplicados/"></a>
+      </p>
     
+  </header>
+
+
+
+  <div class="entry-content"><p>Algumas vezes você assina o feed de um blog e de repente se depara com uma série de posts que já foram lidos aparecendo como se fossem novos no seu <strong>Google Reader</strong>. Já aconteceu com você?</p>
+
+<p>Isto pode acontecer por vários motivos, mas não seria legal deixar isto acontecer com os assinantes do seu feed, correto?</p>
+
+<p>Para ajudar-nos a evitar este tipo de constrangimento, cada entrada e o próprio feed criado pelo builder <a href="http://www.nomedojogo.com/2008/01/17/edge-rails-atom-feed-turbinado/">atom_feed</a> receberam uma nova opção chamada <strong>:id</strong>.</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">atom_feed<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>id</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>tag:nomedojogo.com,2008:test/<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">feed</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+  feed<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>My great blog!<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+  feed<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>updated<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">((</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>posts</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>first<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>created_at<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">))</span>
+
+  <span class="keyword keyword_control keyword_control_ruby">for</span> post <span class="keyword keyword_control keyword_control_ruby">in</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>posts</span>
+    feed<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>entry<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>post<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>id</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>tag:nomedojogo.com,2008:<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">+</span> post<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>id<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>to_s<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">entry</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+      entry<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>post<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+      entry<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>content<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>post<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>body<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>type</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>html<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+
+      entry<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>author <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">author</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+        author<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>name<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Carlos Brando<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+      <span class="keyword keyword_control keyword_control_ruby">end</span>
+    <span class="keyword keyword_control keyword_control_ruby">end</span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+<p>Fazendo desta forma, mesmo que você tenha de reescrever algum trecho do código que gera os feeds, ou fazer alguma grande alteração no conteúdo do seu site, o <strong>id</strong> criado para aquela entrada será sempre o mesmo fazendo com que o leitor de feeds não duplique as entradas antigas.</p>
+
+<p>Seus leitores agradecem.</p>
+
+<p>Aproveitando a ocasião, você pode assinar o feed do Nome do Jogo, <a href="http://www.nomedojogo.com/feed/rss/">clicando aqui</a>.</p>
+</div>
+
+
+    </article>
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/09/10/edge-rails-metodo-find_all-falhando-no-named_scope/">Edge Rails: Método find_all falhando no named_scope</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -124,9 +212,11 @@
 
 <time datetime="2008-09-10T00:00:00-03:00" pubdate data-updated="true">10 de Setembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/09/10/edge-rails-metodo-find_all-falhando-no-named_scope/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Quando você executa o método <strong>find_all</strong> em um <strong>named_scope</strong> o método não está sendo direcionado para o <strong>proxy_found</strong> conforme o esperado. Isto faz com que um erro <strong>NoMethodError</strong> seja retornado.</p>
@@ -145,19 +235,30 @@
 
 <p>Após o lançamento do <strong>Rails 2.2</strong> não teremos mais este erro.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/09/edge-rails-pool-de-conexoes-no-rails/">Edge Rails: Pool de Conexões no Rails</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/09/09/edge-rails-pool-de-conexoes-no-rails/">Edge Rails: Pool de Conexões no Rails</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -174,9 +275,11 @@
 
 <time datetime="2008-09-09T00:00:00-03:00" pubdate data-updated="true"> 9 de Setembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/09/09/edge-rails-pool-de-conexoes-no-rails/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Algo que muita gente reclama sobre o Rails é que ele é lento. Sabemos que isto não é totalmente verdade, mas também sabemos que muita coisa pode ser feita para melhorar a performance dele.</p>
@@ -222,19 +325,30 @@
 </span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/08/enquanto-isto-no-railsconf-europe/">Enquanto isto no RailsConf Europe&#8230;</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/09/08/enquanto-isto-no-railsconf-europe/">Enquanto isto no RailsConf Europe&#8230;</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -251,9 +365,11 @@
 
 <time datetime="2008-09-08T00:00:00-03:00" pubdate data-updated="true"> 8 de Setembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/09/08/enquanto-isto-no-railsconf-europe/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/09/Picture2.png" alt="" /></p>
@@ -262,19 +378,30 @@
 
 <p>Parabéns <a href="http://akitaonrails.com/">Akita</a> e <a href="http://www.mouseoverstudio.com/blog/">Diego Carrion</a>!</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/08/edge-rails-aplicando-layouts-em-emails/">Edge Rails: Aplicando layouts em emails</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/09/08/edge-rails-aplicando-layouts-em-emails/">Edge Rails: Aplicando layouts em emails</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -291,9 +418,11 @@
 
 <time datetime="2008-09-08T00:00:00-03:00" pubdate data-updated="true"> 8 de Setembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/09/08/edge-rails-aplicando-layouts-em-emails/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>A partir do próximo release do Rails teremos uma nova funcionalidade que será a alegria dos spammers!</p>
@@ -351,19 +480,30 @@ Inside
   <span class="support support_function support_function_actionpack support_function_actionpack_rails">layout</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>spam<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>except</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>logout</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span></span></span></pre>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/07/edge-rails-aumentando-as-possibilidades-com-partials/">Edge Rails: Aumentando as possibilidades com partials</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/09/07/edge-rails-aumentando-as-possibilidades-com-partials/">Edge Rails: Aumentando as possibilidades com partials</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -380,9 +520,11 @@ Inside
 
 <time datetime="2008-09-07T00:00:00-03:00" pubdate data-updated="true"> 7 de Setembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/09/07/edge-rails-aumentando-as-possibilidades-com-partials/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Vamos pegar o seguinte exemplo:</p>
@@ -453,19 +595,30 @@ fim
 <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> <span class="keyword keyword_control keyword_control_ruby">end</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span></span></pre>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/06/edge-rails-mais-novidades-na-classe-memoizable/">Edge Rails: Mais novidades na classe Memoizable</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/09/06/edge-rails-mais-novidades-na-classe-memoizable/">Edge Rails: Mais novidades na classe Memoizable</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -482,9 +635,11 @@ fim
 
 <time datetime="2008-09-06T00:00:00-03:00" pubdate data-updated="true"> 6 de Setembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/09/06/edge-rails-mais-novidades-na-classe-memoizable/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Já falei da classe <a href="http://www.nomedojogo.com/2008/07/18/edge-rails-introduzindo-memoizable-para-cache-de-atributos/">Memoizable</a> no passado. Dois novos métodos foram adicionados à ela. Os métodos <strong>unmemoize_all</strong> e <strong>memoize_all</strong>.</p>
@@ -507,19 +662,30 @@ fim
 
 <p>Estes métodos permitem que você desligue ou ligue novamente o cache das propriedades marcadas como <strong>memoizable</strong>.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/05/lancado-o-rails-211-muitas-correcoes-de-bugs/">Rails 2.1.1: Muitas correções de bugs</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/09/05/lancado-o-rails-211-muitas-correcoes-de-bugs/">Rails 2.1.1: Muitas correções de bugs</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -536,9 +702,11 @@ fim
 
 <time datetime="2008-09-05T00:00:00-03:00" pubdate data-updated="true"> 5 de Setembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/09/05/lancado-o-rails-211-muitas-correcoes-de-bugs/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Todos estão esperando o Rails 2.2. Mas acabou de sair o <strong>Ruby on Rails 2.1.1</strong> como um release de manutenção.</p>
@@ -572,19 +740,30 @@ fim
 </ul>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/05/edge-rails-migrationproxy/">Edge Rails: MigrationProxy</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/09/05/edge-rails-migrationproxy/">Edge Rails: MigrationProxy</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -601,28 +780,41 @@ fim
 
 <time datetime="2008-09-05T00:00:00-03:00" pubdate data-updated="true"> 5 de Setembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/09/05/edge-rails-migrationproxy/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Imagine que ao rodar uma série de migrations um determinado modelo seja renomeado. Agora imagine que antes disto acontecer uma outra migration faça referencia a este modelo. Isto causará um erro feio e parará a execução de suas migrations.</p>
 
 <p>Para evitar este tipo de problema foi criado uma nova classe chamada <strong>MigrationProxy</strong> que armazena o nome, a versão e o nome do arquivo de cada migration e usa estas informações para carregar a migration somente quando ela for necessária, evitando carregar todas elas de uma vez.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/05/edge-rails-fixtures_path/">Edge Rails: FIXTURES_PATH</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/09/05/edge-rails-fixtures_path/">Edge Rails: FIXTURES_PATH</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -639,9 +831,11 @@ fim
 
 <time datetime="2008-09-05T00:00:00-03:00" pubdate data-updated="true"> 5 de Setembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/09/05/edge-rails-fixtures_path/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>As tarefas <strong>rake db:fixtures:load</strong> e <strong>rake db:fixtures:identify</strong> receberam um novo parâmetro opcional: <strong>FIXTURES_PATH</strong>.</p>
@@ -651,62 +845,6 @@ fim
 
 <p>Desta forma você pode especificar um caminho alternativo para suas fixtures (por exemplo: spec/fixtures).</p>
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/04/quer-aprender-ruby-on-rails-ainda-este-ano-eu-posso-ajudar/">Quer aprender Ruby on Rails ainda este ano?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-09-04T00:00:00-03:00" pubdate data-updated="true"> 4 de Setembro de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><blockquote>“Ruby on Rails é incrível por estar diminuindo as barreiras para entrar no mundo da programação. Aplicações web poderosas que geralmente demoram semanas ou meses para serem desenvolvidas agora necessitam somente de uma questão de dias.”
-<cite>-Tim O&#8217;Reilly, fundador da O&#8217;Reilly </cite></blockquote>
-
-
-<p>Com a frase acima Tim O&#8217;Reilly resume muito do que é <strong>Ruby on Rails</strong>. Não existe no mercado, hoje, uma ferramenta tão produtiva quanto esta.</p>
-
-<p>O <strong>mercado internacional</strong> procura desesperadamente por profissionais preparados para criar produtos usando este framework. E mesmo no Brasil muitas empresas já estão sendo seduzidas pela velocidade que o Ruby on Rails proporciona aos seus programadores. E o melhor de tudo, na maioria dos casos paga-se muito bem!</p>
-
-<p>Depois de muito enrolação decidi ministrar um curso através da <a href="http://www.egenial.com.br/cursorails/index">e-Genial</a>. O curso começa no dia <strong>7 de outubro</strong> e termina no dia 18 de dezembro.</p>
-
-<p>O curso será totalmente <strong>online</strong> (ao vivo), mas todas as aulas serão gravadas, permitindo que você faça o curso no seu horário e ritmo. <a href="http://www.egenial.com.br/cursorails/como">Clique aqui</a> para ver como funciona o curso.</p>
-
-<p>A idéia do curso é ir do <a href="http://www.egenial.com.br/cursorails/grade">básico ao avançado</a>, ensinando desde o <strong>básico</strong> de Ruby até os recursos mais <strong>avançados</strong> do Rails. Você terá todas as suas dúvidas respondidas por mim mesmo e até o final do curso estará apto a criar qualquer tipo de aplicação web usando Ruby on Rails.</p>
-
-<p>Só tem um problema, as <strong>vagas são limitadas</strong>. Então corra, <a href="http://www.egenial.com.br/cursorails/matricula">matricule-se logo</a> e termine o ano sabendo tudo sobre Ruby on Rails.</p>
-
-<blockquote>“Ruby on Rails é de tirar o fôlego. Usar ele é como assistir a um filme de kung-fu,     onde uma dúzia de frameworks mauvados se preparam para levar uma surra do pequeno iniciante,     com uma variedade imaginativa de golpes.”
-<cite>-Nathan Torkington, consultor e co-fundador do O&#8217;Reilly Radar </cite></blockquote>
-
-</div>
-  
-  
 
 
     </article>
@@ -728,6 +866,10 @@ fim
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
@@ -741,10 +883,6 @@ fim
     
       <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
   </ul>

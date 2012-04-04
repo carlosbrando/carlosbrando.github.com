@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Já estava para falar disto há alguns dias, mas só hoje que consegui parar para escrever. Todo programador Ruby on Rails já ouviu pelo menos falar do &hellip;">
+  <meta name="description" content="Encontrei este post no Ruby on Rails Security Blog. O autor aqui cita três métodos que usamos constatemente e como eles representam uma falha de &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,14 +100,102 @@
       <div id="content">
         <div class="blog-index">
   
-  
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
+    <h1 class="entry-title">
+
+<a href="/2007/09/01/pelo-amor-de-deus-no-use-strip_tags-strip_links-e-nem-sanitize/">Pelo amor de Deus não use strip_tags, strip_links e nem sanitize</a>
+
+</h1>
+
     
-      <h1 class="entry-title"><a href="/2007/08/30/uma-interface-para-o-capistrano/">Uma interface para o Capistrano</a></h1>
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-09-01T00:00:00-03:00" pubdate data-updated="true"> 1 de Setembro de 2007</time>
+        
+        <a rel="bookmark" href="/2007/09/01/pelo-amor-de-deus-no-use-strip_tags-strip_links-e-nem-sanitize/"></a>
+      </p>
     
+  </header>
+
+
+
+  <div class="entry-content"><p><img src="http://farm1.static.flickr.com/102/275156845_4bbc949fce.jpg?v=0"> </p>
+
+
+<p>Encontrei este <a href="http://www.rorsecurity.info/2007/08/17/dont-use-strip_tags-strip_links-and-sanitize/">post</a> no <a href="http://www.rorsecurity.info">Ruby on Rails Security Blog</a>.</p>
+
+
+<p>O autor aqui cita três métodos que usamos constatemente e como eles representam uma falha de segurança no <strong>Rails</strong>.</p>
+
+
+<p>Veja estes dois exemplos abaixo:</p>
+
+
+<p>
+[source:ruby]
+strip_tags(&#8220;sdfasdf<<b>script>alert(&#8216;hello&#8217;)<</b>/script>&#8221;)
+[/source]
+</p>
+<p>
+O código acima vai retornar: <strong>&#8220;sdfasdf&lt;script&gt;alert(&#8216;hello&#8217;)&lt;/script&gt;&#8221;</strong>
+</p>
+<p>
+[source:ruby]
+strip_links(&#8221;<a xhref='http://www.holy-angel.com/'><a xhref='http://www.attacker.com/'>Test</a></a>&#8221;)
+[/source]
+</p>
+<p>E este código retorna <strong>&#8220;&lt;a xhref=&#8217;http://www.attacker.com/&#8217;&gt;Test&lt;/a&gt;&#8221;</strong></p>
+<p>Segundo o autor do post, este problema já foi reportado mas os métodos não devem ser alterados até a versão <strong>2.0</strong> do <strong>Rails</strong>. Por isto, cuidado ao usá-los crianças&#8230;</p>
+
+</div>
+
+
+    </article>
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2007/08/30/uma-interface-para-o-capistrano/">Uma interface para o Capistrano</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -124,9 +212,11 @@
 
 <time datetime="2007-08-30T00:00:00-03:00" pubdate data-updated="true">30 de Agosto de 2007</time>
         
+        <a rel="bookmark" href="/2007/08/30/uma-interface-para-o-capistrano/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://farm1.static.flickr.com/76/173455001_a3a546f09a.jpg?v=0"> </p>
@@ -134,19 +224,30 @@
 
 <p> <p>Já estava para falar disto há alguns dias, mas só hoje que consegui parar para escrever. Todo programador Ruby on Rails já ouviu pelo menos falar do Capistrano. E acredito que a grande maioria já usou também.</p> <p>Se você também é um dos sortudos a usar o Capistrano, alegre-se, pois agora temos o <a href="http://blog.innerewut.de/files/webistrano/webistrano-1.0.zip">Webistrano</a> (que nomezinho&#8230;). Basicamente este software é uma interface web para deploy de aplicações Rails. Eu instalei aqui e gostei bastante, pois ele facilita muito as coisas. Claro que ainda está no começo do desenvolvimento e falta muito para ficar completo.</p> <p>Você pode ver uma galeria de screanshots <a href="http://blog.innerewut.de/webistrano/gallery">aqui</a>.</p> <p>Também pode baixar um screencast <a href="http://blog.innerewut.de/files/webistrano/screencasts/webistrano.mov">aqui</a>.</p> <p>E pode pegar os fontes do projeto <a href="http://rubyforge.org/projects/webistrano/">aqui</a>.</p></p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/08/29/quantos-programadores-rails-existem-no-mundo/">Quantos programadores Rails existem no mundo?</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/08/29/quantos-programadores-rails-existem-no-mundo/">Quantos programadores Rails existem no mundo?</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -163,9 +264,11 @@
 
 <time datetime="2007-08-29T00:00:00-03:00" pubdate data-updated="true">29 de Agosto de 2007</time>
         
+        <a rel="bookmark" href="/2007/08/29/quantos-programadores-rails-existem-no-mundo/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://farm1.static.flickr.com/33/42429170_8efc7391e2.jpg?v=0"> </p>
@@ -173,19 +276,30 @@
 
 <p> <p>Eu já havia mencionado aqui que vale muito a pena criar uma conta no <a href="http://workingwithrails.com/">Working With Rails</a>. Somente este mês já recebi duas propostas de emprego no exterior através do site. Mas este é outro assunto&#8230;</p> <p>O site tem uma série de coisas legais, uma delas é ver quantos programadores Rails existem cadastrados por <a href="http://workingwithrails.com/browse/people/country">país de origem</a>. Baseando-se nisto um cara chamado <strong>Aslak Hellesoy</strong> criou um mapa que mostra a quantidade de programadores Rails per capita por país.</p> <p>Para ver o mapa <a href="http://blog.aslakhellesoy.com/2007/6/13/rails-adoption-world-wide">clique aqui</a>.</p> <p>Ainda acho que o WWR poderia ser muito mais do que é. Mas é uma excelente ferramenta para a comunidade de programadores Rails. Se você ainda não é cadastrado, <a href="http://workingwithrails.com/">clique aqui AGORA</a>.</p> <p>E aproveitando a deixa,&nbsp;eu juro que só falo do WWR porque realmente gosto dele, mas&nbsp;se alguém quiser me recomerdar, é só <a href="http://workingwithrails.com/recommendation/new/person/8137-carlos-brando">clicar aqui</a>. Isto é ótimo para os negócios.</p></p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/08/28/usando-o-mtodo-debug-na-view/">Usando o método debug na view</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/08/28/usando-o-mtodo-debug-na-view/">Usando o método debug na view</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -202,9 +316,11 @@
 
 <time datetime="2007-08-28T00:00:00-03:00" pubdate data-updated="true">28 de Agosto de 2007</time>
         
+        <a rel="bookmark" href="/2007/08/28/usando-o-mtodo-debug-na-view/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://farm1.static.flickr.com/195/518019752_96ecf04954.jpg?v=0"> </p>
@@ -247,19 +363,30 @@ attributes:
 </pre>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/08/27/resumo-do-fim-de-semana/">Resumão do fim de semana</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/08/27/resumo-do-fim-de-semana/">Resumão do fim de semana</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -276,9 +403,11 @@ attributes:
 
 <time datetime="2007-08-27T00:00:00-03:00" pubdate data-updated="true">27 de Agosto de 2007</time>
         
+        <a rel="bookmark" href="/2007/08/27/resumo-do-fim-de-semana/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://farm1.static.flickr.com/85/233472093_1f1d235e7b.jpg?v=0"> </p>
@@ -286,19 +415,30 @@ attributes:
 
 <p> <p>Estive em um congresso neste fim de semana e não tive acesso a internet. O grande problema disto é a quantidade de feeds para ler na segunda-feira. Bom, quando isto acontece o jeito é ir pelo título dos posts e ler o que parecer mais interessante.</p> <p>Depois de &#8220;passar&#8221; por mais de 300 posts, os que achei mais interessante foram:</p> <ul> <li><a href="http://www.cheat-sheets.org/">Cheat-Sheets.org</a>: Um site com dezenas de cheat sheets de diversas linguagens de programação, incluindo <a href="http://www.cheat-sheets.org/#Ruby">Ruby</a>&nbsp;e <a href="http://www.cheat-sheets.org/#RubyRails">Ruby on Rails</a>. Recomendado.  <li><a href="http://www.softiesonrails.com/2007/8/27/ruby-101-hashes-are-cool">Ruby 101: Hashes are Cool</a>: Jeff Cohen mostra as vantagens do Ruby em cima do C# no uso de Hashes.  <li><a href="http://www.akitaonrails.com/2007/8/26/tornando-rails-melhor-consertando-falhas-de-arquitetura-no-active-record">Tornando Rails Melhor - Consertando Falhas de Arquitetura no Active Record</a>: Fábio Akita mostra como seria a arquitetura ideal do Active Record.  <li>&#8220;<a href="http://www.urubatan.com.br/2007/08/25/o-que-voce-acha-de-gerar-um-executavel-da-sua-aplicacao-ruby-on-rails-para-fazer-um-demo-ou-apresentar-para-um-cliente/">O que você acha de gerar um executável da sua aplicação Ruby On Rails para fazer um demo ou apresentar para um cliente?</a>&#8221;: O Rodrigo Urubatan compartilha sua descoberta de duas ferramentas interessantes para Rails. Uma alternativa para o Joyent.</li></ul> <p>E saindo um pouquinho do mundo Ruby on Rails saiu no MSDN um ótimo artigo sobre <a href="http://www.microsoft.com/brasil/msdn/tecnologias/arquitetura/Customizacao_Software.mspx">Técnicas para Customização de Software</a>.</p></p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/08/23/webcasts-gratuitos-sobre-ruby-on-rails/">Webcasts gratuitos sobre Ruby on Rails</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/08/23/webcasts-gratuitos-sobre-ruby-on-rails/">Webcasts gratuitos sobre Ruby on Rails</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -315,27 +455,40 @@ attributes:
 
 <time datetime="2007-08-23T00:00:00-03:00" pubdate data-updated="true">23 de Agosto de 2007</time>
         
+        <a rel="bookmark" href="/2007/08/23/webcasts-gratuitos-sobre-ruby-on-rails/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p> <center><img height="105" alt="home_logo" src="http://old.nomedojogo.com/wp-content/uploads/2007/08/home-logo.gif" width="152" border="0"> <img height="66" alt="home_logo2" src="http://old.nomedojogo.com/wp-content/uploads/2007/08/home-logo2.gif" width="229" border="0"></center> <p></p> <p>O site <a href="http://webcast.berkeley.edu/event_details.php?webcastid=20854">webcast.berkeley</a> disponibilizou uma série de webcasts sobre Ruby on Rails.</p> <p>Os webcasts mostram os conceitos básicos do Ruby e do framework Rails. São ao todo 6 episódios com uma hora de duração cada.</p> <ul> <li><a href="http://webcast.berkeley.edu:8080/ramgen/events/eecs/eecs_20070816_1.rm"><b>Hello World</b></a>  <li><a href="http://webcast.berkeley.edu:8080/ramgen/events/eecs/eecs_20070816_2.rm"><b>Just Enough Ruby</b></a>  <li><a href="http://webcast.berkeley.edu:8080/ramgen/events/eecs/eecs_20070816_3.rm"><b>Basics of Rails</b></a>  <li><a href="http://webcast.berkeley.edu:8080/ramgen/events/eecs/eecs_20070816_4.rm"><b>Advanced Model Relations</b></a>  <li><a href="http://webcast.berkeley.edu:8080/ramgen/events/eecs/eecs_20070816_5.rm"><b>AJAX &amp; Testing</b></a>  <li><a href="http://webcast.berkeley.edu:8080/ramgen/events/eecs/eecs_20070816_6.rm"><b>Configuration &amp; Deployment</b></a></li></ul> <p>Além disto você pode obter todo o material do curso <a href="http://radlab.cs.berkeley.edu/wiki/Ruby_on_Rails_1-day_course">aqui</a>.</p>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/08/23/rails-vs-net/">Rails vs .Net</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/08/23/rails-vs-net/">Rails vs .Net</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -352,9 +505,11 @@ attributes:
 
 <time datetime="2007-08-23T00:00:00-03:00" pubdate data-updated="true">23 de Agosto de 2007</time>
         
+        <a rel="bookmark" href="/2007/08/23/rails-vs-net/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><embed src="http://www.youtube.com/v/528BCJiRkks" width="425" height="350" type="application/x-shockwave-flash" wmode="transparent"></embed></p>
@@ -362,19 +517,30 @@ attributes:
 
 <p> <p>Vi primeiro no <a href="http://samirmamude.com/2007/8/23/rails-envy-rails-vs-net">blog do Samir</a>.</p></p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/08/22/sua-empresa-ainda-no-aceitou-ruby-on-rails-que-tipo-de-evangelista-voc/">Sua empresa ainda não aceitou Ruby on Rails? Que tipo de evangelista é você?</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/08/22/sua-empresa-ainda-no-aceitou-ruby-on-rails-que-tipo-de-evangelista-voc/">Sua empresa ainda não aceitou Ruby on Rails? Que tipo de evangelista é você?</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -391,27 +557,40 @@ attributes:
 
 <time datetime="2007-08-22T00:00:00-03:00" pubdate data-updated="true">22 de Agosto de 2007</time>
         
+        <a rel="bookmark" href="/2007/08/22/sua-empresa-ainda-no-aceitou-ruby-on-rails-que-tipo-de-evangelista-voc/"></a>
       </p>
     
   </header>
 
 
+
   <div class="entry-content"><p><img src="http://farm2.static.flickr.com/1034/888412358_2ab312e766.jpg?v=0">  <p>Você pode desenvolver qualquer tipo de sistema com Ruby? Sim, pode. Vale a pena? Não, não vale. <p>Tenho um sistema web para ser desenvolvido na minha empresa a partir do zero, devo usar Ruby on Rails? Você só não fará isto se for burro.  <p>Se você já viu todo o potencial do Rails e é dono da sua empresa, realmente você é um&nbsp;idiota se ainda não está criando nada com este framework. &Eacute; simplesmente indiscutível os ganhos em se usar Ruby em projetos de pequeno/médio porte para web.  <p>Mas se você é um simples empregado de uma grande corporação, precisa primeiro de tudo, convencer a sua empresa de que apostar no Rails será bom para os negócios. A regra é: Morda um pedaço de cada vez. Não tente ir com toda a sede ao pote, isto vai assustá-los.  <p>Quando me deparei com Ruby on Rails pela primeira vez, confesso que ria muito à medida que estudava. Tudo era muito simples e rápido, de um jeito que parecia brincadeira. Hoje, já com alguns produtos criados e um conhecimento um pouco maior da linguagem e do ambiente, não dou mais risada. Dou gargalhada. Por este motivo, quando vou falar com alguém que não conhece Rails, me empolgo muito, quero mostrar tudo que é possível ser feito, e isto realmente assusta as pessoas.  <p>Comece montando algo pequeno para mostrar como é rápido o desenvolvimento. Não peça permissão. Simplesmente faça. Mostre resultados reais.  <p>Deixe claro para seus superiores que Ruby on Rails é uma alternativa de baixo risco e de baixo investimento para testar novos conceitos.  <p>Teve uma idéia interessante? Crie algo na suas horas de folga, depois mostre para seu chefe. Qualquer pessoa de bom senso vai perceber que deve pelo menos olhar com mais calma para o Rails.  <p>Ainda não consegui a mudança que queria aqui no trabalho, mas mostrando os <a href="www.carreirati.com ">produtos</a> que criei para mim mesmo, e revelando o tempo gasto com o desenvolvimento, já consegui alguns resultados.</p>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/08/21/working-with-rails-ultrapassa-a-marca-de-8000-programadores/">Working with Rails ultrapassa a marca de 8000 programadores.</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/08/21/working-with-rails-ultrapassa-a-marca-de-8000-programadores/">Working with Rails ultrapassa a marca de 8000 programadores.</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -428,27 +607,40 @@ attributes:
 
 <time datetime="2007-08-21T00:00:00-03:00" pubdate data-updated="true">21 de Agosto de 2007</time>
         
+        <a rel="bookmark" href="/2007/08/21/working-with-rails-ultrapassa-a-marca-de-8000-programadores/"></a>
       </p>
     
   </header>
 
 
+
   <div class="entry-content"><p><img src="http://l.yimg.com/www.flickr.com/images/home_photo_notsogoodphotography.jpg">  <p>Aí está um serviço muito interessante. Não conheço nenhuma outra comunidade de linguagem de programação que tenha uma rede social deste nível só para ela.  <p>&Eacute; claro que o <a href="http://www.workingwithrails.com">WWR</a> não é tudo isto, mas tem alguns recursos bem interessantes, como uma lista com os <a href="http://workingwithrails.com/browse/railsplugins/usage">plugins</a> e <a href="http://workingwithrails.com/browse/rubygems/usage ">gems</a> mais usados pelos desenvolvedores no mundo. <p>Você também pode acompanhar um rank de popularidade entre os principais <a href="http://www.workingwithrails.com/browse/popular/people">evangelistas e contribuidores</a> do framework no mundo todo. <p>Outro recurso legal é poder ver os <a href="http://workingwithrails.com/browse/railsplugins/usage/authority/ ">plugins</a> e <a href="http://workingwithrails.com/browse/rubygems/usage/authority/">gems</a> mais usados levando em consideração o grau de autoridade das pessoas na linguagem.  <p>Se você já usa o Rails profissionalmente, com certeza já deve conhecer o site, mas mesmo para quem ainda está aprendendo, este é com certeza um ótimo ambiente para se freq&uuml;entar.  <p>P.S.: Ah, e para quem quiser me recomendar é só <a href="http://workingwithrails.com/recommendation/new/person/8137-carlos-brando">clicar aqui</a>.</p>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2007/08/19/ruby-on-rails-coloque-as-coisas-no-seu-devido-lugar/">Ruby on Rails: Coloque as coisas no seu devido lugar.</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2007/08/19/ruby-on-rails-coloque-as-coisas-no-seu-devido-lugar/">Ruby on Rails: Coloque as coisas no seu devido lugar.</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -465,9 +657,11 @@ attributes:
 
 <time datetime="2007-08-19T00:00:00-03:00" pubdate data-updated="true">19 de Agosto de 2007</time>
         
+        <a rel="bookmark" href="/2007/08/19/ruby-on-rails-coloque-as-coisas-no-seu-devido-lugar/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/08/459207903-d5ce64f14a.jpg" style="border: 0px none " alt="459207903_d5ce64f14a" border="0" height="333" width="500" /> </p>
@@ -506,47 +700,6 @@ attributes:
 <p>Rode e veja como fica sua página. Pronto, tudo no seu devido lugar.</p>
 
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2007/08/19/links-de-domingo/">Links de domingo</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-08-19T00:00:00-03:00" pubdate data-updated="true">19 de Agosto de 2007</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://farm1.static.flickr.com/58/183689226_4e71fc9f7d.jpg?v=0"> </p>
-
-
-<p> <p><a href="http://www.softiesonrails.com/2007/8/19/ruby-101-substrings-in-ruby">Ruby 101: Substrings in Ruby</a>: Jeff Cohen ensina como recuperar trechos de uma string no <strong>Ruby</strong>. &Eacute; uma dica interessante, principalmente para quem ainda está trabalhando com C#, e pode se confundir um pouco na hora de fazer o mesmo com Ruby.</p> <p><a href="http://www.rubyinside.com/yelp-api-for-ruby-581.html"></a><a href="http://scrubyt.org/scrapin-google-in-no-sec/">Scrapin&#39; Google in no sec</a>: CopperMonkey mostra como recuperar dados do <a href="http://www.google.com.br">Google</a> em 0 (zero) segundos usando o <strong><font color="#ff0000">scRUBYt!</font></strong>.</p></p>
-</div>
-  
-  
 
 
     </article>
@@ -568,6 +721,10 @@ attributes:
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
@@ -581,10 +738,6 @@ attributes:
     
       <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
   </ul>

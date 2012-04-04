@@ -9,8 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="
-">
+  <meta name="description" content="A criação de rotas nomeadas é algo muito simples, mas muito poderoso dentro do Rails. Por isto é justo que ele receba uma atenção especial em cada &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -101,14 +100,26 @@
       <div id="content">
         <div class="blog-index">
   
-  
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/11/27/twitter-images/">Twitter Images</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/11/28/rails-22-limitando-as-actions-de-um-recurso/">Rails 2.2: Limitando as actions de um recurso</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -123,28 +134,81 @@
   
 
 
-<time datetime="2008-11-27T00:00:00-02:00" pubdate data-updated="true">27 de Novembro de 2008</time>
+<time datetime="2008-11-28T00:00:00-02:00" pubdate data-updated="true">28 de Novembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/11/28/rails-22-limitando-as-actions-de-um-recurso/"></a>
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p><img class="alignnone size-full wp-image-1856" title="gregg" src="http://old.nomedojogo.com/wp-content/uploads/2008/11/gregg.png" alt="" width="648" height="291" /></p>
+
+  <div class="entry-content"><p>A criação de rotas nomeadas é algo muito simples, mas muito poderoso dentro do Rails. Por isto é justo que ele receba uma atenção especial em cada novo release.</p>
+
+<p>No Rails 2.2 o sistema de <a href="http://www.nomedojogo.com/2008/09/15/edge-rails-polymorphic-routes/">rotas polimórficas foi aprimorado</a> e o <a href="http://www.nomedojogo.com/2008/09/12/edge-rails-simplificando-o-acesso-aos-resources/">acesso aos resources foi simplificado</a>. E para fechar com chave de ouro, uma nova opção na criação de rotas promete diminuir um pouco os gastos com memória causados pela geração desnecessária de código.</p>
+
+<p>Duas novas opções foram adicionadas ao <code>map.resources</code>: <code>:only</code> e <code>:except</code>.</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>posts</span></span></pre>
+
+
+<p>No código acima estou criando sete actions (<code>index</code>, <code>create</code>, <code>new</code>, <code>edit</code>, <code>show</code>, <code>update</code> e <code>destroy</code>) para o recurso <code>Post</code>. Mas digamos que eu só precise de duas (<code>index</code> e <code>show</code>), neste caso estou criando cinco actions desnecessariamente.</p>
+
+<p>Usando estas novas opções eu poderia fazer isto:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>posts</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>only</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>index</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>show</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span></span></pre>
+
+
+<p>Assim, somente as actions necessárias serão criadas. Veja um outro exemplo de uso:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>posts</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>only</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>index</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>show</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">post</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+  post<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>comments</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>except</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>update</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>destroy</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+</span></pre>
+
+
+<p>No código acima acrescentei o recurso <code>Comment</code>, mas removendo as actions <code>update</code> e <code>destroy</code> que não serão usadas, já que não será possível atualizar nem apagar os comentários de um <code>post</code>.</p>
+
+<p>Veja um resumo de algumas ações e o retorno de cada uma:</p>
+
+<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">GET /posts (action PostsController#index)
+POST /posts (falha)
+GET /posts/1 (action PostsController#show)
+DELETE /posts/1 (falha)
+POST /posts/1/comments (action CommentsController#create)
+PUT /posts/1/comments/1 (falha)
+</span></span></pre>
+
+
+<p>Um recurso interessante, mas que deve ser usado com critério.</p>
+
+<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades do Rails 2.2 no e-book “<a href="../2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">Ruby on Rails - O que há de novo?</a>“.</em>
+
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/11/27/licencas-de-graca-para-o-1password/">Licenças de graça para o 1Password</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/11/27/twitter-images/">Twitter Images</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -161,9 +225,60 @@
 
 <time datetime="2008-11-27T00:00:00-02:00" pubdate data-updated="true">27 de Novembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/11/27/twitter-images/"></a>
       </p>
     
   </header>
+
+
+
+  <div class="entry-content"><p><img class="alignnone size-full wp-image-1856" title="gregg" src="http://old.nomedojogo.com/wp-content/uploads/2008/11/gregg.png" alt="" width="648" height="291" /></p>
+</div>
+
+
+    </article>
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/11/27/licencas-de-graca-para-o-1password/">Licenças de graça para o 1Password</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-11-27T00:00:00-02:00" pubdate data-updated="true">27 de Novembro de 2008</time>
+        
+        <a rel="bookmark" href="/2008/11/27/licencas-de-graca-para-o-1password/"></a>
+      </p>
+    
+  </header>
+
 
 
   <div class="entry-content"><p>Usuários de Mac, o pessoal da Agile Web Solutions, criadora do <a href="http://agile.ws/products/1Password">1Password</a> está dando para cada usuário 3 licenças para <a href="http://agile.ws/gift/thanksgiving">presentear</a> seus amigos. Mas todos os meus amigos já compraram o software, hehe&#8230;</p>
@@ -174,19 +289,30 @@
 
 <p>Esta brincadeira só vale hoje!</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/11/26/encontro-de-ti-em-sao-paulo-e-rio/">Encontro de TI em São Paulo e Rio</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/11/26/encontro-de-ti-em-sao-paulo-e-rio/">Encontro de TI em São Paulo e Rio</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -203,9 +329,11 @@
 
 <time datetime="2008-11-26T00:00:00-02:00" pubdate data-updated="true">26 de Novembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/11/26/encontro-de-ti-em-sao-paulo-e-rio/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>É tempo de interatividade e o 1º Encontro de TI faz tudo o que o público deseja!</p>
@@ -330,19 +458,30 @@
 
 <p><em></em></p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/11/26/como-o-github-usou-o-caindo-na-real-para-comprar-uma-briga-cocar-sua-propria-coceira-e-se-manter-pequeno/">Como o GitHub usou o Caindo na Real para comprar uma briga, coçar sua própria coceira e se manter pequeno</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/11/26/como-o-github-usou-o-caindo-na-real-para-comprar-uma-briga-cocar-sua-propria-coceira-e-se-manter-pequeno/">Como o GitHub usou o Caindo na Real para comprar uma briga, coçar sua própria coceira e se manter pequeno</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -359,9 +498,11 @@
 
 <time datetime="2008-11-26T00:00:00-02:00" pubdate data-updated="true">26 de Novembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/11/26/como-o-github-usou-o-caindo-na-real-para-comprar-uma-briga-cocar-sua-propria-coceira-e-se-manter-pequeno/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Este texto é uma tradução do artigo escrito por Chris Wanstrath, onde ele explica os benefícios de aplicar os princípios do <a href="http://gettingreal.37signals.com/GR_por.php">Getting Real</a> na construção do <a href="http://github.com/">GitHub</a>.</p>
@@ -423,19 +564,30 @@
 
 <p>Até aqui, tudo bem.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/11/25/edge-rails-activeresourcebase-to_xml-e-to_json/">Rails 2.2: ActiveResource::Base #to_xml e #to_json</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/11/25/edge-rails-activeresourcebase-to_xml-e-to_json/">Rails 2.2: ActiveResource::Base #to_xml e #to_json</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -452,9 +604,11 @@
 
 <time datetime="2008-11-25T00:00:00-02:00" pubdate data-updated="true">25 de Novembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/11/25/edge-rails-activeresourcebase-to_xml-e-to_json/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Mais dois novos métodos foram acrescentados ao <strong>ActiveResource::Base</strong>: <strong>to_xml</strong> e <strong>to_json</strong>. O primeiro converte o recurso em uma string XML e o segundo retorna também uma string, mas no formato JSON representando o modelo.</p>
@@ -475,19 +629,30 @@ person<span class="punctuation punctuation_separator punctuation_separator_metho
 <hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades do Rails 2.2 no e-book “<a href="../2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">Ruby on Rails - O que há de novo?</a>“.</em>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/11/23/rails-22/">Rails 2.2 - Finalmente</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/11/23/rails-22/">Rails 2.2 - Finalmente</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -504,9 +669,11 @@ person<span class="punctuation punctuation_separator punctuation_separator_metho
 
 <time datetime="2008-11-23T00:00:00-02:00" pubdate data-updated="true">23 de Novembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/11/23/rails-22/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Finalmente a versão final do Rails 2.2 saiu!</p>
@@ -532,19 +699,30 @@ person<span class="punctuation punctuation_separator punctuation_separator_metho
 <pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">gem install rails</span></span></pre>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/11/20/rails-22-suporte-a-banco-de-dados-ibm-db-no-gerador-do-rails/">Rails 2.2: Suporte à banco de dados IBM DB no gerador do Rails</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/11/20/rails-22-suporte-a-banco-de-dados-ibm-db-no-gerador-do-rails/">Rails 2.2: Suporte à banco de dados IBM DB no gerador do Rails</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -561,9 +739,11 @@ person<span class="punctuation punctuation_separator punctuation_separator_metho
 
 <time datetime="2008-11-20T00:00:00-02:00" pubdate data-updated="true">20 de Novembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/11/20/rails-22-suporte-a-banco-de-dados-ibm-db-no-gerador-do-rails/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Foi adicionado ao generator do Rails a opção <strong>IBM DB</strong> para o banco de dados. Para usá-la basta executar no terminal o seguinte comando ao criar o projeto Rails:</p>
@@ -640,19 +820,30 @@ person<span class="punctuation punctuation_separator punctuation_separator_metho
 <hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades do Rails 2.2 no e-book “<a href="../2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">Ruby on Rails - O que há de novo?</a>“.</em>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/11/20/rails-22-alterada-a-mensagem-do-metodo-assert_difference/">Rails 2.2: Alterada a mensagem do método assert_difference</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/11/20/rails-22-alterada-a-mensagem-do-metodo-assert_difference/">Rails 2.2: Alterada a mensagem do método assert_difference</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -669,9 +860,11 @@ person<span class="punctuation punctuation_separator punctuation_separator_metho
 
 <time datetime="2008-11-20T00:00:00-02:00" pubdate data-updated="true">20 de Novembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/11/20/rails-22-alterada-a-mensagem-do-metodo-assert_difference/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Quando usávamos o método <strong>assert_difference</strong> com múltiplas expressões e um erro ocorria era difícil de saber qual das expressões não teve seu valor alterado, já que a mensagem de erro não informava isto.</p>
@@ -692,19 +885,30 @@ person<span class="punctuation punctuation_separator punctuation_separator_metho
 <hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades do Rails 2.2 no e-book “<a href="../2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">Ruby on Rails - O que há de novo?</a>“.</em>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/11/20/edge-rails-atencao-o-applicationrb-foi-renomeado/">Edge Rails: Atenção o application.rb foi renomeado</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/11/20/edge-rails-atencao-o-applicationrb-foi-renomeado/">Edge Rails: Atenção o application.rb foi renomeado</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -721,9 +925,11 @@ person<span class="punctuation punctuation_separator punctuation_separator_metho
 
 <time datetime="2008-11-20T00:00:00-02:00" pubdate data-updated="true">20 de Novembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/11/20/edge-rails-atencao-o-applicationrb-foi-renomeado/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Já faz um tempo que existe uma dicussão sobre o nome do arquivo <code>application.rb</code>. O motivo é que como ele corresponde à classe <code>ApplicationController</code>, deveria chamar-se <code>application_controller.rb</code>.</p>
@@ -742,61 +948,6 @@ person<span class="punctuation punctuation_separator punctuation_separator_metho
 <hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.3/3.0 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades acompanhando a série Edge Rails.</em>
 
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/11/19/rails-22-opcoes-no-metodo-field_set_tag/">Rails 2.2: Opções no método field_set_tag</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-11-19T00:00:00-02:00" pubdate data-updated="true">19 de Novembro de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Foi adicionado ao método <strong>field_set_tag</strong> um parâmetro opcional para facilitar a formatação do HTML. Este parâmetro aceita todas as opções que o método <strong>tag</strong> já aceita. Exemplo:</p>
-
-<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> field_set_tag <span class="constant constant_language constant_language_ruby">nil</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>class</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>format<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
-  <span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>Some text<span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
-<span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> <span class="keyword keyword_control keyword_control_ruby">end</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
-</span></pre>
-
-
-<p>O código acima retornará o seguinte:</p>
-
-<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">fieldset</span> <span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_html">class</span>=<span class="string string_quoted string_quoted_double string_quoted_double_html"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_html">"</span>format<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_html">"</span></span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
-  <span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>Some text<span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">p</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
-<span class="meta meta_tag meta_tag_block meta_tag_block_any meta_tag_block_any_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_block entity_name_tag_block_any entity_name_tag_block_any_html">fieldset</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span>
-</span></pre>
-
-
-<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades do Rails 2.2 no e-book “<a href="../2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">Ruby on Rails - O que há de novo?</a>“.</em>
-
-</div>
-  
-  
 
 
     </article>
@@ -818,6 +969,10 @@ person<span class="punctuation punctuation_separator punctuation_separator_metho
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
@@ -831,10 +986,6 @@ person<span class="punctuation punctuation_separator punctuation_separator_metho
     
       <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
   </ul>

@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Existe um bug no método count do ActiveRecord quando usamos uma associação has_many em conjunto com a opção :limit ou :offset. Vejamos um exemplo: &hellip;">
+  <meta name="description" content="No exemplo abaixo estou renderizando uma partial, e não estou informando qual variável ela deve usar para preencher o conteúdo. Hoje o Rails encara &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,14 +100,89 @@
       <div id="content">
         <div class="blog-index">
   
-  
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
+    <h1 class="entry-title">
+
+<a href="/2008/09/29/edge-rails-partials-nao-vao-mais-definir-as-variaveis-locais-implicitamente/">Edge Rails: Partials não vão mais definir as variáveis locais implicitamente</a>
+
+</h1>
+
     
-      <h1 class="entry-title"><a href="/2008/09/28/edge-rails-correcao-de-bug-no-metodo-count-do-activerecord/">Edge Rails: Correção de bug no método count do ActiveRecord</a></h1>
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-09-29T00:00:00-03:00" pubdate data-updated="true">29 de Setembro de 2008</time>
+        
+        <a rel="bookmark" href="/2008/09/29/edge-rails-partials-nao-vao-mais-definir-as-variaveis-locais-implicitamente/"></a>
+      </p>
     
+  </header>
+
+
+
+  <div class="entry-content"><p>No exemplo abaixo estou renderizando uma <strong>partial</strong>, e não estou informando qual variável ela deve usar para preencher o conteúdo. Hoje o Rails encara que como tenho uma variável de instância com o mesmo nome, implicitamente é esta que deve ser usada.</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>customer</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Customer</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Carlos Brando<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="support support_function support_function_actionpack support_function_actionpack_rails">render</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>partial</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>customer<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span></span></pre>
+
+
+<p>Isto funciona mas é um pouco arriscado. A partir do Rails 2.2, esta funcionalidade continua funcionando mas sempre emitindo uma aviso de que será por pouco tempo:</p>
+
+<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">@customer will no longer be implicitly assigned to customer</span></span></pre>
+
+
+<p>Sim, este recurso será removido do Rails no futuro.</p>
+
+<hr /><em>Este artigo pertence a série “Edge Rails”. Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. A intenção desta série é preparar antecipadamente os programadores para as próximas versões do framework.</em>
+
+</div>
+
+
+    </article>
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/09/28/edge-rails-correcao-de-bug-no-metodo-count-do-activerecord/">Edge Rails: Correção de bug no método count do ActiveRecord</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -124,9 +199,11 @@
 
 <time datetime="2008-09-28T00:00:00-03:00" pubdate data-updated="true">28 de Setembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/09/28/edge-rails-correcao-de-bug-no-metodo-count-do-activerecord/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Existe um bug no método <strong>count</strong> do <strong>ActiveRecord</strong> quando usamos uma associação <strong>has_many</strong> em conjunto com a opção <strong>:limit</strong> ou <strong>:offset</strong>. Vejamos um exemplo:</p>
@@ -164,19 +241,30 @@
 <hr /><em>Este artigo pertence a série “Edge Rails”. Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. A intenção desta série é preparar antecipadamente os programadores para as próximas versões do framework.</em>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/27/edge-rails-metodo-count-do-activerecord-nao-inclui-um-alias-para-associacoes/">Edge Rails: Método count do ActiveRecord não inclui um alias para associações</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/09/27/edge-rails-metodo-count-do-activerecord-nao-inclui-um-alias-para-associacoes/">Edge Rails: Método count do ActiveRecord não inclui um alias para associações</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -193,9 +281,11 @@
 
 <time datetime="2008-09-27T00:00:00-03:00" pubdate data-updated="true">27 de Setembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/09/27/edge-rails-metodo-count-do-activerecord-nao-inclui-um-alias-para-associacoes/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Digamos que temos a seguinte associação <strong>has_many :through</strong>:</p>
@@ -229,19 +319,30 @@
 <hr /><em>Este artigo pertence a série “Edge Rails”. Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. A intenção desta série é preparar antecipadamente os programadores para as próximas versões do framework.</em>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/26/edge-rails-troca-de-biblioteca-geradora-de-chaves-secretas/">Edge Rails: Troca de biblioteca geradora de chaves secretas</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/09/26/edge-rails-troca-de-biblioteca-geradora-de-chaves-secretas/">Edge Rails: Troca de biblioteca geradora de chaves secretas</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -258,9 +359,11 @@
 
 <time datetime="2008-09-26T00:00:00-03:00" pubdate data-updated="true">26 de Setembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/09/26/edge-rails-troca-de-biblioteca-geradora-de-chaves-secretas/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>A classe <strong>Rails::SecretKeyGenerator</strong>, usada para gerar chaves secretas aleatórias como as usadas para armazenar a sessão do usuário em cookies, está sendo marcada para ser removida do Rails (Deprecate).</p>
@@ -301,19 +404,30 @@
 <hr /><em>Este artigo pertence a série “Edge Rails”. Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. A intenção desta série é preparar antecipadamente os programadores para as próximas versões do framework.</em>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/25/edge-rails-nova-versao-destrutiva-dos-metodos-de-pesquisa-do-activerecord/">Edge Rails: Nova versão destrutiva dos métodos de pesquisa do ActiveRecord</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/09/25/edge-rails-nova-versao-destrutiva-dos-metodos-de-pesquisa-do-activerecord/">Edge Rails: Nova versão destrutiva dos métodos de pesquisa do ActiveRecord</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -330,9 +444,11 @@
 
 <time datetime="2008-09-25T00:00:00-03:00" pubdate data-updated="true">25 de Setembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/09/25/edge-rails-nova-versao-destrutiva-dos-metodos-de-pesquisa-do-activerecord/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Os métodos dinâmicos de pesquisa do <strong>ActiveRecord</strong> receberam uma versão destrutiva, que dispara um erro do tipo <strong>RecordNotFound</strong> caso nenhum registro seja encontrado, ao invés de apenas retornar <strong>nil</strong> como acontece com a versão original.</p>
@@ -348,19 +464,30 @@
 <hr /><em>Este artigo pertence a série “Edge Rails”. Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. A intenção desta série é preparar antecipadamente os programadores para as próximas versões do framework.</em>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/24/porque-country_select-virou-um-plugin/">Porque country_select virou um plugin</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/09/24/porque-country_select-virou-um-plugin/">Porque country_select virou um plugin</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -377,9 +504,11 @@
 
 <time datetime="2008-09-24T00:00:00-03:00" pubdate data-updated="true">24 de Setembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/09/24/porque-country_select-virou-um-plugin/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Ontem eu <a href="http://www.nomedojogo.com/2008/09/23/edge-rails-country_select-removido-do-rails/">mencionei</a> aqui no blog que o helper <strong>country_select</strong> foi removido do Rails e virou um plugin. Eu não tinha entendido muito bem, mas o <a href="http://queroseragil.wordpress.com/">Rafael Mueller</a> me ajudou a esclarecer o assunto.</p>
@@ -399,19 +528,30 @@
 <hr /><em>Este artigo pertence a série “Edge Rails”. Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. A intenção desta série é preparar antecipadamente os programadores para as próximas versões do framework.</em>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/23/esqueca-atribuicoes-em-massa-no-rails-pelo-menos-por-enquanto/">Esqueça atribuições em massa no Rails, pelo menos por enquanto</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/09/23/esqueca-atribuicoes-em-massa-no-rails-pelo-menos-por-enquanto/">Esqueça atribuições em massa no Rails, pelo menos por enquanto</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -428,9 +568,11 @@
 
 <time datetime="2008-09-23T00:00:00-03:00" pubdate data-updated="true">23 de Setembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/09/23/esqueca-atribuicoes-em-massa-no-rails-pelo-menos-por-enquanto/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Lembra-se destes dois artigos?</p>
@@ -448,19 +590,30 @@
 <hr /><em>Este artigo pertence a série “Edge Rails”. Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. A intenção desta série é preparar antecipadamente os programadores para as próximas versões do framework.</em>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/23/edge-rails-country_select-removido-do-rails/">Edge Rails: country_select removido do Rails</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/09/23/edge-rails-country_select-removido-do-rails/">Edge Rails: country_select removido do Rails</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -477,9 +630,11 @@
 
 <time datetime="2008-09-23T00:00:00-03:00" pubdate data-updated="true">23 de Setembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/09/23/edge-rails-country_select-removido-do-rails/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>O helper <strong>country_select</strong> foi removido do Rails. Para quem não se lembra, este método retorna uma lista com todos os países do mundo.</p>
@@ -498,19 +653,30 @@
 <hr /><em>Este artigo pertence a série “Edge Rails”. Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. A intenção desta série é preparar antecipadamente os programadores para as próximas versões do framework.</em>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/22/edge-rails-correcao-do-bug-do-timeend_of_quarter/">Edge Rails: Correção do bug do Time#end_of_quarter</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/09/22/edge-rails-correcao-do-bug-do-timeend_of_quarter/">Edge Rails: Correção do bug do Time#end_of_quarter</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -527,9 +693,11 @@
 
 <time datetime="2008-09-22T00:00:00-03:00" pubdate data-updated="true">22 de Setembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/09/22/edge-rails-correcao-do-bug-do-timeend_of_quarter/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Um dos primeiros posts desta série pré-Rails 2.2 foi sobre um <a href="http://www.nomedojogo.com/2008/06/03/edge-rails-erro-ao-usar-o-metodo-end_of_quarter/">bug no método end_of_quarter</a>. Na época enviei um patch para o core team com a correção do erro e só agora, meses depois, o patch foi aceito e implementado ao Rails.</p>
@@ -544,19 +712,30 @@
 <hr /><em>Este artigo pertence a série &#8220;Edge Rails&#8221;. Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. A intenção desta série é preparar antecipadamente os programadores para as próximas versões do framework.</em>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/21/dica-testando-rotas-no-console/">Dica: Testando rotas no console</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/09/21/dica-testando-rotas-no-console/">Dica: Testando rotas no console</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -573,9 +752,11 @@
 
 <time datetime="2008-09-21T00:00:00-03:00" pubdate data-updated="true">21 de Setembro de 2008</time>
         
+        <a rel="bookmark" href="/2008/09/21/dica-testando-rotas-no-console/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Andei brincando muito com rotas nomeadas ultimamente. O problema é que eu precisa de uma forma bem rápida de testar se as rotas que eu estava criando estavam realmente funcionando, enquanto eu editava o arquivo <strong>route.rb</strong>. E a melhor forma que encontrei foi testar as rotas no console do Rails.</p>
@@ -617,58 +798,6 @@
 
 <p>O <a href="http://simplesideias.com.br/">Nando Vieira</a> e o <a href="http://www.araecriacoes.com.br/">Daniel Lopes</a> deram uma dica que eu não conhecia, que aliás torna muito mais fácil fazer a mesma coisa. Veja os comentários abaixo.</p>
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/09/20/edge-rails-pluralizacao-na-internacionalizacao/">Edge Rails: Pluralização na Internacionalização</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-09-20T00:00:00-03:00" pubdate data-updated="true">20 de Setembro de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Já falei anteriormente sobre o novo recurso de <a href="http://www.nomedojogo.com/2008/07/24/como-funcionara-o-novo-suporte-a-internacionalizacao-no-rails-22/">internacionalização</a> que teremos no Rails 2.2. Muita coisa está sendo feita para deixar esta implementação o melhor possível, já que ela é de interesse de muita gente que usa o framework para desenvolver software para países que não usam o inglês como língua nativa.</p>
-
-<p>No arquivo de localização, podemos internacionalizar frases do nosso aplicativo que dependem de um número ou quantidade, por exemplo:</p>
-
-<pre class="textmate-source"><span class="source source_yaml"><span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">datetime</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
-</span>  <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">distance_in_words</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
-</span>    <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">x_seconds</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span>
-</span>      <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">one</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span> </span><span class="string string_quoted string_quoted_double string_quoted_double_yaml"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_yaml">"</span>1 segundo<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_yaml">"</span></span>
-      <span class="meta meta_tag meta_tag_yaml"><span class="entity entity_name entity_name_tag entity_name_tag_yaml">other</span><span class="punctuation punctuation_separator punctuation_separator_key-value punctuation_separator_key-value_yaml">:</span> </span><span class="string string_quoted string_quoted_double string_quoted_double_yaml"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_yaml">"</span> segundos<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_yaml">"</span></span></span></pre>
-
-
-<p>Quando estiver usando o método <strong>distance_in_words</strong> do Rails, quero que ele use o plural de forma correta quando o tempo for maior que um segundo. A alteração aqui é que anteriormente usaríamos a chave <strong>many</strong> para definir valores maiores que 1. Mas agora usaremos a chave <strong>other</strong>.</p>
-
-<hr /><em>Este artigo pertence a série &#8220;Edge Rails&#8221;. Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. A intenção desta série é preparar antecipadamente os programadores para as próximas versões do framework.</em>
-
-</div>
-  
-  
 
 
     </article>
@@ -690,6 +819,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
@@ -703,10 +836,6 @@
     
       <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
   </ul>

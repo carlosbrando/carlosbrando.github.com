@@ -9,7 +9,8 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Desde que instalei o Leopard venho sofrendo para integrar o ZenTest com o Growl. Quando achei que tinha encontrado a solução para o problema, logo &hellip;">
+  <meta name="description" content="Apenas uma atualização do script deste post. # ~.autotest
+module Autotest::Growl FAIL = -1 PENDING = 0 SUCCESS = 1 FAIL_IMAGE = "/Users/carlosbrando &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,14 +101,133 @@
       <div id="content">
         <div class="blog-index">
   
-  
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
+    <h1 class="entry-title">
+
+<a href="/2008/04/28/alteracao-no-script-do-autotest-com-growl/">Alteração no script do Autotest com Growl</a>
+
+</h1>
+
     
-      <h1 class="entry-title"><a href="/2008/04/26/zentest-com-growl-mais-uma-vez/">ZenTest com Growl, mais uma vez&#8230;</a></h1>
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-04-28T00:00:00-03:00" pubdate data-updated="true">28 de Abril de 2008</time>
+        
+        <a rel="bookmark" href="/2008/04/28/alteracao-no-script-do-autotest-com-growl/"></a>
+      </p>
     
+  </header>
+
+
+
+  <div class="entry-content"><p>Apenas uma atualização do script <a href="http://www.nomedojogo.com/2008/04/26/zentest-com-growl-mais-uma-vez/">deste post</a>.</p>
+
+<pre class="textmate-source"><span class="source source_ruby"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> ~.autotest
+</span><span class="meta meta_module meta_module_ruby"><span class="keyword keyword_control keyword_control_module keyword_control_module_ruby">module</span> <span class="entity entity_name entity_name_type entity_name_type_module entity_name_type_module_ruby"><span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_module entity_other_inherited-class_module_first entity_other_inherited-class_module_first_ruby">Autotest<span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">::</span></span>Growl</span></span>
+  <span class="variable variable_other variable_other_constant variable_other_constant_ruby">FAIL</span>    <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">-</span><span class="constant constant_numeric constant_numeric_ruby">1</span>
+  <span class="variable variable_other variable_other_constant variable_other_constant_ruby">PENDING</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_numeric constant_numeric_ruby">0</span>
+  <span class="variable variable_other variable_other_constant variable_other_constant_ruby">SUCCESS</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_numeric constant_numeric_ruby">1</span>
+
+  <span class="variable variable_other variable_other_constant variable_other_constant_ruby">FAIL_IMAGE</span>    <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>/Users/carlosbrando/.autotest_images/fail.png<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+  <span class="variable variable_other variable_other_constant variable_other_constant_ruby">SUCCESS_IMAGE</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>/Users/carlosbrando/.autotest_images/pass.png<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+
+  <span class="support support_class support_class_ruby">Autotest</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>add_hook <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>ran_command</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">at</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+    result <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> at<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>results<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>last
+    <span class="keyword keyword_control keyword_control_ruby">if</span> result
+      examples <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> result <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">=~</span> <span class="string string_regexp string_regexp_classic string_regexp_classic_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span><span class="string string_regexp string_regexp_group string_regexp_group_ruby"><span class="punctuation punctuation_definition punctuation_definition_group punctuation_definition_group_ruby">(</span><span class="constant constant_character constant_character_escape constant_character_escape_ruby">\d</span>+<span class="punctuation punctuation_definition punctuation_definition_group punctuation_definition_group_ruby">)</span></span> example<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span></span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">?</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_global variable_other_readwrite_global_pre-defined variable_other_readwrite_global_pre-defined_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">$</span>1</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>to_i <span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">:</span> <span class="constant constant_numeric constant_numeric_ruby">0</span>
+      failures <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> result <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">=~</span> <span class="string string_regexp string_regexp_classic string_regexp_classic_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span><span class="string string_regexp string_regexp_group string_regexp_group_ruby"><span class="punctuation punctuation_definition punctuation_definition_group punctuation_definition_group_ruby">(</span><span class="constant constant_character constant_character_escape constant_character_escape_ruby">\d</span>+<span class="punctuation punctuation_definition punctuation_definition_group punctuation_definition_group_ruby">)</span></span> failure<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span></span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">?</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_global variable_other_readwrite_global_pre-defined variable_other_readwrite_global_pre-defined_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">$</span>1</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>to_i <span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">:</span> <span class="constant constant_numeric constant_numeric_ruby">0</span>
+      pendings <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> result <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">=~</span> <span class="string string_regexp string_regexp_classic string_regexp_classic_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span><span class="string string_regexp string_regexp_group string_regexp_group_ruby"><span class="punctuation punctuation_definition punctuation_definition_group punctuation_definition_group_ruby">(</span><span class="constant constant_character constant_character_escape constant_character_escape_ruby">\d</span>+<span class="punctuation punctuation_definition punctuation_definition_group punctuation_definition_group_ruby">)</span></span> pending<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span></span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">?</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_global variable_other_readwrite_global_pre-defined variable_other_readwrite_global_pre-defined_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">$</span>1</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>to_i <span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">:</span> <span class="constant constant_numeric constant_numeric_ruby">0</span>
+
+      <span class="keyword keyword_control keyword_control_ruby">unless</span> last_result_was<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>examples<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> failures<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> pendings<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+        msg <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span><span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>examples<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span> example<span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>s<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="keyword keyword_control keyword_control_ruby">if</span> examples <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">!=</span> <span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span>, <span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>failures<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span> failure<span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>s<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="keyword keyword_control keyword_control_ruby">if</span> failures <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">!=</span> <span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span>, <span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>pendings<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span> pending<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+
+        <span class="keyword keyword_control keyword_control_ruby">if</span> failures <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">0</span>
+          growl <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>FAIL<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> msg<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">FAIL_IMAGE</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">2</span>
+        <span class="keyword keyword_control keyword_control_ruby">else</span>
+          growl <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Pass<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> msg<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">SUCCESS_IMAGE</span>
+        <span class="keyword keyword_control keyword_control_ruby">end</span>
+      <span class="keyword keyword_control keyword_control_ruby">end</span>
+
+      code <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>failures <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">0</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">?</span> <span class="constant constant_numeric constant_numeric_ruby">31</span> <span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">:</span> <span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>pendings <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">0</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">?</span> <span class="constant constant_numeric constant_numeric_ruby">33</span> <span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">:</span> <span class="constant constant_numeric constant_numeric_ruby">32</span>
+      puts <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span><span class="constant constant_character constant_character_escape constant_character_escape_ruby">\e</span>[<span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>code<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span>m<span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>=<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">*</span> <span class="constant constant_numeric constant_numeric_ruby">80</span><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span><span class="constant constant_character constant_character_escape constant_character_escape_ruby">\e</span>[0m<span class="constant constant_character constant_character_escape constant_character_escape_ruby">\n\n</span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+    <span class="keyword keyword_control keyword_control_ruby">end</span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+
+<span class="meta meta_class meta_class_ruby">  <span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby"><span class="variable variable_other variable_other_object variable_other_object_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">&lt;&lt;</span> self</span></span></span>
+    <span class="meta meta_function meta_function_method meta_function_method_with-arguments meta_function_method_with-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">growl</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">(</span><span class="variable variable_parameter variable_parameter_function variable_parameter_function_ruby">title<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> msg<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> img <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">SUCCESS_IMAGE</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> pri <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_numeric constant_numeric_ruby">0</span></span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">)</span></span>
+      system <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>growlnotify -n autotest --image <span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>img<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span> -p <span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>pri<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span> -m <span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>msg<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>inspect<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span> <span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>title<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+    <span class="keyword keyword_control keyword_control_ruby">end</span>
+
+    <span class="meta meta_function meta_function_method meta_function_method_with-arguments meta_function_method_with-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">last_result_was</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">(</span><span class="variable variable_parameter variable_parameter_function variable_parameter_function_ruby">examples<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> failures<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> pendings</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">)</span></span>
+      <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>last_result</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_augmented keyword_operator_assignment_augmented_ruby">||=</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_numeric constant_numeric_ruby">0</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">0</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">0</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span>
+
+      <span class="keyword keyword_control keyword_control_ruby">if</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>last_result</span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">==</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span>examples<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> failures<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> pendings<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span>
+        <span class="constant constant_language constant_language_ruby">true</span>
+      <span class="keyword keyword_control keyword_control_ruby">else</span>
+        <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>last_result</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span>examples<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> failures<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> pendings<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span>
+        <span class="constant constant_language constant_language_ruby">false</span>
+      <span class="keyword keyword_control keyword_control_ruby">end</span>
+    <span class="keyword keyword_control keyword_control_ruby">end</span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+<p><a href="http://pastie.caboo.se/188205">http://pastie.caboo.se/188205</a></p>
+
+<p>Este script está preparado apenas para o RSpec, se alguém alterá-lo, não se esqueça de me avisar!</p>
+
+<p>Eu tive de mudar o script, porque ele ficava o tempo todo exibindo mensagens no Growl. Agora uma mensagem só é exibida quando algo mudou desde a última mensagem.</p>
+
+<p>O Alexandre fez algumas <a href="http://alexandredasilva.wordpress.com/2008/04/28/rails2-zentest-e-libnotify/">alterações no script</a> anterior para funcionar no Ubuntu com Libnotify.</p>
+</div>
+
+
+    </article>
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/04/26/zentest-com-growl-mais-uma-vez/">ZenTest com Growl, mais uma vez&#8230;</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -124,9 +244,11 @@
 
 <time datetime="2008-04-26T00:00:00-03:00" pubdate data-updated="true">26 de Abril de 2008</time>
         
+        <a rel="bookmark" href="/2008/04/26/zentest-com-growl-mais-uma-vez/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Desde que instalei o <strong>Leopard</strong> venho sofrendo para integrar o <strong>ZenTest</strong> com o <strong>Growl</strong>. Quando achei que tinha encontrado a solução para o problema, logo depois uma atualização no ZenTest ferrou tudo de novo.</p>
@@ -180,19 +302,30 @@
 
 <p>Não sei porque (e por pura preguiça não procurei saber ainda) mas o WordPress troca o caractere de <strong>aspas</strong> no código, então se na hora de copiá-lo ficar tudo zoado, pegue o <a href="http://pastie.caboo.se/187114">código aqui</a>.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/04/25/rss-o-que-e-isto/">RSS, o que é isto?</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/04/25/rss-o-que-e-isto/">RSS, o que é isto?</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -209,27 +342,40 @@
 
 <time datetime="2008-04-25T00:00:00-03:00" pubdate data-updated="true">25 de Abril de 2008</time>
         
+        <a rel="bookmark" href="/2008/04/25/rss-o-que-e-isto/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><iframe src="http://dotsub.com/api/player.php?filmid=444&filminstance=446&language=br" frameborder="0" width="480" height="392"></iframe>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/04/25/rails-podcast-brasil-episodio-14/">Rails Podcast Brasil - Episódio 14</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/04/25/rails-podcast-brasil-episodio-14/">Rails Podcast Brasil - Episódio 14</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -246,9 +392,11 @@
 
 <time datetime="2008-04-25T00:00:00-03:00" pubdate data-updated="true">25 de Abril de 2008</time>
         
+        <a rel="bookmark" href="/2008/04/25/rails-podcast-brasil-episodio-14/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Esta semana eu e o Fábio exageramos um pouco no tempo do podcast&#8230; acho que este foi o mais longo até agora, hehe! Então já sabe, guarde-o para os dias de trânsito em São Paulo.</p>
@@ -297,19 +445,30 @@
 </ul>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/04/24/usou-o-method_missing-entao-nao-deixe-pontas-soltas/">Usou o method_missing, então não deixe pontas soltas</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/04/24/usou-o-method_missing-entao-nao-deixe-pontas-soltas/">Usou o method_missing, então não deixe pontas soltas</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -326,9 +485,11 @@
 
 <time datetime="2008-04-24T00:00:00-03:00" pubdate data-updated="true">24 de Abril de 2008</time>
         
+        <a rel="bookmark" href="/2008/04/24/usou-o-method_missing-entao-nao-deixe-pontas-soltas/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Devido a natureza dinâmica do Ruby, o método <code>respond_to?</code> é crucial. Quantas vezes não precisamos checar se um método existe no objeto que estamos manipulando, ou mesmo verificar se o objeto é mesmo aquele que estamos esperando (<code>is_a?</code>)?</p>
@@ -394,19 +555,30 @@ rex<span class="punctuation punctuation_separator punctuation_separator_method p
 
 <p>Acabei de ver que no Rails 2.1 corrigiram este problema, poderemos usar o <code>respond_to?</code> para verificar a existência de métodos como o <code>find_by_alguma_coisa</code>.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/04/24/nao-sabe-o-que-e-um-podcast/">Não sabe o que é um podcast?</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/04/24/nao-sabe-o-que-e-um-podcast/">Não sabe o que é um podcast?</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -423,27 +595,40 @@ rex<span class="punctuation punctuation_separator punctuation_separator_method p
 
 <time datetime="2008-04-24T00:00:00-03:00" pubdate data-updated="true">24 de Abril de 2008</time>
         
+        <a rel="bookmark" href="/2008/04/24/nao-sabe-o-que-e-um-podcast/"></a>
       </p>
     
   </header>
 
 
+
   <div class="entry-content"><iframe src="http://dotsub.com/api/player.php?filmid=3725&filminstance=3727&language=br" frameborder="0" width="480" height="392"></iframe>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/04/23/edge-rails-acessando-helpers-fora-das-views/">Edge Rails: Acessando Helpers fora das Views</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/04/23/edge-rails-acessando-helpers-fora-das-views/">Edge Rails: Acessando Helpers fora das Views</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -460,9 +645,11 @@ rex<span class="punctuation punctuation_separator punctuation_separator_method p
 
 <time datetime="2008-04-23T00:00:00-03:00" pubdate data-updated="true">23 de Abril de 2008</time>
         
+        <a rel="bookmark" href="/2008/04/23/edge-rails-acessando-helpers-fora-das-views/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Aí está mais uma alteração que gostei. Quantas vezes eu não criei um helper e depois quis usá-lo dentro do meu controller&#8230; Para conseguir isto só incluindo o módulo do mesmo no controller, mas isto sempre me deixava com uma sensação de sujeira.</p>
@@ -475,19 +662,30 @@ rex<span class="punctuation punctuation_separator punctuation_separator_method p
 
 <p>Simples e limpo!</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/04/22/edge-rails-gemsbuild-e-gemsunpack/">Edge Rails: gems:build e gems:unpack</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/04/22/edge-rails-gemsbuild-e-gemsunpack/">Edge Rails: gems:build e gems:unpack</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -504,9 +702,11 @@ rex<span class="punctuation punctuation_separator punctuation_separator_method p
 
 <time datetime="2008-04-22T00:00:00-03:00" pubdate data-updated="true">22 de Abril de 2008</time>
         
+        <a rel="bookmark" href="/2008/04/22/edge-rails-gemsbuild-e-gemsunpack/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Eu já falei por aqui das novas funcionalidade do <code><a href="http://www.nomedojogo.com/2008/04/14/edge-rails-configgem/">config.gem</a></code>, entre elas mencionei a tarefa:</p>
@@ -531,19 +731,30 @@ rex<span class="punctuation punctuation_separator punctuation_separator_method p
 
 <p>Que compilam as extensões nativas do gems que foram instalados através do <code>gems:unpack</code>.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/04/18/edge-rails-hashwithout/">Edge Rails: Hash#without</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/04/18/edge-rails-hashwithout/">Edge Rails: Hash#without</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -560,9 +771,11 @@ rex<span class="punctuation punctuation_separator punctuation_separator_method p
 
 <time datetime="2008-04-18T00:00:00-03:00" pubdate data-updated="true">18 de Abril de 2008</time>
         
+        <a rel="bookmark" href="/2008/04/18/edge-rails-hashwithout/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Conhece o método slice que o Rails acrescenta ao objeto <code>Hash</code>? O método <code>slice</code> é muito útil em diversas ocasiões. Veja um exemplo:</p>
@@ -584,19 +797,30 @@ search<span class="punctuation punctuation_section punctuation_section_function 
 <pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Event</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>event<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>attributes<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>without<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>id</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>user_id</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">))</span></span></pre>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/04/17/edge-rails-railslogger-railsroot-railsenv-e-railscache/">Edge Rails: Rails.logger, Rails.root, Rails.env e Rails.cache</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/04/17/edge-rails-railslogger-railsroot-railsenv-e-railscache/">Edge Rails: Rails.logger, Rails.root, Rails.env e Rails.cache</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -613,9 +837,11 @@ search<span class="punctuation punctuation_section punctuation_section_function 
 
 <time datetime="2008-04-17T00:00:00-03:00" pubdate data-updated="true">17 de Abril de 2008</time>
         
+        <a rel="bookmark" href="/2008/04/17/edge-rails-railslogger-railsroot-railsenv-e-railscache/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>No Rails 2.1 ao invés de usarmos as constantes: <code>RAILS_DEFAULT_LOGGER</code>, <code>RAILS_ROOT</code>, <code>RAILS_ENV</code> e <code>RAILS_CACHE</code>. Usaremos os atalhos:</p>
@@ -633,78 +859,6 @@ search<span class="punctuation punctuation_section punctuation_section_function 
 </span><span class="support support_class support_class_ruby">Rails</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>cache</span></pre>
 
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/04/16/rails-podcast-brasil-episodio-13/">Rails Podcast Brasil - Episódio 13</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-04-16T00:00:00-03:00" pubdate data-updated="true">16 de Abril de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>O assunto da semana foi a migração Rails para Git e GitHub, mas não falamos apenas disto neste podcast, falamos um pouco sobre a nova iniciativa do Google, o Google App Engine, também conversamos sobre o mod_rails, Mack, Merb, JRuby&#8230;</p>
-
-<p>Para baixar o episódio acesse: <a href="http://www.rubyonrails.pro.br/podcasts">http://www.rubyonrails.pro.br/podcasts</a></p>
-
-<h3>Neste episódio:</h3>
-
-
-<ul>
-    <li><a href="http://www.techcrunch.com/2008/04/08/techcrunch-labs-our-experience-building-and-launching-app-on-google-app-engine/">TechCrunch Labs: Our Experience Building And Launching An App On Google App Engine</a></li>
-    <li><a href="http://www.rubyinside.com/railscasts-releases-100th-free-screencast-holds-a-contest-845.html">Railscasts Releases 100th Free Screencast; Holds a Contest</a></li>
-    <li><a href="http://weblog.rubyonrails.com/2008/4/11/passenger-mod_rails-for-apache-launches">Passenger (mod_rails for Apache) launches</a></li>
-    <li><a href="http://weblog.rubyonrails.com/2008/4/11/rails-premieres-on-github">Rails premieres on GitHub</a></li>
-    <li><a href="http://www.infoq.com/news/2008/04/jruby-1-1-release">JRuby 1.1 released with major performance improvements</a></li>
-    <li><a href="http://www.rubyinside.com/mack-a-fast-best-of-the-rest-web-app-framework-856.html">Mack: A Fast, &#8220;Best of the Rest&#8221; Web App Framework</a></li>
-    <li><a href="http://code.google.com/p/query-reviewer/">query reviewer</a></li>
-    <li><a href="http://www.makemesimple.com/blog/2008/04/07/contribuindo-plugin-reserved_attributes-para-rails/">Contribuindo: plugin reserved_attributes para Rails</a></li>
-    <li><a href="http://code.leadmediapartners.com/tools/rubyamp">RubyAMP</a></li>
-    <li><a href="http://blog.segment7.net/articles/2008/04/10/rubygems-1-1-1">RubyGems 1.1.1</a></li>
-    <li><a href="http://revolutiononrails.blogspot.com/2007/04/actsaswithreadonly-to-support-read-only.html">ActsAsWithReadonly to support read-only DB slave databases</a></li>
-    <li><a href="http://blog.jayfields.com/2008/04/alternatives-for-redefining-methods.html">Alternatives for redefining methods</a></li>
-    <li><a href="http://blog.jayfields.com/2008/04/extend-modules-instead-of-defining.html">Extend modules instead of defining methods on a metaclass</a></li>
-    <li><a href="http://effectif.com/2008/3/29/opening-ruby-gems-in-textmate">Opening Ruby gems in TextMate</a></li>
-    <li><a href="http://ruby.dzone.com/news/merb-jruby-11-rc3">Merb on JRuby 1.1 RC3</a></li>
-    <li><a href="http://mad.ly/2008/04/09/rails-21-time-zone-support-an-overview/">Rails 2.1 Time Zone Support: An Overview</a></li>
-    <li><a href="http://robsanheim.com/2008/04/04/zero-to-a-fully-git-enabled-rails-app-in-the-time-it-takes-to-drink/">Zero to a Fully Git Enabled Rails App in the time it takes to drink an espresso</a></li>
-    <li><a href="http://drnicwilliams.com/2008/04/08/git-for-rubyforge-accounts/">Git for Rubyforge accounts</a></li>
-    <li><a href="http://woss.name/2008/04/09/using-git-submodules-to-track-vendorrails/">Using git submodules to track plugins</a></li>
-    <li><a href="http://www.dtsato.com/blog/default/?permalink=Git-tip-for-Brazilians.html&amp;smm=y">Git tip for Brazilians</a></li>
-    <li><a href="http://woss.name/2008/04/10/read-only-clones-and-commiting-changes-to-submodules/">Read-only clones and commiting changes to submodules</a></li>
-    <li><a href="http://www.rubyinside.com/git-and-ruby-git-tutorials-articles-and-links-for-rubyists-860.html">Git and Ruby: Git tutorials, articles and links for Rubyists</a></li>
-    <li><a href="http://betterruby.wordpress.com/2008/04/11/rubinius-on-github/">Rubinius on GitHub</a></li>
-    <li><a href="http://blog.davidchelimsky.net/articles/2008/04/09/rspec-at-github">RSpec at github</a></li>
-    <li><a href="http://www.robbyonrails.com/articles/2008/04/10/git-svn-is-a-gateway-drug">git-svn is a gateway drug</a></li>
-</ul>
-
-</div>
-  
-  
 
 
     </article>
@@ -726,6 +880,10 @@ search<span class="punctuation punctuation_section punctuation_section_function 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
@@ -739,10 +897,6 @@ search<span class="punctuation punctuation_section punctuation_section_function 
     
       <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
   </ul>

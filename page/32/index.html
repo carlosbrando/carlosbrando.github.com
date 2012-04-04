@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Conforme expliquei no artigo anterior, teremos suporte a I18n no Ruby on Rails a partir da próxima versão. E eu prometi escrever um artigo mostrando &hellip;">
+  <meta name="description" content="Na classe TimeZone do ActiveSupport existe o método us_zones que convenientemente retorna uma lista dinâmica com todos os fusos-horários americanos. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,14 +100,90 @@
       <div id="content">
         <div class="blog-index">
   
-  
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
+    <h1 class="entry-title">
+
+<a href="/2008/07/25/edge-rails-suporte-a-expressoes-regulares-no-time_zone_select/">Edge Rails: Suporte a expressões regulares no time_zone_select</a>
+
+</h1>
+
     
-      <h1 class="entry-title"><a href="/2008/07/24/como-funcionara-o-novo-suporte-a-internacionalizacao-no-rails-22/">Como funcionará o novo suporte a internacionalização no Rails 2.2</a></h1>
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-07-25T00:00:00-03:00" pubdate data-updated="true">25 de Julho de 2008</time>
+        
+        <a rel="bookmark" href="/2008/07/25/edge-rails-suporte-a-expressoes-regulares-no-time_zone_select/"></a>
+      </p>
     
+  </header>
+
+
+
+  <div class="entry-content"><p>Na classe <a href="http://rails-doc.org/rails/TimeZone">TimeZone</a> do <strong>ActiveSupport</strong> existe o método <a href="http://rails-doc.org/rails/v2.1.0/TimeZone/us_zones/class">us_zones</a> que convenientemente retorna uma lista dinâmica com todos os fusos-horários americanos.</p>
+
+<p>O problema é que não moramos nos Estados Unidos e muito provavelmente vamos desenvolver software para pessoas em nosso país, mas não existe um método tão conveniente assim que liste os fusos-horários brasileiros ou de outros países.</p>
+
+<p>Ouve uma <a href="http://rails.lighthouseapp.com/projects/8994/tickets/195-convenience-methods-for-time-zones-outside-the-u-s">longa discussão</a> sobre criar ou não criar métodos como <strong>african_zones</strong>, <strong>american_zones</strong>, etc.. No fim prevaleceu o seguinte:</p>
+
+<p>Foi implantado no objeto <strong>TimeZone</strong> o suporte para <strong>=~</strong> afim de ajudar a montar uma lista de fusos-horários a partir de uma expressão regular. Além disso o método <a href="http://rails-doc.org/rails/v2.1.0/ActionView/Helpers/FormOptionsHelper/time_zone_select">time_zone_select</a> foi alterado para trabalhar em conjunto com esta novidade do <strong>TimeZone</strong>.</p>
+
+<p>Agora podemos fazer isto:</p>
+
+<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> time_zone_select<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>user<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>time_zone<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_regexp string_regexp_classic string_regexp_classic_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span>Brasilia<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span></span></pre>
+
+
+<p>Para softwares brasileiros não faz tanta diferença&#8230;</p>
+
+<p>Para aprender mais sobre <strong>TimeZones</strong> aconselho assistir ao <a href="http://railscasts.com/episodes/106">episódio 160</a> do RailsCasts e dar uma olhada no nosso <a href="http://www.nomedojogo.com/2008/06/06/o-primeiro-livro-sobre-rails-21-e-brasileiro/">livro do Rails 2.1</a>.</p>
+</div>
+
+
+    </article>
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/07/24/como-funcionara-o-novo-suporte-a-internacionalizacao-no-rails-22/">Como funcionará o novo suporte a internacionalização no Rails 2.2</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -124,9 +200,11 @@
 
 <time datetime="2008-07-24T00:00:00-03:00" pubdate data-updated="true">24 de Julho de 2008</time>
         
+        <a rel="bookmark" href="/2008/07/24/como-funcionara-o-novo-suporte-a-internacionalizacao-no-rails-22/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Conforme expliquei no <a href="http://www.nomedojogo.com/2008/07/22/edge-rails-seus-problemas-acabaram-o-rails-tambem-vai-falar-portugues/">artigo anterior</a>, teremos suporte a <strong>I18n</strong> no Ruby on Rails a partir da próxima versão. E eu prometi escrever um artigo mostrando como funcionaria esta nova implementação, o problema é que demorei e já teve gente se adiantando&#8230;</p>
@@ -165,19 +243,30 @@
 
 <p>Assim que as coisas estiverem mais concretas, eu volto a falar mais sobre isto.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/07/23/edge-rails-correcao-de-bug-no-scriptabout-e-alteracoes-nos-metodos-render_file-e-auto_link/">Edge Rails: Bug no script/about, e alterações no render_file e auto_link</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/07/23/edge-rails-correcao-de-bug-no-scriptabout-e-alteracoes-nos-metodos-render_file-e-auto_link/">Edge Rails: Bug no script/about, e alterações no render_file e auto_link</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -194,9 +283,11 @@
 
 <time datetime="2008-07-23T00:00:00-03:00" pubdate data-updated="true">23 de Julho de 2008</time>
         
+        <a rel="bookmark" href="/2008/07/23/edge-rails-correcao-de-bug-no-scriptabout-e-alteracoes-nos-metodos-render_file-e-auto_link/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><h3>Railties</h3>
@@ -216,19 +307,30 @@
 </ul>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/07/22/edge-rails-tratando-a-opcao-limit-como-bytes/">Edge Rails: Tratando a opção :limit como bytes (atualizado)</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/07/22/edge-rails-tratando-a-opcao-limit-como-bytes/">Edge Rails: Tratando a opção :limit como bytes (atualizado)</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -245,9 +347,11 @@
 
 <time datetime="2008-07-22T00:00:00-03:00" pubdate data-updated="true">22 de Julho de 2008</time>
         
+        <a rel="bookmark" href="/2008/07/22/edge-rails-tratando-a-opcao-limit-como-bytes/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>À partir da próxima versão do Rails quando usarmos a opção <strong>:limit</strong> para colunas com números inteiros, em nossas migrations, estaremos nos referindo ao número de bytes, no MySQL e no PostgreSQL (no sqlite sempre foi assim).</p>
@@ -269,19 +373,30 @@
 <span class="keyword keyword_control keyword_control_ruby">when</span> <span class="constant constant_numeric constant_numeric_ruby">5</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">..</span><span class="constant constant_numeric constant_numeric_ruby">8</span><span class="punctuation punctuation_separator punctuation_separator_statement punctuation_separator_statement_ruby">;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>bigint<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span></pre>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/07/22/edge-rails-seus-problemas-acabaram-o-rails-tambem-vai-falar-portugues/">Edge Rails: Seus problemas acabaram, o Rails também vai falar português!</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/07/22/edge-rails-seus-problemas-acabaram-o-rails-tambem-vai-falar-portugues/">Edge Rails: Seus problemas acabaram, o Rails também vai falar português!</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -298,9 +413,11 @@
 
 <time datetime="2008-07-22T00:00:00-03:00" pubdate data-updated="true">22 de Julho de 2008</time>
         
+        <a rel="bookmark" href="/2008/07/22/edge-rails-seus-problemas-acabaram-o-rails-tambem-vai-falar-portugues/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><a href="http://old.nomedojogo.com/wp-content/uploads/2008/07/1417766186_85663b2a70.jpg"><img class="alignnone size-medium wp-image-908" title="1417766186_85663b2a70" src="http://old.nomedojogo.com/wp-content/uploads/2008/07/1417766186_85663b2a70.jpg" alt="" /></a></p>
@@ -360,19 +477,30 @@
 
 <p>No próximo artigo vou dar mais detalhes desta implementação, usando código.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/07/21/free-book-ruby-on-rails-21-whats-new-7-translations/">Free Book: Ruby on Rails 2.1 - What&#8217;s New (7 translations)</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/07/21/free-book-ruby-on-rails-21-whats-new-7-translations/">Free Book: Ruby on Rails 2.1 - What&#8217;s New (7 translations)</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -389,9 +517,11 @@
 
 <time datetime="2008-07-21T00:00:00-03:00" pubdate data-updated="true">21 de Julho de 2008</time>
         
+        <a rel="bookmark" href="/2008/07/21/free-book-ruby-on-rails-21-whats-new-7-translations/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img class="alignnone size-full wp-image-902" title="149172094_f4a814bf30" src="http://old.nomedojogo.com/wp-content/uploads/2008/07/149172094_f4a814bf30.jpg" alt="" /></p>
@@ -411,19 +541,30 @@
 
 <p>This book is already available in <a href="http://www.nomedojogo.com/2008/06/06/o-primeiro-livro-sobre-rails-21-e-brasileiro/">Portuguese</a>, <a href="http://www.nomedojogo.com/2008/06/15/ruby-on-rails-21-whats-new-second-edition/">English</a>, <a href="http://www.nomedojogo.com/2008/06/21/ruby-on-rails-21-2/">Japanese</a>, <a href="http://www.nomedojogo.com/2008/06/25/ruby-on-rails-21-whats-new-chinese-version/">Simplified</a> and <a href="http://www.scribd.com/doc/4019122/Rails-21-">Traditional</a> Chinese, <a href="http://www.nomedojogo.com/2008/06/26/ruby-on-rails-21-o-que-ha-de-novo-em-italiano/">Italian</a> and <a href="http://rails21-book.springnote.com/">Korean</a>. And the <a href="http://www.nomedojogo.com/2008/06/13/em-breve/">Spanish</a> version should leave soon.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/07/21/edge-rails-correcoes-de-bugs/">Edge Rails: Algumas correções de bugs</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/07/21/edge-rails-correcoes-de-bugs/">Edge Rails: Algumas correções de bugs</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -440,9 +581,11 @@
 
 <time datetime="2008-07-21T00:00:00-03:00" pubdate data-updated="true">21 de Julho de 2008</time>
         
+        <a rel="bookmark" href="/2008/07/21/edge-rails-correcoes-de-bugs/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Algumas correções de bugs que sairão na próxima versão do Ruby on Rails:</p>
@@ -462,19 +605,30 @@ Quando usávamos optimistic locking com partial updates, tinhamos queries extras
 </ul>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/07/19/minha-palestra-no-rejectconf07-agora-com-slides/">Minha palestra no RejectConf&#8217;07 - agora com slides!</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/07/19/minha-palestra-no-rejectconf07-agora-com-slides/">Minha palestra no RejectConf&#8217;07 - agora com slides!</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -491,9 +645,11 @@ Quando usávamos optimistic locking com partial updates, tinhamos queries extras
 
 <time datetime="2008-07-19T00:00:00-03:00" pubdate data-updated="true">19 de Julho de 2008</time>
         
+        <a rel="bookmark" href="/2008/07/19/minha-palestra-no-rejectconf07-agora-com-slides/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Em novembro do ano passado (2007) tivemos o <a href="http://www.nomedojogo.com/2007/10/17/confirmado-evento-de-rails-em-sao-paulo/">RejectConf&#8217;07</a> em São Paulo, onde eu tive o privilégio de fechar o evento com uma palestra motivacional. Depois deste evento, tivemos muitos outros em vários estados do Brasil e online.</p>
@@ -511,19 +667,30 @@ Quando usávamos optimistic locking com partial updates, tinhamos queries extras
 <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="520" height="276" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="bgcolor" value="#FFFFFF" /><param name="quality" value="high" /><param name="allowscriptaccess" value="always" /><param name="allowfullscreen" value="true" /><param name="src" value="http://www.omnisio.com/bin/Embed.swf?embedID=bpIJK0uSmr3AgwadbiFy2w" /><embed type="application/x-shockwave-flash" width="520" height="276" src="http://www.omnisio.com/bin/Embed.swf?embedID=bpIJK0uSmr3AgwadbiFy2w" allowfullscreen="true" allowscriptaccess="always" quality="high" bgcolor="#FFFFFF"></embed></object>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/07/18/edge-rails-introduzindo-memoizable-para-cache-de-atributos/">Edge Rails: Introduzindo Memoizable para cache de atributos</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/07/18/edge-rails-introduzindo-memoizable-para-cache-de-atributos/">Edge Rails: Introduzindo Memoizable para cache de atributos</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -540,9 +707,11 @@ Quando usávamos optimistic locking com partial updates, tinhamos queries extras
 
 <time datetime="2008-07-18T00:00:00-03:00" pubdate data-updated="true">18 de Julho de 2008</time>
         
+        <a rel="bookmark" href="/2008/07/18/edge-rails-introduzindo-memoizable-para-cache-de-atributos/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Performance é coisa séria, e um dos métodos mais usados para aumentar a velocidade de execução em códigos é o uso de cache. Quem nunca fez algo assim?</p>
@@ -571,19 +740,30 @@ Quando usávamos optimistic locking com partial updates, tinhamos queries extras
 
 <p>No segundo exemplo, o método <strong>age</strong> só será executado uma vez e o valor retornado será sempre devolvido nas próximas chamadas, mesmo que seja <strong>nil</strong> ou <strong>false</strong>.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2008/07/17/o-que-e-uma-rota-singular/">O que é uma Rota Singular?</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2008/07/17/o-que-e-uma-rota-singular/">O que é uma Rota Singular?</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -600,9 +780,11 @@ Quando usávamos optimistic locking com partial updates, tinhamos queries extras
 
 <time datetime="2008-07-17T00:00:00-03:00" pubdate data-updated="true">17 de Julho de 2008</time>
         
+        <a rel="bookmark" href="/2008/07/17/o-que-e-uma-rota-singular/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img class="alignnone size-full wp-image-838" title="191042981_8daa4da429" src="http://old.nomedojogo.com/wp-content/uploads/2008/07/191042981_8daa4da429.jpg" alt="" /></p>
@@ -645,55 +827,6 @@ Quando usávamos optimistic locking com partial updates, tinhamos queries extras
 
 <p>O relacionamento entre a tabela de catálogos e o usuário corrente não é automático, você deve autenticar o usuário e retornar o catálogo dele. Não existe mágica ou poderes psíquicos aqui, é apenas uma outra técnica de roteamento a nossa disposição, se precisarmos.</p>
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/07/17/edge-rails-polymorphic_url-agora-e-capaz-de-lidar-com-recursos-singleton/">Edge Rails: polymorphic_url agora é capaz de lidar com recursos singleton</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-07-17T00:00:00-03:00" pubdate data-updated="true">17 de Julho de 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Agora que todos já sabem o que é uma rota singular, posso comentar uma novidade no Edge Rails.</p>
-
-<p>Atualmente o helper <strong>polymorphic_url</strong> não está tratando singleton resources corretamente.</p>
-
-<p>Um novo patch foi incluído no Rails para permitir que especifiquemos um singular resource usando símbolos, assim como fazemos com namespaces. Exemplo:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> este código
-</span>polymorphic_url<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>admin</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>user</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>blog</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>post</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> é a mesma coisa que
-</span>admin_user_blog_post_url<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>user</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>post</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
-
-</div>
-  
-  
 
 
     </article>
@@ -715,6 +848,10 @@ Quando usávamos optimistic locking com partial updates, tinhamos queries extras
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
@@ -728,10 +865,6 @@ Quando usávamos optimistic locking com partial updates, tinhamos queries extras
     
       <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
   </ul>

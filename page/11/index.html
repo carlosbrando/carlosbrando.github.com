@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="No sábado passado aconteceu em São Paulo o primeiro evento organizado pelo Guru-SP, o Ruby + Rails no mundo Real 2009. Eu e toda a equipe do Ruby &hellip;">
+  <meta name="description" content="O Ruby on Rails possui algumas dezenas de geradores de código que visam automatizar tarefas repetitivas, economizando o tempo de desenvolvimento e &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,14 +100,121 @@
       <div id="content">
         <div class="blog-index">
   
-  
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
+    <h1 class="entry-title">
+
+<a href="/2009/04/07/rails-way-7-geradores-de-codigo/">Rails Way #7: Geradores de Código</a>
+
+</h1>
+
     
-      <h1 class="entry-title"><a href="/2009/04/06/so-os-imaturos-nao-testam/">Só os imaturos não testam</a></h1>
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-07T00:00:00-03:00" pubdate data-updated="true"> 7 de Abril de 2009</time>
+        
+        <a rel="bookmark" href="/2009/04/07/rails-way-7-geradores-de-codigo/"></a>
+      </p>
     
+  </header>
+
+
+
+  <div class="entry-content"><p style="text-align: center;"><img class="size-full wp-image-2396 aligncenter" title="2084287794_ecbee303db" src="http://old.nomedojogo.com/wp-content/uploads/2009/04/2084287794_ecbee303db.jpg" alt="2084287794_ecbee303db" /></p>
+
+
+<p>O Ruby on Rails possui algumas dezenas de geradores de código que visam automatizar tarefas repetitivas, economizando o tempo de desenvolvimento e evitando que o programador tenha que se repetir. Geradores de código tem tudo a ver com a filosofia “Don’t Repeat Yourself”.</p>
+
+<h2>Aplicativos que geram código</h2>
+
+
+<p>Se expandirmos nossos horizontes para outras linguagens de programação menos dinâmicas, talvez geradores de código possam ser muito úteis na criação de arquivos XML de configuração, justificando de maneira óbvia o seu custo. Ao usar ferramentas como o Microsoft Visual Studio eu simplesmente informava ao editor que desejava criar uma aplicativo MFC (Microsoft Foundation Classes) e ele gerava para mim um esqueleto com mais de 2000 linhas de código, uma economia de tempo incalculável.</p>
+
+<p>Algumas pessoas são totalmente contra este tipo de gerador de código porque na maioria dos casos o programador que o utiliza não entende exatamente o que o código gerado está fazendo. Embora isto seja uma realidade, isso não deve ser uma justificativa para evitar ferramentas como essa, já que na maior parte do tempo o problema está no programador e não na ferramenta. No exemplo que dei acima, embora eu nunca tenha parado para analisar cuidadosamente o que cada uma das 2000 linhas de código gerados pelo Visual Studio faça, eu entendo no contexto o porque delas, e para mim isto sempre foi o suficiente para tocar um projeto à partir deste esqueleto.</p>
+
+<p>No Rails também encontramos alguns geradores deste tipo na forma de scripts (<code>./script/generate scaffold</code>, por exemplo). Os scripts geradores de código do Rails nos ajudam a manter as convenções propostas pelo framework com mais facilidade, e normalmente incluem apenas algumas poucas linhas de código em cada arquivo gerado.</p>
+
+<p>Raramente você achará útil criar um script ou aplicativo gerador de código para um projeto Rails. Mas ao criar um plugin ou mesmo o seu próprio framework em Ruby, talvez seja prático investir na criação deste tipo de gerador. Mas não se engane, construir um gerador de código deste tipo é uma tarefa que consome tempo e um grande esforço. Além do tempo gasto na codificação do gerador, também deve-se levar em consideração o esforço necessário para manter o projeto (atualizações, correções de bugs e inclusão de novas funcionalidades) e para treinar a sua equipe (e re-treinar após modificações).</p>
+
+<p>A escolha do seu editor preferido também depende muito da capacidade que ele possui de gerar código. O TextMate, por exemplo, durante muito tempo foi (no meu caso ainda é) considerado o melhor editor para se trabalhar com código Ruby, e isto se deu graças aos seus famosos Bundles, que não são mais do que scripts geradores de código.</p>
+
+<p>Muitos editores também permitem que você crie seus próprios “bundles”. Na maior parte do tempo é mais fácil e barato criar um script utilizando as ferramentas que seu editor lhe fornece do que criar um aplicativo do zero afim de automatizar a criação de códigos mais simples.</p>
+
+<h2>Metaprogramação</h2>
+
+
+<p>Usamos metaprogramação para criar softwares que tenham a capacidade de escrever código por si mesmo. Um bom exemplo disso é o ActiveRecord do Rails, que cria em tempo de execução todo o código necessário para a manipulação de informações de um banco de dados. Ao adicionar uma nova coluna no banco de dados, não precisamos alterar nenhuma linha no código do modelo, o ActiveRecord usando metaprogramação consegue identificar a nova coluna e automaticamente criará todos os métodos e atributos necessários para permitir o acesso a esta nova coluna.</p>
+
+<p>Linguagens dinâmicas como o Ruby favorecem muito o uso de metaprogramação. Programadores mais avançados fazem muito uso destes recursos para diminuir repetições em seus códigos.</p>
+
+<p>A ferramenta mais comum de metaprogramação é um compilador, já que ele permite que você escreva pequenos programas em uma linguagem de alto nível afim de gerar programas em linguagem de máquina. Uma brincadeira comum que envolve o exercício de metaprogramação é montar um <a href="http://pt.wikipedia.org/wiki/Quine_(inform%C3%A1tica)">quine</a>, que é um programa que deve produzir uma única saída que é o seu próprio código fonte. Veja um exemplo em Javascript:</p>
+
+<pre class="textmate-source"><span class="source source_js"><span class="support support_function support_function_js">unescape</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span>q<span class="keyword keyword_operator keyword_operator_js">=</span><span class="string string_quoted string_quoted_double string_quoted_double_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">"</span>unescape(q=%22*%22).replace('*',q)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">"</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span><span class="meta meta_delimiter meta_delimiter_method meta_delimiter_method_period meta_delimiter_method_period_js">.</span><span class="support support_function support_function_js">replace</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>*<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_delimiter meta_delimiter_object meta_delimiter_object_comma meta_delimiter_object_comma_js">,</span>q<span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span></span></pre>
+
+
+<p>Execute o código acima e você terá como saída um texto com exatamente o mesmo código gerador. Tente fazer o mesmo em Ruby, é um bom exercício!</p>
+
+<h2>Helpers</h2>
+
+
+<p>O diretório helpers não foi adicionado ao Rails à toa, ele está lá para ser utilizado. Helpers são fáceis de criar e podem ajudar a diminuir uma quantidade razoável de repetições em suas views. Quando criados utilizando-se de recursos de metaprogramação podem fazer uma grande diferença.</p>
+
+<p>Linguagens de marcação como o <a href="http://haml.hamptoncatlin.com/">Haml</a>, servem de grande incentivo para estimular a criação de helpers em projetos Rails.</p>
+
+<h2>Finalizando</h2>
+
+
+<p>Geradores de código são ferramentas essenciais no dia-a-dia dos programadores e são extremamente importantes para aumentar nossa produtividade e evitar que tenhamos de escrever códigos desnecessários.</p>
+
+<p>Faça uso dos geradores que você tem a disposição, e também crie seus próprios geradores quando forem realmente necessários. Mas mantenha-se longe de geradores que criem código que você não sabe para que serve ou que não entende.</p>
+</div>
+
+
+    </article>
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2009/04/06/so-os-imaturos-nao-testam/">Só os imaturos não testam</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -124,9 +231,11 @@
 
 <time datetime="2009-04-06T00:00:00-03:00" pubdate data-updated="true"> 6 de Abril de 2009</time>
         
+        <a rel="bookmark" href="/2009/04/06/so-os-imaturos-nao-testam/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>No sábado passado aconteceu em São Paulo o primeiro evento organizado pelo <a href="http://www.guru-sp.org/" target="_blank">Guru-SP</a>, o Ruby + Rails no mundo Real 2009. Eu e toda a equipe do Ruby Inside Brasil estivemos presentes no evento. Você pode conferir uma <a href="http://www.rubyinside.com.br/cobertura-ruby-rails-no-mundo-real-2009-977">cobertura completa</a> das palestras no site.</p>
@@ -138,19 +247,30 @@
 </div>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/04/02/contrate-gerentes-de-si-mesmo/">Contrate gerentes de si mesmo</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/04/02/contrate-gerentes-de-si-mesmo/">Contrate gerentes de si mesmo</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -167,9 +287,11 @@
 
 <time datetime="2009-04-02T00:00:00-03:00" pubdate data-updated="true"> 2 de Abril de 2009</time>
         
+        <a rel="bookmark" href="/2009/04/02/contrate-gerentes-de-si-mesmo/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Quando você estiver contratando, procure por pessoas que gerenciem a si mesmas.</p>
@@ -185,19 +307,30 @@
 <hr /><em>Este texto é uma tradução de um artigo do blog <a href="http://www.37signals.com/svn/posts/1430-hire-managers-of-one">Signal vs. Noise</a>.</em>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/04/01/promocoes-no-ruby-inside/">Promoções no Ruby Inside</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/04/01/promocoes-no-ruby-inside/">Promoções no Ruby Inside</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -214,9 +347,11 @@
 
 <time datetime="2009-04-01T00:00:00-03:00" pubdate data-updated="true"> 1 de Abril de 2009</time>
         
+        <a rel="bookmark" href="/2009/04/01/promocoes-no-ruby-inside/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p style="text-align: center;"><a href="http://www.rubyinside.com.br/"><img class="size-full wp-image-2371 aligncenter" title="logo-br" src="http://old.nomedojogo.com/wp-content/uploads/2009/04/logo-br.gif" alt="logo-br" width="289" height="72" /></a></p>
@@ -228,19 +363,30 @@
 
 <p>Agora, se sua empresa está promovendo um curso, sua editora acabou de publicar um livro sobre Ruby/Rails ou mesmo se você está lançando algum projeto e gostaria de ver isto noticiado no Ruby Inside Brasil, envie uma mensagem através da nossa <a href="http://www.rubyinside.com.br/contato">página de contato</a> e teremos o maior prazer em ajudá-lo!</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/03/27/a-importancia-da-definicao-das-expectativas/">A importância da definição das expectativas</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/03/27/a-importancia-da-definicao-das-expectativas/">A importância da definição das expectativas</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -257,9 +403,11 @@
 
 <time datetime="2009-03-27T00:00:00-03:00" pubdate data-updated="true">27 de Março de 2009</time>
         
+        <a rel="bookmark" href="/2009/03/27/a-importancia-da-definicao-das-expectativas/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Esta semana estou trocando o telhado da minha casa. Eu pesquisei, fiz cotações, escolhi uma empresa e eles já estão trabalhando nisso agora.</p>
@@ -312,19 +460,30 @@
 <hr /><em>Este texto é uma tradução de um artigo escrito por <strong>Jason Fried</strong> para o blog <a href="http://www.37signals.com/svn/posts/1388-the-importance-of-setting-expectations">Signal vs. Noise</a>.</em>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/03/18/remarkable-23-is-out/">Remarkable 2.3 is out!</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/03/18/remarkable-23-is-out/">Remarkable 2.3 is out!</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -341,9 +500,11 @@
 
 <time datetime="2009-03-18T00:00:00-03:00" pubdate data-updated="true">18 de Março de 2009</time>
         
+        <a rel="bookmark" href="/2009/03/18/remarkable-23-is-out/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><a id="yjic" title="Remarkable" href="http://github.com/carlosbrando/remarkable/tree">Remarkable</a> 2.2.x series was made of frequent releases with deprecation warnings to consolidate the API. Until we get into 2.3, we improved <a id="hbpx" title="support for ActiveRecord validations" href="../2009/02/10/remarkable-now-supports-all-activerecord-validations/">support for ActiveRecord validations</a>, <a id="u.td" title="fixed some bugs" href="http://carlosbrando.lighthouseapp.com/projects/19775-remarkable/tickets?q=all">fixed some bugs</a> and <a id="uimi" title="made some changes" href="http://github.com/carlosbrando/remarkable/commits/master">made some changes</a>, so we are safe and clear to work on new features and new matchers.</p>
@@ -354,19 +515,30 @@
 
 <p>Thanks for everyone who collaborated, we are getting solid as rock. :)</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/03/12/um-pouco-mais-sobre-%25e2%2580%259cdon%25e2%2580%2599t-repeat-yourself%25e2%2580%259d/">Um pouco mais sobre &#8216;Don&#8217;t Repeat Yourself&#8217;</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/03/12/um-pouco-mais-sobre-%25e2%2580%259cdon%25e2%2580%2599t-repeat-yourself%25e2%2580%259d/">Um pouco mais sobre &#8216;Don&#8217;t Repeat Yourself&#8217;</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -383,9 +555,11 @@
 
 <time datetime="2009-03-12T00:00:00-03:00" pubdate data-updated="true">12 de Março de 2009</time>
         
+        <a rel="bookmark" href="/2009/03/12/um-pouco-mais-sobre-%25e2%2580%259cdon%25e2%2580%2599t-repeat-yourself%25e2%2580%259d/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Sim, ainda tem muita coisa a ser dita sobre DRY. Como eu disse no <a href="http://www.nomedojogo.com/2009/03/06/rails-way-5-dont-repeat-yourself/">primeiro artigo</a> sobre este assunto, “<em>Don’t Repeat Yourself</em>” não é apenas uma regra, conceito ou boa prática, é uma filosofia. Então vamos filosofar mais um pouco sobre isto&#8230;</p>
@@ -406,19 +580,30 @@
 
 <p>Falarei mais sobre isto no próximo artigo.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/03/09/rails-e-dificil-por-causa-do-ruby/">Rails é difícil por causa do Ruby</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/03/09/rails-e-dificil-por-causa-do-ruby/">Rails é difícil por causa do Ruby</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -435,9 +620,11 @@
 
 <time datetime="2009-03-09T00:00:00-03:00" pubdate data-updated="true"> 9 de Março de 2009</time>
         
+        <a rel="bookmark" href="/2009/03/09/rails-e-dificil-por-causa-do-ruby/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Eu já conversei com muitos programadores PHP e Java que gostam das ideias e conceitos do Rails, mas que têm medo de avançar em virtude do Ruby. O argumento é que uma vez que eles já sabem PHP ou Java, teriam menos trabalho se usassem uma ferramenta similar (como um port) ao Rails para estas linguagens. Eu realmente não penso assim.</p>
@@ -465,19 +652,30 @@
 <hr /><em>Este texto é uma tradução do artigo “<a href="http://www.loudthinking.com/posts/34-myth-5-rails-is-hard-because-of-ruby">Myth #5: Rails is hard because of Ruby</a>” escrito por David Heinemeier Hansson, criador do Rails.</em>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/03/06/rails-way-5-dont-repeat-yourself/">Rails Way #5: Don&#8217;t Repeat Yourself</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/03/06/rails-way-5-dont-repeat-yourself/">Rails Way #5: Don&#8217;t Repeat Yourself</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -494,9 +692,11 @@
 
 <time datetime="2009-03-06T00:00:00-03:00" pubdate data-updated="true"> 6 de Março de 2009</time>
         
+        <a rel="bookmark" href="/2009/03/06/rails-way-5-dont-repeat-yourself/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img class="aligncenter size-full wp-image-2303" title="solve-main" src="http://old.nomedojogo.com/wp-content/uploads/2009/03/solve-main.jpg" alt="solve-main" />
@@ -524,19 +724,30 @@ Uma das filosofias mais adotadas por programadores Ruby no mundo todo e amplamen
 
 <p>“Don&#8217;t Repeat Yourself” - <strong>Ruby on Rails foi criado com este conceito em mente</strong>. Quase tudo que o fazemos no desenvolvimento de projetos com Rails visa evitar duplicações e repetições, mesmo quando falamos de banco de dados e testes. Por este motivo é que “não se repetir” se tornou o principal lema dos desenvolvedores Rails.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/03/05/use-subdiretorios-para-agrupar-imagens-por-recursos/"></a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/03/05/use-subdiretorios-para-agrupar-imagens-por-recursos/"></a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -553,9 +764,11 @@ Uma das filosofias mais adotadas por programadores Ruby no mundo todo e amplamen
 
 <time datetime="2009-03-05T00:00:00-03:00" pubdate data-updated="true"> 5 de Março de 2009</time>
         
+        <a rel="bookmark" href="/2009/03/05/use-subdiretorios-para-agrupar-imagens-por-recursos/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><blockquote>Uma dica: Use subdiretórios para agrupar imagens por recursos. Ex.: images/people/add.gif vs. images/add_person.gif.</blockquote>
@@ -564,70 +777,6 @@ Uma das filosofias mais adotadas por programadores Ruby no mundo todo e amplamen
 <p style="text-align: right;">Dica de <a href="http://www.37signals.com/svn/posts/1300-rails-tip-use-subdirectories-to-namespace">Ryan Singer</a></p>
 
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/03/04/ruby-19-1-argumentos-em-blocos/">Ruby 1.9 #1: Argumentos em blocos</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-03-04T00:00:00-03:00" pubdate data-updated="true"> 4 de Março de 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>O Ruby 1.9 está ai e já passou da hora de começarmos a ver quais são algumas das novidades mais importantes desta nova versão da nossa linguagem de programação preferida.</p>
-
-<p>À partir da versão 1.9 argumentos criados dentro de blocos terão seu escopo limitado ao mesmo. Para entender melhor, vejamos um exemplo de código executado na versão 1.8.6 e logo em seguida na versão 1.9:</p>
-
-<pre class="textmate-source"><span class="source source_ruby">i <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Olá<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
-<span class="constant constant_numeric constant_numeric_ruby">3</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>times <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">i</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> puts i <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
-puts i
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> 0
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> 1
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> 2
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> 2</span></span></pre>
-
-
-<p>Note que no código acima ao alterar a variável <code>i</code> dentro do bloco (o método <code>times</code> atribui  um novo valor a cada execução) acabamos também alterando a variável com o mesmo nome que foi declarada fora do bloco. Embora isto não seja um bug, mas sim uma característica do Ruby nesta versão, raramente (talvez nunca) vamos desejar este comportamento.</p>
-
-<p>Agora o mesmo código sendo executado na versão 1.9:</p>
-
-<pre class="textmate-source"><span class="source source_ruby">i <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Olá<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
-<span class="constant constant_numeric constant_numeric_ruby">3</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>times <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">i</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> puts i <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
-puts i
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> 0
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> 1
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> 2
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> "Olá"</span></span></pre>
-
-
-<p>Desta vez a execução do bloco não alterou a variável externa <code>i</code>. Toda variável criada dentro de um bloco no Ruby 1.9 só existirá dentro do escopo do bloco, por isto cuidado com seus códigos malucos ao migrar para esta nova versão!</p>
-</div>
-  
-  
 
 
     </article>
@@ -649,6 +798,10 @@ puts i
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
@@ -662,10 +815,6 @@ puts i
     
       <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
   </ul>

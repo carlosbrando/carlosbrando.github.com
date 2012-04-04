@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="O método delegate é util para expor métodos de terceiros em uma classe como se fossem dela. Para aqueles que não conhecem este método, vamos pegar um &hellip;">
+  <meta name="description" content="Thomas Fuchs, o criador do script.aculo.us iniciou um novo projeto esta semana chamado Prototype helpers. O projeto visa disponibilizar uma série de &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,14 +100,119 @@
       <div id="content">
         <div class="blog-index">
   
-  
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
+    <h1 class="entry-title">
+
+<a href="/2009/01/23/utilizando-valores-de-entrada-como-sugestoes-a-maneira-facil/">Utilizando valores de entrada como sugestões, a maneira fácil</a>
+
+</h1>
+
     
-      <h1 class="entry-title"><a href="/2009/01/22/edge-rails-delegate-allow_nil/">Edge Rails: delegate :allow_nil</a></h1>
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-01-23T00:00:00-02:00" pubdate data-updated="true">23 de Janeiro de 2009</time>
+        
+        <a rel="bookmark" href="/2009/01/23/utilizando-valores-de-entrada-como-sugestoes-a-maneira-facil/"></a>
+      </p>
     
+  </header>
+
+
+
+  <div class="entry-content"><p><a href="http://mir.aculo.us/">Thomas Fuchs</a>, o criador do <a href="http://script.aculo.us/">script.aculo.us</a> iniciou um novo projeto esta semana chamado <a href="http://github.com/madrobby/prototype_helpers/tree/master">Prototype helpers</a>. O projeto visa disponibilizar uma série de scripts do <a href="http://www.prototypejs.org/">Prototype</a> criados por ele.</p>
+
+<p>Eu particularmente gostei muito do <a href="http://mir.aculo.us/2009/1/7/using-input-values-as-hints-the-easy-way">defaultValueActsAsHint</a>, um script que facilita a inclusão de dicas sobre o preenchimento de um formulário dentro do próprio campo no formato de um texto mais claro. Ao se clicar no campo o texto some, mas caso o usuário não preencha o campo o texto volta a aparecer ao perder o foco.</p>
+
+<p><img class="center" src="http://old.nomedojogo.com/wp-content/uploads/2009/01/quickentry.png"></p>
+
+<p>Enfim, é melhor mostrar do que falar. <a href="http://old.nomedojogo.com/wp-content/uploads/2009/01/jquery_helpers/defaultValueActsAsHint/test.html">Clique aqui</a> para ver um exemplo funcionando.</p>
+
+<p>Como não sou um usuário de Prototype, fiz questão de portar este script para um plugin do <a href="http://jquery.com/">jQuery</a>, que faço questão de disponibilizar para vocês.</p>
+
+<p>Para usar é muito fácil, lembrando que você deve estar usando o jQuery, basta incluir o script abaixo em sua página:</p>
+
+<pre class="textmate-source"><span class="source source_js source_js_jquery"><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="storage storage_type storage_type_js">function</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="keyword keyword_operator keyword_operator_js">$</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span><span class="meta meta_brace meta_brace_curly meta_brace_curly_js">{</span>
+  <span class="meta meta_function meta_function_js"><span class="support support_class support_class_js">$.fn</span>.<span class="entity entity_name entity_name_function entity_name_function_js">defaultValueActsAsHint</span> = <span class="storage storage_type storage_type_function storage_type_function_js">function</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_begin punctuation_definition_parameters_begin_js">(</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_end punctuation_definition_parameters_end_js">)</span></span> <span class="meta meta_brace meta_brace_curly meta_brace_curly_js">{</span>
+    <span class="keyword keyword_control keyword_control_js">return</span> <span class="variable variable_language variable_language_js">this</span><span class="support support_function support_function_js support_function_js_jquery">.each</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="storage storage_type storage_type_js">function</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">()</span> <span class="meta meta_brace meta_brace_curly meta_brace_curly_js">{</span>
+      <span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.attr</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>_default<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_delimiter meta_delimiter_object meta_delimiter_object_comma meta_delimiter_object_comma_js">, </span><span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.attr</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>value<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">))</span>
+      <span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.addClass</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>hint<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span><span class="punctuation punctuation_terminator punctuation_terminator_statement punctuation_terminator_statement_js">;</span>
+
+      <span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.bind</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>focus<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_delimiter meta_delimiter_object meta_delimiter_object_comma meta_delimiter_object_comma_js">, </span><span class="storage storage_type storage_type_js">function</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="support support_class support_class_js">event</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span> <span class="meta meta_brace meta_brace_curly meta_brace_curly_js">{</span>
+        <span class="keyword keyword_control keyword_control_js">if</span> <span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.attr</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>_default<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span> <span class="keyword keyword_operator keyword_operator_js">==</span> <span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.attr</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>value<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">))</span>
+          <span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.removeClass</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>hint<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.attr</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>value<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_delimiter meta_delimiter_object meta_delimiter_object_comma meta_delimiter_object_comma_js">, </span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span><span class="punctuation punctuation_terminator punctuation_terminator_statement punctuation_terminator_statement_js">;</span>
+      <span class="meta meta_brace meta_brace_curly meta_brace_curly_js">}</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span><span class="punctuation punctuation_terminator punctuation_terminator_statement punctuation_terminator_statement_js">;</span>
+
+      <span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.blur</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="storage storage_type storage_type_js">function</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">()</span> <span class="meta meta_brace meta_brace_curly meta_brace_curly_js">{</span>
+        <span class="keyword keyword_control keyword_control_js">if</span> <span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="keyword keyword_operator keyword_operator_js">$</span><span class="meta meta_delimiter meta_delimiter_method meta_delimiter_method_period meta_delimiter_method_period_js">.</span>trim<span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.attr</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>value<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">))</span> <span class="keyword keyword_operator keyword_operator_js">==</span> <span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span>
+          <span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.addClass</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>hint<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.attr</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>value<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_delimiter meta_delimiter_object meta_delimiter_object_comma meta_delimiter_object_comma_js">, </span><span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="variable variable_language variable_language_js">this</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="support support_function support_function_js support_function_js_jquery">.attr</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">(</span><span class="string string_quoted string_quoted_single string_quoted_single_js"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_js">'</span>_default<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_js">'</span></span><span class="meta meta_brace meta_brace_round meta_brace_round_js">))</span><span class="punctuation punctuation_terminator punctuation_terminator_statement punctuation_terminator_statement_js">;</span>
+      <span class="meta meta_brace meta_brace_curly meta_brace_curly_js">}</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span><span class="punctuation punctuation_terminator punctuation_terminator_statement punctuation_terminator_statement_js">;</span>
+
+    <span class="meta meta_brace meta_brace_curly meta_brace_curly_js">}</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span><span class="punctuation punctuation_terminator punctuation_terminator_statement punctuation_terminator_statement_js">;</span>
+  <span class="meta meta_brace meta_brace_curly meta_brace_curly_js">}</span><span class="punctuation punctuation_terminator punctuation_terminator_statement punctuation_terminator_statement_js">;</span>
+<span class="meta meta_brace meta_brace_curly meta_brace_curly_js">}</span><span class="meta meta_brace meta_brace_round meta_brace_round_js">)(</span>jQuery<span class="meta meta_brace meta_brace_round meta_brace_round_js">)</span><span class="punctuation punctuation_terminator punctuation_terminator_statement punctuation_terminator_statement_js">;</span>
+</span></pre>
+
+
+<h4>Download: <a href="http://old.nomedojogo.com/wp-content/uploads/2009/01/jquery_helpers/defaultValueActsAsHint/jquery.defaultvalueactsashint.js "><span>jquery.defaultvalueactsashint.js</span></a></h4>
+
+
+<p>E definir quais campos se beneficiarão deste script, assim:</p>
+
+<pre class="textmate-source"><span class="text text_html text_html_jquery"><span class="source source_js source_js_jquery source_js_jquery_embedded source_js_jquery_embedded_html"><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;</span><span class="entity entity_name entity_name_tag entity_name_tag_script entity_name_tag_script_html">script</span> type="text/javascript" charset="utf-8"<span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span>
+  <span class="support support_class support_class_js support_class_js_jquery">$</span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">(</span><span class="meta meta_selector meta_selector_jquery"><span class="punctuation punctuation_definition punctuation_definition_selector punctuation_definition_selector_begin punctuation_definition_selector_begin_js">'</span><span class="meta meta_selector meta_selector_css"><span class="entity entity_other entity_other_attribute-name entity_other_attribute-name_id entity_other_attribute-name_id_css"><span class="punctuation punctuation_definition punctuation_definition_attribute-name punctuation_definition_attribute-name_css">#</span>foo</span></span><span class="punctuation punctuation_definition punctuation_definition_selector punctuation_definition_selector_end punctuation_definition_selector_end_js">'</span></span><span class="punctuation punctuation_section punctuation_section_class punctuation_section_class_js">)</span><span class="meta meta_delimiter meta_delimiter_method meta_delimiter_method_period meta_delimiter_method_period_js">.</span>defaultValueActsAsHint<span class="meta meta_brace meta_brace_round meta_brace_round_js">()</span><span class="punctuation punctuation_terminator punctuation_terminator_statement punctuation_terminator_statement_js">;</span>
+<span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&lt;/</span><span class="entity entity_name entity_name_tag entity_name_tag_script entity_name_tag_script_html">script</span><span class="punctuation punctuation_definition punctuation_definition_tag punctuation_definition_tag_html">&gt;</span></span></span></pre>
+
+
+<p>Como sempre, tudo está em um projeto no <a href="http://github.com/carlosbrando/jquery_helpers/tree/master">GitHub</a>. Bom divertimento!</p>
+</div>
+
+
+    </article>
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2009/01/22/edge-rails-delegate-allow_nil/">Edge Rails: delegate :allow_nil</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -124,9 +229,11 @@
 
 <time datetime="2009-01-22T00:00:00-02:00" pubdate data-updated="true">22 de Janeiro de 2009</time>
         
+        <a rel="bookmark" href="/2009/01/22/edge-rails-delegate-allow_nil/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>O método <code>delegate</code> é util para expor métodos de terceiros em uma classe como se fossem dela. Para aqueles que não conhecem este método, vamos pegar um exemplo:</p>
@@ -168,19 +275,30 @@
 <hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.3/3.0 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades acompanhando a série <a href="../category/edge-rails/">Edge Rails</a>.</em>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/01/21/edge-rails-date-helpers/">Edge Rails: Date Helpers</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/01/21/edge-rails-date-helpers/">Edge Rails: Date Helpers</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -197,9 +315,11 @@
 
 <time datetime="2009-01-21T00:00:00-02:00" pubdate data-updated="true">21 de Janeiro de 2009</time>
         
+        <a rel="bookmark" href="/2009/01/21/edge-rails-date-helpers/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Uma nova opção foi adicionada aos date helpers do Rails. Métodos como o <code>date_select</code>, <code>time_select</code>, <code>datetime_select</code>, <code>select_minute</code> e outros receberam a opção <code>:prompt</code>.</p>
@@ -232,19 +352,30 @@
 <hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.3/3.0 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades acompanhando a série <a href="../category/edge-rails/">Edge Rails</a>.</em>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/01/20/edge-rails-observe_field/">Edge Rails: observe_field</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/01/20/edge-rails-observe_field/">Edge Rails: observe_field</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -261,9 +392,11 @@
 
 <time datetime="2009-01-20T00:00:00-02:00" pubdate data-updated="true">20 de Janeiro de 2009</time>
         
+        <a rel="bookmark" href="/2009/01/20/edge-rails-observe_field/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>O método <code>observe_field</code> tem a finalidade de observar um determinado campo de um formulário e executar uma chamada Ajax quando houver alguma alteração em seu valor.</p>
@@ -281,19 +414,30 @@
 <hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.3/3.0 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades acompanhando a série <a href="../category/edge-rails/">Edge Rails</a>.</em>
 
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/01/19/livro-gratis-ruby-on-rails-22-o-que-ha-de-novo/">Livro Grátis: Ruby on Rails 2.2 - O que há de novo?</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/01/19/livro-gratis-ruby-on-rails-22-o-que-ha-de-novo/">Livro Grátis: Ruby on Rails 2.2 - O que há de novo?</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -310,9 +454,11 @@
 
 <time datetime="2009-01-19T00:00:00-02:00" pubdate data-updated="true">19 de Janeiro de 2009</time>
         
+        <a rel="bookmark" href="/2009/01/19/livro-gratis-ruby-on-rails-22-o-que-ha-de-novo/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Atendendo a pedidos: O segundo livro extraído deste blog:</p>
@@ -345,19 +491,30 @@
 
 <p>O responsável pela linda capa do livro é o <a href="http://renatocarvalho.com/">Renato Carvalho</a>, designer da <a href="http://surgeworks.com/">Surgeworks</a>.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/01/16/pergunta-devo-disponibilizar-a-versao-em-portugues-do-livro-rails-22-para-download-de-graca/">Pergunta: Devo disponibilizar a versão em português do livro Rails 2.2 para download de graça?</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/01/16/pergunta-devo-disponibilizar-a-versao-em-portugues-do-livro-rails-22-para-download-de-graca/">Pergunta: Devo disponibilizar a versão em português do livro Rails 2.2 para download de graça?</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -374,9 +531,11 @@
 
 <time datetime="2009-01-16T00:00:00-02:00" pubdate data-updated="true">16 de Janeiro de 2009</time>
         
+        <a rel="bookmark" href="/2009/01/16/pergunta-devo-disponibilizar-a-versao-em-portugues-do-livro-rails-22-para-download-de-graca/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>Em outubro do ano passado lancei o meu <a href="http://www.nomedojogo.com/2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">segundo livro</a>: “Ruby on Rails 2.2 - O que há de novo?” e conforme expliquei na ocasião, para conseguir lançar o livro na data do lançamento do Rails 2.2 tive de perder alguns dias de trabalho. Então Gregg Pollack me fez uma proposta de vender o livro em um pacote promocional junto com o screencast que estavam produzindo.</p>
@@ -395,19 +554,30 @@
 
 <p>Comentem, por favor.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/01/15/explicando-o-rails-metal-parte-2/">Explicando o Rails Metal - Parte 2</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/01/15/explicando-o-rails-metal-parte-2/">Explicando o Rails Metal - Parte 2</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -424,9 +594,11 @@
 
 <time datetime="2009-01-15T00:00:00-02:00" pubdate data-updated="true">15 de Janeiro de 2009</time>
         
+        <a rel="bookmark" href="/2009/01/15/explicando-o-rails-metal-parte-2/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>No <a href="http://www.nomedojogo.com/2009/01/12/o-que-e-o-rails-metal/">primeiro artigo</a> desta série eu comentei sobre um dos novos recursos incluídos no Rails, chamado de <strong>Rails Metal</strong>. Agora vamos falar da funcionalidade que leva o nome “Metal”.</p>
@@ -497,19 +669,30 @@ get <span class="string string_quoted string_quoted_single string_quoted_single_
 
 <p>Como podem ver teremos o melhor de dois mundo na próxima versão do Rails. Mas é importante ressaltar que mesmo sendo possível criar um projeto inteiro usando apenas o Rails Metal, isto não é uma boa coisa a se fazer. O Rails Metal é uma ferramenta com uma finalidade especifica e somente deve ser usada para casos onde a performance é crucial para o sucesso do seu software.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/01/14/curso-gratis-de-ruby/">Curso Grátis de Ruby</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/01/14/curso-gratis-de-ruby/">Curso Grátis de Ruby</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -526,9 +709,11 @@ get <span class="string string_quoted string_quoted_single string_quoted_single_
 
 <time datetime="2009-01-14T00:00:00-02:00" pubdate data-updated="true">14 de Janeiro de 2009</time>
         
+        <a rel="bookmark" href="/2009/01/14/curso-gratis-de-ruby/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>À partir do dia <strong>24 de janeiro</strong>, Satish Talim do <a onclick="javascript:urchinTracker ('/outbound/article/www.rubylearning.org');" href="http://www.rubylearning.org/" target="_blank">Ruby Learning</a> iniciará mais um dos seus famosos cursos de <a href="http://rubylearning.com/satishtalim/tutorial.html">Ruby</a>. O curso é online e o material é liberado diariamente.</p>
@@ -541,19 +726,30 @@ get <span class="string string_quoted string_quoted_single string_quoted_single_
 
 <p>Já é possível se <a href="http://rubylearning.org/class/login/index.php">matricular</a> no curso e o material já está disponível para os que desejarem se adiantar.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/01/13/campus-party-voce-vai/">Campus Party - Você vai?</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/01/13/campus-party-voce-vai/">Campus Party - Você vai?</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -570,9 +766,11 @@ get <span class="string string_quoted string_quoted_single string_quoted_single_
 
 <time datetime="2009-01-13T00:00:00-02:00" pubdate data-updated="true">13 de Janeiro de 2009</time>
         
+        <a rel="bookmark" href="/2009/01/13/campus-party-voce-vai/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p><img class="center" src="http://old.nomedojogo.com/wp-content/uploads/2009/01/logocpbrasil.gif"></p>
@@ -583,19 +781,30 @@ get <span class="string string_quoted string_quoted_single string_quoted_single_
 
 <p>Vamos usar o campo de comentários deste post para combinarmos.</p>
 </div>
-  
-  
 
 
     </article>
   
-  
-    <article>
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
       
   <header>
-    
-      <h1 class="entry-title"><a href="/2009/01/12/o-que-e-o-rails-metal/">O que é o Rails Metal?</a></h1>
-    
+    <h1 class="entry-title">
+
+<a href="/2009/01/12/o-que-e-o-rails-metal/">O que é o Rails Metal?</a>
+
+</h1>
+
     
       <p class="meta">
         
@@ -612,9 +821,11 @@ get <span class="string string_quoted string_quoted_single string_quoted_single_
 
 <time datetime="2009-01-12T00:00:00-02:00" pubdate data-updated="true">12 de Janeiro de 2009</time>
         
+        <a rel="bookmark" href="/2009/01/12/o-que-e-o-rails-metal/"></a>
       </p>
     
   </header>
+
 
 
   <div class="entry-content"><p>A noticia não é muito nova, mas eu preciso seguir uma certa linha temporal na série Edge Rails para não me perder no mar de atualizações do Ruby on Rails. Acredito que todos vocês já devem ter lido ou ouvido algo a respeito do Rails Metal, mas afinal o que é isto?</p>
@@ -630,56 +841,6 @@ get <span class="string string_quoted string_quoted_single string_quoted_single_
 
 <p>Existe ainda outro ponto muito importante sobre o Rails Metal que precisa ser melhor explorado e esta nova característica é que leva o nome ‘Metal’. Falaremos sobre isto no próximo artigo.</p>
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/01/09/resolvendo-o-problema-com-o-tempo-de-espera-de-elevadores/">Resolvendo o problema com o tempo de espera de elevadores</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-01-09T00:00:00-02:00" pubdate data-updated="true"> 9 de Janeiro de 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Segue abaixo uma história interessante sobre um edifício onde os inquilinos começaram a queixar-se do longo tempo de espera do elevador. A solução mostra como a chave para resolver um problema é frequentemente definir primeiro qual exatamente é o problema.</p>
-
-<p><img class="center" src="http://farm3.static.flickr.com/2375/2247917571_9da6f62b5e.jpg?v=0"></p>
-
-<p>A clássica história ilustra muito bem o custo potencial de colocação de um problema em uma caixa disciplinar. Envolve um edifício de muitos andares em Nova York. Os inquilinos começaram a queixar-se do péssimo serviço prestado nos elevadores do edifício. O tempo de espera dos elevadores no horário de pico, eles diziam, era excessivamente longo. Vários inquilinos ameaçaram cancelar seus contratos de aluguel e sair do edifício.</p>
-
-<p>A administração autorizou um estudo para determinar qual seria a melhor solução para este problema. O estudo revelou que devido à idade do edifício nenhuma solução de engenharia seria economicamente viável. O engenheiro disse que a administração simplesmente teria de viver com este problema permanentemente.</p>
-
-<p>O gerente convocou desesperadamente uma reunião com seus funcionários, incluindo um jovem recém contratado graduado em psicologia pessoal&#8230; O rapaz não se concentrou no desempenho do elevador, mas no fato de que as pessoas estavam se queixando apenas de ter de esperar alguns minutos. “Por que”, perguntou-se, estão se queixando apenas por esperar um tempo muito curto? Ele concluiu que as queixas eram uma consequência do tédio. Por isso, ele deduziu que a solução para o problema seria dar algo para os inquilinos fazerem durante o tempo de espera. Ele sugeriu instalar espelhos nas áreas de embarque do elevador, para que as pessoas pudessem olhar para os outros, ou para si próprio, sem que parecesse estar fazendo isto. O gerente aceitou a sua sugestão. A instalação dos espelhos foi feita rapidamente e com um custo relativamente baixo. As queixas sobre o tempo de espera pararam.</p>
-
-<p>Hoje, espelhos na área de espera e até dentro dos elevadores são comuns em edifícios muito altos.</p>
-
-<p>Retirado do livro &#8221;<a href="http://www.amazon.com/Turning-Learning-Right-Side-Education/dp/0132346494">Turning Learning Right Side Up: Putting Education Back on Track</a>&#8221;.</p>
-</div>
-  
-  
 
 
     </article>
@@ -701,6 +862,10 @@ get <span class="string string_quoted string_quoted_single string_quoted_single_
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
@@ -714,10 +879,6 @@ get <span class="string string_quoted string_quoted_single string_quoted_single_
     
       <li class="post">
         <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
       </li>
     
   </ul>
