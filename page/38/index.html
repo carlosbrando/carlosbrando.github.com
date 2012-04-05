@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Antes de qualquer coisa, me deixe explicar como ficaram organizadas as coisas aqui no blog. A série Edge Rails, como sempre, continua tratando das &hellip;">
+  <meta name="description" content="Mais um patch do José Valim (desta vez eu prestei atenção de quem era). Ele adicionou a opção :layout no método caches_action. class ListsController &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,70 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/06/05/edge-rails-opcao-layout-para-o-metodo-caches_action/">Edge Rails: Opção :layout para o método caches_action</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-06-05T00:00:00-03:00" pubdate data-updated="true"> 5 de Junho de 2008</time>
+        
+        <a rel="bookmark" href="/2008/06/05/edge-rails-opcao-layout-para-o-metodo-caches_action/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>Mais um patch do <a href="http://josevalim.blogspot.com/">José Valim</a> (desta vez eu prestei atenção de quem era).</p>
+
+<p>Ele adicionou a opção <strong>:layout</strong> no método <strong>caches_action</strong>.</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_controller"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">ListsController<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ApplicationController</span></span></span>
+  <span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">...</span>
+
+  caches_action <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>index</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>layout</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">false</span>
+
+  <span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">...</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+<p>No exemplo acima eu especifiquei <strong>:layout =&gt; false</strong>, isto significa que o layout não será armazenado no cache, apenas o conteúdo da action será. Isto é muito útil quando temos conteúdo dinâmico no layout (o que acontece na maioria dos casos).</p>
+
+<p>Se você não especificar nada ele assumirá o padrão atual que é true.</p>
+</div>
+
+
+    </article>
   
     
     
@@ -689,60 +753,6 @@
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/05/31/edge-rails-utc-ou-gmt/">Edge Rails: UTC ou GMT?</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-05-31T00:00:00-03:00" pubdate data-updated="true">31 de Maio de 2008</time>
-        
-        <a rel="bookmark" href="/2008/05/31/edge-rails-utc-ou-gmt/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>Uma alteração simples, mas interessante. Até agora o Rails tem usado muito a sigla UTC, mas quando se executa o método <strong>to_s</strong> do objeto <strong>TimeZone</strong> ele mostrará GMT e não UTC. Isto se dá porque a sigla GMT é mais familiar para o usuário final.</p>
-
-<p>Se você olhar no painel de controle do Windows, onde você escolhe o fuso-horário, verá que a sigla usada é GMT. Google e Yahoo também usam GMT em seus produtos.</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">TimeZone</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Moscow<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>to_s <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; "(GMT+03:00) Moscow"</span></span></pre>
-
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/39/">&larr; Antigos</a>
@@ -760,6 +770,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/05/heroku-add-ons-catalog/">Heroku Add-ons Catalog</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
       </li>
     
@@ -773,10 +787,6 @@
     
       <li class="post">
         <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
       </li>
     
   </ul>

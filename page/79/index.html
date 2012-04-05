@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="O Rails é genial, pena que tudo é em inglês. Mas eu queria o que? Tudo na minha língua, de forma perfeita? &Eacute; claro que sim. Isto é possível. &hellip;">
+  <meta name="description" content="Um problema que temos com os validates é que ele insiste em colocar o nome do campo na frente da mensagem, mesmo quando personalizamos ela usando o &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,144 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2007/04/17/validates-personalisados/">Mensagens personalizadas com validates</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-04-17T00:00:00-03:00" pubdate data-updated="true">17 de Abril de 2007</time>
+        
+        <a rel="bookmark" href="/2007/04/17/validates-personalisados/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><center><img src="http://old.nomedojogo.com/wp-content/uploads/2007/04/windowslivewritervalidatespersonalisados-971dcustom-springs131.jpg" height="150" width="160" /></center>
+
+
+<p>Um problema que temos com os validates é que ele insiste em colocar o nome do campo na frente da mensagem, mesmo quando personalizamos ela usando o :message.
+[source:ruby]validates_presence_of :title,
+:message =&gt; &#8220;O campo &#8216;Título&#8217; deve ser preenchido&#8221;[/source]
+Na nossa view ficaria assim:</p>
+
+<ul>
+    <li>Title O campo &#8216;Título&#8217; deve ser preenchido</li>
+</ul>
+
+
+<p>Como resolver isto?</p>
+
+<p>Crie um arquivo .rb qualquer dentro da pasta lib com o seguinte conteúdo:
+[source:ruby]module ActiveRecord</p>
+
+<pre><code>class Errors
+    def add(attribute, msg = @@default_error_messages[:invalid])
+        if replace_message?(msg)
+            msg = replace_message(attribute, msg)
+            attribute = :base
+        end
+
+        @errors[attribute.to_s] = [] if @errors[attribute.to_s].nil?
+        @errors[attribute.to_s] &amp;lt;&amp;lt; msg
+    end
+
+    # true se a mensagem for alterável
+
+    def replace_message?(msg)
+        (msg =~ /{?}/) || (msg.starts_with?"!")
+    end
+
+    # muda a mensagem
+
+    def replace_message(attr, msg)
+
+        # se mensagem veio com {?}, agrega o nome do campo no meio do texto
+
+        if msg =~ /{?}/
+            msg.gsub(/{?}/, attr.to_s.humanize)
+        elsif msg.starts_with?("!")              # se tiver ! no começo, remove
+            msg.from(1)
+        else
+            msg
+        end
+    end
+
+    def add_on_blank(attributes, msg = @@default_error_messages[:blank])
+        for attr in [attributes].flatten
+            value = @base.respond_to?(attr.to_s) ? @base.send(attr.to_s) : @base[attr.to_s]
+
+            # se mensagem veio com {?}, agrega o nome do campo no meio do texto
+
+            if replace_message?(msg)
+                add(:base, replace_message(attr, msg)) if value.blank?
+            else
+                add(attr, msg) if value.blank? # fluxo normal
+            end
+        end
+    end
+end
+</code></pre>
+
+<p>end[/source]
+Não vou entrar em detalhes sobre o que o código faz (cabe a você analisar), mas basicamente eu verifico se o texto passado no :message possui:</p>
+
+<ol>
+    <li>{?} em algum lugar do texto.</li>
+    <li>Ou começa com ! (exclamação)</li>
+</ol>
+
+
+<p>No primeiro caso, simplesmente subistituimos a string &#8220;{?}&#8221; pelo nome da coluna. O que nos permite criar algo assim: &#8220;O campo &#8216;{?}&#8217; deve ser preenchido&#8221;.</p>
+
+<p>No segundo caso, o código verifica se a mensagem começa com o símbolo de exclamação (!). Se sim, deixa a mensagem exatamente como está, ignorando completamente o nome da coluna.</p>
+
+<p>Sendo assim, o código dado como exemplo acima poderia ficar assim:
+[source:ruby]validates_presence_of :title,
+:message =&gt; &#8221;<strong>!</strong>O campo &#8216;Título&#8217; deve ser preenchido&#8221;[/source]
+E o resultado na sua página seria:</p>
+
+<ul>
+    <li>O campo &#8216;Título&#8217; deve ser preenchido</li>
+</ul>
+
+
+<p>Este é apenas um exemplo de como podemos alterar o Rails de forma simples para nossas necessidades.</p>
+</div>
+
+
+    </article>
   
     
     
@@ -737,68 +875,6 @@ Porque só consigo pensar no que serei, e tudo que ficou para trás de algum mod
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2007/03/20/o-fim-do-mundo-mad-max-sem-mel-gibson/">É o fim do mundo! Mad Max sem Mel Gibson</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-03-20T00:00:00-03:00" pubdate data-updated="true">20 de Março de 2007</time>
-        
-        <a rel="bookmark" href="/2007/03/20/o-fim-do-mundo-mad-max-sem-mel-gibson/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p></p></p>
-
-<p><img style="border-top-width: 0px; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="150" src="http://old.nomedojogo.com/wp-content/uploads/writer/ofimdomundoMadMaxsemMelGibson_85AF/08937465003.jpg" width="240" align="right" border="0">AÂ coluna de entretenimento do Globo.comÂ publicouÂ a seguinte noticia:
-<p>&#8220;O diretor da série &#8220;Mad Max&#8221;, o australiano George Miller, pretende levar o herói Mad de novo às telas,Â mas nãoÂ mais comÂ Mel Gibson, que ele acha muito velho para o papel.</p>
-<blockquote><p>Não será Mel. Ele tinha 21 anos quando fez o primeiro filme. Agora está muito mais velho e sua paixão é dirigir filmes</p>
-</blockquote>
-<p>Disse Miller, citado pela agência australiana AAP.</p>
-<p>O novo Max Rockatansky será um ator jovem, com potencial para ser um astro, disse o cineasta, sem citar possíveis candidatos.</p>
-<p>Mad Max sem Mel Gibson?
-<p>O mundo cinematográfico anda carente de heróis e de ícones com carisma verdadeiro.
-<p>Vide a lista de personagens que estão sendo ressuscitados:
-<p>Rocky, John Mcclane o cara que nunca morre (Bruce Willis em Duro de matar), já se fala de um novoÂ Â Rambo, e seÂ o Harrison Ford não morrer, ainda vamos ver o av&ocirc; Indiana Jones&#8230;
-<p>Mas o Mad Max sem Mel Gibson? Aonde tudo isso vai parar?</p>
-
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/80/">&larr; Antigos</a>
@@ -816,6 +892,10 @@ Porque só consigo pensar no que serei, e tudo que ficou para trás de algum mod
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/05/heroku-add-ons-catalog/">Heroku Add-ons Catalog</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
       </li>
     
@@ -829,10 +909,6 @@ Porque só consigo pensar no que serei, e tudo que ficou para trás de algum mod
     
       <li class="post">
         <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
       </li>
     
   </ul>

@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Não é segredo para ninguém que eu estou exaustivamente trabalhando em um novo framework para o desenvolvimento de aplicativos sociais de forma ultra &hellip;">
+  <meta name="description" content="Muitas novidades estão sendo preparadas para a próxima versão do Rails. Uma que já estamos observando a alguns dias é a nova DSL para a configuração &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,214 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2009/12/14/rails-3-uma-nova-dsl-para-a-configuracao-de-rotas/">Rails 3: Uma nova DSL para a configuração de rotas</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-14T00:00:00-02:00" pubdate data-updated="true">14 de Dezembro de 2009</time>
+        
+        <a rel="bookmark" href="/2009/12/14/rails-3-uma-nova-dsl-para-a-configuracao-de-rotas/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>Muitas novidades estão sendo preparadas para a próxima versão do Rails. Uma que já estamos observando a alguns dias é a nova DSL para a configuração de rotas.</p>
+
+<p>O Rails 3 ainda está em desenvolvimento, isto significa que o código da DSL pode sofrer alterações até o lançamento oficial. De qualquer forma você pode ir matando a curiosidade analisando o novo arquivo <code>config/routes.rb</code> que está sendo gerado pelo <code>Rails 3.0.pre</code> neste momento. Eu tomei a liberdade de traduzir os comentários para facilitar o entendimento.</p>
+
+<figure class='code'><figcaption><span>routes.rb </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="no">ActionController</span><span class="o">::</span><span class="no">Routing</span><span class="o">::</span><span class="no">Routes</span><span class="o">.</span><span class="n">draw</span> <span class="k">do</span> <span class="o">|</span><span class="n">map</span><span class="o">|</span>
+</span><span class='line'>  <span class="c1"># A prioridade é baseada na ordem da criação:</span>
+</span><span class='line'>  <span class="c1"># criado primeiro -&gt; maior prioridade.</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Exemplo de uma rota comum:</span>
+</span><span class='line'>  <span class="n">match</span> <span class="s1">&#39;products/:id&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;catalog#view&#39;</span>
+</span><span class='line'>  <span class="c1"># Tenha em mente que você pode atribuir outros valores</span>
+</span><span class='line'>  <span class="c1"># além de :controller e :action</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Exemplo de uma rota nomeada:</span>
+</span><span class='line'>  <span class="n">match</span> <span class="s1">&#39;products/:id/purchase&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;catalog#purchase&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:purchase</span>
+</span><span class='line'>  <span class="c1"># Esta rota pode ser invocada utilizando</span>
+</span><span class='line'>  <span class="c1"># purchase_url(:id =&gt; product.id)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Exemplo utilizando resources (mapeia verbos HTTP</span>
+</span><span class='line'>  <span class="c1"># para ações do controller automaticamente)</span>
+</span><span class='line'>  <span class="n">resources</span> <span class="ss">:products</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Exemplo utilizando resources com opções:</span>
+</span><span class='line'>  <span class="n">resources</span> <span class="ss">:products</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">member</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">get</span> <span class="ss">:short</span>
+</span><span class='line'>      <span class="n">post</span> <span class="ss">:toggle</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">collection</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">get</span> <span class="ss">:sold</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Exemplo utilizando resource com sub-resources:</span>
+</span><span class='line'>  <span class="n">resources</span> <span class="ss">:products</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">resources</span> <span class="ss">:comments</span><span class="p">,</span> <span class="ss">:sales</span>
+</span><span class='line'>    <span class="n">resource</span> <span class="ss">:seller</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Exemplo mais complexo de uso de resources com </span>
+</span><span class='line'>  <span class="c1"># sub-resources:</span>
+</span><span class='line'>  <span class="n">resources</span> <span class="ss">:products</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">resources</span> <span class="ss">:comments</span>
+</span><span class='line'>    <span class="n">resources</span> <span class="ss">:sales</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">get</span> <span class="ss">:recent</span><span class="p">,</span> <span class="ss">:on</span> <span class="o">=&gt;</span> <span class="ss">:collection</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Exeplo utilizando resource com um namespace:</span>
+</span><span class='line'>  <span class="n">namespace</span> <span class="ss">:admin</span> <span class="k">do</span>
+</span><span class='line'>    <span class="c1"># Direciona /admin/products/* para </span>
+</span><span class='line'>    <span class="c1"># Admin::ProductsController</span>
+</span><span class='line'>    <span class="c1"># (app/controllers/admin/products_controller.rb)</span>
+</span><span class='line'>    <span class="n">resources</span> <span class="ss">:products</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Você pode definir a home do seu site utilizando </span>
+</span><span class='line'>  <span class="c1"># &quot;root&quot;. </span>
+</span><span class='line'>  <span class="c1"># Lembre-se de apagar o arquivo public/index.html.</span>
+</span><span class='line'>  <span class="n">root</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s2">&quot;welcome&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Você pode listar todas as rotas disponíveis com </span>
+</span><span class='line'>  <span class="c1"># &quot;rake routes&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Deixe a rota padrão com a prioridade mais baixa </span>
+</span><span class='line'>  <span class="c1"># possível.</span>
+</span><span class='line'>  <span class="c1"># Nota: A rota padrão torna todas as actions em </span>
+</span><span class='line'>  <span class="c1"># qualquer controller acessíveis via solicitações GET. </span>
+</span><span class='line'>  <span class="c1"># Você deve considerar a remoção ou comentar esta </span>
+</span><span class='line'>  <span class="c1"># linha se estiver usando rotas nomeadas e recursos.</span>
+</span><span class='line'>  <span class="n">match</span> <span class="s1">&#39;:controller(/:action(/:id(.:format)))&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>[ATUALIZAÇÃO 21/12/2009 3:00]</h4>
+
+<p>A DSL sofreu uma leve alteração que simplifica ainda mais a especificação de rotas.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># As duas linhas a seguir fazem a mesma coisa</span>
+</span><span class='line'><span class="n">match</span> <span class="s1">&#39;products/:id&#39;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&#39;catalog#view&#39;</span>
+</span><span class='line'><span class="n">match</span> <span class="s1">&#39;products/:id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;catalog#view&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+    </article>
   
     
     
@@ -815,163 +1023,6 @@ Hello, world</span></span></pre>
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2009/09/25/os-oito-niveis-do-programador/">Os oito níveis do programador</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-09-25T00:00:00-03:00" pubdate data-updated="true">25 de Setembro de 2009</time>
-        
-        <a rel="bookmark" href="/2009/09/25/os-oito-niveis-do-programador/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>Não tenho o habito de ler os artigos de <a href="http://www.codinghorror.com/blog/">Jeff Atwood</a>, talvez por já ter discordado de um grande número deles, mas este em particular achei muito interessante. Embora os oito níveis descritos abaixo representem a realidade de uma forma muito simplificada, acho que são interessantes para nos fazer pensar. Segue a <a href="http://www.codinghorror.com/blog/archives/001250.html">tradução</a>:</p>
-
-<p>Já ouviu a clássica pergunta &#8221;<strong>onde você se imagina daqui há 5 anos?</strong>&#8221; em uma entrevista de emprego?</p>
-
-<p>Você quer detonar, naturalmente! Ou pelo menos se tornar o equivalente a uma estrela do rock em desenvolvimento de software. Este não é o tipo de pergunta onde se espera receber uma resposta séria - outra pergunta desta mesma categoria seria “qual é o seu maior defeito?”</p>
-
-<p>Mas particularmente acho que este pergunta é um pouco diferente e merece ser seriamente considerada. Não para o benefício do entrevistador, mas para <em>seu próprio</em> benefício.</p>
-
-<p>A pergunta “onde você se vê em cinco anos” já é uma espécie de clichê e a maioria das pessoas tem uma resposta na ponta da língua preparada para eventuais entrevistas. Mas esta pergunta levanta algumas preocupações mais profundas: qual é o caminho potencial para uma carreira de desenvolvedor de software? Claro, somos apaixonados pela nossa profissão e estamos muito felizes com isso. Mas você ainda estará sentado em frente a um computador programando quando estiver com 50 anos? Com 60 anos? Qual é o melhor resultado possível na carreira de um programador que aspira ser&#8230; bem, um programador?</p>
-
-<p>E se eu lhe dissesse que há <strong>oito níveis de programadores</strong>?</p>
-
-<h2 style="padding-left: 30px;">8. Programador Imortal</h2>
-
-
-
-
-<p style="padding-left: 30px;">Este é o nível mais alto. Seu código sobreviveu e transcendeu a sua morte. Você é uma parte do registro histórico permanente da computação. Outros programadores estudam o seu trabalho e as coisas que você escreveu. Você pode ter ganhado um Prêmio Turing, redigido trabalhos influentes ou inventado uma ou mais coisas fundamentais para a área de tecnologia que afetaram o curso da programação como a conhecemos. Você não apenas tem uma entrada na Wikipédia - mas há sites inteiros dedicados a estudar a sua vida e obra.</p>
-
-
-<p style="padding-left: 30px;">Muito programadores, embora tenham tentado, nunca atingiram esse nível.</p>
-
-
-<p style="padding-left: 30px;">Exemplos: <a href="http://en.wikipedia.org/wiki/Edsger_W._Dijkstra">Dijkstra</a>, <a href="http://en.wikipedia.org/wiki/Donald_Knuth">Knuth,</a> <a href="http://en.wikipedia.org/wiki/Alan_Kay">Kay</a></p>
-
-
-
-
-<h2 style="padding-left: 30px;">7. Programador Bem-sucedido</h2>
-
-
-<p style="padding-left: 30px;">Neste nível encontram-se programadores que além de serem muito conhecidos também criaram uma empresa - talvez até mesmo algumas empresas - em torno de seu código. Estes programadores conseguiram a verdadeira liberdade: a liberdade de decidir por si próprio em que querem trabalhar. E podem compartilhar esta liberdade com seus colegas programadores.</p>
-
-
-<p style="padding-left: 30px;">Este é o nível que a maioria dos programadores aspiram chegar. Chegar a este nível muitas vezes depende mais das habilidades em negócios do que em programação.</p>
-
-
-<p style="padding-left: 30px;">Exemplos: <a href="http://en.wikipedia.org/wiki/Bill_Gates">Gates</a>, <a href="http://en.wikipedia.org/wiki/John_D._Carmack">Carmack</a>, <a href="http://en.wikipedia.org/wiki/David_Heinemeier_Hansson">DHH</a></p>
-
-
-
-
-<h2 style="padding-left: 30px;">6. Programador Famoso</h2>
-
-
-<p style="padding-left: 30px;">Este também é um bom lugar para se estar, desde que você tenha um emprego.</p>
-
-
-<p style="padding-left: 30px;">Você é famoso nos círculos de programação. Mas ser famoso não significa necessariamente que você pode transformar isto em lucro e sustentar-se. Ser famoso é bom, mas *bem-sucedido* é melhor. Você provavelmente trabalha para uma grande e conhecida empresa de tecnologia, uma influente empresa de pequeno porte ou é membro de uma equipe em uma startup. De qualquer maneira, outros programadores já ouviram falar de você, e você está tendo um impacto positivo na área.</p>
-
-
-
-
-<h2 style="padding-left: 30px;">5. Programador Profissional</h2>
-
-
-<p style="padding-left: 30px;">Você tem uma carreira bem sucedida como um desenvolvedor de software. Suas habilidades são valorizadas e você não tem muita dificuldade para encontrar um bom emprego. Seus colegas de trabalho o respeitam. Toda empresa na qual você já trabalhou se tornou melhor e foi enriquecida de alguma forma pela sua presença.</p>
-
-
-<p style="padding-left: 30px;">Mas onde você vai chegar?</p>
-
-
-
-
-<h2 style="padding-left: 30px;">4. Programador Mediano</h2>
-
-
-<p style="padding-left: 30px;">Neste nível, você já é um programador bom o suficiente para perceber que você não é um *grande* programador. E você nunca poderia ser.</p>
-
-
-<p style="padding-left: 30px;">Talento na maioria das vezes tem pouco a ver com fazer sucesso. Você pode ser muito bem sucedido se tiver habilidades nos negócios e souber lidar com pessoas. Se você é um programador mediano, e ainda assim consegue sobreviver nesta área, então você é talentoso, mesmo que não necessariamente no ato de codificar.</p>
-
-
-<p style="padding-left: 30px;">Não se sinta mal com isto. Taleto é mais raro do que você imagina. Não há nada de errado com a falta de talento. Seja ousado. Descubra em que você é bom, e persiga isto. Seja agressivo.</p>
-
-
-
-
-<h2 style="padding-left: 30px;">3. Programador Amador</h2>
-
-
-<p style="padding-left: 30px;">Um programador amador gosta de codificar e normalmente eles são estudantes promissores ou estagiários, talvez estejam contribuindo para projetos de código aberto, criando aplicativos &#8220;just for fun&#8221; ou desenhando web sites em seu tempo livre. Seu código e ideias demonstram entusiasmo e que eles tem um bom futuro pela frente.</p>
-
-
-<p style="padding-left: 30px;">Ser um amador é uma coisa boa; partindo deste nível pode-se subir rapidamente para se tornar um programador profissional.</p>
-
-
-
-
-<h2 style="padding-left: 30px;">2. Programador Desconhecido</h2>
-
-
-<p style="padding-left: 30px;">É o típico programador comum. Apenas um recurso. Competente (na maioria das vezes), mas normal. Provavelmente trabalha para uma grande e anônima megacorporação. É apenas um funcionário, programar não faz parte da sua vida. Também não há nada de errado com isso.</p>
-
-
-
-
-<h2 style="padding-left: 30px;">1. Programador Ruim</h2>
-
-
-<p style="padding-left: 30px;">Pessoas que de alguma maneira entraram na área de desenvolvimento de software sem um pingo de habilidade ou capacidade. Tudo o que tocam se transforma em dor e sofrimento para os seus colegas programadores - com a possível exceção de *outros* maus programadores, onde falta ainda a habilidade rudimentar obrigatória para perceberem que eles estão trabalhando com um outro programador ruim.</p>
-
-
-<p style="padding-left: 30px;">Esta é talvez, a marca registrada de todos os maus programadores. Essas pessoas simplesmente não possuem nenhuma habilidade para escreverem código, mas de alguma maneira é isto o que fazem.</p>
-
-
-<p>Estes níveis não são totalmente sérios. Nem todos os programadores aspiram continuar fazendo isto por toda a sua carreira. Mas é esclarecedor considerar o que um programador <em>poderia</em> realizar em dez, vinte ou trinta anos - talvez mesmo uma vida inteira. Quais são os programadores notáveis que você mais admira? O que eles fizeram para merecer a sua admiração?</p>
-
-<p>Em suma, <strong>o que você quer fazer com sua vida?</strong></p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/7/">&larr; Antigos</a>
@@ -989,6 +1040,10 @@ Hello, world</span></span></pre>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/05/heroku-add-ons-catalog/">Heroku Add-ons Catalog</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
       </li>
     
@@ -1002,10 +1057,6 @@ Hello, world</span></span></pre>
     
       <li class="post">
         <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
       </li>
     
   </ul>

@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="O problema era o seguinte: Tenho um arquivo de texto com um monte de informações inúteis e precisava ler este arquivo e retirar o texto que me &hellip;">
+  <meta name="description" content="Acho legal a implementação do Rails para paginação. O problema é que não dá para formatar direito o paginador usando CSS ou outros meios. Mas&#8230; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,96 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2007/05/10/paginando-com-estilo/">Paginando com estilo</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-05-10T00:00:00-03:00" pubdate data-updated="true">10 de Maio de 2007</time>
+        
+        <a rel="bookmark" href="/2007/05/10/paginando-com-estilo/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>Acho legal a implementação do Rails para paginação. O problema é que não dá para formatar direito o paginador usando CSS ou outros meios.</p>
+
+<p>Mas&#8230; é muito fácil criar um paginador personalizado.</p>
+
+<center><img src="http://old.nomedojogo.com/wp-content/uploads/2007/05/windowslivewriterpaginandocomestilo-cee5pagination3.jpg" height="44" width="356" /></center>
+
+
+<p>No meu caso, criei um método chamado <strong>pagination_links_with_css</strong> em um dos helpers da minha aplicação.Meu código ficou assim:
+[source:ruby]
+  def pagination_links_with_css(paginator, options={}, html_options={})</p>
+
+<pre><code>name = options[:name] || ActionView::Helpers::PaginationHelper::DEFAULT_OPTIONS[:name]
+params = (options[:params] || ActionView::Helpers::PaginationHelper::DEFAULT_OPTIONS[:params]).clone
+
+options[:link_to_current_page] = true
+atual_page = options[:atual_page] || 1
+
+pagination_links_each(paginator, options) do |n|
+  params[name] = n
+
+  if n.to_s.to_i == atual_page.to_i
+    "&lt;span class='current'&gt;#{n.to_s}&lt;/span&gt;"
+  else
+    link_to("#{n.to_s}", params, html_options)
+  end
+end
+</code></pre>
+
+<p>  end
+[/source]</p>
+
+<p>O que faço é bem simples. Como preciso pegar a página corrente, deixo a opção link_to_current_page como verdadeira. Também recupero o número da página atual (:atual_page) que informo na chamada do método na view (neste ponto chamo atenção, porque não consegui recuperar este valor de outra forma, você sabe como?).</p>
+
+<p>Então, percorro todas as páginas e posso formatar o retorno de cada uma da maneira como desejo (&#8220;&lt;span class=&#8217;current&#8217;&gt;#{n.to_s}&lt;/span&gt;&#8221;).</p>
+
+<p>No view, a única coisa que tenho de fazer é chamar o método novo:</p>
+
+<p>[source:ruby]
+&lt;%= pagination_links_with_css @job_pages, {:window_size =&gt; 10, :atual_page =&gt; params[:page] } %&gt;
+[/source]</p>
+
+<p>&Eacute; por isto que sou um entusiasta do Rails. Mesmo quando o framework não pode fazer algo, é muito fácil implementar.</p>
+</div>
+
+
+    </article>
   
     
     
@@ -662,144 +752,6 @@ Se alguém tiver uma solução melhor que esta, por favor se pronuncie.</p>
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2007/04/17/validates-personalisados/">Mensagens personalizadas com validates</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-04-17T00:00:00-03:00" pubdate data-updated="true">17 de Abril de 2007</time>
-        
-        <a rel="bookmark" href="/2007/04/17/validates-personalisados/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><center><img src="http://old.nomedojogo.com/wp-content/uploads/2007/04/windowslivewritervalidatespersonalisados-971dcustom-springs131.jpg" height="150" width="160" /></center>
-
-
-<p>Um problema que temos com os validates é que ele insiste em colocar o nome do campo na frente da mensagem, mesmo quando personalizamos ela usando o :message.
-[source:ruby]validates_presence_of :title,
-:message =&gt; &#8220;O campo &#8216;Título&#8217; deve ser preenchido&#8221;[/source]
-Na nossa view ficaria assim:</p>
-
-<ul>
-    <li>Title O campo &#8216;Título&#8217; deve ser preenchido</li>
-</ul>
-
-
-<p>Como resolver isto?</p>
-
-<p>Crie um arquivo .rb qualquer dentro da pasta lib com o seguinte conteúdo:
-[source:ruby]module ActiveRecord</p>
-
-<pre><code>class Errors
-    def add(attribute, msg = @@default_error_messages[:invalid])
-        if replace_message?(msg)
-            msg = replace_message(attribute, msg)
-            attribute = :base
-        end
-
-        @errors[attribute.to_s] = [] if @errors[attribute.to_s].nil?
-        @errors[attribute.to_s] &amp;lt;&amp;lt; msg
-    end
-
-    # true se a mensagem for alterável
-
-    def replace_message?(msg)
-        (msg =~ /{?}/) || (msg.starts_with?"!")
-    end
-
-    # muda a mensagem
-
-    def replace_message(attr, msg)
-
-        # se mensagem veio com {?}, agrega o nome do campo no meio do texto
-
-        if msg =~ /{?}/
-            msg.gsub(/{?}/, attr.to_s.humanize)
-        elsif msg.starts_with?("!")              # se tiver ! no começo, remove
-            msg.from(1)
-        else
-            msg
-        end
-    end
-
-    def add_on_blank(attributes, msg = @@default_error_messages[:blank])
-        for attr in [attributes].flatten
-            value = @base.respond_to?(attr.to_s) ? @base.send(attr.to_s) : @base[attr.to_s]
-
-            # se mensagem veio com {?}, agrega o nome do campo no meio do texto
-
-            if replace_message?(msg)
-                add(:base, replace_message(attr, msg)) if value.blank?
-            else
-                add(attr, msg) if value.blank? # fluxo normal
-            end
-        end
-    end
-end
-</code></pre>
-
-<p>end[/source]
-Não vou entrar em detalhes sobre o que o código faz (cabe a você analisar), mas basicamente eu verifico se o texto passado no :message possui:</p>
-
-<ol>
-    <li>{?} em algum lugar do texto.</li>
-    <li>Ou começa com ! (exclamação)</li>
-</ol>
-
-
-<p>No primeiro caso, simplesmente subistituimos a string &#8220;{?}&#8221; pelo nome da coluna. O que nos permite criar algo assim: &#8220;O campo &#8216;{?}&#8217; deve ser preenchido&#8221;.</p>
-
-<p>No segundo caso, o código verifica se a mensagem começa com o símbolo de exclamação (!). Se sim, deixa a mensagem exatamente como está, ignorando completamente o nome da coluna.</p>
-
-<p>Sendo assim, o código dado como exemplo acima poderia ficar assim:
-[source:ruby]validates_presence_of :title,
-:message =&gt; &#8221;<strong>!</strong>O campo &#8216;Título&#8217; deve ser preenchido&#8221;[/source]
-E o resultado na sua página seria:</p>
-
-<ul>
-    <li>O campo &#8216;Título&#8217; deve ser preenchido</li>
-</ul>
-
-
-<p>Este é apenas um exemplo de como podemos alterar o Rails de forma simples para nossas necessidades.</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/79/">&larr; Antigos</a>
@@ -817,6 +769,10 @@ E o resultado na sua página seria:</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/05/heroku-add-ons-catalog/">Heroku Add-ons Catalog</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
       </li>
     
@@ -830,10 +786,6 @@ E o resultado na sua página seria:</p>
     
       <li class="post">
         <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
       </li>
     
   </ul>

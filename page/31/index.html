@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Para melhorar a performance do Rails as páginas de template serão armazenadas em cache automaticamente em ambiente de produção. Em outras palavras, &hellip;">
+  <meta name="description" content="Como alguns já viram no último podcast eu costumo defender muito os projetos e sistemas que gosto. O GitHub pode não ter a importancia que o &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,79 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/08/05/porque-eu-defendo-o-shoulda/">Porque eu defendo o Shoulda</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-08-05T00:00:00-03:00" pubdate data-updated="true"> 5 de Agosto de 2008</time>
+        
+        <a rel="bookmark" href="/2008/08/05/porque-eu-defendo-o-shoulda/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>Como alguns já viram no último <a href="http://www.nomedojogo.com/2008/07/29/rails-podcast-brasil-episodio-25/">podcast</a> eu costumo defender muito os projetos e sistemas que gosto. O <a href="http://github.com/">GitHub</a> pode não ter a importancia que o <a href="http://rubyforge.org/">RubyForge</a> &#8220;teve&#8221; para a comunidade Ruby no mundo, mas acredito seriamente no valor deste projeto e aposto minhas fichas nele.</p>
+
+<p>O fato dele ser um projeto comercial só aumenta ainda mais minha confiança, porque ele é um projeto opensource-like com a diferença de ser mantido não somente pela boa vontade dos desenvolvedores, mas sim por dinheiro, e isto é muito bom porque estimula a &#8220;boa vontade&#8221;, se é que vocês me entendem.</p>
+
+<p>Além disso o GitHub evoluiu os projetos opensource além do que o RubyForge conseguiu, tornou muito mais fácil contribuir para um projeto, criar forks, entrar em contato com desenvolvedores, e tudo de uma forma que estimula o social.</p>
+
+<p>Outro projeto que muito me agrada é o <a href="http://www.thoughtbot.com/projects/shoulda">Shoulda</a>, e vou explicar o motivo disto. O Sholda diferente do <a href="http://rspec.info/">RSpec</a>, por exemplo, foi feito para o Rails (embora você possa usá-lo em outros tipos de projetos isto não faz muito sentido) e isto dá ao projeto uma liberdade que não pode ser aplicada ao RSPec que precisa ser mais genérico.</p>
+
+<p>Claro que existem iniciativas semelhantes aplicadas ao RSpec, mas nenhuma é tão madura.</p>
+
+<p>Outra vantagem é que o Shoulda não precisa alterar nada em seu projeto Rails, já que ele trabalha em cima do <a href="http://www.ruby-doc.org/stdlib/libdoc/test/unit/rdoc/classes/Test/Unit.html">Test::Unit</a> que é o framework padrão para testes no Rails. E se você já costuma criar testes neste framework, a curva de aprendizado é perto de zero.</p>
+
+<p>E agora a terceira grande vantagem é a possibilidade de criar macros para testes. Funciona mais ou menos assim: Você cria um plugin que adiciona uma certa funcionalidade a um objeto do <strong>ActiveRecord</strong>, então você cria uma macro de testes para isto e a coloca dentro de uma pasta <strong>shoulda_macros</strong> na raiz do seu gem ou plugin. Assim, os usuários do seu projeto só precisam incluir uma chamada de método nos testes dos modelos que implementarem estas novas funcionalidades e tudo estará seguro.</p>
+
+<p>Por exemplo, se você estiver usando o plugin <a href="http://www.thoughtbot.com/projects/paperclip">Paperclip</a>, basta adicionar a seguinte linha no arquivo de teste do modelo para garantir que tudo vai funcionar bem:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_unit_test"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">UserTest<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> Test::Unit::TestCase</span></span></span>
+  should_have_attached_file <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>avatar</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span>
+</span></pre>
+
+
+<p>Sou tão fõ do projeto que mantenho, junto com o Dr. Nic, os <a href="http://github.com/drnic/ruby-shoulda-tmbundle/tree/master">Bundles do TextMate</a> para o Shoulda e posso garantir que ele está completo. Já enviei alguns patchs para o projeto principal também.</p>
+
+<p>Se tem coisas que eu não sou é preciosista ou saudosita. Sou adépto ao novo, e quando considero que algo novo é melhor do que o antigo não tenho medo de mudar. Não é porque algo me serviu durante muitos anos que devo continuar usando-o o resto da vida, se fosse assim eu não teria comprado um travesseiro novo, nem um macbook, nem uma TV nova, nem um&#8230;</p>
+</div>
+
+
+    </article>
   
     
     
@@ -674,85 +747,6 @@
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/07/28/edge-rails-usando-a-opcao-accessible-para-fazer-atribuicoes-em-massa-no-activerecord/">Edge Rails: Usando a opção :accessible para fazer atribuições em massa no ActiveRecord</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-07-28T00:00:00-03:00" pubdate data-updated="true">28 de Julho de 2008</time>
-        
-        <a rel="bookmark" href="/2008/07/28/edge-rails-usando-a-opcao-accessible-para-fazer-atribuicoes-em-massa-no-activerecord/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>Todos os métodos de associações do <strong>ActiveRecord</strong> (<strong>belongs_to</strong>, <strong>has_one</strong>, <strong>has_many</strong> e <strong>has_and_belongs_to_many</strong>) receberam um nova opção que permite a atribuição de valores para suas associações usando hashes aninhados.</p>
-
-<p>Vamos pegar como exemplo um modelo chamado <strong>Post</strong>:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Post<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
-  <span class="support support_function support_function_activerecord support_function_activerecord_rails">belongs_to</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>author</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>accessible</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">true</span>
-  <span class="support support_function support_function_activerecord support_function_activerecord_rails">has_many</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>comments</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>accessible</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">true</span>
-</span><span class="keyword keyword_control keyword_control_ruby">end</span>
-</span></pre>
-
-
-<p>Note que logo após associar este modelo com <strong>author</strong> e <strong>comments</strong> estou definindo a nova opção <strong>:accessible</strong> como <strong>true</strong> (verdadeiro). Com esta opção &#8220;ligada&#8221; eu posso fazer algo assim:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">post <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Post</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>create<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block">
-</span>  <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>title</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Accessible Attributes<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
-  <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>author</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>name</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>David Dollar<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
-  <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>comments</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span>
-    <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>body</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>First Post!<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
-    <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>body</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Nested Hashes are great!<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
-  <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span>
-<span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
-
-
-<p>Veja que estou criando todas as associações usando apenas um único <strong>hash</strong> com sub-níveis para cada associação. Isto não é possível de forma automática na versão atual do Rails.</p>
-
-<p>Eu também poderia fazer algo assim, para adicionar um novo comentário:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">post<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>comments <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_augmented keyword_operator_assignment_augmented_ruby">&lt;&lt;</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>body</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Another Comment<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span></span></pre>
-
-
-<p>Esta nova funcionalidade pode parecer um pouco estranha ou insignificante, mas a grande vantagem por trás dela será vista no próximo artigo desta série.</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/32/">&larr; Antigos</a>
@@ -770,6 +764,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/05/heroku-add-ons-catalog/">Heroku Add-ons Catalog</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
       </li>
     
@@ -783,10 +781,6 @@
     
       <li class="post">
         <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
       </li>
     
   </ul>

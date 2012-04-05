@@ -9,8 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Apenas uma atualização do script deste post. # ~.autotest
-module Autotest::Growl FAIL = -1 PENDING = 0 SUCCESS = 1 FAIL_IMAGE = "/Users/carlosbrando &hellip;">
+  <meta name="description" content="O método json_escape funciona como o html_escape. É muito útil para quem precisa exibir strings JSON em uma página HTML, como no caso de uma &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,6 +99,70 @@ module Autotest::Growl FAIL = -1 PENDING = 0 SUCCESS = 1 FAIL_IMAGE = "/Users/ca
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/04/28/edge-rails-json-escape/">Edge Rails: json escape</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-04-28T00:00:00-03:00" pubdate data-updated="true">28 de Abril de 2008</time>
+        
+        <a rel="bookmark" href="/2008/04/28/edge-rails-json-escape/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>O método <code>json_escape</code> funciona como o <code>html_escape</code>. É muito útil para quem precisa exibir strings JSON em uma página HTML, como no caso de uma documentação, por exemplo.</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">puts json_escape<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>is a &gt; 0 &amp; a &lt; 10?<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; is a \u003E 0 \u0026 a \u003C 10?
+</span></span></pre>
+
+
+<p>Também podemos usar o atalho <code>j</code> no ERB:</p>
+
+<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> j <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>person</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>to_json <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span></span></pre>
+
+
+<p>Se quiser que todo o código JSON seja &#8220;escapado&#8221; por padrão, incluía a seguinte linha no seu arquivo <code>environment.rb</code>:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">ActiveSupport</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>escape_html_entities_in_json <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_language constant_language_ruby">true</span></span></pre>
+
+</div>
+
+
+    </article>
   
     
     
@@ -801,68 +864,6 @@ search<span class="punctuation punctuation_section punctuation_section_function 
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/04/17/edge-rails-railslogger-railsroot-railsenv-e-railscache/">Edge Rails: Rails.logger, Rails.root, Rails.env e Rails.cache</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-04-17T00:00:00-03:00" pubdate data-updated="true">17 de Abril de 2008</time>
-        
-        <a rel="bookmark" href="/2008/04/17/edge-rails-railslogger-railsroot-railsenv-e-railscache/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>No Rails 2.1 ao invés de usarmos as constantes: <code>RAILS_DEFAULT_LOGGER</code>, <code>RAILS_ROOT</code>, <code>RAILS_ENV</code> e <code>RAILS_CACHE</code>. Usaremos os atalhos:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> RAILS_DEFAULT_LOGGER
-</span><span class="support support_class support_class_ruby">Rails</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>logger
-
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> RAILS_ROOT
-</span><span class="support support_class support_class_ruby">Rails</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>root
-
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> RAILS_ENV
-</span><span class="support support_class support_class_ruby">Rails</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>env
-
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> RAILS_CACHE
-</span><span class="support support_class support_class_ruby">Rails</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>cache</span></pre>
-
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/46/">&larr; Antigos</a>
@@ -880,6 +881,10 @@ search<span class="punctuation punctuation_section punctuation_section_function 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/05/heroku-add-ons-catalog/">Heroku Add-ons Catalog</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
       </li>
     
@@ -893,10 +898,6 @@ search<span class="punctuation punctuation_section punctuation_section_function 
     
       <li class="post">
         <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
       </li>
     
   </ul>

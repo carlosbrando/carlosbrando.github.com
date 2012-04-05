@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Ruby 101: Substrings in Ruby: Jeff Cohen ensina como recuperar trechos de uma string no Ruby. &Eacute; uma dica interessante, principalmente para &hellip;">
+  <meta name="description" content="Regra: Coloque sempre links para stylesheets e javascript dentro da tag HEAD do HTML. Não é que isto seja obrigatório, mas eu gosto de deixar as &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,89 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2007/08/19/ruby-on-rails-coloque-as-coisas-no-seu-devido-lugar/">Ruby on Rails: Coloque as coisas no seu devido lugar.</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-08-19T00:00:00-03:00" pubdate data-updated="true">19 de Agosto de 2007</time>
+        
+        <a rel="bookmark" href="/2007/08/19/ruby-on-rails-coloque-as-coisas-no-seu-devido-lugar/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/08/459207903-d5ce64f14a.jpg" style="border: 0px none " alt="459207903_d5ce64f14a" border="0" height="333" width="500" /> </p>
+
+
+<p>Regra: Coloque sempre links para stylesheets e javascript dentro da tag HEAD do HTML.</p>
+
+
+<p>Não é que isto seja obrigatório, mas eu gosto de deixar as coisas bonitas. O problema com Rails neste caso é que quando uso o método <strong>stylesheet_link_tag</strong> na página que estou desenvolvendo, quando ela for renderizada, o link do css&nbsp;ficará bem no meio da página por causa do <strong>yield</strong> da página de layout.</p>
+
+
+<p>Mas como tudo no Rails, existe uma solução muito simples para isto. Podemos usar o método <strong>content_for</strong>.</p>
+
+
+<p>Para fazer o teste, crie um view de layout com o seguinte código:</p>
+
+
+<p>[source:html]
+<html>
+    <head>
+        <%= yield :css %>
+    </head>
+    <body>
+        <%= yield %>
+    </body>
+</html>
+[/source]</p>
+<p>Veja que a página tem dois yield, sendo que o primeiro recebe um par&acirc;metro <strong>:css</strong>.</p>
+<p>Agora crie outra&nbsp;view da seguinte forma:</p>
+<p>[source:html]
+<% content_for :css do %>
+    <%= stylesheet_link_tag 'css_da_minha_pagina' %>
+<% end %>
+<h2>Minha Página</h2>
+[/source]</p>
+<p>Rode e veja como fica sua página. Pronto, tudo no seu devido lugar.</p>
+
+</div>
+
+
+    </article>
   
     
     
@@ -676,68 +759,6 @@ int bytes = 100.Megabytes() + 50.Kilobytes();
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2007/08/07/resumo-iron-ruby/">Resumão Iron Ruby</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-08-07T00:00:00-03:00" pubdate data-updated="true"> 7 de Agosto de 2007</time>
-        
-        <a rel="bookmark" href="/2007/08/07/resumo-iron-ruby/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><center><img src="http://farm2.static.flickr.com/1142/1038447324_ba03ffc1a6.jpg?v=0" /></center>
-
-
-<p>Uma primeira impressão sobre o <strong>IronRuby</strong>: <a href="http://weblogs.asp.net/scottgu/archive/2007/07/23/first-look-at-ironruby.aspx" title="http://weblogs.asp.net/scottgu/archive/2007/07/23/first-look-at-ironruby.aspx">http://weblogs.asp.net/scottgu/archive/2007/07/23/first-look-at-ironruby.aspx</a></p>
-
-<p>Neste post <strong>Scott Guthrie</strong> dá alguns exemplos com o <strong>IronRuby</strong>, inclusive criando um aplicativo <strong>Windows Forms</strong>.</p>
-
-<p>WPF Sample in IronRuby talking via <strong>C#</strong> to Wesabe: <a href="http://www.hanselman.com/blog/WPFSampleInIronRubyTalkingViaCToWesabe.aspx" title="http://www.hanselman.com/blog/WPFSampleInIronRubyTalkingViaCToWesabe.aspx">http://www.hanselman.com/blog/WPFSampleInIronRubyTalkingViaCToWesabe.aspx</a></p>
-
-<p>Outra primeira impressão sobre o <strong>IronRuby</strong>: <a href="http://www.iunknown.com/2007/07/a-first-look-at.html" title="http://www.iunknown.com/2007/07/a-first-look-at.html">http://www.iunknown.com/2007/07/a-first-look-at.html</a></p>
-
-<p>Desta vez na opinião de <strong>John Lam</strong>. Este foi o primeiro post a respeito do <strong>IronRuby</strong> que vi.</p>
-
-<p>Da mesma forma como acompanhamos o lançamento do <strong>JRuby</strong>, o <strong>IronRuby</strong> é algo importante para nossa comunidade e deve ser acompanhado de perto.</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/72/">&larr; Antigos</a>
@@ -755,6 +776,10 @@ int bytes = 100.Megabytes() + 50.Kilobytes();
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/05/heroku-add-ons-catalog/">Heroku Add-ons Catalog</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
       </li>
     
@@ -768,10 +793,6 @@ int bytes = 100.Megabytes() + 50.Kilobytes();
     
       <li class="post">
         <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
       </li>
     
   </ul>

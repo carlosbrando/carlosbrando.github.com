@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Já falei anteriormente sobre o novo recurso de internacionalização que teremos no Rails 2.2. Muita coisa está sendo feita para deixar esta &hellip;">
+  <meta name="description" content="Andei brincando muito com rotas nomeadas ultimamente. O problema é que eu precisa de uma forma bem rápida de testar se as rotas que eu estava criando &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,92 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/09/21/dica-testando-rotas-no-console/">Dica: Testando rotas no console</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-09-21T00:00:00-03:00" pubdate data-updated="true">21 de Setembro de 2008</time>
+        
+        <a rel="bookmark" href="/2008/09/21/dica-testando-rotas-no-console/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>Andei brincando muito com rotas nomeadas ultimamente. O problema é que eu precisa de uma forma bem rápida de testar se as rotas que eu estava criando estavam realmente funcionando, enquanto eu editava o arquivo <strong>route.rb</strong>. E a melhor forma que encontrei foi testar as rotas no console do Rails.</p>
+
+<p>Para isto bastou executar dois trechos de código antes de começar com a brincadeira:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">$ <span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">/</span>script<span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">/</span>console
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Loading development environment (Rails 2.1.1)
+</span>
+<span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> <span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">include</span> <span class="support support_class support_class_ruby">ActionController</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="variable variable_other variable_other_constant variable_other_constant_ruby">UrlWriter</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; Object
+</span>
+<span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> default_url_options<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>host</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>example.com<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "example.com"
+</span></span></pre>
+
+
+<p>Agora é só testar as rotas:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> user_url<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "http://example.com/users/1"
+</span>
+<span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> user_photos_url<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "http://example.com/users/1/photos"
+</span></span></pre>
+
+
+<p>Outro problema é que quando o arquivo <strong>route.rb</strong> é alterado, isto não reflete no console. Para ter acesso as últimas modificações, toda vez que houver uma atualização você terá de executar:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> reload!
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Reloading...
+</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; true</span></span></pre>
+
+
+<p>Boa diversão!</p>
+
+<h2>Atualização</h2>
+
+
+<p>O <a href="http://simplesideias.com.br/">Nando Vieira</a> e o <a href="http://www.araecriacoes.com.br/">Daniel Lopes</a> deram uma dica que eu não conhecia, que aliás torna muito mais fácil fazer a mesma coisa. Veja os comentários abaixo.</p>
+</div>
+
+
+    </article>
   
     
     
@@ -721,65 +807,6 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/09/12/edge-rails-fileatomic_write-copia-as-permissoes-do-arquivo-original/">Edge Rails: File.atomic_write copia as permissões do arquivo original</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-09-12T00:00:00-03:00" pubdate data-updated="true">12 de Setembro de 2008</time>
-        
-        <a rel="bookmark" href="/2008/09/12/edge-rails-fileatomic_write-copia-as-permissoes-do-arquivo-original/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>Talvez alguns não conheçam o método <strong>File.atomic_write</strong>. Ele serve para escrever arquivos de forma atômica. Isto pode ser muito útil em situações onde você não quer que outros processos ou threads vejam um arquivo escrito pela metade.</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">File</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>atomic_write<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>important.file<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">file</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
-  file<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>write<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>hello<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-<span class="keyword keyword_control keyword_control_ruby">end</span>
-</span></pre>
-
-
-<p>O que este método faz é criar um arquivo temporário enquanto você escreve nele, e quando terminar ele substitui o arquivo antigo pelo novo.</p>
-
-<p>A novidade no Rails 2.2 é que agora este método copia todas as permissões do arquivo original antes de substitui-lo.</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/26/">&larr; Antigos</a>
@@ -797,6 +824,10 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/05/heroku-add-ons-catalog/">Heroku Add-ons Catalog</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
       </li>
     
@@ -810,10 +841,6 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
     
       <li class="post">
         <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
       </li>
     
   </ul>

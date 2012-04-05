@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Criar migrations ficou muito mais sexy depois do lançamento do Rails 2.0, mas alterar uma tabela usando migrations continuou sendo da forma antiga, &hellip;">
+  <meta name="description" content="Interessante como uma coisa simples pode mobilizar as pessoas. Tudo começou com um simples script para exibir uma janela com o retorno dos testes no &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,83 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/05/13/autotest-notification-gem-pode-ajudar/">Autotest Notification Gem - Pode ajudar?</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-05-13T00:00:00-03:00" pubdate data-updated="true">13 de Maio de 2008</time>
+        
+        <a rel="bookmark" href="/2008/05/13/autotest-notification-gem-pode-ajudar/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>Interessante como uma coisa simples pode mobilizar as pessoas. Tudo começou com um simples <a href="http://www.nomedojogo.com/2008/02/28/autotest-com-growl-no-leopard/">script</a> para exibir uma janela com o retorno dos testes no <strong>Mac</strong> usando o <strong>Growl</strong>.</p>
+
+<p>Depois o <a href="http://alexandredasilva.wordpress.com/">Alexandre</a> adaptou o script para também funcionar no <strong>Linux</strong> usando o <strong>LibNotify</strong>.</p>
+
+<p>Resolvemos então que seria legal ter este script em algum lugar mais acessível, onde pudesse ser alterado e melhorado por qualquer pessoa de uma forma mais simples. Joguei tudo no GitHub.</p>
+
+<p>Numa noite de insônia eu resolvi testar minhas habilidades criando um gem e criei o Autotest Notification. Apaguei o repositório antigo e criei um novo no GitHub. Agora tínhamos um gem de fácil instalação e com apenas um comando ele já criava os ganchos para o <strong>ZenTest</strong>, e funcionava muito bem no <strong>Linux</strong> e no <strong>Mac</strong>.</p>
+
+<p>Foi aí que o <a href="http://www.urubatan.info/">Rodrigo Urubatan</a> resolveu adicionar suporte ao <strong>Windows</strong> (com <strong>cygwin</strong>) no gem. Neste momento o gem já suportava os principais sistemas operacionais: <strong>Mac, Linux e Windows</strong>.</p>
+
+<p>Algumas hora depois o <a href="http://tas.milk-it.net/">Carlos Júnior</a> envia um patch adicionando suporte ao <strong>KDE</strong> (kdialog). E mais tarde (madrugada) aproveitei que o <a href="http://blog.impactmedia.com.br/">Davis Cabral</a> também estava com insônia para me ajudar com alguns testes. Fui dormir e quando acordei o Davis havia adicionado suporte nativo ao <strong>Windows</strong> (sem precisar do cygwin) e também suporte ao <strong>Gnome</strong> (zenity).</p>
+
+<p>Resumindo: Eu criei apenas um script simples para resolver um problema que eu tinha e que só funcionava no Mac com o Growl. Agora temos um gem que coloca tudo para funcionar sem precisar ter um conhecimento profundo do sistema operacional que funciona no <strong>Mac, Linux (com suporte extra para o KDE e Gnome) e Windows (com e sem cygwin)</strong>.</p>
+
+<p>Foi muito divertido!</p>
+
+<p>Quer entrar na brincadeira? Para o gem ficar completo, precisamos apenas de alguma documentação. Algo como um passo a passo de como instalar as dependências em cada sistema operacional. Instalar o gem é fácil, mas as dependências&#8230;</p>
+
+<p>O GitHub permite criar um wiki, as páginas permitem uso de imagens e tudo.</p>
+
+<p>E claro, testes&#8230; gostaria de um feedback dos que estão usando o gem. Dificuldades para colocar para rodar, etc.</p>
+
+<p>Para colaborar ou usar: <a href="http://github.com/carlosbrando/autotest-notification/">http://github.com/carlosbrando/autotest-notification/</a></p>
+
+<h3>Atualização</h3>
+
+
+<p>O <span id="profile_name"><a href="http://blog.improveit.com.br/">Marcos Tapajós</a> acabou de liberar uma série de testes para o gem.
+</span></p>
+</div>
+
+
+    </article>
   
     
     
@@ -694,70 +771,6 @@
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/05/08/edge-rails-scriptdbconsole/">Edge Rails: script/dbconsole</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-05-08T00:00:00-03:00" pubdate data-updated="true"> 8 de Maio de 2008</time>
-        
-        <a rel="bookmark" href="/2008/05/08/edge-rails-scriptdbconsole/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>Esta é quentinha. Acabou de sair&#8230;</p>
-
-<p>No Rails 2.1 teremos mais um script para facilitar nossa vida:</p>
-
-<pre class="textmate-source"><span class="source source_shell">script/dbconsole</span></pre>
-
-
-<p>Ele faz a mesma coisa que o script/console mas para o banco de dados. Em outras palavras ele entra no cliente de linha de comandos do banco de dados. Veja o resultado do meu teste:</p>
-
-<p><img class="aligncenter size-full wp-image-709" title="console" src="http://old.nomedojogo.com/wp-content/uploads/2008/05/console.png" alt="" /></p>
-
-<p>Como você pode ver estou usando o sqlite.</p>
-
-<p>Analisando o código, aparentemente isto só vai funcionar para bancos de dados <strong>mysql</strong>, <strong>postgresql</strong>, <strong>sqlite</strong>(3). Quando um banco diferente estiver configurado no arquivo <strong><em>database.yml</em></strong> e este comando for executado, a mensagem <em>&#8220;not supported for this database type&#8221;</em> será exibida no terminal.</p>
-
-<p>Particularmente eu gostei muito disto&#8230;</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/43/">&larr; Antigos</a>
@@ -775,6 +788,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/05/heroku-add-ons-catalog/">Heroku Add-ons Catalog</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
       </li>
     
@@ -788,10 +805,6 @@
     
       <li class="post">
         <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
       </li>
     
   </ul>

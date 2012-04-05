@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Algumas vezes você assina o feed de um blog e de repente se depara com uma série de posts que já foram lidos aparecendo como se fossem novos no seu &hellip;">
+  <meta name="description" content="Talvez alguns não conheçam o método File.atomic_write. Ele serve para escrever arquivos de forma atômica. Isto pode ser muito útil em situações onde &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,65 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/09/12/edge-rails-fileatomic_write-copia-as-permissoes-do-arquivo-original/">Edge Rails: File.atomic_write copia as permissões do arquivo original</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-09-12T00:00:00-03:00" pubdate data-updated="true">12 de Setembro de 2008</time>
+        
+        <a rel="bookmark" href="/2008/09/12/edge-rails-fileatomic_write-copia-as-permissoes-do-arquivo-original/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>Talvez alguns não conheçam o método <strong>File.atomic_write</strong>. Ele serve para escrever arquivos de forma atômica. Isto pode ser muito útil em situações onde você não quer que outros processos ou threads vejam um arquivo escrito pela metade.</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">File</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>atomic_write<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>important.file<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">file</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+  file<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>write<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>hello<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+</span></pre>
+
+
+<p>O que este método faz é criar um arquivo temporário enquanto você escreve nele, e quando terminar ele substitui o arquivo antigo pelo novo.</p>
+
+<p>A novidade no Rails 2.2 é que agora este método copia todas as permissões do arquivo original antes de substitui-lo.</p>
+</div>
+
+
+    </article>
   
     
     
@@ -795,60 +854,6 @@ fim
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/09/05/edge-rails-fixtures_path/">Edge Rails: FIXTURES_PATH</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-09-05T00:00:00-03:00" pubdate data-updated="true"> 5 de Setembro de 2008</time>
-        
-        <a rel="bookmark" href="/2008/09/05/edge-rails-fixtures_path/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>As tarefas <strong>rake db:fixtures:load</strong> e <strong>rake db:fixtures:identify</strong> receberam um novo parâmetro opcional: <strong>FIXTURES_PATH</strong>.</p>
-
-<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">rake db:fixtures:load FIXTURES_PATH=spec/fixtures</span></span></pre>
-
-
-<p>Desta forma você pode especificar um caminho alternativo para suas fixtures (por exemplo: spec/fixtures).</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/27/">&larr; Antigos</a>
@@ -866,6 +871,10 @@ fim
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/05/heroku-add-ons-catalog/">Heroku Add-ons Catalog</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
       </li>
     
@@ -879,10 +888,6 @@ fim
     
       <li class="post">
         <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
       </li>
     
   </ul>

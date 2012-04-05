@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Já falei sobre isto no episódio 4 do Rails Podcast, e estou usando extensivamente os Bundles do Rails 2.0 no TextMate. E posso garantir que valem a &hellip;">
+  <meta name="description" content="Olha aí uma alteração legal! Até agora podíamos usar apenas três operadores para procurar dados usando o método find do Active Record: :first, :all e &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,66 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/03/17/edge-rails-active-record-agora-aceita-findlast/">Edge Rails: Active Record agora aceita find(:last)</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-03-17T00:00:00-03:00" pubdate data-updated="true">17 de Março de 2008</time>
+        
+        <a rel="bookmark" href="/2008/03/17/edge-rails-active-record-agora-aceita-findlast/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>Olha aí uma alteração legal!</p>
+
+<p>Até agora podíamos usar apenas três operadores para procurar dados usando o método <code>find</code> do Active Record: <code>:first</code>, <code>:all</code> e o próprio <code>id</code> do objeto (neste caso não usamos um operador especifico, mas a falta de um significa que estamos passando o <code>id</code>).</p>
+
+<p>E quando queríamos o último registro inserido no banco? Tínhamos de usar a opção <code>:conditions</code> para conseguir isto. Agora ficou mais simples, porque teremos um quarto operador o <code>:last</code>. Veja alguns exemplos:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Person</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>last</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+
+<span class="support support_class support_class_ruby">Person</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>last</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>conditions</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>user_name = ?<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> user_name<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+
+<span class="support support_class support_class_ruby">Person</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>last</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>order</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>created_on DESC<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>offset</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">5</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
+
+</div>
+
+
+    </article>
   
     
     
@@ -644,57 +704,6 @@ O resultado final você pode ver <a href="http://www.backpackit.com/images/bp-ca
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/03/10/gitnub-veja-as-alteracoes-em-seu-repositorio-git/">GitNub - Veja as alterações em seu repositório Git</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-03-10T00:00:00-03:00" pubdate data-updated="true">10 de Março de 2008</time>
-        
-        <a rel="bookmark" href="/2008/03/10/gitnub-veja-as-alteracoes-em-seu-repositorio-git/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>O <a href="http://github.com/Caged/gitnub/tree/master">GitNub</a> é um projeto em RubyCocoa que permite navegar nos logs do Git através de uma interface gráfica. Não sei dizer com certeza, mas deve ser um dos primeiros projetos deste nível para o Git. Pena que só vai rodar em um Mac&#8230;</p>
-
-<p>Eu sei que tem bastante gente falando do Git por aí, muitos falando bem, outros apenas criticando&#8230; Mas, o que posso dizer é: teste você mesmo. Eu gastei uma hora assistindo o screencast do PeepCode sobre Git e posso dizer que gostei muito do que vi. E Hoje uso o Git em 100% dos meus projetos, mesmo para os que estão no Subversion uso Git com git-svn. E sou mais feliz do que quando usava o SVN.</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/52/">&larr; Antigos</a>
@@ -712,6 +721,10 @@ O resultado final você pode ver <a href="http://www.backpackit.com/images/bp-ca
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/05/heroku-add-ons-catalog/">Heroku Add-ons Catalog</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
       </li>
     
@@ -725,10 +738,6 @@ O resultado final você pode ver <a href="http://www.backpackit.com/images/bp-ca
     
       <li class="post">
         <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/10/18/grok-podcast-extra-o-que-voce-achou/">Grok Podcast Extra - O que você achou?</a>
       </li>
     
   </ul>
