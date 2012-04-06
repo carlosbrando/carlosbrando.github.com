@@ -9,8 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Imagine a seguinte situação: Uma tabela users com duas colunas, first_name e last_name. [source:ruby]
-class CreateUsers < ActiveRecord::Migration &hellip;">
+  <meta name="description" content="Antes de ir para o almoço na casa da sogra só uma dica rápida de um serviço legal que vi no grupo de discussão Rails-Br. O Herval Freire criou uma &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,6 +99,58 @@ class CreateUsers < ActiveRecord::Migration &hellip;">
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2007/09/16/dica-de-domingo-onde-mora-cada-programador-ruby-on-rails-no-brasil/">Dica de domingo: Onde mora cada programador Ruby on Rails no Brasil</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-09-16T00:00:00-03:00" pubdate data-updated="true">16 de Setembro de 2007</time>
+        
+        <a rel="bookmark" href="/2007/09/16/dica-de-domingo-onde-mora-cada-programador-ruby-on-rails-no-brasil/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p><img src="http://farm1.static.flickr.com/41/122476158_36c4644a63.jpg?v=0"> </p>
+
+
+<p> <p>Antes de ir para o almoço na casa da sogra só uma dica rápida de um <a href="http://www.mapservices.org/myguestmap/map/railsbr">serviço</a> legal que vi no grupo de discussão <a href="http://groups.google.com/group/rails-br/browse_thread/thread/3d1147a6d899cd9f?hl=pt-BR">Rails-Br</a>. O <a href="http://groups.google.com/groups/profile?enc_user=HSwQkhYAAAAfxS-l0LFiEPklxSLooDOao4cocwWvDVg2RHsu8f1bCg&amp;hl=pt-BR">Herval Freire</a> criou uma pagina com um google map onde todos os programadores Rails podem indicar onde moram. Para ver <a href="http://www.mapservices.org/myguestmap/map/railsbr">clique aqui</a>.</p> <p>Isto é bem legal. Podemos ter uma idéia da quantidade de programadores e onde a maioria se concentra.</p> <p>Seguindo uma dica do próprio desenvolvedor: </p> <blockquote> <p>Assim cada um coloca um marcador na cidade que mora (nao precisa ser em cima da casa, pra quem tem medo de sequestro ;-)), um link pro seu blog&#8230; e todos ficam sabendo quem sao todos os outros&#8230; </p></blockquote> <p>Um bom domingo para todos.</p></p>
+</div>
+
+
+    </article>
   
     
     
@@ -701,104 +752,6 @@ Que isso nos sirva como um grande aprendizado.</blockquote>
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2007/09/04/scrubyt-no-windows-no-tem-hash/">scRUBYt! no Windows não tem Hash</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-09-04T00:00:00-03:00" pubdate data-updated="true"> 4 de Setembro de 2007</time>
-        
-        <a rel="bookmark" href="/2007/09/04/scrubyt-no-windows-no-tem-hash/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>
-<center><img src="http://farm2.static.flickr.com/1108/1071869118_2a3a386c08.jpg?v=0"></center>
-<p></p>
-<p>O <a href="http://scrubyt.org/">scRUBYt!</a> é um gem muito útil para quem precisa recuperar dados à partir de uma página na web. Ele faz uso do <a href="http://code.whytheluckystiff.net/hpricot/">Hpricot</a> e do <a href="http://mechanize.rubyforge.org/mechanize/">Mechanize</a> e busca pelos dados usando um sistema de exemplos. Se estiver interessado em ver como funciona acesse o site oficial do projeto e veja os tutoriais.</p>
-<p>O problema é que a versão final (0.3.0) não funciona direito no Windows, pelo menos não sem uma série de configurações e gambiarras. A melhor versão para Windows é a versão 1.2.6, que obviamente não possui todas as funcionalidades da última versão.</p>
-<p>Brincando com a versão 1.2.6 uma das coisas que mais senti falta foi a possibilidade de converter o resultado de uma busca em um Hash. Nesta versão o máximo que podemos fazer é recuperar em XML ou em texto puro.</p>
-<p>Para resolver este problema resolvi fuçar pelo código da versão mais nova e encontrei um trecho de código que poderia ajudar. Mas não quero alterar diretamente o fonte do gem (não recomendo fazer isto), por isto montei a seguinte classe:</p>
-<p>[source:ruby]
-require &#8216;rubygems&#8217;
-require &#8216;scrubyt&#8217;
-
-module Scrubyt
-  class ResultDumper
-
-    def self.to_hash(pattern)
-      result = []
-      flat_hash_inner = lambda {|e, parts|
-        content = e.text ? REXML::Text.unnormalize(e.text) : &#8221;
-        if ((e.is_a? REXML::Element) && content != &#8221;)
-          if parts[e.local_name]
-            parts[e.local_name] = parts[e.local_name] + &#8220;,&#8221; + content
-          else
-            parts[e.local_name] = content
-          end
-        end
-        e.children.each {|c| flat_hash_inner.call(c, parts) if c.is_a? REXML::Element }
-        parts
-      }
-      to_xml(pattern).root.elements[&#8216;/root&#8217;].each {|e| result << flat_hash_inner.call(e, {}) }
-      result
-    end
-
-    def self.to_csv(pattern)
-      result = []
-      flat_csv_inner = lambda {|e, parts|
-        content = e.text || ''
-        parts << content if ((e.is_a? REXML::Element) && content != '')
-        e.children.each {|c| flat_hash_inner.call(c, parts) if c.is_a? REXML::Element }
-        parts
-      }
-      to_xml(pattern).root.elements['/root'].each {|e| result << flat_csv_inner.call(e, []) }
-      (result.map! {|a| a.join(',')}).join("\n")
-    end
-
-  end
-end
-[/source] </p>
-<p>Incluindo isto no projeto, podemos pegar o retorno da pesquisa em formato&nbsp;CVS ou em um Hash da mesma forma como fazemos com os métodos <strong>to_xml</strong> e <strong>to_text</strong>.</p>
-<p>Se você não entendeu nada deste post, dê uma olhada de leve no <a href="http://scrubyt.org/">scRUBYt!</a>, tenho certeza de que você vai gostar.</p>
-
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/70/">&larr; Antigos</a>
@@ -816,6 +769,10 @@ end
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/06/enviando-o-link-da-pagina-atual-por-e-mail/">Enviando o link da página atual por e-mail</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/05/heroku-add-ons-catalog/">Heroku Add-ons Catalog</a>
       </li>
     
@@ -829,10 +786,6 @@ end
     
       <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
   </ul>

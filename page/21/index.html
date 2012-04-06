@@ -9,7 +9,8 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Ao se criar um cookie existe uma opção esquecida por muita gente. A opção http_only faz com que o cookie somente seja acessível via HTTP, impedindo &hellip;">
+  <meta name="description" content="Quando uma exceção é dispara recebemos em nossa view uma mensagem semelhante a esta: NoMethodError in Administration/groups#show
+Showing app/views// &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +100,72 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/11/05/rails-22-caminho-completo-da-view-no-caso-de-uma-excecao/">Rails 2.2: Caminho completo da view no caso de uma exceção</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-11-05T00:00:00-02:00" pubdate data-updated="true"> 5 de Novembro de 2008</time>
+        
+        <a rel="bookmark" href="/2008/11/05/rails-22-caminho-completo-da-view-no-caso-de-uma-excecao/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>Quando uma exceção é dispara recebemos em nossa view uma mensagem semelhante a esta:</p>
+
+<pre class="textmate-source"><span class="text text_html text_html_basic">NoMethodError in Administration/groups#show
+Showing app/views//_list.erb where line ...
+</span></pre>
+
+
+<p>Quando na verdade deveríamos receber uma mensagem com o caminho completo do arquivo que disparou o erro, assim:</p>
+
+<pre class="textmate-source"><span class="text text_html text_html_basic">NoMethodError in Administration/groups#show
+Showing app/views/administration/reports/_list.erb where line ...
+</span></pre>
+
+
+<p>Este problema já está corrigido no Rails 2.2, facilitando nosso trabalho.</p>
+
+<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades do Rails 2.2 no e-book “<a href="../2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">Ruby on Rails - O que há de novo?</a>“.</em>
+
+</div>
+
+
+    </article>
   
     
     
@@ -783,62 +850,6 @@ comment <span class="keyword keyword_operator keyword_operator_assignment keywor
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/10/24/rails-22-release-candidate-1-released/">Rails 2.2 Release Candidate 1 Released</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-10-24T00:00:00-02:00" pubdate data-updated="true">24 de Outubro de 2008</time>
-        
-        <a rel="bookmark" href="/2008/10/24/rails-22-release-candidate-1-released/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>David Heinemeier Hansson anunciou no <a href="http://weblog.rubyonrails.org/2008/10/24/rails-2-2-rc1-i18n-thread-safety-docs-etag-last-modified">blog oficial</a> do Ruby on Rails o lançamento do primeiro Release Candidate do Rails 2.2.</p>
-
-<p>Para saber de todas as novidades você pode acessar a série <a href="http://www.nomedojogo.com/category/edge-rails/">Edge Rails</a>, publicada neste blog.</p>
-
-<p>Para instalar a versão 2.2 RC1 execute no terminal:</p>
-
-<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">gem install rails -s <span class="markup markup_underline markup_underline_link markup_underline_link_text">http://gems.rubyonrails.org</span> -v 2.2.0</span></span></pre>
-
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/22/">&larr; Antigos</a>
@@ -856,6 +867,10 @@ comment <span class="keyword keyword_operator keyword_operator_assignment keywor
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/06/enviando-o-link-da-pagina-atual-por-e-mail/">Enviando o link da página atual por e-mail</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/05/heroku-add-ons-catalog/">Heroku Add-ons Catalog</a>
       </li>
     
@@ -869,10 +884,6 @@ comment <span class="keyword keyword_operator keyword_operator_assignment keywor
     
       <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
   </ul>

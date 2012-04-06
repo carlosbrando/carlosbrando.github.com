@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Está virando moda gravar o podcast de madrugada. Esta ficando difícil conciliar os horários para a gravação! Neste episódio contamos as últimas &hellip;">
+  <meta name="description" content="O Carlos Júnior já escreveu sobre isto no blog da milk-it. Provavelmente teremos suporte a ETags no Rails 2.2. Eu disse provavelmente porque isto &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,95 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/08/15/edge-rails-melhorando-a-performance-usando-etags/">Edge Rails: Melhorando a performance usando ETags</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-08-15T00:00:00-03:00" pubdate data-updated="true">15 de Agosto de 2008</time>
+        
+        <a rel="bookmark" href="/2008/08/15/edge-rails-melhorando-a-performance-usando-etags/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>O Carlos Júnior já escreveu sobre isto no blog da <a href="http://tas.milk-it.net/carlos/novo-no-rails-edge-suporte-simples-a-conditional-get-etags/">milk-it</a>. Provavelmente teremos suporte a <strong>ETags</strong> no Rails 2.2. Eu disse provavelmente porque isto ainda não foi incluído no branch oficial do Rails, mas como é algo importante e está sendo feito pelo core team, é quase certo de que será.</p>
+
+<p>Antes de começar a falar sobre isto, deixa eu tentar explicar o que são <strong>ETags</strong> (Entity Tags). <strong>Etags</strong> seriam de uma forma grosseira identificadores associados a cada recurso para determinar se o arquivo que está no servidor é o mesmo que está no cache do browser. No caso, o recurso seria uma página em HTML, mas também poderia ser um XML ou JSON.</p>
+
+<p>Cabe ao servidor a responsabilidade de verificar se o recurso solicitado é igual dos dois lados. Caso o servidor confirme que o recurso armazenado no cache do browser do usuário é exatamente o mesmo que seria enviado de volta para ele, ao invés de devolver todo o conteúdo do recurso novamente ele apenas retorna um <a href="http://www.nomedojogo.com/2008/07/14/http-status-code-no-rails/">status</a> <strong>304</strong> (<strong>Not Modified</strong>) e o browser usará o que está em seu cache.</p>
+
+<p>Servidores Web como o <strong>Apache</strong> e o <strong>IIS</strong> já sabem fazer isto para página estáticas. Mas quando o conteúdo é dinâmico, como na maioria das páginas de um projeto Ruby on Rails, a responsabilidade é todo nossa.</p>
+
+<p>O objeto <strong>response</strong> ganhou dois novos métodos, o <strong>last_modified=</strong> e o <strong>etag=</strong> (note o sinal de igualdade &#8220;=&#8221;). Quando você atribuir valores a estes métodos eles serão repassados aos cabeçalhos <strong>HTTP_IF_MODIFIED_SINCE</strong> e <strong>HTTP_IF_NONE_MATCH</strong> respectivamente. Quando uma nova requisição (<strong>request</strong>) deste recurso for feita ela retornará com estes cabeçalhos permitindo que você possa comparar com o novo valor informado no <strong>response</strong> e decidir se quer enviar todo o conteúdo do recurso novamente ou apenas um status <strong>304</strong>.</p>
+
+<p>Vamos ao código (roubando o exemplo dado por <a href="http://ryandaigle.com/articles/2008/8/14/what-s-new-in-edge-rails-simpler-conditional-get-support-etags">Ryan Daigle</a> no seu blog):</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_controller"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">ArticlesController<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ApplicationController</span></span></span>
+  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">show</span></span>
+    <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>article</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Article</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>params<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>id</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">    <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> informado o identificador
+</span>    response<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>last_modified <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>article</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>published_at<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>utc
+    response<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>etag <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>article</span>
+
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">    <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> verificando se houve mudanças
+</span>    <span class="keyword keyword_control keyword_control_ruby">if</span> request<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>fresh?<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>response<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+      head <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>not_modified</span>
+    <span class="keyword keyword_control keyword_control_ruby">else</span>
+      <span class="support support_function support_function_actionpack support_function_actionpack_rails">respond_to</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">wants</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">        <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> retornando conteúdo normalmente
+</span>      <span class="keyword keyword_control keyword_control_ruby">end</span>
+    <span class="keyword keyword_control keyword_control_ruby">end</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+<p>Note que estou atribuindo valores para <strong>response.last_modified</strong> e <strong>response.etag</strong>, e logo em seguinda usando o método <strong>request.fresh?(response)</strong> para determinar se houve alguma mudança ou não. Caso os dois cabeçalhos continuem iguais eu apenas retorno um status <strong>304</strong> e o browser do usuário usará o conteúdo que está armazenado no seu cache.</p>
+
+<p>Quanto ao método <strong>etag</strong>, também podemos passar um <strong>array</strong> se for o caso:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">response<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>etag <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>article</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> current_user<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span></span></pre>
+
+
+<p>A forma como foi implementado isto no Rails está causando um certo desconforto em muita gente e várias outras formas foram sugeridas pela comunidade, então possivelmente isto pode mudar antes do lançamento da versão 2.2.</p>
+
+<p>Veja algumas sugestões dadas: <a href="http://pastie.org/252869">in_modified_scope</a> e <a href="http://pastie.org/253302">with_etag_cache</a>.</p>
+</div>
+
+
+    </article>
   
     
     
@@ -705,102 +794,6 @@ Accept: text/x-dvi; q=.8; mxb=100000; mxt=5.0, text/x-c</code></p>
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/08/06/rails-podcast-brasil-episodio-26/">Rails Podcast Brasil - Episódio 26</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-08-06T00:00:00-03:00" pubdate data-updated="true"> 6 de Agosto de 2008</time>
-        
-        <a rel="bookmark" href="/2008/08/06/rails-podcast-brasil-episodio-26/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p><img class="alignnone size-full wp-image-1043" title="552926523_9fb50d67e2" src="http://old.nomedojogo.com/wp-content/uploads/2008/08/552926523_9fb50d67e2.jpg" alt="" /></p>
-
-<p>Episódio novo gravado às 2 da manhõ de hoje!</p>
-
-<p>Pergunta: Você acha o Rails Podcast Brasil grande demais? Na sua opinião ele deveria ser menor? O que você acharia se um episódio fosse dividido em pedaços de 15 minutos (3 arquivos para fechar um episódio de 45 minutos)? Algumas pessoas estão reclamando do tempo de duração do podcast, mas achei melhor levar esta dúvida para vocês. Comentem por favor&#8230;</p>
-
-<p>Neste episódio falamos mais um pouco sobre os preparativos para o Rails Summit Latin America, falamos sobre a nova onda de procurar emprego com blogs, comentamos sobre o Prawn que parece ser a nova alternativa para gerar PDF a partir de código Ruby. Além disso também falamos de novos projetos como o HTTParty, a revista &#8220;The Rubyist&#8221;, novos livros, Rails no Windows e para fechar nossa opinião sobre Erlang.</p>
-
-<p>Para baixar o episódio <a href="http://download.podcast.rubyonrails.pro.br/RailsPodcastBrasil_026.mp3">clique aqui</a>.</p>
-
-<p>Para fazer isto automaticamente via iTunes (e similares) use este endereço: <a href="http://podcast.rubyonrails.pro.br/rss">http://podcast.rubyonrails.pro.br/rss</a></p>
-
-<h3>Neste episódio</h3>
-
-
-<ul>
-    <li><a href="http://www.akitaonrails.com/2008/8/1/largada-para-o-maior-evento-de-rails-da-am-rica-latina">Largada Para O Maior Evento De Rails Da América Latina!</a></li>
-    <li><a href="http://www.akitaonrails.com/2008/8/5/ruby-on-rails-em-produ-o-na-locaweb">Ruby on Rails na Locaweb!</a></li>
-    <li><a href="http://blog.egenial.com.br/?p=164">Novidades Treina TOM, FREE</a></li>
-    <li><a href="http://blog.brasigo.com.br/2008/07/17/no-ar-brasigo-beta/">No ar, Brasigo beta :)</a></li>
-    <li><a href="http://www.akitaonrails.com/2008/8/4/brazilian-open-source-rails-projects">Brazilian Open Source Rails Projects</a></li>
-    <li><a href="http://mergulhao.info/2008/7/31/procuro-empresa-para-me-contratar">Dr Nic for hire e Sylvestre Mergulhão</a></li>
-    <li><a href="http://www.railsinside.com/elsewhere/62-open-source-rails-app-repository.html">Open Source Rails: An Index of Open Sourced Rails Apps</a></li>
-    <li><a href="http://www.rubyinside.com/prawn-ruby-pdf-library-987.html">Prawn: The Pure Ruby PDF Generation Library</a></li>
-    <li><a href="http://www.rubyinside.com/httparty-web-api-rest-service-consumption-from-ruby-class-981.html">HTTParty: Quick Web Service Consumption From Any Ruby Class</a></li>
-    <li><a href="http://peepcode.com/products/rails-on-facebook">Rails on Facebook</a></li>
-    <li><a href="http://rubylearning.com/blog/2008/07/31/best-of-rubylearning-posts-for-ruby-beginners/">Best of RubyLearning Posts for Ruby Beginners</a></li>
-    <li><a href="http://www.rubyinside.com/the-rubyist-magazine-first-issue-released-983.html">&#8220;The Rubyist&#8221; Ruby Magazine Launches</a></li>
-    <li><a href="http://blog.hungrymachine.com/2008/8/6/ruby-and-multi-threaded-mysql-mri-vs-jruby-jdbc-vs-dataobjects-mysql">MRI Ruby + MySQL + Threads == Stop the worldÂ JRuby doesnÂt</a></li>
-    <li><a href="http://antoniocangiano.com/2008/08/05/ruby-on-rails-for-microsoft-developers-available-for-pre-order/">Ruby on Rails for Microsoft Developers available for pre-order on Amazon.com</a></li>
-    <li><a href="http://www.akitaonrails.com/2008/7/29/testando-rails-no-iis-6-com-fastcgi">Testando Rails No IIS 6 Com FastCGI</a></li>
-    <li><a href="http://www.sapphiresteel.com/The-Little-Book-Of-Ruby-in">The Little Book Of Ruby Â in Brazilian Portuguese</a></li>
-    <li><a href="http://www.codethinked.com/category/IronRuby-via-C-Series.aspx">Learning Ruby via IronRuby and C# Part 6</a></li>
-    <li><a href="http://www.wagnerandrade.com/blog/2008/08/textmate-theme-github/">Textmate Theme: Github</a></li>
-    <li><a href="http://github.com/blog/128-let-there-be-renaming">Let There Be Renaming</a></li>
-    <li><a href="http://blogs.sun.com/arungupta/entry/jruby_on_glassfish_v2_screencast">JRuby on GlassFish v2 Â screencast from community</a></li>
-    <li><a href="http://blog.areacriacoes.com.br/2008/7/30/rails-mate-nova-vers-o">Rails Mate nova versão</a></li>
-    <li><a href="http://railspikes.com/2008/7/29/functional-loops-in-ruby-each-map-inject-select-and-for">Functional programming and looping</a></li>
-    <li><a href="http://simplesideias.com.br/textmate-cheat-sheet/">Textmate cheat sheet</a></li>
-    <li><a href="http://alexbartlow.net/2008/07/actsasencrypted.html">acts<em>as</em>encrypted</a></li>
-    <li><a href="http://rubypond.com/articles/2008/07/16/sexy-forms-in-rails/">Sexy Forms in Rails</a></li>
-    <li><a href="http://blog.mmediasys.com/2008/08/04/problems-with-rubygems-find-here-some-handy-tips/">Problems with RubyGems? Find here some handy tips</a></li>
-    <li><a href="http://www.nomedojogo.com/2008/08/04/edge-rails-informando-o-primary_key-em-associacoes-has_many/">Edge Rails: Informando outro primary_key em associações</a></li>
-    <li><a href="http://marklunds.com/articles/one/389">Asus Eee + Ubuntu + Rails</a></li>
-    <li><a href="http://github.com/guides/disaster-faq-what-to-do-when-github-goes-bad">Guides: Disaster FAQ: What to do when GitHub goes bad</a></li>
-    <li><a href="http://debasishg.blogspot.com/2008/08/erlang-as-middleware.html">Erlang as middleware</a></li>
-</ul>
-
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/31/">&larr; Antigos</a>
@@ -818,6 +811,10 @@ Accept: text/x-dvi; q=.8; mxb=100000; mxt=5.0, text/x-c</code></p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/06/enviando-o-link-da-pagina-atual-por-e-mail/">Enviando o link da página atual por e-mail</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/05/heroku-add-ons-catalog/">Heroku Add-ons Catalog</a>
       </li>
     
@@ -831,10 +828,6 @@ Accept: text/x-dvi; q=.8; mxb=100000; mxt=5.0, text/x-c</code></p>
     
       <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
   </ul>

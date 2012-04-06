@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Precisa testar alguma coisa no script/console do Rails, mas não pode correr o risco de alterar nenhuma informação do banco de dados? script/console &hellip;">
+  <meta name="description" content="Um dos tópicos mais polêmicos do livro Getting Real é o “Comece com Não”. Certa vez eu fiz alguns comentários sobre este ponto e ficou claro que &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,75 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/12/02/faca-com-que-cada-nova-funcionalidade-prove-o-seu-valor/">Faça com que cada nova funcionalidade prove o seu valor</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-12-02T00:00:00-02:00" pubdate data-updated="true"> 2 de Dezembro de 2008</time>
+        
+        <a rel="bookmark" href="/2008/12/02/faca-com-que-cada-nova-funcionalidade-prove-o-seu-valor/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>Um dos tópicos mais polêmicos do livro <a href="http://gettingreal.37signals.com/index.php">Getting Real</a> é o “Comece com Não”. Certa vez eu <a href="http://www.nomedojogo.com/2007/12/06/repita-comigo-nos-nao-precisamos-disto/">fiz alguns comentários</a> sobre este ponto e ficou claro que algumas pessoas simplesmente não concordam com ele.</p>
+
+<p>Acredito que o grande vilão neste caso são as consultorias e empresas de software que desde que sejam pagos aceitam criar qualquer tipo de funcionalidade solicitada pelo cliente, mesmo as mais ridículas delas. E isto de forma indireta acaba nos influenciando, mesmo quando estamos construindo nossa própria empresa.</p>
+
+<p>Não me entendam mal, consultorias foram criadas exatamente para isso e este é o negócio delas. Quando uma empresa contrata uma consultoria para desenvolver seu software, normalmente é isso o que ela espera, gerar uma lista de demandas e ser atendida. (Hoje podemos encontrar algumas consultorias com filosofias um pouco diferentes, mas estou falando da maioria)</p>
+
+<p>O que não podemos esquecer, entretanto, é que o livro <strong>Getting Real</strong> não trata desde ramos especifico de atividades, mas sim da criação do seu próprio produto. É neste momento que o dizer “Não” se torna indispensável.</p>
+
+<p>Toda vez que uma nova funcionalidade é adicionada ao seu sistema, é como se você estivesse adotando um filho, você terá de lidar com ela para o resto da vida do seu software. Tente remover uma funcionalidade já existente e veja a reação de seus clientes. A idéia por trás do “comece com não” é provar o valor de uma nova funcionalidade antes de implementá-la.</p>
+
+<p>Lembra-se do filme <a href="http://www.imdb.com/title/tt0137523/">Clube da Luta</a>? Para que um novo membro fosse aceito, ele deveria ficar esperando por três dias na porta, era assim que ele provava que merecia entrar para o clube. Faça o mesmo com as novas funcionalidades, deixe-as na geladeira por três dias antes de implantá-las. Faça com que elas provem que são realmente importantes, não saia implementando cada nova idéia ou sugestão de seus clientes.</p>
+
+<p><img class="center" src="http://old.nomedojogo.com/wp-content/uploads/2008/12/fight_club.jpg"></p>
+
+<p>Mas existe um problema nesta abordagem. Se você adotar a idéia de sempre começar com “não”, seu software, na maioria dos casos, terá menos funcionalidades que seus possíveis concorrentes (caso eles existam). E aquelas famosas listas comparativas são inevitáveis, colocando cada uma das funcionalidades que eles possuem e vocês não.</p>
+
+<p>Mas não se intimide. Simplicidade é uma palavra muito forte hoje em dia, acredite. Se não fosse assim, o <strong>iPhone</strong> e o <strong>Basecamp</strong> não seriam o sucesso que são. Comparados com a concorrência, ambos oferecem menos funcionalidades, mas quando adquirimos qualquer um deles, é exatamente isto que estamos procurando. Priorizamos a simplicidade e a qualidade acima de tudo.</p>
+
+<p><img class="center" src="http://old.nomedojogo.com/wp-content/uploads/2008/12/iphone.jpg"></p>
+
+<p>Ter mais funcionalidades não significa ter um produto melhor. Uma forma de convencer seus clientes disso é deixá-los testar seu produto de graça durante um periodo de tempo. Na minha opinião isto é uma parte importante da estratégia para este tipo de empreendimento.</p>
+</div>
+
+
+    </article>
   
     
     
@@ -878,71 +947,6 @@ person<span class="punctuation punctuation_separator punctuation_separator_metho
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/11/20/rails-22-alterada-a-mensagem-do-metodo-assert_difference/">Rails 2.2: Alterada a mensagem do método assert_difference</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-11-20T00:00:00-02:00" pubdate data-updated="true">20 de Novembro de 2008</time>
-        
-        <a rel="bookmark" href="/2008/11/20/rails-22-alterada-a-mensagem-do-metodo-assert_difference/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>Quando usávamos o método <strong>assert_difference</strong> com múltiplas expressões e um erro ocorria era difícil de saber qual das expressões não teve seu valor alterado, já que a mensagem de erro não informava isto.</p>
-
-<p>No Rails 2.2 a mensagem devolvida pelo método informará exatamente qual expressão não passou no teste. Por exemplo:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">assert_difference <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Post.count<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>current_user.posts.count<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do
-</span>  <span class="support support_class support_class_ruby">Post</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>create<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>params<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-<span class="keyword keyword_control keyword_control_ruby">end</span>
-</span></pre>
-
-
-<p>O código acima retornará a seguinte mensagem, caso a segunda expressão não tenha passado:</p>
-
-<pre>&lt;current_user.posts.count&gt; was expression that failed. &lt;1&gt; expected but was &lt;0&gt;.</pre>
-
-
-<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades do Rails 2.2 no e-book “<a href="../2008/10/24/novo-livro-e-screencast-ruby-on-rails-22-o-que-ha-de-novo/">Ruby on Rails - O que há de novo?</a>“.</em>
-
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/19/">&larr; Antigos</a>
@@ -960,6 +964,10 @@ person<span class="punctuation punctuation_separator punctuation_separator_metho
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/06/enviando-o-link-da-pagina-atual-por-e-mail/">Enviando o link da página atual por e-mail</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/05/heroku-add-ons-catalog/">Heroku Add-ons Catalog</a>
       </li>
     
@@ -973,10 +981,6 @@ person<span class="punctuation punctuation_separator punctuation_separator_metho
     
       <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
   </ul>

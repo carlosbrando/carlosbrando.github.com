@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Apenas o link&#8230; clique aqui. ">
+  <meta name="description" content="O scRUBYt! é um gem muito útil para quem precisa recuperar dados à partir de uma página na web. Ele faz uso do Hpricot e do Mechanize e busca pelos &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,104 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2007/09/04/scrubyt-no-windows-no-tem-hash/">scRUBYt! no Windows não tem Hash</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-09-04T00:00:00-03:00" pubdate data-updated="true"> 4 de Setembro de 2007</time>
+        
+        <a rel="bookmark" href="/2007/09/04/scrubyt-no-windows-no-tem-hash/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>
+<center><img src="http://farm2.static.flickr.com/1108/1071869118_2a3a386c08.jpg?v=0"></center>
+<p></p>
+<p>O <a href="http://scrubyt.org/">scRUBYt!</a> é um gem muito útil para quem precisa recuperar dados à partir de uma página na web. Ele faz uso do <a href="http://code.whytheluckystiff.net/hpricot/">Hpricot</a> e do <a href="http://mechanize.rubyforge.org/mechanize/">Mechanize</a> e busca pelos dados usando um sistema de exemplos. Se estiver interessado em ver como funciona acesse o site oficial do projeto e veja os tutoriais.</p>
+<p>O problema é que a versão final (0.3.0) não funciona direito no Windows, pelo menos não sem uma série de configurações e gambiarras. A melhor versão para Windows é a versão 1.2.6, que obviamente não possui todas as funcionalidades da última versão.</p>
+<p>Brincando com a versão 1.2.6 uma das coisas que mais senti falta foi a possibilidade de converter o resultado de uma busca em um Hash. Nesta versão o máximo que podemos fazer é recuperar em XML ou em texto puro.</p>
+<p>Para resolver este problema resolvi fuçar pelo código da versão mais nova e encontrei um trecho de código que poderia ajudar. Mas não quero alterar diretamente o fonte do gem (não recomendo fazer isto), por isto montei a seguinte classe:</p>
+<p>[source:ruby]
+require &#8216;rubygems&#8217;
+require &#8216;scrubyt&#8217;
+
+module Scrubyt
+  class ResultDumper
+
+    def self.to_hash(pattern)
+      result = []
+      flat_hash_inner = lambda {|e, parts|
+        content = e.text ? REXML::Text.unnormalize(e.text) : &#8221;
+        if ((e.is_a? REXML::Element) && content != &#8221;)
+          if parts[e.local_name]
+            parts[e.local_name] = parts[e.local_name] + &#8220;,&#8221; + content
+          else
+            parts[e.local_name] = content
+          end
+        end
+        e.children.each {|c| flat_hash_inner.call(c, parts) if c.is_a? REXML::Element }
+        parts
+      }
+      to_xml(pattern).root.elements[&#8216;/root&#8217;].each {|e| result << flat_hash_inner.call(e, {}) }
+      result
+    end
+
+    def self.to_csv(pattern)
+      result = []
+      flat_csv_inner = lambda {|e, parts|
+        content = e.text || ''
+        parts << content if ((e.is_a? REXML::Element) && content != '')
+        e.children.each {|c| flat_hash_inner.call(c, parts) if c.is_a? REXML::Element }
+        parts
+      }
+      to_xml(pattern).root.elements['/root'].each {|e| result << flat_csv_inner.call(e, []) }
+      (result.map! {|a| a.join(',')}).join("\n")
+    end
+
+  end
+end
+[/source] </p>
+<p>Incluindo isto no projeto, podemos pegar o retorno da pesquisa em formato&nbsp;CVS ou em um Hash da mesma forma como fazemos com os métodos <strong>to_xml</strong> e <strong>to_text</strong>.</p>
+<p>Se você não entendeu nada deste post, dê uma olhada de leve no <a href="http://scrubyt.org/">scRUBYt!</a>, tenho certeza de que você vai gostar.</p>
+
+</div>
+
+
+    </article>
   
     
     
@@ -621,56 +719,6 @@ attributes:
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2007/08/21/working-with-rails-ultrapassa-a-marca-de-8000-programadores/">Working with Rails ultrapassa a marca de 8000 programadores.</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-08-21T00:00:00-03:00" pubdate data-updated="true">21 de Agosto de 2007</time>
-        
-        <a rel="bookmark" href="/2007/08/21/working-with-rails-ultrapassa-a-marca-de-8000-programadores/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p><img src="http://l.yimg.com/www.flickr.com/images/home_photo_notsogoodphotography.jpg">  <p>Aí está um serviço muito interessante. Não conheço nenhuma outra comunidade de linguagem de programação que tenha uma rede social deste nível só para ela.  <p>&Eacute; claro que o <a href="http://www.workingwithrails.com">WWR</a> não é tudo isto, mas tem alguns recursos bem interessantes, como uma lista com os <a href="http://workingwithrails.com/browse/railsplugins/usage">plugins</a> e <a href="http://workingwithrails.com/browse/rubygems/usage ">gems</a> mais usados pelos desenvolvedores no mundo. <p>Você também pode acompanhar um rank de popularidade entre os principais <a href="http://www.workingwithrails.com/browse/popular/people">evangelistas e contribuidores</a> do framework no mundo todo. <p>Outro recurso legal é poder ver os <a href="http://workingwithrails.com/browse/railsplugins/usage/authority/ ">plugins</a> e <a href="http://workingwithrails.com/browse/rubygems/usage/authority/">gems</a> mais usados levando em consideração o grau de autoridade das pessoas na linguagem.  <p>Se você já usa o Rails profissionalmente, com certeza já deve conhecer o site, mas mesmo para quem ainda está aprendendo, este é com certeza um ótimo ambiente para se freq&uuml;entar.  <p>P.S.: Ah, e para quem quiser me recomendar é só <a href="http://workingwithrails.com/recommendation/new/person/8137-carlos-brando">clicar aqui</a>.</p>
-
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/71/">&larr; Antigos</a>
@@ -688,6 +736,10 @@ attributes:
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/06/enviando-o-link-da-pagina-atual-por-e-mail/">Enviando o link da página atual por e-mail</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/05/heroku-add-ons-catalog/">Heroku Add-ons Catalog</a>
       </li>
     
@@ -701,10 +753,6 @@ attributes:
     
       <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
   </ul>

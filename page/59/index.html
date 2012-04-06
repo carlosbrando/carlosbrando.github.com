@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Se 2008 for metade do que foi 2007 para mim, este será um ótimo ano. Em 2007 eu troquei de emprego duas vezes e terminei o ano do jeito que eu &hellip;">
+  <meta name="description" content="David acabou de publicar algumas alterações no trunk do Rails. Vamos a elas: Rails:update A partir de agora toda vez que rodarmos a tarefa &#39;rake &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,100 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/01/03/edge-rails-titleize-increment-e-dry/">Edge Rails: Titleize, increment e DRY</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-01-03T00:00:00-02:00" pubdate data-updated="true"> 3 de Janeiro de 2008</time>
+        
+        <a rel="bookmark" href="/2008/01/03/edge-rails-titleize-increment-e-dry/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/01/92697433_aa5c016a77.jpg" alt="92697433_aa5c016a77.jpg" /></p>
+
+<p>David acabou de publicar algumas alterações no trunk do Rails. Vamos a elas:</p>
+
+<h3>Rails:update</h3>
+
+
+<p>A partir de agora toda vez que rodarmos a tarefa &#39;<strong>rake rails:freeze:edge</strong>&#39; também será executado o &#39;<strong>rails:update</strong>&#39;, atualizando os arquivos de configuração e JavaScript. Esta é uma alteração simples mas importante, porque na maioria das vezes que congelamos uma versão do Rails em nosso projeto, precisamos rodar um &#39;<strong>rake rails:update</strong>&#39;, mas muita gente se esquece disso. Agora não será mais necessário.</p>
+
+<h3>Titleize</h3>
+
+
+<p>Existe um bug no método <strong>String#titleize</strong> quando tentamos usá-lo em uma string que contenha o <em><strong>&#39;s</strong></em>. Faça um teste no console de sua aplicação Rails executando o código abaixo:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>brando's blog<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>titleize
+<span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Brando'S Blog<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span></span></pre>
+
+
+<p>Notou que o <em><strong>&#39;s</strong></em> retornou maiúsculo? Este problema foi corrigido. Se você executar o mesmo código na versão Edge do Rails, o retorno será o texto correto: &quot;Brando&#39;s Blog&quot;.</p>
+
+<h3>Increment e decrement</h3>
+
+
+<p>Os métodos <strong>increment</strong>, <strong>increment!</strong>, <strong>decrement</strong> e <strong>decrement!</strong> do <em><strong>ActiveRecord</strong></em> receberam mais um par&acirc;metro como opcional. Hoje você pode usar estes métodos para aumentar ou diminuir o valor de uma coluna em 1 (um). Mas a partir da próxima versão do Rails você poderá especificar o valor a ser adicionado ou subtraído se desejar. Assim:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">player1<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>increment!<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>points</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">5</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+player2<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>decrement!<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>points</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">2</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
+
+
+<p>No exemplo acima estou somando 5 à pontuação atual do jogador 1 e subtraindo 2 da pontuação atual do jogador 2. Como este par&acirc;metro é opcional, os seus códigos antigos não serão afetados.</p>
+
+<h3>127.0.0.1 e DRY</h3>
+
+
+<p>Em um <a href="http://www.nomedojogo.com/2007/12/16/edge-rails-%e2%80%93-ruby-19-seguranca-e-muito-zelo/">post antigo</a> eu mencionei que o arquivo <a href="http://dev.rubyonrails.org/browser/trunk/railties/lib/tasks/databases.rake?rev=8388">databases.rake</a> havia sido alterado para suportar o <strong>IP 127.0.0.1</strong> na tarefa <em><strong>create</strong></em>. Agora isto foi estendido para a tarefa <em><strong>drop</strong></em> e o arquivo recebeu um <em>refactory</em> para tornar o código menos repetitivo.</p>
+
+<h4>Referências:</h4>
+
+
+<ul>
+    <li><a href="http://dev.rubyonrails.org/ticket/10565">Change rails:freeze:edge to call rails:update automatically</a></li>
+    <li><a href="http://dev.rubyonrails.org/ticket/10571">Titleize doesn&#8217;t work correctly on &#8220;alex&#8217;s beer&#8221;</a></li>
+    <li><a href="http://dev.rubyonrails.org/ticket/10542">Add optional by parameter to AR increment/decrement</a></li>
+    <li><a href="http://dev.rubyonrails.org/ticket/10539">Add 127.0.0.1 to drop and refactor</a></li>
+</ul>
+
+</div>
+
+
+    </article>
   
     
     
@@ -659,63 +753,6 @@ time_zone_select<span class="punctuation punctuation_section punctuation_section
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2007/12/20/screencast-rails-20-anotacoes/">Screencast: Rails 2.0 - Anotações</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-12-20T00:00:00-02:00" pubdate data-updated="true">20 de Dezembro de 2007</time>
-        
-        <a rel="bookmark" href="/2007/12/20/screencast-rails-20-anotacoes/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/12/169867791_dc71bc6b6b.jpg" alt="169867791_dc71bc6b6b.jpg" /></p>
-
-<p>É com muito orgulho que apresento o primeiro <strong>screencast</strong> do Nome do Jogo. Esta gravação já tinha sido feito a algum tempo atrás, mas eu ainda precisava editar e preparar o blog para isto. Mas agora chegou a hora.</p>
-
-<p>Meu plano é publicar uma série de vídeos com dicas sobre Ruby on Rails no mesmo estilo do famoso <a href="http://railscasts.com/">Railscasts</a>, mas com conteúdo <strong>100% em português</strong>. Este é o primeiro da série e para isto eu escolhi um assunto bem simples para começar. O vídeo está no formato m4v e eu acredito que ninguém terá problemas para vê-lo, se o formato for ruim me avisem nos comentários. De qualquer forma eu gostaria muito que todos comentassem o que acharam, o que pode ser melhorado, o que não gostaram, etc. Também aceito sugestões de assuntos para futuros vídeos.</p>
-
-<p>Este primeiro vídeo fala de uma novidade no Rails 2.0: anotações no código. É um assunto simples, mas serve como um piloto para este novo formato.</p>
-
-<p>Para assistir o vídeo ou fazer o download basta clicar nos links abaixo.</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/60/">&larr; Antigos</a>
@@ -733,6 +770,10 @@ time_zone_select<span class="punctuation punctuation_section punctuation_section
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/06/enviando-o-link-da-pagina-atual-por-e-mail/">Enviando o link da página atual por e-mail</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/05/heroku-add-ons-catalog/">Heroku Add-ons Catalog</a>
       </li>
     
@@ -746,10 +787,6 @@ time_zone_select<span class="punctuation punctuation_section punctuation_section
     
       <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
   </ul>

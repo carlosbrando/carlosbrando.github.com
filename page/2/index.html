@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Já faz algum tempo que desenvolvi uma gem para imprimir o resultado dos meus testes de uma forma mais intuitiva, menos poluída e mais&#8230; colorida &hellip;">
+  <meta name="description" content="Atualmente estou envolvido em um projeto envolvendo módulos específicos em Ruby, Erlang e C. Ruby e Erlang são mais tranquilos, mas C tem a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,308 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2011/06/13/a-regra-direita-esquerda-do-c/">A Regra Direita-Esquerda do C</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-06-13T00:00:00-03:00" pubdate data-updated="true">13 de Junho de 2011</time>
+        
+        <a rel="bookmark" href="/2011/06/13/a-regra-direita-esquerda-do-c/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>Atualmente estou envolvido em um projeto envolvendo módulos específicos em Ruby, Erlang e C. Ruby e Erlang são mais tranquilos, mas C tem a desagradável característica de deixar alguns códigos &#8220;meio&#8221; complicados de entender.</p>
+
+<p>Porém, um <a href="http://twitter.com/#!/marciogm">colega</a> da Plano Bê me enviou um artigo que me ajudou muito e quero compartilhá-lo com vocês. O <a href="http://ieng9.ucsd.edu/~cs30x/rt_lt.rule.html">artigo original</a> parece ter sido escrito por Rick Ord da Universidade da California, em San Diego. Segue a tradução:</p>
+
+<h2>A Regra Direita-Esquerda do C</h2>
+
+<p>A regra <strong>direta-esquerda</strong> é muito útil para decifrar declarações na linguagem C e também pode ser de grande ajuda ao escrever código. A regra é bem simples, toda vez que encontrar os seguintes símbolos no código, leia:</p>
+
+<pre><code>*   como "um ponteiro para"      - sempre do lado esquerdo
+[]  como "um array de"           - sempre do lado direito
+()  como "uma função retornando" - sempre do lado direito
+</code></pre>
+
+<h2>Passo 1</h2>
+
+<p>Encontre o identificador. Esse é o seu ponto de partida. Então, diga para si mesmo <em>&#8220;o identificador é&#8221;</em>. É nesse ponto que iniciamos a declaração.</p>
+
+<h2>Passo 2</h2>
+
+<p>Comece pelos símbolos a direita do identificador. Digamos que você encontrou um <code>()</code>, então você sabe que essa declaração é uma função. Então você deve dizer <em>&#8220;o identificador é uma função retornando&#8221;</em>. Caso você tenha encontrado um <code>[]</code>, então você deve dizer <em>&#8220;o identificador é um array de&#8221;</em>. Continue avançando pela direita enquanto houver símbolos OU até encontrar um fecha parênteses <code>)</code>. (continue seguindo caso você encontre um abre parênteses, falaremos sobre isso mais abaixo.)</p>
+
+<h2>Passo 3</h2>
+
+<p>Quando terminarem os símbolos a direita do identificador, então comece a procurar por símbolos a sua esquerda. Se você encontrar algo diferente dos símbolos mencionados acima (digamos, algo como <code>int</code>), simplesmente repita o seu nome. Caso contrário, traduza o símbolo para o português usando a tabela. Continue seguindo pela esquerda enquanto houver símbolos OU até encontrar um abre parênteses <code>(</code>.</p>
+
+<p>Então, repita os passos 2 e 3 até terminar toda a sua declaração. Veja abaixo alguns exemplos:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="kt">int</span> <span class="o">*</span><span class="n">p</span><span class="p">[];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Encontre o identificador.</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int *p[];
+</span><span class='line'>     ^
+</span><span class='line'>"p é"</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Siga pela direita enquanto encontrar um símbolo ou abre parênteses.</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int *p[];
+</span><span class='line'>      ^^
+</span><span class='line'>"p é um array de"</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Quando não puder mais mover para a direita (os símbolo acabaram), então siga para a esquerda e encontre:</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int *p[];
+</span><span class='line'>    ^
+</span><span class='line'>"p é um array de ponteiros para"</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Continue seguinte pela esquerda e encontre:</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int *p[];
+</span><span class='line'>^^^
+</span><span class='line'>"p é um array de ponteiros para int". 
+</span><span class='line'>(ou "p é um array onde cada elemento é um ponteiro para um inteiro")</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Outro exemplo:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="kt">int</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">func</span><span class="p">())();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Encontre o identificador.</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int *(*func())();
+</span><span class='line'>       ^^^^
+</span><span class='line'>"func é"</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Vá para a direita.</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int *(*func())();
+</span><span class='line'>           ^^
+</span><span class='line'>"func é uma função retornando"</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Não dá para ir mais a direita devido ao fecha parênteses, então vá para a esquerda.</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int *(*func())();
+</span><span class='line'>      ^
+</span><span class='line'>"func é uma função retornando um ponteiro para"</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Não pode mais ir para a esquerda devido ao abre parênteses, então continue indo pela direita.</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int *(*func())();
+</span><span class='line'>              ^^
+</span><span class='line'>"func é uma função retornando um ponteiro para uma função retornando"</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>Não dá mais para ir para a direita porque não há mais simbolos, então vá para a esquerda.</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int *(*func())();
+</span><span class='line'>    ^
+</span><span class='line'>"func é uma função retornando um ponteiro para uma função retornando um ponteiro para"</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>E finalmente, o último símbolo a esquerda.</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int *(*func())();
+</span><span class='line'>^^^
+</span><span class='line'>"func é uma função retornando um ponteiro para uma função retornando um ponteiro para um inteiro".</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Como você pode ver, essa regra pode ser muito útil. Ela também é ótima para manter a sua sanidade enquanto estiver criando declarações, além de ajudá-lo a identificar onde colocar o próximo símbolo ou parênteses.</p>
+
+<p>Algumas declarações podem parecer ainda mais complicadas quando definem o tamanho de um array ou informam uma lista de argumentos. Por exemplo, se você ver algo como <code>[3]</code>, deve ler <em>&#8220;um array (de tamanho 3) de&#8230;&#8221;</em>. Mas se você ver algo como <code>(char *,int)</code>, então deve ler <em>&#8220;uma função esperando (char </em>, int) e retornando&#8230;&#8221;*. Veja mais um exemplo:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">fun_one</span><span class="p">)(</span><span class="kt">char</span> <span class="o">*</span><span class="p">,</span><span class="kt">double</span><span class="p">))[</span><span class="mi">9</span><span class="p">][</span><span class="mi">20</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Eu não vou seguir cada passo para decifrar essa declaração. Mas o resultado será: <em>&#8220;fun_one é um ponteiro para uma função esperando (char </em>, double) e retornando um ponteiro para um array (tamanho 9) de um array (tamanho 20) de inteiros&#8221;*.</p>
+
+<p>Fica mais fácil se você remover o tamanho dos arrays e as listas de argumentos:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">fun_one</span><span class="p">)())[][];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Uma boa opção é decifrar dessa maneira e só depois adicionar o tamanho dos arrays e a lista de argumentos.</p>
+
+<h2>Algumas considerações finais</h2>
+
+<p>É totalmente possível criar declarações ilegais usando essa regra, então algum conhecimento do que é aceitável e do que não é em C é necessário. Por exemplo, se você tiver algo assim:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="kt">int</span> <span class="o">*</span><span class="p">((</span><span class="o">*</span><span class="n">fun_one</span><span class="p">)())[][];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A declaração acima seria traduzida para <em>&#8220;fun_one é um ponteiro para uma função retornando um array de arrays de ponteiros para inteiros&#8221;</em>.</p>
+
+<p>Uma vez que uma função não pode retornar um array, mas somente um ponteiro para um array, essa declaração é ilegal.</p>
+
+<p>Combinações ilegais incluem:</p>
+
+<pre><code>[]() - não pode haver um array de funções
+()() - não pode haver uma função que retorna uma função
+()[] - não pode haver uma função que retorna um array
+</code></pre>
+
+<p>Em todos os casos acima, você provavelmente precisaria de um conjunto de parênteses para colocar um símbolo <code>*</code> a esquerda entre cada <code>()</code> e <code>[]</code> para tornar uma declaração válida.</p>
+
+<p>Segue abaixo alguns exemplos válidos e inválidos para exercitar o que aprendemos:</p>
+
+<pre><code>int i;           "i um inteiro"
+int *p;          "p é um ponteiro para um inteiro"
+int a[];         "a é um array de inteiros"
+int f();         "f é uma função retornando um inteiro"
+int **pp;        "pp é um ponteiro para um ponteiro para um inteiro"
+int (*pa)[];     "pa é um ponteiro para um array de inteiros"
+int (*pf)();     "pf é um ponteiro para uma função retornando um inteiro"
+int *ap[];       "ap é um array de ponteiros para inteiros"
+int aa[][];      "aa é um array de arrays de inteiros"
+int af[]();      "af é um array de funções retornando um inteiro (ILEGAL)"
+int *fp();       "fp é uma função retornando um ponteiro para um inteiro"
+int fa()[];      "fa é uma função retornando um array de inteiros (ILEGAL)"
+int ff()();      "ff é uma função retornando uma função retornando um inteiro (ILEGAL)"
+int ***ppp;      "ppp é um ponteiro para um ponteiro para um ponteiro para um inteiro"
+int (**ppa)[];   "ppa é um ponteiro para um ponteiro para um array de inteiros"
+int (**ppf)();   "ppf é um ponteiro para um ponteiro para uma função retornando um inteiro"
+int *(*pap)[];   "pap é um ponteiro para um array de ponteiros para inteiros"
+int (*paa)[][];  "paa é um ponteiro para um array de arrays de inteiros"
+int (*paf)[]();  "paf é um ponteiro para um array de funções retornando um inteiro (ILEGAL)"
+int *(*pfp)();   "pfp é um ponteiro para uma função retornando um ponteiro para um inteiro"
+int (*pfa)()[];  "pfa é um ponteiro para uma função retornando um array de inteiros (ILEGAL)"
+int (*pff)()();  "pff é um ponteiro para uma função retornando uma função retornando um inteiro (ILEGAL)"
+int **app[];     "app é um array de ponteiros para ponteiros para um inteiro"
+int (*apa[])[];  "apa é um array de ponteiros para um array de inteiros"
+int (*apf[])();  "apf é um array de ponteiros para funções retornando um inteiro"
+int *aap[][];    "aap é um array de arrays de ponteiros para inteiros"
+int aaa[][][];   "aaa é um array de arrays de arrays de inteiros"
+int aaf[][]();   "aaf é um array de arrays de funções retornando um inteiro (ILEGAL)"
+int *afp[]();    "afp é um array de funções retornando um ponteiro para um inteiro (ILEGAL)"
+int afa[]()[];   "afa é um array de funções retornando um array de inteiros (ILEGAL)"
+int aff[]()();   "aff é um array de funções retornando funções retornando um inteiro (ILEGAL)"
+int **fpp();     "fpp é uma função retornando um ponteiro para um ponteiro para um inteiro"
+int (*fpa())[];  "fpa é uma função retornando um ponteiro para um array de inteiros"
+int (*fpf())();  "fpf é uma função retornando um ponteiro para uma função retornando um inteiro"
+int *fap()[];    "fap é uma função retornando um array de ponteiros para inteiros (ILEGAL)"
+int faa()[][];   "faa é uma função retornando um array de arrays de inteiros (ILEGAL)"
+int faf()[]();   "faf é uma função retornando um array de funções retornando inteiros (ILEGAL)"
+int *ffp()();    "ffp é uma função retornando uma função retornando um ponteiro para um inteiro (ILEGAL)"
+</code></pre>
+</div>
+
+
+    </article>
   
     
     
@@ -649,73 +951,6 @@
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2010/11/01/rubyconf-brasil-2010/">RubyConf Brasil 2010 (slides e vídeo)</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-11-01T00:00:00-02:00" pubdate data-updated="true"> 1 de Novembro de 2010</time>
-        
-        <a rel="bookmark" href="/2010/11/01/rubyconf-brasil-2010/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>Aconteceu na semana passada o <strong>RubyConf Brasil 2010</strong> e o evento foi sem dúvida um sucesso em todos os sentidos. Principalmente, em minha opinião, pelo alto nível técnico da maioria das palestras.</p>
-
-<p>Eu também tive o prazer de palestrar sobre minha experiencia desenvolvendo aplicativos sociais. Também foi uma palestra totalmente técnica, com muito código e uma demonstração de como criar um aplicativo simples do começo ao fim para a plataforma <strong>OpenSocial</strong> utilizando <strong>Rails 3</strong>. Cumprindo a minha promessa, abaixo você pode rever os slides da apresentação e o vídeo do desenvolvimento do aplicativo. Infelizmente o vídeo não tem som, então ele será mais útil para aqueles que assistiram a palestra.</p>
-
-<p>Todas as palestras foram gravadas, assim eu acredito que em breve a <strong>Locaweb</strong> deve disponibilizá-los online.</p>
-
-<h2>Slides</h2>
-
-
-<div id="__ss_5629495" style="width: 425px;"><strong><a title="Desenvolvendo Aplicativos Sociais com Rails 3" href="http://www.slideshare.net/eduardobrando/desenvolvendo-aplicativos-sociais-com-rails-3">Desenvolvendo Aplicativos Sociais com Rails 3</a></strong><object id="__sse5629495" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="425" height="355" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowFullScreen" value="true" /><param name="allowScriptAccess" value="always" /><param name="src" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=rubyconf-101031214321-phpapp01&amp;stripped_title=desenvolvendo-aplicativos-sociais-com-rails-3&amp;userName=eduardobrando" /><param name="name" value="__sse5629495" /><param name="allowfullscreen" value="true" /><embed id="__sse5629495" type="application/x-shockwave-flash" width="425" height="355" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=rubyconf-101031214321-phpapp01&amp;stripped_title=desenvolvendo-aplicativos-sociais-com-rails-3&amp;userName=eduardobrando" name="__sse5629495" allowscriptaccess="always" allowfullscreen="true"></embed></object>
-<div style="padding: 5px 0 12px;">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/eduardobrando">Carlos Brando</a>.</div>
-</div>
-
-
-<h2>Vídeo</h2>
-
-
-<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="480" height="385" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="src" value="http://www.youtube.com/v/C4eHP49-KtI?fs=1&amp;hl=en_US" /><param name="allowfullscreen" value="true" /><embed type="application/x-shockwave-flash" width="480" height="385" src="http://www.youtube.com/v/C4eHP49-KtI?fs=1&amp;hl=en_US" allowscriptaccess="always" allowfullscreen="true"></embed></object>
-
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/3/">&larr; Antigos</a>
@@ -733,6 +968,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/06/enviando-o-link-da-pagina-atual-por-e-mail/">Enviando o link da página atual por e-mail</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/05/heroku-add-ons-catalog/">Heroku Add-ons Catalog</a>
       </li>
     
@@ -746,10 +985,6 @@
     
       <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
   </ul>

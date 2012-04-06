@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Caramba! Desta vez acho que ficou legal. Interessante como algo que criei para meu uso pessoal pode ter mudado tanto à partir do momento que liberei &hellip;">
+  <meta name="description" content="Foi incluído o método between? na classe TimeWithZone para verificar se a instância está entre duas datas. Exemplo: @twz.between?(Time.utc(1999,12,31 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,59 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/02/22/edge-rails-novo-metodo-timewithzonebetween/">Edge Rails: Novo método between? na classe TimeWithZone</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-02-22T00:00:00-03:00" pubdate data-updated="true">22 de Fevereiro de 2008</time>
+        
+        <a rel="bookmark" href="/2008/02/22/edge-rails-novo-metodo-timewithzonebetween/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>Foi incluído o método <code>between?</code> na classe <code>TimeWithZone</code> para verificar se a instância está entre duas datas. Exemplo:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>twz</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>between?<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>utc<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">1999</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span><span class="constant constant_numeric constant_numeric_ruby">12</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span><span class="constant constant_numeric constant_numeric_ruby">31</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span><span class="constant constant_numeric constant_numeric_ruby">23</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span><span class="constant constant_numeric constant_numeric_ruby">59</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span><span class="constant constant_numeric constant_numeric_ruby">59</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
+              <span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>utc<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">2000</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span><span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span><span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span><span class="constant constant_numeric constant_numeric_ruby">0</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span><span class="constant constant_numeric constant_numeric_ruby">0</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span><span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">))</span></span></pre>
+
+</div>
+
+
+    </article>
   
     
     
@@ -738,72 +791,6 @@ formatted_polymorphic_path<span class="punctuation punctuation_section punctuati
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/02/18/edge-rails-customizando-url-no-mapresources/">Edge Rails: Customizando URL no map.resources</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-02-18T00:00:00-03:00" pubdate data-updated="true">18 de Fevereiro de 2008</time>
-        
-        <a rel="bookmark" href="/2008/02/18/edge-rails-customizando-url-no-mapresources/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>Imagine o seguinte cenário, você tem um site todo em português e que deixar seus rotas também em português para facilitar a vida de seus usuários. Em outras palavras ao invés de ter algo como:</p>
-
-<p>http://www.meusite.com.br/<strong>products</strong>/1234/<strong>reviews</strong></p>
-
-<p>Você gostaria de ter algo assim:</p>
-
-<p>http://www.meusite.com.br/<strong>produtos</strong>/1234/<strong>comentarios</strong></p>
-
-<p>Ok, isto é possível hoje, mas não de uma forma muito simples, não pelo menos sem comprometer algumas convenções do Rails.</p>
-
-<p>Mas na próxima versão do Rails ganharemos a opção :as no map.resources para personalizar nossas rotas. Veja um exemplo, para conseguir a URL acima totalmente em português:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>products</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>as</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>produtos<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">product</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> product_reviews_path(product) ==
-</span><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> '/produtos/1234/comentarios'
-</span>  product<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>product_reviews</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>as</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>comentarios<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
-<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/55/">&larr; Antigos</a>
@@ -821,6 +808,10 @@ formatted_polymorphic_path<span class="punctuation punctuation_section punctuati
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/06/enviando-o-link-da-pagina-atual-por-e-mail/">Enviando o link da página atual por e-mail</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/05/heroku-add-ons-catalog/">Heroku Add-ons Catalog</a>
       </li>
     
@@ -834,10 +825,6 @@ formatted_polymorphic_path<span class="punctuation punctuation_section punctuati
     
       <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
   </ul>

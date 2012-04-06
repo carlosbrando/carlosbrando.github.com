@@ -9,7 +9,8 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Não tem jeito, ou você programa com um livro do seu lado ou com algum site como o Rails Framework Documentation aberto o tempo todo. Já existe &hellip;">
+  <meta name="description" content="Imagine o seguinte método: def count_users(type) User.count(:all, :conditions =&gt; ["type = ?", type])
+end &Eacute; um método simples, que irá me &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +100,119 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2007/11/06/deixando-meus-metodos-de-pesquisa-mais-espertos/">Deixando meus métodos de pesquisa mais espertos</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-11-06T00:00:00-02:00" pubdate data-updated="true"> 6 de Novembro de 2007</time>
+        
+        <a rel="bookmark" href="/2007/11/06/deixando-meus-metodos-de-pesquisa-mais-espertos/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/11/1858685882_35f2f01bca.jpg" alt="1858685882_35f2f01bca.jpg" /></p>
+
+<p>Imagine o seguinte método:</p>
+
+<pre>
+def count_users(type)
+  User.count(:all, :conditions =&gt; ["type = ?", type])
+end</pre>
+
+
+<p>&Eacute; um método simples, que irá me retornar a quantidade de usuários de um determinado tipo. Agora, vamos testar nosso método (preste atenção aos comandos <strong>SQL</strong> gerados):</p>
+
+<pre>
+&gt;&gt; count_users(1)
+=&gt; 2
+SELECT count(*) AS count_all FROM users WHERE (type = 1)
+
+&gt;&gt; count_users(2)
+=&gt; 5
+SELECT count(*) AS count_all FROM users WHERE (type = 2)</pre>
+
+
+<p>Ok, até aqui tudo funciona perfeitamente, mas e se eu desejasse contar todos os usuários que tivessem a coluna <strong>type</strong> com o valor <strong>NULL</strong>?</p>
+
+<pre>
+&gt;&gt; count_users(nil)
+=&gt; 0
+SELECT count(*) AS count_all FROM users WHERE (type = NULL)</pre>
+
+
+<p>Opa, eu tenho um registro no meu banco com o valor <strong>NULL</strong>, mas o meu método retornou zero. O que saiu errado? Note a <strong>query</strong> gerado pelo comando, <strong>type = NULL </strong>está errado, deveríamos usar <strong>type IS NULL</strong>.</p>
+
+<p>Preciso alterar meu método:</p>
+
+<pre>
+def count_users(type)
+  User.count(:all, :conditions =&gt; {:type =&gt; type})
+end</pre>
+
+
+<p>Note que alterei a forma como o par&acirc;metro <strong>:conditions</strong> estava sendo usado. Neste caso especifico, meu método ficou muito mais robusto. Veja alguns exemplos:</p>
+
+<pre>
+&gt;&gt; count_users(1)
+=&gt; 2
+SELECT count(*) AS count_all FROM users WHERE (users."type" = 1)
+
+&gt;&gt; count_users(2)
+=&gt; 5
+SELECT count(*) AS count_all FROM users WHERE (users."type" = 2)
+
+&gt;&gt; count_users(nil)
+=&gt; 1
+SELECT count(*) AS count_all FROM users WHERE (users."type" IS NULL)
+
+&gt;&gt; count_users([1,3])
+=&gt; 3
+SELECT count(*) AS count_all FROM users WHERE (users."type" IN (1,3))
+
+&gt;&gt; count_users(1..3)
+=&gt; 8
+SELECT count(*) AS count_all FROM users WHERE (users."type" BETWEEN 1 AND 3)</pre>
+
+
+<p>Note que agora, mesmo passando <strong>nil</strong> ou um <strong>array</strong> para o método, ele criará a <strong>query</strong> de pesquisa da forma correta de acordo com o tipo do objeto usado.</p>
+</div>
+
+
+    </article>
   
     
     
@@ -862,65 +976,6 @@ second:
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2007/10/26/quer-trabalhar-com-rails-que-tal-trabalhar-com-david-hansson/">Quer trabalhar com Rails? Que tal trabalhar com David Hansson?</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-10-26T00:00:00-02:00" pubdate data-updated="true">26 de Outubro de 2007</time>
-        
-        <a rel="bookmark" href="/2007/10/26/quer-trabalhar-com-rails-que-tal-trabalhar-com-david-hansson/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/10/106050092_a8318bbe71.jpg" /></p>
-
-<p>Costumo sempre acessar o blog da <a href="http://www.37signals.com/svn/">37signals</a>. Primeiro porque gosto das dicas dadas por eles e segundo, porque é a empresa de David Hansson (criador do Rails).</p>
-
-<p>Acontece que eles estão <a href="http://www.37signals.com/svn/posts/674-rails-programmer-wanted">contratando</a> mais um programador Rails. E aí, vai encarar? Com certeza não é para qualquer um. Mas seria uma experiência interessante trabalhar com nomes pesados da comunidade RoR, não acha?</p>
-
-<p>Para quem estiver interessado, <a href="http://jobs.37signals.com/jobs/2420">clique aqui</a> para ver mais detalhes da vaga.</p>
-
-<p>Agora, se você não fala inglês ou ainda não está totalmente preparado para trabalhar com Rails, pode tentar algumas das vagas no <a href="http://www.carreirati.com">Carreira TI</a>. (Sim, é propaganda mesmo!)</p>
-
-<p>P.S.: Eu estou muito bem na Surgeworks, obrigado! :)</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/66/">&larr; Antigos</a>
@@ -938,6 +993,10 @@ second:
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/06/enviando-o-link-da-pagina-atual-por-e-mail/">Enviando o link da página atual por e-mail</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/05/heroku-add-ons-catalog/">Heroku Add-ons Catalog</a>
       </li>
     
@@ -951,10 +1010,6 @@ second:
     
       <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
   </ul>

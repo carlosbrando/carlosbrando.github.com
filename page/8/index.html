@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Chegamos em Natal na quinta-feira depois de uma longa viagem de 7 horas com escala em Brasília e logo de cara fomos recepcionados por um senhor &hellip;">
+  <meta name="description" content="Javascript é uma linguagem controversa. Muitos programadores adoram trabalhar com ela, mas com certeza o número de programadores que a odeiam é &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,192 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2009/08/17/isto-e-um-bug-no-javascript/">Isto é um bug no Javascript?</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-08-17T00:00:00-03:00" pubdate data-updated="true">17 de Agosto de 2009</time>
+        
+        <a rel="bookmark" href="/2009/08/17/isto-e-um-bug-no-javascript/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p><img class="center" src="http://old.nomedojogo.com/wp-content/uploads/2009/08/2279116910_4d699d91cb.jpg"></p>
+
+<p>Javascript é uma linguagem controversa. Muitos programadores adoram trabalhar com ela, mas com certeza o número de programadores que a odeiam é maior ainda. Não importa se você está no primeiro ou no segundo grupo, se você é um desenvolvedor web simplesmente não pode evitá-la.</p>
+
+<p>Eu particularmente sempre estou em cima do muro quando o assunto é Javascript, já passei por momentos bem agradaveis criando coisas com esta linguagem, mas também já me irritei com algumas caracteristicas ruins da sua implementação em muitas outras ocasiões.</p>
+
+<p>O fato é que para se dar bem com Javascript é importante conhecer um pouco mais da linguagem do que o usual. Mas a maioria dos programadores só estão interessados em conhecer o suficiente da linguagem para realizar pequenas tarefas e criar alguns scripts simples (Ctrl+C e Ctrl+V). Assim, quando alguma coisa imprevista acontece na execução do código, logo jogamos a culpa no pobre Javascript.</p>
+
+<p>Em uma dessas madrugadas em claro, eu comecei a enumerar alguns trechos de código que parecem bugs, mas não são. Segue uma explicação sobre cada um deles e algumas dicas para evitar resultados inesperados. E antes que atirem pedras em mim, os subtítulos não devem ser levados a sério.</p>
+
+<h2>Javascript não sabe somar</h2>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="mf">0.1</span> <span class="o">+</span> <span class="mf">0.2</span>
+</span><span class='line'><span class="mf">0.30000000000000004</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Números em Javascript são representados internamente com 64 bits e cada número pode ter no máximo 17 dígitos significativos. Isto tem algumas consequências interessantes como demonstrado no exemplo acima. É preciso ser bem cuidadoso com certos cálculos, principalmente quando a precisão é algo muito importante para o aplicativo.</p>
+
+<h2>Javascript não sabe somar - parte 2</h2>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&gt;&gt;</span> <span class="s2">&quot;3&quot;</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">5</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="mi">345</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">+</span> <span class="s2">&quot;5&quot;</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="mi">75</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>No Javascript, o operador de soma (<code>+</code>) é usado tanto para somar valores numéricos como também para concatenar strings. Precisamos estar atentos a seguinte regra: durante uma operação de soma, quando um dos valores é do tipo string, então tudo é convertido para este mesmo tipo e uma concatenação é realizada.</p>
+
+<p>No primeiro exemplo, como iniciamos a soma com um string, todos os valores seguintes são imediatamente convertidos para este mesmo formato e depois são concatenados. Já no segundo exemplo, temos inicialmente uma soma numéria (<code>3 + 4 = 7</code>) que é realizada normalmente, mas como a próxima soma a ser realizada não será com outro valor número, mas sim com o string <code>"5"</code>, então o Javascript realiza a conversão do primeiro resultado e em seguida realiza uma concatenação com os valores, devolvendo no final o string <code>"75"</code>.</p>
+
+<h2>Javascript não sabe converter string para números</h2>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">parseInt</span><span class="p">(</span><span class="s2">&quot;010&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="mi">8</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">parseInt</span><span class="p">(</span><span class="s2">&quot;010&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</span><span class='line'><span class="mi">10</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>O método <code>parseInt</code> é muito utilizado e tem por objetivo converter strings em números inteiros. Basicamente o método aceita dois parâmetros: o primeiro é um string contendo o valor a ser convertido e o segundo é um inteiro que representa a base (decimal, binário, hexadecimal, etc.) na qual o string em questão está sendo representado.</p>
+
+<p>O problema aqui é que alguns livros e sites costumam explicar que o valor padrão da base (para quando ele não é informado) é 10, o que não é necessariamente uma verdade. Quando não informamos a base (radix) ou a definimos com o valor 0, então o método utiliza a seguinte regra:</p>
+
+<ul>
+    <li>Se o string que estamos convertendo iniciar com <code>"0x"</code>, então o método assumirá a conversão com a base 16 (hexadecimal).</li>
+    <li>Se o string começar com <code>"0"</code> (como no primeiro exemplo) a base utilizada será 8 (octal).</li>
+    <li>Se o string iniciar com qualquer outro valor numérico, então a base padrão será 10 (decimal).</li>
+    <li>E se o primeiro caractere do string não puder ser convertido para um número, então <code>parseInt</code> retornará <code>NaN.</code> (&#8220;not a number&#8221;).</li>
+</ul>
+
+
+<p>Desta forma, a regra é sempre informar a base na qual a conversão deve ser realizada, exatamente como foi feito no segundo exemplo.</p>
+
+<h2>Javascript não sabe fazer comparações</h2>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&gt;&gt;</span> <span class="mi">1</span> <span class="o">==</span> <span class="kc">true</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="kc">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Podemos realizar comparações em Javascript com os símbolos <code>&lt;, &gt;, &lt;= e &gt;=</code>. Eles funcionam tanto para numerais como para strings. Mas quando o assunto é a comparações de igualdade, precisamos prestar atenção a alguns fatores.</p>
+
+<p>O operador de igualdade duplo realiza uma coerção de tipos caso você esteja comparando dois valores de tipos diferentes, como acontece no exemplo acima. Embora aparentemente este seja um resultado normal, em outros casos podemos ter resultados inesperados, como na seguinte comparação:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&gt;&gt;</span> <span class="kc">null</span> <span class="o">==</span> <span class="kc">false</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="kc">false</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A linguagem também conta com um operador de igualdade tripo, que ignora a coerção de tipos:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&gt;&gt;</span> <span class="mi">1</span> <span class="o">===</span> <span class="kc">true</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="kc">false</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Eu particularmente tenho como regra sempre utilizar o operador triplo ao realizar comparações de valores, isto tem me ajudado a evitar alguns erros de interpretação ao analisar o código e eventuais bugs decorrentes desta característica da linguagem.</p>
+
+<h2>Javascript também não sabe contar</h2>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&gt;&gt;</span> <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;dog&quot;</span><span class="p">,</span> <span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="s2">&quot;hen&quot;</span><span class="p">];</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="nx">a</span><span class="p">[</span><span class="mi">100</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;fox&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="nx">a</span><span class="p">.</span><span class="nx">length</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="mi">101</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A propriedade <code>length</code> de objetos do tipo array em Javascript sempre retornará um número acima da maior posição do array e não necessariamente a quantidade de itens no objeto, conforme você pôde ver no exemplo acima.</p>
+
+<p>Se você tentar recuperar o valor em uma posição não existente no array ele devolverá <code>undefined</code>.</p>
+
+<h2>Eu amo Javascript</h2>
+
+
+<p>Javascript possui muitas características realmente boas, e da mesma forma também possui algumas implementações realmente ruins (pretendo falar sobre isto em outro artigo). Por isto é importante gastar um pouco mais de tempo estudando mais a fundo o comportamento da linguagem. Depois de entender como algumas coisas realmente funcionam, descobrimos que nem tudo é bug.</p>
+
+<p>Estas são apenas algumas poucas curiosidades que consegui coletar em alguns minutos brincando com a linguagem, você conhece mais alguma?</p>
+</div>
+
+
+    </article>
   
     
     
@@ -940,96 +1126,6 @@
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2009/06/08/como-motivar-um-programador/">Como motivar um programador</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-06-08T00:00:00-03:00" pubdate data-updated="true"> 8 de Junho de 2009</time>
-        
-        <a rel="bookmark" href="/2009/06/08/como-motivar-um-programador/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>O mercado de internet sempre foi super aquecido, e tem se tornado cada dia ainda mais competitivo. Lance um produto de sucesso e em poucos dias haverá dezenas de clones dele. Faça um exercício mental e tente lembrar dos últimos sites que fizerem barulho, agora tente enumerar a quantidade de projetos lançados com o mesmo conceito, mas tentando parecer um pouco diferente.</p>
-
-<p>Lendo o excelente livro <a href="http://www.startupolivro.com.br/">StartUp</a> de <a href="http://www.foundersatwork.com/blog.html">Jessica Livingston</a>, notei que mesmo o mais confiante empreendedor tem seus temores. Medo de que uma empresa com mais mais recursos produza um software igual ao seu e que consiga levar seus clientes. Mas o que se percebe é que na maioria dos casos, mesmo que o software da concorrência pareça melhor ou tenha sido construído por uma equipe com mais experiencia, normalmente vence a equipe mais apaixonada.</p>
-
-<p>Está revelado o segredo. Para montar uma equipe vencedora, não procure o melhor profissional, procure o profissional mais motivado. Mas não basta somente contratar alguém apaixonado, é preciso manter acesso está paixão. Como?</p>
-
-<h2>Salário?</h2>
-
-
-<p>O salário parece ser sempre o principal motivo de descontentamento em uma empresa. É claro que quando estamos falamos de dinheiro, quanto mais melhor. Mas é um fato que bons programadores não levam o dinheiro tão a sério assim. Pessoalmente, eu conheço muitos bons profissionais que mesmo achando que poderiam estar ganhando mais dinheiro em outra empresa, se &#8220;sacrificam&#8221; para permanecer em um ambiente de trabalho que lhe agrade, onde ele talvez considere que está aprendendo coisas novas ou <a href="http://www.nomedojogo.com/2009/04/20/adicione-algo-de-valor-ao-universo/">adicionando algo de valor ao universo</a>.</p>
-
-<p>Eu mesmo passei por uma experiencia parecida há um tempo atrás. Já estava há dois anos trabalhando em um mesmo projeto e havia perdido o interesse naquilo já fazia um bom tempo quando recebi uma proposta de emprego para receber pouco mais do que eu ganhava naquela empresa. Ao avisar que estava saindo, recebi a tentadora proposta de ficar e dobrar o meu salário. Não aceitei, porque não tinha mais a ver com dinheiro e sim com paixão e motivação.</p>
-
-<h2>Se quer resultados, desafie</h2>
-
-
-<p>Em meu trabalho com pessoas surdas, certa vez eu acompanhei um amigo em uma aula. Este meu amigo é uma pessoa de natureza séria, e como tal costuma tratar seus alunos com seriedade, embora seja um excelente professor e tenha um profundo conhecimento da língua de sinais (visivelmente maior do que o meu). Mas ele tinha um problema, seus alunos estavam com sérias dificuldades para entender algumas coisas muito simples. Diferente dele, eu costumo ser um pouco mais brincalhão em minhas aulas e me aproximo mais dos alunos. Neste dia, brincando com as crianças eu disse que quem errasse uma pergunta levaria um cascudo na cabeça, mas para cada pergunta certa eu daria um beliscão no professor deles. Adivinhem, tivemos um excelente aproveitamento da aula e não precisei dar cascudo em nenhuma criança. :)</p>
-
-<p>O ser humano precisa ser desafiado. Pagar bem para um profissional fazer um trabalho desinteressante e sem valor não desperta paixão em ninguém. É por isto que uma startup, mesmo com uma equipe menor (e com salários menores também) muitas vezes conseguem competir com grandes corporações. É o desafio que motiva as pessoas a fazerem coisas grandiosas.</p>
-
-<h2>Programadores precisam ser desafiados</h2>
-
-
-<p>Não existe ninguém que goste mais de desafios que os programadores. Pegue um código escrito por alguém, e sem avisá-lo altere para deixá-lo mais rápido ou mais elegante, e você com certeza estará ganhando um inimigo mortal. Acho que os quadrinhos abaixo ilustram isto muito bem:</p>
-
-<p><img class="aligncenter size-full wp-image-2563" title="geek-hero-panel-1" src="http://old.nomedojogo.com/wp-content/uploads/2009/06/geek-hero-panel-1.jpg" alt="geek-hero-panel-1" /></p>
-
-<p><img class="aligncenter size-full wp-image-2564" title="geek-hero-panel-2" src="http://old.nomedojogo.com/wp-content/uploads/2009/06/geek-hero-panel-2.jpg" alt="geek-hero-panel-2" /></p>
-
-<p>Alguns anos atrás eu trabalhei em um projeto onde havia um programador na equipe que já estava trabalhando para o mesmo cliente por algum tempo e já possuía um excelente domínio dos negócios daquele cliente. Sendo assim, ele assumiu a responsabilidade de escrever um código que envolvia uma regra de negócio um pouco mais complicada. Lembro que quando vi o código, pela primeira vez depois de pronto, levei um susto tremendo. O código era macarrônico e tinha quase 1.000 linhas. Era simplesmente incompreensível.</p>
-
-<p>Por profundo respeito ao amigo, não comentei nada sobre o código na hora. Depois de algumas semanas houve uma mudança em uma regra que envolvia realizar uma alteração em algum ponto daquele emaranhado de código. Um outro programador da equipe assumiu o desafio. Horas depois ele desistiu. Como o pai da criança estava presente, ele acabou assumindo e resolvendo o problema.</p>
-
-<p>Pressentindo que aquele código poderia se tornar um problema no futuro, o gerente do projeto solicitou ao programador que ele refatorasse o código afim de deixá-lo mais intuitivo e fácil manutenção. Embora ele tenha melhorado um pouco o código, não posso dizer que o resultado era o esperado.</p>
-
-<p>Passaram-se mais alguns dias e mais uma vez tornou-se necessário alterar algo naquele maldito código. Desta vez, outro programador foi designado para fazer isto. Depois de um tempo tentando entender o que aquele código fazia ele também se cansou e após mostrar o código para o gerente do projeto e receber sua aprovação, ele começou a refazer o código de uma forma que todos pudessem entende-lo. Mas como o dia já estava chegando ao fim, ele deixou para terminar o trabalho no dia seguinte.</p>
-
-<p>A surpresa foi que no dia seguinte ao chegar na empresa o programador original do código já havia refeito todo o código de uma forma muito mais inteligente. De alguma maneira ele soube que seu código seria refeito por outro programador, e ao invés de ir para casa ele passou a noite em claro refazendo todo o código. Somente após se sentir desafiado é que aquele profissional se motivou para fazer seu trabalho da maneira certa, e confesso que ele realmente conseguiu acertar.</p>
-
-<p>Claro que existem formas mais elegantes de se desafiar um profissional, mas eu considero interessante analisar o efeito do desafio na vida de uma pessoa. No caso acima, o programador se privou do sono e do seu merecido descanso, afim de encarar um desafio.</p>
-
-<p>Como motivar um programador? Eu acredito seriamente que o segredo está em dar um propósito a ele, incumbi-lo de um trabalho que tenha um verdadeiro valor, que acrescente algo de importante em nosso mundo. Eu quero deixar a minha marca no universo, quero ser desafiado, quero mostrar porque estou aqui. Me dê um desafio a altura e eu te mostrarei o que é paixão.</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/9/">&larr; Antigos</a>
@@ -1047,6 +1143,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/06/enviando-o-link-da-pagina-atual-por-e-mail/">Enviando o link da página atual por e-mail</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/05/heroku-add-ons-catalog/">Heroku Add-ons Catalog</a>
       </li>
     
@@ -1060,10 +1160,6 @@
     
       <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
   </ul>

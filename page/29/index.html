@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="O método error_message_on é extremamente útil. Com ele podemos exibir mensagens de erro retornadas por determinados métodos em um objeto de uma forma &hellip;">
+  <meta name="description" content="Pelo menos em partes eu estava certo&#8230; clique aqui. Não posso afirmar que o TibiaBR foi o culpado pela fraude, pode ser que não devido a grande &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,65 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/08/25/sobre-o-premio-podcast-2008/">Sobre o Prêmio Podcast 2008</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-08-25T00:00:00-03:00" pubdate data-updated="true">25 de Agosto de 2008</time>
+        
+        <a rel="bookmark" href="/2008/08/25/sobre-o-premio-podcast-2008/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p style="text-align: center;"><img class="aligncenter" src="http://twictur.es/i/894675815.gif" alt="" width="440" height="145" /></p>
+
+
+<p style="text-align: left;">Pelo menos em partes eu estava certo&#8230; <a href="http://www.blog.premiopodcast.com.br/?p=10">clique aqui</a>.</p>
+
+
+<p style="text-align: left;">Não posso afirmar que o TibiaBR foi o culpado pela fraude, pode ser que não devido a grande comunidade em torno do jogo, mas muitos podcast que estavam entre os primeiros colocados não chegavam nem perto de serem bons podcasts.</p>
+
+
+<p style="text-align: left;">De qualquer forma o concurso está suspenso até segunda ordem.</p>
+
+</div>
+
+
+    </article>
   
     
     
@@ -708,95 +767,6 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/08/15/edge-rails-melhorando-a-performance-usando-etags/">Edge Rails: Melhorando a performance usando ETags</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-08-15T00:00:00-03:00" pubdate data-updated="true">15 de Agosto de 2008</time>
-        
-        <a rel="bookmark" href="/2008/08/15/edge-rails-melhorando-a-performance-usando-etags/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>O Carlos Júnior já escreveu sobre isto no blog da <a href="http://tas.milk-it.net/carlos/novo-no-rails-edge-suporte-simples-a-conditional-get-etags/">milk-it</a>. Provavelmente teremos suporte a <strong>ETags</strong> no Rails 2.2. Eu disse provavelmente porque isto ainda não foi incluído no branch oficial do Rails, mas como é algo importante e está sendo feito pelo core team, é quase certo de que será.</p>
-
-<p>Antes de começar a falar sobre isto, deixa eu tentar explicar o que são <strong>ETags</strong> (Entity Tags). <strong>Etags</strong> seriam de uma forma grosseira identificadores associados a cada recurso para determinar se o arquivo que está no servidor é o mesmo que está no cache do browser. No caso, o recurso seria uma página em HTML, mas também poderia ser um XML ou JSON.</p>
-
-<p>Cabe ao servidor a responsabilidade de verificar se o recurso solicitado é igual dos dois lados. Caso o servidor confirme que o recurso armazenado no cache do browser do usuário é exatamente o mesmo que seria enviado de volta para ele, ao invés de devolver todo o conteúdo do recurso novamente ele apenas retorna um <a href="http://www.nomedojogo.com/2008/07/14/http-status-code-no-rails/">status</a> <strong>304</strong> (<strong>Not Modified</strong>) e o browser usará o que está em seu cache.</p>
-
-<p>Servidores Web como o <strong>Apache</strong> e o <strong>IIS</strong> já sabem fazer isto para página estáticas. Mas quando o conteúdo é dinâmico, como na maioria das páginas de um projeto Ruby on Rails, a responsabilidade é todo nossa.</p>
-
-<p>O objeto <strong>response</strong> ganhou dois novos métodos, o <strong>last_modified=</strong> e o <strong>etag=</strong> (note o sinal de igualdade &#8220;=&#8221;). Quando você atribuir valores a estes métodos eles serão repassados aos cabeçalhos <strong>HTTP_IF_MODIFIED_SINCE</strong> e <strong>HTTP_IF_NONE_MATCH</strong> respectivamente. Quando uma nova requisição (<strong>request</strong>) deste recurso for feita ela retornará com estes cabeçalhos permitindo que você possa comparar com o novo valor informado no <strong>response</strong> e decidir se quer enviar todo o conteúdo do recurso novamente ou apenas um status <strong>304</strong>.</p>
-
-<p>Vamos ao código (roubando o exemplo dado por <a href="http://ryandaigle.com/articles/2008/8/14/what-s-new-in-edge-rails-simpler-conditional-get-support-etags">Ryan Daigle</a> no seu blog):</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_controller"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">ArticlesController<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ApplicationController</span></span></span>
-  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">show</span></span>
-    <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>article</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Article</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>params<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>id</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">    <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> informado o identificador
-</span>    response<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>last_modified <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>article</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>published_at<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>utc
-    response<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>etag <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>article</span>
-
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">    <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> verificando se houve mudanças
-</span>    <span class="keyword keyword_control keyword_control_ruby">if</span> request<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>fresh?<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>response<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-      head <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>not_modified</span>
-    <span class="keyword keyword_control keyword_control_ruby">else</span>
-      <span class="support support_function support_function_actionpack support_function_actionpack_rails">respond_to</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">wants</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">        <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> retornando conteúdo normalmente
-</span>      <span class="keyword keyword_control keyword_control_ruby">end</span>
-    <span class="keyword keyword_control keyword_control_ruby">end</span>
-</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-
-
-<p>Note que estou atribuindo valores para <strong>response.last_modified</strong> e <strong>response.etag</strong>, e logo em seguinda usando o método <strong>request.fresh?(response)</strong> para determinar se houve alguma mudança ou não. Caso os dois cabeçalhos continuem iguais eu apenas retorno um status <strong>304</strong> e o browser do usuário usará o conteúdo que está armazenado no seu cache.</p>
-
-<p>Quanto ao método <strong>etag</strong>, também podemos passar um <strong>array</strong> se for o caso:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">response<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>etag <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>article</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> current_user<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span></span></pre>
-
-
-<p>A forma como foi implementado isto no Rails está causando um certo desconforto em muita gente e várias outras formas foram sugeridas pela comunidade, então possivelmente isto pode mudar antes do lançamento da versão 2.2.</p>
-
-<p>Veja algumas sugestões dadas: <a href="http://pastie.org/252869">in_modified_scope</a> e <a href="http://pastie.org/253302">with_etag_cache</a>.</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/30/">&larr; Antigos</a>
@@ -814,6 +784,10 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/06/enviando-o-link-da-pagina-atual-por-e-mail/">Enviando o link da página atual por e-mail</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/05/heroku-add-ons-catalog/">Heroku Add-ons Catalog</a>
       </li>
     
@@ -827,10 +801,6 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
     
       <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
   </ul>

@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Foto de GeorgieR Além do map.resources, há também uma forma singular (ou &#8221;singleton&#8221;) de rotear recursos: map.resource. Esta forma é &hellip;">
+  <meta name="description" content="Performance é coisa séria, e um dos métodos mais usados para aumentar a velocidade de execução em códigos é o uso de cache. Quem nunca fez algo assim &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,79 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/07/18/edge-rails-introduzindo-memoizable-para-cache-de-atributos/">Edge Rails: Introduzindo Memoizable para cache de atributos</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-07-18T00:00:00-03:00" pubdate data-updated="true">18 de Julho de 2008</time>
+        
+        <a rel="bookmark" href="/2008/07/18/edge-rails-introduzindo-memoizable-para-cache-de-atributos/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>Performance é coisa séria, e um dos métodos mais usados para aumentar a velocidade de execução em códigos é o uso de cache. Quem nunca fez algo assim?</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Person<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
+  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">age</span></span>
+    <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>age</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_augmented keyword_operator_assignment_augmented_ruby">||=</span> um_calculo_muito_complexo
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span>
+</span></pre>
+
+
+<p>Na próxima versão do Rails teremos uma forma mais elegante de fazer isto usando o método <strong>memoize</strong> (é memoize mesmo e não memorize). Vamos alterar o exemplo acima para funcionar com esta nova funcionalidade:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Person<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
+  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">age</span></span>
+    um_calculo_muito_complexo
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+  memoize <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>age</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+<p>O método <strong>age</strong> será executado apenas uma vez e o seu retorno será armazenado e retornado em futuras chamadas ao método.</p>
+
+<p>Só existe uma diferença entre os dois códigos acima. No primeiro, como o método é executado todas as vezes, se o valor armazenado na variável <strong>@age</strong> for <strong>nil</strong> ou <strong>false</strong> o cálculo (muito complexo) será executado novamente até termos a idade da pessoa.</p>
+
+<p>No segundo exemplo, o método <strong>age</strong> só será executado uma vez e o valor retornado será sempre devolvido nas próximas chamadas, mesmo que seja <strong>nil</strong> ou <strong>false</strong>.</p>
+</div>
+
+
+    </article>
   
     
     
@@ -984,73 +1057,6 @@ Uma execução brilhante = $10,000,000
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/07/09/edge-rails-definindo-como-o-metodo-validates_length_of-deve-funcionar/">Edge Rails: Definindo como o método validates_length_of deve funcionar</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-07-09T00:00:00-03:00" pubdate data-updated="true"> 9 de Julho de 2008</time>
-        
-        <a rel="bookmark" href="/2008/07/09/edge-rails-definindo-como-o-metodo-validates_length_of-deve-funcionar/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>O método <a href="http://rails-doc.org/docs/ActiveModel/Validations/ClassMethods/validates_length_of">validates_length_of</a> faz parte dos muitos métodos de validação contidos no <strong>ActiveRecord</strong>. Este método em particular serve para garantir que o valor gravado em uma determinada coluna no banco de dados terá um tamanho máximo, mínimo, exato, ou até mesmo se está em um intervalo de valores.</p>
-
-<p>Mas o termo &#8220;tamanho&#8221; é relativo. Hoje quando dizemos &#8220;tamanho&#8221; estamos nos referindo a quantidade de caracteres no texto.</p>
-
-<p>Mas imagine um caso onde eu tenha um campo em um formulário onde a limitação não seja definida pela quantidade de caracteres e sim pela quantidade de palavras, algo como &#8220;escreva um texto com no mínimo 100 palavras&#8221;. Imagine uma página onde o usuário tenha de redigir uma redação, por exemplo.</p>
-
-<p>Hoje, para validar isto não teríamos outra escolha senão criarmos um novo método que faça esta validação. Mas na próxima versão do Rails poderemos personalizar o método <strong>validates_length_of</strong> para funcionar da forma como desejamos usando a opção <strong>:tokenizer</strong>.</p>
-
-<p>Veja um exemplo que resolveria o problema citado acima:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_function support_function_activerecord support_function_activerecord_rails">validates_length_of</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>essay</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
-                    <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>minimum</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">100</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
-                    <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>too_short</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Sua redação deve ter no mínimo %d palavras.<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
-                    <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>tokenizer</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> lambda <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">str</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> str<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>scan<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_regexp string_regexp_classic string_regexp_classic_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span><span class="constant constant_character constant_character_escape constant_character_escape_ruby">\w</span>+<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_ruby">/</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span></span></pre>
-
-
-<p>Este é apenas um exemplo do que podemos fazer com esta nova opção. Além disso podemos usa-lá para contar apenas a quantidade de dígitos, menções de uma única palavra, etc..</p>
-
-<p>E então, como você fará uso dessa opção?</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/34/">&larr; Antigos</a>
@@ -1068,6 +1074,10 @@ Uma execução brilhante = $10,000,000
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/06/enviando-o-link-da-pagina-atual-por-e-mail/">Enviando o link da página atual por e-mail</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/05/heroku-add-ons-catalog/">Heroku Add-ons Catalog</a>
       </li>
     
@@ -1081,10 +1091,6 @@ Uma execução brilhante = $10,000,000
     
       <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
   </ul>

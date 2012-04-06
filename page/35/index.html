@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Mais uma tradução acabou de sair do forno, desta vez em italiano. Quero parabenizar o meu amigo Carlo Pecchia por coodenar o processo de tradução &hellip;">
+  <meta name="description" content="Uma nova opção foi incluída aos métodos de cálculos do ActiveRecord (count, sum, average, minimum e maximum). Ao fazer uso da opção :from, podemos &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,67 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/06/27/edge-rails-nova-opcao-from-para-metodos-de-calculo-do-activerecord/">Edge Rails: Nova opção :from para métodos de cálculo do ActiveRecord</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-06-27T00:00:00-03:00" pubdate data-updated="true">27 de Junho de 2008</time>
+        
+        <a rel="bookmark" href="/2008/06/27/edge-rails-nova-opcao-from-para-metodos-de-calculo-do-activerecord/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>Uma nova opção foi incluída aos métodos de cálculos do <strong>ActiveRecord</strong> (<strong>count</strong>, <strong>sum</strong>, <strong>average</strong>, <strong>minimum</strong> e <strong>maximum</strong>).</p>
+
+<p>Ao fazer uso da opção <strong>:from</strong>, podemos sobrecarregar o nome da tabela na query gerada pelo <strong>ActiveRecord</strong>, o que não parece muito útil em um primeiro momento. Mas algo interessante que esta opção nos permite fazer é forçar o MySQL a usar um índice especifico ao realizar o cálculo desejado.</p>
+
+<p>Veja alguns exemplos de uso:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Forçando o MySQL a usar um índice para realizar o cálculo
+</span><span class="support support_class support_class_ruby">Edge</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>count <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>all</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>from</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>edges USE INDEX(unique_edge_index)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
+           <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>conditions</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>sink_id &lt; 5<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Realizando o cálculo em uma tabela diferente da associada a classe
+</span><span class="support support_class support_class_ruby">Company</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>count <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>all</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>from</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>accounts<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span></pre>
+
+</div>
+
+
+    </article>
   
     
     
@@ -705,80 +766,6 @@ b <span class="keyword keyword_operator keyword_operator_assignment keyword_oper
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/06/21/ruby-on-rails-21-2/">Ruby on Rails 2.1 - の変更</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-06-21T00:00:00-03:00" pubdate data-updated="true">21 de Junho de 2008</time>
-        
-        <a rel="bookmark" href="/2008/06/21/ruby-on-rails-21-2/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p><img class="aligncenter size-full wp-image-800" title="2287901139_d4f8a4d212" src="http://old.nomedojogo.com/wp-content/uploads/2008/06/2287901139_d4f8a4d212.jpg" alt="" /></p>
-
-<h6>Photo by <a title="Link to bananagranola's photostream" href="http://flickr.com/photos/bananagranola/"><strong>bananagranola</strong></a></h6>
-
-
-<h4>Português</h4>
-
-
-<p>Acabou de sair uma versão alpha da tradução do livro &#8221;<a href="http://www.nomedojogo.com/2008/06/06/o-primeiro-livro-sobre-rails-21-e-brasileiro/">Ruby on Rails - O que há de novo?</a>&#8221; em <strong>japonês</strong>.</p>
-
-<p>O livro foi traduzido por <a href="http://blog.yoidore.org/">Hirobumi Hama</a>, que fez o trabalho praticamente sozinho. Como não entendo nada de japonês, não sei dizer se tem muita coisa para ser corrigida até uma versão final, mas com este lançamento, acredito que a comunidade japonesa deve colaborar e em breve teremos uma versão final lançada.</p>
-
-<p>Quero agradecer ao <strong>Hama</strong>, por este excelente trabalho e espero que ele também colha bons frutos com este trabalho!</p>
-
-<p>Para fazer o download da versão em japonês, <a href="http://www.box.net/shared/s90wjdickk">clique aqui</a>.</p>
-
-<h4>English</h4>
-
-
-<p>An alpha version of the &#8221;<a href="http://www.nomedojogo.com/2008/06/09/new-free-book-ruby-on-rails-21-whats-new/">Ruby on Rails - What&#8217;s new?</a>&#8221; in <strong>Japanese</strong> has just been released.</p>
-
-<p>The book was translated by <a href="http://blog.yoidore.org/">Hirobumi Hama</a>, who did the work almost alone. I don&#8217;t understand Japanese, so I don&#8217;t know if have a lot to be fixed to a final version, but with this release, I believe that the Japanese community will work and a final version will be released soon.</p>
-
-<p>Congratulations to <strong>Hama</strong> for his excellent work and I hope he will reap good results from his hard work!</p>
-
-<p>To download the Japanese version <a href="http://www.box.net/shared/s90wjdickk">click here</a>.</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/36/">&larr; Antigos</a>
@@ -796,6 +783,10 @@ b <span class="keyword keyword_operator keyword_operator_assignment keyword_oper
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/06/enviando-o-link-da-pagina-atual-por-e-mail/">Enviando o link da página atual por e-mail</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/05/heroku-add-ons-catalog/">Heroku Add-ons Catalog</a>
       </li>
     
@@ -809,10 +800,6 @@ b <span class="keyword keyword_operator keyword_operator_assignment keyword_oper
     
       <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
   </ul>

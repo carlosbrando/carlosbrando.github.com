@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Faça o Teste, crie um projeto Rails 2.0 (você já sabe fazer isto né?) e execute o comando abaixo: ./script/generate scaffold Post title:string body: &hellip;">
+  <meta name="description" content="Conhece o método atom_feed? Ele é uma novidade no Rails 2.0, que facilitou muito a criação de feeds Atom. Veja um exemplo de uso: Em um arquivo &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,125 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/01/17/edge-rails-atom-feed-turbinado/">Edge Rails: Atom Feed turbinado</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-01-17T00:00:00-02:00" pubdate data-updated="true">17 de Janeiro de 2008</time>
+        
+        <a rel="bookmark" href="/2008/01/17/edge-rails-atom-feed-turbinado/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/01/286440543_052e5d6260.jpg" alt="286440543_052e5d6260.jpg" /></p>
+
+<p>Conhece o método <span style="font-weight: bold">atom_feed</span>? Ele é uma novidade no <span style="font-style: italic; font-weight: bold">Rails 2.0</span>, que facilitou muito a criação de feeds Atom. Veja um exemplo de uso:</p>
+
+<p>Em um arquivo index.atom.builder:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">atom_feed <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">feed</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+  feed<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Nome do Jogo<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+  feed<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>updated<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">((</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>posts</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>first<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>created_at<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">))</span>
+
+  <span class="keyword keyword_control keyword_control_ruby">for</span> post <span class="keyword keyword_control keyword_control_ruby">in</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>posts</span>
+    feed<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>entry<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>post<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">entry</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+      entry<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>post<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+      entry<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>content<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>post<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>body<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>type</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>html<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+
+      entry<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>author <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">author</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+        author<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>name<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Carlos Brando<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+      <span class="keyword keyword_control keyword_control_ruby">end</span>
+    <span class="keyword keyword_control keyword_control_ruby">end</span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+
+
+<h3>Mas, o que é um atom feed?</h3>
+
+
+<p>Hmm&#8230; ok, tem bastante gente nova na área lendo este blog, então é melhor explicar o que é um Atom Feed.</p>
+
+<p>Atom é o nome de um estilo baseado em XML e meta data. Em outras palavras é um protocolo quer serve para publicar conteúdo na internet que é sempre atualizado, como este blog, por exemplo. Os feeds sempre são publicados em XML e no caso do Atom Feed ele é identificado como application/atom+xml media type.</p>
+
+<p>Se mesmo assim você não entendeu, <a href="http://feeds.feedburner.com/NomeDoJogo">clique aqui</a> para ver o que é um feed. Neste caso é um RSS Feed, mas é quase a mesma coisa. Quase, porque o Atom é um pouco mais sofisticado que o RSS.</p>
+
+<h3>Ok, entendi, e o que tem de novo neste método?</h3>
+
+
+<p>Vamos lá&#8230;</p>
+
+<p>Atualmente este método aceita como parâmetros as opções <span style="font-weight: bold">:language</span>, <span style="font-weight: bold">:root_url</span> e <span style="font-weight: bold">:url</span>, para mais informações sobre este método <a href="http://rails.rubyonrails.org/classes/ActionView/Helpers/AtomFeedHelper.html#M000931">clique aqui</a>. Mas com a alteração realizada agora podemos incluir novos namespaces ao elemento root do feed. Por exemplo, se fizermos assim:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">atom_feed<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>xmlns:app<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>http://www.w3.org/2007/app<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">feed</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span></span></pre>
+
+
+<p>Ele retornará isto:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&lt;</span>feed xml<span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>lang=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>en-US<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> xmlns<span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>http://www.w3.org/2005/Atom<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span> xmlns<span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>app=</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>http://www.w3.org/2007/app<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">&gt;</span></span></pre>
+
+
+<p>Adaptando o exemplo anterior, poderíamos usá-lo assim:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">atom_feed<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>xmlns:app<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>http://www.w3.org/2007/app<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
+           <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>xmlns:openSearch<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>http://a9.com/-/spec/opensearch/1.1/<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">feed</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+
+  feed<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Nome do Jogo<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+  feed<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>updated<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">((</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>posts</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>first<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>created_at<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">))</span>
+  feed<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>tag!<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>openSearch<span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>totalResults</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">10</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+
+  <span class="keyword keyword_control keyword_control_ruby">for</span> post <span class="keyword keyword_control keyword_control_ruby">in</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>posts</span>
+    feed<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>entry<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>post<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">entry</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+      entry<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>post<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+      entry<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>content<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>post<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>body<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>type</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>html<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+      entry<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>tag!<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>app:edited<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>now<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+
+      entry<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>author <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">author</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+        author<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>name<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Carlos Brando<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+      <span class="keyword keyword_control keyword_control_ruby">end</span>
+    <span class="keyword keyword_control keyword_control_ruby">end</span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+</div>
+
+
+    </article>
   
     
     
@@ -782,100 +901,6 @@ config<span class="punctuation punctuation_separator punctuation_separator_metho
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/01/03/edge-rails-titleize-increment-e-dry/">Edge Rails: Titleize, increment e DRY</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-01-03T00:00:00-02:00" pubdate data-updated="true"> 3 de Janeiro de 2008</time>
-        
-        <a rel="bookmark" href="/2008/01/03/edge-rails-titleize-increment-e-dry/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/01/92697433_aa5c016a77.jpg" alt="92697433_aa5c016a77.jpg" /></p>
-
-<p>David acabou de publicar algumas alterações no trunk do Rails. Vamos a elas:</p>
-
-<h3>Rails:update</h3>
-
-
-<p>A partir de agora toda vez que rodarmos a tarefa &#39;<strong>rake rails:freeze:edge</strong>&#39; também será executado o &#39;<strong>rails:update</strong>&#39;, atualizando os arquivos de configuração e JavaScript. Esta é uma alteração simples mas importante, porque na maioria das vezes que congelamos uma versão do Rails em nosso projeto, precisamos rodar um &#39;<strong>rake rails:update</strong>&#39;, mas muita gente se esquece disso. Agora não será mais necessário.</p>
-
-<h3>Titleize</h3>
-
-
-<p>Existe um bug no método <strong>String#titleize</strong> quando tentamos usá-lo em uma string que contenha o <em><strong>&#39;s</strong></em>. Faça um teste no console de sua aplicação Rails executando o código abaixo:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="keyword keyword_operator keyword_operator_other keyword_operator_other_ruby">&gt;&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>brando's blog<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>titleize
-<span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Brando'S Blog<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span></span></pre>
-
-
-<p>Notou que o <em><strong>&#39;s</strong></em> retornou maiúsculo? Este problema foi corrigido. Se você executar o mesmo código na versão Edge do Rails, o retorno será o texto correto: &quot;Brando&#39;s Blog&quot;.</p>
-
-<h3>Increment e decrement</h3>
-
-
-<p>Os métodos <strong>increment</strong>, <strong>increment!</strong>, <strong>decrement</strong> e <strong>decrement!</strong> do <em><strong>ActiveRecord</strong></em> receberam mais um par&acirc;metro como opcional. Hoje você pode usar estes métodos para aumentar ou diminuir o valor de uma coluna em 1 (um). Mas a partir da próxima versão do Rails você poderá especificar o valor a ser adicionado ou subtraído se desejar. Assim:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">player1<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>increment!<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>points</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">5</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-player2<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>decrement!<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>points</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">2</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
-
-
-<p>No exemplo acima estou somando 5 à pontuação atual do jogador 1 e subtraindo 2 da pontuação atual do jogador 2. Como este par&acirc;metro é opcional, os seus códigos antigos não serão afetados.</p>
-
-<h3>127.0.0.1 e DRY</h3>
-
-
-<p>Em um <a href="http://www.nomedojogo.com/2007/12/16/edge-rails-%e2%80%93-ruby-19-seguranca-e-muito-zelo/">post antigo</a> eu mencionei que o arquivo <a href="http://dev.rubyonrails.org/browser/trunk/railties/lib/tasks/databases.rake?rev=8388">databases.rake</a> havia sido alterado para suportar o <strong>IP 127.0.0.1</strong> na tarefa <em><strong>create</strong></em>. Agora isto foi estendido para a tarefa <em><strong>drop</strong></em> e o arquivo recebeu um <em>refactory</em> para tornar o código menos repetitivo.</p>
-
-<h4>Referências:</h4>
-
-
-<ul>
-    <li><a href="http://dev.rubyonrails.org/ticket/10565">Change rails:freeze:edge to call rails:update automatically</a></li>
-    <li><a href="http://dev.rubyonrails.org/ticket/10571">Titleize doesn&#8217;t work correctly on &#8220;alex&#8217;s beer&#8221;</a></li>
-    <li><a href="http://dev.rubyonrails.org/ticket/10542">Add optional by parameter to AR increment/decrement</a></li>
-    <li><a href="http://dev.rubyonrails.org/ticket/10539">Add 127.0.0.1 to drop and refactor</a></li>
-</ul>
-
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/59/">&larr; Antigos</a>
@@ -893,6 +918,10 @@ player2<span class="punctuation punctuation_separator punctuation_separator_meth
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/06/enviando-o-link-da-pagina-atual-por-e-mail/">Enviando o link da página atual por e-mail</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/05/heroku-add-ons-catalog/">Heroku Add-ons Catalog</a>
       </li>
     
@@ -906,10 +935,6 @@ player2<span class="punctuation punctuation_separator punctuation_separator_meth
     
       <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
   </ul>

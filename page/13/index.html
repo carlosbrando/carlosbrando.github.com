@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Mais um evento sobre Ruby on Rails em São Paulo, desta vez promovido pelo grupo Guru-SP (Grupo de Usuários Ruby de São Paulo). A idéia do evento é &hellip;">
+  <meta name="description" content="Good times! It has been just one week since I announced Diego Carrion and José Valim as members of the Remarkable core team and we already put some &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,160 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2009/02/10/remarkable-now-supports-all-activerecord-validations/">Remarkable now supports all ActiveRecord validations</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-02-10T00:00:00-02:00" pubdate data-updated="true">10 de Fevereiro de 2009</time>
+        
+        <a rel="bookmark" href="/2009/02/10/remarkable-now-supports-all-activerecord-validations/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>Good times! It has been just one week since I announced <a href="http://www.diegocarrion.com/">Diego Carrion</a> and <a href="http://josevalim.blogspot.com/">José Valim</a> as members of the <a href="http://github.com/carlosbrando/remarkable/tree/master">Remarkable</a> core team and we already put some effort into making a new shiny release! We are going to cover what&#8217;s new on this <a href="http://github.com/carlosbrando/remarkable/tree/master">Remarkable</a> version, step by step.</p>
+
+<h2>1. All ActiveRecord validations are supported with all options</h2>
+
+
+<p>In other words, you can write your spec validation macros the same way as you do in <code>ActiveRecord</code>, without consulting the documentation, without worrying if any validation is supported or not, without checking which options are allowed or not. Check it out:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rspec"><span class="meta meta_rspec meta_rspec_behaviour"><span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_behaviour">describe</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">User</span> <span class="keyword keyword_control keyword_control_ruby keyword_control_ruby_start-block">do</span></span>
+<span class="meta meta_rspec meta_rspec_pending">  <span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_pending">it</span> <span class="string string_ruby">{ should validate_uniqueness_of(:email) }</span></span>
+<span class="meta meta_rspec meta_rspec_pending">  <span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_pending">it</span> <span class="string string_ruby">{ should validate_presence_of(:email, :password) }</span></span>
+<span class="meta meta_rspec meta_rspec_pending">  <span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_pending">it</span> <span class="string string_ruby">{ should validate_confirmation_of( :email, :password) }</span></span>
+
+<span class="meta meta_rspec meta_rspec_pending">  <span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_pending">it</span> <span class="string string_ruby">{ should validate_acceptance_of(:terms) }</span></span>
+<span class="meta meta_rspec meta_rspec_pending">  <span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_pending">it</span> <span class="string string_ruby">{ should validate_inclusion_of(:gender, %w(m f), :message =&gt; 'whoa! what are you then?') }</span></span>
+<span class="meta meta_rspec meta_rspec_pending">  <span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_pending">it</span> <span class="string string_ruby">{ should validate_length_of(:password, :within =&gt; 6..20) }</span></span>
+<span class="meta meta_rspec meta_rspec_pending">  <span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_pending">it</span> <span class="string string_ruby">{ should validate_numericality_of(:age, :greater_than_or_equal_to =&gt; 18, :allow_nil =&gt; false) }</span></span>
+
+<span class="meta meta_rspec meta_rspec_pending">  <span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_pending">it</span> <span class="string string_ruby">{ should allow_mass_assignment_of(:password, :email) }</span></span>
+<span class="meta meta_rspec meta_rspec_pending">  <span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_pending">it</span> <span class="string string_ruby">{ should not_allow_mass_assignment_of(:salt, :hashed_password) }</span></span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+<p>Or if you prefer:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rspec"><span class="meta meta_rspec meta_rspec_behaviour"><span class="keyword keyword_other keyword_other_rspec keyword_other_rspec_behaviour">describe</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">User</span> <span class="keyword keyword_control keyword_control_ruby keyword_control_ruby_start-block">do</span></span>
+  should_validate_uniqueness_of <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>email</span>
+  should_validate_presence_of <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>email</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>password</span>
+  should_validate_confirmation_of <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>email</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>password</span>
+
+  should_validate_acceptance_of <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>terms</span>
+  should_validate_inclusion_of <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>gender</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_other string_quoted_other_literal string_quoted_other_literal_lower string_quoted_other_literal_lower_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">%w(</span>m f<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">)</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>message</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>whoa! what are you then?<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span>
+  should_validate_length_of <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>password</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>within</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">6</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">..</span><span class="constant constant_numeric constant_numeric_ruby">20</span>
+  should_validate_numericality_of <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>age</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>greater_than_or_equal_to</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">18</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>allow_nil</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">false</span>
+
+  should_allow_mass_assignment_of <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>password</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>email</span>
+  should_not_allow_mass_assignment_of <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>salt</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>hashed_password</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+<p>We <a href="http://wiki.github.com/carlosbrando/remarkable/active-record-macros">updated the wiki</a> and it&#8217;s already reflecting the new macros. But you might ask, what happened with the older ones? The older ones are going to be deprecated and you will see a message while running the tests.</p>
+
+<p>What you might have noticed above is that <code>should_protect_attributes</code> now became <code>should_not_allow_mass_assignment_of</code>. This one was based on Shoulda last changes, so who are porting tests from Shoulda gets everything compatible.</p>
+
+<h2>2. Pending macros</h2>
+
+
+<p>We are not just bringing macros to Rspec, we are bringng Rspec to macros! So let&#8217;s suppose you are doing some code refactoring and you know some tests will fail while you clean the house, what do you do then?</p>
+
+<p>In Rspec, you can do:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rspec">xit <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span>should validate_numericality_of<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>age</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span></span></pre>
+
+
+<p>Well, now you can do just the same with macros:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">xshould_validate_numericality_of <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>age</span></span></pre>
+
+
+<p>And it&#8217;s even better because it shows you a nice message:</p>
+
+<pre class="textmate-source"><span class="source source_shell"><span class="meta meta_scope meta_scope_group meta_scope_group_shell"><span class="meta meta_scope meta_scope_group meta_scope_group_shell"><span class="meta meta_scope meta_scope_group meta_scope_group_shell"><span class="meta meta_scope meta_scope_group meta_scope_group_shell"><span class="meta meta_scope meta_scope_group meta_scope_group_shell"><span class="meta meta_scope meta_scope_group meta_scope_group_shell"><span class="meta meta_scope meta_scope_group meta_scope_group_shell"><span class="meta meta_scope meta_scope_group meta_scope_group_shell"><span class="meta meta_scope meta_scope_group meta_scope_group_shell"><span class="meta meta_scope meta_scope_group meta_scope_group_shell">Example disabled: should validate numericality of age</span></span></span></span></span></span></span></span></span></span></span></pre>
+
+
+<p>Yeah!</p>
+
+<h2>3. Full I18n support</h2>
+
+
+<p>You know how validations macros (as <code>validate_presence_of</code>) work? Let&#8217;s talk about it a little bit.</p>
+
+<p>When you say that we should validate presence of e-mail, we set the e-mail to nil and save the object. Then we search in all error messages in e-mail, if it has a &#8220;can&#8217;t be blank&#8221; message, your validation is working properly and then the test passes, otherwise, the test fails. The problem is, if you change the error message in your application and do not change on the macro, we will never be able to find the message &#8220;can&#8217;t be blank&#8221; and then the tests will always pass.</p>
+
+<p>This is valid for almost rspec matchers, not only on Remarkable. But what&#8217;s new is, if you change the message using the I18n YAML files, we will find the message properly and you don&#8217;t have to pass <code>:message</code> in your macros. This is new and we are currently the only one doing this.</p>
+
+<p>But remember, if ever you set the message directly in your models like this:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rspec">validates_inclusion_of <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>gender</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_other string_quoted_other_literal string_quoted_other_literal_lower string_quoted_other_literal_lower_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">%w(</span>m f<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">)</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>message</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>whoa! what are you then?<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span></pre>
+
+
+<p>Don&#8217;t forget to do the same in your macros:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rspec">should_validate_inclusion_of <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>gender</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_other string_quoted_other_literal string_quoted_other_literal_lower string_quoted_other_literal_lower_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">%w(</span>m f<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">)</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>message</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>whoa! what are you then?<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span></pre>
+
+
+<p>Deal?</p>
+
+<h2>Conclusion</h2>
+
+
+<p><a href="http://github.com/carlosbrando/remarkable/tree/master">Remarkable is available on GitHub</a> and to install it, just do on your console:</p>
+
+<pre class="textmate-source"><span class="source source_shell">gem sources -a http://gems.github.com/
+sudo gem install <span class="string string_quoted string_quoted_double string_quoted_double_shell"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_shell">"</span>carlosbrando-remarkable<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_shell">"</span></span></span></pre>
+
+
+<p>And then on your <code>RAILS_ROOT/config/environment.rb</code>:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>gem <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>carlosbrando-remarkable<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>lib</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>remarkable<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>source</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>http://gems.github.com/<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span></span></pre>
+
+
+<h2>Any doubts? Any bug?</h2>
+
+
+<p>We want to hear you! So you can use the <a href="http://groups.google.com/group/remarkable-core">Remarkable google group</a>, our <a href="http://carlosbrando.lighthouseapp.com/projects/19775-remarkable/">bug tracking system</a>, Github comments, whatever suits you better!</p>
+
+<p>See you there!</p>
+</div>
+
+
+    </article>
   
     
     
@@ -997,94 +1151,6 @@ puts a<span class="punctuation punctuation_separator punctuation_separator_metho
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2009/01/27/edge-rails-escopos-dinamicos/">Edge Rails: Escopos Dinâmicos</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-01-27T00:00:00-02:00" pubdate data-updated="true">27 de Janeiro de 2009</time>
-        
-        <a rel="bookmark" href="/2009/01/27/edge-rails-escopos-dinamicos/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>Finders dinâmicos não são mais novidades no Ruby on Rails há muito tempo, qualquer um que já tenha trabalhado em um simples projeto Rails, já fez algo assim:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find_by_first_name_and_age<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Pedro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">20</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
-
-
-<p>Sabemos que o método acima não existe, mas graças aos finders dinâmicos podemos usá-lo para recuperar todos os usuários que tenham como primeiro nome ‘Pedro’ e 20 anos de idade.</p>
-
-<p>Outro recurso, um pouco mais novo, que também tem se mostrado muito útil são os named scopes. Com este recurso podemos definir um escopo como base para uma pesquisa. Por exemplo:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Article<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
-  <span class="support support_function support_function_activerecord support_function_activerecord_rails">named_scope</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>published</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>conditions</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>published</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">true</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
-</span><span class="keyword keyword_control keyword_control_ruby">end</span>
-
-<span class="support support_class support_class_ruby">Article</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>published<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>all <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>limit</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">5</span>
-</span></pre>
-
-
-<p>No exemplo acima estou usando o escopo <code>published</code> que ajustará minha pesquisa para que apenas artigos publicados sejam devolvidos, mas acrescentando o método <code>all</code> também posso limitar a quantidade de artigos retornados em cinco. Este tipo de flexibilidade não é possível em finders dinâmicos.</p>
-
-<p>Para resolver esta deficiência foi adicionado um novo recurso ao Rails chamado dynamic scopes (escopos dinâmicos). Imagine esta funcionalidade como uma mistura dos dois conceitos que acabamos de ver.</p>
-
-<p>Agora você poderá criar escopos de forma dinâmica, da mesma forma como já fazíamos através do <code>find_by</code>. Desta forma:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>scoped_by_first_name_and_age <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Pedro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">20</span></span></pre>
-
-
-<p>Mas com a vantagem de poder usar toda a flexibilidade de um escopo:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>scoped_by_first_name_and_age<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Pedro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">20</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>all<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>limit</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_numeric constant_numeric_ruby">5</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
-
-
-<p>Da mesma forma como fazíamos em escopos comuns, também podemos preceder um escopo com outro escopo:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">User</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>scoped_by_first_name<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Pedro<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>scoped_by_age<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">20</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
-
-
-<p>Enfim, mais um grande ganho à nossa produtividade.</p>
-
-<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.3/3.0 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades acompanhando a série <a href="../category/edge-rails/">Edge Rails</a>.</em>
-
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/14/">&larr; Antigos</a>
@@ -1102,6 +1168,10 @@ puts a<span class="punctuation punctuation_separator punctuation_separator_metho
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/06/enviando-o-link-da-pagina-atual-por-e-mail/">Enviando o link da página atual por e-mail</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/05/heroku-add-ons-catalog/">Heroku Add-ons Catalog</a>
       </li>
     
@@ -1115,10 +1185,6 @@ puts a<span class="punctuation punctuation_separator punctuation_separator_metho
     
       <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
   </ul>

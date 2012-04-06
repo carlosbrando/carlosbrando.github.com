@@ -9,8 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Vale muito a pena ver o vídeo: Eu vi no blog do Cris Dias.
-">
+  <meta name="description" content="Não tem problema. Acabei de falar com o Carlos Eduardo da e-Genial e ele me disse que as palestras serão gravadas e disponibilizadas no site depois &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,6 +99,63 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2007/11/13/nao-pode-participar-do-rails-for-kids/">Não pode participar do Rails for Kids?</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-11-13T00:00:00-02:00" pubdate data-updated="true">13 de Novembro de 2007</time>
+        
+        <a rel="bookmark" href="/2007/11/13/nao-pode-participar-do-rails-for-kids/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/11/159700685_1fc1e8125d.jpg" alt="159700685_1fc1e8125d.jpg" /></p>
+
+<p>Não tem problema.</p>
+
+<p>Acabei de falar com o <strong>Carlos Eduardo</strong> da <a href="http://www.egenial.com.br/">e-Genial</a> e ele me disse que as palestras serão gravadas e disponibilizadas no site depois do evento. Será um dia inteiro de palestras, então mesmo quem não puder ficar na frente do computador o dia todo, poderá assistir as palestras depois.</p>
+
+<p>Claro que é muito mais interessante assistir ao vivo e participar das palestras. Mas mesmo para quem não pode, não precisa se preocupar, pois você terá acesso a todo o conteúdo deste dia no site do <a href="http://www.egenial.com.br/railsforkids/">Rails for Kids</a>.</p>
+
+<p>E não se esqueça o evento é no dia <strong>15 de dezembro de 2007</strong> e custa apenas <strong>R$ 25,00</strong>, dinheiro que será totalmente doado para o <strong>Cotolengo -MS</strong>.</p>
+</div>
+
+
+    </article>
   
     
     
@@ -656,119 +712,6 @@ page<span class="punctuation punctuation_section punctuation_section_array punct
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2007/11/06/deixando-meus-metodos-de-pesquisa-mais-espertos/">Deixando meus métodos de pesquisa mais espertos</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-11-06T00:00:00-02:00" pubdate data-updated="true"> 6 de Novembro de 2007</time>
-        
-        <a rel="bookmark" href="/2007/11/06/deixando-meus-metodos-de-pesquisa-mais-espertos/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/11/1858685882_35f2f01bca.jpg" alt="1858685882_35f2f01bca.jpg" /></p>
-
-<p>Imagine o seguinte método:</p>
-
-<pre>
-def count_users(type)
-  User.count(:all, :conditions =&gt; ["type = ?", type])
-end</pre>
-
-
-<p>&Eacute; um método simples, que irá me retornar a quantidade de usuários de um determinado tipo. Agora, vamos testar nosso método (preste atenção aos comandos <strong>SQL</strong> gerados):</p>
-
-<pre>
-&gt;&gt; count_users(1)
-=&gt; 2
-SELECT count(*) AS count_all FROM users WHERE (type = 1)
-
-&gt;&gt; count_users(2)
-=&gt; 5
-SELECT count(*) AS count_all FROM users WHERE (type = 2)</pre>
-
-
-<p>Ok, até aqui tudo funciona perfeitamente, mas e se eu desejasse contar todos os usuários que tivessem a coluna <strong>type</strong> com o valor <strong>NULL</strong>?</p>
-
-<pre>
-&gt;&gt; count_users(nil)
-=&gt; 0
-SELECT count(*) AS count_all FROM users WHERE (type = NULL)</pre>
-
-
-<p>Opa, eu tenho um registro no meu banco com o valor <strong>NULL</strong>, mas o meu método retornou zero. O que saiu errado? Note a <strong>query</strong> gerado pelo comando, <strong>type = NULL </strong>está errado, deveríamos usar <strong>type IS NULL</strong>.</p>
-
-<p>Preciso alterar meu método:</p>
-
-<pre>
-def count_users(type)
-  User.count(:all, :conditions =&gt; {:type =&gt; type})
-end</pre>
-
-
-<p>Note que alterei a forma como o par&acirc;metro <strong>:conditions</strong> estava sendo usado. Neste caso especifico, meu método ficou muito mais robusto. Veja alguns exemplos:</p>
-
-<pre>
-&gt;&gt; count_users(1)
-=&gt; 2
-SELECT count(*) AS count_all FROM users WHERE (users."type" = 1)
-
-&gt;&gt; count_users(2)
-=&gt; 5
-SELECT count(*) AS count_all FROM users WHERE (users."type" = 2)
-
-&gt;&gt; count_users(nil)
-=&gt; 1
-SELECT count(*) AS count_all FROM users WHERE (users."type" IS NULL)
-
-&gt;&gt; count_users([1,3])
-=&gt; 3
-SELECT count(*) AS count_all FROM users WHERE (users."type" IN (1,3))
-
-&gt;&gt; count_users(1..3)
-=&gt; 8
-SELECT count(*) AS count_all FROM users WHERE (users."type" BETWEEN 1 AND 3)</pre>
-
-
-<p>Note que agora, mesmo passando <strong>nil</strong> ou um <strong>array</strong> para o método, ele criará a <strong>query</strong> de pesquisa da forma correta de acordo com o tipo do objeto usado.</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/65/">&larr; Antigos</a>
@@ -786,6 +729,10 @@ SELECT count(*) AS count_all FROM users WHERE (users."type" BETWEEN 1 AND 3)</pr
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/06/enviando-o-link-da-pagina-atual-por-e-mail/">Enviando o link da página atual por e-mail</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/05/heroku-add-ons-catalog/">Heroku Add-ons Catalog</a>
       </li>
     
@@ -799,10 +746,6 @@ SELECT count(*) AS count_all FROM users WHERE (users."type" BETWEEN 1 AND 3)</pr
     
       <li class="post">
         <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/11/07/ruby-em-todos-os-lugares-e-dispositivos/">Ruby em todos os lugares e dispositivos</a>
       </li>
     
   </ul>
