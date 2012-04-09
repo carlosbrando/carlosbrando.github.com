@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Algo muito comum, é quando o usuário clica no botão submit de um formulário, desejarmos que ele confirme a ação antes de prosseguir. Até agora para &hellip;">
+  <meta name="description" content="O ActiveRecord recebeu três novos métodos para pesquisa: all, first e last. Os três métodos são alias para os já conhecidos find(:all), find(:first) &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,63 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/03/31/edge-rails-uma-nova-velha-forma-de-pesquisar-dados-no-activerecord/">Edge Rails: Uma nova (velha) forma de pesquisar dados no ActiveRecord</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-03-31T00:00:00-03:00" pubdate data-updated="true">31 de Março de 2008</time>
+        
+        <a rel="bookmark" href="/2008/03/31/edge-rails-uma-nova-velha-forma-de-pesquisar-dados-no-activerecord/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>O ActiveRecord recebeu três novos métodos para pesquisa: <code>all</code>, <code>first</code> e <code>last</code>. Os três métodos são <strong>alias</strong> para os já conhecidos <code>find(:all)</code>, <code>find(:first)</code> e <code>find(:last)</code>.</p>
+
+<p>Em outras palavras, na hora de pesquisar seus dados, agora você poderá fazer assim:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Topic</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>all
+<span class="support support_class support_class_ruby">Topic</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>first
+<span class="support support_class support_class_ruby">Topic</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>last
+<span class="support support_class support_class_ruby">Topic</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>first<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>conditions</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>name = ?<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>Chris<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
+
+</div>
+
+
+    </article>
   
     
     
@@ -647,65 +704,6 @@
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/03/25/edge-rails-o-que-exatamente-o-metodo-findlast-retorna/">Edge Rails: O que exatamente o método find(:last) retorna?</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-03-25T00:00:00-03:00" pubdate data-updated="true">25 de Março de 2008</time>
-        
-        <a rel="bookmark" href="/2008/03/25/edge-rails-o-que-exatamente-o-metodo-findlast-retorna/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>No ultimo Rails Podcast eu falei sobre a alteração no método <code>find</code> do <code>ActiveRecord</code>, que agora permite usarmos a opção <code>:last</code>.</p>
-
-<p>Então o Akita levantou a questão: &#8220;Como este método é implementado?&#8221;, hmm, err&#8230; Bom, eu resolvi pesquisar e acho que a melhor forma de responder esta pergunta é mostrando um dos seus testes:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">test_find_last</span></span>
-  last  <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Developer</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>last</span>
-  assert_equal last<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="support support_class support_class_ruby">Developer</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>first</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>order</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>id desc<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-
-
-<p>Entendeu?</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/50/">&larr; Antigos</a>
@@ -723,6 +721,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/08/burnout/">Burnout</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/06/enviando-o-link-da-pagina-atual-por-e-mail/">Enviando o link da página atual por e-mail</a>
       </li>
     
@@ -736,10 +738,6 @@
     
       <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
   </ul>

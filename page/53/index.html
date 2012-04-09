@@ -9,7 +9,8 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="O sétimo episódio do Rails Podcast Brasil está no ar. Parece que estamos conseguindo manter um certo grau de regularidade. O correto seria o podcast &hellip;">
+  <meta name="description" content=" &#8220;Se você acha que é muito pequeno para fazer a diferença, tente dormir com um mosquito em um quarto fechado.&#8221; Signal vs. Noise
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +100,59 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/02/28/se-sentindo-inferior/">Se sentindo inferior?</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-02-28T00:00:00-03:00" pubdate data-updated="true">28 de Fevereiro de 2008</time>
+        
+        <a rel="bookmark" href="/2008/02/28/se-sentindo-inferior/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/02/1417381021_38b833b1d3.jpg" alt="1417381021_38b833b1d3.jpg" /></p>
+
+<p>&#8220;Se você acha que é muito pequeno para fazer a diferença, tente dormir com um mosquito em um quarto fechado.&#8221;</p>
+
+<p><a href="http://www.37signals.com/svn/posts/886-a-great-quote-about-size">Signal vs. Noise</a></p>
+</div>
+
+
+    </article>
   
     
     
@@ -689,86 +743,6 @@
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/02/22/plugin-custom-resource-name-plugin-101/">Plugin: Custom Resource Name Plugin 1.0.1</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-02-22T00:00:00-03:00" pubdate data-updated="true">22 de Fevereiro de 2008</time>
-        
-        <a rel="bookmark" href="/2008/02/22/plugin-custom-resource-name-plugin-101/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>Eu sei que mal acabei de lançar o plugin, mas havia algo que continuava me incomodando&#8230; embora minha URL ficasse na minha língua nativa, as actions <code>new</code> e <code>edit</code> continuavam em inglês, isto não estava certo&#8230;</p>
-
-<p>Também recebi alguns e-mails sobre este assunto. Então resolvi alterar o plugin mais uma vez para resolver este problema. A questão é que não posso simplesmente alterar a rota para usar <code>novo</code> e <code>editar</code>, afinal de contas não somos só nós brasileiros que temos este problema. Então resolvi contornar a situação de uma forma um pouco diferente.</p>
-
-<p>Já que vamos ter de configurar no arquivo <em>routes.rb</em> o novo nome da rota, vamos aproveitar também para configurar um apelido para os métodos <code>new</code> e <code>edit</code>, assim:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">map<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>resources <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>photos</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>as</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> "fotos"<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>new_as</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>novo<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>edit_as</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>editar<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span></pre>
-
-
-<p>Você deve ter notado que agora além da opção <code>:as</code>, você tem <code>:new_as</code> e <code>:edit_as</code>.</p>
-
-<p>Neste caso quando você usar rotas como <code>new_photo</code>, por exemplo, você terá uma URL assim:</p>
-
-<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text"><span class="markup markup_underline markup_underline_link markup_underline_link_text">http://www.meusite.com.br/fotos/novo</span></span></span></pre>
-
-
-<p>Eu sei que isto pode parecer não muito DRY, mas não quero ser egoísta e fazer este plugin apenas para brasileiros, então&#8230;</p>
-
-<p>O melhor desta estratégia é que os seus controllers continuam exatamente do jeito que estão hoje. Nada muda.</p>
-
-<p>Se alguém tiver alguma sugestão ou idéia melhor, estou aceitando todas.</p>
-
-<p>Para usar esta nova funcionalidade você vai precisar atualizar o plugin no seu projeto.</p>
-
-<p>Se você já instalou o plugin, só precisa atualizar:</p>
-
-<pre class="textmate-source"><span class="source source_shell">./script/plugin update custom_resource_name</span></pre>
-
-
-<p>Se ainda não instalou, veja mais detalhes <a href="http://www.nomedojogo.com/559/">clicando aqui</a>.</p>
-
-<p>Ah, e se você gostou do plugin, não esqueça de me recomendar no <a href="http://www.workingwithrails.com/recommendation/new/person/8137-carlos-brando">Working with Rails</a>.</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/54/">&larr; Antigos</a>
@@ -786,6 +760,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/08/burnout/">Burnout</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/06/enviando-o-link-da-pagina-atual-por-e-mail/">Enviando o link da página atual por e-mail</a>
       </li>
     
@@ -799,10 +777,6 @@
     
       <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
   </ul>

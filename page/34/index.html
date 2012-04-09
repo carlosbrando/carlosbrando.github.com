@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="O método validates_length_of faz parte dos muitos métodos de validação contidos no ActiveRecord. Este método em particular serve para garantir que o &hellip;">
+  <meta name="description" content="No código abaixo estamos usando uma partial com uma coleção de dados: render :partial =&gt; "admin_person", :collection =&gt; @winners Dentro da &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,67 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/07/10/edge-rails-dando-um-nome-para-a-variavel-local-de-uma-colecao-de-partials/">Edge Rails: Dando um nome para a variável local de uma coleção de partials</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-07-10T00:00:00-03:00" pubdate data-updated="true">10 de Julho de 2008</time>
+        
+        <a rel="bookmark" href="/2008/07/10/edge-rails-dando-um-nome-para-a-variavel-local-de-uma-colecao-de-partials/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>No código abaixo estamos usando uma <strong>partial</strong> com uma coleção de dados:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_function support_function_actionpack support_function_actionpack_rails">render</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>partial</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>admin_person<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>collection</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>winners</span></span></pre>
+
+
+<p>Dentro da <strong>partial</strong> podemos usar então a variável <strong>admin_person</strong> para acessar os itens da coleção. Mas temos de concordar que este nome de variável é meio ruim.</p>
+
+<p>Na próxima versão do Rails teremos a opção de personalizar o nome desta variável usando a opção <strong>:as</strong>. Vamos alterar o exemplo acima:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_function support_function_actionpack support_function_actionpack_rails">render</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>partial</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>admin_person<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>collection</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>winners</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>as</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>person</span></span></pre>
+
+
+<p>Agora podemos acessar cada item da coleção usando a variável person que tem um nome mais intuitivo.</p>
+</div>
+
+
+    </article>
   
     
     
@@ -745,59 +806,6 @@ Finished in 0.870842 seconds.</span></span></pre>
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/06/29/concurso-sproutcore/">Concurso SproutCore</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-06-29T00:00:00-03:00" pubdate data-updated="true">29 de Junho de 2008</time>
-        
-        <a rel="bookmark" href="/2008/06/29/concurso-sproutcore/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>O time de desenvolvimento do <a href="http://www.sproutcore.com/">SproutCore</a> está propondo um <a href="http://www.sproutcore.com/2008/06/27/demo-app-contest/">concurso</a> que envolve criar aplicativos de demonstração usando o framework. O concurso vai até o dia <strong>21 de julho</strong>.</p>
-
-<p>Para participar, basta criar um aplicativo com cara de desktop usando o SproutCore e depois incluir o projeto no <a href="http://64.233.179.104/translate_c?hl=pt-BR&amp;sl=en&amp;tl=pt&amp;u=http://github.com/sproutit/sproutcore/wikis/sproutcore-demo-awards-1">wiki do GitHub</a> e enviar um email para <strong>sproutcore@sproutitmail.com</strong>.</p>
-
-<p>O que você ganha? Uma camiseta e um link no site do projeto, ou seja, nada de mais&#8230; Mas para quem está tentando aprender a usar o framework talvez sirva de incentivo.</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/35/">&larr; Antigos</a>
@@ -815,6 +823,10 @@ Finished in 0.870842 seconds.</span></span></pre>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/08/burnout/">Burnout</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/06/enviando-o-link-da-pagina-atual-por-e-mail/">Enviando o link da página atual por e-mail</a>
       </li>
     
@@ -828,10 +840,6 @@ Finished in 0.870842 seconds.</span></span></pre>
     
       <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
   </ul>

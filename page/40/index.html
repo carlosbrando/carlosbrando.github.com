@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Tradução do artigo &#8221;Ask 37signals: When do I launch?&#8221;. A pergunta: Estou numa encruzilhada com um novo projeto onde eu tenho um conceito &hellip;">
+  <meta name="description" content="Lembra quando eu falei dos novos métodos first, last e all que o ActiveRecord ganhou? Também se lembra quando falei do named_scope, uma nova &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,60 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/05/28/edge-rails-metodos-first-e-last-em-named_scope/">Edge Rails: métodos first e last em named_scope</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-05-28T00:00:00-03:00" pubdate data-updated="true">28 de Maio de 2008</time>
+        
+        <a rel="bookmark" href="/2008/05/28/edge-rails-metodos-first-e-last-em-named_scope/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>Lembra quando eu falei dos novos métodos <a href="http://www.nomedojogo.com/2008/03/31/edge-rails-uma-nova-velha-forma-de-pesquisar-dados-no-activerecord/">first, last e all</a> que o ActiveRecord ganhou? Também se lembra quando falei do <a href="http://www.nomedojogo.com/2008/04/06/edge-rails-named_scope/">named_scope</a>, uma nova funcionalidade do Rails para a versão 2.1?</p>
+
+<p>Pois é, este post é para avisar que agora os métodos acima também funcionarão em named_scopes. Imagine que eu criei um named_scope chamado <strong>recent</strong>, então eu poderei fazer isto:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">post<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>comments<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>recent<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>last</span></pre>
+
+</div>
+
+
+    </article>
   
     
     
@@ -718,60 +772,6 @@ item2 <span class="keyword keyword_operator keyword_operator_assignment keyword_
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/05/19/edge-rails-caches_action-aceita-condicionais/">Edge Rails: caches_action aceita condicionais</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-05-19T00:00:00-03:00" pubdate data-updated="true">19 de Maio de 2008</time>
-        
-        <a rel="bookmark" href="/2008/05/19/edge-rails-caches_action-aceita-condicionais/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>O método <strong>caches_action</strong> agora também aceita a opção <strong>:if</strong>, permitindo o uso de condicionais para especificar quando uma <em>action</em> pode ir para o <em>cache</em>. Por exemplo:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">caches_action <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>index</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>if</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="support support_class support_class_ruby">Proc</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">c</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> <span class="keyword keyword_operator keyword_operator_logical keyword_operator_logical_ruby">!</span>c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>request<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>format<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>json? <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span></span></pre>
-
-
-<p>No exemplo acima, a <em>action</em> <strong>index</strong> só irá para o <em>cache</em> se não foi acessada via um <em>request</em> <em>JSON</em>.</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/41/">&larr; Antigos</a>
@@ -789,6 +789,10 @@ item2 <span class="keyword keyword_operator keyword_operator_assignment keyword_
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/08/burnout/">Burnout</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/06/enviando-o-link-da-pagina-atual-por-e-mail/">Enviando o link da página atual por e-mail</a>
       </li>
     
@@ -802,10 +806,6 @@ item2 <span class="keyword keyword_operator keyword_operator_assignment keyword_
     
       <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
   </ul>

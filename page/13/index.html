@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Good times! It has been just one week since I announced Diego Carrion and José Valim as members of the Remarkable core team and we already put some &hellip;">
+  <meta name="description" content="Você nunca deve contratar alguém para fazer alguma coisa sem se esforçar em fazê-la primeiro. Isto vai ensinar-lhe mais do que o necessário para que &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,66 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2009/02/11/faca-voce-mesmo-primeiro/">Faça você mesmo primeiro</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-02-11T00:00:00-02:00" pubdate data-updated="true">11 de Fevereiro de 2009</time>
+        
+        <a rel="bookmark" href="/2009/02/11/faca-voce-mesmo-primeiro/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>Você nunca deve contratar alguém para fazer alguma coisa sem se esforçar em fazê-la primeiro. Isto vai ensinar-lhe mais do que o necessário para que você possa entrevistar os candidatos, vai permitir que você entenda melhor a natureza do trabalho (preciso mesmo contratar ou podemos terceirizar?) e você saberá exatamente como um trabalho bem feito deve parecer. Isto também vai lhe permitir saber se o trabalho é grande o suficiente para contratar alguém por tempo integral ou se você mesmo poderia fazê-lo.</p>
+
+<p>Jason não me contratou para ajudá-lo no programa Singlefile (extinto) antes de ter uma espécie de protótipo-mal-feito criado através de suas próprias competências em PHP. Eu não contratei Mark para fazer a administração do sistema sem antes perder um verão inteiro configurando um cluster. Jason não trouxe Sarah à bordo para manter o serviço de suporte antes dele mesmo ter tentado fazer isto por alguns anos.</p>
+
+<p>Os benefícios de tentar fazer você mesmo o trabalho antes de contratar alguém não estão somente na hora de realizar uma contratação. Você conseguirá gerenciar muito melhor o trabalho se você em algum momento já o realizou, do que quando você está totalmente no escuro sobre o que precisa ser feito. Você terá empatia quando as coisas não ocorrerem da forma como você esperava e a culpa não for exatamente do funcionário - e também terá voz ativa quando for.</p>
+
+<p><img class="center" src="http://old.nomedojogo.com/wp-content/uploads/2009/02/2914363493_73a21ed86a.jpg"></p>
+
+<p>Não deixe que nomes compridos o assuste. O que um diretor de desenvolvedor empresarial faz? Descubra fazendo você mesmo. Chame algumas pessoas, tente fazer alguns negócios. Você acha que precisa de alguém para realizar testes de usabilidade em seu projeto? Tente fazer você mesmo uma sessão com seus amigos. Não, ele não sairá perfeito. Mas tudo bem. O que você está perdendo nesta execução inicial lhe será reembolsado várias vezes pelos benefícios descritos acima.</p>
+
+<hr /><em>Este texto é uma tradução do artigo escrito por <strong>David Heinemeier Hansson</strong> para o blog <a href="http://blogcabin.37signals.com/svn/">Signal vs. Noise</a>, originalmente em <a href="http://www.37signals.com/svn/posts/1296-do-it-yourself-first">inglês</a>.</em>
+
+</div>
+
+
+    </article>
   
     
     
@@ -1053,104 +1113,6 @@ puts a<span class="punctuation punctuation_separator punctuation_separator_metho
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2009/01/28/edge-rails-simplificando-o-uso-de-partials/">Edge Rails: Simplificando o uso de partials</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-01-28T00:00:00-02:00" pubdate data-updated="true">28 de Janeiro de 2009</time>
-        
-        <a rel="bookmark" href="/2009/01/28/edge-rails-simplificando-o-uso-de-partials/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>A cada nova versão do Rails o método <code>render</code> tem se tornado mais esperto, e no Rails 2.3 isto não será diferente.</p>
-
-<p>Até hoje se nenhuma opção fosse informada ao método ele usaria a opção <code>:file</code> como padrão. Isto mudou já que agora a opção padrão, para quando nenhuma outra for informada, será renderizar uma partial. Além disso, por convenção, o último parâmetro informado ao método sempre será o hash de variáveis locais (<code>local_assigns</code>).</p>
-
-<p>Isto muda um pouco a forma de usar partials. Vejamos alguns exemplos comparando a sintaxe antiga com a nova sintaxe. Primeiro um exemplo simples:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Antes
-</span><span class="support support_function support_function_actionpack support_function_actionpack_rails">render</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>partial</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>account<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
-
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Rails 2.3 em diante
-</span><span class="support support_function support_function_actionpack support_function_actionpack_rails">render</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>account<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
-</span></pre>
-
-
-<p>Agora um exemplo informando uma variável local:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Antes
-</span><span class="support support_function support_function_actionpack support_function_actionpack_rails">render</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>partial</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>account<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>locals</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>account</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>buyer</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
-
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Rails 2.3 em diante
-</span><span class="support support_function support_function_actionpack support_function_actionpack_rails">render</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>account<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>account</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>buyer</span></span></pre>
-
-
-<p>No exemplo abaixo a variável <code>@account</code> é uma instancia da classe <code>Account</code>, desta forma o Rails usa o <code>RecordIdentifier</code> para fazer a mágica:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Antes
-</span><span class="support support_function support_function_actionpack support_function_actionpack_rails">render</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>partial</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>accounts/account<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>locals</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>account</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>account</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
-
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Rails 2.3 em diante
-</span><span class="support support_function support_function_actionpack support_function_actionpack_rails">render</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>account</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
-
-
-<p>Um último exemplo, onde a variável <code>@posts</code> é um array com instâncias da classe <code>Post</code>. Mais mágica:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Antes
-</span><span class="support support_function support_function_actionpack support_function_actionpack_rails">render</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>partial</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>posts/post<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>collection</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>posts</span>
-
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Rails 2.3 em diante
-</span><span class="support support_function support_function_actionpack support_function_actionpack_rails">render</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>posts</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
-
-
-<p>Caso você esteja migrando seu projeto para o Rails 2.3, tome o cuidado de verificar se não está usando o método <code>render</code> com a opção padrão em algum lugar do seu projeto. Se estiver, será necessário alterar para especificar a opção <code>:file</code>, assim:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_function support_function_actionpack support_function_actionpack_rails">render</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>file</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_single string_quoted_single_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">'</span>greeting<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">'</span></span></span></pre>
-
-
-<p>Como você pode ver, tivemos uma boa diminuição na quantidade de código necessário ao usar partials.</p>
-
-<hr /><em>Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.3/3.0 ou superior</strong>. Você pode encontrar mais detalhes sobre esta e outras novidades acompanhando a série <a href="../category/edge-rails/">Edge Rails</a>.</em>
-
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/14/">&larr; Antigos</a>
@@ -1168,6 +1130,10 @@ puts a<span class="punctuation punctuation_separator punctuation_separator_metho
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/08/burnout/">Burnout</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/06/enviando-o-link-da-pagina-atual-por-e-mail/">Enviando o link da página atual por e-mail</a>
       </li>
     
@@ -1181,10 +1147,6 @@ puts a<span class="punctuation punctuation_separator punctuation_separator_metho
     
       <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
   </ul>

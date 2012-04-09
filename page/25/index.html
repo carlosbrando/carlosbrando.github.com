@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Um dos primeiros posts desta série pré-Rails 2.2 foi sobre um bug no método end_of_quarter. Na época enviei um patch para o core team com a correção &hellip;">
+  <meta name="description" content="O helper country_select foi removido do Rails. Para quem não se lembra, este método retorna uma lista com todos os países do mundo. O motivo deste &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,69 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/09/23/edge-rails-country_select-removido-do-rails/">Edge Rails: country_select removido do Rails</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-09-23T00:00:00-03:00" pubdate data-updated="true">23 de Setembro de 2008</time>
+        
+        <a rel="bookmark" href="/2008/09/23/edge-rails-country_select-removido-do-rails/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>O helper <strong>country_select</strong> foi removido do Rails. Para quem não se lembra, este método retorna uma lista com todos os países do mundo.</p>
+
+<p>O motivo deste método ter sido removido do Rails é que aparentemente ele será atualizado para utilizar a norma ISO 3166 para os nomes dos países. Em outras palavras, ao invés de gravar no seu banco de dados o nome completo do país, você passaria a gravar apenas a sigla BR (ou BRA, isto vai depender da escolha feita pelo core team) para Brasil, por exemplo.</p>
+
+<p>Esta alteração ainda não foi implementada, mas de acordo com Michael Koziarski algumas pessoas estão se sentido ofendidas por causa disto. Honestamente eu devo estar por fora de alguma coisa, mas não entendi o porque disso.</p>
+
+<p>De qualquer forma o helper foi removido, mas um plugin foi criado para os que desejarem tê-lo de volta. Para instalar:</p>
+
+<pre class="textmate-source"><span class="text text_plain"><span class="meta meta_paragraph meta_paragraph_text">./script/plugin install git://github.com/rails/country_select.git</span></span></pre>
+
+
+<p>Quando tiver mais informações sobre isto eu volto a comentar.</p>
+
+<hr /><em>Este artigo pertence a série “Edge Rails”. Todos os exemplos dados aqui funcionarão somente no <strong>Ruby on Rails 2.2 ou superior</strong>. A intenção desta série é preparar antecipadamente os programadores para as próximas versões do framework.</em>
+
+</div>
+
+
+    </article>
   
     
     
@@ -729,61 +792,6 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/09/13/edge-rails-recuperando-o-ultimo-registro-do-activeresource/">Edge Rails: Recuperando o último registro do ActiveResource</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-09-13T00:00:00-03:00" pubdate data-updated="true">13 de Setembro de 2008</time>
-        
-        <a rel="bookmark" href="/2008/09/13/edge-rails-recuperando-o-ultimo-registro-do-activeresource/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>Seguindo o padrão do <strong>ActiveRecord</strong>, também foi adicionado ao método <strong>find</strong> do <strong>ActiveResource</strong> a opção <strong>:last</strong>.</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Person</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>last</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>from</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>managers</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; GET /people/managers.xml</span></span></pre>
-
-
-<p>Desta forma podemos recuperar o último recurso encontrado.</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/26/">&larr; Antigos</a>
@@ -801,6 +809,10 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/08/burnout/">Burnout</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/06/enviando-o-link-da-pagina-atual-por-e-mail/">Enviando o link da página atual por e-mail</a>
       </li>
     
@@ -814,10 +826,6 @@ polymorphic_url<span class="punctuation punctuation_section punctuation_section_
     
       <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
   </ul>

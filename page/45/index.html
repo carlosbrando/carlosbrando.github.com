@@ -9,7 +9,8 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Post rápido apenas para documentar e alertar. No Rails 2.1 a opção :case_sensitive do método validates_uniqueness_of deixará de ter seu valor default &hellip;">
+  <meta name="description" content="Rails agora aceita POSTs de conteúdo JSON. Por exemplo, você pode enviar uma requisição POST assim: POST /posts
+{"post": {"title": "Breaking News"}} &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +100,70 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/04/29/edge-rails-mais-json/">Edge Rails: Mais JSON</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-04-29T00:00:00-03:00" pubdate data-updated="true">29 de Abril de 2008</time>
+        
+        <a rel="bookmark" href="/2008/04/29/edge-rails-mais-json/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>Rails agora aceita POSTs de conteúdo JSON. Por exemplo, você pode enviar uma requisição POST assim:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="variable variable_other variable_other_constant variable_other_constant_ruby">POST</span> <span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">/</span>posts
+<span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>post<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">:</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>title<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">:</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Breaking News<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}}</span>
+</span></pre>
+
+
+<p>E o tudo vai para dentro da variável <code>params</code>. Isto aqui funcionará, por exemplo:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">create</span></span>
+  <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>post</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Post</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>create params<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>post</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby">  <span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> ...
+</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+<p>Para quem não sabe o JSON é um &#8220;concorrente&#8221; do XML, e é muito usado para tráfego de dados em JavaScript, porque é representado nesta linguagem. Daí o seu nome: JavaScript Object Notation.</p>
+</div>
+
+
+    </article>
   
     
     
@@ -785,75 +850,6 @@ rex<span class="punctuation punctuation_separator punctuation_separator_method p
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/04/22/edge-rails-gemsbuild-e-gemsunpack/">Edge Rails: gems:build e gems:unpack</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-04-22T00:00:00-03:00" pubdate data-updated="true">22 de Abril de 2008</time>
-        
-        <a rel="bookmark" href="/2008/04/22/edge-rails-gemsbuild-e-gemsunpack/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>Eu já falei por aqui das novas funcionalidade do <code><a href="http://www.nomedojogo.com/2008/04/14/edge-rails-configgem/">config.gem</a></code>, entre elas mencionei a tarefa:</p>
-
-<pre class="textmate-source"><span class="source source_shell">rake gems:unpack GEM=nome_do_gem</span></pre>
-
-
-<p>O comando acima copia o gem especificado para dentro do Rails. Isto é uma mão na roda para quem usa shared host.</p>
-
-<p>Agora a novidade é o comando:</p>
-
-<pre class="textmate-source"><span class="source source_shell">rake gems:unpack</span></pre>
-
-
-<p>Neste caso não estou especificando qual gem quero copiar, então ele copia todos os gems da qual minha aplicação depende. Para entender como configurar isto, <a href="http://www.nomedojogo.com/2008/04/14/edge-rails-configgem/">clique aqui</a>.</p>
-
-<p>Além disso, também foi criado as seguintes tarefas:</p>
-
-<pre class="textmate-source"><span class="source source_shell">rake gems:build <span class="comment comment_line comment_line_number-sign comment_line_number-sign_shell"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_shell">#</span> Para todas as gems
-</span>rake gems:build GEM=mygem <span class="comment comment_line comment_line_number-sign comment_line_number-sign_shell"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_shell">#</span> Estou informando a gem</span></span></pre>
-
-
-<p>Que compilam as extensões nativas do gems que foram instalados através do <code>gems:unpack</code>.</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/46/">&larr; Antigos</a>
@@ -871,6 +867,10 @@ rex<span class="punctuation punctuation_separator punctuation_separator_method p
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/08/burnout/">Burnout</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/06/enviando-o-link-da-pagina-atual-por-e-mail/">Enviando o link da página atual por e-mail</a>
       </li>
     
@@ -884,10 +884,6 @@ rex<span class="punctuation punctuation_separator punctuation_separator_method p
     
       <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
   </ul>

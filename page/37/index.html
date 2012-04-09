@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Um novo método foi acrescentado à classe Object. O método present? é o equivalente a !Object#blank?. Em outras palavras um objeto está presente se &hellip;">
+  <meta name="description" content="Calma, calma&#8230; ainda não saiu&#8230; Mas a tradução está de vento em popa! Quem está na dianteira desta vez é meu amigo, o argentino Gastón &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,63 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/06/13/em-breve/">Em breve&#8230;</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-06-13T00:00:00-03:00" pubdate data-updated="true">13 de Junho de 2008</time>
+        
+        <a rel="bookmark" href="/2008/06/13/em-breve/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p><img class="aligncenter size-full wp-image-789" title="espanhol1" src="http://old.nomedojogo.com/wp-content/uploads/2008/06/espanhol1.jpg" alt="" /></p>
+
+<p>Calma, calma&#8230; ainda não saiu&#8230; Mas a tradução está de vento em popa!</p>
+
+<p>Quem está na dianteira desta vez é meu amigo, o argentino <a href="http://gastonramos.wordpress.com/">Gastón Ramos</a>. Mas claro que nós brasileiros podemos dar uma força para nosso hermano. Para quem quiser ajudar na tradução, todo o código do livro está no GitHub e é só criar um fork, traduzir e mandar um request para ele.</p>
+
+<p>Para acessar o projeto no GitHub, <a href="http://github.com/gramos/rails21-book-es/tree/master">clique aqui</a>.</p>
+
+<p>E para quem acha que acabou&#8230; espere que este livro ainda vai dar mais o que falar.</p>
+</div>
+
+
+    </article>
   
     
     
@@ -778,108 +835,6 @@ c<span class="punctuation punctuation_separator punctuation_separator_method pun
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/06/06/edge-rails-stringquestioneer/">Edge Rails: StringQuestioneer</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-06-06T00:00:00-03:00" pubdate data-updated="true"> 6 de Junho de 2008</time>
-        
-        <a rel="bookmark" href="/2008/06/06/edge-rails-stringquestioneer/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>David acabou de incluir uma novidade interessante no Rails, a classe <strong>StringQuestioneer</strong> (alguns estão tentando mudar este nome para StringInquirer, mas por enquanto é <strong>StringQuestioneer</strong> mesmo).</p>
-
-<p>Para entender como funciona, vou ter de explicar usando alguns exemplos. Vamos criar uma classe chamada Cliente que contém um método que retorna o status do cliente:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Cliente</span></span>
-  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">status</span></span>
-    <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>ativo<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
-  <span class="keyword keyword_control keyword_control_ruby">end</span>
-<span class="keyword keyword_control keyword_control_ruby">end</span>
-
-
-c <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Cliente</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span>
-c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>status
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "ativo"
-</span>
-c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>status <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">==</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>ativo<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; true
-</span>
-c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>status <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">==</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>inativo<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; false
-</span></span></pre>
-
-
-<p>Ok, até aqui tudo normal. Agora vou modificar a implementação do método status usando a classe <strong>StringQuestioneer</strong>, sempre lembrando que o retorno do método status pode vir de uma coluna do banco de dados (claro), isto é apenas um exemplo.</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Cliente</span></span>
-  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">status</span></span>
-    <span class="support support_class support_class_ruby">StringQuestioneer</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>ativo<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-  <span class="keyword keyword_control keyword_control_ruby">end</span>
-<span class="keyword keyword_control keyword_control_ruby">end</span>
-
-
-c <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Cliente</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span>
-c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>status
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "ativo"
-</span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Agora vem a grande diferença:
-</span>c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>status<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>ativo?
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; true
-</span>
-c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>status<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>inativo?
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; false</span></span></pre>
-
-
-<p>Para verificar se o status do cliente é o esperado, ao invés de comparar <strong>Strings</strong>, eu uso um método com o valor do status e o sinal de interrogação. Gostou?</p>
-
-<p>Claro que isto já começou a ser usado no próprio Rails. Por exemplo, caso você precise verificar se o Rails foi carregado em ambiente de produção, você pode substituir o velho <strong>Rails.env == &#8220;production&#8221;</strong>, por:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Rails</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>env<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>production?</span></pre>
-
-
-<p>Para variar criei mais um plugin só para ir colocando as novidades que gostei e não quero esperar
-para usar. Para quem quiser acompanhar, tá no <strong>GitHub</strong> (para variar):
-<a href="http://github.com/carlosbrando/back-to-the-future">http://github.com/carlosbrando/back-to-the-future</a></p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/38/">&larr; Antigos</a>
@@ -897,6 +852,10 @@ para usar. Para quem quiser acompanhar, tá no <strong>GitHub</strong> (para var
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/08/burnout/">Burnout</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/06/enviando-o-link-da-pagina-atual-por-e-mail/">Enviando o link da página atual por e-mail</a>
       </li>
     
@@ -910,10 +869,6 @@ para usar. Para quem quiser acompanhar, tá no <strong>GitHub</strong> (para var
     
       <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
   </ul>

@@ -9,8 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Novo método para a classe AbstractAdapter: table_exists?. Seu uso é muito simples: &gt;&gt; ActiveRecord::Base.connection.table_exists?("users")
-=&gt &hellip;">
+  <meta name="description" content="O método caches_action agora também aceita a opção :if, permitindo o uso de condicionais para especificar quando uma action pode ir para o cache. Por &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,6 +99,60 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/05/19/edge-rails-caches_action-aceita-condicionais/">Edge Rails: caches_action aceita condicionais</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-05-19T00:00:00-03:00" pubdate data-updated="true">19 de Maio de 2008</time>
+        
+        <a rel="bookmark" href="/2008/05/19/edge-rails-caches_action-aceita-condicionais/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>O método <strong>caches_action</strong> agora também aceita a opção <strong>:if</strong>, permitindo o uso de condicionais para especificar quando uma <em>action</em> pode ir para o <em>cache</em>. Por exemplo:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">caches_action <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>index</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>if</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="support support_class support_class_ruby">Proc</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">c</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> <span class="keyword keyword_operator keyword_operator_logical keyword_operator_logical_ruby">!</span>c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>request<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>format<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>json? <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span></span></pre>
+
+
+<p>No exemplo acima, a <em>action</em> <strong>index</strong> só irá para o <em>cache</em> se não foi acessada via um <em>request</em> <em>JSON</em>.</p>
+</div>
+
+
+    </article>
   
     
     
@@ -666,64 +719,6 @@ To turn off the notifier:
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/05/13/edge-rails-definindo-a-localizacao-de-seu-arquivo-de-rotas/">Edge Rails: Definindo a localização de seu arquivo de rotas</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-05-13T00:00:00-03:00" pubdate data-updated="true">13 de Maio de 2008</time>
-        
-        <a rel="bookmark" href="/2008/05/13/edge-rails-definindo-a-localizacao-de-seu-arquivo-de-rotas/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>No Rails 2.1 você poderá definir em que arquivo estão suas rotas incluindo a seguinte linha no seu arquivo <strong>environment.rb</strong>:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>routes_configuration_file</span></pre>
-
-
-<p>Isto pode ser útil em um cenário onde você tem dois front-ends separados que usam os mesmos módulos, bibliotecas e plugins.</p>
-
-<p>Por exemplo, getsatisfaction.com e api.getsatisfaction.com compartilham os mesmos modelos, mas não os controllers, helpers e views. getsatisfaction.com tem o seu arquivo de rotas com otimizações para melhorar o seu SEO, enquanto o arquivo de rotas da API não precisaria de nada disto.</p>
-
-<p>Este é só um exemplo&#8230;</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/42/">&larr; Antigos</a>
@@ -741,6 +736,10 @@ To turn off the notifier:
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/08/burnout/">Burnout</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/06/enviando-o-link-da-pagina-atual-por-e-mail/">Enviando o link da página atual por e-mail</a>
       </li>
     
@@ -754,10 +753,6 @@ To turn off the notifier:
     
       <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
   </ul>

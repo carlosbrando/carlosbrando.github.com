@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Podcast especial &#8220;RailsConf 2008&#8221;. Neste episódio Fábio Akita conta tudo sobre os bastidores do evento mais importante para a comunidade &hellip;">
+  <meta name="description" content="David acabou de incluir uma novidade interessante no Rails, a classe StringQuestioneer (alguns estão tentando mudar este nome para StringInquirer, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,108 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/06/06/edge-rails-stringquestioneer/">Edge Rails: StringQuestioneer</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-06-06T00:00:00-03:00" pubdate data-updated="true"> 6 de Junho de 2008</time>
+        
+        <a rel="bookmark" href="/2008/06/06/edge-rails-stringquestioneer/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>David acabou de incluir uma novidade interessante no Rails, a classe <strong>StringQuestioneer</strong> (alguns estão tentando mudar este nome para StringInquirer, mas por enquanto é <strong>StringQuestioneer</strong> mesmo).</p>
+
+<p>Para entender como funciona, vou ter de explicar usando alguns exemplos. Vamos criar uma classe chamada Cliente que contém um método que retorna o status do cliente:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Cliente</span></span>
+  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">status</span></span>
+    <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>ativo<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+
+
+c <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Cliente</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span>
+c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>status
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "ativo"
+</span>
+c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>status <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">==</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>ativo<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; true
+</span>
+c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>status <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_ruby">==</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>inativo<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; false
+</span></span></pre>
+
+
+<p>Ok, até aqui tudo normal. Agora vou modificar a implementação do método status usando a classe <strong>StringQuestioneer</strong>, sempre lembrando que o retorno do método status pode vir de uma coluna do banco de dados (claro), isto é apenas um exemplo.</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Cliente</span></span>
+  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">status</span></span>
+    <span class="support support_class support_class_ruby">StringQuestioneer</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>ativo<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+
+
+c <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Cliente</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span>
+c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>status
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "ativo"
+</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Agora vem a grande diferença:
+</span>c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>status<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>ativo?
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; true
+</span>
+c<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>status<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>inativo?
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; false</span></span></pre>
+
+
+<p>Para verificar se o status do cliente é o esperado, ao invés de comparar <strong>Strings</strong>, eu uso um método com o valor do status e o sinal de interrogação. Gostou?</p>
+
+<p>Claro que isto já começou a ser usado no próprio Rails. Por exemplo, caso você precise verificar se o Rails foi carregado em ambiente de produção, você pode substituir o velho <strong>Rails.env == &#8220;production&#8221;</strong>, por:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Rails</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>env<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>production?</span></pre>
+
+
+<p>Para variar criei mais um plugin só para ir colocando as novidades que gostei e não quero esperar
+para usar. Para quem quiser acompanhar, tá no <strong>GitHub</strong> (para variar):
+<a href="http://github.com/carlosbrando/back-to-the-future">http://github.com/carlosbrando/back-to-the-future</a></p>
+</div>
+
+
+    </article>
   
     
     
@@ -691,69 +793,6 @@
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/05/31/railsconf-2008-session-on-git-atualizado/">RailsConf 2008 Session on Git [atualizado]</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-05-31T00:00:00-03:00" pubdate data-updated="true">31 de Maio de 2008</time>
-        
-        <a rel="bookmark" href="/2008/05/31/railsconf-2008-session-on-git-atualizado/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p><a href="http://www.gitcasts.com/git-talk"><img class="alignnone size-full wp-image-760" title="gitcover" src="http://old.nomedojogo.com/wp-content/uploads/2008/05/gitcover.png" alt="" /></a></p>
-
-<p>No último podcast falamos dos <a href="http://www.gitcasts.com/">GitCasts</a>, produzidos por <strong>Scott Chacon</strong>. Nesta RailsConf o cara também palestrou e acabou de publicar em seu site os slides da sua apresentação.</p>
-
-<p>Clique <a href="http://s3.amazonaws.com/chacon/git-talk.pdf">aqui</a> para pegá-los.</p>
-
-<h4>Atualização:</h4>
-
-
-<p>Acabou de sair o vídeo desta apresentação. Assim como no <a href="http://www.nomedojogo.com/2008/05/31/keynote-de-david-heinemeier-hansson-no-railsconf-2008/">vídeo de DHH</a> que postei ontem, é uma gravação amadora, os vídeos oficiais devem demorar um pouco ainda para sair.</p>
-
-<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="400" height="300" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="src" value="http://www.vimeo.com/moogaloop.swf?clip_id=1099027&amp;server=www.vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=&amp;fullscreen=1" /><embed type="application/x-shockwave-flash" width="400" height="300" src="http://www.vimeo.com/moogaloop.swf?clip_id=1099027&amp;server=www.vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=&amp;fullscreen=1" allowscriptaccess="always" allowfullscreen="true"></embed></object>
-
-
-<p><a href="http://www.vimeo.com/1099027?pg=embed&amp;sec=1099027">RailsConf 2008 Git Talk by Scot Chacon Video</a> from <a href="http://www.vimeo.com/user507500?pg=embed&amp;sec=1099027">daniel wanja</a> on <a href="http://vimeo.com?pg=embed&amp;sec=1099027">Vimeo</a>.</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/39/">&larr; Antigos</a>
@@ -771,6 +810,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/08/burnout/">Burnout</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/06/enviando-o-link-da-pagina-atual-por-e-mail/">Enviando o link da página atual por e-mail</a>
       </li>
     
@@ -784,10 +827,6 @@
     
       <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
   </ul>

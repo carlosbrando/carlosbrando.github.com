@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Conhece o método slice que o Rails acrescenta ao objeto Hash? O método slice é muito útil em diversas ocasiões. Veja um exemplo: def search(criteria &hellip;">
+  <meta name="description" content="Eu já falei por aqui das novas funcionalidade do config.gem, entre elas mencionei a tarefa: rake gems:unpack GEM=nome_do_gem O comando acima copia o &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,75 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/04/22/edge-rails-gemsbuild-e-gemsunpack/">Edge Rails: gems:build e gems:unpack</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-04-22T00:00:00-03:00" pubdate data-updated="true">22 de Abril de 2008</time>
+        
+        <a rel="bookmark" href="/2008/04/22/edge-rails-gemsbuild-e-gemsunpack/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>Eu já falei por aqui das novas funcionalidade do <code><a href="http://www.nomedojogo.com/2008/04/14/edge-rails-configgem/">config.gem</a></code>, entre elas mencionei a tarefa:</p>
+
+<pre class="textmate-source"><span class="source source_shell">rake gems:unpack GEM=nome_do_gem</span></pre>
+
+
+<p>O comando acima copia o gem especificado para dentro do Rails. Isto é uma mão na roda para quem usa shared host.</p>
+
+<p>Agora a novidade é o comando:</p>
+
+<pre class="textmate-source"><span class="source source_shell">rake gems:unpack</span></pre>
+
+
+<p>Neste caso não estou especificando qual gem quero copiar, então ele copia todos os gems da qual minha aplicação depende. Para entender como configurar isto, <a href="http://www.nomedojogo.com/2008/04/14/edge-rails-configgem/">clique aqui</a>.</p>
+
+<p>Além disso, também foi criado as seguintes tarefas:</p>
+
+<pre class="textmate-source"><span class="source source_shell">rake gems:build <span class="comment comment_line comment_line_number-sign comment_line_number-sign_shell"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_shell">#</span> Para todas as gems
+</span>rake gems:build GEM=mygem <span class="comment comment_line comment_line_number-sign comment_line_number-sign_shell"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_shell">#</span> Estou informando a gem</span></span></pre>
+
+
+<p>Que compilam as extensões nativas do gems que foram instalados através do <code>gems:unpack</code>.</p>
+</div>
+
+
+    </article>
   
     
     
@@ -759,100 +828,6 @@ rake db<span class="constant constant_other constant_other_symbol constant_other
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/04/11/edge-rails-dirty-objects/">Edge Rails: Dirty Objects</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-04-11T00:00:00-03:00" pubdate data-updated="true">11 de Abril de 2008</time>
-        
-        <a rel="bookmark" href="/2008/04/11/edge-rails-dirty-objects/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>Mesmo publicando uma atualização do Rails por dia, (às vezes mais do que uma) neste blog, ainda assim estou atrasado, muito atrasado. Por isto algumas vezes sou obrigado a documentar algumas novidades que não são mais novidades para ninguém.</p>
-
-<p>O Ryan Daigle já escreveu sobre <a href="http://ryandaigle.com/articles/2008/3/31/what-s-new-in-edge-rails-dirty-objects">Dirty Objects</a> no seu blog e eu vou basicamente traduzir a explicação dele para cá.</p>
-
-<p>Nós falamos sobre isto no <a href="http://www.nomedojogo.com/2008/04/07/rails-podcast-brasil-episodio-12/">último podcast</a>, mas agora no Rails podemos rastrear alterações feitas no <code>ActiveRecord</code>. Podemos saber se um objeto foi alterado ou não e se foi alterado podemos identificar o que mudou e até mesmo fazer um comparativo do tipo antes e depois. Vamos aos exemplos:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">article <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Article</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>first</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>changed?  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; false
-</span>
-article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; "Title"
-</span>article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>New Title<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
-article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title_changed? <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; true
-</span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Recupera o valor anterior do atributo
-</span>article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title_was  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; "Title"
-</span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Veja o antes de depois da alteração
-</span>article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title_change  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; ["Title", "New Title"]</span></span></pre>
-
-
-<p>Como você pode ver é bem simples. Você também pode listar todas as alterações no objeto de duas formas. Continuando do código anterior:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Devolve uma lista com os atributos alterados
-</span>article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>changed  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; ['title']
-</span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Devolve um Hash com os atributos alterados e um antes e depois
-</span>article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>changes  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; { 'title' =&gt; ["Title", "New Title"] }
-</span></span></pre>
-
-
-<p>Note que quando o objeto é salvo, o status dele é alterado. Veja:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>changed?  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; true
-</span>article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>save  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; true
-</span>article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>changed?  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; false</span></span></pre>
-
-
-<p>Caso você vá alterar um objeto sem usar o operador <code>attr=</code>, você precisará informar manualmente que o atributo foi alterado usando o método <code>attr_name_will_change!</code> (no lugar de <code>attr</code>, vai o nome do atributo), veja mais um último exemplo:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">article <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Article</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>first</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title_will_change!
-article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>upcase!
-article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>title_change  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; ['Title', 'TITLE']</span></span></pre>
-
-
-<p>Guarde este artigo nos seus favoritos porque ele é gancho para uma outra modificação importante.</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/47/">&larr; Antigos</a>
@@ -870,6 +845,10 @@ article<span class="punctuation punctuation_separator punctuation_separator_meth
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/08/burnout/">Burnout</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/06/enviando-o-link-da-pagina-atual-por-e-mail/">Enviando o link da página atual por e-mail</a>
       </li>
     
@@ -883,10 +862,6 @@ article<span class="punctuation punctuation_separator punctuation_separator_meth
     
       <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
   </ul>

@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Imagine o seguinte cenário, você tem um site todo em português e que deixar seus rotas também em português para facilitar a vida de seus usuários. Em &hellip;">
+  <meta name="description" content="Os helpers para URLs polimórficas são métodos usados para resolver de uma forma mais inteligente uma rota nomeada quando você tem uma instancia de um &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,89 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/02/18/edge-rails-usando-urls-polimorficas/">Edge Rails: Usando URLs polimórficas</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-02-18T00:00:00-03:00" pubdate data-updated="true">18 de Fevereiro de 2008</time>
+        
+        <a rel="bookmark" href="/2008/02/18/edge-rails-usando-urls-polimorficas/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>Os helpers para URLs polimórficas são métodos usados para resolver de uma forma mais inteligente uma rota nomeada quando você tem uma instancia de um modelo do <font color="#333333"><strong>ActiveRecord</strong>.</font></p>
+
+<p>Estes métodos são úteis quando você quer gerar uma URL correta para um recurso RESTful sem precisar saber exatamente qual é o tipo do registro em questão.</p>
+
+<p>O funcionamento é bem simples, veja alguns exemplos (nos comentários estão as chamadas equivalentes, como fazemos hoje):</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">record <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Article</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>first</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+polymorphic_url<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>record<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>-&gt;  article_url(record)
+</span>
+record <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Comment</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>first</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+polymorphic_url<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>record<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>-&gt;  comment_url(record)
+</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> ele também reconhece quando é um novo registro
+</span>record <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Comment</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span>
+polymorphic_url<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span>record<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>-&gt;  comments_url()
+</span></span></pre>
+
+
+<p>Veja que o método reconhece o registro usado e monta a rota corretamente. Nested resources e namespaces também são suportados:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">polymorphic_url<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>admin</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>article</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>comment</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>-&gt; vai devolver:
+</span>admin_article_comment_url<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>article</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>comment</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
+
+
+<p>Você também pode usar prefixos como <font color="#333333"><strong>new</strong>,</font> <font color="#333333"><strong>edit</strong></font> e <font color="#333333"><strong>formatted</strong>,</font> veja alguns exemplos:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">edit_polymorphic_path<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>post</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; /posts/1/edit
+</span>
+formatted_polymorphic_path<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>post</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>pdf</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; /posts/1.pdf</span></span></pre>
+
+
+<p>O próprio Rails faz uso destes helpers em alguns momentos, como no método <font color="#333333"><strong>form_for</strong></font>, por exemplo. Talvez venham a ser úteis para você também, principalmente na construção de plugins.</p>
+</div>
+
+
+    </article>
   
     
     
@@ -720,103 +803,6 @@ datetime<span class="punctuation punctuation_separator punctuation_separator_met
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/02/11/edge-rails-fuso-horario-muito-mais-simples/">Edge Rails: Fuso-horário muito mais simples</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-02-11T00:00:00-02:00" pubdate data-updated="true">11 de Fevereiro de 2008</time>
-        
-        <a rel="bookmark" href="/2008/02/11/edge-rails-fuso-horario-muito-mais-simples/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>Criar um software para a internet não é fácil, principalmente quando seus usuários estão espalhados por todo o mundo. Um dos maiores desafios neste caso é manipular fusos-horário. Hoje no Rails isto não é um bicho de sete cabeças graças a plugins como o <a href="http://agilewebdevelopment.com/plugins/tzinfo_timezone">TZInfo</a>. Mas pelo visto este não é um problema só seu, ou meu, já que na próxima versão do Rails teremos este plugin praticamente incorporado ao framework.</p>
-
-<p>Para explicar como funciona esta nova implementação, vou usar como base o excelente artigo de <strong>Ryan Daigle</strong> no seu blog <a href="http://ryandaigle.com/articles/2008/1/25/what-s-new-in-edge-rails-easier-timezones">RyanÂs Scraps</a>.</p>
-
-<p>Neste artigo Ryan nos mostra como definir o fuso-horário de seu aplicativo usando o método Time.zone, assim:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Informa o fuso-horário local
-</span><span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>zone <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Pacific Time (US &amp; Canada)<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
-
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Todas as datas agora refletem a hora local
-</span>article <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Article</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>first</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>published_at <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; Wed, 30 Jan 2008 2:21:09 PST -08:00
-</span>
-<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Informando novos horários em UTC, eles irão refletir a hora local
-</span>article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>published_at <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>utc<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">2008</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">0</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
-article<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>published_at  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span>=&gt; Mon, 31 Dec 2007 16:00:00 PST -08:00</span></span></pre>
-
-
-<p>Note que as datas passam a refletir o timezone escolhido.</p>
-
-<h3>Legal, mas como usar isto no mundo real?</h3>
-
-
-<p>Ryan dá uma dica interessante. Você pode usar um filtro (<strong>before_filter</strong>) para informar o fuso-horário, permitindo que seus usuários possam definir o timezone desejado. Mais ou menos assim:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_controller"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">ApplicationController<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActionController::Base</span></span></span>
-
-  <span class="support support_function support_function_actionpack support_function_actionpack_rails">before_filter</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>set_timezone</span>
-
-  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">set_timezone</span></span>
-    <span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>zone <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> current_user<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>time_zone
-  <span class="keyword keyword_control keyword_control_ruby">end</span>
-</span><span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-
-
-<h3>Mas, e se meu software só for usado no Brasil?</h3>
-
-
-<p>Se sua aplicação só trabalhará com um fuso-horário especifico, você pode configurá-lo no arquivo environment.rb:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Rails</span><span class="punctuation punctuation_separator punctuation_separator_other punctuation_separator_other_ruby">::</span><span class="support support_class support_class_ruby">Initializer</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>run <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">config</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
-  config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>time_zone <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>Hawaii<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
-<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
-
-
-<p>E por último se desejar recuperar o timezone atual:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>zone<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>now</span></pre>
-
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/56/">&larr; Antigos</a>
@@ -834,6 +820,10 @@ article<span class="punctuation punctuation_separator punctuation_separator_meth
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/08/burnout/">Burnout</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/06/enviando-o-link-da-pagina-atual-por-e-mail/">Enviando o link da página atual por e-mail</a>
       </li>
     
@@ -847,10 +837,6 @@ article<span class="punctuation punctuation_separator punctuation_separator_meth
     
       <li class="post">
         <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/01/31/mudancas-no-ruby-inside-brasil/">Mudanças no Ruby Inside Brasil</a>
       </li>
     
   </ul>
