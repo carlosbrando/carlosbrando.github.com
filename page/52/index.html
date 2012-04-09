@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content=" ">
+  <meta name="description" content="Vi esta dica no blog do Jason Rudolph, mas ele mesmo ouvi isto do Evan Phoenix no RubyConf no ano passado. Durante uma discussão sobre como testar &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,81 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/03/12/como-testar-um-metodo-privado/">Como testar um método privado?</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-03-12T00:00:00-03:00" pubdate data-updated="true">12 de Março de 2008</time>
+        
+        <a rel="bookmark" href="/2008/03/12/como-testar-um-metodo-privado/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/03/148963020_54c3f1b723.jpg" alt="148963020_54c3f1b723.jpg" /></p>
+
+<p>Vi esta dica no blog do <a href="http://jasonrudolph.com/blog/2007/11/02/evan-phoenix-on-testing-private-methods-in-ruby/">Jason Rudolph</a>, mas ele mesmo ouvi isto do Evan Phoenix no RubyConf no ano passado. Durante uma discussão sobre como testar isoladamente métodos privados, Evan chegou com a seguinte idéia, veja o método</p>
+
+<pre class="textmate-source"><span class="source source_ruby"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Ninja</span></span>
+  <span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">private</span>
+  <span class="meta meta_function meta_function_method meta_function_method_with-arguments meta_function_method_with-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">kill</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">(</span><span class="variable variable_parameter variable_parameter_function variable_parameter_function_ruby">num_victims</span><span class="punctuation punctuation_definition punctuation_definition_parameters punctuation_definition_parameters_ruby">)</span></span>
+    <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span><span class="source source_ruby source_ruby_embedded source_ruby_embedded_source"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">#{</span>num_victims<span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">}</span></span> victims are no longer with us.<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+</span></pre>
+
+
+<p>Ok, agora como testar isto? A sugestão foi definir um novo método público na classe, que chamará o método privado. Tudo isto na classe de teste. Veja como:</p>
+
+<pre class="textmate-source"><span class="source source_ruby"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">NinjaTest<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> Test::Unit::TestCase</span></span></span>
+  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">test_should_punish_sloppy_coders</span></span>
+    <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>ninja</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Ninja</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span>
+    <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span></span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>ninja</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>flog_publicly<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">*</span>args<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+      kill<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">*</span>args<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+    <span class="keyword keyword_control keyword_control_ruby">end</span>
+    assert_equal Â<span class="constant constant_numeric constant_numeric_ruby">3</span> victims are no longer with us<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>Â<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>ninja</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>flog_publicly<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">3</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span></span></pre>
+
+
+<p>Entendeu? Criamos um novo método público chamado <code>flog_publicly</code> e o inserimos na instancia de <code>ninja</code>, este método por sua vez, chama nosso método privado.</p>
+</div>
+
+
+    </article>
   
     
     
@@ -673,64 +748,6 @@ Retorna dia 31 de dezembro às 23:59:59</p>
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/02/29/dica-rapida-abusando-do-growlnotify/">Dica Rápida: Abusando do growlnotify&#8230;</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-02-29T00:00:00-03:00" pubdate data-updated="true">29 de Fevereiro de 2008</time>
-        
-        <a rel="bookmark" href="/2008/02/29/dica-rapida-abusando-do-growlnotify/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/02/picture-1.png" alt="picture-1.png" /></p>
-
-<p>Uma dica rápida para quem usa Mac e tem o growlnotify instalado. Eu falei dele ontem.</p>
-
-<p>Suponhamos que você tenha de executar algum comando no terminal que pode demorar um pouco para terminar, e que você deseja ser notificado quando acabar. Muito simples:</p>
-
-<pre class="textmate-source"><span class="source source_shell">meu_comando_demorado <span class="keyword keyword_operator keyword_operator_list keyword_operator_list_shell">&amp;&amp;</span> growlnotify -s -H localhost -m <span class="string string_quoted string_quoted_double string_quoted_double_shell"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_shell">"</span>Terminou<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_shell">"</span></span></span></pre>
-
-
-<p>Quando a execução do comando terminar, você receberá um alerta.</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/53/">&larr; Antigos</a>
@@ -748,6 +765,10 @@ Retorna dia 31 de dezembro às 23:59:59</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/09/how-i-do-my-computing/">How I do my Computing</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/08/burnout/">Burnout</a>
       </li>
     
@@ -761,10 +782,6 @@ Retorna dia 31 de dezembro às 23:59:59</p>
     
       <li class="post">
         <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
   </ul>

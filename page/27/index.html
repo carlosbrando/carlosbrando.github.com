@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Todos estão esperando o Rails 2.2. Mas acabou de sair o Ruby on Rails 2.1.1 como um release de manutenção. O principal motivo por trás deste release &hellip;">
+  <meta name="description" content="Já falei da classe Memoizable no passado. Dois novos métodos foram adicionados à ela. Os métodos unmemoize_all e memoize_all. class Person &lt; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,73 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/09/06/edge-rails-mais-novidades-na-classe-memoizable/">Edge Rails: Mais novidades na classe Memoizable</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-09-06T00:00:00-03:00" pubdate data-updated="true"> 6 de Setembro de 2008</time>
+        
+        <a rel="bookmark" href="/2008/09/06/edge-rails-mais-novidades-na-classe-memoizable/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>Já falei da classe <a href="http://www.nomedojogo.com/2008/07/18/edge-rails-introduzindo-memoizable-para-cache-de-atributos/">Memoizable</a> no passado. Dois novos métodos foram adicionados à ela. Os métodos <strong>unmemoize_all</strong> e <strong>memoize_all</strong>.</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_rails meta_rails_model"><span class="meta meta_class meta_class_ruby"><span class="keyword keyword_control keyword_control_class keyword_control_class_ruby">class</span> <span class="entity entity_name entity_name_type entity_name_type_class entity_name_type_class_ruby">Person<span class="entity entity_other entity_other_inherited-class entity_other_inherited-class_ruby"> <span class="punctuation punctuation_separator punctuation_separator_inheritance punctuation_separator_inheritance_ruby">&lt;</span> ActiveRecord::Base</span></span></span>
+  <span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">age</span></span>
+    um_calculo_muito_complexo
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+  memoize <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>age</span>
+</span><span class="keyword keyword_control keyword_control_ruby">end</span>
+
+<span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>person</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Person</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>first
+
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Para desligar o cache do método age
+</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>person</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>unmemoize_all
+
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Para ligar novamente o cache do método age apenas
+</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>person</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>memoize_all</span></pre>
+
+
+<p>Estes métodos permitem que você desligue ou ligue novamente o cache das propriedades marcadas como <strong>memoizable</strong>.</p>
+</div>
+
+
+    </article>
   
     
     
@@ -676,63 +743,6 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/09/02/por-que-o-salario-dele-e-maior-do-que-o-meu/">Por que o salário dele é maior do que o meu?</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-09-02T00:00:00-03:00" pubdate data-updated="true"> 2 de Setembro de 2008</time>
-        
-        <a rel="bookmark" href="/2008/09/02/por-que-o-salario-dele-e-maior-do-que-o-meu/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>Sobreviver no mercado de desenvolvimento de software no Brasil não é tão difícil quanto parece, conheço muita gente ruim que consegue manter seu emprego, muita vezes trabalhando como terceiro dentro de alguma grande companhia. Este tipo de pessoa normalmente tem um bom conhecimento do negócio da empresa, mas estranhamente ele nunca cresce dentro dela.</p>
-
-<p>Isto acontece por motivos óbvios. Primeiro porque embora ele bata cartão todos os dias na empresa e tenha uma mesa e computador pessoal, oficialmente ele não é um empregado daquela empresa. Percebi isto mais claramente quando trabalhei durante dois anos em uma empresa de televisão por assinatura aqui em São Paulo. Embora eu cumprisse com todos os compromissos que um funcionário contratado pela empresa tinha, eu não tinha direito a nada, como desconto em minha assinatura, férias ou décimo-terceiro, afinal eu era apenas um terceiro.</p>
-
-<p>O segundo motivo do não-crescimento se dá pelo fato que se você é um expert em um determinado projeto da empresa não vale a pena promovê-lo, pois a empresa estaria perdendo um programador competente e muito provavelmente ganhando um gerente &#8220;mais ou menos&#8221;.</p>
-
-<p>Alguns apostam todas as suas fichas na empresa, acreditando que um dia seu chefe lhe fará uma proposta para incorporá-lo ao time de empregados da companhia. Isto não é impossível, mas pode demorar muito tempo. O problema é que depois de alguns anos (ou meses em alguns casos) dentro de uma mesma empresa, trabalhando no mesmo projeto você entra no que chamamos de &#8220;zona de conforto&#8221;. Você já conhece e é conhecido por todos na empresa, tem total domínio das &#8220;regras de negócio&#8221; e começa a sentir medo do mercado de trabalho.</p>
-
-<p>Quando isto acontece, já passou da hora de sair. Agora sua única opção é buscar meios de crescer dentro desta empresa. Neste caso, vou lhe dar um conselho, consiga uma boa e confortável cadeira, porque isto pode demorar muitos anos para alguns. E quando você descobrir que pessoas mais novas ou que pareçam menos experientes que você tem um salário maior que o seu, nem pense em ficar chateado ou resmungar, você recebe tanto quanto ele, a diferença é que boa parte do seu dinheiro é gasto no seu comodismo.</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/28/">&larr; Antigos</a>
@@ -750,6 +760,10 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/09/how-i-do-my-computing/">How I do my Computing</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/08/burnout/">Burnout</a>
       </li>
     
@@ -763,10 +777,6 @@ Episódios anteriores: <a href="http://podcast.rubyonrails.pro.br/">http://podca
     
       <li class="post">
         <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
   </ul>

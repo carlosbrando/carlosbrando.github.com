@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Tentei assistir este seriado tempos atrás, mas nunca consegui porque minha esposa simplesmente não achava a menor graça cof não entendia as piadas &hellip;">
+  <meta name="description" content="Quando usamos o método respond_to para fazer algo assim: def index @people = Person.find(:all) respond_to do |format| format.html format.xml { render &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,90 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/08/08/edge-rails-desabilitando-o-cabecalho-accept-em-requisicoes-http/">Edge Rails: Desabilitando o cabeçalho Accept em requisições HTTP</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-08-08T00:00:00-03:00" pubdate data-updated="true"> 8 de Agosto de 2008</time>
+        
+        <a rel="bookmark" href="/2008/08/08/edge-rails-desabilitando-o-cabecalho-accept-em-requisicoes-http/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>Quando usamos o método <strong>respond_to</strong> para fazer algo assim:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="meta meta_function meta_function_method meta_function_method_without-arguments meta_function_method_without-arguments_ruby"><span class="keyword keyword_control keyword_control_def keyword_control_def_ruby">def</span> <span class="entity entity_name entity_name_function entity_name_function_ruby">index</span></span>
+  <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>people</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">Person</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>all</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>
+
+  <span class="support support_function support_function_actionpack support_function_actionpack_rails">respond_to</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">format</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span>
+    format<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>html
+    format<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>xml <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="meta meta_syntax meta_syntax_ruby meta_syntax_ruby_start-block"> </span><span class="support support_function support_function_actionpack support_function_actionpack_rails">render</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>xml</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>people</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>to_xml <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span>
+  <span class="keyword keyword_control keyword_control_ruby">end</span>
+<span class="keyword keyword_control keyword_control_ruby">end</span>
+</span></pre>
+
+
+<p>O Rails tem duas formas de identificar qual é o formato que deve ser usado, a primeira e mais comum é através do formato informado na URL (/index.<strong>xml</strong>, por exemplo) e a segunda forma para o caso de o formato não ter sido especificado é examinando o cabeçalho <strong>Accept</strong> da requisição HTTP.</p>
+
+<p>Para quem não sabe o cabeçalho <strong>Accept</strong> é aquele que informa o tipo do documento desejado em strings mais ou menos assim:</p>
+
+<p><code>Accept: text/plain, text/html
+Accept: text/x-dvi; q=.8; mxb=100000; mxt=5.0, text/x-c</code></p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> recuperando esta informação via código
+</span><span class="variable variable_other variable_other_readwrite variable_other_readwrite_instance variable_other_readwrite_instance_ruby"><span class="punctuation punctuation_definition punctuation_definition_variable punctuation_definition_variable_ruby">@</span>request</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>env<span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>HTTP_ACCEPT<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span> <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>text/javascript<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span></span></pre>
+
+
+<p><a href="http://www.developershome.com/wap/detection/detection.asp?page=httpHeaders">Aqui</a> você pode ver uma lista dos tipos mais comuns.</p>
+
+<p>Acontece que este cabeçalho é porcamente implementado na maioria dos browsers. E quando ele é usado em sites públicos algumas vezes estranhos erros acontecem quando robôs indexadores fazem seus <strong>requests</strong>.</p>
+
+<p>Assim, tomou-se a decisão de desativar este cabeçalho por padrão, depois voltou-se atrás e resolveu-se que era melhor deixar apenas a opção de desligar se desejado. Para isto basta incluir a seguinte linha no arquivo <strong>environment.rb</strong>:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails">config<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>action_controller<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>use_accept_header <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="constant constant_language constant_language_ruby">false</span></span></pre>
+
+
+<p>Quando desligado, caso o formato não seja informado na URL o Rails assumirá que deve usar o <strong>format.html</strong>.</p>
+
+<p>Existe um caso especial quando fazemos requisições usando ajax se o cabeçalho <strong>X-Requested-With</strong> estiver presente. Neste caso o formato <strong>format.js</strong> ainda será usado mesmo que o formato não tenha sido especificado (/people/1, por exemplo).</p>
+</div>
+
+
+    </article>
   
     
     
@@ -668,60 +752,6 @@
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/07/30/edge-rails-render-template-agora-aceita-locals/">Edge Rails: render :template agora aceita :locals</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-07-30T00:00:00-03:00" pubdate data-updated="true">30 de Julho de 2008</time>
-        
-        <a rel="bookmark" href="/2008/07/30/edge-rails-render-template-agora-aceita-locals/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>Os métodos <strong>render :action</strong> e <strong>render :partial</strong> permitem que passemos um <strong>hash</strong> através da opção <strong>:locals</strong> com dados para serem processados por eles, mas o  render <strong>:template</strong> não permite.</p>
-
-<p>Ou melhor, não permitia. Na próxima versão do Rails isto irá funcionar também:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_function support_function_actionpack support_function_actionpack_rails">render</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>template</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>weblog/show<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>locals</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">{</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>customer</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="support support_class support_class_ruby">Customer</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span><span class="keyword keyword_other keyword_other_special-method keyword_other_special-method_ruby">new</span><span class="punctuation punctuation_section punctuation_section_scope punctuation_section_scope_ruby">}</span></span></pre>
-
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/32/">&larr; Antigos</a>
@@ -739,6 +769,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/09/how-i-do-my-computing/">How I do my Computing</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/08/burnout/">Burnout</a>
       </li>
     
@@ -752,10 +786,6 @@
     
       <li class="post">
         <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
   </ul>

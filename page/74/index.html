@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="O Pownce é uma mistura de Twitter, blog e compartilhador de arquivos, com cara de rede social. Tenho 10 convites, quem quiser testar o serviço basta &hellip;">
+  <meta name="description" content="Durante um projeto, mudanças no layout são muito comuns. Quando isto ocorre, é normal que alguns códigos em seus arquivos CSS se tornem &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,63 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2007/07/10/remova-codigos-nao-utilizados-dos-seus-arquivos-css/">Remova códigos não utilizados dos seus arquivos CSS</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-07-10T00:00:00-03:00" pubdate data-updated="true">10 de Julho de 2007</time>
+        
+        <a rel="bookmark" href="/2007/07/10/remova-codigos-nao-utilizados-dos-seus-arquivos-css/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p><img src="http://farm1.static.flickr.com/65/182590110_4b9b6fb5be.jpg?v=0" alt="" /></p>
+
+<p>Durante um projeto, mudanças no layout são muito comuns. Quando isto ocorre, é normal que alguns códigos em seus arquivos <strong>CSS</strong> se tornem desnecessários, neste caso é muito simples apagamos ele.Mas imagine um projeto grande com designers e programadores alterando arquivos o tempo todo. Como verificar se aquele determinado trecho de código é realmente redundante?</p>
+
+<p><strong>Tom Armitage</strong> escreveu um script simples em <strong>Ruby</strong> para verificar isto para você. É o <a href="http://code.google.com/p/css-redundancy-checker/"><strong>CSS Redundancy Checker</strong></a>.</p>
+
+<p>Esta ferramenta é muito simples de usar. Basta informar qual arquivo CSS você deseja verificar e o diretório onde seus arquivos <strong>HTML</strong> se encontram. Assim:
+[source:ruby]css-redundancy-checker.rb [cssfile] [directory of html files OR .txt file listing urls to use][/source]
+No fim, ele vai te dizer quais linhas do CSS não está sendo usada em nenhum arquivo. Simples assim&#8230;</p>
+</div>
+
+
+    </article>
   
     
     
@@ -604,117 +661,6 @@ Screencast: <a href="http://www.aptana.tv/movies/iphone_screencast/iphone.html" 
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2007/06/27/um-css-para-o-ie-outro-para-o-firefox-outro-para-o/">Um CSS para o IE, outro para o Firefox, outro para o&#8230;</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-06-27T00:00:00-03:00" pubdate data-updated="true">27 de Junho de 2007</time>
-        
-        <a rel="bookmark" href="/2007/06/27/um-css-para-o-ie-outro-para-o-firefox-outro-para-o/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>Meu <strong>browser</strong> predileto é o <strong>Firefox</strong>, por isto sempre que estou criando algo, tenho o costume de ir testando nele.</p>
-
-<p>O problema é que quando abro meu site (que está lindo no Firefox) no <strong>Internet Explorer</strong>, fica tudo desalinhado. Mexe aqui, mexe ali, e consigo deixar tudo bonito no IE. Mas quando abro o site no Firefox novamente, ferrei tudo&#8230;</p>
-
-<p>Quantas vezes você já passou por isto?</p>
-
-<p>Passei por isto ontem (mais uma vez) e resolvi ir atrás de alguma ferramenta que me ajudasse neste trabalho.</p>
-
-<p>Primeiro encontrei um <strong><a href="http://rafael.adm.br/css_browser_selector/">Javascript</a></strong> que me permite diferenciar as propriedades do CSS de acordo com o browser e até com o sistema operacional:</p>
-
-<p>[source:js]
-var css_browser_selector = function() {
-var
-ua=navigator.userAgent.toLowerCase(),
-is=function(t){ return ua.indexOf(t) != -1; },
-h=document.getElementsByTagName(&#8216;html&#8217;)[0],
-b=(!(/opera|webtv/i.test(ua))&amp;&amp;/msie (\d)/.test(ua))?(&#8216;ie ie&#8217;+RegExp.$1):is(&#8216;gecko/&#8217;)? &#8216;gecko&#8217;:is(&#8216;opera/9&#8217;)?&#8217;opera opera9&#8217;:/opera (\d)/.test(ua)?&#8217;opera opera&#8217;+RegExp.$1:is(&#8216;konqueror&#8217;)?&#8217;konqueror&#8217;:is(&#8216;applewebkit/&#8217;)?&#8217;webkit safari&#8217;:is(&#8216;mozilla/&#8217;)?&#8217;gecko&#8217;:&#8221;,
-os=(is(&#8216;x11&#8217;)||is(&#8216;linux&#8217;))?&#8217; linux&#8217;:is(&#8216;mac&#8217;)?&#8217; mac&#8217;:is(&#8216;win&#8217;)?&#8217; win&#8217;:&#8221;;
-var c=b+os+&#8217; js&#8217;;
-h.className += h.className?&#8217; &#8216;+c:c;
-}();
-[/source]</p>
-
-<p>Isto por si só já facilita muito as coisas. Posso criar um CSS assim, por exemplo:</p>
-
-<p>[source:css]
-.ie .example {
-background-color: yellow
-}
-.ie7 .example {
-background-color: orange
-}
-.gecko .example {
-background-color: gray
-}
-.win.gecko .example {
-background-color: red
-}
-.linux.gecko .example {
-background-color: pink
-}
-.opera .example {
-background-color: green
-}
-.konqueror .example {
-background-color: blue
-}
-.webkit .example {
-background-color: black
-}
-.example {
-width: 100px;
-height: 100px;
-}
-.no_js { display: block }
-.has_js { display: none }
-.js .no_js { display: none }
-.js .has_js { display: block }
-[/source]</p>
-
-<p>Entre as opções de browser estão: ie, ie5, ie6, ie7, firefox, opera, konqueror, safari e outros.</p>
-
-<p><img src="http://farm1.static.flickr.com/28/61713976_e9d7be6c02_m.jpg" alt="" align="right" />Outra coisa interessante que encontrei para estes casos é o <strong><a href="http://sitevista.com/cssvista/">CSSVista</a></strong> (apesar do nome só tem uma versão para o <strong>Windows XP</strong>). Este software permite que você altere o CSS enquanto vê uma versão do site no IE e no Firefox ao mesmo tempo.</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/75/">&larr; Antigos</a>
@@ -732,6 +678,10 @@ height: 100px;
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/09/how-i-do-my-computing/">How I do my Computing</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/08/burnout/">Burnout</a>
       </li>
     
@@ -745,10 +695,6 @@ height: 100px;
     
       <li class="post">
         <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
   </ul>

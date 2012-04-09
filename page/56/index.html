@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Criar um software para a internet não é fácil, principalmente quando seus usuários estão espalhados por todo o mundo. Um dos maiores desafios neste &hellip;">
+  <meta name="description" content="Pelo visto o formato atual de se trabalhar com TimeZones estava incomodando bastante gente, porque muita coisa está sendo alterada ou melhorada neste &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,76 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/02/13/edge-rails-mais-alteracoes-no-timezone/">Edge Rails: Mais alterações no TimeZone</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-02-13T00:00:00-02:00" pubdate data-updated="true">13 de Fevereiro de 2008</time>
+        
+        <a rel="bookmark" href="/2008/02/13/edge-rails-mais-alteracoes-no-timezone/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>Pelo visto o formato atual de se trabalhar com TimeZones estava incomodando bastante gente, porque muita coisa está sendo alterada ou melhorada neste ponto no Rails.</p>
+
+<p>O método <strong>formatted_offset</strong> foi incluído nas classes <strong>Time</strong> e <strong>DateTime</strong> para retornar no formato +HH:MM o desvio da hora UTC. Por exemplo, em nosso fuso-horário (hora de Brasília) o desvio retornado pelo método seria uma string com o valor &#8220;-03:00&#8221;.</p>
+
+<p>Vamos aos exemplos:</p>
+
+<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Recuperando o desvio a partir de um DateTime
+</span>datetime <span class="keyword keyword_operator keyword_operator_assignment keyword_operator_assignment_ruby">=</span> <span class="support support_class support_class_ruby">DateTime</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>civil<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">2000</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">1</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">0</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">0</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">0</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="variable variable_other variable_other_constant variable_other_constant_ruby">Rational</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="keyword keyword_operator keyword_operator_arithmetic keyword_operator_arithmetic_ruby">-</span><span class="constant constant_numeric constant_numeric_ruby">6</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_numeric constant_numeric_ruby">24</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">))</span>
+datetime<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>formatted_offset         <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "-06:00"
+</span>datetime<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>formatted_offset<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_language constant_language_ruby">false</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "-0600"
+</span>
+<span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> Agora a partir de um Time
+</span><span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>local<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">2000</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>formatted_offset         <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "-06:00"
+</span><span class="support support_class support_class_ruby">Time</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>local<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_numeric constant_numeric_ruby">2000</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>formatted_offset<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_language constant_language_ruby">false</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span>  <span class="comment comment_line comment_line_number-sign comment_line_number-sign_ruby"><span class="punctuation punctuation_definition punctuation_definition_comment punctuation_definition_comment_ruby">#</span> =&gt; "-0600"</span></span></pre>
+
+
+<p>Note que este método retorna uma string, que pode ser formatada ou não dependendo do valor passado como parâmetro.</p>
+
+<h3>Prototype</h3>
+
+
+<p>Uma informação rápida: Foi corrigido um erro no <strong>Effect.ScrollTo</strong> que fazia o Firefox fazer o o scroll para a posição errada em algumas situações.</p>
+</div>
+
+
+    </article>
   
     
     
@@ -712,91 +782,6 @@ currency <span class="keyword keyword_operator keyword_operator_comparison keywo
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/02/02/edge-rails-uma-nova-estrategia-para-o-eager-loading/">Edge Rails: Uma nova estratégia para o Eager Loading</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-02-02T00:00:00-02:00" pubdate data-updated="true"> 2 de Fevereiro de 2008</time>
-        
-        <a rel="bookmark" href="/2008/02/02/edge-rails-uma-nova-estrategia-para-o-eager-loading/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2008/02/219781763_29850fce52.jpg" alt="219781763_29850fce52.jpg" /></p>
-
-<p>Para explicar esta nova funcionalidade vou precisar mostrar na prática. Vamos pegar como exemplo o código abaixo:</p>
-
-<pre class="textmate-source"><span class="source source_ruby source_ruby_rails"><span class="support support_class support_class_ruby">Author</span><span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>find<span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">(</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>all</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>include</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">[</span><span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>posts</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>comments</span><span class="punctuation punctuation_section punctuation_section_array punctuation_section_array_ruby">]</span><span class="punctuation punctuation_section punctuation_section_function punctuation_section_function_ruby">)</span></span></pre>
-
-
-<p>Estou fazendo uma pesquisa na tabela <strong>authors</strong>, mas incluindo na minha query as tabelas <strong>posts</strong> e <strong>comments</strong>, relacionado-as pela coluna <strong>author_id</strong>. Para entender melhor veja a query gerada pelo Rails:</p>
-
-<pre class="textmate-source"><span class="source source_sql"><span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">SELECT</span>
-  authors.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>id"</span>          <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t0_r0,
-  authors.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>created_at"</span>  <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t0_r1,
-  authors.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>updated_at"</span>  <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t0_r2,
-  posts.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>id"</span>            <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t1_r0,
-  posts.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>author_id"</span>     <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t1_r1,
-  posts.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>created_at"</span>    <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t1_r2,
-  posts.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>updated_at"</span>    <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t1_r3,
-  comments.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>id"</span>         <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t2_r0,
-  comments.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>author_id"</span>  <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t2_r1,
-  comments.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>created_at"</span> <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t2_r2,
-  comments.<span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>updated_at"</span> <span class="keyword keyword_other keyword_other_alias keyword_other_alias_sql">AS</span> t2_r3
-<span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">FROM</span>
-  authors
-  <span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">LEFT OUTER JOIN</span> posts <span class="keyword keyword_other keyword_other_DDL keyword_other_DDL_create keyword_other_DDL_create_II keyword_other_DDL_create_II_sql">ON</span> <span class="constant constant_other constant_other_database-name constant_other_database-name_sql">posts</span>.<span class="constant constant_other constant_other_table-name constant_other_table-name_sql">author_id</span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_sql">=</span> <span class="constant constant_other constant_other_database-name constant_other_database-name_sql">authors</span>.<span class="constant constant_other constant_other_table-name constant_other_table-name_sql">id</span>
-  <span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">LEFT OUTER JOIN</span> comments <span class="keyword keyword_other keyword_other_DDL keyword_other_DDL_create keyword_other_DDL_create_II keyword_other_DDL_create_II_sql">ON</span> <span class="constant constant_other constant_other_database-name constant_other_database-name_sql">comments</span>.<span class="constant constant_other constant_other_table-name constant_other_table-name_sql">author_id</span> <span class="keyword keyword_operator keyword_operator_comparison keyword_operator_comparison_sql">=</span> <span class="constant constant_other constant_other_database-name constant_other_database-name_sql">authors</span>.<span class="constant constant_other constant_other_table-name constant_other_table-name_sql">id</span></span></pre>
-
-
-<p>Uma única query SQL foi criada contendo <strong>joins</strong> entre as tabelas <strong>authors</strong>, <strong>posts</strong> e <strong>comments</strong>. Chamamos isto de produto cartesiano.</p>
-
-<p>Acontece que isto nem sempre é performático, por isto foi alterado. Para a nova versão do Rails ao executar a mesma pesquisa na classe <strong>Author</strong>, o Rails usará uma outra estratégia para recuperar os dados das três tabelas. Ao invés de usar apenas uma query com todas as tabelas relacionadas, ele usará três querys menores, uma para cada tabela. Veja o resultado no log, após executar o mesmo código acima nesta nova versão Edge Rails:</p>
-
-<pre class="textmate-source"><span class="source source_sql"><span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">SELECT</span> <span class="keyword keyword_operator keyword_operator_star keyword_operator_star_sql">*</span> <span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">FROM</span> <span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>authors"</span>
-<span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">SELECT</span> posts.<span class="keyword keyword_operator keyword_operator_star keyword_operator_star_sql">*</span> <span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">FROM</span> <span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>posts"</span> <span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">WHERE</span> (<span class="constant constant_other constant_other_database-name constant_other_database-name_sql">posts</span>.<span class="constant constant_other constant_other_table-name constant_other_table-name_sql">author_id</span> <span class="keyword keyword_other keyword_other_data-integrity keyword_other_data-integrity_sql">IN</span> (<span class="constant constant_numeric constant_numeric_sql">1</span>))
-<span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">SELECT</span> comments.<span class="keyword keyword_operator keyword_operator_star keyword_operator_star_sql">*</span> <span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">FROM</span> <span class="string string_quoted string_quoted_double string_quoted_double_sql"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_sql">"</span>comments"</span> <span class="keyword keyword_other keyword_other_DML keyword_other_DML_sql">WHERE</span> (<span class="constant constant_other constant_other_database-name constant_other_database-name_sql">comments</span>.<span class="constant constant_other constant_other_table-name constant_other_table-name_sql">author_id</span> <span class="keyword keyword_other keyword_other_data-integrity keyword_other_data-integrity_sql">IN</span> (<span class="constant constant_numeric constant_numeric_sql">1</span>))</span></pre>
-
-
-<p>Na &#8220;maioria&#8221; dos casos executar três querys simples é mais rápido que executar uma única query gigante.</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/57/">&larr; Antigos</a>
@@ -814,6 +799,10 @@ currency <span class="keyword keyword_operator keyword_operator_comparison keywo
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/09/how-i-do-my-computing/">How I do my Computing</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/08/burnout/">Burnout</a>
       </li>
     
@@ -827,10 +816,6 @@ currency <span class="keyword keyword_operator keyword_operator_comparison keywo
     
       <li class="post">
         <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
   </ul>

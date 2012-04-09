@@ -9,9 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Vi esta dica no blog do Ilya Grigorik. O código:
-[source:ruby]
-&lt;% current_uri = u(request.protocol &lt;&lt; request.host_with_port &lt;&lt; &hellip;">
+  <meta name="description" content="Meu browser predileto é o Firefox, por isto sempre que estou criando algo, tenho o costume de ir testando nele. O problema é que quando abro meu site &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -101,6 +99,117 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2007/06/27/um-css-para-o-ie-outro-para-o-firefox-outro-para-o/">Um CSS para o IE, outro para o Firefox, outro para o&#8230;</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-06-27T00:00:00-03:00" pubdate data-updated="true">27 de Junho de 2007</time>
+        
+        <a rel="bookmark" href="/2007/06/27/um-css-para-o-ie-outro-para-o-firefox-outro-para-o/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>Meu <strong>browser</strong> predileto é o <strong>Firefox</strong>, por isto sempre que estou criando algo, tenho o costume de ir testando nele.</p>
+
+<p>O problema é que quando abro meu site (que está lindo no Firefox) no <strong>Internet Explorer</strong>, fica tudo desalinhado. Mexe aqui, mexe ali, e consigo deixar tudo bonito no IE. Mas quando abro o site no Firefox novamente, ferrei tudo&#8230;</p>
+
+<p>Quantas vezes você já passou por isto?</p>
+
+<p>Passei por isto ontem (mais uma vez) e resolvi ir atrás de alguma ferramenta que me ajudasse neste trabalho.</p>
+
+<p>Primeiro encontrei um <strong><a href="http://rafael.adm.br/css_browser_selector/">Javascript</a></strong> que me permite diferenciar as propriedades do CSS de acordo com o browser e até com o sistema operacional:</p>
+
+<p>[source:js]
+var css_browser_selector = function() {
+var
+ua=navigator.userAgent.toLowerCase(),
+is=function(t){ return ua.indexOf(t) != -1; },
+h=document.getElementsByTagName(&#8216;html&#8217;)[0],
+b=(!(/opera|webtv/i.test(ua))&amp;&amp;/msie (\d)/.test(ua))?(&#8216;ie ie&#8217;+RegExp.$1):is(&#8216;gecko/&#8217;)? &#8216;gecko&#8217;:is(&#8216;opera/9&#8217;)?&#8217;opera opera9&#8217;:/opera (\d)/.test(ua)?&#8217;opera opera&#8217;+RegExp.$1:is(&#8216;konqueror&#8217;)?&#8217;konqueror&#8217;:is(&#8216;applewebkit/&#8217;)?&#8217;webkit safari&#8217;:is(&#8216;mozilla/&#8217;)?&#8217;gecko&#8217;:&#8221;,
+os=(is(&#8216;x11&#8217;)||is(&#8216;linux&#8217;))?&#8217; linux&#8217;:is(&#8216;mac&#8217;)?&#8217; mac&#8217;:is(&#8216;win&#8217;)?&#8217; win&#8217;:&#8221;;
+var c=b+os+&#8217; js&#8217;;
+h.className += h.className?&#8217; &#8216;+c:c;
+}();
+[/source]</p>
+
+<p>Isto por si só já facilita muito as coisas. Posso criar um CSS assim, por exemplo:</p>
+
+<p>[source:css]
+.ie .example {
+background-color: yellow
+}
+.ie7 .example {
+background-color: orange
+}
+.gecko .example {
+background-color: gray
+}
+.win.gecko .example {
+background-color: red
+}
+.linux.gecko .example {
+background-color: pink
+}
+.opera .example {
+background-color: green
+}
+.konqueror .example {
+background-color: blue
+}
+.webkit .example {
+background-color: black
+}
+.example {
+width: 100px;
+height: 100px;
+}
+.no_js { display: block }
+.has_js { display: none }
+.js .no_js { display: none }
+.js .has_js { display: block }
+[/source]</p>
+
+<p>Entre as opções de browser estão: ie, ie5, ie6, ie7, firefox, opera, konqueror, safari e outros.</p>
+
+<p><img src="http://farm1.static.flickr.com/28/61713976_e9d7be6c02_m.jpg" alt="" align="right" />Outra coisa interessante que encontrei para estes casos é o <strong><a href="http://sitevista.com/cssvista/">CSSVista</a></strong> (apesar do nome só tem uma versão para o <strong>Windows XP</strong>). Este software permite que você altere o CSS enquanto vê uma versão do site no IE e no Firefox ao mesmo tempo.</p>
+</div>
+
+
+    </article>
   
     
     
@@ -642,56 +751,6 @@ Se você gostou, acesse o <a href="http://lazibi.rubyforge.org/">site do criador
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2007/06/14/reconhecendo-arquivos-rb-corretamente-no-e-text-editor/">Reconhecendo arquivos .rb corretamente no E-Text Editor</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-06-14T00:00:00-03:00" pubdate data-updated="true">14 de Junho de 2007</time>
-        
-        <a rel="bookmark" href="/2007/06/14/reconhecendo-arquivos-rb-corretamente-no-e-text-editor/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p> <center><img height="388" src="http://farm1.static.flickr.com/225/489728104_a479febb76.jpg?v=0" width="500"></center> <p></p> <p>&nbsp;</p> <p>Todo programador <strong>Ruby</strong> que não tem um <strong>Mac</strong> sente (nem que seja um pouquinho) de inveja de quem tem um, e pode usar o famoso <strong>textmate</strong> para desenvolver.</p> <p>Como alternativa para o <strong>Windows</strong> temos o&nbsp;<strong><a href="http://www.e-texteditor.com/index.html">E-Text</a></strong>, que funciona de forma muito parecida.</p> <p>Um problema que tive com o E-Text é que quando se abre um arquivo <strong>.rb</strong> ele automáticamente reconhece o arquivo e habilita os <strong>Bundles</strong> para <strong>Ruby</strong>, e não <strong>Ruby on Rails</strong>. Como corrigir isto?</p> <p>Vá até a pasta onde seu E-Text está instalado e procure por estes arquivos:</p> <ul> <li>C:\Program Files\e\Bundles\<strong>Ruby.tmbundle\Syntaxes\Ruby.plist</strong>  <li>C:\Program Files\e\Bundles\<strong>Rails.tmbundle\Syntaxes\Ruby on Rails.plist</strong></li></ul> <p>No primeiro arquivo procure por: <strong>&lt;key&gt;fileTypes&lt;/key&gt;</strong></p> <p>Recorte as seguintes linhas:</p> <ul> <ul> <li>&lt;string&gt;<strong>rb</strong>&lt;/string&gt;  <li>&lt;string&gt;<strong>rjs</strong>&lt;/string&gt;</li></ul></ul> <p>E cole no mesmo lugar do segundo arquivo.</p> <p>Agora, quando você abrir arquivos .rb ou .rjs no E-Text, ele habilitará os atalhos corretos.</p>
-
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/76/">&larr; Antigos</a>
@@ -709,6 +768,10 @@ Se você gostou, acesse o <a href="http://lazibi.rubyforge.org/">site do criador
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/09/how-i-do-my-computing/">How I do my Computing</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/08/burnout/">Burnout</a>
       </li>
     
@@ -722,10 +785,6 @@ Se você gostou, acesse o <a href="http://lazibi.rubyforge.org/">site do criador
     
       <li class="post">
         <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
   </ul>

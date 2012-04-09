@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="A equipe de desenvolvimento do RadRaild acaba de anunciar o lançamento da versão 0.9.1. As principais novidades são uma melhor integração com o &hellip;">
+  <meta name="description" content="Uma lista com 101 projetos criados em Ruby on Rails. Vale a penas dar uma olhada. E como a moda agora é comprar um Mac, um top 100 aplicativos para &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,59 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2007/11/07/dica-rapida-duas-listas-interessantes/">Dica rápida: Duas listas interessantes</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-11-07T00:00:00-02:00" pubdate data-updated="true"> 7 de Novembro de 2007</time>
+        
+        <a rel="bookmark" href="/2007/11/07/dica-rapida-duas-listas-interessantes/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/11/155884100_053e873db1.jpg" alt="155884100_053e873db1.jpg" /></p>
+
+<p>Uma lista com <a href="http://www.zanypixel.com/blog/ruby-web-apps/">101 projetos criados em Ruby on Rails</a>. Vale a penas dar uma olhada.</p>
+
+<p>E como a moda agora é comprar um Mac, um <a href="http://chris.pirillo.com/2007/11/06/top-100-mac-apps/">top 100 aplicativos para Mac</a>.</p>
+</div>
+
+
+    </article>
   
     
     
@@ -818,159 +871,6 @@ metodo b
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2007/10/27/o-que-vem-por-ai-novidades-nas-fixtures/">O que vem por aí? Novidades nas Fixtures</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-10-27T00:00:00-02:00" pubdate data-updated="true">27 de Outubro de 2007</time>
-        
-        <a rel="bookmark" href="/2007/10/27/o-que-vem-por-ai-novidades-nas-fixtures/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p><img src="http://old.nomedojogo.com/wp-content/uploads/2007/10/1129159157_9c02a19aaa.jpg" /></p>
-
-<p>A partir da próxima versão do Rails teremos alguns recursos extras nas famosas fixtures.</p>
-
-<h3>Geração de ID&#39;s automáticos</h3>
-
-
-<p>Hoje é assim:</p>
-
-<pre>
-george:
-  id: 1
-  name: George the Monkey
-
-reginald:
-  id: 2
-  name: Reginald the Pirate
-</pre>
-
-
-<p>Cadas uma das fixtures tem dois identificadores, um para o banco (id: 1) e outro para humanos (george, por exemplo). Por que não gerar a <strong>primary key</strong> automaticamente? Assim criaríamos as nossas fixtures assim:</p>
-
-<pre>
-george: # generated id: 503576764
-  name: George the Monkey
-
-reginald: # generated id: 324201669
-  name: Reginald the Pirate
-</pre>
-
-
-<p>A partir da próxima versão do Rails, o ActiveRecord irá até a classe correspondente à fixture e recuperará o campo que representa o primary key, inserindo o registro no banco corretamente.</p>
-
-<p>O ID gerado é uma constante, então nós podemos descobrir o ID de qualquer fixture sem carregar nada, desde que saibamos qual o nome que foi dado ao registro.</p>
-
-<h3>Associações entre fixtures através dos nomes</h3>
-
-
-<p>Especificar um relacionamento entre fixtures é problemático e frágil, sem contar a dificuldade para se ler. E já que podemos remover o ID das fixtures, utilizando somente o nome, também poderemos realizar as associações diretamente pelo nome, assim:</p>
-
-<pre>
-### pirates.yml
-reginald:
-  name: Reginald the Pirate
-  monkey: george
-
-### monkeys.yml
-george:
-  name: George the Monkey
-  pirate: reginald
-</pre>
-
-
-<p>E se tivermos um relacionamento <strong>has_and_belongs_to_many</strong> podemos fazer assim:</p>
-
-<pre>
-### monkeys.yml
-george:
-  name: George the Monkey
-  pirate: reginald
-  fruits: apple, orange, grape
-
-### fruits.yml
-apple:
-  name: apple
-
-orange:
-  name: orange
-
-grape:
-  name: grape
-</pre>
-
-
-<p>Muito legal né?</p>
-
-<h3>Colunas do timestamp preenchidas automaticamente</h3>
-
-
-<p>Se sua tabela tiver qualquer uma das colunas no formato padrão dos timestamps do Rails (<strong>created_at</strong>, <strong>created_on</strong>, <strong>updated_at</strong>, <strong>updated_on</strong>), elas serão automaticamente preenchidas com um <strong>Time.now</strong>.</p>
-
-<p>Se você quiser um valor diferente deste, você vai precisar fazer da forma antiga, preenchendo o valor na fixture.</p>
-
-<h3>Suporte aos padrões do YAML</h3>
-
-
-<p>Você com certeza sabe como usar o YAML para reutilizar informações no seu arquivo database.yml. Agora você também pode fazer o mesmo em suas fixtures:</p>
-
-<pre>
-DEFAULTS: &DEFAULTS
-  created_on: <%= 3.weeks.ago.to_s(:db) %>
-
-first:
-  name: Smurf
-  <<: *DEFAULTS
-
-second:
-  name: Fraggle
-  <<: *DEFAULTS
-</pre>
-
-
-<p>Estas são algumas das novidades que nos aguardam, mas não acabou, muita coisa ainda deve mudar até a versão 2.0. Estou acompanhando de perto&#8230;</p>
-
-<p>Tudo isto e mais um pouco pode ser encontrado <a href="http://dev.rubyonrails.org/changeset/8036">aqui</a>.</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/66/">&larr; Antigos</a>
@@ -988,6 +888,10 @@ second:
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/09/how-i-do-my-computing/">How I do my Computing</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/08/burnout/">Burnout</a>
       </li>
     
@@ -1001,10 +905,6 @@ second:
     
       <li class="post">
         <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/02/08/cinco-anos-de-nome-do-jogo/">Cinco anos de Nome do Jogo</a>
       </li>
     
   </ul>
