@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Coloque um bando de nerds em uma Van, apague a luz e prenda-os no trânsito de São Paulo por algumas horas. Qual seria o resultado? O vídeo mais &hellip;">
+  <meta name="description" content="David Heinemeier Hansson iniciou uma série de artigos em seu blog pessoal desmistificando algumas crenças sobre o Ruby on Rails. Este texto não é uma &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,84 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/11/17/mito-1-rails-e-dificil-de-implantar/">Mito #1: Rails é difícil de implantar</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-11-17T00:00:00-02:00" pubdate data-updated="true">17 de Novembro de 2008</time>
+        
+        <a rel="bookmark" href="/2008/11/17/mito-1-rails-e-dificil-de-implantar/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>David Heinemeier Hansson iniciou uma série de artigos em seu <a href="http://www.loudthinking.com/posts/29-the-rails-myths">blog pessoal</a> <span style="color: #000000;"><span style="font-family: &quot;Lucida Grande&quot;,&quot;Lucida Sans Unicode&quot;,Tahoma,Verdana,sans-serif;">desmistificando</span></span> algumas crenças sobre o Ruby on Rails. Este texto não é uma tradução literal e sim uma explanação do <a href="http://www.loudthinking.com/posts/30-myth-1-rails-is-hard-to-deploy#mod_rails">primeiro artigo</a> de David.</p>
+
+<p>Quando David lançou o <a href="http://www.basecamphq.com/">Basecamp</a> sob <a href="http://www.modruby.net/en/">mod_ruby,</a> há alguns anos atrás, ele não estava preocupado com o fato de que precisaria executar várias instâncias de um projeto Rails, tanto é que na época isto era um pouco complicado de se fazer, sem uma bela de uma gambiarra.</p>
+
+<p>Naquela época só era possível executar o Rails sob CGI. Depois veio o FCGI, que ainda hoje é uma plataforma viável. Os softwares da 37signals foram executados sob esta plataforma durante alguns anos, mas esta parecia ser uma plataforma moribunda.</p>
+
+<h2>Mongrel</h2>
+
+
+<p>Foi nesta época em que apareceu o <a href="http://mongrel.rubyforge.org/">Mongrel</a>, e junto com ele a sensação de que não precisávamos de mais nenhum outro protocolo para fazer com que os servidores de aplicação e os servidores web conversassem.  Nós simplesmente podíamos usar HTTP! Hoje Mongrel, <a href="http://code.macournoyer.com/thin/">Thin</a>, <a href="http://ebb.rubyforge.org/">Ebb</a> e outros servidores web baseados em Ruby predominam nos ambientes de produção. E existem boas razões para isto, afinal eles são estáveis, versáteis e rápidos.</p>
+
+<h2>Muitas opções</h2>
+
+
+<p>Até aqui tudo parece muito bem, mas um problema apareceu: Entre tantas opções, qual é a melhor para colocar meu projeto em produção? Devo ir de Apache, nginx, ou quem sabe de lighttpd? Devo confiar nos proxies dos servidores web ou usar algo como o HAProxy ou Pound? Quantos processos do Mongrel devo usar? Seria bom usar alguma ferramenta para monitorar os processos? God ou Monit?</p>
+
+<p>Todas estas são boas opções, mas isto gera um paradoxo das Boas Opções. Entre elas qual é a melhor? Este grande numero de Boas Opções é exatamente o que cria este primeiro mito sobre o Ruby on Rails. <strong>Sem saber exatamente qual ferramenta usar, conclui-se que é difícil implantar um projeto Rails.</strong></p>
+
+<p>Como resolver este tipo de problema?</p>
+
+<h2>Phusion Passenger™</h2>
+
+
+<p><a href="http://www.modrails.com/">Passenger (mod_rails)</a>, é uma solução única que torna o deploy de aplicativos Rails tão fácil quanto um mod_php. Após um deploy ridiculamente simples, você tem um Apache se comportando como um web server, load balancer, application server e monitorador de processos. Você simplesmente joga seu aplicativo, altera o arquivo tmp/restart.txt e pronto, você está no ar!</p>
+
+<p>Isto ainda não quer dizer que todos os grandes projetos Rails estão usando Passenger. Atualmente até mesmo os projetos da 37signals ainda não estão usando-o, pelo menos por enquanto.</p>
+
+<p>O fato importante é que se houver alguma razão para isso, você pode montar todo o seu ambiente de produção manualmente com algumas das soluções mencionadas acima. Mas caso queira algo realmente simples e rápido, pode optar pelo Passenger, e confiar que esta é uma excelente opção.</p>
+
+<p><strong>Resumindo, Rails é difícil de implantar? Não! Phusion Passenger tornou o processo de implantação de projetos Rails ridiculamente simples.</strong></p>
+</div>
+
+
+    </article>
   
     
     
@@ -837,98 +915,6 @@ client<span class="punctuation punctuation_separator punctuation_separator_metho
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/11/07/ninguem-pode-ser-uma-estrela-do-rock-sem-um-grande-cenario/">Ninguém pode ser uma estrela do rock sem um grande cenário</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-11-07T00:00:00-02:00" pubdate data-updated="true"> 7 de Novembro de 2008</time>
-        
-        <a rel="bookmark" href="/2008/11/07/ninguem-pode-ser-uma-estrela-do-rock-sem-um-grande-cenario/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p><img class="alignnone size-full wp-image-1750" title="StarWars Rock!" src="http://old.nomedojogo.com/wp-content/uploads/2008/11/359087786_8fb025c4a0.jpg" alt="" /></p>
-
-<h5><em>Este texto é uma tradução do artigo &#8221;<a href="http://www.37signals.com/svn/posts/1164-average-environments-beget-average-work">Average environments beget average work</a>&#8221;.</em></h5>
-
-
-<p><a href="http://en.wikipedia.org/wiki/Grady_Booch">Grady Booch</a> soltou o seguinte axioma no <a href="http://www.timeinc.net/fortune/conferences/brainstormtech/tech_home.html">BrainstormTECH</a>: &#8220;Na média, um trabalhador mediano realiza um trabalho mediano&#8221;. Inicialmente, pareceu-me perfeitamente racional. Mas, pensando melhor, isto começou a me incomodar. Isto se baseia na hipótese de que mau, médio e bom são atributos estáticos de uma pessoa, o que eu considero totalmente ofensivo e de mau gosto.</p>
-
-<p>Eu acredito que somos capazes de fazer trabalhos ruins, medianos e bons. Eu certamente já fiz trabalhos ruins algumas vezes e constantemente faço trabalhos medianos. O que tenho percebido é que os trabalhos bons e excepcionais dependem mais do ambiente em que trabalho do que de mim. Ambientes medianos produzem trabalhos medianos.</p>
-
-<h2>Bons profissionais produzem trabalhos ruins o tempo todo</h2>
-
-
-<p>Simplesmente pense em todas as grandes pessoas e empresas que desapareceram em algum momento, só para aparecerem novamente depois de alguns anos, com quase nada de novo para mostrar. Até pessoas conhecidas como excepcionais podem fazer trabalhos imprestáveis quando são colocadas em ambientes ruins.</p>
-
-<p>Ou pense em como boas pessoas podem facilmente fazer coisas ruins quando colocadas em circunstâncias ruins. O <a href="http://www.prisonexp.org/">Stanford Prison Experiment</a> é um bom exemplo da banalidade do mal.</p>
-
-<p>Isso não quer dizer que somos todos iguais e que a estrela do rock dentro de você pode ser destravada com música hippie e sandálias. Só que há muito potencial inexplorado dentro de nós preso sob políticas de merda, má direção e burocracias sufocantes. Existem muitas pessoas esperando para fazer um grande trabalho se lhes dermos oportunidade.</p>
-
-<h2>Ninguém pode ser uma estrela do rock sem um grande cenário</h2>
-
-
-<p>Se você quer um time vencedor, então pare de tentar encher uma sala com estrelas do rock e ninjas. Em vez disso, comece a pensar na sala!</p>
-
-<p>Aqui estão três perguntas para você começar a pensar sobre como auto-diagnosticar o seu meio ambiente:</p>
-
-<ul>
-    <li>Você valoriza o esforço antes do efeito?
-<em>Alguém que fica a noite toda trabalhando é um herói, mas aquele que termina todo o trabalho e vai mais cedo para casa é visto como alguém que não trabalha em equipe.</em></li>
-</ul>
-
-
-<ul>
-    <li> Você confia que as pessoas farão a coisa certa?
-<em>Nós não contamos dias de férias e damos a qualquer um o cartão de crédito corporativo, mas exigimos relatórios do que não são despesas.</em></li>
-</ul>
-
-
-<ul>
-    <li> Você incentiva questionamentos?
-<em>As discussões sempre acabam com a frase &#8220;porque eu quero isto assim&#8221; ou explicando políticas como &#8221; porque deve ser desse jeito e pronto&#8221;.</em></li>
-</ul>
-
-
-<p>Mas o mais importante, pare de utilizar a qualidade percebida do seu time como desculpa para justificar porque você não pode experimentar ou seguir novas idéias. É uma grande realização dizer que isto nunca vai decepcioná-lo. Os seres humanos são extremamente propensos a desanimar sob baixas expectativas.</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/21/">&larr; Antigos</a>
@@ -946,6 +932,10 @@ client<span class="punctuation punctuation_separator punctuation_separator_metho
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/10/28/como-funciona-o-autoload-por-dentro/">Como funciona o autoload por dentro</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/09/how-i-do-my-computing/">How I do my Computing</a>
       </li>
     
@@ -961,12 +951,82 @@ client<span class="punctuation punctuation_separator punctuation_separator_metho
         <a href="/2012/04/05/heroku-add-ons-catalog/">Heroku Add-ons Catalog</a>
       </li>
     
-      <li class="post">
-        <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
-      </li>
-    
   </ul>
 </section>
+
+<section>
+  <h1>Últimos Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Atualizando&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("carlosbrando", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/carlosbrando" class="twitter-follow-button" data-show-count="false">Siga @carlosbrando</a>
+  
+</section>
+
+
+<section>
+  <h1>Coderwall</h1>
+  <ul id="cw_badges">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+
+  <script type="text/javascript">
+    var coderwall = (function(){
+      function render(options, badges){
+        var fragment = '',
+            t = $(options.target),
+            height = 65,
+            width = 65,
+            index;
+
+        for (index in badges) {
+          fragment += '<a class="cw_badge"title="' + badges[index].description + '" href="http://coderwall.com/' + options.user + '">';
+          fragment +=   '<img alt="' + badges[index].description + '" height="' + width + '" width="' + height + '" src="' + badges[index].badge + '"/>';
+          fragment += '</a>';
+        }
+
+        t.html(fragment);
+      }
+      return {
+        showBadges: function(options){
+          $.ajax({
+              url: 'http://coderwall.com/' + options.user + '.json?callback=?'
+            , dataType: 'jsonp'
+            , error: function (err) { $(options.target + ' li.loading').addClass('error').text("Error loading feed"); }
+            , success: function(res) {
+                render(options, res.data.badges);
+            }
+          });
+        }
+      };
+    })();
+
+    $(document).ready(function(){
+      coderwall.showBadges({
+        user: 'carlosbrando',
+        target: '#cw_badges'
+      });
+    });
+  </script>
+  <style type="text/css">
+    .cw_badge img {
+      padding: 5px;
+      border: 0 none !important;
+      -moz-box-shadow: none !important;
+      -webkit-box-shadow: none !important;
+      -o-box-shadow: none !important;
+      box-shadow: none !important;
+    }
+  </style>
+</section>
+
 
 <section>
   <h1>GitHub Repos</h1>
@@ -995,23 +1055,6 @@ client<span class="punctuation punctuation_separator punctuation_separator_metho
     });
   </script>
   <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-<section>
-  <h1>Últimos Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Atualizando&#8230;</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("carlosbrando", 4, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
-  
-    <a href="http://twitter.com/carlosbrando" class="twitter-follow-button" data-show-count="false">Siga @carlosbrando</a>
-  
 </section>
 
 

@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Que Richard Stallman tem um conceito bem extremista com respeito a software, todo mundo sabe. Mas é sempre interessante ler a respeito de suas &hellip;">
+  <meta name="description" content="Em dezembro de 2009 eu iniciei uma série de artigos nesse blog que visava explicar em detalhes como alguns mecanismos do Ruby que usamos todos os &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,165 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2012/10/28/como-funciona-o-autoload-por-dentro/">Como funciona o autoload por dentro</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-28T22:01:00-02:00" pubdate data-updated="true">28 de Outubro de 2012</time>
+        
+        <a rel="bookmark" href="/2012/10/28/como-funciona-o-autoload-por-dentro/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>Em dezembro de 2009 eu iniciei uma série de artigos nesse blog que visava explicar em detalhes como alguns mecanismos do Ruby que usamos todos os dias funcionam internamente. Desde então eu publiquei poucos artigos sobre o tema, mas sempre foi um desejo continuar essa série.</p>
+
+<p>Seguindo a linha do <a href="http://nomedojogo.com/2010/01/07/entendendo-os-metodos-load-e-require-por-dentro/">último artigo</a>, dessa vez vou explicar como funciona o método <code>autoload</code>.</p>
+
+<p>Antes de começarmos, eu recomendo fortemente que você leia o artigo &#8221;<a href="http://nomedojogo.com/2010/01/07/entendendo-os-metodos-load-e-require-por-dentro/">Entendendo os métodos load e require por dentro</a>&#8221; que explica o passo-a-passo que o Ruby executa quando carrega um novo arquivo no seu código. Esse artigo lhe dará a base necessária para entender o que se segue.</p>
+
+<h2>Para que serve o autoload?</h2>
+
+<p>Sei que o método <code>autoload</code> não faz parte do dia a dia de todos, então vejamos primeiro qual é a sua finalidade.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">autoload</span> <span class="ss">:MyClass</span><span class="p">,</span> <span class="s2">&quot;my_class&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">module</span> <span class="nn">X</span>
+</span><span class='line'>  <span class="nb">autoload</span> <span class="ss">:MySubClass</span><span class="p">,</span> <span class="s2">&quot;my_sub_class.rb&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>No exemplo acima, estamos usando o método em dois contextos diferentes. Em ambos os casos, não desejamos carregar os arquivos <code>my_class.rb</code> e <code>my_sub_class.rb</code> no momento da execução. Porém, quando as constantes <code>MyClass</code> ou <code>MySubClass</code> forem usadas pela primeira vez em nosso código, queremos que o Ruby se encarregue de &#8220;auto carregar&#8221; os arquivos da mesma forma como faria com a instrução <code>require</code>.</p>
+
+<p>Os arquivos devem possuir uma declaração de suas devidas classes de acordo com a constante utilizada no primeiro argumento do método <code>autoload</code>, como no exemplo abaixo:</p>
+
+<figure class='code'><figcaption><span>my_class.rb </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="k">class</span> <span class="nc">MyClass</span>
+</span><span class='line'>  <span class="c1"># ...</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>my_sub_class.rb </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="k">module</span> <span class="nn">X</span>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">MySubClass</span>
+</span><span class='line'>    <span class="c1"># ...</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A diferença entre usar <code>autoload</code> ao invés de <code>require</code> é que se a constante nunca for usada, o arquivo correspondente também nunca será carregado. O conceito é bem simples.</p>
+
+<h2>Vamos começar do principio</h2>
+
+<p>No primeiro exemplo, executamos o método <code>autoload</code> em dois contextos diferentes. A primeira chamada é feita diretamente no <code>main</code> e a segunda no contexto de um módulo. Assim, o objetos <code>Kernel</code> e <code>Module</code> possuem a sua própria versão do método <code>autoload</code>. Essas versões seguem basicamente o mesmo procedimento, mas por hora vamos nos concentrar na versão que está na classe <code>Kernel</code>.</p>
+
+<p>O método <code>autoload</code> sempre irá esperar por dois argumentos: <code>module</code> que pode ser um objeto do tipo <code>String</code> ou um símbolo representando o módulo que será usado em um outro ponto de nosso código e <code>filename</code> que contém o nome do arquivo que desejamos carregar, seguindo as mesmas regras do método <code>require</code>.</p>
+
+<p>Quando o método <code>autoload</code> é executado pela primeira vez, ele analisará se você informou os argumentos corretamente. Se o <code>filename</code> for um texto em branco, por exemplo, ele retornará um erro do tipo <code>ArgumentError</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">autoload</span> <span class="ss">:MyClass</span><span class="p">,</span> <span class="s1">&#39;&#39;</span>
+</span><span class='line'><span class="c1"># =&gt; ArgumentError: empty file name</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>O segundo passo é verificar se o arquivo especificado já não foi carregado em uma execução do método anterior. Ele faz isso verificando a variável global <code>$LOADED_FEATURES</code>. Se o arquivo já foi carregado antes, a execução do método termina aqui.</p>
+
+<p>Se esse não for o caso, ele verificará se já existe alguma outra declaração de <code>autoload</code> para o mesmo <code>module</code>. Se for encontrado, o <code>filename</code> anterior será substituído pelo novo. Veja um exemplo:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">autoload</span> <span class="ss">:MyClass</span><span class="p">,</span> <span class="s2">&quot;arquivo.rb&quot;</span>
+</span><span class='line'><span class="nb">autoload?</span><span class="p">(</span><span class="ss">:MyClass</span><span class="p">)</span>                     <span class="c1"># =&gt; &quot;arquivo.rb&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">autoload</span> <span class="ss">:MyClass</span><span class="p">,</span> <span class="s2">&quot;outro_arquivo.rb&quot;</span>
+</span><span class='line'><span class="nb">autoload?</span><span class="p">(</span><span class="ss">:MyClass</span><span class="p">)</span>                     <span class="c1"># =&gt; &quot;outro_arquivo.rb&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>No código acima introduzimos o método <code>autoload?</code>, que é útil para confirmar se o módulo já existe na tabela de constantes do Ruby.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Object</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">grep</span> <span class="sr">/MyClass/</span>
+</span><span class='line'><span class="c1"># =&gt; [:MyClass]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Como o Ruby entende o autoload?</h2>
+
+<p>Nesse ponto eu recomendo que você dê uma outra pausa para ler um texto que facilitará o seu entendimento. Leia o artigo &#8221;<a href="http://nomedojogo.com/2009/12/24/classes-sao-modulos-no-ruby/">Classes são Módulos no Ruby</a>&#8221; antes de continuar.</p>
+
+<p>Ao executar <code>autoload</code>, o Ruby carrega o módulo na sua tabela interna de constantes. Mas diferente dos procedimentos normais, ele não armazenará uma instância da classe ou módulo diretamente nessa tabela. Nesse momento ele armazena uma estrutura secundária que contém informações como o nome do módulo, o escopo e o nome do arquivo que deve ser carregado.</p>
+
+<p>Quando a constante for usada pela primeira vez, ela verificará se o objeto resultante é uma instância dessa estrutura <code>Autoload</code>. Se esse for o caso, ele recuperará os dados necessários e executará uma instrução <code>require 'filename'</code> da mesma forma como o artigo mencionado no terceiro parágrafo explicou. O retorno será então o novo módulo ou classe pronto para ser usado.</p>
+
+<h2>Onde usar?</h2>
+
+<p>Na maioria dos casos você será feliz em usar <code>require</code> ou <code>load</code> para adicionar algum comportamento ao seu código. Porém em algumas gems é comum existirem funcionalidades que não serão usadas por todos. Nesses casos faz muito sentido usar o método <code>autoload</code> para carregar somente o que o será necessário.</p>
+
+<h2>Próximos artigos</h2>
+
+<p>Como estou sem ideias, eu gostaria de receber sugestões de outros temas para artigos como esse. Se existe algum aspecto ou método do Ruby que você gostaria de entender como funciona por dentro, deixei um comentário abaixo. Até o próximo artigo.</p>
+</div>
+
+
+    </article>
   
     
     
@@ -606,75 +765,6 @@ A cinco anos atrás eu decidi escrever um blog com a finalidade de compartilhar 
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2011/09/12/contratos-onde-todos-ganham/">Contratos onde todos ganham</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-09-12T11:09:00-03:00" pubdate data-updated="true">12 de Setembro de 2011</time>
-        
-        <a rel="bookmark" href="/2011/09/12/contratos-onde-todos-ganham/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p>Lidar com computadores não é fácil, por outro lado lidar com pessoas costuma ser ainda mais complicado. A muito tempo eu já me convenci que o relacionamento entre clientes e programadores sempre serão problemáticos.</p>
-
-<p>A forma mais simples de tentar diminuir a tensão entre os lados envolvidos são os contratos.</p>
-
-<p>Um bom contrato deve deixar claro quais são os direitos e responsabilidades de cada um dos envolvidos. Também não deve deixar dúvidas sobre qual será a repercussão no caso de uma das partes não cumprir com o acordo.</p>
-
-<p>Um tipo básico de contrato é o que define um preço fixo para o projeto. Esse tipo de contrato é a melhor opção para o cliente e a pior para o programador. Uma mudança no escopo ou um pequeno atraso e tudo vai para a conta do desenvolvedor, deixando todo o risco nas mãos do profissional. Normalmente esse é o tipo de contrato que mais dá problema, já que o programador costuma se sentir lesado por alterações no escopo do projeto e o cliente não se sente na obrigação de pagar mais por isso.</p>
-
-<p>Por outro lado um contrato de tempo e recurso, onde o cliente paga pelo tempo de cada profissional alocado no projeto é o melhor contrato para o programador, mas é o pior para o cliente. Nesse caso, atrasos e alterações no escopo caem sempre na conta do cliente, mesmo quando a culpa não é dele.</p>
-
-<p>Para beneficiar ambos os lados, talvez o mais interessante seja unir esses dois tipos de contratos em um contrato híbrido, onde o cliente e o programador definem um valor fixo menor e uma taxa por horas de trabalho.</p>
-
-<p>Funciona mais ou menos assim: se você estimar que serão necessárias aproximadamente duas semanas (80 horas) para finalizar o projeto e normalmente você cobra R$ 100,00 por hora, então o custo estimado para o projeto seria de R$ 8.000. Nesse tipo de contrato você definiria então com o cliente um pagamento fixo no valor de R$ 4.000 e mais uma taxa de R$ 50,00 reais por hora trabalhada no projeto.</p>
-
-<p>Se o projeto terminar dentro do prazo, o cliente terá pago exatamente o valor estimado para o projeto e todos ganham.</p>
-
-<p>Se o projeto terminar antes da data, o cliente terá pago menos e você terá ganho mais. Digamos que o projeto seja finalizado com 60 horas trabalhadas. Então o cliente pagará R$ 7.000 pelo serviço, que é menos do que o esperado. E você receberá R$ 1.000 a mais do que você receberia pelas 60 horas trabalhadas. Mais uma vez, todos ganham.</p>
-
-<p>Por outro lado, se algo acontecer e o projeto atrasar, então o cliente estará pagando adicionalmente metade da sua hora, dividindo assim igualmente o risco entre o cliente e o programador.</p>
-
-<p>Não importa se você usa uma metodologia ágil ou um modelo mais tradicional, contratos são essenciais em qualquer negocio e não será diferente em desenvolvimento de software. O importante é que você nunca feche um negócio sem assinar um antes.</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/2/">&larr; Antigos</a>
@@ -688,6 +778,10 @@ A cinco anos atrás eu decidi escrever um blog com a finalidade de compartilhar 
     <section>
   <h1>Artigos Recentes</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/10/28/como-funciona-o-autoload-por-dentro/">Como funciona o autoload por dentro</a>
+      </li>
     
       <li class="post">
         <a href="/2012/04/09/how-i-do-my-computing/">How I do my Computing</a>
@@ -705,12 +799,82 @@ A cinco anos atrás eu decidi escrever um blog com a finalidade de compartilhar 
         <a href="/2012/04/05/heroku-add-ons-catalog/">Heroku Add-ons Catalog</a>
       </li>
     
-      <li class="post">
-        <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
-      </li>
-    
   </ul>
 </section>
+
+<section>
+  <h1>Últimos Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Atualizando&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("carlosbrando", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/carlosbrando" class="twitter-follow-button" data-show-count="false">Siga @carlosbrando</a>
+  
+</section>
+
+
+<section>
+  <h1>Coderwall</h1>
+  <ul id="cw_badges">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+
+  <script type="text/javascript">
+    var coderwall = (function(){
+      function render(options, badges){
+        var fragment = '',
+            t = $(options.target),
+            height = 65,
+            width = 65,
+            index;
+
+        for (index in badges) {
+          fragment += '<a class="cw_badge"title="' + badges[index].description + '" href="http://coderwall.com/' + options.user + '">';
+          fragment +=   '<img alt="' + badges[index].description + '" height="' + width + '" width="' + height + '" src="' + badges[index].badge + '"/>';
+          fragment += '</a>';
+        }
+
+        t.html(fragment);
+      }
+      return {
+        showBadges: function(options){
+          $.ajax({
+              url: 'http://coderwall.com/' + options.user + '.json?callback=?'
+            , dataType: 'jsonp'
+            , error: function (err) { $(options.target + ' li.loading').addClass('error').text("Error loading feed"); }
+            , success: function(res) {
+                render(options, res.data.badges);
+            }
+          });
+        }
+      };
+    })();
+
+    $(document).ready(function(){
+      coderwall.showBadges({
+        user: 'carlosbrando',
+        target: '#cw_badges'
+      });
+    });
+  </script>
+  <style type="text/css">
+    .cw_badge img {
+      padding: 5px;
+      border: 0 none !important;
+      -moz-box-shadow: none !important;
+      -webkit-box-shadow: none !important;
+      -o-box-shadow: none !important;
+      box-shadow: none !important;
+    }
+  </style>
+</section>
+
 
 <section>
   <h1>GitHub Repos</h1>
@@ -739,23 +903,6 @@ A cinco anos atrás eu decidi escrever um blog com a finalidade de compartilhar 
     });
   </script>
   <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-<section>
-  <h1>Últimos Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Atualizando&#8230;</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("carlosbrando", 4, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
-  
-    <a href="http://twitter.com/carlosbrando" class="twitter-follow-button" data-show-count="false">Siga @carlosbrando</a>
-  
 </section>
 
 

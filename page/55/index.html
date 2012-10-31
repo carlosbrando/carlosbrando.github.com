@@ -9,7 +9,7 @@
   <meta name="author" content="Carlos Brando">
 
   
-  <meta name="description" content="Para testar uma rota com um método HTTP: assert_routing({ :method =&gt; 'put', :path =&gt; '/product/321' }, { :controller =&gt; "product", :action &hellip;">
+  <meta name="description" content="No episódio 75 do Railscast de Ryan Bates , ele reclama ao ter de fazer uma gambiarra incluindo um :index =&gt; nil em cada objeto de um formulário &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,74 @@
     <div id="main">
       <div id="content">
         <div class="blog-index">
+  
+    
+    
+
+
+
+
+
+
+
+
+
+    <article >
+      
+  <header>
+    <h1 class="entry-title">
+
+<a href="/2008/02/19/edge-rails-form_for-e-fields_for-agora-aceita-a-opcao-index/">Edge Rails: form_for e fields_for, agora aceitam a opção :index</a>
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-02-19T00:00:00-03:00" pubdate data-updated="true">19 de Fevereiro de 2008</time>
+        
+        <a rel="bookmark" href="/2008/02/19/edge-rails-form_for-e-fields_for-agora-aceita-a-opcao-index/"></a>
+      </p>
+    
+  </header>
+
+
+
+  <div class="entry-content"><p>No episódio <a href="http://railscasts.com/episodes/75">75 do Railscast</a> de <strong>Ryan Bates</strong> , ele reclama ao ter de fazer uma gambiarra incluindo um <font color="#333333"><strong>:index  =&gt; nil</strong></font> em cada objeto de um formulário para impedir que o Rails acrescentasse o ID do registro no nome do objeto (<strong><font color="#333333">project[task_attributes][41][name]</font></strong>) quando na verdade ele queria sem o ID (<strong><font color="#333333">project[task_attributes][][name]</font></strong>).</p>
+
+<p>No vídeo, o código dele ficava mais ou menos assim:</p>
+
+<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> fields_for <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>project[task_attributes][]<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> task <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">f</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+  <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> f<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>text_field <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>name</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>index</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">nil</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+  <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> f<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>hidden_field <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>id</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>index</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">nil</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+  <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> f<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>hidden_field <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>should_destroy</span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>index</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">nil</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+<span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> <span class="keyword keyword_control keyword_control_ruby">end</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span></span></pre>
+
+
+<p>Para evitar este tipo de sujeira a opção <font color="#333333"><strong>:index</strong></font> foi incluída também no <font color="#333333"><strong>form_for</strong></font> e no <strong><font color="#333333">fields_for</font></strong>. Assim fica mais fácil e limpo:</p>
+
+<pre class="textmate-source"><span class="text text_html text_html_ruby"><span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> fields_for <span class="string string_quoted string_quoted_double string_quoted_double_ruby"><span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_begin punctuation_definition_string_begin_ruby">"</span>project[task_attributes][]<span class="punctuation punctuation_definition punctuation_definition_string punctuation_definition_string_end punctuation_definition_string_end_ruby">"</span></span><span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span> task<span class="punctuation punctuation_separator punctuation_separator_object punctuation_separator_object_ruby">,</span>
+              <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>index</span> <span class="punctuation punctuation_separator punctuation_separator_key-value">=&gt;</span> <span class="constant constant_language constant_language_ruby">nil</span> <span class="keyword keyword_control keyword_control_start-block keyword_control_start-block_ruby">do </span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span><span class="variable variable_other variable_other_block variable_other_block_ruby">f</span><span class="punctuation punctuation_separator punctuation_separator_variable punctuation_separator_variable_ruby">|</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+  <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> f<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>text_field <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>name</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+  <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> f<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>hidden_field <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>id</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+  <span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%=</span> f<span class="punctuation punctuation_separator punctuation_separator_method punctuation_separator_method_ruby">.</span>hidden_field <span class="constant constant_other constant_other_symbol constant_other_symbol_ruby"><span class="punctuation punctuation_definition punctuation_definition_constant punctuation_definition_constant_ruby">:</span>should_destroy</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span>
+<span class="source source_ruby source_ruby_rails source_ruby_rails_embedded source_ruby_rails_embedded_html"><span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">&lt;%</span> <span class="keyword keyword_control keyword_control_ruby">end</span> <span class="punctuation punctuation_section punctuation_section_embedded punctuation_section_embedded_ruby">%&gt;</span></span></span></pre>
+
+</div>
+
+
+    </article>
   
     
     
@@ -688,107 +756,6 @@ formatted_polymorphic_path<span class="punctuation punctuation_section punctuati
 
     </article>
   
-    
-    
-
-
-
-
-
-
-
-
-
-    <article >
-      
-  <header>
-    <h1 class="entry-title">
-
-<a href="/2008/02/14/rails-podcast-brasil-episodio-5/">Rails Podcast Brasil - Episódio 5</a>
-
-</h1>
-
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-02-14T00:00:00-02:00" pubdate data-updated="true">14 de Fevereiro de 2008</time>
-        
-        <a rel="bookmark" href="/2008/02/14/rails-podcast-brasil-episodio-5/"></a>
-      </p>
-    
-  </header>
-
-
-
-  <div class="entry-content"><p align="justify"><img src="http://old.nomedojogo.com/wp-content/uploads/2008/01/untitled-1.png" alt="untitled-1.png" /></p>
-
-
-<p align="justify">Mais um episódio do meu, do seu, do nosso <a href="http://www.rubyonrails.pro.br/podcasts">Rails Podcast Brasil</a> está no ar. Para ouvir basta acessar a <a href="http://www.rubyonrails.pro.br/podcasts">página do poscast</a> e fazer o download do arquivo mp3.</p>
-
-
-<p align="justify">Esta semana falamos sobre rubinius, mais um pouco sobre GIT, resource_controller, Heroku, Mac e os poderes da pasta de dente.</p>
-
-
-
-
-<h3>Neste episódio:</h3>
-
-
-<ul>
-    <li><a href="http://macmagazine.com.br/blog/2008/02/11/yahoo-rejeita-oficialmente-proposta-de-compra-da-microsoft/">Yahoo! rejeita oficialmente proposta de compra da Microsoft</a></li>
-    <li><a href="http://www.mouseoverstudio.com/blog/">Aprendendo a desenvolver com JRuby (Parte 1: Configurando o ambiente)</a></li>
-    <li><a href="http://cocoadevcentral.com/d/learn_cocoa/">Learn Cocoa</a></li>
-    <li><a href="http://code.google.com/apis/orkut/submission.html">Google começa a receber aplicações do OpenSocial</a></li>
-    <li><a href="http://code.google.com/p/ie7-js/">ie7-js</a></li>
-    <li><a href="http://alternateidea.com/blog/articles/2006/01/03/textmate-vibrant-ink-theme-and-prototype-bundle">Textmate Vibrant Ink Theme and Prototype Bundle</a></li>
-    <li><a href="http://www.danwebb.net/2006/9/3/low-pro-unobtrusive-scripting-for-prototype">Low Pro: Unobtrusive Scripting For Prototype</a></li>
-    <li><a href="http://www.ilovejackdaniels.com/cheat-sheets/regular-expressions-cheat-sheet/">Regular Expressions Cheat Sheet</a></li>
-    <li><a href="http://www.rubyinside.com/ruby-cheat-sheet-734.html">Ruby Cheat Sheets</a></li>
-    <li><a href="http://www.monteiro.eti.br/2008/02/10/rails-brasil-on-fisl/">Rails Brasil on FISL</a></li>
-    <li><a href="http://www.akitaonrails.com/2008/2/12/o-que-voc-quer-no-mod_rubinius">O que você quer no mod_rubinius?</a></li>
-    <li><a href="http://www.akitaonrails.com/2008/2/11/conversando-com-evan-phoenix">Conversando com Evan Phoenix</a></li>
-    <li><a href="http://www.akitaonrails.com/2008/2/10/tradu-o-n-o-sei-o-que-quero-mas-sei-como-conseguir">Tradução: Não sei o que quero, mas sei como conseguir</a></li>
-    <li><a href="http://www.akitaonrails.com/2008/2/11/tradu-o-de-quem-essa-vari-vel-afinal">Tradução: De quem é essa variável, afinal?</a></li>
-    <li><a href="http://www.akitaonrails.com/2008/2/13/git-on-cygwin-on-windows">Git on Windows</a></li>
-    <li><a href="http://ropiku.wordpress.com/2008/02/04/installing-rspec-with-braid/">Installing rspec with Braid (Giston)</a></li>
-    <li><a href="http://video.google.com/videoplay?docid=-1019966410726538802">Git (Video) - Randal Schwartz</a></li>
-    <li><a href="http://dan.makovec.net/blog/?p=276">MacPorts db44 build fails under OS X 10.5 Tiger</a></li>
-    <li><a href="http://blog.morrisjohns.com/javascript_closures_for_dummies">JavaScript Closures for Dummies</a></li>
-    <li><a href="http://www.infoq.com/news/2008/01/rails-resource-controller">make_resourceful vs resource_controller</a></li>
-    <li><a href="http://railscasts.com/episodes/92">make_resourceful</a></li>
-    <li><a href="http://www.techcrunch.com/2008/02/07/heroku-lifts-ruby-on-rails-development-to-the-cloud/">Heroku Lifts Ruby on Rails Development into the Cloud</a></li>
-    <li><strong>Memcached e Nginx</strong>
-<ul>
-    <li><a href="http://www.rubynaut.net/articles/2008/02/12/install-ruby-memcached-on-macosx">Install memcached on Mac OS X</a></li>
-    <li><a href="http://www.igvita.com/2008/02/11/nginx-and-memcached-a-400-boost/">Nginx and Memcached, a 400% boost in req/s!</a></li>
-    <li><a href="http://www.softwareprojects.com/resources/programming/t-installing-nginx-web-server-w-php-and-ssl-1474.html">Installing Nginx</a></li>
-</ul>
-</li>
-    <li><a href="http://www.rorsecurity.info/2008/02/13/the-tainted-edition/">Ruby on Rails Security Blog - The Tainted Edition</a></li>
-    <li><a href="http://kurt.karmalab.org/articles/2008/02/07/rails-app-without-tests-guaranteed-fail">Rails App Without Tests = Guaranteed Fail</a></li>
-    <li><a href="http://www.tuaw.com/2008/02/08/clean-your-macbook-with-toothpaste/">Clean your MacBook with toothpaste</a></li>
-    <li><a href="http://digg.com/apple/How_to_Unlock_Your_iPhone_for_Any_SIM_3">iPhone 1.1.2 e 1.1.3 OTB Unlock</a></li>
-    <li><a href="http://www.akitaonrails.com/2008/2/12/mac-os-x-10-5-2-update-dispon-ve">Mac OS X 10.5.2 Update Disponível</a></li>
-</ul>
-
-
-<p>Mais uma vez, seu comentário é muito importante para nós!</p>
-</div>
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/56/">&larr; Antigos</a>
@@ -806,6 +773,10 @@ formatted_polymorphic_path<span class="punctuation punctuation_section punctuati
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/10/28/como-funciona-o-autoload-por-dentro/">Como funciona o autoload por dentro</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/09/how-i-do-my-computing/">How I do my Computing</a>
       </li>
     
@@ -821,12 +792,82 @@ formatted_polymorphic_path<span class="punctuation punctuation_section punctuati
         <a href="/2012/04/05/heroku-add-ons-catalog/">Heroku Add-ons Catalog</a>
       </li>
     
-      <li class="post">
-        <a href="/2012/04/04/cldwalker-slash-debugger-github/">Finalmente um debug para o Ruby 1.9.3</a>
-      </li>
-    
   </ul>
 </section>
+
+<section>
+  <h1>Últimos Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Atualizando&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("carlosbrando", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/carlosbrando" class="twitter-follow-button" data-show-count="false">Siga @carlosbrando</a>
+  
+</section>
+
+
+<section>
+  <h1>Coderwall</h1>
+  <ul id="cw_badges">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+
+  <script type="text/javascript">
+    var coderwall = (function(){
+      function render(options, badges){
+        var fragment = '',
+            t = $(options.target),
+            height = 65,
+            width = 65,
+            index;
+
+        for (index in badges) {
+          fragment += '<a class="cw_badge"title="' + badges[index].description + '" href="http://coderwall.com/' + options.user + '">';
+          fragment +=   '<img alt="' + badges[index].description + '" height="' + width + '" width="' + height + '" src="' + badges[index].badge + '"/>';
+          fragment += '</a>';
+        }
+
+        t.html(fragment);
+      }
+      return {
+        showBadges: function(options){
+          $.ajax({
+              url: 'http://coderwall.com/' + options.user + '.json?callback=?'
+            , dataType: 'jsonp'
+            , error: function (err) { $(options.target + ' li.loading').addClass('error').text("Error loading feed"); }
+            , success: function(res) {
+                render(options, res.data.badges);
+            }
+          });
+        }
+      };
+    })();
+
+    $(document).ready(function(){
+      coderwall.showBadges({
+        user: 'carlosbrando',
+        target: '#cw_badges'
+      });
+    });
+  </script>
+  <style type="text/css">
+    .cw_badge img {
+      padding: 5px;
+      border: 0 none !important;
+      -moz-box-shadow: none !important;
+      -webkit-box-shadow: none !important;
+      -o-box-shadow: none !important;
+      box-shadow: none !important;
+    }
+  </style>
+</section>
+
 
 <section>
   <h1>GitHub Repos</h1>
@@ -855,23 +896,6 @@ formatted_polymorphic_path<span class="punctuation punctuation_section punctuati
     });
   </script>
   <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-<section>
-  <h1>Últimos Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Atualizando&#8230;</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("carlosbrando", 4, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
-  
-    <a href="http://twitter.com/carlosbrando" class="twitter-follow-button" data-show-count="false">Siga @carlosbrando</a>
-  
 </section>
 
 
